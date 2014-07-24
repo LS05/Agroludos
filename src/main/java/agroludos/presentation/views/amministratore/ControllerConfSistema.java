@@ -12,11 +12,13 @@ import javafx.scene.layout.GridPane;
 
 public class ControllerConfSistema implements Initializable{
 	@FXML Button btnAvantiConf;
+	@FXML Button btnIndietroConf;
 	@FXML GridPane databasePane;
 	@FXML GridPane managerSistemaPane;
 	
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+		this.databasePane.setVisible(true);
+        this.managerSistemaPane.setVisible(false);
 	}
 	
 	@FXML protected void btnAvantiClicked(MouseEvent event) {
@@ -24,4 +26,9 @@ public class ControllerConfSistema implements Initializable{
 	        this.databasePane.setVisible(false);
 	        this.managerSistemaPane.setVisible(true);
 	}
+	@FXML protected void btnIndietroClicked(MouseEvent event) {
+		System.out.println("Ciao");
+        this.databasePane.setVisible(true);
+        this.managerSistemaPane.setVisible(false);
+}
 }

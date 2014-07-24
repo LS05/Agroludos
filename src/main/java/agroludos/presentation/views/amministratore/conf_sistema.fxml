@@ -19,7 +19,7 @@
     <RowConstraints maxHeight="219.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="357.0" minHeight="10.0" prefHeight="357.0" vgrow="SOMETIMES" />
   </rowConstraints>
-<children><GridPane fx:id="managerSistemaPane" visible="false" GridPane.rowIndex="1">
+<children><GridPane fx:id="managerSistemaPane" GridPane.rowIndex="1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -101,7 +101,7 @@
 <Insets right="10.0" />
 </GridPane.margin>
 </Button>
-<Button mnemonicParsing="false" styleClass="mainBtn,btnIndietro" text="%key61" GridPane.halignment="RIGHT" />
+<Button fx:id="btnIndietroConf" mnemonicParsing="false" onMouseClicked="#btnIndietroClicked" styleClass="mainBtn,btnIndietro" text="%key61" GridPane.halignment="RIGHT" />
 </children>
 <columnConstraints>
 <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="414.0" />
@@ -143,7 +143,7 @@
 </GridPane.margin>
 </Label>
 </children>
-</GridPane><GridPane fx:id="databasePane" GridPane.rowIndex="1">
+</GridPane><GridPane fx:id="databasePane" visible="false" GridPane.rowIndex="1">
 <children>
 <GridPane GridPane.rowIndex="1">
 <children>
