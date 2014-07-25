@@ -19,131 +19,7 @@
     <RowConstraints maxHeight="219.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="357.0" minHeight="10.0" prefHeight="357.0" vgrow="SOMETIMES" />
   </rowConstraints>
-<children><GridPane fx:id="managerSistemaPane" GridPane.rowIndex="1">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints maxHeight="57.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="324.0" minHeight="10.0" prefHeight="321.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-<children><GridPane GridPane.rowIndex="1">
-<children>
-<Label text="%key2">
-<font>
-<Font name="System Bold" size="13.0" />
-</font>
-<GridPane.margin>
-<Insets left="10.0" />
-</GridPane.margin>
-</Label>
-<Label text="%key3" GridPane.rowIndex="1">
-<font>
-<Font name="System Bold" size="13.0" />
-</font>
-<GridPane.margin>
-<Insets left="10.0" />
-</GridPane.margin>
-</Label>
-<Label text="%key75" GridPane.rowIndex="3">
-<font>
-<Font name="System Bold" size="13.0" />
-</font>
-<GridPane.margin>
-<Insets left="10.0" />
-</GridPane.margin>
-</Label>
-<Label text="%key81" GridPane.rowIndex="5">
-<font>
-<Font name="System Bold" size="13.0" />
-</font>
-<GridPane.margin>
-<Insets left="10.0" />
-</GridPane.margin>
-</Label>
-<TextField GridPane.columnIndex="1">
-<GridPane.margin>
-<Insets right="10.0" />
-</GridPane.margin>
-</TextField>
-<TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
-<GridPane.margin>
-<Insets right="10.0" />
-</GridPane.margin>
-</TextField>
-<TextField GridPane.columnIndex="1" GridPane.rowIndex="5">
-<GridPane.margin>
-<Insets right="10.0" />
-</GridPane.margin>
-</TextField>
-<Label text="%key74" GridPane.rowIndex="2">
-<font>
-<Font name="System Bold" size="13.0" />
-</font>
-<GridPane.margin>
-<Insets left="10.0" />
-</GridPane.margin>
-</Label>
-<TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
-<GridPane.margin>
-<Insets right="10.0" />
-</GridPane.margin>
-</TextField>
-<PasswordField GridPane.columnIndex="1" GridPane.rowIndex="3">
-<GridPane.margin>
-<Insets right="10.0" />
-</GridPane.margin>
-</PasswordField>
-<GridPane GridPane.columnIndex="1" GridPane.rowIndex="6">
-<children>
-<Button mnemonicParsing="false" styleClass="btnConferma,mainBtn" text="%key82" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
-<GridPane.margin>
-<Insets right="10.0" />
-</GridPane.margin>
-</Button>
-<Button fx:id="btnIndietroConf" mnemonicParsing="false" onMouseClicked="#btnIndietroClicked" styleClass="mainBtn,btnIndietro" text="%key61" GridPane.halignment="RIGHT" />
-</children>
-<columnConstraints>
-<ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="414.0" />
-<ColumnConstraints hgrow="SOMETIMES" maxWidth="297.0" minWidth="10.0" prefWidth="205.0" />
-</columnConstraints>
-<rowConstraints>
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-</rowConstraints>
-</GridPane>
-<Label text="%key4" GridPane.rowIndex="4">
-<font>
-<Font name="System Bold" size="13.0" />
-</font>
-<GridPane.margin>
-<Insets left="10.0" />
-</GridPane.margin>
-</Label>
-<TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-</children>
-<columnConstraints>
-<ColumnConstraints hgrow="SOMETIMES" maxWidth="395.0" minWidth="10.0" prefWidth="181.0" />
-<ColumnConstraints hgrow="SOMETIMES" maxWidth="657.0" minWidth="10.0" prefWidth="619.0" />
-</columnConstraints>
-<rowConstraints>
-<RowConstraints maxHeight="55.0" minHeight="2.0" prefHeight="55.0" vgrow="SOMETIMES" />
-<RowConstraints maxHeight="55.0" minHeight="0.0" prefHeight="55.0" vgrow="SOMETIMES" />
-<RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-<RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-<RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-<RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-<RowConstraints maxHeight="55.0" minHeight="0.0" prefHeight="55.0" vgrow="SOMETIMES" />
-</rowConstraints>
-</GridPane><Label text="%key80">
-<font>
-<Font name="System Bold" size="18.0" />
-</font>
-<GridPane.margin>
-<Insets left="10.0" />
-</GridPane.margin>
-</Label>
-</children>
-</GridPane><GridPane fx:id="databasePane" visible="false" GridPane.rowIndex="1">
+<children><GridPane fx:id="databasePane" GridPane.rowIndex="1">
 <children>
 <GridPane GridPane.rowIndex="1">
 <children>
@@ -246,6 +122,130 @@
 <RowConstraints maxHeight="57.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
 <RowConstraints maxHeight="324.0" minHeight="10.0" prefHeight="300.0" vgrow="SOMETIMES" />
 </rowConstraints>
+</GridPane><GridPane fx:id="managerSistemaPane" visible="false" GridPane.rowIndex="1">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="57.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="324.0" minHeight="10.0" prefHeight="321.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+<children><GridPane GridPane.rowIndex="1">
+<children>
+<Label text="%key2">
+<font>
+<Font name="System Bold" size="13.0" />
+</font>
+<GridPane.margin>
+<Insets left="10.0" />
+</GridPane.margin>
+</Label>
+<Label text="%key3" GridPane.rowIndex="1">
+<font>
+<Font name="System Bold" size="13.0" />
+</font>
+<GridPane.margin>
+<Insets left="10.0" />
+</GridPane.margin>
+</Label>
+<Label text="%key75" GridPane.rowIndex="3">
+<font>
+<Font name="System Bold" size="13.0" />
+</font>
+<GridPane.margin>
+<Insets left="10.0" />
+</GridPane.margin>
+</Label>
+<Label text="%key81" GridPane.rowIndex="5">
+<font>
+<Font name="System Bold" size="13.0" />
+</font>
+<GridPane.margin>
+<Insets left="10.0" />
+</GridPane.margin>
+</Label>
+<TextField GridPane.columnIndex="1">
+<GridPane.margin>
+<Insets right="10.0" />
+</GridPane.margin>
+</TextField>
+<TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+<GridPane.margin>
+<Insets right="10.0" />
+</GridPane.margin>
+</TextField>
+<TextField GridPane.columnIndex="1" GridPane.rowIndex="5">
+<GridPane.margin>
+<Insets right="10.0" />
+</GridPane.margin>
+</TextField>
+<Label text="%key74" GridPane.rowIndex="2">
+<font>
+<Font name="System Bold" size="13.0" />
+</font>
+<GridPane.margin>
+<Insets left="10.0" />
+</GridPane.margin>
+</Label>
+<TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+<GridPane.margin>
+<Insets right="10.0" />
+</GridPane.margin>
+</TextField>
+<PasswordField GridPane.columnIndex="1" GridPane.rowIndex="3">
+<GridPane.margin>
+<Insets right="10.0" />
+</GridPane.margin>
+</PasswordField>
+<GridPane GridPane.columnIndex="1" GridPane.rowIndex="6">
+<children>
+<Button fx:id="btnConfermaConfigurazione" mnemonicParsing="false" onMouseClicked="#btnConfermaConfigurazione" styleClass="btnConferma,mainBtn" text="%key82" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+<GridPane.margin>
+<Insets right="10.0" />
+</GridPane.margin>
+</Button>
+<Button fx:id="btnIndietroConf" mnemonicParsing="false" onMouseClicked="#btnIndietroClicked" styleClass="mainBtn,btnIndietro" text="%key61" GridPane.halignment="RIGHT" />
+</children>
+<columnConstraints>
+<ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="414.0" />
+<ColumnConstraints hgrow="SOMETIMES" maxWidth="297.0" minWidth="10.0" prefWidth="205.0" />
+</columnConstraints>
+<rowConstraints>
+<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+</rowConstraints>
+</GridPane>
+<Label text="%key4" GridPane.rowIndex="4">
+<font>
+<Font name="System Bold" size="13.0" />
+</font>
+<GridPane.margin>
+<Insets left="10.0" />
+</GridPane.margin>
+</Label>
+<TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+</children>
+<columnConstraints>
+<ColumnConstraints hgrow="SOMETIMES" maxWidth="395.0" minWidth="10.0" prefWidth="181.0" />
+<ColumnConstraints hgrow="SOMETIMES" maxWidth="657.0" minWidth="10.0" prefWidth="619.0" />
+</columnConstraints>
+<rowConstraints>
+<RowConstraints maxHeight="55.0" minHeight="2.0" prefHeight="55.0" vgrow="SOMETIMES" />
+<RowConstraints maxHeight="55.0" minHeight="0.0" prefHeight="55.0" vgrow="SOMETIMES" />
+<RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+<RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+<RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+<RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+<RowConstraints maxHeight="55.0" minHeight="0.0" prefHeight="55.0" vgrow="SOMETIMES" />
+</rowConstraints>
+</GridPane><Label text="%key80">
+<font>
+<Font name="System Bold" size="18.0" />
+</font>
+<GridPane.margin>
+<Insets left="10.0" />
+</GridPane.margin>
+</Label>
+</children>
 </GridPane><GridPane>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

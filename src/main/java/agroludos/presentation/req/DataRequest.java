@@ -1,6 +1,6 @@
 package agroludos.presentation.req;
 
-public class DataRequest extends AdiRequest{
+public class DataRequest extends AgroRequest{
 
 	public DataRequest(String command) {
 		super(command);

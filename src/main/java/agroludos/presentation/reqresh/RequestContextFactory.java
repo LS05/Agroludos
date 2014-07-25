@@ -1,8 +1,8 @@
 package agroludos.presentation.reqresh;
 
 
-import adisys.server.factory.Factory;
-import adisys.server.presentation.req.AdiRequest;
+import agroludos.factory.Factory;
+import agroludos.presentation.req.AgroRequest;
 
 public class RequestContextFactory extends Factory{
 	private static RequestContextFactory reqFactInstance;
@@ -17,8 +17,8 @@ public class RequestContextFactory extends Factory{
 		return reqFactInstance;
 	}
 
-	public AdiRequestContext createRequestContext(AdiRequest request) {
-		AdiRequestContext requestContext = null;
+	public AgroRequestContext createRequestContext(AgroRequest request) {
+		AgroRequestContext requestContext = null;
 
 		try {
 
@@ -26,7 +26,7 @@ public class RequestContextFactory extends Factory{
 
 			// Identify POJO RequestContext Class for the given Command,
 			// using CommandMap
-			Class<? extends AdiRequestContext> requestContextClass = getContextObjectClass(command);
+			Class<? extends AgroRequestContext> requestContextClass = getContextObjectClass(command);
 
 			// Instantiate POJO
 
@@ -46,12 +46,12 @@ public class RequestContextFactory extends Factory{
 		return requestContext;
 	}
 
-	Class<? extends AdiRequestContext> getContextObjectClass(String tipo){
+	Class<? extends AgroRequestContext> getContextObjectClass(String tipo){
 		Class res = null;
 		
 		try {
 			String nomeClasseRichiesta = this.initData(tipo);
-			res = Class.forName("adisys.server.presentation.reqresh." + nomeClasseRichiesta);
+			res = Class.forName("agroludos.presentation.reqresh." + nomeClasseRichiesta);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}

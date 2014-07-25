@@ -1,4 +1,4 @@
-package agroludos.integration.dao.mysql;
+package agroludos.integration.dao.hib;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,7 +15,7 @@ import agroludos.integration.dao.TipoCompetizioneDAO;
 import agroludos.integration.dao.TipoOptionalDAO;
 import agroludos.integration.dao.UtenteDAO;
 
-public class MySqlDAOFactory extends DAOFactory {
+public class HibDAOFactory extends DAOFactory {
 
 	/**
 	 * Name of the class that holds the jdbc driver implementation for the MySQL database
@@ -47,11 +47,11 @@ public class MySqlDAOFactory extends DAOFactory {
 	public static Connection createConnection() {
 		try {
 			Connection conn = DriverManager.getConnection (DBURL, USERNAME, PASSWORD);
-			System.out.println(MySqlDAOFactory.class.getName()+".createConnection(): database connection established");
+			System.out.println(HibDAOFactory.class.getName()+".createConnection(): database connection established");
 			return conn;
 		} 
 		catch (Exception e) {
-			System.err.println(MySqlDAOFactory.class.getName()+".createConnection(): failed creating connection\n"+e);
+			System.err.println(HibDAOFactory.class.getName()+".createConnection(): failed creating connection\n"+e);
 			e.printStackTrace();
 			return null;
 		}
@@ -62,53 +62,53 @@ public class MySqlDAOFactory extends DAOFactory {
 			conn.close();
 		}
 		catch (Exception e) {
-			System.err.println(MySqlDAOFactory.class.getName()+".closeConnection(): failed closing connection\n"+e);
+			System.err.println(HibDAOFactory.class.getName()+".closeConnection(): failed closing connection\n"+e);
 			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO() {
-		return new MySqlManagerDiCompetizioneDAO();
+		return new HibManagerDiCompetizioneDAO();
 	}
 
 	@Override
 	public ManagerDiSistemaDAO getManagerDiSistemaDAO() {
-		return new MySqlManagerDiSistemaDAO();
+		return new HibManagerDiSistemaDAO();
 	}
 
 	@Override
 	public CompetizioneDAO getCompetizioneDAO() {
-		return new MySqlCompetizioneDAO();
+		return new HibCompetizioneDAO();
 	}
 
 	@Override
 	public PartecipanteDAO getPartecipanteDAO() {
-		return new MySqlPartecipanteDAO();
+		return new HibPartecipanteDAO();
 	}
 
 	@Override
 	public TipoCompetizioneDAO getTipoCompetizioneDAO() {
-		return new MySqlTipoCompetizioneDAO();
+		return new HibTipoCompetizioneDAO();
 	}
 
 	@Override
 	public TipoOptionalDAO getTipoOptionalDAO() {
-		return new MySqlTipoOptionalDAO();
+		return new HibTipoOptionalDAO();
 	}
 
 	@Override
 	public OptionalDAO getOptionalDAO() {
-		return new MySqlOptionalDAO();
+		return new HibOptionalDAO();
 	}
 
 	@Override
 	public UtenteDAO getUtenteDAO() {
-		return new MySqlUtenteDAO();
+		return new HibUtenteDAO();
 	}
 
 	@Override
 	public ConfigurazioneDAO getConfigurazioneDAO() {
-		return new MySqlConfigurazioneDAO();
+		return new HibConfigurazioneDAO();
 	}
 }

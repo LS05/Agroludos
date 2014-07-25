@@ -2,12 +2,6 @@ package agroludos.business.bd;
 
 import java.util.List;
 
-import adisys.server.to.FileTO;
-import adisys.server.to.InterventoTO;
-import adisys.server.to.PazienteTO;
-import adisys.server.to.PianificazioneTO;
-import adisys.server.to.InfermiereTO;
-
 public interface BusinessDelegate {
 //	int checkConfigurazione();
 //	//        Gestione Infermieri    	//

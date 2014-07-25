@@ -9,7 +9,7 @@ import java.util.Map;
  *
  */
 
-public class FrameRequest extends AdiRequest{
+public class FrameRequest extends AgroRequest{
 	private Map<String, String> reqData;
 	
 	public FrameRequest(Map<String, String> data, String commandName) {

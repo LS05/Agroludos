@@ -1,6 +1,6 @@
 package agroludos.presentation.controller;
 
-import agroludos.presentation.reqresh.AdiRequestContext;
+import agroludos.presentation.reqresh.AgroRequestContext;
 import agroludos.presentation.reqresh.DataRequestContext;
 
 public class ACFactory {
@@ -16,10 +16,10 @@ public class ACFactory {
 	}
 	/*--------------------------------------------------*/
 	
-	public ApplicationController getAC(AdiRequestContext request){
+	public ApplicationController getAC(AgroRequestContext request){
 		ApplicationController ac = null;
 		if(request instanceof DataRequestContext) 
-			ac = new ADISysController();
+			ac = new AgroludosController();
 		return ac;
 	}
 }

@@ -2,9 +2,9 @@ package agroludos.presentation.reqresh;
 
 import java.util.Map;
 
-import adisys.server.presentation.req.DataFieldException;
+import agroludos.presentation.req.DataFieldException;
 
-public class DataRequestContext extends AdiRequestContext{
+public class DataRequestContext extends AgroRequestContext{
 
 	@Override
 	public String getCommand() {

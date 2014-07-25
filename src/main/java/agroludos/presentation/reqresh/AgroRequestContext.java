@@ -2,14 +2,14 @@ package agroludos.presentation.reqresh;
 
 import java.util.Map;
 
-import adisys.server.presentation.req.AdiRequest;
-import adisys.server.presentation.req.DataFieldException;
+import agroludos.presentation.req.AgroRequest;
+import agroludos.presentation.req.DataFieldException;
 
-public abstract class AdiRequestContext {
-	protected AdiRequest richiesta;
+public abstract class AgroRequestContext {
+	protected AgroRequest richiesta;
 	protected boolean param;
 	
-	public void initialize(AdiRequest request) {
+	public void initialize(AgroRequest request) {
 		this.richiesta = request;
 		this.param = request.isParameter();
 	}

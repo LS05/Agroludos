@@ -6,7 +6,7 @@
         <xs:element name="richiesta" maxOccurs="unbounded" minOccurs="0">
           <xs:complexType>
             <xs:sequence>
-              <xs:element type="xs:string" name="classe"/>
+              <xs:element type="xs:integer" name="classe"/>
             </xs:sequence>
             <xs:attribute type="xs:string" name="tipo" use="optional"/>
           </xs:complexType>

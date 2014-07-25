@@ -2,8 +2,8 @@ package agroludos.presentation.fc;
 
 import agroludos.presentation.controller.ACFactory;
 import agroludos.presentation.controller.ApplicationController;
-import agroludos.presentation.req.AdiRequest;
-import agroludos.presentation.reqresh.AdiRequestContext;
+import agroludos.presentation.req.AgroRequest;
+import agroludos.presentation.reqresh.AgroRequestContext;
 import agroludos.presentation.reqresh.RequestContextFactory;
 
 public class FC {
@@ -17,13 +17,13 @@ public class FC {
 		return frontControllerInstance;
 	}
 
-	public Object eseguiRichiesta(AdiRequest request){
+	public Object eseguiRichiesta(AgroRequest request){
 		
 		RequestContextFactory reqFact = RequestContextFactory.getInstance();
 		
 		ACFactory acFact = ACFactory.getInstance();
 		
-		AdiRequestContext requestContext = reqFact.createRequestContext(request);
+		AgroRequestContext requestContext = reqFact.createRequestContext(request);
 		
 		ApplicationController ac = acFact.getAC(requestContext);
 		

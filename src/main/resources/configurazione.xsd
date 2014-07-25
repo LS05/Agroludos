@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+      <!-- XML Schema Generated from XML Document on Fri Jul 25 2014 19:25:39 GMT+0200 (CEST) -->
+      <!-- with XmlGrid.net Free Online Service http://xmlgrid.net -->
+      <xs:element name="configurazione">
+            <xs:complexType>
+                  <xs:sequence>
+                        <xs:element name="database">
+                              <xs:complexType>
+                                    <xs:sequence>
+                                          <xs:element name="tipo"></xs:element>
+                                          <xs:element name="nome"></xs:element>
+                                          <xs:element name="server"></xs:element>
+                                          <xs:element name="porta"></xs:element>
+                                          <xs:element name="username"></xs:element>
+                                          <xs:element name="password"></xs:element>
+                                    </xs:sequence>
+                              </xs:complexType>
+                        </xs:element>
+                  </xs:sequence>
+            </xs:complexType>
+      </xs:element>
+</xs:schema>

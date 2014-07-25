@@ -1,10 +1,10 @@
 package agroludos.presentation.req;
 
-public abstract class AdiRequest {
+public abstract class AgroRequest {
 	String commandName;
 	boolean flagParam;
 	
-	AdiRequest(String commandName){
+	AgroRequest(String commandName){
 		this.commandName = commandName;
 	}
 	

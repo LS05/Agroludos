@@ -1,7 +1,7 @@
 package agroludos.presentation.controller;
 
-import adisys.server.req.mapper.CommandMapper;
-import agroludos.presentation.reqresh.AdiRequestContext;
+import agroludos.req.mapper.CommandMapper;
+import agroludos.presentation.reqresh.AgroRequestContext;
 
 abstract public class ApplicationController extends CommandMapper{
 	
@@ -9,7 +9,7 @@ abstract public class ApplicationController extends CommandMapper{
 		super();
 	}
 
-	public Object gestisciRichiesta(AdiRequestContext request) {
+	public Object gestisciRichiesta(AgroRequestContext request) {
 		//request.validate();
 		//String command = request.getCommand();
 		

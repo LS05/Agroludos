@@ -1,7 +1,7 @@
-package agroludos.integration.dao.mysql;
+package agroludos.integration.dao.hib;
 
 import agroludos.integration.dao.ManagerDiCompetizioneDAO;
 
-public class MySqlManagerDiCompetizioneDAO implements ManagerDiCompetizioneDAO{
+public class HibManagerDiCompetizioneDAO implements ManagerDiCompetizioneDAO{
 	//private ServerTOFactory toFact = ServerTOFactory.getTOFactory();
 }
