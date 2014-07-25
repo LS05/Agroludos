@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 
 
 import agroludos.integration.dao.CompetizioneDAO;
+import agroludos.integration.dao.ConfigurazioneDAO;
 import agroludos.integration.dao.DAOFactory;
 import agroludos.integration.dao.ManagerDiCompetizioneDAO;
 import agroludos.integration.dao.ManagerDiSistemaDAO;
@@ -107,7 +108,7 @@ public class MySqlDAOFactory extends DAOFactory {
 	}
 
 	@Override
-	public UtenteDAO getConfigurazioneDAO() {
+	public ConfigurazioneDAO getConfigurazioneDAO() {
 		return new MySqlConfigurazioneDAO();
 	}
 }

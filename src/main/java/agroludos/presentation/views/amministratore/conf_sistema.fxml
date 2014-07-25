@@ -256,7 +256,7 @@
   </rowConstraints>
 <children><ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
 <image>
-<Image url="@../../../../../resources/images/logo.png" />
+<Image url="@agroludos/src/main/resources/images/logo.png" />
 </image>
 <GridPane.margin>
 <Insets top="20.0" />

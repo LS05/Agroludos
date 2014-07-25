@@ -1,0 +1,4 @@
+----- Da Eliminare
+
+Le classi del package si occupano di gestire tutte le richieste provenienti 
+dall'interfaccia utente (FrontController);

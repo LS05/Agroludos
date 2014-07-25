@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<richieste>    		
+	<richiesta tipo="getAllInfermieri">
+      	<classe>DataRequestContext</classe>
+  	</richiesta>
+	<richiesta tipo="getAllInterventi">
+		<classe>DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="getAllPazienti">
+		<classe>DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="visualizzaEditorPazienti">
+		<classe>DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="visualizzaEditorInfermieri">
+		<classe>DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="visualizzaEditorInterventi">
+		<classe>DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="aggiungiInfermiere">
+		<classe>DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="modificaInfermiere">
+		<classe>DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="eliminaInfermiere">
+		<classe>DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="cancellaTuttiInfermieri">
+	    <classe>DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="aggiungiIntervento">
+	    <classe>DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="modificaIntervento">
+	    <classe>DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="eliminaIntervento">
+	    <classe>DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="cancellaTuttiInterventi">
+	    <classe>DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="aggiungiPaziente">
+        <classe>DataRequestContext</classe>
+    </richiesta>
+    <richiesta tipo="modificaPaziente">
+        <classe>DataRequestContext</classe>
+    </richiesta>
+    <richiesta tipo="rimuoviPaziente">
+        <classe>DataRequestContext</classe>
+    </richiesta>
+	<richiesta tipo="cancellaTuttiPazienti">
+	    <classe>DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="confermaNuovoInfermiere">
+	    <classe>DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="confermaRimuoviInfermiere">
+	    <classe>DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="confermaNuovoIntervento">
+	    <classe>DataRequestContext</classe>
+    </richiesta>
+	<richiesta tipo="confermaModificaIntervento">
+	    <classe>DataRequestContext</classe>
+	</richiesta>
+    <richiesta tipo="confermaRimuoviIntervento">
+        <classe>DataRequestContext</classe>
+    </richiesta>
+    <richiesta tipo="confermaRimuoviPaziente">
+        <classe>DataRequestContext</classe>
+    </richiesta>
+    <richiesta tipo="esportaPianificazione">
+	    <classe>PlanRequestContext</classe>
+	</richiesta>
+    <richiesta tipo="modificaPianificazione">
+	    <classe>PlanRequestContext</classe>
+	</richiesta>
+</richieste>
