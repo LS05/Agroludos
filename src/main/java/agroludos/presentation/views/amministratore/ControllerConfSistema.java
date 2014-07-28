@@ -26,6 +26,7 @@ public class ControllerConfSistema implements Initializable{
 	@FXML private GridPane managerSistemaPane;
 	
 	//texfield DataBase
+	@FXML private TextField txtTipoDB;
 	@FXML private TextField txtPercorsoDB;
 	@FXML private TextField txtNomeDB;
 	@FXML private TextField txtUsernameDB;
@@ -55,18 +56,20 @@ public class ControllerConfSistema implements Initializable{
 	
 	@FXML protected void btnAvantiClicked(MouseEvent event) {
 		//controllo la validità delle textfield
-		if((this.txtPercorsoDB.getText().length() != 0)  && 
+		if((this.txtTipoDB.getText().length() != 0)  &&
+			(this.txtPercorsoDB.getText().length() != 0)  && 
 			(this.txtNomeDB.getText().length() != 0)  &&
 			(this.txtUsernameDB.getText().length() != 0)  &&
 			(this.txtPasswordDB.getText().length() != 0)  
 		) {
 			//copio il contenuto delle textfield nell'hashmap parametri
+			parametriDB.put("txtTipoDB", txtTipoDB.getText());
 			parametriDB.put("txtPercorsoDB", txtPercorsoDB.getText());
 			parametriDB.put("txtNomeDB", txtNomeDB.getText());
 			parametriDB.put("txtUsernameDB", txtUsernameDB.getText());
 			parametriDB.put("txtPasswordDB", txtPasswordDB.getText());
 			
-			this.richiesta = new FrameRequest(parametriDB,"confermaConfigurazione");
+			this.richiesta = new FrameRequest(parametriDB,"testConnessioneDB");
 			boolean res = (boolean) this.frontController.eseguiRichiesta(richiesta);
 			
 			//se la connessione al db è andata a buon fine procedi
@@ -107,7 +110,7 @@ public class ControllerConfSistema implements Initializable{
 			parametriMds.put("txtEmailMds", txtEmailMds.getText());
 			parametriMds.put("txtTelefonoMds", txtTelefonoMds.getText());
 			
-			this.richiesta = new FrameRequest(parametriMds,"confermaConfigurazione");
+			this.richiesta = new FrameRequest(parametriMds,"nuovoMDS");
 			Object res = this.frontController.eseguiRichiesta(richiesta);
 		}
 		else {
