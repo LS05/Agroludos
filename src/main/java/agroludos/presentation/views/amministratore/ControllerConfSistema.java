@@ -1,6 +1,8 @@
 package agroludos.presentation.views.amministratore;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,6 +39,11 @@ public class ControllerConfSistema implements Initializable{
 	@FXML private TextField txtEmailMds;
 	@FXML private TextField txtTelefonoMds;
 	
+	//hashmap dei contenuti delle text
+	private Map<String, String> parametriDB = new HashMap<>();
+	private Map<String, String> parametriMds = new HashMap<>();
+	
+	
 	private FC frontController = FC.getInstance();
 	
 	private FrameRequest richiesta;
@@ -53,6 +60,16 @@ public class ControllerConfSistema implements Initializable{
 			(this.txtUsernameDB.getText().length() != 0)  &&
 			(this.txtPasswordDB.getText().length() != 0)  
 		) {
+			//copio il contenuto delle textfield nell'hashmap parametri
+			parametriDB.put("txtPercorsoDB", txtPercorsoDB.getText());
+			parametriDB.put("txtNomeDB", txtNomeDB.getText());
+			parametriDB.put("txtUsernameDB", txtUsernameDB.getText());
+			parametriDB.put("txtPasswordDB", txtPasswordDB.getText());
+			
+			this.richiesta = new FrameRequest(parametriDB,"confermaConfigurazione");
+			Object res = this.frontController.eseguiRichiesta(richiesta);
+			
+			//se la connessione al db è andata a buon fine procedi
 			this.databasePane.setVisible(false);
 	        this.managerSistemaPane.setVisible(true);
 		}
@@ -77,7 +94,16 @@ public class ControllerConfSistema implements Initializable{
 			(this.txtEmailMds.getText().length() != 0)  &&
 			(this.txtTelefonoMds.getText().length() != 0)  
 		) {
-			this.richiesta = new FrameRequest("confermaConfigurazione");
+			//richiesta per creare il Manager di Sistema
+			//copio il contenuto delle textfield nell'hashmap parametri
+			parametriMds.put("txtNomeMds", txtNomeMds.getText());
+			parametriMds.put("txtCognomeMds", txtCognomeMds.getText());
+			parametriMds.put("txtUsernameMds", txtUsernameMds.getText());
+			parametriMds.put("txtPasswordMds", txtPasswordMds.getText());
+			parametriMds.put("txtEmailMds", txtEmailMds.getText());
+			parametriMds.put("txtTelefonoMds", txtTelefonoMds.getText());
+			
+			this.richiesta = new FrameRequest(parametriMds,"confermaConfigurazione");
 			Object res = this.frontController.eseguiRichiesta(richiesta);
 		}
 		else {
