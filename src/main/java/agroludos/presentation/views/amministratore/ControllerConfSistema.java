@@ -67,11 +67,15 @@ public class ControllerConfSistema implements Initializable{
 			parametriDB.put("txtPasswordDB", txtPasswordDB.getText());
 			
 			this.richiesta = new FrameRequest(parametriDB,"confermaConfigurazione");
-			Object res = this.frontController.eseguiRichiesta(richiesta);
+			boolean res = (boolean) this.frontController.eseguiRichiesta(richiesta);
 			
 			//se la connessione al db è andata a buon fine procedi
-			this.databasePane.setVisible(false);
-	        this.managerSistemaPane.setVisible(true);
+			if(res){
+				this.databasePane.setVisible(false);
+		        this.managerSistemaPane.setVisible(true);
+			}
+			else
+				System.out.println("Connessione al DB fallita");
 		}
 		else {
 			System.out.println("Campi vuoti o errati");
