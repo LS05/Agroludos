@@ -24,4 +24,9 @@ public class DataRequestContext extends AgroRequestContext{
 	public Map<String, String> getMainData() {
 		return (Map<String, String>)this.richiesta.getData();
 	}
+
+	@Override
+	public String getClassName() {
+		return this.getClass().getSimpleName();
+	}
 }

@@ -1,6 +1,5 @@
 package agroludos.presentation.reqresh;
 
-
 import agroludos.factory.Factory;
 import agroludos.presentation.req.AgroRequest;
 
@@ -10,7 +9,7 @@ public class RequestContextFactory extends Factory{
 	private RequestContextFactory(){ 
 		super("richieste");
 	}
-
+	
 	public static RequestContextFactory getInstance(){
 		if(reqFactInstance == null)
 			reqFactInstance = new RequestContextFactory();
@@ -18,6 +17,7 @@ public class RequestContextFactory extends Factory{
 	}
 
 	public AgroRequestContext createRequestContext(AgroRequest request) {
+		
 		AgroRequestContext requestContext = null;
 
 		try {
@@ -46,17 +46,8 @@ public class RequestContextFactory extends Factory{
 		return requestContext;
 	}
 
-	Class<? extends AgroRequestContext> getContextObjectClass(String tipo){
-		Class res = null;
-		
-		try {
-			String nomeClasseRichiesta = this.initData(tipo);
-			res = Class.forName("agroludos.presentation.reqresh." + nomeClasseRichiesta);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		return res;
+	private Class<? extends AgroRequestContext> getContextObjectClass(String tipo){
+		return this.getClass("agroludos.presentation.reqresh.", this.initData(tipo));
 	}
 
 	@Override

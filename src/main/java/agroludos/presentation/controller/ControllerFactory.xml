@@ -3,7 +3,7 @@
 xmlns:xs="http://www.w3.org/2001/XMLSchema"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:noNamespaceSchemaLocation="ReqFactorySchema.xsd">    		
-	<richiesta tipo="confermaConfigurazione">
-      	<classe>DataRequestContext</classe>
-  	</richiesta>
+	<context tipo="DataRequestContext">
+      	<classe>GeneralAC</classe>
+  	</context>
 </richieste>

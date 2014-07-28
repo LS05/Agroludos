@@ -1,7 +1,7 @@
 package agroludos.presentation.fc;
 
 import agroludos.presentation.controller.ACFactory;
-import agroludos.presentation.controller.ApplicationController;
+import agroludos.presentation.controller.AgroludosAC;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.reqresh.AgroRequestContext;
 import agroludos.presentation.reqresh.RequestContextFactory;
@@ -25,7 +25,7 @@ public class FC {
 		
 		AgroRequestContext requestContext = reqFact.createRequestContext(request);
 		
-		ApplicationController ac = acFact.getAC(requestContext);
+		AgroludosAC ac = acFact.getAC(requestContext);
 		
 		return ac.gestisciRichiesta(requestContext);
 	}

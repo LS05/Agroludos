@@ -25,4 +25,6 @@ public abstract class AgroRequestContext {
 	public abstract Object getData(Object key) throws DataFieldException;
 	
 	public abstract Map<String, String> getMainData();
+	
+	public abstract String getClassName();
 }

@@ -3,9 +3,9 @@ package agroludos.presentation.controller;
 import agroludos.req.mapper.CommandMapper;
 import agroludos.presentation.reqresh.AgroRequestContext;
 
-abstract public class ApplicationController extends CommandMapper{
+abstract public class AgroludosAC extends CommandMapper{
 	
-	ApplicationController(){
+	AgroludosAC(){
 		super();
 	}
 

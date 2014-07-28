@@ -4,7 +4,7 @@ import agroludos.business.bd.BDFactory;
 import agroludos.business.bd.BusinessDelegate;
 import agroludos.presentation.reqresh.AgroRequestContext;
 
-public class AgroludosController extends ApplicationController{
+public class GeneralAC extends AgroludosAC{
 
 	private static BusinessDelegate agroBD;
 	
@@ -21,7 +21,7 @@ public class AgroludosController extends ApplicationController{
 	}
 	
 	public static boolean confermaConfigurazione(){
-		System.out.println("AgroludosController.confermaConfigurazione");
+		System.out.println("GeneralAC.confermaConfigurazione");
 		return false;
 	}
 

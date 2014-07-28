@@ -45,6 +45,18 @@ public abstract class Factory {
 		return this.handler.getResult();
 	}
 	
+	public Class getClass(String path, String className){
+		Class res = null;
+		
+		try {
+			res = Class.forName(path + className);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+	
 	protected abstract String getXMLPath();
 
 }
