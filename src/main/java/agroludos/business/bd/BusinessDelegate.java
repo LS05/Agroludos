@@ -2,7 +2,11 @@ package agroludos.business.bd;
 
 import java.util.List;
 
+import agroludos.to.ConfigurazioneTO;
+import agroludos.to.DatabaseTO;
+
 public interface BusinessDelegate {
+	boolean checkConnessioneDB(DatabaseTO conf) throws ApplicationException;
 //	int checkConfigurazione();
 //	//        Gestione Infermieri    	//
 //	List<InfermiereTO> getAllInfermieri();

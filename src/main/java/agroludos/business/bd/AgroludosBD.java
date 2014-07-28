@@ -3,9 +3,12 @@ package agroludos.business.bd;
 import java.util.List;
 
 import agroludos.business.as.gestoreconfigurazione.LConfigurazione;
+import agroludos.business.as.gestoreconfigurazione.SConfigurazione;
 import agroludos.business.as.gestoreconfigurazione.IntConfigurazione;
+import agroludos.to.ConfigurazioneTO;
+import agroludos.to.DatabaseTO;
 
-class AdisysBD implements BusinessDelegate{
+class AgroludosBD implements BusinessDelegate{
 //	
 //	private static LUtenteI LUtente;
 //	private static SUtenteI SUtente;
@@ -26,19 +29,18 @@ class AdisysBD implements BusinessDelegate{
 //	private static SInfermiereI SInfermiere;
 	
 	private static LConfigurazione LConfigurazione;
+	private static SConfigurazione SConfigurazione;
 
-	AdisysBD(){
+	AgroludosBD(){
 		LConfigurazione = IntConfigurazione.getLConfigurazioneI();
 //		LUtente = IntUtente.getLUtenteI();
 //		SUtente = IntUtente.getSUtenteI();
 	}
 
-	public int checkConfigurazione(){
-
-		int res = 0;
-
-		LConfigurazione.testDBConnection();
-		
+	@Override
+	public boolean checkConnessioneDB(DatabaseTO conf) throws ApplicationException{
+		boolean res = false;
+		LConfigurazione.testDBConnection(conf);
 		return res;
 	}
 

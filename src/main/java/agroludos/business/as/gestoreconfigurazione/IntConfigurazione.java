@@ -1,7 +1,7 @@
 package agroludos.business.as.gestoreconfigurazione;
 
 public class IntConfigurazione {
-	private static ASConfigurazione asConf = new ASConfigurazione();
+	private static ASGestoreConfigurazione asConf = new ASGestoreConfigurazione();
 	
 	public static LConfigurazione getLConfigurazioneI(){
 		return asConf;

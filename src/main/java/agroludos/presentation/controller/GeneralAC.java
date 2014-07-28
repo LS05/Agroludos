@@ -25,7 +25,6 @@ public class GeneralAC extends AgroludosAC{
 		return false;
 	}
 
-
 	@Override
 	public Class getResourceClass() {
 		return this.getClass();

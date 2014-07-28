@@ -1,7 +1,7 @@
 package agroludos.business.as.gestoreconfigurazione;
 
+import agroludos.to.DatabaseTO;
+
 public interface LConfigurazione {
-	public boolean checkConfigurazione();
-	public boolean testDBConnection();
-	public String getTipoDB();
+	public boolean testDBConnection(DatabaseTO dbto);
 }
