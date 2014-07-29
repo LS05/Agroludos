@@ -1,9 +1,8 @@
 package agroludos.integration.dao;
 
-import agroludos.integration.dao.hib.HibDAOFactory;
+import agroludos.integration.dao.mysql.MySqlDAOFactory;
 
 public abstract class DAOFactory {
-
 
 	// --- Metodo di factory ---
 
@@ -14,8 +13,8 @@ public abstract class DAOFactory {
 	* DAOFactory
 	*/
 	public static DAOFactory getDAOFactory(String tipo) throws IllegalArgumentException{
-		if(tipo.equals("hibernate"))
-			return new HibDAOFactory();
+		if(tipo.equals("mysql"))
+			return new MySqlDAOFactory();
 		else
 			throw new IllegalArgumentException();
 	}

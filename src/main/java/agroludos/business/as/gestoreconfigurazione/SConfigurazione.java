@@ -1,5 +1,7 @@
 package agroludos.business.as.gestoreconfigurazione;
 
-public interface SConfigurazione {
+import agroludos.to.DatabaseTO;
 
+public interface SConfigurazione {
+	boolean inserisciConfigurazione(DatabaseTO dbto);
 }

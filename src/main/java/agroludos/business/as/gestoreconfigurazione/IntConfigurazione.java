@@ -7,4 +7,7 @@ public class IntConfigurazione {
 		return asConf;
 	}
 	
+	public static SConfigurazione getSConfigurazioneI(){
+		return asConf;
+	}
 }

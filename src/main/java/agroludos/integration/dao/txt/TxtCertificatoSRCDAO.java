@@ -1,7 +1,7 @@
 package agroludos.integration.dao.txt;
 
-import agroludos.integration.dao.FileDAO;
+import agroludos.integration.dao.CertificatoSRCDAO;
 
-public class TxtCertificatoSRCDAO implements FileDAO{
+public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 	
 }

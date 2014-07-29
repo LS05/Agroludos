@@ -1,15 +1,20 @@
 package agroludos.integration.dao;
 
 import agroludos.integration.dao.txt.TxtDAOFactory;
+import agroludos.integration.dao.xml.XmlDAOFactory;
 
 abstract public class FileDAOFactory {
 	
-	public static FileDAOFactory getDAOFactory(String tipoFile) {
+	public static FileDAOFactory getDAOFactory(String tipoFile) throws IllegalArgumentException{
 		if(tipoFile.equals("txt"))
 			return new TxtDAOFactory();
+		else if(tipoFile.equals("xml"))
+			return new XmlDAOFactory();
 		else
-			return null;
+			throw new IllegalArgumentException();
 	}
 	
-	public abstract FileDAO getCertificatoSRCDAO();
+	public abstract CertificatoSRCDAO getCertificatoSRCDAO();
+	
+	public abstract ConfigurazioneDAO getConfigurazioneDAO();
 }

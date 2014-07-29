@@ -33,6 +33,7 @@ class AgroludosBD implements BusinessDelegate{
 
 	AgroludosBD(){
 		LConfigurazione = IntConfigurazione.getLConfigurazioneI();
+		SConfigurazione = IntConfigurazione.getSConfigurazioneI();
 //		LUtente = IntUtente.getLUtenteI();
 //		SUtente = IntUtente.getSUtenteI();
 	}
