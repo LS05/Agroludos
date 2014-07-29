@@ -69,7 +69,7 @@ public class ControllerConfSistema implements Initializable{
 			parametriDB.put("txtUsernameDB", txtUsernameDB.getText());
 			parametriDB.put("txtPasswordDB", txtPasswordDB.getText());
 			
-			this.richiesta = new FrameRequest(parametriDB,"testConnessioneDB");
+			this.richiesta = new FrameRequest(parametriDB,"confermaConfigurazione");
 			boolean res = (boolean) this.frontController.eseguiRichiesta(richiesta);
 			
 			//se la connessione al db è andata a buon fine procedi

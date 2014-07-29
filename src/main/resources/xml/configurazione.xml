@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<configurazione
-xsi:noNamespaceSchemaLocation="configurazione.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><configurazione>
 	<database>
-		<tipo></tipo>
-		<nome></nome>
-		<server></server>
-		<porta></porta>
-		<username></username>
-		<password></password>
+		<tipo>Luchein</tipo>
+		<nome>si</nome>
+		<server>pop</server>
+		<porta>nu </porta>
+		<username>grandessm</username>
+		<password>cddaun</password>
 	</database>
 </configurazione>
