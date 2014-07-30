@@ -12,29 +12,31 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import agroludos.integration.dao.DAOFactory;
 import agroludos.integration.dao.ConfigurazioneDAO;
 import agroludos.to.DatabaseTO;
 
 public class XmlConfigurazioneDAO implements ConfigurazioneDAO{
 
-	private String filePath;
-	private DAOFactory daofact;
-
 	@Override
 	public boolean creaConfigurazione(DatabaseTO dbto) {
 
-		this.filePath = "src/main/resources/xml/configurazione.xml";
+		String tipoDB = dbto.getTipo();
+		String nomeDB = dbto.getNome();
+		String serverDB = dbto.getServer();
+		String portaDB = "8080";
+		String usernameDB = dbto.getUsername();
+		String passwordDB = dbto.getPassword();
 
+		String filepath = "src/main/resources/xml/configurazione.xml";
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-			Document doc = docBuilder.parse(this.filePath);
+			Document doc = docBuilder.parse(filepath);
 
 			// Get the database element by tag name directly
 			Node database = doc.getElementsByTagName("database").item(0);
@@ -48,22 +50,22 @@ public class XmlConfigurazioneDAO implements ConfigurazioneDAO{
 
 				// get the tipo element, and update the value
 				if ("tipo".equals(node.getNodeName())) {
-					node.setTextContent("Luchein");
+					node.setTextContent(tipoDB);
 				}
 				if ("nome".equals(node.getNodeName())) {
-					node.setTextContent("si");
+					node.setTextContent(nomeDB);
 				}
 				if ("server".equals(node.getNodeName())) {
-					node.setTextContent("pop");
+					node.setTextContent(serverDB);
 				}
 				if ("porta".equals(node.getNodeName())) {
-					node.setTextContent("nu");
+					node.setTextContent(portaDB);
 				}
 				if ("username".equals(node.getNodeName())) {
-					node.setTextContent("grandessm");
+					node.setTextContent(usernameDB);
 				}
 				if ("password".equals(node.getNodeName())) {
-					node.setTextContent("cddaun");
+					node.setTextContent(passwordDB);
 				}
 			}
 
@@ -71,7 +73,7 @@ public class XmlConfigurazioneDAO implements ConfigurazioneDAO{
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File(this.filePath));
+			StreamResult result = new StreamResult(new File(filepath));
 			transformer.transform(source, result);
 
 			System.out.println("Done");
@@ -85,11 +87,11 @@ public class XmlConfigurazioneDAO implements ConfigurazioneDAO{
 		} catch (SAXException sae) {
 			sae.printStackTrace();
 		}
-
 		return false;
 	}
 
-	public static void main(String[] args) throws Exception {
-		new XmlConfigurazioneDAO().creaConfigurazione(null);
-	}
+
+	//	public static void main(String[] args) throws Exception {
+	//	    new XmlConfigurazioneDAO().creaConfigurazione(null);
+	//	}
 }
