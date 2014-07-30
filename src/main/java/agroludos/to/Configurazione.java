@@ -1,9 +1,5 @@
 package agroludos.to;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
 class Configurazione implements ConfigurazioneTO{
 	private String pathConf;
 	private int idConf;
@@ -31,16 +27,5 @@ class Configurazione implements ConfigurazioneTO{
 
 	public void setIdConf(int idConf) {
 		this.idConf = idConf;
-	}
-	
-	
-	public static void main(String args[]){
-		ConfigurazioneTO conf = new Configurazione();
-		conf.setPathConf("test");
-		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.save(conf);
-		session.getTransaction().commit();
 	}
 }
