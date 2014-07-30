@@ -1,6 +1,6 @@
 package agroludos.to;
 
-class Database implements DatabaseTO{
+public class Database implements DatabaseTO{
 	private String nome;
 	private String server;
 	private String porta;

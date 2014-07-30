@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -13,12 +14,14 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.DocumentType;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import agroludos.integration.dao.ConfigurazioneDAO;
+import agroludos.to.Database;
 import agroludos.to.DatabaseTO;
 
 public class XmlConfigurazioneDAO implements ConfigurazioneDAO{
@@ -119,14 +122,28 @@ public class XmlConfigurazioneDAO implements ConfigurazioneDAO{
 	private void writeFile(Document doc, String path) throws TransformerException{
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
+		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		
+		DocumentType doctype = doc.getDoctype();
+		
+        if(doctype != null) {
+            transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, doctype.getPublicId());
+            transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
+        }
+        
 		DOMSource source = new DOMSource(doc);
 		StreamResult result = new StreamResult(new File(path));
 		transformer.transform(source, result);
 	}
 
-//	public static void main(String[] args) throws Exception {
-//		DatabaseTO dbto = new Database();
-//		dbto.setTipo("mysql");
-//		new XmlConfigurazioneDAO().creaConfigurazione(dbto);
-//	}
+	public static void main(String[] args) throws Exception {
+		DatabaseTO dbto = new Database();
+		dbto.setTipo("mysql");
+		dbto.setNome("agroludos");
+		dbto.setUsername("root");
+		dbto.setPassword("root");
+		dbto.setPorta("3306");
+		dbto.setServer("localhost");
+		new XmlConfigurazioneDAO().creaConfigurazione(dbto);
+	}
 }

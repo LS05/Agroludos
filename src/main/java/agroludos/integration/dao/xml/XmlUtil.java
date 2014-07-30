@@ -34,7 +34,7 @@ class XmlUtil {
 		String url = null;
 		
 		if(tipoDB.toLowerCase().equals("mysql"))
-			url = "jdbc:mysql://:";
+			url = "jdbc:mysql://";
 		
 		return url;
 	
