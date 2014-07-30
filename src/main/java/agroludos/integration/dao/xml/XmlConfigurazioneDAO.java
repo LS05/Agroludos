@@ -25,6 +25,13 @@ public class XmlConfigurazioneDAO implements ConfigurazioneDAO{
 	@Override
 	public boolean creaConfigurazione(DatabaseTO dbto) {
 		
+		String tipoDB = dbto.getTipo();
+		String nomeDB = dbto.getNome();
+		String serverDB = dbto.getServer();
+		String portaDB = "8080";
+		String usernameDB = dbto.getUsername();
+		String passwordDB = dbto.getPassword();
+		
 		String filepath = "src/main/resources/xml/configurazione.xml";
 		try {
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -43,22 +50,22 @@ public class XmlConfigurazioneDAO implements ConfigurazioneDAO{
  
 		   // get the tipo element, and update the value
 		   if ("tipo".equals(node.getNodeName())) {
-			node.setTextContent("Luchein");
+			node.setTextContent(tipoDB);
 		   }
 		   if ("nome".equals(node.getNodeName())) {
-				node.setTextContent("si");
+				node.setTextContent(nomeDB);
 			   }
 		   if ("server".equals(node.getNodeName())) {
-				node.setTextContent("pop");
+				node.setTextContent(serverDB);
 			   }
 		   if ("porta".equals(node.getNodeName())) {
-				node.setTextContent("nu");
+				node.setTextContent(portaDB);
 			   }
 		   if ("username".equals(node.getNodeName())) {
-				node.setTextContent("grandessm");
+				node.setTextContent(usernameDB);
 			   }
 		   if ("password".equals(node.getNodeName())) {
-				node.setTextContent("cddaun");
+				node.setTextContent(passwordDB);
 			   }
 		}
  
@@ -84,7 +91,7 @@ public class XmlConfigurazioneDAO implements ConfigurazioneDAO{
 	}
 
 
-	public static void main(String[] args) throws Exception {
-	    new XmlConfigurazioneDAO().creaConfigurazione(null);
-	}
+//	public static void main(String[] args) throws Exception {
+//	    new XmlConfigurazioneDAO().creaConfigurazione(null);
+//	}
 }
