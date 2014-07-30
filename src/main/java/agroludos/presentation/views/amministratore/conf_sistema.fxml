@@ -47,7 +47,7 @@
 <Insets left="10.0" />
 </GridPane.margin>
 </Label>
-<TextField fx:id="txtPercorsoDB" promptText="%key76" GridPane.columnIndex="1" GridPane.rowIndex="1">
+<TextField fx:id="txtServerDB" promptText="%key76" GridPane.columnIndex="1" GridPane.rowIndex="1">
 <GridPane.margin>
 <Insets right="10.0" />
 </GridPane.margin>

@@ -28,7 +28,7 @@ public class XmlConfigurazioneDAO implements ConfigurazioneDAO{
 		String tipoDB = dbto.getTipo();
 		String nomeDB = dbto.getNome();
 		String serverDB = dbto.getServer();
-		String portaDB = "8080";
+		String portaDB = dbto.getPorta();
 		String usernameDB = dbto.getUsername();
 		String passwordDB = dbto.getPassword();
 		
