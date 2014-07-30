@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><configurazione>
 	<database>
-		<tipo>Luchein</tipo>
-		<nome>si</nome>
-		<server>pop</server>
-		<porta>nu</porta>
-		<username>grandessm</username>
-		<password>cddaun</password>
+		<tipo></tipo>
+		<nome></nome>
+		<server></server>
+		<porta></porta>
+		<username></username>
+		<password></password>
 	</database>
 </configurazione>
