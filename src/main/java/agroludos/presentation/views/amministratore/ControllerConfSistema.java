@@ -9,10 +9,13 @@ import java.util.regex.Pattern;
 
 import agroludos.presentation.fc.FC;
 import agroludos.presentation.req.FrameRequest;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -26,8 +29,9 @@ public class ControllerConfSistema implements Initializable{
 	@FXML private GridPane managerSistemaPane;
 	
 	//texfield DataBase
-	@FXML private TextField txtTipoDB;
-	@FXML private TextField txtPercorsoDB;
+	@FXML private ComboBox<String> cmbTipoDB;
+	@FXML private TextField txtServerDB;
+	@FXML private TextField txtPortaDB;
 	@FXML private TextField txtNomeDB;
 	@FXML private TextField txtUsernameDB;
 	@FXML private PasswordField txtPasswordDB;
@@ -48,26 +52,37 @@ public class ControllerConfSistema implements Initializable{
 	private FC frontController = FC.getInstance();
 	
 	private FrameRequest richiesta;
+	private ObservableList<String> listaTipiDB;
 	
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		this.listaTipiDB = FXCollections.observableArrayList();
+		//aggiungo i tipi di db alla combobox
+		this.listaTipiDB.add("mysql");
+		this.listaTipiDB.add("oracle");
+		this.listaTipiDB.add("postgress");
+		this.cmbTipoDB.setItems(this.listaTipiDB);
+		this.cmbTipoDB.setValue("mysql");
+		
 		this.databasePane.setVisible(true);
         this.managerSistemaPane.setVisible(false);
 	}
 	
 	@FXML protected void btnAvantiClicked(MouseEvent event) {
 		//controllo la validità delle textfield
-		if((this.txtTipoDB.getText().length() != 0)  &&
-			(this.txtPercorsoDB.getText().length() != 0)  && 
+		if((this.cmbTipoDB.getValue().length() != 0)  &&
+			(this.txtServerDB.getText().length() != 0)  && 
+			(this.txtPortaDB.getText().length() != 0)  && 
 			(this.txtNomeDB.getText().length() != 0)  &&
 			(this.txtUsernameDB.getText().length() != 0)  &&
 			(this.txtPasswordDB.getText().length() != 0)  
 		) {
 			//copio il contenuto delle textfield nell'hashmap parametri
-			parametriDB.put("txtTipoDB", txtTipoDB.getText());
-			parametriDB.put("txtPercorsoDB", txtPercorsoDB.getText());
-			parametriDB.put("txtNomeDB", txtNomeDB.getText());
-			parametriDB.put("txtUsernameDB", txtUsernameDB.getText());
-			parametriDB.put("txtPasswordDB", txtPasswordDB.getText());
+			parametriDB.put("tipo", this.cmbTipoDB.getValue());
+			parametriDB.put("server", txtServerDB.getText());
+			parametriDB.put("porta", txtPortaDB.getText());
+			parametriDB.put("nome", txtNomeDB.getText());
+			parametriDB.put("username", txtUsernameDB.getText());
+			parametriDB.put("password", txtPasswordDB.getText());
 			
 			this.richiesta = new FrameRequest(parametriDB,"confermaConfigurazione");
 			boolean res = (boolean) this.frontController.eseguiRichiesta(richiesta);

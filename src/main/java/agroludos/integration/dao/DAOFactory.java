@@ -7,71 +7,72 @@ public abstract class DAOFactory {
 	// --- Metodo di factory ---
 
 	/**
-	* In base al parametro di input
-	* il metoro ritorna una delle possibili implementazioni
-	* di questo factory, basate sulla specifica dell'interfaccia
-	* DAOFactory
-	*/
-	public static DAOFactory getDAOFactory(String tipo) throws IllegalArgumentException{
-		if(tipo.equals("mysql"))
+	 * In base al parametro di input il metoro ritorna una delle possibili
+	 * implementazioni di questo factory, basate sulla specifica
+	 * dell'interfaccia DAOFactory
+	 */
+	public static DAOFactory getDAOFactory(String tipo)
+			throws IllegalArgumentException {
+		if (tipo.toLowerCase().equals("mysql"))
 			return new MySqlDAOFactory();
 		else
 			throw new IllegalArgumentException();
 	}
 
-	// --- Factory specification: concrete factories implementing this spec must provide this methods! ---
+	// --- Factory specification: concrete factories implementing this spec must
+	// provide this methods! ---
 
 	/**
-	* Metodo per ottenere il DATA ACCESS OBJECT
-	* per il tipo Manager di ManagerDiCompetizione
-	*/
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
+	 * ManagerDiCompetizione
+	 */
 	public abstract ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO();
-	
+
 	/**
-	* Metodo per ottenere il DATA ACCESS OBJECT
-	* per il tipo Manager di ManagerDiSistema
-	*/
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
+	 * ManagerDiSistema
+	 */
 	public abstract ManagerDiSistemaDAO getManagerDiSistemaDAO();
-	
+
 	/**
-	* Metodo per ottenere il DATA ACCESS OBJECT
-	* per il tipo Manager di Competizione
-	*/
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
+	 * Competizione
+	 */
 	public abstract CompetizioneDAO getCompetizioneDAO();
-	
+
 	/**
-	* Metodo per ottenere il DATA ACCESS OBJECT
-	* per il tipo Manager di Partecipante
-	*/
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
+	 * Partecipante
+	 */
 	public abstract TipoCompetizioneDAO getTipoCompetizioneDAO();
-	
+
 	/**
-	* Metodo per ottenere il DATA ACCESS OBJECT
-	* per il tipo Manager di Partecipante
-	*/
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
+	 * Partecipante
+	 */
 	public abstract PartecipanteDAO getPartecipanteDAO();
-	
+
 	/**
-	* Metodo per ottenere il DATA ACCESS OBJECT
-	* per il tipo Manager di Partecipante
-	*/
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
+	 * Partecipante
+	 */
 	public abstract TipoOptionalDAO getTipoOptionalDAO();
-	
+
 	/**
-	* Metodo per ottenere il DATA ACCESS OBJECT
-	* per il tipo Manager di Partecipante
-	*/
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
+	 * Partecipante
+	 */
 	public abstract OptionalDAO getOptionalDAO();
-	
+
 	/**
-	* Metodo per ottenere il DATA ACCESS OBJECT
-	* per il tipo Manager di Partecipante
-	*/
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
+	 * Partecipante
+	 */
 	public abstract UtenteDAO getUtenteDAO();
-	
+
 	/**
-	* Metodo per ottenere il DATA ACCESS OBJECT
-	* per il tipo Manager di Partecipante
-	*/
-	public abstract ConfigurazioneDAO getConfigurazioneDAO();
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
+	 * Partecipante
+	 */
+	public abstract FConfigurazioneDAO getConfigurazioneDAO();
 }

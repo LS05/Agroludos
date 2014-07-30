@@ -1,8 +1,9 @@
 package agroludos.to;
 
-class Database implements DatabaseTO{
+public class Database implements DatabaseTO{
 	private String nome;
-	private String percorso;
+	private String server;
+	private String porta;
 	private String username;
 	private String password;
 	private String tipo;
@@ -13,14 +14,17 @@ class Database implements DatabaseTO{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getPercorso() {
-		return percorso;
+	public String getServer() {
+		return server;
 	}
-	public void setPercorso(String percorso) {
-		this.percorso = percorso;
+	public void setServer(String server) {
+		this.server = server;
 	}
 	public String getUsername() {
 		return username;
+	}
+	public String getPorta() {
+		return porta;
 	}
 	public void setUsername(String username) {
 		this.username = username;
@@ -36,5 +40,8 @@ class Database implements DatabaseTO{
 	}
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+	public void setPorta(String porta) {
+		this.porta = porta;
 	}
 }

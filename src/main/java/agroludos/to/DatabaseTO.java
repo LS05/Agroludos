@@ -5,10 +5,12 @@ public interface DatabaseTO{
 	String getTipo();
 	String getUsername();
 	String getPassword();
-	String getPercorso();
+	String getServer();
+	String getPorta();
 	void setNome(String nome);
 	void setTipo(String tipo);
 	void setUsername(String username);
 	void setPassword(String password);
-	void setPercorso(String percorso);
+	void setServer(String server);
+	void setPorta(String porta);
 }
