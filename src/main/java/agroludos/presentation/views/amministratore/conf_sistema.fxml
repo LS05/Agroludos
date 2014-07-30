@@ -52,6 +52,7 @@
 <Insets right="10.0" />
 </GridPane.margin>
 </TextField>
+                              <TextField fx:id="txtPortaDB" promptText="%key89" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 <TextField fx:id="txtNomeDB" promptText="%key77" GridPane.columnIndex="1" GridPane.rowIndex="3">
 <GridPane.margin>
 <Insets right="10.0" />
@@ -100,7 +101,6 @@
                                  </GridPane.margin>
                               </Label>
                               <ComboBox fx:id="cmbTipoDB" prefWidth="150.0" GridPane.columnIndex="1" />
-                              <TextField fx:id="txtPortaDB" promptText="%key89" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label text="%key88" GridPane.rowIndex="2">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
