@@ -21,7 +21,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import agroludos.integration.dao.ConfigurazioneDAO;
-import agroludos.to.Database;
 import agroludos.to.DatabaseTO;
 
 public class XmlConfigurazioneDAO implements ConfigurazioneDAO{
@@ -136,14 +135,14 @@ public class XmlConfigurazioneDAO implements ConfigurazioneDAO{
 		transformer.transform(source, result);
 	}
 
-	public static void main(String[] args) throws Exception {
-		DatabaseTO dbto = new Database();
-		dbto.setTipo("mysql");
-		dbto.setNome("agroludos");
-		dbto.setUsername("root");
-		dbto.setPassword("root");
-		dbto.setPorta("3306");
-		dbto.setServer("localhost");
-		new XmlConfigurazioneDAO().creaConfigurazione(dbto);
-	}
+//	public static void main(String[] args) throws Exception {
+//		DatabaseTO dbto = new Database();
+//		dbto.setTipo("mysql");
+//		dbto.setNome("agroludos");
+//		dbto.setUsername("root");
+//		dbto.setPassword("root");
+//		dbto.setPorta("3306");
+//		dbto.setServer("localhost");
+//		new XmlConfigurazioneDAO().creaConfigurazione(dbto);
+//	}
 }

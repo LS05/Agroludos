@@ -9,24 +9,6 @@ import agroludos.to.ConfigurazioneTO;
 import agroludos.to.DatabaseTO;
 
 class AgroludosBD implements BusinessDelegate{
-//	
-//	private static LUtenteI LUtente;
-//	private static SUtenteI SUtente;
-//
-//	private static SInterventiI SInterventi;
-//	private static LInterventiI LInterventi;
-//	
-//	private static LPazienteI LPazienti;
-//	private static SPazienteI SPazienti;
-//	
-//	private static ODatiI ODati;
-//	private static LDatiI IDati;
-//	
-//	private static LServerI LServer;
-//	private static SServerI SServer;
-	
-//	private static LInfermiereI LInfermiere;
-//	private static SInfermiereI SInfermiere;
 	
 	private static LConfigurazione LConfigurazione;
 	private static SConfigurazione SConfigurazione;
@@ -40,7 +22,14 @@ class AgroludosBD implements BusinessDelegate{
 	@Override
 	public boolean checkConnessioneDB(DatabaseTO conf) throws ApplicationException{
 		boolean res = false;
-		LConfigurazione.testDBConnection(conf);
+		res = LConfigurazione.testDBConnection(conf);
+		return res;
+	}
+
+	@Override
+	public boolean creaConfigurazione(DatabaseTO dbto) throws ApplicationException {
+		boolean res = false;
+		res = SConfigurazione.inserisciConfigurazione(dbto);
 		return res;
 	}
 
