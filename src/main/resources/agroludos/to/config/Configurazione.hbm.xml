@@ -14,5 +14,23 @@
         <property name="pathConf" type="string">
             <column name="conf_file" not-null="true" />
         </property>
+        <property name="tipoDB" type="string">
+            <column name="tipo" not-null="true" />
+        </property>
+        <property name="nomeDB" type="string">
+            <column name="nome" not-null="true" />
+        </property>
+        <property name="serverDB" type="string">
+            <column name="server" not-null="true" />
+        </property>
+        <property name="portaDB" type="string">
+            <column name="porta" not-null="true" />
+        </property>
+        <property name="userDB" type="text">
+            <column name="username" not-null="true" />
+        </property>
+        <property name="pwdDB" type="text">
+            <column name="password" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

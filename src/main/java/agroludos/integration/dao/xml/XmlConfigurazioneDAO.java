@@ -15,40 +15,46 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import agroludos.integration.dao.ConfigurazioneDAO;
+import agroludos.integration.dao.FConfigurazioneDAO;
+import agroludos.to.ConfigurazioneTO;
 import agroludos.to.DatabaseTO;
+import agroludos.to.TOFactory;
 
-public class XmlConfigurazioneDAO implements ConfigurazioneDAO{
+public class XmlConfigurazioneDAO implements FConfigurazioneDAO{
 
 	private DocumentBuilderFactory docFactory;
 	private DocumentBuilder docBuilder;
+	private Document doc;
 
 	private String confPath = XmlUtil.getConfPath();
-
-
 	
+	private XMLConfigFile xmlFile;
+	
+	XmlConfigurazioneDAO(){
+		this.doc = this.getDocument(this.confPath);
+		this.xmlFile = XMLConfigFile.getInstance();
+	}
+
 	@Override
 	public boolean creaConfigurazione(DatabaseTO dbto) {
-
-		Document doc = this.getDocument(this.confPath);
-
-		ScriviXML.scriviFileXML(doc, dbto);
 		
-		// write the content into xml file
-		try {
-			this.writeFile(doc, this.confPath);
+		boolean res = false;
 
-		} catch (TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(this.doc != null){
+			res = xmlFile.scriviFileXML(this.doc, dbto);
+			try {
+				this.writeFile(this.doc, this.confPath);
+			} catch (TransformerException e) {
+				res = false;
+				e.printStackTrace();
+			}
+		} else {
+			res = false;
 		}
 
-		return false;
+		return res;
 	}
 
 	private Document getDocument(String path){
@@ -60,13 +66,10 @@ public class XmlConfigurazioneDAO implements ConfigurazioneDAO{
 			this.docBuilder = docFactory.newDocumentBuilder();
 			doc = this.docBuilder.parse(path);
 		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -77,27 +80,21 @@ public class XmlConfigurazioneDAO implements ConfigurazioneDAO{
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-		
+
 		DocumentType doctype = doc.getDoctype();
-		
-        if(doctype != null) {
-            transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, doctype.getPublicId());
-            transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
-        }
-        
+
+		if(doctype != null) {
+			transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, doctype.getPublicId());
+			transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
+		}
+
 		DOMSource source = new DOMSource(doc);
 		StreamResult result = new StreamResult(new File(path));
 		transformer.transform(source, result);
 	}
 
-//	public static void main(String[] args) throws Exception {
-//		DatabaseTO dbto = new Database();
-//		dbto.setTipo("mysql");
-//		dbto.setNome("agroludos");
-//		dbto.setUsername("root");
-//		dbto.setPassword("root");
-//		dbto.setPorta("3306");
-//		dbto.setServer("localhost");
-//		new XmlConfigurazioneDAO().creaConfigurazione(dbto);
-//	}
+	@Override
+	public String getConfPath() {
+		return this.confPath;
+	}
 }

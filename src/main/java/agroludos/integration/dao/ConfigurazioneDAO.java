@@ -1,7 +1,8 @@
 package agroludos.integration.dao;
 
-import agroludos.to.DatabaseTO;
+import agroludos.to.ConfigurazioneTO;
 
 public interface ConfigurazioneDAO {
-	boolean creaConfigurazione(DatabaseTO dbto);
+	public boolean addConfigurazioneDB(ConfigurazioneTO conf);
+	boolean getStatoConfigurazione();
 }

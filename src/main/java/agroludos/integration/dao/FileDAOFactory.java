@@ -17,5 +17,5 @@ abstract public class FileDAOFactory {
 
 	public abstract CertificatoSRCDAO getCertificatoSRCDAO();
 
-	public abstract ConfigurazioneDAO getConfigurazioneDAO();
+	public abstract FConfigurazioneDAO getConfigurazioneDAO();
 }

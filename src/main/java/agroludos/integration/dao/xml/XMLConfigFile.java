@@ -7,20 +7,37 @@ import org.w3c.dom.NodeList;
 
 import agroludos.to.DatabaseTO;
 
-class ScriviXML {
-	
-	public ScriviXML(){
-		
+class XMLConfigFile {
+
+	private String tipoDB;
+	private String nomeDB;
+	private String serverDB;
+	private String portaDB;
+	private String usernameDB;
+	private String passwordDB;
+
+	private static XMLConfigFile scriviInst;
+
+	private XMLConfigFile(){
+
 	}
 
-	static boolean scriviFileXML (Document doc, DatabaseTO dbto){
-		
-		String tipoDB = dbto.getTipo();
-		String nomeDB = dbto.getNome();
-		String serverDB = dbto.getServer();
-		String portaDB = dbto.getPorta();
-		String usernameDB = dbto.getUsername();
-		String passwordDB = dbto.getPassword();
+	static XMLConfigFile getInstance(){
+		if(scriviInst == null)
+			scriviInst = new XMLConfigFile();
+		return scriviInst;
+	}
+
+	boolean scriviFileXML (Document doc, DatabaseTO dbto){
+
+		boolean res = false;
+
+		this.tipoDB = dbto.getTipo();
+		this.nomeDB = dbto.getNome();
+		this.serverDB = dbto.getServer();
+		this.portaDB = dbto.getPorta();
+		this.usernameDB = dbto.getUsername();
+		this.passwordDB = dbto.getPassword();	
 
 		// Get the database element by tag name directly
 		Node database = doc.getElementsByTagName("session-factory").item(0);
@@ -42,28 +59,34 @@ class ScriviXML {
 
 					if(attrValue.equals(XmlUtil.hibDriver)){
 						node.setTextContent(XmlUtil.getDriver(tipoDB));
+						res = true;
 					}
 
 					if(attrValue.equals(XmlUtil.hibDialect)){
 						node.setTextContent(XmlUtil.getDialect(tipoDB));
+						res = true;
 					}
 
 					if(attrValue.equals(XmlUtil.hibUsername)){
 						node.setTextContent(usernameDB);
+						res = true;
 					}
 
 					if(attrValue.equals(XmlUtil.hibPassword)){
 						node.setTextContent(passwordDB);
+						res = true;
 					}
 
 					if(attrValue.equals(XmlUtil.hibUrl)){
 						String urlDB = XmlUtil.getUrl(tipoDB) + serverDB + ":" + portaDB + "/" + nomeDB;
 						node.setTextContent(urlDB);
+						res = true;
 					}
 				}
 			}
 		}
-		
-		return false;
+
+		return res;
 	}
+
 }

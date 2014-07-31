@@ -74,5 +74,5 @@ public abstract class DAOFactory {
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
 	 * Partecipante
 	 */
-	public abstract FConfigurazioneDAO getConfigurazioneDAO();
+	public abstract ConfigurazioneDAO getConfigurazioneDAO();
 }

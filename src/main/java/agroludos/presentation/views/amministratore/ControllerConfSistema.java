@@ -95,7 +95,7 @@ public class ControllerConfSistema implements Initializable{
 			parametriDB.put("porta", txtPortaDB.getText());
 			parametriDB.put("nome", txtNomeDB.getText());
 			parametriDB.put("username", txtUsernameDB.getText());
-			parametriDB.put("password", securePassword);
+			parametriDB.put("password", txtPasswordDB.getText());
 
 			this.richiesta = new FrameRequest(parametriDB,"confermaConfigurazione");
 			boolean res = (boolean) this.frontController.eseguiRichiesta(richiesta);

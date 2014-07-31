@@ -1,14 +1,11 @@
 package agroludos.integration.dao.mysql;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
-import agroludos.integration.dao.FConfigurazioneDAO;
+import agroludos.integration.dao.ConfigurazioneDAO;
 import agroludos.to.ConfigurazioneTO;
-import agroludos.to.DatabaseTO;
 
-public class MySqlConfigurazioneDAO implements FConfigurazioneDAO {
+public class MySqlConfigurazioneDAO implements ConfigurazioneDAO {
 	private Session session;
 	
 	MySqlConfigurazioneDAO(){
@@ -16,17 +13,19 @@ public class MySqlConfigurazioneDAO implements FConfigurazioneDAO {
 	}
 	
 	@Override
-	public boolean creaConfigurazione(DatabaseTO dbto) {
-		return false;
+	public boolean addConfigurazioneDB(ConfigurazioneTO conf) {
+		boolean res = false;
+		// TODO Aggiungere gestione eccezioni hibernate
+		this.session.beginTransaction();
+		this.session.save(conf);
+		res = true;
+		this.session.getTransaction().commit();
+		return res;
 	}
 
 	@Override
-	public boolean salvaConfigurazione(ConfigurazioneTO conf) {
-		
-		this.session.beginTransaction();
-		this.session.save(conf);
-		this.session.getTransaction().commit();
-		
+	public boolean getStatoConfigurazione() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
