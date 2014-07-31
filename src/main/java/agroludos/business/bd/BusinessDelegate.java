@@ -7,7 +7,7 @@ import agroludos.to.DatabaseTO;
 
 public interface BusinessDelegate {
 	boolean creaConfigurazione(DatabaseTO dbto) throws ApplicationException;
-	boolean checkConnessioneDB(DatabaseTO conf) throws ApplicationException;
+	boolean testConnessioneDB(DatabaseTO conf) throws ApplicationException;
 //	int checkConfigurazione();
 //	//        Gestione Infermieri    	//
 //	List<InfermiereTO> getAllInfermieri();

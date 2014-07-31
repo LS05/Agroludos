@@ -27,5 +27,4 @@ public class SecurePassword {
 		return securePassword;
 
 	}
-	
 }

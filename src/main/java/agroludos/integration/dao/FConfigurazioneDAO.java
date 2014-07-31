@@ -1,7 +1,8 @@
 package agroludos.integration.dao;
 
-import agroludos.to.ConfigurazioneTO;
+import agroludos.to.DatabaseTO;
 
-public interface FConfigurazioneDAO extends ConfigurazioneDAO {
-	boolean salvaConfigurazione(ConfigurazioneTO conf);
+public interface FConfigurazioneDAO {
+	boolean creaConfigurazione(DatabaseTO dbto);
+	String getConfPath();
 }

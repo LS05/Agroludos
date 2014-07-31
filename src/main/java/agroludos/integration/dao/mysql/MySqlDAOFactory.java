@@ -6,7 +6,7 @@ import org.hibernate.cfg.Configuration;
 
 
 import agroludos.integration.dao.CompetizioneDAO;
-import agroludos.integration.dao.FConfigurazioneDAO;
+import agroludos.integration.dao.ConfigurazioneDAO;
 import agroludos.integration.dao.DAOFactory;
 import agroludos.integration.dao.ManagerDiCompetizioneDAO;
 import agroludos.integration.dao.ManagerDiSistemaDAO;
@@ -74,7 +74,12 @@ public class MySqlDAOFactory extends DAOFactory {
 	}
 
 	@Override
-	public FConfigurazioneDAO getConfigurazioneDAO() {
+	public ConfigurazioneDAO getConfigurazioneDAO() {
 		return new MySqlConfigurazioneDAO();
 	}
+	
+	public static void main(String[] args) {
+		new MySqlDAOFactory();
+	}
+
 }

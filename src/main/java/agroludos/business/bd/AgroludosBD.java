@@ -5,7 +5,6 @@ import java.util.List;
 import agroludos.business.as.gestoreconfigurazione.LConfigurazione;
 import agroludos.business.as.gestoreconfigurazione.SConfigurazione;
 import agroludos.business.as.gestoreconfigurazione.IntConfigurazione;
-import agroludos.to.ConfigurazioneTO;
 import agroludos.to.DatabaseTO;
 
 class AgroludosBD implements BusinessDelegate{
@@ -16,13 +15,12 @@ class AgroludosBD implements BusinessDelegate{
 	AgroludosBD(){
 		LConfigurazione = IntConfigurazione.getLConfigurazioneI();
 		SConfigurazione = IntConfigurazione.getSConfigurazioneI();
-		
 	}
 
 	@Override
-	public boolean checkConnessioneDB(DatabaseTO conf) throws ApplicationException{
+	public boolean testConnessioneDB(DatabaseTO dbto) throws ApplicationException{
 		boolean res = false;
-		res = LConfigurazione.testDBConnection(conf);
+//		res = LConfigurazione.testDBConnection(dbto);
 		return res;
 	}
 
@@ -30,6 +28,7 @@ class AgroludosBD implements BusinessDelegate{
 	public boolean creaConfigurazione(DatabaseTO dbto) throws ApplicationException {
 		boolean res = false;
 		res = SConfigurazione.inserisciConfigurazione(dbto);
+//		res = LConfigurazione.testDBConnection(dbto);
 		return res;
 	}
 

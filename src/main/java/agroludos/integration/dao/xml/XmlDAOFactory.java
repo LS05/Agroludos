@@ -1,7 +1,7 @@
 package agroludos.integration.dao.xml;
 
 import agroludos.integration.dao.CertificatoSRCDAO;
-import agroludos.integration.dao.ConfigurazioneDAO;
+import agroludos.integration.dao.FConfigurazioneDAO;
 import agroludos.integration.dao.FileDAOFactory;
 
 public class XmlDAOFactory extends FileDAOFactory {
@@ -12,7 +12,7 @@ public class XmlDAOFactory extends FileDAOFactory {
 	}
 
 	@Override
-	public ConfigurazioneDAO getConfigurazioneDAO() {
+	public FConfigurazioneDAO getConfigurazioneDAO() {
 		return new XmlConfigurazioneDAO();
 	}
 
