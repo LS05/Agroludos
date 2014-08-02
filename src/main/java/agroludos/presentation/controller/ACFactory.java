@@ -4,7 +4,7 @@ import agroludos.factory.Factory;
 import agroludos.presentation.reqresh.AgroRequestContext;
 
 public class ACFactory extends Factory{
-	/*---------------- SingletonPattern ----------------*/
+
 	private static ACFactory acFactInstance;
 	
 	private ACFactory(){ 

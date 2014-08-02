@@ -5,16 +5,25 @@ import java.util.List;
 import agroludos.business.as.gestoreconfigurazione.LConfigurazione;
 import agroludos.business.as.gestoreconfigurazione.SConfigurazione;
 import agroludos.business.as.gestoreconfigurazione.IntConfigurazione;
+import agroludos.business.as.gestoremds.SManagerDiSistema;
+import agroludos.business.as.gestoremds.LManagerDiSistema;
+import agroludos.business.as.gestoremds.IntManagerDiSistema;
 import agroludos.to.DatabaseTO;
+import agroludos.to.UtenteTO;
 
 class AgroludosBD implements BusinessDelegate{
 	
 	private static LConfigurazione LConfigurazione;
 	private static SConfigurazione SConfigurazione;
+	
+	private static LManagerDiSistema LManagerDiSistema;
+	private static SManagerDiSistema SManagerDiSistema;
 
 	AgroludosBD(){
 		LConfigurazione = IntConfigurazione.getLConfigurazioneI();
 		SConfigurazione = IntConfigurazione.getSConfigurazioneI();
+//		LManagerDiSistema = IntManagerDiSistema.getLManagerDiSistema();
+//		SManagerDiSistema = IntManagerDiSistema.getSManagerDiSistema();
 	}
 
 	@Override
@@ -25,12 +34,23 @@ class AgroludosBD implements BusinessDelegate{
 	}
 
 	@Override
-	public boolean creaConfigurazione(DatabaseTO dbto) throws ApplicationException {
+	public boolean creaConfigurazione(DatabaseTO dbto) 
+			throws ApplicationException {
 		boolean res = false;
 		res = SConfigurazione.inserisciConfigurazione(dbto);
 //		res = LConfigurazione.testDBConnection(dbto);
 		return res;
 	}
+
+	@Override
+	public boolean inserisciManagerDiSistema(UtenteTO uto)
+			throws ApplicationException {
+		boolean res = false;
+		res = SManagerDiSistema.inserisciManagerDiSistema(uto);
+		return res;
+	}
+	
+	
 
 //	public List<InfermiereTO> getAllInfermieri() {
 //		List<InfermiereTO> userList = LInfermiere.getAllInfermieri();

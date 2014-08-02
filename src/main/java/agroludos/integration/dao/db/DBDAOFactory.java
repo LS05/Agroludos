@@ -1,8 +1,9 @@
-package agroludos.integration.dao;
+package agroludos.integration.dao.db;
 
-import agroludos.integration.dao.mysql.MySqlDAOFactory;
+import agroludos.integration.dao.config.ConfigurazioneDAODB;
 
-public abstract class DAOFactory {
+public abstract class DBDAOFactory{
+	private static DBDAOFactory dao;
 
 	// --- Metodo di factory ---
 
@@ -11,12 +12,8 @@ public abstract class DAOFactory {
 	 * implementazioni di questo factory, basate sulla specifica
 	 * dell'interfaccia DAOFactory
 	 */
-	public static DAOFactory getDAOFactory(String tipo)
-			throws IllegalArgumentException {
-		if (tipo.toLowerCase().equals("mysql"))
-			return new MySqlDAOFactory();
-		else
-			throw new IllegalArgumentException();
+	public static DBDAOFactory getDAOFactory() {
+		return dao;
 	}
 
 	// --- Factory specification: concrete factories implementing this spec must
@@ -74,5 +71,5 @@ public abstract class DAOFactory {
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
 	 * Partecipante
 	 */
-	public abstract ConfigurazioneDAO getConfigurazioneDAO();
+	public abstract ConfigurazioneDAODB getConfigurazioneDAO();	
 }

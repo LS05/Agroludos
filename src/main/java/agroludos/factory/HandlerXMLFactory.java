@@ -8,6 +8,10 @@ class HandlerXMLFactory{
 			hx = new HandlerXMLRichieste();
 		else if(tipo.equals("factory"))
 			hx = new HandlerXMLAC();
+		else if(tipo.equals("database"))
+			hx = new HandlerXMLDAO();
+		else if(tipo.equals("file"))
+			hx = new HandlerXMLFDAO();
 		return hx;
 	}
 	

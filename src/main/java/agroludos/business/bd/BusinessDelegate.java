@@ -4,10 +4,12 @@ import java.util.List;
 
 import agroludos.to.ConfigurazioneTO;
 import agroludos.to.DatabaseTO;
+import agroludos.to.UtenteTO;
 
 public interface BusinessDelegate {
 	boolean creaConfigurazione(DatabaseTO dbto) throws ApplicationException;
 	boolean testConnessioneDB(DatabaseTO conf) throws ApplicationException;
+	boolean inserisciManagerDiSistema(UtenteTO uto) throws ApplicationException;
 //	int checkConfigurazione();
 //	//        Gestione Infermieri    	//
 //	List<InfermiereTO> getAllInfermieri();

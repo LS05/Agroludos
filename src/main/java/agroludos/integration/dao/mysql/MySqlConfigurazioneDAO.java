@@ -1,15 +1,12 @@
 package agroludos.integration.dao.mysql;
 
-import org.hibernate.Session;
-
-import agroludos.integration.dao.ConfigurazioneDAO;
+import agroludos.integration.dao.config.ConfigurazioneDAODB;
 import agroludos.to.ConfigurazioneTO;
 
-public class MySqlConfigurazioneDAO implements ConfigurazioneDAO {
-	private Session session;
+public class MySqlConfigurazioneDAO extends MySqlDAO implements ConfigurazioneDAODB {
 	
 	MySqlConfigurazioneDAO(){
-		this.session = MySqlDAOFactory.getSession();
+		super();
 	}
 	
 	@Override

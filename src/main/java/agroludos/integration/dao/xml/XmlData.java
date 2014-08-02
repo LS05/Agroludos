@@ -1,6 +1,6 @@
 package agroludos.integration.dao.xml;
 
-class XmlUtil {
+class XmlData {
 	
 	public static String hibDriver = "hibernate.connection.driver_class";
 	public static String hibUsername = "hibernate.connection.username";

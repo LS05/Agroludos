@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dao
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">    		
+	<file tipo="xml">
+      	<classe>XmlDAOFactory</classe>
+  	</file>
+  	<file tipo="txt">
+      	<classe>TxtDAOFactory</classe>
+  	</file>
+</dao>

@@ -1,7 +1,18 @@
 package agroludos.integration.dao.mysql;
 
-import agroludos.integration.dao.ManagerDiSistemaDAO;
+import agroludos.integration.dao.db.ManagerDiSistemaDAO;
+import agroludos.to.UtenteTO;
 
-public class MySqlManagerDiSistemaDAO implements ManagerDiSistemaDAO{
+public class MySqlManagerDiSistemaDAO extends MySqlDAO implements ManagerDiSistemaDAO{
+	
+	MySqlManagerDiSistemaDAO(){
+		super();
+	}
+	
+	@Override
+	public boolean crea(UtenteTO uto) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

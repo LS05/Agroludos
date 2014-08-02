@@ -1,38 +1,41 @@
 package agroludos.business.as.gestoreconfigurazione;
 
-import agroludos.integration.dao.FConfigurazioneDAO;
-import agroludos.integration.dao.DAOFactory;
-import agroludos.integration.dao.ConfigurazioneDAO;
-import agroludos.integration.dao.FileDAOFactory;
+import agroludos.integration.dao.config.ConfigurazioneDAODB;
+import agroludos.integration.dao.config.ConfigurazioneDAOFactory;
+import agroludos.integration.dao.config.FConfigurazioneDAO;
+import agroludos.integration.dao.db.DBDAOFactory;
+import agroludos.system.SystemConf;
 import agroludos.to.ConfigurazioneTO;
 import agroludos.to.DatabaseTO;
 import agroludos.to.TOFactory;
 
 class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
-	private FileDAOFactory fileDaoFact;
+	private ConfigurazioneDAOFactory fileDaoFact;
 	private FConfigurazioneDAO fileConf;
 	
 
 	ASGestoreConfigurazione(){
-		this.fileDaoFact = FileDAOFactory.getDAOFactory("xml");
+		this.fileDaoFact = ConfigurazioneDAOFactory.getDAOFactory();
 		this.fileConf = fileDaoFact.getConfigurazioneDAO();
 	}
 
 	@Override
 	public boolean testDBConnection() {
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean inserisciConfigurazione(DatabaseTO dbto) {
 		boolean res = false;
-		DAOFactory daoFact = null;
-		ConfigurazioneDAO dbConf = null; 
+		DBDAOFactory daoFact = null;
+		ConfigurazioneDAODB dbConf = null; 
 		
 		// TODO Aggiungere controlli sui dati dei parametri
 		
 		if(this.fileConf.creaConfigurazione(dbto)){
-			daoFact = DAOFactory.getDAOFactory(dbto.getTipo());
+			SystemConf sysConf = SystemConf.getInstance();
+			sysConf.setTipoDB(dbto.getTipo());
+			daoFact = DBDAOFactory.getDAOFactory();
 			dbConf = daoFact.getConfigurazioneDAO();
 			ConfigurazioneTO conf = TOFactory.getConfigurazioneTO(); 
 			conf.setPathConf(this.fileConf.getConfPath());

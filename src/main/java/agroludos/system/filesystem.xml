@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agroludostypes>
+    <type name="database"></type>
+    <type name="configurazione">xml</type>
+    <type name="certificato">txt</type>
+</agroludostypes>

@@ -28,7 +28,7 @@ class XMLConfigFile {
 		return scriviInst;
 	}
 
-	boolean scriviFileXML (Document doc, DatabaseTO dbto){
+	boolean setDocument (Document doc, DatabaseTO dbto){
 
 		boolean res = false;
 
@@ -57,28 +57,28 @@ class XMLConfigFile {
 					Node attr = attributes.item(a);
 					String attrValue = attr.getNodeValue();
 
-					if(attrValue.equals(XmlUtil.hibDriver)){
-						node.setTextContent(XmlUtil.getDriver(tipoDB));
+					if(attrValue.equals(XmlData.hibDriver)){
+						node.setTextContent(XmlData.getDriver(tipoDB));
 						res = true;
 					}
 
-					if(attrValue.equals(XmlUtil.hibDialect)){
-						node.setTextContent(XmlUtil.getDialect(tipoDB));
+					if(attrValue.equals(XmlData.hibDialect)){
+						node.setTextContent(XmlData.getDialect(tipoDB));
 						res = true;
 					}
 
-					if(attrValue.equals(XmlUtil.hibUsername)){
+					if(attrValue.equals(XmlData.hibUsername)){
 						node.setTextContent(usernameDB);
 						res = true;
 					}
 
-					if(attrValue.equals(XmlUtil.hibPassword)){
+					if(attrValue.equals(XmlData.hibPassword)){
 						node.setTextContent(passwordDB);
 						res = true;
 					}
 
-					if(attrValue.equals(XmlUtil.hibUrl)){
-						String urlDB = XmlUtil.getUrl(tipoDB) + serverDB + ":" + portaDB + "/" + nomeDB;
+					if(attrValue.equals(XmlData.hibUrl)){
+						String urlDB = XmlData.getUrl(tipoDB) + serverDB + ":" + portaDB + "/" + nomeDB;
 						node.setTextContent(urlDB);
 						res = true;
 					}

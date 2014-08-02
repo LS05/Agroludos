@@ -1,15 +1,9 @@
 package agroludos.integration.dao.xml;
 
-import agroludos.integration.dao.CertificatoSRCDAO;
-import agroludos.integration.dao.FConfigurazioneDAO;
-import agroludos.integration.dao.FileDAOFactory;
+import agroludos.integration.dao.config.ConfigurazioneDAOFactory;
+import agroludos.integration.dao.config.FConfigurazioneDAO;
 
-public class XmlDAOFactory extends FileDAOFactory {
-
-	@Override
-	public CertificatoSRCDAO getCertificatoSRCDAO() {
-		return null;
-	}
+public class XmlDAOFactory extends ConfigurazioneDAOFactory {
 
 	@Override
 	public FConfigurazioneDAO getConfigurazioneDAO() {

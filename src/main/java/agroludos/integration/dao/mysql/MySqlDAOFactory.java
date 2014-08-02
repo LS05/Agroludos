@@ -5,18 +5,18 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 
-import agroludos.integration.dao.CompetizioneDAO;
-import agroludos.integration.dao.ConfigurazioneDAO;
-import agroludos.integration.dao.DAOFactory;
-import agroludos.integration.dao.ManagerDiCompetizioneDAO;
-import agroludos.integration.dao.ManagerDiSistemaDAO;
-import agroludos.integration.dao.OptionalDAO;
-import agroludos.integration.dao.PartecipanteDAO;
-import agroludos.integration.dao.TipoCompetizioneDAO;
-import agroludos.integration.dao.TipoOptionalDAO;
-import agroludos.integration.dao.UtenteDAO;
+import agroludos.integration.dao.config.ConfigurazioneDAODB;
+import agroludos.integration.dao.db.CompetizioneDAO;
+import agroludos.integration.dao.db.DBDAOFactory;
+import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
+import agroludos.integration.dao.db.ManagerDiSistemaDAO;
+import agroludos.integration.dao.db.OptionalDAO;
+import agroludos.integration.dao.db.PartecipanteDAO;
+import agroludos.integration.dao.db.TipoCompetizioneDAO;
+import agroludos.integration.dao.db.TipoOptionalDAO;
+import agroludos.integration.dao.db.UtenteDAO;
 
-public class MySqlDAOFactory extends DAOFactory {
+public class MySqlDAOFactory extends DBDAOFactory {
 	
 	private static Session session;
 	private static SessionFactory sessionFactory; 
@@ -74,7 +74,7 @@ public class MySqlDAOFactory extends DAOFactory {
 	}
 
 	@Override
-	public ConfigurazioneDAO getConfigurazioneDAO() {
+	public ConfigurazioneDAODB getConfigurazioneDAO() {
 		return new MySqlConfigurazioneDAO();
 	}
 	
