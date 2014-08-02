@@ -19,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class ControllerConfSistema implements Initializable{
@@ -82,21 +81,13 @@ public class ControllerConfSistema implements Initializable{
 				(this.txtPasswordDB.getText().length() != 0)  
 				) {
 
-			//sicurezza password
-			String securePassword = null;
-			try {
-				securePassword = SecurePassword.stringToMD5(this.txtPasswordDB.getText());
-			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			//copio il contenuto delle textfield nell'hashmap parametri
 			parametriDB.put("tipo", this.cmbTipoDB.getValue());
 			parametriDB.put("server", txtServerDB.getText());
 			parametriDB.put("porta", txtPortaDB.getText());
 			parametriDB.put("nome", txtNomeDB.getText());
 			parametriDB.put("username", txtUsernameDB.getText());
-			parametriDB.put("password", securePassword);
+			parametriDB.put("password", this.txtPasswordDB.getText());
 
 			this.richiesta = new FrameRequest(parametriDB,"confermaConfigurazione");
 			boolean res = (boolean) this.frontController.eseguiRichiesta(richiesta);
@@ -131,16 +122,49 @@ public class ControllerConfSistema implements Initializable{
 				(this.txtTelefonoMds.getText().length() != 0)  
 				) {
 			//richiesta per creare il Manager di Sistema
+			//sicurezza password
+			String securePassword = null;
+			try {
+				securePassword = SecurePassword.stringToMD5(this.txtPasswordMds.getText());
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			//copio il contenuto delle textfield nell'hashmap parametri
 			parametriMds.put("txtNomeMds", txtNomeMds.getText());
 			parametriMds.put("txtCognomeMds", txtCognomeMds.getText());
 			parametriMds.put("txtUsernameMds", txtUsernameMds.getText());
-			parametriMds.put("txtPasswordMds", txtPasswordMds.getText());
+			parametriMds.put("txtPasswordMds", securePassword);
 			parametriMds.put("txtEmailMds", txtEmailMds.getText());
 			parametriMds.put("txtTelefonoMds", txtTelefonoMds.getText());
 
 			this.richiesta = new FrameRequest(parametriMds,"nuovoMDS");
-			Object res = this.frontController.eseguiRichiesta(richiesta);
+			boolean res = (boolean) this.frontController.eseguiRichiesta(richiesta);
+			//se non ci sono errori mostra la finestra di login
+			if(res){
+				System.out.println("Manager di Sistema inserito correttamente");
+				
+//				Class c = ControllerViews.class;
+//				
+//				try {
+//					Method m = c.getMethod(itm.getId());
+//					m.invoke(c);
+//				} catch (NoSuchMethodException | SecurityException e) {
+//					e.printStackTrace();
+//				} catch (IllegalAccessException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IllegalArgumentException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (InvocationTargetException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+				
+			}
+			else
+				System.out.println("Inserimento fallito");
 		}
 		else {
 			System.out.println("Campi vuoti o errati");
