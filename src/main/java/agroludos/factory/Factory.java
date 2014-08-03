@@ -12,16 +12,16 @@ import org.xml.sax.SAXException;
 public abstract class Factory {
 	HandlerXML handler;
 	SAXParser saxParser;
-	
+
 	public Factory(String tipo){
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			factory.setNamespaceAware(true);
 			factory.setValidating(true);
-			
+
 			this.saxParser = factory.newSAXParser();
 			this.saxParser.setProperty(HandlerXML.JAXP_SCHEMA_LANGUAGE, HandlerXML.W3C_XML_SCHEMA);
-			
+
 			this.handler = HandlerXMLFactory.getHandler(tipo);
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
@@ -29,7 +29,7 @@ public abstract class Factory {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String initData(String data){
 		try {
 			this.handler.setDataToRead(data);
@@ -41,13 +41,13 @@ public abstract class Factory {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return this.handler.getResult();
 	}
-	
+
 	public Class getClass(String path, String className){
 		Class res = null;
-		
+
 		try {
 			res = Class.forName(path + className);
 		} catch (ClassNotFoundException e) {
@@ -56,7 +56,26 @@ public abstract class Factory {
 
 		return res;
 	}
-	
+
+	public Object getInstance(String className){
+		Object res = null;
+		Class<?> c = null;
+		
+		try {
+			System.out.println("Factory -> Classe: " + className);
+			c = Class.forName(className);
+			res = c.newInstance();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
 	protected abstract String getXMLPath();
 
 }

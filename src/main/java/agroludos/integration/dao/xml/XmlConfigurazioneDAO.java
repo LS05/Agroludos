@@ -3,7 +3,7 @@ package agroludos.integration.dao.xml;
 import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
 
-import agroludos.integration.dao.config.FConfigurazioneDAO;
+import agroludos.integration.dao.file.FConfigurazioneDAO;
 import agroludos.to.DatabaseTO;
 import agroludos.utility.xml.XmlUtil;
 

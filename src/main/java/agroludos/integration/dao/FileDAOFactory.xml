@@ -3,9 +3,9 @@
 xmlns:xs="http://www.w3.org/2001/XMLSchema"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">    		
 	<file tipo="xml">
-      	<classe>XmlDAOFactory</classe>
+      	<classe>agroludos.integration.dao.xml.XmlDAOFactory</classe>
   	</file>
   	<file tipo="txt">
-      	<classe>TxtDAOFactory</classe>
+      	<classe>agroludos.integration.dao.txt.TxtDAOFactory</classe>
   	</file>
 </dao>

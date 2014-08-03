@@ -1,5 +1,7 @@
 package agroludos.system;
 
+import javax.xml.transform.TransformerException;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -11,11 +13,12 @@ public class SystemConf {
 	private Document doc;
 	private XmlUtil utXml = new XmlUtil();
 	private String tipoDB;
+	private String path;
 	
 	private static SystemConf sysInst;
 	
 	private SystemConf(){
-		String path = this.getClass().getResource("filesystem.xml").toString();
+		this.path = "src/main/java/agroludos/system/filesystem.xml";
 		this.doc = utXml.getDocument(path);
 	}
 	
@@ -51,6 +54,12 @@ public class SystemConf {
 					}
 				}
 			}
+		}
+		
+		try {
+			this.utXml.writeFile(this.doc, this.path);
+		} catch (TransformerException e) {
+			e.printStackTrace();
 		}
 		
 		return res;

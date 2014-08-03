@@ -1,6 +1,6 @@
 package agroludos.integration.dao.db;
 
-import agroludos.integration.dao.config.ConfigurazioneDAODB;
+import agroludos.integration.dao.file.ConfigurazioneDAODB;
 
 public abstract class DBDAOFactory{
 	private static DBDAOFactory dao;

@@ -9,7 +9,7 @@ class DAO implements AgroludosDAO{
 	}
 	
 	@Override
-	public String getFileXmlPath(){
+	public String getFilePath(){
 		return this.getClass().getResource("FileDAOFactory.xml").toString();
 	}
 	

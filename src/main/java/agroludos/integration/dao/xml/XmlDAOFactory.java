@@ -1,9 +1,9 @@
 package agroludos.integration.dao.xml;
 
-import agroludos.integration.dao.config.ConfigurazioneDAOFactory;
-import agroludos.integration.dao.config.FConfigurazioneDAO;
+import agroludos.integration.dao.file.FConfigurazioneDAO;
+import agroludos.integration.dao.file.FileDAOFactory;
 
-public class XmlDAOFactory extends ConfigurazioneDAOFactory {
+public class XmlDAOFactory extends FileDAOFactory {
 
 	@Override
 	public FConfigurazioneDAO getConfigurazioneDAO() {

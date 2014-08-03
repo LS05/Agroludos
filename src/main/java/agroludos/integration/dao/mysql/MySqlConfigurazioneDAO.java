@@ -1,6 +1,6 @@
 package agroludos.integration.dao.mysql;
 
-import agroludos.integration.dao.config.ConfigurazioneDAODB;
+import agroludos.integration.dao.file.ConfigurazioneDAODB;
 import agroludos.to.ConfigurazioneTO;
 
 public class MySqlConfigurazioneDAO extends MySqlDAO implements ConfigurazioneDAODB {

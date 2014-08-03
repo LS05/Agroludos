@@ -1,21 +1,21 @@
 package agroludos.business.as.gestoreconfigurazione;
 
-import agroludos.integration.dao.config.ConfigurazioneDAODB;
-import agroludos.integration.dao.config.ConfigurazioneDAOFactory;
-import agroludos.integration.dao.config.FConfigurazioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
+import agroludos.integration.dao.file.ConfigurazioneDAODB;
+import agroludos.integration.dao.file.FConfigurazioneDAO;
+import agroludos.integration.dao.file.FileDAOFactory;
 import agroludos.system.SystemConf;
 import agroludos.to.ConfigurazioneTO;
 import agroludos.to.DatabaseTO;
 import agroludos.to.TOFactory;
 
 class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
-	private ConfigurazioneDAOFactory fileDaoFact;
+	private FileDAOFactory fileDaoFact;
 	private FConfigurazioneDAO fileConf;
+	private static SystemConf sysConf = SystemConf.getInstance();
 	
-
 	ASGestoreConfigurazione(){
-		this.fileDaoFact = ConfigurazioneDAOFactory.getDAOFactory();
+		this.fileDaoFact = FileDAOFactory.getDAOFactory(sysConf.getTipoConf());
 		this.fileConf = fileDaoFact.getConfigurazioneDAO();
 	}
 

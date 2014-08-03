@@ -1,4 +1,4 @@
-package agroludos.integration.dao.config;
+package agroludos.integration.dao.file;
 
 import agroludos.to.ConfigurazioneTO;
 
