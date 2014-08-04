@@ -23,13 +23,13 @@ public class ControllerMdsMain {
 	@FXML private GridPane paneGestioneOptional;
 	@FXML private GridPane paneGestioneManagerCompetizione;
 	@FXML private GridPane paneGestionePartecipanti;
-	
+
 	//button mainView
 	@FXML private Button btnGestManComp;
 	@FXML private Button btnGestComp;
 	@FXML private Button btnGestOptional;
 	@FXML private Button btnGestPart;
-	
+
 	//texfield 
 
 
@@ -59,7 +59,7 @@ public class ControllerMdsMain {
 		this.paneGestioneManagerCompetizione.setVisible(false);
 		this.paneGestionePartecipanti.setVisible(false);
 	}
-	
+
 	@FXML protected void btnGestManComp(MouseEvent event) {
 		this.paneGestioneCompetizioni.setVisible(false);
 		this.paneGestioneOptional.setVisible(false);
@@ -67,7 +67,7 @@ public class ControllerMdsMain {
 		this.paneGestionePartecipanti.setVisible(false);
 
 	}
-	
+
 	@FXML protected void btnGestPart(MouseEvent event) {
 		this.paneGestioneCompetizioni.setVisible(false);
 		this.paneGestioneOptional.setVisible(false);
@@ -76,5 +76,5 @@ public class ControllerMdsMain {
 	}
 
 
-	
+
 }

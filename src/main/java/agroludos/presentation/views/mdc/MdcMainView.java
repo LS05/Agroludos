@@ -1,4 +1,4 @@
-package agroludos.presentation.views.mds;
+package agroludos.presentation.views.mdc;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -10,7 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class MdsMainView extends Application{
+public class MdcMainView extends Application{
 
 	private ResourceBundle itBundle = ResourceBundle.getBundle("bundles.Agroludos", Locale.forLanguageTag("it"));
 
@@ -19,7 +19,7 @@ public class MdsMainView extends Application{
 		Parent root = null;
 
 		try {
-			root = (Parent)FXMLLoader.load(getClass().getResource("mdsMain.fxml"), itBundle);
+			root = (Parent)FXMLLoader.load(getClass().getResource("mdcMain.fxml"), itBundle);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -35,6 +35,4 @@ public class MdsMainView extends Application{
 
 		launch(args);
 	}
-
-
 }
