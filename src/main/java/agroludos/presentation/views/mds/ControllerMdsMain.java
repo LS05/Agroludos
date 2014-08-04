@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -16,7 +17,7 @@ import agroludos.presentation.fc.FC;
 import agroludos.presentation.req.FrameRequest;
 import agroludos.utility.SecurePassword;
 
-public class ControllerMdsMain {
+public class ControllerMdsMain implements Initializable{
 
 	//pane centrali
 	@FXML private GridPane paneGestioneCompetizioni;
@@ -29,6 +30,17 @@ public class ControllerMdsMain {
 	@FXML private Button btnGestComp;
 	@FXML private Button btnGestOptional;
 	@FXML private Button btnGestPart;
+
+	//button gest competizioni
+	@FXML private Button btnCorsaCampestre;
+	@FXML private Button btnTiroConArco;
+	@FXML private Button btnNuovoTipoCompetizione;
+
+	//button gest optionlal
+	@FXML private Button btnPranzo;
+	@FXML private Button btnMerenda;
+	@FXML private Button btnPernotto;
+	@FXML private Button btnNuovoTipoOptional;
 
 	//texfield 
 
@@ -45,6 +57,8 @@ public class ControllerMdsMain {
 		this.paneGestioneManagerCompetizione.setVisible(false);
 		this.paneGestionePartecipanti.setVisible(false);
 	}
+
+	//----------------Main View--------------------
 
 	@FXML protected void btnGestComp(MouseEvent event) {
 		this.paneGestioneCompetizioni.setVisible(true);
@@ -75,6 +89,32 @@ public class ControllerMdsMain {
 		this.paneGestionePartecipanti.setVisible(true);
 	}
 
+	//--------------------Gest Competizioni View---------------
 
+	@FXML protected void btnCorsaCampestre(MouseEvent event) {
+		//caricare competizioni di corsa campestre nella tabella
+	}
 
+	@FXML protected void btnTiroConArco(MouseEvent event) {
+		//caricare competizioni di tiro con l'arco nella tabella
+	}
+
+	@FXML protected void btnNuovoTipoCompetizione(MouseEvent event) {
+	}
+
+	//--------------------Gest Optional View---------------
+
+	@FXML protected void btnPranzo(MouseEvent event) {
+		//caricare optional nella tabella
+	}
+
+	@FXML protected void btnMerenda(MouseEvent event) {
+		//caricare optional nella tabella
+	}
+
+	@FXML protected void btnPernotto(MouseEvent event) {
+		//caricare optional nella tabella
+	}
+	@FXML protected void btnNuovoTipoOptional(MouseEvent event) {
+	}
 }

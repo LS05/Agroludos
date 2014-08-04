@@ -33,7 +33,7 @@
 <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
 <RowConstraints maxHeight="406.0" minHeight="10.0" prefHeight="252.0" vgrow="SOMETIMES" />
   </rowConstraints>
-<children><Button fx:id="btnPaneComptizioni" mnemonicParsing="false" prefHeight="65.0" prefWidth="200.0" text="%key16" textFill="WHITE" GridPane.valignment="TOP"></Button>
+<children><Button fx:id="btnPaneComptizioni" mnemonicParsing="false" onMouseClicked="#btnPaneComptizioni" prefHeight="65.0" prefWidth="200.0" text="%key16" textFill="WHITE" GridPane.valignment="TOP" />
 </children>
 </GridPane>
 </left>

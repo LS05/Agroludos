@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
@@ -20,7 +21,7 @@ import agroludos.presentation.fc.FC;
 import agroludos.presentation.req.FrameRequest;
 import agroludos.utility.SecurePassword;
 
-public class ControllerLogin {
+public class ControllerLogin implements Initializable{
 
 	@FXML private Button btnLogin;
 	@FXML private Button btnPswDimenticata;
