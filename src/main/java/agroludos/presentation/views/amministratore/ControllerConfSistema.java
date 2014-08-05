@@ -49,7 +49,7 @@ public class ControllerConfSistema implements Initializable{
 	private Map<String, String> parametriMds = new HashMap<>();
 
 
-	private FC frontController = FC.getInstance();
+	private FC frontController;
 
 	private FrameRequest richiesta;
 	private ObservableList<String> listaTipiDB;
