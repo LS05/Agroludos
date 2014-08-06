@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import agroludos.presentation.fc.FC;
+import agroludos.presentation.fc.FrontController;
 import agroludos.presentation.req.FrameRequest;
 import agroludos.utility.SecurePassword;
 import javafx.collections.FXCollections;
@@ -49,7 +49,7 @@ public class ControllerConfSistema implements Initializable{
 	private Map<String, String> parametriMds = new HashMap<>();
 
 
-	private FC frontController;
+	private FrontController frontController;
 
 	private FrameRequest richiesta;
 	private ObservableList<String> listaTipiDB;

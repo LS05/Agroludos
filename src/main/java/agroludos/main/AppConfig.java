@@ -5,6 +5,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import agroludos.presentation.fc.FrontController;
+import agroludos.presentation.req.AgroRequest;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,13 +25,18 @@ class AppConfig implements App{
 	private Parent root;
 	
 	private FrontController frontController;
+	
+	private AgroRequest richiesta;
+	
+	AppConfig(FrontController frontController, AgroRequest richiesta){
+		this.frontController = frontController;
+		this.richiesta = richiesta;
+		this.richiesta.setCommand("checkConfigurazione");
+		this.frontController.eseguiRichiesta(richiesta);
+	}
 
 	public void setPrimaryStage(Stage primaryStage) {
 		this.stage = primaryStage;
-	}
-	
-	public void setFrontController(FrontController frontController){
-		this.frontController = frontController;
 	}
 
 	public void show() {
@@ -50,9 +57,5 @@ class AppConfig implements App{
 			}
 		});
 		stage.show();
-	}
-
-	public Stage getStage() {
-		return stage;
 	}
 }

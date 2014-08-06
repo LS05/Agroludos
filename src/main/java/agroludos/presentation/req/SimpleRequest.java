@@ -1,9 +1,12 @@
 package agroludos.presentation.req;
 
-public class DataRequest extends AgroRequest{
-
-	public DataRequest(String command) {
-		super(command);
+public class SimpleRequest extends AgroRequest{
+	public SimpleRequest(){
+		
+	}
+	
+	public SimpleRequest(String command) {
+//		super(command);
 	}
 
 	public boolean isParameter() {

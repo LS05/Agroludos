@@ -1,19 +1,13 @@
 package agroludos.presentation.reqresh;
 
 import agroludos.factory.Factory;
+import agroludos.factory.FactoryInstantiationException;
 import agroludos.presentation.req.AgroRequest;
 
 public class RequestContextFactory extends Factory{
-	private static RequestContextFactory reqFactInstance;
 
-	private RequestContextFactory(){ 
+	RequestContextFactory(){ 
 		super("richieste");
-	}
-	
-	public static RequestContextFactory getInstance(){
-		if(reqFactInstance == null)
-			reqFactInstance = new RequestContextFactory();
-		return reqFactInstance;
 	}
 
 	public AgroRequestContext createRequestContext(AgroRequest request) {
@@ -21,33 +15,25 @@ public class RequestContextFactory extends Factory{
 		AgroRequestContext requestContext = null;
 
 		try {
-
 			String command = request.getCommand();
-
 			// Identify POJO RequestContext Class for the given Command,
 			// using CommandMap
-			Class<? extends AgroRequestContext> requestContextClass = getContextObjectClass(command);
-
-			// Instantiate POJO
-
-			requestContext  = requestContextClass.newInstance();
-
-
+			requestContext = getContextObjectClass(command);
 			// Set Protcol-specific Request object
 			requestContext.initialize(request);
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
+		} catch (FactoryInstantiationException e) {
 			e.printStackTrace();
 		}
 
 		return requestContext;
 	}
 
-	private Class<? extends AgroRequestContext> getContextObjectClass(String tipo){
-		return this.getClass("agroludos.presentation.reqresh.", this.initData(tipo));
+	private AgroRequestContext getContextObjectClass(String tipo) throws FactoryInstantiationException{
+		AgroRequestContext res = null;
+		Object obj = this.getInstance(this.initData(tipo));
+		if(obj instanceof AgroRequestContext)
+			res = (AgroRequestContext)obj;
+		return res;
 	}
 
 	@Override

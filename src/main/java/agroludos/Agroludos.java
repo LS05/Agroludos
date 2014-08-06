@@ -10,9 +10,14 @@ import javafx.stage.Stage;
 public class Agroludos extends Application{
 	private App mainApp;
 	
+	public void setMainApp(App mainApp) {
+		this.mainApp = mainApp;
+	}
+
 	@Override
 	public void start(Stage stage) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        this.mainApp = (App)context.getBean("mainApp");
         this.mainApp.setPrimaryStage(stage);
 		this.mainApp.show();
 	}

@@ -12,14 +12,16 @@ import java.util.Map;
 public class FrameRequest extends AgroRequest{
 	private Map<String, String> reqData;
 	
+	public FrameRequest(){ }
+	
 	public FrameRequest(Map<String, String> data, String commandName) {
-		super(commandName);
+//		super(commandName);
 		this.reqData = data;
 		this.flagParam = true;
 	}
 	
 	public FrameRequest(String commandName) {
-		super(commandName);
+//		super(commandName);
 		this.flagParam = false;
 	}
 

@@ -4,8 +4,8 @@ public abstract class AgroRequest {
 	String commandName;
 	boolean flagParam;
 	
-	AgroRequest(String commandName){
-		this.commandName = commandName;
+	public void setCommand(String command){
+		this.commandName = command;
 	}
 	
 	public String getCommand(){
@@ -15,6 +15,5 @@ public abstract class AgroRequest {
 	public abstract boolean isParameter();
 	
 	public abstract Object getData(Object key) throws DataFieldException;
-	
 	public abstract Object getData();
 }

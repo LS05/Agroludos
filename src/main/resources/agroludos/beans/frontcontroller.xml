@@ -3,7 +3,14 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<import resource="classpath:agroludos/beans/request.xml" />
+	<import resource="classpath:agroludos/beans/applicationcontroller.xml" />
 	<bean id="fc" class="agroludos.presentation.fc.FC">
-	
+			<constructor-arg ref="ctxFactory" />
+			<constructor-arg ref="acFactory" />
+<!-- 		<property name="requestContext"> -->
+<!-- 			<bean id="agroRequestContext" class="agroludos.presentation.reqresh.AgroRequestContext" /> -->
+<!-- 			</bean> -->
+<!-- 		</property> -->
 	</bean>
 </beans>

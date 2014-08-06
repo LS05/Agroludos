@@ -45,19 +45,7 @@ public abstract class Factory {
 		return this.handler.getResult();
 	}
 
-	public Class getClass(String path, String className){
-		Class res = null;
-
-		try {
-			res = Class.forName(path + className);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		return res;
-	}
-
-	public Object getInstance(String className){
+	public Object getInstance(String className) throws FactoryInstantiationException{
 		Object res = null;
 		Class<?> c = null;
 		
@@ -66,11 +54,11 @@ public abstract class Factory {
 			c = Class.forName(className);
 			res = c.newInstance();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			throw new FactoryInstantiationException(e);
 		} catch (InstantiationException e) {
-			e.printStackTrace();
+			throw new FactoryInstantiationException(e);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			throw new FactoryInstantiationException(e);
 		}
 
 		return res;

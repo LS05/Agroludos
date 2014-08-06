@@ -6,9 +6,9 @@ import agroludos.presentation.reqresh.AgroRequestContext;
 
 abstract public class CommandMapper {
 	
-	CommandMap cmdMap;
+	private CommandMap cmdMap;
 	
-	Class classToCall;
+	private Class classToCall;
 	
 	public abstract Class getResourceClass();
 	
