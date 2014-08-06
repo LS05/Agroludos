@@ -10,11 +10,19 @@ import agroludos.to.TOFactory;
 
 public class GeneralAC extends AgroludosAC{
 
-	private static BusinessDelegate agroBD;
+	private BusinessDelegate agroBD;
+	
+	private AgroRequestContext req;
 	
 	public GeneralAC(){
 		super();
-		agroBD = BDFactory.getBD();
+		System.out.println("General AC");
+//		agroBD = BDFactory.getBD();
+	}
+	
+	@Override
+	public void setReq(AgroRequestContext req) {
+		this.req = req;
 	}
 	
 	public static void chiudiAgroludos()
@@ -22,7 +30,12 @@ public class GeneralAC extends AgroludosAC{
 		System.exit(0);
 	}
 	
-	public static boolean confermaConfigurazione(AgroRequestContext request){
+	public boolean checkConfigurazione(){
+		System.out.println("GeneralAC.checkConfigurazione");
+		return false;
+	}
+	
+	public boolean confermaConfigurazione(AgroRequestContext request){
 		System.out.println("GeneralAC.confermaConfigurazione");
 		DatabaseTO dbto = TOFactory.getDatabaseTO();
 		

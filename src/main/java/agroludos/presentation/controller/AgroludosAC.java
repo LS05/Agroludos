@@ -25,4 +25,6 @@ abstract public class AgroludosAC extends CommandMapper{
 		//String viewName = mapEntry.getViewName();
 		//responseContext.setViewName("");
 	}
+	
+	public abstract void setReq(AgroRequestContext req);
 }

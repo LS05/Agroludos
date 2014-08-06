@@ -20,8 +20,9 @@ class AgroludosBD implements BusinessDelegate{
 	private static SManagerDiSistema SManagerDiSistema;
 
 	AgroludosBD(){
-		LConfigurazione = IntConfigurazione.getLConfigurazioneI();
-		SConfigurazione = IntConfigurazione.getSConfigurazioneI();
+		System.out.println("AgroludosBD");
+//		LConfigurazione = IntConfigurazione.getLConfigurazioneI();
+//		SConfigurazione = IntConfigurazione.getSConfigurazioneI();
 //		LManagerDiSistema = IntManagerDiSistema.getLManagerDiSistema();
 //		SManagerDiSistema = IntManagerDiSistema.getSManagerDiSistema();
 	}

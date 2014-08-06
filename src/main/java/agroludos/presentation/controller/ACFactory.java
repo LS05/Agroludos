@@ -6,11 +6,11 @@ import agroludos.presentation.reqresh.AgroRequestContext;
 
 public class ACFactory extends Factory{
 	
-	private ACFactory(){ 
+	ACFactory(){ 
 		super("factory");
 	}
 	
-	public AgroludosAC getAC(AgroRequestContext request){
+	public AgroludosAC getApplicationController(AgroRequestContext request){
 		AgroludosAC ac = null;
 
 		try {

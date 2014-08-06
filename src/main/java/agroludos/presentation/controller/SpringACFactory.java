@@ -5,22 +5,26 @@ import agroludos.presentation.reqresh.DataRequestContext;
 
 public class SpringACFactory implements ACFactoryI{
 	
-	private AgroRequestContext req;
-	
-	private static AgroludosAC generalAC = new GeneralAC();
+	private static GeneralAC generalAC = new GeneralAC();
+//	private static UserAC userAC;
 	
 	private SpringACFactory(){ }
 	
-	@Override
-	public AgroludosAC getAC(){
-		AgroludosAC res = null;
-		if(this.req instanceof DataRequestContext)
-			res = generalAC;
-		return res;
+	public AgroludosAC createGeneralAC(){
+		return generalAC;
 	}
 	
+	public AgroludosAC createUserAC(){
+		return generalAC;
+	}
+
 	@Override
-	public void setAgroRequestContext(AgroRequestContext req) {
-		this.req = req;
+	public AgroludosAC getAC(AgroRequestContext req) {
+		AgroludosAC res = null;
+		if(req instanceof DataRequestContext){
+			res = generalAC;
+			res.setReq(req);
+		}
+		return res;
 	}
 }

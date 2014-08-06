@@ -8,13 +8,13 @@ abstract public class CommandMapper {
 	
 	private CommandMap cmdMap;
 	
-	private Class classToCall;
+	private Object classToCall;
 	
 	public abstract Class getResourceClass();
 	
 	public CommandMapper(){
-		classToCall = this.getResourceClass();
-		this.cmdMap = new CommandMap(this.classToCall);
+		classToCall = this;
+		this.cmdMap = new CommandMap(this.getClass());
 	}
 	
 	public Object execute(AgroRequestContext request) {

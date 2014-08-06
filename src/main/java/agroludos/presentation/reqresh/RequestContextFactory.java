@@ -10,9 +10,9 @@ public class RequestContextFactory extends Factory{
 		super("richieste");
 	}
 
-	public AgroRequestContext createRequestContext(AgroRequest request) {
+	public DataRequestContext createRequestContext(AgroRequest request) {
 		
-		AgroRequestContext requestContext = null;
+		DataRequestContext requestContext = null;
 
 		try {
 			String command = request.getCommand();
@@ -28,11 +28,11 @@ public class RequestContextFactory extends Factory{
 		return requestContext;
 	}
 
-	private AgroRequestContext getContextObjectClass(String tipo) throws FactoryInstantiationException{
-		AgroRequestContext res = null;
+	private DataRequestContext getContextObjectClass(String tipo) throws FactoryInstantiationException{
+		DataRequestContext res = null;
 		Object obj = this.getInstance(this.initData(tipo));
-		if(obj instanceof AgroRequestContext)
-			res = (AgroRequestContext)obj;
+		if(obj instanceof DataRequestContext)
+			res = (DataRequestContext)obj;
 		return res;
 	}
 
