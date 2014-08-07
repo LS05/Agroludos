@@ -2,30 +2,27 @@ package agroludos.req.mapper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import agroludos.presentation.reqresh.AgroRequestContext;
 
-abstract public class CommandMapper {
-	
+public class CommandMapper implements CommandMapperI{
+
 	private CommandMap cmdMap;
 	
-	private Object classToCall;
+	private Object obj;
 	
-	public abstract Class getResourceClass();
+	private String method;
 	
-	public CommandMapper(){
-		classToCall = this;
-		this.cmdMap = new CommandMap(this.getClass());
-	}
+	private Object args;
 	
-	public Object execute(AgroRequestContext request) {
-		boolean param = request.isParam();
-		Object obj = null;
-		Method m = cmdMap.getMethod(request.getCommand());
+	@Override
+	public Object execute() {
+		this.cmdMap = new CommandMap(this.obj.getClass());
+		Object res = null;
+		Method m = this.cmdMap.getMethod(method);
 		try {
-			if(param)
-				obj = m.invoke(classToCall, request);
+			if(args != null)
+				res = m.invoke(this.obj, args);
 			else
-				obj = m.invoke(classToCall);
+				res = m.invoke(this.obj);
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -37,6 +34,18 @@ abstract public class CommandMapper {
 			e.printStackTrace();
 			e.getCause();
 		}
-		return obj;
+		return res;
+	}
+
+	public void setObj(Object obj) {
+		this.obj = obj;
+	}
+	
+	public void setMethod(String method) {
+		this.method = method;
+	}
+
+	public void setArgs(Object args) {
+		this.args = args;
 	}
 }

@@ -1,28 +1,22 @@
 package agroludos.presentation.controller;
 
 import agroludos.business.bd.ApplicationException;
-import agroludos.business.bd.BDFactory;
 import agroludos.business.bd.BusinessDelegate;
 import agroludos.presentation.req.DataFieldException;
 import agroludos.presentation.reqresh.AgroRequestContext;
 import agroludos.to.DatabaseTO;
 import agroludos.to.TOFactory;
 
-public class GeneralAC extends AgroludosAC{
-
+public class GeneralAC extends ApplicationController{
+	
 	private BusinessDelegate agroBD;
 	
-	private AgroRequestContext req;
-	
 	public GeneralAC(){
-		super();
 		System.out.println("General AC");
-//		agroBD = BDFactory.getBD();
 	}
 	
-	@Override
-	public void setReq(AgroRequestContext req) {
-		this.req = req;
+	public void setAgroBD(BusinessDelegate agroBD){
+		this.agroBD = agroBD;
 	}
 	
 	public static void chiudiAgroludos()
@@ -58,10 +52,4 @@ public class GeneralAC extends AgroludosAC{
 
 		return false;
 	}
-
-	@Override
-	public Class<? extends GeneralAC> getResourceClass() {
-		return this.getClass();
-	}
-
 }

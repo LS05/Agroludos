@@ -10,20 +10,19 @@ public class SpringACFactory implements ACFactoryI{
 	
 	private SpringACFactory(){ }
 	
-	public AgroludosAC createGeneralAC(){
+	public ApplicationController createGeneralAC(){
 		return generalAC;
 	}
 	
-	public AgroludosAC createUserAC(){
+	public ApplicationController createUserAC(){
 		return generalAC;
 	}
 
 	@Override
-	public AgroludosAC getAC(AgroRequestContext req) {
-		AgroludosAC res = null;
+	public ApplicationController getAC(AgroRequestContext req) {
+		ApplicationController res = null;
 		if(req instanceof DataRequestContext){
 			res = generalAC;
-			res.setReq(req);
 		}
 		return res;
 	}

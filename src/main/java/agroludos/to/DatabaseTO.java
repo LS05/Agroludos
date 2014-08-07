@@ -1,6 +1,6 @@
 package agroludos.to;
 
-public interface DatabaseTO{
+public interface DatabaseTO extends AgroludosTO{
 	String getNome();
 	String getTipo();
 	String getUsername();

@@ -3,5 +3,5 @@ package agroludos.presentation.controller;
 import agroludos.presentation.reqresh.AgroRequestContext;
 
 public interface ACFactoryI {
-	AgroludosAC getAC(AgroRequestContext req);
+	ApplicationController getAC(AgroRequestContext req);
 }
