@@ -24,8 +24,9 @@ public class GeneralAC extends ApplicationController{
 		System.exit(0);
 	}
 	
-	public boolean checkConfigurazione(){
-		System.out.println("GeneralAC.checkConfigurazione");
+	public boolean checkConfigurazione(AgroRequestContext request){
+		System.out.println(request.getCommand());
+		agroBD.gestisciServizio(request.getCommand());
 		return false;
 	}
 	

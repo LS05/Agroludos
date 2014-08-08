@@ -12,11 +12,11 @@ import agroludos.to.TOFactory;
 class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 	private FileDAOFactory fileDaoFact;
 	private FConfigurazioneDAO fileConf;
-	private static SystemConf sysConf = SystemConf.getInstance();
+	private SystemConf sysConf;
 	
 	ASGestoreConfigurazione(){
-		this.fileDaoFact = FileDAOFactory.getDAOFactory(sysConf.getTipoConf());
-		this.fileConf = fileDaoFact.getConfigurazioneDAO();
+//		this.fileDaoFact = FileDAOFactory.getDAOFactory(sysConf.getTipoConf());
+//		this.fileConf = fileDaoFact.getConfigurazioneDAO();
 	}
 
 	@Override
@@ -52,7 +52,7 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 	}
 
 	@Override
-	public boolean testConfigurazione() {
+	public boolean checkConfigurazione() {
 		return false;
 	}
 

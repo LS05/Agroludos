@@ -1,211 +1,62 @@
 package agroludos.business.bd;
 
-import java.util.List;
-
 import agroludos.business.as.gestoreconfigurazione.LConfigurazione;
 import agroludos.business.as.gestoreconfigurazione.SConfigurazione;
-import agroludos.business.as.gestoreconfigurazione.IntConfigurazione;
 import agroludos.business.as.gestoremds.SManagerDiSistema;
 import agroludos.business.as.gestoremds.LManagerDiSistema;
-import agroludos.business.as.gestoremds.IntManagerDiSistema;
 import agroludos.to.DatabaseTO;
 import agroludos.to.UtenteTO;
 
-class AgroludosBD implements BusinessDelegate{
+public class AgroludosBD extends BusinessDelegate{
+
+	private LConfigurazione lconfigurazione;
+	private SConfigurazione sconfigurazione;
 	
-	private static LConfigurazione LConfigurazione;
-	private static SConfigurazione SConfigurazione;
-	
-	private static LManagerDiSistema LManagerDiSistema;
-	private static SManagerDiSistema SManagerDiSistema;
+	private LManagerDiSistema lmanagerdisistema;
+	private SManagerDiSistema smanagerdisistema;
 
 	AgroludosBD(){
 		System.out.println("AgroludosBD");
-//		LConfigurazione = IntConfigurazione.getLConfigurazioneI();
-//		SConfigurazione = IntConfigurazione.getSConfigurazioneI();
-//		LManagerDiSistema = IntManagerDiSistema.getLManagerDiSistema();
-//		SManagerDiSistema = IntManagerDiSistema.getSManagerDiSistema();
+	}
+	
+	public boolean checkConfigurazione() throws ApplicationException{
+		boolean res = false;
+		res = lconfigurazione.checkConfigurazione();
+		return res;
 	}
 
-	@Override
 	public boolean testConnessioneDB(DatabaseTO dbto) throws ApplicationException{
 		boolean res = false;
 //		res = LConfigurazione.testDBConnection(dbto);
 		return res;
 	}
 
-	@Override
-	public boolean creaConfigurazione(DatabaseTO dbto) 
-			throws ApplicationException {
+	public boolean creaConfigurazione(DatabaseTO dbto) throws ApplicationException {
 		boolean res = false;
-		res = SConfigurazione.inserisciConfigurazione(dbto);
+		res = sconfigurazione.inserisciConfigurazione(dbto);
 //		res = LConfigurazione.testDBConnection(dbto);
 		return res;
 	}
 
-	@Override
-	public boolean inserisciManagerDiSistema(UtenteTO uto)
-			throws ApplicationException {
+	public boolean inserisciManagerDiSistema(UtenteTO uto) throws ApplicationException {
 		boolean res = false;
-		res = SManagerDiSistema.inserisciManagerDiSistema(uto);
+		res = smanagerdisistema.inserisciManagerDiSistema(uto);
 		return res;
 	}
 	
+	public void setLconfigurazione(LConfigurazione conf) {
+		this.lconfigurazione = conf;
+	}
 	
+	public void setSconfigurazione(SConfigurazione conf) {
+		this.sconfigurazione = conf;
+	}
 
-//	public List<InfermiereTO> getAllInfermieri() {
-//		List<InfermiereTO> userList = LInfermiere.getAllInfermieri();
-//		return userList;
-//	}
-//
-//	public InfermiereTO getInfermiere(String username) {
-//		return LInfermiere.getDati(username);
-//	}
-//
-//	public boolean rimuoviInfermiere(InfermiereTO user) throws ApplicationException{
-//		boolean res = false;
-//		try {
-//			res = SInfermiere.rimuoviInfermiere(user);
-//		} catch (DataDeleteException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return res;
-//	}
-//
-//	public boolean nuovoInfermiere(InfermiereTO user) throws ApplicationException {
-//		boolean res = false;
-//		try {
-//			res = SInfermiere.nuovoInfermiere(user);
-//		} catch (DataFormatException e) {
-//			res = false;
-//			throw new ApplicationException(e.getMessage());
-//		}
-//		return res;
-//	}
-//
-//	public InfermiereTO modificaInfermiere(InfermiereTO user) throws ApplicationException {
-//		boolean res = false;
-//		InfermiereTO upUser = null;
-//		try {
-//			res = SInfermiere.modificaInfermiere(user);
-//		} catch (DataFormatException e) {
-//			throw new ApplicationException(e.getMessage());
-//		}
-//		if(res)
-//			upUser = LInfermiere.getDati(user.getID());
-//		return upUser;
-//	}
-//
-//	public List<InterventoTO> getAllInterventi() {
-//		List<InterventoTO> userList = LInterventi.getAllInterventi();
-//		return userList;
-//	}
-//
-//	public InterventoTO getIntervento(String id) {
-//		return LInterventi.getIntervento(id);
-//	}
-//
-//	public InterventoTO modificaIntervento(InterventoTO interv) throws ApplicationException{
-//		boolean res = false;
-//		InterventoTO intv = null;
-//		
-//		try {
-//			res = SInterventi.modificaIntervento(interv);
-//		} catch (DataFormatException e) {
-//			throw new ApplicationException(e.getMessage());
-//		}
-//		if(res)
-//			intv = LInterventi.getDati(interv.getID());
-//
-//		return intv;
-//	}
-//
-//	public boolean nuovoIntervento(InterventoTO interv) throws ApplicationException {
-//		boolean res = false;
-//		try {
-//			res = SInterventi.nuovoIntervento(interv);
-//		} catch (DataFormatException e) {
-//			res = false;
-//			throw new ApplicationException(e.getMessage());
-//		}
-//
-//		return res;
-//	}
-//
-//	public boolean rimuoviIntervento(InterventoTO interv) throws ApplicationException {
-//		boolean res = false;
-//		try {
-//			res = SInterventi.rimuoviIntervento(interv);
-//		} catch (DataDeleteException e) {
-//			throw new ApplicationException(e.getMessage());
-//		}
-//		return res;
-//	}
-//
-//	public List<PazienteTO> getAllPazienti() {
-//		List<PazienteTO> userList = LPazienti.getAllPazienti();
-//		return userList;
-//	}
-//
-//	public boolean nuovoPaziente(PazienteTO paz) throws ApplicationException {
-//		boolean res = false;
-//		try {
-//			res = SPazienti.nuovoPaziente(paz);
-//		} catch (DataFormatException e) {
-//			res = false;
-//			throw new ApplicationException(e.getMessage());
-//		}
-//
-//		return res;
-//	}
-//	
-//	public PazienteTO getPaziente(PazienteTO paz) {
-//		return LPazienti.getPaziente(paz);
-//	}
-//
-//	public PazienteTO modificaPaziente(PazienteTO paz) throws ApplicationException {
-//		boolean res = false;
-//		PazienteTO paziente = null;
-//		
-//		try {
-//			res = SPazienti.modificaPaziente(paz);
-//		} catch (DataFormatException e) {
-//			throw new ApplicationException(e.getMessage());
-//		}
-//		if(res)
-//			paziente = LPazienti.getPaziente(paz);
-//
-//		return paziente;
-//	}
-//
-//	public boolean rimuoviPaziente(String nlib) throws ApplicationException {
-//		boolean res = false;
-//		try {
-//			res = SPazienti.rimuoviPaziente(nlib);
-//		} catch (DataDeleteException e) {
-//			throw new ApplicationException(e.getMessage());
-//		}
-//		return res;
-//	}
-//
-//	public boolean creaPianificazione(PianificazioneTO pianificazione) {
-//		return ODati.creaPianificazione(pianificazione);
-//	}
-//	
-//	public boolean inserisciPianificazione(PianificazioneTO pianificazione) {
-//		return ODati.inserisciPianificazione(pianificazione);
-//	}
-//	
-//	public FileTO getPianificazione(String username) throws ApplicationException {
-//		FileTO file = null;
-//		
-//		try {
-//			file = IDati.getPianificazione(username);
-//		} catch (ReadPianificazioneException e) {
-//			throw new ApplicationException(e.getMessage());
-//		}
-//		
-//		return file;
-//	}
+	public void setLmanagerdisistema(LManagerDiSistema mansis) {
+		this.lmanagerdisistema = mansis;
+	}
+
+	public void setSmanagerdisistema(SManagerDiSistema mansis) {
+		this.smanagerdisistema = mansis;
+	}
 }

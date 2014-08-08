@@ -15,8 +15,7 @@ class ApplicationController implements AgroludosAC{
 		String command = request.getCommand();
 		this.cmdMap.setObj(this);
 		this.cmdMap.setMethod(command);
-		if(request.isParam())
-			this.cmdMap.setArgs(request);
+		this.cmdMap.setArgs(request);
 		return this.cmdMap.execute();
 	}
 	

@@ -9,8 +9,8 @@ class ASGestoreManagerDiSistema implements LManagerDiSistema, SManagerDiSistema{
 	private ManagerDiSistemaDAO daoMan;
 	
 	ASGestoreManagerDiSistema(){
-		this.daoFact = DBDAOFactory.getDAOFactory();
-		this.daoMan = this.daoFact.getManagerDiSistemaDAO();
+//		this.daoFact = DBDAOFactory.getDAOFactory();
+//		this.daoMan = this.daoFact.getManagerDiSistemaDAO();
 	}
 
 	@Override

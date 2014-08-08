@@ -3,5 +3,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-    <bean id="cmdMapper" class="agroludos.req.mapper.CommandMapper" scope="prototype" />
+    <bean id="gestoreConfigurazione"
+        class="agroludos.business.as.gestoreconfigurazione.ASGestoreConfigurazione">
+        
+    </bean>
+    <bean id="gestoreManagerSistema"
+        class="agroludos.business.as.gestoremds.ASGestoreManagerDiSistema" />
 </beans>
