@@ -1,19 +1,25 @@
 package agroludos.business.bd;
 
-import agroludos.presentation.reqresh.AgroRequestContext;
-import agroludos.req.mapper.CommandMapper;
+import agroludos.req.mapper.CommandMapperI;
 import agroludos.to.AgroludosTO;
 
-public abstract class AGBusinessDelegate extends CommandMapper{
-	AGBusinessDelegate(){
-		super();
+public class AGBusinessDelegate{
+	
+	private CommandMapperI cmdMap;
+	
+	public Object gestisciServizio(String servizio) {
+		this.setClassMethod(servizio);
+		return this.cmdMap.execute();
 	}
 	
 	public Object gestisciServizio(String servizio, AgroludosTO to) {
-		return execute(servizio, to);
+		this.setClassMethod(servizio);
+		this.cmdMap.setArgs(to);
+		return this.cmdMap.execute();
 	}
 	
-	public Object gestisciServizio(AgroludosTO to) {
-		return execute(to);
+	private void setClassMethod(String servizio){
+		this.cmdMap.setMethod(servizio);
+		this.cmdMap.setObj(this);
 	}
 }
