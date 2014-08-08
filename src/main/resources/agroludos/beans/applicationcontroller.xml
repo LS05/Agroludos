@@ -6,6 +6,7 @@
     <import resource="classpath:agroludos/beans/request.xml" />
     <import resource="classpath:agroludos/beans/businessdelegate.xml" />
     <import resource="classpath:agroludos/beans/commandmapper.xml" />
+    <import resource="classpath:agroludos/beans/transferobject.xml" />
     <bean id="agroludosAC" class="agroludos.presentation.controller.ApplicationController">
 	    <property name="cmdMap" ref="cmdMapper" />
 	</bean>
@@ -15,6 +16,7 @@
 	    factory-method="createGeneralAC"
 	    parent="agroludosAC">
 	    <property name="agroBD" ref="agroludosBD" />
+	    <property name="toFact" ref="toFactory" />
 	</bean>
 	<bean id="userAC" 
 	    factory-bean="acFactory" 

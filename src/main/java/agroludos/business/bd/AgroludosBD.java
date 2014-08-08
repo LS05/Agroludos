@@ -4,6 +4,7 @@ import agroludos.business.as.gestoreconfigurazione.LConfigurazione;
 import agroludos.business.as.gestoreconfigurazione.SConfigurazione;
 import agroludos.business.as.gestoremds.SManagerDiSistema;
 import agroludos.business.as.gestoremds.LManagerDiSistema;
+import agroludos.to.AgroludosTO;
 import agroludos.to.DatabaseTO;
 import agroludos.to.UtenteTO;
 
@@ -23,6 +24,12 @@ public class AgroludosBD extends BusinessDelegate{
 		boolean res = false;
 		res = lconfigurazione.checkConfigurazione();
 		return res;
+	}
+	
+	public boolean confermaConfigurazione(DatabaseTO to) throws ApplicationException{
+		System.out.println(to.getNome());
+		System.out.println("confermaConfigurazione()");
+		return false;
 	}
 
 	public boolean testConnessioneDB(DatabaseTO dbto) throws ApplicationException{

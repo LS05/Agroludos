@@ -6,8 +6,9 @@
            
 	<import resource="classpath:agroludos/beans/frontcontroller.xml" />
 	<import resource="classpath:agroludos/beans/request.xml" />
+	<import resource="classpath:agroludos/beans/views.xml" />
 	<bean id="mainApp" class="agroludos.main.AppConfig">
 		<constructor-arg ref="fc" />
-		<constructor-arg ref="sRequest" />
+		<constructor-arg ref="reqFactory" />
 	</bean>
 </beans>

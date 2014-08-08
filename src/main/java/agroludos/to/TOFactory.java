@@ -1,11 +1,10 @@
 package agroludos.to;
 
 public class TOFactory {
-	public static ConfigurazioneTO getConfigurazioneTO(){
-		return new Configurazione();
-	}
 	
-	public static DatabaseTO getDatabaseTO(){
+	private TOFactory(){ }
+	
+	public DatabaseTO createDatabaseTO(){
 		return new Database();
 	}
 }

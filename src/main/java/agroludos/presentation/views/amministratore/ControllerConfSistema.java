@@ -6,7 +6,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import agroludos.presentation.fc.FrontController;
-import agroludos.presentation.req.FrameRequest;
+import agroludos.presentation.req.AgroRequest;
+import agroludos.presentation.req.RequestFactory;
 import agroludos.utility.SecurePassword;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +23,7 @@ import javafx.scene.layout.GridPane;
 import java.security.NoSuchAlgorithmException;
 
 public class ControllerConfSistema implements Initializable{
+
 	@FXML private Button btnAvantiConf;
 	@FXML private Button btnIndietroConf;
 	@FXML private Button btnConfermaConfigurazione;
@@ -49,14 +51,21 @@ public class ControllerConfSistema implements Initializable{
 	private Map<String, String> parametriMds = new HashMap<>();
 
 
-	private FrontController frontController;
-
-	private FrameRequest richiesta;
+	private static FrontController frontController;
+	
+	private static RequestFactory reqFact;
+	private AgroRequest richiesta;
+	
 	private ObservableList<String> listaTipiDB;
-
-
-
-
+	
+	public void setFrontController(FrontController fc){
+		ControllerConfSistema.frontController = fc;
+	}
+	
+	public void setReqFact(RequestFactory reqFact) {
+		ControllerConfSistema.reqFact = reqFact;
+	}
+	
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.listaTipiDB = FXCollections.observableArrayList();
 		//aggiungo i tipi di db alla combobox
@@ -68,6 +77,13 @@ public class ControllerConfSistema implements Initializable{
 
 		this.databasePane.setVisible(true);
 		this.managerSistemaPane.setVisible(false);
+		
+		//DA ELIMINARE
+		this.txtServerDB.setText("localhost"); 
+		this.txtPortaDB.setText("3306"); 
+		this.txtNomeDB.setText("agroludos");
+		this.txtUsernameDB.setText("root");
+		this.txtPasswordDB.setText("root");  
 	}
 
 	@FXML protected void btnAvantiClicked(MouseEvent event) {
@@ -88,8 +104,8 @@ public class ControllerConfSistema implements Initializable{
 			parametriDB.put("nome", txtNomeDB.getText());
 			parametriDB.put("username", txtUsernameDB.getText());
 			parametriDB.put("password", this.txtPasswordDB.getText());
-
-			this.richiesta = new FrameRequest(parametriDB,"confermaConfigurazione");
+			
+			this.richiesta = reqFact.createDFrameRequest(parametriDB, "confermaConfigurazione");
 			boolean res = (boolean) this.frontController.eseguiRichiesta(richiesta);
 
 			//se la connessione al db è andata a buon fine procedi
@@ -137,9 +153,9 @@ public class ControllerConfSistema implements Initializable{
 			parametriMds.put("txtPasswordMds", securePassword);
 			parametriMds.put("txtEmailMds", txtEmailMds.getText());
 			parametriMds.put("txtTelefonoMds", txtTelefonoMds.getText());
-
-			this.richiesta = new FrameRequest(parametriMds,"nuovoMDS");
-			boolean res = (boolean) this.frontController.eseguiRichiesta(richiesta);
+			
+			this.richiesta = reqFact.createDFrameRequest(parametriMds, "nuovoMDS");
+			boolean res = (boolean)frontController.eseguiRichiesta(richiesta);
 			//se non ci sono errori mostra la finestra di login
 			if(res){
 				System.out.println("Manager di Sistema inserito correttamente");

@@ -8,11 +8,17 @@ import agroludos.to.DatabaseTO;
 import agroludos.to.TOFactory;
 
 public class GeneralAC extends ApplicationController{
-	
+
 	private BusinessDelegate agroBD;
+	
+	private TOFactory toFact;
 	
 	public GeneralAC(){
 		System.out.println("General AC");
+	}
+	
+	public void setToFact(TOFactory toFact) {
+		this.toFact = toFact;
 	}
 	
 	public void setAgroBD(BusinessDelegate agroBD){
@@ -25,14 +31,17 @@ public class GeneralAC extends ApplicationController{
 	}
 	
 	public boolean checkConfigurazione(AgroRequestContext request){
+		boolean res = false;
 		System.out.println(request.getCommand());
-		agroBD.gestisciServizio(request.getCommand());
-		return false;
+		Object obj = agroBD.gestisciServizio(request.getCommand());
+		if(obj instanceof Boolean)
+			res = (Boolean)obj;
+		return res;
 	}
 	
 	public boolean confermaConfigurazione(AgroRequestContext request){
 		System.out.println("GeneralAC.confermaConfigurazione");
-		DatabaseTO dbto = TOFactory.getDatabaseTO();
+		DatabaseTO dbto = this.toFact.createDatabaseTO();
 		
 		try {
 			dbto.setTipo((String)(request.getData((String)"tipo")));
@@ -45,11 +54,11 @@ public class GeneralAC extends ApplicationController{
 			e.printStackTrace();
 		}
 		
-		try {
-			agroBD.creaConfigurazione(dbto);
-		} catch (ApplicationException e) {
-			e.printStackTrace();
-		}
+//		try {
+			agroBD.gestisciServizio(request.getCommand(), dbto);
+//		} catch (ApplicationException e) {
+//			e.printStackTrace();
+//		}
 
 		return false;
 	}

@@ -10,6 +10,7 @@ import agroludos.to.DatabaseTO;
 import agroludos.to.TOFactory;
 
 class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
+
 	private FileDAOFactory fileDaoFact;
 	private FConfigurazioneDAO fileConf;
 	private SystemConf sysConf;
@@ -33,7 +34,6 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 		// TODO Aggiungere controlli sui dati dei parametri
 		
 		if(this.fileConf.creaConfigurazione(dbto)){
-			SystemConf sysConf = SystemConf.getInstance();
 			sysConf.setTipoDB(dbto.getTipo());
 			daoFact = DBDAOFactory.getDAOFactory();
 			dbConf = daoFact.getConfigurazioneDAO();
@@ -53,7 +53,16 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 
 	@Override
 	public boolean checkConfigurazione() {
-		return false;
+		boolean res = false;
+		String tipoDB = this.sysConf.getTipoDB();
+		
+		if(!tipoDB.equals(""))
+			res = true;
+		
+		return res;
 	}
-
+	
+	public void setSysConf(SystemConf sysConf) {
+		this.sysConf = sysConf;
+	}
 }

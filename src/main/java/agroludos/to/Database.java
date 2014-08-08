@@ -44,4 +44,9 @@ class Database implements DatabaseTO{
 	public void setPorta(String porta) {
 		this.porta = porta;
 	}
+	
+	@Override
+	public String toString(){
+		return "DatabaseTO";
+	}
 }

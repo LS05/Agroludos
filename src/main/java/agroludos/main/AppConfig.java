@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import agroludos.presentation.fc.FrontController;
 import agroludos.presentation.req.AgroRequest;
+import agroludos.presentation.req.RequestFactory;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-class AppConfig implements App{   
+class AppConfig implements App{
+
 	private ResourceBundle itBundle = ResourceBundle.getBundle("bundles.Agroludos", Locale.forLanguageTag("it"));
 	private String pathFXML="/agroludos/presentation/views/amministratore/conf_sistema.fxml";
 
@@ -26,19 +28,20 @@ class AppConfig implements App{
 	
 	private FrontController frontController;
 	
-	private AgroRequest richiesta;
+	private RequestFactory reqFact;
 	
-	AppConfig(FrontController frontController, AgroRequest richiesta){
+	AppConfig(FrontController frontController, RequestFactory reqFact){
 		this.frontController = frontController;
-		this.richiesta = richiesta;
-		this.richiesta.setCommand("checkConfigurazione");
+		this.reqFact = reqFact;
+	}
+	
+	@Override
+	public void initialize(){
+		AgroRequest richiesta = reqFact.createSimpleRequest("checkConfigurazione");
 		this.frontController.eseguiRichiesta(richiesta);
 	}
 
-	public void setPrimaryStage(Stage primaryStage) {
-		this.stage = primaryStage;
-	}
-
+	@Override
 	public void show() {
 		try {
 			root = (Parent)FXMLLoader.load(getClass().getResource(pathFXML), itBundle);
@@ -57,5 +60,10 @@ class AppConfig implements App{
 			}
 		});
 		stage.show();
+	}
+	
+	@Override
+	public void setPrimaryStage(Stage primaryStage) {
+		this.stage = primaryStage;
 	}
 }
