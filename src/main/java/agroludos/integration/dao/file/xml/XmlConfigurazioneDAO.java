@@ -1,4 +1,4 @@
-package agroludos.integration.dao.xml;
+package agroludos.integration.dao.file.xml;
 
 import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
@@ -11,16 +11,15 @@ public class XmlConfigurazioneDAO implements FConfigurazioneDAO{
 
 	private Document doc;
 
-	private String confPath = XmlData.getConfPath();
+	private String confPath;
 
 	private XMLConfigFile xmlFile;
 
-	private XmlUtil utXml = new XmlUtil();
-
-
+	private XmlUtil utXml;
+	
 	XmlConfigurazioneDAO(){
-		this.doc = utXml.getDocument(this.confPath);
-		this.xmlFile = XMLConfigFile.getInstance();
+		System.out.println("XmlConfigurazioneDAO()");
+		this.confPath = XmlData.getConfPath();
 	}
 
 	@Override
@@ -46,5 +45,14 @@ public class XmlConfigurazioneDAO implements FConfigurazioneDAO{
 	@Override
 	public String getConfPath() {
 		return this.confPath;
+	}
+
+	public void setUtXml(XmlUtil utXml) {
+		this.utXml = utXml;
+		this.doc = utXml.getDocument(this.confPath);
+	}
+	
+	public void setXmlFile(XMLConfigFile xmlFile) {
+		this.xmlFile = xmlFile;
 	}
 }

@@ -4,6 +4,7 @@ import agroludos.integration.dao.db.DBConfigurazioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.file.FConfigurazioneDAO;
 import agroludos.integration.dao.file.FileDAOFactory;
+import agroludos.integration.dao.file.FileFactory;
 import agroludos.system.SystemConf;
 import agroludos.to.ConfigurazioneTO;
 import agroludos.to.DatabaseTO;
@@ -11,17 +12,15 @@ import agroludos.to.TOFactory;
 
 class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 
-	private FileDAOFactory fileDaoFact;
 	private SystemConf sysConf;
+	private FileDAOFactory fileDaoFact;
 	private FConfigurazioneDAO fileConf;
 	private TOFactory toFact;
 	
-	ASGestoreConfigurazione(SystemConf sysConf, FileDAOFactory fileDaoFact){
+	ASGestoreConfigurazione(SystemConf sysConf, FileFactory filefact){
 		this.sysConf = sysConf;
-		this.fileDaoFact = fileDaoFact;
-		
-		this.fileDaoFact = this.fileDaoFact.getDAOFactory(this.sysConf.getTipoConf());
-//		this.fileConf = fileDaoFact.getConfigurazioneDAO();
+		this.fileDaoFact = filefact.getDAOFactory(this.sysConf.getTipoConf());
+		this.fileConf = this.fileDaoFact.getConfigurazioneDAO();
 	}
 
 	@Override
@@ -39,6 +38,7 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 		
 		if(this.fileConf.creaConfigurazione(dbto)){
 			sysConf.setTipoDB(dbto.getTipo());
+			//Sono arrivato a questo punto.
 			daoFact = DBDAOFactory.getDAOFactory();
 			dbConf = daoFact.getConfigurazioneDAO();
 			ConfigurazioneTO conf = this.toFact.createConfigurazioneTO(); 

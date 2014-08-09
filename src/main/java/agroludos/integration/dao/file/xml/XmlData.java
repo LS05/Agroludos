@@ -1,4 +1,4 @@
-package agroludos.integration.dao.xml;
+package agroludos.integration.dao.file.xml;
 
 class XmlData {
 	

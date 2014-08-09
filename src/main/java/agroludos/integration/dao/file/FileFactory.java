@@ -1,18 +1,20 @@
 package agroludos.integration.dao.file;
 
-import agroludos.integration.dao.txt.TxtDAOFactory;
-import agroludos.integration.dao.xml.XmlDAOFactory;
+import agroludos.integration.dao.file.txt.TxtDAOFactory;
+import agroludos.integration.dao.file.xml.XmlDAOFactory;
 
-public class FileDAOFactory {
+public class FileFactory {
 	private static XmlDAOFactory xmlFact = new XmlDAOFactory();
 	private static TxtDAOFactory txtFact = new TxtDAOFactory();
 	
-	public FileDAO getDAOFactory(String tipo){
-		FileDAO res = null;
-		if(tipo.equals("xml"))
+	public FileDAOFactory getDAOFactory(String tipo){
+		FileDAOFactory res = null;
+		
+		if(tipo.toLowerCase().equals("xml"))
 			res = xmlFact;
 		else if(tipo.equals("txt"))
 			res = txtFact;
+		
 		return res;
 	}
 }

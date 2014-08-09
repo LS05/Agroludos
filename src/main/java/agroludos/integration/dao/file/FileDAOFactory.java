@@ -1,6 +1,6 @@
 package agroludos.integration.dao.file;
 
-public interface FileDAO{
+public interface FileDAOFactory{
 	FConfigurazioneDAO getConfigurazioneDAO();
 	CertificatoSRCDAO getCertificatoSRCDAO();
 }

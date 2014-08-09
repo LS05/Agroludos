@@ -1,4 +1,4 @@
-package agroludos.integration.dao.xml;
+package agroludos.integration.dao.file.xml;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -16,19 +16,7 @@ class XMLConfigFile {
 	private String usernameDB;
 	private String passwordDB;
 
-	private static XMLConfigFile scriviInst;
-
-	private XMLConfigFile(){
-
-	}
-
-	static XMLConfigFile getInstance(){
-		if(scriviInst == null)
-			scriviInst = new XMLConfigFile();
-		return scriviInst;
-	}
-
-	boolean setDocument (Document doc, DatabaseTO dbto){
+	boolean setDocument(Document doc, DatabaseTO dbto){
 
 		boolean res = false;
 
