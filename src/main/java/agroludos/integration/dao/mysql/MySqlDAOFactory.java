@@ -4,8 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-
 import agroludos.integration.dao.db.CompetizioneDAO;
+import agroludos.integration.dao.db.DBConfigurazioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
 import agroludos.integration.dao.db.ManagerDiSistemaDAO;
@@ -14,7 +14,6 @@ import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.integration.dao.db.TipoOptionalDAO;
 import agroludos.integration.dao.db.UtenteDAO;
-import agroludos.integration.dao.file.ConfigurazioneDAODB;
 
 public class MySqlDAOFactory extends DBDAOFactory {
 	
@@ -74,7 +73,7 @@ public class MySqlDAOFactory extends DBDAOFactory {
 	}
 
 	@Override
-	public ConfigurazioneDAODB getConfigurazioneDAO() {
+	public DBConfigurazioneDAO getConfigurazioneDAO() {
 		return new MySqlConfigurazioneDAO();
 	}
 	

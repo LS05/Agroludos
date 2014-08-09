@@ -4,9 +4,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     <import resource="classpath:agroludos/beans/system.xml" />
+    <import resource="classpath:agroludos/beans/transferobject.xml" />
+    <import resource="classpath:agroludos/beans/daofactory.xml" />
     <bean id="gestoreConfigurazione"
         class="agroludos.business.as.gestoreconfigurazione.ASGestoreConfigurazione">
-        <property name="sysConf" ref="systemConf" />
+        <constructor-arg ref="fileDaoFactory" />
+        <constructor-arg ref="systemConf" />
+        <property name="toFact" ref="toFactory" />
     </bean>
     <bean id="gestoreManagerSistema"
         class="agroludos.business.as.gestoremds.ASGestoreManagerDiSistema" />

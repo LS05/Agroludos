@@ -1,7 +1,7 @@
 package agroludos.business.as.gestoreconfigurazione;
 
+import agroludos.integration.dao.db.DBConfigurazioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
-import agroludos.integration.dao.file.ConfigurazioneDAODB;
 import agroludos.integration.dao.file.FConfigurazioneDAO;
 import agroludos.integration.dao.file.FileDAOFactory;
 import agroludos.system.SystemConf;
@@ -12,11 +12,15 @@ import agroludos.to.TOFactory;
 class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 
 	private FileDAOFactory fileDaoFact;
-	private FConfigurazioneDAO fileConf;
 	private SystemConf sysConf;
+	private FConfigurazioneDAO fileConf;
+	private TOFactory toFact;
 	
-	ASGestoreConfigurazione(){
-//		this.fileDaoFact = FileDAOFactory.getDAOFactory(sysConf.getTipoConf());
+	ASGestoreConfigurazione(SystemConf sysConf, FileDAOFactory fileDaoFact){
+		this.sysConf = sysConf;
+		this.fileDaoFact = fileDaoFact;
+		
+		this.fileDaoFact = this.fileDaoFact.getDAOFactory(this.sysConf.getTipoConf());
 //		this.fileConf = fileDaoFact.getConfigurazioneDAO();
 	}
 
@@ -29,7 +33,7 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 	public boolean inserisciConfigurazione(DatabaseTO dbto) {
 		boolean res = false;
 		DBDAOFactory daoFact = null;
-		ConfigurazioneDAODB dbConf = null; 
+		DBConfigurazioneDAO dbConf = null; 
 		
 		// TODO Aggiungere controlli sui dati dei parametri
 		
@@ -37,7 +41,7 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 			sysConf.setTipoDB(dbto.getTipo());
 			daoFact = DBDAOFactory.getDAOFactory();
 			dbConf = daoFact.getConfigurazioneDAO();
-			ConfigurazioneTO conf = TOFactory.getConfigurazioneTO(); 
+			ConfigurazioneTO conf = this.toFact.createConfigurazioneTO(); 
 			conf.setPathConf(this.fileConf.getConfPath());
 			conf.setNomeDB(dbto.getNome());
 			conf.setUserDB(dbto.getUsername());
@@ -62,7 +66,7 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 		return res;
 	}
 	
-	public void setSysConf(SystemConf sysConf) {
-		this.sysConf = sysConf;
+	public void setToFact(TOFactory toFact) {
+		this.toFact = toFact;
 	}
 }

@@ -27,20 +27,13 @@ public class AgroludosBD extends BusinessDelegate{
 	}
 	
 	public boolean confermaConfigurazione(DatabaseTO to) throws ApplicationException{
-		System.out.println(to.getNome());
-		System.out.println("confermaConfigurazione()");
-		return false;
+		boolean res = false;
+		res = sconfigurazione.inserisciConfigurazione(to);
+		return res;
 	}
 
 	public boolean testConnessioneDB(DatabaseTO dbto) throws ApplicationException{
 		boolean res = false;
-//		res = LConfigurazione.testDBConnection(dbto);
-		return res;
-	}
-
-	public boolean creaConfigurazione(DatabaseTO dbto) throws ApplicationException {
-		boolean res = false;
-		res = sconfigurazione.inserisciConfigurazione(dbto);
 //		res = LConfigurazione.testDBConnection(dbto);
 		return res;
 	}

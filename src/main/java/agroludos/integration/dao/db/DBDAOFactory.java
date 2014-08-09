@@ -1,6 +1,5 @@
 package agroludos.integration.dao.db;
 
-import agroludos.integration.dao.file.ConfigurazioneDAODB;
 
 public abstract class DBDAOFactory{
 	private static DBDAOFactory dao;
@@ -71,5 +70,5 @@ public abstract class DBDAOFactory{
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
 	 * Partecipante
 	 */
-	public abstract ConfigurazioneDAODB getConfigurazioneDAO();	
+	public abstract DBConfigurazioneDAO getConfigurazioneDAO();	
 }
