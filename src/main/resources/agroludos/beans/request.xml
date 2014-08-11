@@ -4,9 +4,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	<bean id="reqFactory" class="agroludos.presentation.req.RequestFactory" />
-	<bean id="sRequest" factory-bean="reqFactory" factory-method="createSimpleRequest" scope="prototype"  />
-	<bean id="dfRequest" factory-bean="reqFactory" factory-method="createDFrameRequest" scope="prototype"  />
-	<bean id="efRequest" factory-bean="reqFactory" factory-method="createEFrameRequest" scope="prototype"  />
-	<bean id="ctxFactory" class="agroludos.presentation.reqresh.RequestContextFactory" />
-	<bean id="ctxRequest" class="agroludos.presentation.reqresh.DataRequestContext" />
+	<bean id="sRequest" factory-bean="reqFactory" factory-method="createSimpleRequest"
+		scope="prototype" />
+	<bean id="dfRequest" factory-bean="reqFactory" factory-method="createDFrameRequest"
+		scope="prototype" />
+	<bean id="efRequest" factory-bean="reqFactory" factory-method="createEFrameRequest"
+		scope="prototype" />
+	<bean id="ctxFactory" class="agroludos.presentation.reqh.RequestContextFactory" />
+	<bean id="ctxRequest" class="agroludos.presentation.reqh.DataRequestContext" />
 </beans>

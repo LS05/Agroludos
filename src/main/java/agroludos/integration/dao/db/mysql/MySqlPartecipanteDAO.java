@@ -1,4 +1,4 @@
-package agroludos.integration.dao.mysql;
+package agroludos.integration.dao.db.mysql;
 
 import agroludos.integration.dao.db.PartecipanteDAO;
 

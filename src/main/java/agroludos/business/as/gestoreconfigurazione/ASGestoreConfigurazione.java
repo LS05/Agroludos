@@ -2,6 +2,7 @@ package agroludos.business.as.gestoreconfigurazione;
 
 import agroludos.integration.dao.db.DBConfigurazioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
+import agroludos.integration.dao.db.DBFactory;
 import agroludos.integration.dao.file.FConfigurazioneDAO;
 import agroludos.integration.dao.file.FileDAOFactory;
 import agroludos.integration.dao.file.FileFactory;
@@ -12,11 +13,13 @@ import agroludos.to.TOFactory;
 
 class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 
-	private SystemConf sysConf;
+	private DBFactory dbFact;
 	private FileDAOFactory fileDaoFact;
-	private FConfigurazioneDAO fileConf;
 	private TOFactory toFact;
+	private FConfigurazioneDAO fileConf;
 	
+	private SystemConf sysConf;
+
 	ASGestoreConfigurazione(SystemConf sysConf, FileFactory filefact){
 		this.sysConf = sysConf;
 		this.fileDaoFact = filefact.getDAOFactory(this.sysConf.getTipoConf());
@@ -31,16 +34,15 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 	@Override
 	public boolean inserisciConfigurazione(DatabaseTO dbto) {
 		boolean res = false;
-		DBDAOFactory daoFact = null;
+		DBDAOFactory dbDAO = null;
 		DBConfigurazioneDAO dbConf = null; 
-		
+
 		// TODO Aggiungere controlli sui dati dei parametri
-		
+
 		if(this.fileConf.creaConfigurazione(dbto)){
-			sysConf.setTipoDB(dbto.getTipo());
-			//Sono arrivato a questo punto.
-			daoFact = DBDAOFactory.getDAOFactory();
-			dbConf = daoFact.getConfigurazioneDAO();
+			this.sysConf.setTipoDB(dbto.getTipo());
+			dbDAO = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+			dbConf = dbDAO.getConfigurazioneDAO();
 			ConfigurazioneTO conf = this.toFact.createConfigurazioneTO(); 
 			conf.setPathConf(this.fileConf.getConfPath());
 			conf.setNomeDB(dbto.getNome());
@@ -51,7 +53,7 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 			conf.setTipoDB(dbto.getTipo());
 			dbConf.addConfigurazioneDB(conf);
 		}
-		
+
 		return res;
 	}
 
@@ -59,14 +61,18 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 	public boolean checkConfigurazione() {
 		boolean res = false;
 		String tipoDB = this.sysConf.getTipoDB();
-		
+
 		if(!tipoDB.equals(""))
 			res = true;
-		
+
 		return res;
 	}
-	
+
 	public void setToFact(TOFactory toFact) {
 		this.toFact = toFact;
+	}
+
+	public void setDbFact(DBFactory dbFact) {
+		this.dbFact = dbFact;
 	}
 }

@@ -1,4 +1,4 @@
-package agroludos.integration.dao.mysql;
+package agroludos.integration.dao.db.mysql;
 
 import org.hibernate.Session;
 

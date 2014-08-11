@@ -1,8 +1,10 @@
-package agroludos.integration.dao.mysql;
+package agroludos.integration.dao.db.mysql;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBConfigurazioneDAO;
@@ -15,18 +17,28 @@ import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.integration.dao.db.TipoOptionalDAO;
 import agroludos.integration.dao.db.UtenteDAO;
 
-public class MySqlDAOFactory extends DBDAOFactory {
-	
+public class MySqlDAOFactory implements DBDAOFactory {
 	private static Session session;
-	private static SessionFactory sessionFactory; 
+	private static SessionFactory sessionFactory;
+	private static ServiceRegistry serviceRegistry;
 	// --------------------------------------------
 	
-	static {
-		sessionFactory = new Configuration().configure().buildSessionFactory();
-		session = sessionFactory.openSession();
-	}
+//	static {
+//		sessionFactory = new Configuration().configure().buildSessionFactory();
+//		session = sessionFactory.openSession();
+//	}
 
 	// --------------------------------------------
+	
+	private static SessionFactory createSessionFactory() {
+	    Configuration configuration = new Configuration();
+	    configuration.configure();
+	    serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+	            configuration.getProperties()).build();
+	    sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+	    session = sessionFactory.openSession();
+	    return sessionFactory;
+	}
 
 	public static Session getSession() {
 		return session;

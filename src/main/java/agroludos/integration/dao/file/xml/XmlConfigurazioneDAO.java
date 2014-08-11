@@ -7,7 +7,7 @@ import agroludos.integration.dao.file.FConfigurazioneDAO;
 import agroludos.to.DatabaseTO;
 import agroludos.utility.xml.XmlUtil;
 
-public class XmlConfigurazioneDAO implements FConfigurazioneDAO{
+class XmlConfigurazioneDAO implements FConfigurazioneDAO{
 
 	private Document doc;
 
@@ -16,7 +16,7 @@ public class XmlConfigurazioneDAO implements FConfigurazioneDAO{
 	private XMLConfigFile xmlFile;
 
 	private XmlUtil utXml;
-	
+
 	XmlConfigurazioneDAO(){
 		System.out.println("XmlConfigurazioneDAO()");
 		this.confPath = XmlData.getConfPath();
@@ -51,7 +51,7 @@ public class XmlConfigurazioneDAO implements FConfigurazioneDAO{
 		this.utXml = utXml;
 		this.doc = utXml.getDocument(this.confPath);
 	}
-	
+
 	public void setXmlFile(XMLConfigFile xmlFile) {
 		this.xmlFile = xmlFile;
 	}

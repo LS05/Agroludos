@@ -2,7 +2,10 @@ package agroludos.integration.dao.file;
 
 import agroludos.integration.dao.file.txt.TxtDAOFactory;
 import agroludos.integration.dao.file.xml.XmlDAOFactory;
-
+/**
+ * Cercare di rimuovere il riferimento a XmlDAOFactory e a TxtDAOFactory
+ * 
+ */
 public class FileFactory {
 	private static XmlDAOFactory xmlFact = new XmlDAOFactory();
 	private static TxtDAOFactory txtFact = new TxtDAOFactory();
