@@ -27,8 +27,8 @@ public class AgroludosBD extends BusinessDelegate{
 	}
 	
 	public boolean confermaConfigurazione(DatabaseTO to) throws ApplicationException{
-		System.out.println(to.getNome());
 		System.out.println("confermaConfigurazione()");
+		sconfigurazione.inserisciConfigurazione(to);
 		return false;
 	}
 
