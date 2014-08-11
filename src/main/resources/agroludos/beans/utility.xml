@@ -3,8 +3,5 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	<import resource="classpath:agroludos/beans/utility.xml" />
-	<bean id="systemConf" class="agroludos.system.SystemConf">
-		<constructor-arg ref="utilityXml" />
-	</bean>
+	<bean id="utilityXml" class="agroludos.utility.xml.XmlUtil" />
 </beans>

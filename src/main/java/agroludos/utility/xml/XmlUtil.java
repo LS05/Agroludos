@@ -18,7 +18,7 @@ import org.w3c.dom.DocumentType;
 import org.xml.sax.SAXException;
 
 public class XmlUtil {
-	
+
 	private DocumentBuilderFactory docFactory;
 	private DocumentBuilder docBuilder;
 	private Document doc;

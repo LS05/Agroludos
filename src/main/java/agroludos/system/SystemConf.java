@@ -11,17 +11,18 @@ import agroludos.utility.xml.XmlUtil;
 
 public class SystemConf {
 	private Document doc;
-	private XmlUtil utXml = new XmlUtil();
+	private XmlUtil utXml;
 	private String path;
 
-	SystemConf(){
+	SystemConf(XmlUtil utXml){
+		this.utXml = utXml;
 		this.path = "src/main/java/agroludos/system/filesystem.xml";
 		this.doc = utXml.getDocument(path);
 	}
-	
+
 	public boolean setTipoDB(String tipoDB){
 		boolean res = false;
-		
+
 		this.writeDataBaseNode(tipoDB);
 
 		try {
@@ -68,7 +69,7 @@ public class SystemConf {
 				}
 			}
 		}
-		
+
 		return res;
 	}
 
@@ -76,15 +77,15 @@ public class SystemConf {
 		Node n = this.getSystemNode("database");
 		n.setTextContent(s);
 	}
-	
+
 	private String readDataBaseNode(){
 		return this.getSystemNode("database").getTextContent();
 	}
-	
+
 	private String readConfNode(){
 		return this.getSystemNode("configurazione").getTextContent();
 	}
-	
+
 	private String readCertNode(){
 		return this.getSystemNode("certificato").getTextContent();
 	}

@@ -7,4 +7,8 @@ public class TOFactory {
 	public DatabaseTO createDatabaseTO(){
 		return new Database();
 	}
+	
+	public ConfigurazioneTO createConfigurazioneTO(){
+		return new Configurazione();
+	}
 }

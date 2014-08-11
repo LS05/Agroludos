@@ -1,6 +1,6 @@
 package agroludos.presentation.controller;
 
-import agroludos.presentation.reqresh.AgroRequestContext;
+import agroludos.presentation.reqh.AgroRequestContext;
 
 public interface AgroludosAC {
 	public Object gestisciRichiesta(AgroRequestContext request);

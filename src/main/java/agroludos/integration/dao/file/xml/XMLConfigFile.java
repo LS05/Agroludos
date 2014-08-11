@@ -1,0 +1,80 @@
+package agroludos.integration.dao.file.xml;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import agroludos.to.DatabaseTO;
+
+class XMLConfigFile {
+
+	private String tipoDB;
+	private String nomeDB;
+	private String serverDB;
+	private String portaDB;
+	private String usernameDB;
+	private String passwordDB;
+
+	boolean setDocument(Document doc, DatabaseTO dbto){
+
+		boolean res = false;
+
+		this.tipoDB = dbto.getTipo();
+		this.nomeDB = dbto.getNome();
+		this.serverDB = dbto.getServer();
+		this.portaDB = dbto.getPorta();
+		this.usernameDB = dbto.getUsername();
+		this.passwordDB = dbto.getPassword();	
+
+		// Get the database element by tag name directly
+		Node database = doc.getElementsByTagName("session-factory").item(0);
+
+		// loop the database child node
+		NodeList list = database.getChildNodes();
+
+		for (int i = 0; i < list.getLength(); i++) {
+
+			Node node = list.item(i);
+
+			if("property".equals(node.getNodeName())){
+
+				NamedNodeMap attributes = node.getAttributes();
+
+				for (int a = 0; a < attributes.getLength(); a++) {
+					Node attr = attributes.item(a);
+					String attrValue = attr.getNodeValue();
+
+					if(attrValue.equals(XmlData.hibDriver)){
+						node.setTextContent(XmlData.getDriver(tipoDB));
+						res = true;
+					}
+
+					if(attrValue.equals(XmlData.hibDialect)){
+						node.setTextContent(XmlData.getDialect(tipoDB));
+						res = true;
+					}
+
+					if(attrValue.equals(XmlData.hibUsername)){
+						node.setTextContent(usernameDB);
+						res = true;
+					}
+
+					if(attrValue.equals(XmlData.hibPassword)){
+						node.setTextContent(passwordDB);
+						res = true;
+					}
+
+					if(attrValue.equals(XmlData.hibUrl)){
+						String urlDB = XmlData.getUrl(tipoDB) + serverDB + ":" + portaDB + "/" + nomeDB;
+						node.setTextContent(urlDB);
+						res = true;
+					}
+				}
+			}
+		}
+
+		return res;
+	}
+
+}
