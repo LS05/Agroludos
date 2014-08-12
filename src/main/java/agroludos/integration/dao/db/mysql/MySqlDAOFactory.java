@@ -1,6 +1,6 @@
 package agroludos.integration.dao.db.mysql;
 
-import org.hibernate.Session;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -18,31 +18,6 @@ import agroludos.integration.dao.db.TipoOptionalDAO;
 import agroludos.integration.dao.db.UtenteDAO;
 
 public class MySqlDAOFactory implements DBDAOFactory {
-	private static Session session;
-	private static SessionFactory sessionFactory;
-	private static ServiceRegistry serviceRegistry;
-	// --------------------------------------------
-	
-//	static {
-//		sessionFactory = new Configuration().configure().buildSessionFactory();
-//		session = sessionFactory.openSession();
-//	}
-
-	// --------------------------------------------
-	
-	private static SessionFactory createSessionFactory() {
-	    Configuration configuration = new Configuration();
-	    configuration.configure();
-	    serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-	            configuration.getProperties()).build();
-	    sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-	    session = sessionFactory.openSession();
-	    return sessionFactory;
-	}
-
-	public static Session getSession() {
-		return session;
-	}
 
 	@Override
 	public ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO() {
@@ -88,9 +63,4 @@ public class MySqlDAOFactory implements DBDAOFactory {
 	public DBConfigurazioneDAO getConfigurazioneDAO() {
 		return new MySqlConfigurazioneDAO();
 	}
-	
-	public static void main(String[] args) {
-		new MySqlDAOFactory();
-	}
-
 }

@@ -51,7 +51,7 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 			conf.setPortaDB(dbto.getPorta());
 			conf.setServerDB(dbto.getServer());
 			conf.setTipoDB(dbto.getTipo());
-			dbConf.addConfigurazioneDB(conf);
+			res = dbConf.addConfigurazioneDB(conf);
 		}
 
 		return res;
