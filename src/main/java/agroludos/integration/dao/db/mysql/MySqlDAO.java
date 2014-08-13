@@ -5,20 +5,33 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-public abstract class MySqlDAO {
+import agroludos.exceptions.DatabaseException;
 
-	private static final SessionFactory sessionFactory = buildSessionFactory();
+class MySqlDAO {
 
-	private static SessionFactory buildSessionFactory(){
-		Configuration configuration = new Configuration();
-		configuration.configure();
-		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-				configuration.getProperties()).build();
-		SessionFactory res = configuration.buildSessionFactory(serviceRegistry);
+	private static SessionFactory sessionFactory;
+
+	static SessionFactory buildSessionFactory() throws DatabaseException{
+		SessionFactory res = null;
+
+		if(sessionFactory == null){
+			Configuration configuration = new Configuration();
+			configuration.configure();
+			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+					configuration.getProperties()).build();
+			try{
+			res = configuration.buildSessionFactory(serviceRegistry);
+			}catch(Exception e){
+				throw new DatabaseException(e.getMessage());
+			}
+		} else {
+			res = sessionFactory;
+		}
+
 		return res;
 	}
-	
+
 	public static SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
+		return sessionFactory;
+	}
 }

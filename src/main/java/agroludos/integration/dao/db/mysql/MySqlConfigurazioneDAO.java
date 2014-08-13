@@ -5,11 +5,11 @@ import org.hibernate.Session;
 import agroludos.integration.dao.db.DBConfigurazioneDAO;
 import agroludos.to.ConfigurazioneTO;
 
-public class MySqlConfigurazioneDAO extends MySqlDAO implements DBConfigurazioneDAO {
+public class MySqlConfigurazioneDAO implements DBConfigurazioneDAO {
 	private Session session;
 	
 	MySqlConfigurazioneDAO(){
-		this.session = getSessionFactory().openSession();
+		this.session = MySqlDAO.getSessionFactory().openSession();
 	}
 	
 	@Override

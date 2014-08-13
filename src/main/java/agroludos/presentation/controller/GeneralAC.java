@@ -1,7 +1,7 @@
 package agroludos.presentation.controller;
 
-import agroludos.business.bd.ApplicationException;
 import agroludos.business.bd.BusinessDelegate;
+import agroludos.exceptions.ApplicationException;
 import agroludos.presentation.req.DataFieldException;
 import agroludos.presentation.reqh.AgroRequestContext;
 import agroludos.to.DatabaseTO;
@@ -40,6 +40,7 @@ public class GeneralAC extends ApplicationController{
 	}
 
 	public boolean confermaConfigurazione(AgroRequestContext request){
+		boolean res = false;
 		System.out.println("GeneralAC.confermaConfigurazione");
 		DatabaseTO dbto = this.toFact.createDatabaseTO();
 
@@ -55,11 +56,11 @@ public class GeneralAC extends ApplicationController{
 		}
 
 		//		try {
-		agroBD.gestisciServizio(request.getCommand(), dbto);
+		res = (Boolean)agroBD.gestisciServizio(request.getCommand(), dbto);
 		//		} catch (ApplicationException e) {
 		//			e.printStackTrace();
 		//		}
 
-		return false;
+		return res;
 	}
 }

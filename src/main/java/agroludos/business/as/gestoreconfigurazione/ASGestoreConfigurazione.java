@@ -1,5 +1,7 @@
 package agroludos.business.as.gestoreconfigurazione;
 
+import agroludos.exceptions.DBFactoryException;
+import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.DBConfigurazioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.DBFactory;
@@ -17,7 +19,7 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 	private FileDAOFactory fileDaoFact;
 	private TOFactory toFact;
 	private FConfigurazioneDAO fileConf;
-	
+
 	private SystemConf sysConf;
 
 	ASGestoreConfigurazione(SystemConf sysConf, FileFactory filefact){
@@ -32,7 +34,7 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 	}
 
 	@Override
-	public boolean inserisciConfigurazione(DatabaseTO dbto) {
+	public boolean inserisciConfigurazione(DatabaseTO dbto) throws DatabaseException {
 		boolean res = false;
 		DBDAOFactory dbDAO = null;
 		DBConfigurazioneDAO dbConf = null; 
@@ -41,17 +43,23 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 
 		if(this.fileConf.creaConfigurazione(dbto)){
 			this.sysConf.setTipoDB(dbto.getTipo());
-			dbDAO = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-			dbConf = dbDAO.getConfigurazioneDAO();
-			ConfigurazioneTO conf = this.toFact.createConfigurazioneTO(); 
-			conf.setPathConf(this.fileConf.getConfPath());
-			conf.setNomeDB(dbto.getNome());
-			conf.setUserDB(dbto.getUsername());
-			conf.setPwdDB(dbto.getPassword());
-			conf.setPortaDB(dbto.getPorta());
-			conf.setServerDB(dbto.getServer());
-			conf.setTipoDB(dbto.getTipo());
-			res = dbConf.addConfigurazioneDB(conf);
+
+			try {
+				dbDAO = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+				dbConf = dbDAO.getConfigurazioneDAO();
+				ConfigurazioneTO conf = this.toFact.createConfigurazioneTO(); 
+				conf.setPathConf(this.fileConf.getConfPath());
+				conf.setNomeDB(dbto.getNome());
+				conf.setUserDB(dbto.getUsername());
+				conf.setPwdDB(dbto.getPassword());
+				conf.setPortaDB(dbto.getPorta());
+				conf.setServerDB(dbto.getServer());
+				conf.setTipoDB(dbto.getTipo());
+				res = dbConf.addConfigurazioneDB(conf);
+			} catch (DBFactoryException e) {
+				this.sysConf.setTipoDB("");
+				throw new DatabaseException(e.getMessage());
+			}
 		}
 
 		return res;

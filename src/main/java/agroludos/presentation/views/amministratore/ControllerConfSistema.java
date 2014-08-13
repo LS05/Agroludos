@@ -59,7 +59,7 @@ public class ControllerConfSistema implements Initializable{
 	private ObservableList<String> listaTipiDB;
 	
 	public void setFrontController(FrontController fc){
-		ControllerConfSistema.frontController = fc;
+		frontController = fc;
 	}
 	
 	public void setReqFact(RequestFactory reqFact) {
@@ -106,7 +106,7 @@ public class ControllerConfSistema implements Initializable{
 			parametriDB.put("password", this.txtPasswordDB.getText());
 			
 			this.richiesta = reqFact.createDFrameRequest(parametriDB, "confermaConfigurazione");
-			boolean res = (boolean) this.frontController.eseguiRichiesta(richiesta);
+			boolean res = (boolean) frontController.eseguiRichiesta(richiesta);
 
 			//se la connessione al db è andata a buon fine procedi
 			if(res){

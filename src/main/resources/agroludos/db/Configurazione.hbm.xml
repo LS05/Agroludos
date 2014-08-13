@@ -34,6 +34,6 @@
 			<column name="password" not-null="true" />
 		</property>
 	</class>
-	<query name="ByNameAndMaximumWeight">
-        <![CDATA[ from eg.DomesticCat as cat where cat.name = ? and cat.weight > ? ]]></query>
+	<query name="getStatoConfigurazione">
+        <![CDATA[ from agroludos.to.Configurazione where id = 1 ]]></query>
 </hibernate-mapping>

@@ -30,6 +30,8 @@ class AppConfig implements App{
 	
 	private RequestFactory reqFact;
 	
+	private boolean isConf;
+	
 	AppConfig(FrontController frontController, RequestFactory reqFact){
 		this.frontController = frontController;
 		this.reqFact = reqFact;
@@ -38,7 +40,7 @@ class AppConfig implements App{
 	@Override
 	public void initialize(){
 		AgroRequest richiesta = reqFact.createSimpleRequest("checkConfigurazione");
-		this.frontController.eseguiRichiesta(richiesta);
+		this.isConf = (Boolean)this.frontController.eseguiRichiesta(richiesta);
 	}
 
 	@Override

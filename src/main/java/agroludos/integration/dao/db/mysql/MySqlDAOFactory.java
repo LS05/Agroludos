@@ -2,10 +2,8 @@ package agroludos.integration.dao.db.mysql;
 
 
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
+import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBConfigurazioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
@@ -18,6 +16,16 @@ import agroludos.integration.dao.db.TipoOptionalDAO;
 import agroludos.integration.dao.db.UtenteDAO;
 
 public class MySqlDAOFactory implements DBDAOFactory {
+	
+	private static SessionFactory sessionFactory;
+	
+	public boolean initialize() throws DatabaseException{
+		boolean res = false;
+		sessionFactory = MySqlDAO.buildSessionFactory();
+		if(sessionFactory != null)
+			res = true;
+		return res;
+	}
 
 	@Override
 	public ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO() {
