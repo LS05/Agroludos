@@ -20,7 +20,8 @@ class MySqlDAO {
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
 					configuration.getProperties()).build();
 			try{
-			res = configuration.buildSessionFactory(serviceRegistry);
+				sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+				res = sessionFactory;
 			}catch(Exception e){
 				throw new DatabaseException(e.getMessage());
 			}

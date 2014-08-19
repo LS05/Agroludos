@@ -1,7 +1,7 @@
 package agroludos.business.as.gestoremds;
 
-import agroludos.to.UtenteTO;
+import agroludos.to.ManagerDiSistemaTO;
 
 public interface SManagerDiSistema {
-	boolean inserisciManagerDiSistema(UtenteTO uto);
+	boolean inserisciManagerDiSistema(ManagerDiSistemaTO mdsto);
 }

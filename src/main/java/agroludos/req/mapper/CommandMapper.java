@@ -14,7 +14,7 @@ public class CommandMapper implements CommandMapperI{
 	private Object args;
 	
 	@Override
-	public Object execute() {
+	public Object execute() throws Throwable {
 		this.cmdMap = new CommandMap(this.obj.getClass());
 		Object res = null;
 		Method m = this.cmdMap.getMethod(method);
@@ -32,7 +32,7 @@ public class CommandMapper implements CommandMapperI{
 		} catch (InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			e.getCause();
+			throw e.getCause();
 		}
 		return res;
 	}

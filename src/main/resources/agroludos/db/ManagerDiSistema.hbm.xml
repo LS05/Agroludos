@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="agroludos.to.ManagerDiSistema" table="tbl_mansis"
+		catalog="agroludos">
+		<id name="id" type="java.lang.Integer">
+			<column name="idmansis" />
+			<generator class="increment" />
+		</id>
+		<property name="nome" type="string">
+			<column name="nome" not-null="true"/>
+		</property>
+		<property name="cognome" type="string">
+			<column name="cognome" not-null="true" />
+		</property>
+		<property name="username" type="string">
+			<column name="username" not-null="true" />
+		</property>
+		<property name="password" type="string">
+			<column name="password" not-null="true" />
+		</property>
+		<property name="email" type="string">
+			<column name="email" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

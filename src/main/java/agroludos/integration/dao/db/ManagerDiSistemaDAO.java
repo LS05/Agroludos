@@ -1,7 +1,7 @@
 package agroludos.integration.dao.db;
 
-import agroludos.to.UtenteTO;
+import agroludos.to.ManagerDiSistemaTO;
 
 public interface ManagerDiSistemaDAO {
-	boolean crea(UtenteTO uto);
+	boolean crea(ManagerDiSistemaTO mdsto);
 }

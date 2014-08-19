@@ -1,18 +1,26 @@
 package agroludos.integration.dao.db.mysql;
 
-import agroludos.integration.dao.db.ManagerDiSistemaDAO;
-import agroludos.to.UtenteTO;
+import org.hibernate.Session;
 
-public class MySqlManagerDiSistemaDAO extends MySqlDAO implements ManagerDiSistemaDAO{
+import agroludos.integration.dao.db.ManagerDiSistemaDAO;
+import agroludos.to.ManagerDiSistemaTO;
+
+public class MySqlManagerDiSistemaDAO implements ManagerDiSistemaDAO{
+	private Session session;
 	
 	MySqlManagerDiSistemaDAO(){
-		super();
+		this.session = MySqlDAO.getSessionFactory().openSession();
 	}
 	
 	@Override
-	public boolean crea(UtenteTO uto) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean crea(ManagerDiSistemaTO mdsto) {
+		boolean res = false;
+		// TODO Aggiungere gestione eccezioni hibernate
+		this.session.beginTransaction();
+		this.session.save(mdsto);
+		res = true;
+		this.session.getTransaction().commit();
+		return res;
 	}
 
 }

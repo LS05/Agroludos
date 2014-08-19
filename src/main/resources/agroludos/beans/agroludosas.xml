@@ -14,5 +14,9 @@
 		<property name="dbFact" ref="dbFactory" />
 	</bean>
 	<bean id="gestoreManagerSistema"
-		class="agroludos.business.as.gestoremds.ASGestoreManagerDiSistema" />
+		class="agroludos.business.as.gestoremds.ASGestoreManagerDiSistema"
+		lazy-init="true">
+		<constructor-arg ref="dbFactory" />
+		<constructor-arg ref="systemConf" />
+	</bean>
 </beans>

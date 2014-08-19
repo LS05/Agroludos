@@ -8,6 +8,14 @@ public class TOFactory {
 		return new Database();
 	}
 	
+	public ManagerDiSistemaTO createMdSTO(){
+		return new ManagerDiSistema();
+	}
+	
+	public ManagerDiSistemaTO createUTO(){
+		return new ManagerDiSistema();
+	}
+	
 	public ConfigurazioneTO createConfigurazioneTO(){
 		return new Configurazione();
 	}

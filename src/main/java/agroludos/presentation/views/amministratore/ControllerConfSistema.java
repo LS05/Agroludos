@@ -52,20 +52,20 @@ public class ControllerConfSistema implements Initializable{
 
 
 	private static FrontController frontController;
-	
+
 	private static RequestFactory reqFact;
 	private AgroRequest richiesta;
-	
+
 	private ObservableList<String> listaTipiDB;
-	
+
 	public void setFrontController(FrontController fc){
 		frontController = fc;
 	}
-	
+
 	public void setReqFact(RequestFactory reqFact) {
 		ControllerConfSistema.reqFact = reqFact;
 	}
-	
+
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.listaTipiDB = FXCollections.observableArrayList();
 		//aggiungo i tipi di db alla combobox
@@ -77,7 +77,7 @@ public class ControllerConfSistema implements Initializable{
 
 		this.databasePane.setVisible(true);
 		this.managerSistemaPane.setVisible(false);
-		
+
 		//DA ELIMINARE
 		this.txtServerDB.setText("localhost"); 
 		this.txtPortaDB.setText("3306"); 
@@ -104,7 +104,7 @@ public class ControllerConfSistema implements Initializable{
 			parametriDB.put("nome", txtNomeDB.getText());
 			parametriDB.put("username", txtUsernameDB.getText());
 			parametriDB.put("password", this.txtPasswordDB.getText());
-			
+
 			this.richiesta = reqFact.createDFrameRequest(parametriDB, "confermaConfigurazione");
 			boolean res = (boolean) frontController.eseguiRichiesta(richiesta);
 
@@ -147,37 +147,37 @@ public class ControllerConfSistema implements Initializable{
 				e.printStackTrace();
 			}
 			//copio il contenuto delle textfield nell'hashmap parametri
-			parametriMds.put("txtNomeMds", txtNomeMds.getText());
-			parametriMds.put("txtCognomeMds", txtCognomeMds.getText());
-			parametriMds.put("txtUsernameMds", txtUsernameMds.getText());
-			parametriMds.put("txtPasswordMds", securePassword);
-			parametriMds.put("txtEmailMds", txtEmailMds.getText());
-			parametriMds.put("txtTelefonoMds", txtTelefonoMds.getText());
-			
-			this.richiesta = reqFact.createDFrameRequest(parametriMds, "nuovoMDS");
+			parametriMds.put("nome", txtNomeMds.getText());
+			parametriMds.put("cognome", txtCognomeMds.getText());
+			parametriMds.put("username", txtUsernameMds.getText());
+			parametriMds.put("password", securePassword);
+			parametriMds.put("email", txtEmailMds.getText());
+			parametriMds.put("telefono", txtTelefonoMds.getText());
+
+			this.richiesta = reqFact.createDFrameRequest(parametriMds, "nuovoManagerDiSistema");
 			boolean res = (boolean)frontController.eseguiRichiesta(richiesta);
 			//se non ci sono errori mostra la finestra di login
 			if(res){
 				System.out.println("Manager di Sistema inserito correttamente");
-				
-//				Class c = ControllerViews.class;
-//				
-//				try {
-//					Method m = c.getMethod(itm.getId());
-//					m.invoke(c);
-//				} catch (NoSuchMethodException | SecurityException e) {
-//					e.printStackTrace();
-//				} catch (IllegalAccessException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IllegalArgumentException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (InvocationTargetException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-				
+
+				//				Class c = ControllerViews.class;
+				//				
+				//				try {
+				//					Method m = c.getMethod(itm.getId());
+				//					m.invoke(c);
+				//				} catch (NoSuchMethodException | SecurityException e) {
+				//					e.printStackTrace();
+				//				} catch (IllegalAccessException e) {
+				//					// TODO Auto-generated catch block
+				//					e.printStackTrace();
+				//				} catch (IllegalArgumentException e) {
+				//					// TODO Auto-generated catch block
+				//					e.printStackTrace();
+				//				} catch (InvocationTargetException e) {
+				//					// TODO Auto-generated catch block
+				//					e.printStackTrace();
+				//				}
+
 			}
 			else
 				System.out.println("Inserimento fallito");

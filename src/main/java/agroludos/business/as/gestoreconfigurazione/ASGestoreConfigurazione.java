@@ -29,11 +29,6 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 	}
 
 	@Override
-	public boolean testDBConnection() {
-		return false;
-	}
-
-	@Override
 	public boolean inserisciConfigurazione(DatabaseTO dbto) throws DatabaseException {
 		boolean res = false;
 		DBDAOFactory dbDAO = null;
@@ -43,7 +38,6 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 
 		if(this.fileConf.creaConfigurazione(dbto)){
 			this.sysConf.setTipoDB(dbto.getTipo());
-
 			try {
 				dbDAO = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 				dbConf = dbDAO.getConfigurazioneDAO();

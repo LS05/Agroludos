@@ -8,4 +8,10 @@
 	<richiesta tipo="confermaConfigurazione">
 		<classe>agroludos.presentation.reqh.DataRequestContext</classe>
 	</richiesta>
+	<richiesta tipo="nuovoManagerDiSistema">
+		<classe>agroludos.presentation.reqh.DataRequestContext</classe>
+	</richiesta>
+	<richiesta tipo="autenticazioneUtente">
+		<classe>agroludos.presentation.reqh.DataRequestContext</classe>
+	</richiesta>
 </richieste>

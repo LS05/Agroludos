@@ -12,11 +12,20 @@ class ApplicationController implements AgroludosAC{
 	}
 
 	public Object gestisciRichiesta(AgroRequestContext request) {
+		Object res = null;
 		String command = request.getCommand();
 		this.cmdMap.setObj(this);
 		this.cmdMap.setMethod(command);
 		this.cmdMap.setArgs(request);
-		return this.cmdMap.execute();
+		
+		try {
+			res = this.cmdMap.execute();
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 	
 	public void setCmdMap(CommandMapperI cmdMap) {

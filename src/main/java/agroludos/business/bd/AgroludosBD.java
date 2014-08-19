@@ -8,6 +8,7 @@ import agroludos.exceptions.ApplicationException;
 import agroludos.exceptions.DatabaseException;
 import agroludos.to.AgroludosTO;
 import agroludos.to.DatabaseTO;
+import agroludos.to.ManagerDiSistemaTO;
 import agroludos.to.UtenteTO;
 
 public class AgroludosBD extends BusinessDelegate{
@@ -30,7 +31,7 @@ public class AgroludosBD extends BusinessDelegate{
 	
 	public boolean confermaConfigurazione(DatabaseTO to) throws ApplicationException{
 		boolean res = false;
-		System.out.println("confermaConfigurazione()");
+		System.out.println("AgroludosBD.confermaConfigurazione()");
 		try {
 			res = sconfigurazione.inserisciConfigurazione(to);
 		} catch (DatabaseException e) {
@@ -45,7 +46,8 @@ public class AgroludosBD extends BusinessDelegate{
 		return res;
 	}
 
-	public boolean inserisciManagerDiSistema(UtenteTO uto) throws ApplicationException {
+	public boolean nuovoManagerDiSistema(ManagerDiSistemaTO uto) throws ApplicationException {
+		System.out.println("AgroludosBD.nuovoManagerDiSistema()");
 		boolean res = false;
 		res = smanagerdisistema.inserisciManagerDiSistema(uto);
 		return res;
