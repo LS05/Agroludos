@@ -52,19 +52,11 @@ public class ControllerConfSistema implements Initializable{
 
 
 	private static FrontController frontController;
-
 	private static RequestFactory reqFact;
+	
 	private AgroRequest richiesta;
 
 	private ObservableList<String> listaTipiDB;
-
-	public void setFrontController(FrontController fc){
-		frontController = fc;
-	}
-
-	public void setReqFact(RequestFactory reqFact) {
-		ControllerConfSistema.reqFact = reqFact;
-	}
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.listaTipiDB = FXCollections.observableArrayList();
@@ -159,25 +151,6 @@ public class ControllerConfSistema implements Initializable{
 			//se non ci sono errori mostra la finestra di login
 			if(res){
 				System.out.println("Manager di Sistema inserito correttamente");
-
-				//				Class c = ControllerViews.class;
-				//				
-				//				try {
-				//					Method m = c.getMethod(itm.getId());
-				//					m.invoke(c);
-				//				} catch (NoSuchMethodException | SecurityException e) {
-				//					e.printStackTrace();
-				//				} catch (IllegalAccessException e) {
-				//					// TODO Auto-generated catch block
-				//					e.printStackTrace();
-				//				} catch (IllegalArgumentException e) {
-				//					// TODO Auto-generated catch block
-				//					e.printStackTrace();
-				//				} catch (InvocationTargetException e) {
-				//					// TODO Auto-generated catch block
-				//					e.printStackTrace();
-				//				}
-
 			}
 			else
 				System.out.println("Inserimento fallito");
@@ -187,7 +160,13 @@ public class ControllerConfSistema implements Initializable{
 		}
 
 	}
+	
+	public void setFrontController(FrontController fc){
+		frontController = fc;
+	}
 
-
+	public void setReqFact(RequestFactory rFact) {
+		reqFact = rFact;
+	}
 
 }

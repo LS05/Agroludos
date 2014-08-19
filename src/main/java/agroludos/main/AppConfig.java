@@ -7,28 +7,27 @@ import java.util.ResourceBundle;
 import agroludos.presentation.fc.FrontController;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.req.RequestFactory;
+import agroludos.presentation.views.Navigator;
+import agroludos.presentation.views.main.MainController;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 class AppConfig implements App{
 
 	private ResourceBundle itBundle = ResourceBundle.getBundle("bundles.Agroludos", Locale.forLanguageTag("it"));
-	private String pathFXML="/agroludos/presentation/views/amministratore/conf_sistema.fxml";
 
 	private Stage stage;
 	
 	private Scene scene;
-
-	private Parent root;
 	
 	private FrontController frontController;
 	
 	private RequestFactory reqFact;
+	
+	private Navigator nav;
 	
 	private boolean isConf;
 	
@@ -38,34 +37,40 @@ class AppConfig implements App{
 	}
 	
 	@Override
-	public void initialize(){
+	public void initialize(Stage stage){
+		this.stage = stage;
 		AgroRequest richiesta = reqFact.createSimpleRequest("checkConfigurazione");
 		this.isConf = (Boolean)this.frontController.eseguiRichiesta(richiesta);
 	}
-
-	@Override
-	public void show() {
-		try {
-			root = (Parent)FXMLLoader.load(getClass().getResource(pathFXML), itBundle);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-//		root.getStylesheets().add(STYLE_FILE);
-//		root.getStyleClass().add("main-window");
-		stage.setTitle("Agroludos - Configurazione Iniziale");
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.setOnHiding(new EventHandler<WindowEvent>() {
-			public void handle(WindowEvent event) {
-				System.exit(0);
-			}
-		});
-		stage.show();
-	}
 	
 	@Override
-	public void setPrimaryStage(Stage primaryStage) {
-		this.stage = primaryStage;
+	public void show(){
+		FXMLLoader loader = null;
+		Pane root = null;
+		
+		try {
+			loader = new FXMLLoader(getClass().getResource(Navigator.MAIN), itBundle);
+			root = (Pane)loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		this.scene = new Scene(root);
+		this.stage.setScene(this.scene);
+		
+		MainController mainController = loader.getController();
+		this.nav.setMainController(mainController);
+		
+		if(this.isConf){
+			this.nav.loadVista(Navigator.VISTA_LOGIN);
+		}else {
+			this.nav.loadVista(Navigator.VISTA_CONF);
+		}
+		
+		this.stage.show();
+	}
+	
+	public void setNav(Navigator nav) {
+		this.nav = nav;
 	}
 }

@@ -10,7 +10,7 @@ import agroludos.to.ManagerDiSistemaTO;
 class ASGestoreManagerDiSistema implements LManagerDiSistema, SManagerDiSistema{
 	private SystemConf sysConf;
 	private DBFactory dbFact;	
-	
+
 	ASGestoreManagerDiSistema(DBFactory dbFact, SystemConf sysConf){
 		this.dbFact = dbFact;
 		this.sysConf = sysConf;
@@ -19,20 +19,24 @@ class ASGestoreManagerDiSistema implements LManagerDiSistema, SManagerDiSistema{
 	@Override
 	public boolean inserisciManagerDiSistema(ManagerDiSistemaTO mdsto) {
 		boolean res = false;
-		ManagerDiSistemaDAO daoMan = getManagerDiSistemaDAO();
-		res = daoMan.crea(mdsto);
-		return res;
-	}
-	
-	private ManagerDiSistemaDAO getManagerDiSistemaDAO(){
-		DBDAOFactory dbDAOFact = null;
+		ManagerDiSistemaDAO daoMan = null;
 		
 		try {
-			dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+			daoMan = getManagerDiSistemaDAO();
 		} catch (DBFactoryException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		res = daoMan.crea(mdsto);
+		return res;
+	}
+
+	private ManagerDiSistemaDAO getManagerDiSistemaDAO() throws DBFactoryException{
+		DBDAOFactory dbDAOFact = null;
+
+		dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+
 		return dbDAOFact.getManagerDiSistemaDAO();
 	}
 }
