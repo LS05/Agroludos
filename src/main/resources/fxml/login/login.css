@@ -13,24 +13,23 @@
 .btnLogin:hover{
 	-fx-background-color:#37C911;
 }
-
 #agrologo{
-	-fx-background-image: url("../images/logo.png");
+	-fx-background-image: url("../../images/logo.png");
     -fx-background-repeat: stretch;   
     -fx-background-size: 313 68;
     -fx-background-position: center center;
 }
-
 #btnPwdDimenticata{
     -fx-font-weight: normal;
     -fx-text-fill: #282828;
     -fx-background-color:#fff;
 }
-
 #btnPwdDimenticata:hover{
     -fx-underline: true;
 }
-
 .btnRegistrati{
 	-fx-background-color:#46C3F3;
+}
+.btnRegistrati:hover{
+	-fx-background-color:#6ad2f9;
 }

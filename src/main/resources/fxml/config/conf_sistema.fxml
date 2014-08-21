@@ -301,4 +301,7 @@
         </center>
     </BorderPane>
 </children>
+<stylesheets>
+    <URL value="@conf.css" />
+  </stylesheets>
 </AnchorPane>

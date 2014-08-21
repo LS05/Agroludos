@@ -72,7 +72,7 @@ class ViewsLoader{
 	}
 	
 	
-	public Scene getView(String view){
+	Scene getView(String view){
 		return this.views.get(view);
 	}
 }
