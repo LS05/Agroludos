@@ -17,13 +17,17 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import agroludos.presentation.views.AgroludosController;
 import agroludos.utility.SecurePassword;
 
-public class ControllerLogin implements Initializable{
+public class ControllerLogin extends AgroludosController implements Initializable{
 
 	@FXML private Button btnLogin;
 	@FXML private Button btnPswDimenticata;
 	@FXML private Button btnRegistrati;
+	
+	@FXML private Pane agroLogoPane;
 	
 	//texfield 
 	@FXML private TextField txtUsername;
@@ -34,10 +38,12 @@ public class ControllerLogin implements Initializable{
 
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		this.agroLogoPane.setFocusTraversable(true);
 	}
 
 	@FXML protected void btnLogin(MouseEvent event) {
+		nav.setVista("configurazione");
+//		this.nav.setVista(this.nav.getViewPath("configurazione"));
 //		//controllo la validità delle textfield	
 //
 //		if((this.txtUsername.getText().length() != 0)  &&

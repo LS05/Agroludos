@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agro-views>
+    <view name="login">/fxml/login.fxml</view>
+    <view name="configurazione">/fxml/conf_sistema.fxml</view>
+</agro-views>

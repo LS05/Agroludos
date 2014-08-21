@@ -5,4 +5,4 @@
 
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1" fx:controller="agroludos.presentation.views.MainController" />
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="agroludos.presentation.views.main.MainController" />

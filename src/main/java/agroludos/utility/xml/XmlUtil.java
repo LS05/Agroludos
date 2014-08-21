@@ -21,7 +21,6 @@ public class XmlUtil {
 
 	private DocumentBuilderFactory docFactory;
 	private DocumentBuilder docBuilder;
-	private Document doc;
 
 	public Document getDocument(String path){
 		Document doc = null;
@@ -58,5 +57,4 @@ public class XmlUtil {
 		StreamResult result = new StreamResult(new File(path));
 		transformer.transform(source, result);
 	}
-
 }

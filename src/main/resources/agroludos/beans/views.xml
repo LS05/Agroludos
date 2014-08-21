@@ -6,9 +6,13 @@
 
 	<import resource="classpath:agroludos/beans/frontcontroller.xml" />
 	<import resource="classpath:agroludos/beans/request.xml" />
+	<import resource="classpath:agroludos/beans/navigator.xml" />
 	<bean id="controllerConfigurazione"
 		class="agroludos.presentation.views.amministratore.ControllerConfSistema">
 		<property name="frontController" ref="fc" />
 		<property name="reqFact" ref="reqFactory" />
+	</bean>
+	<bean id="agroController" class="agroludos.presentation.views.AgroludosController">
+	    <property name="nav" ref="navigator" />
 	</bean>
 </beans>
