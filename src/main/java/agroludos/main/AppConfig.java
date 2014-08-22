@@ -34,9 +34,18 @@ class AppConfig implements App{
 	
 	@Override
 	public void show(){
+		boolean dbConn;
+		AgroRequest richiesta = reqFact.createSimpleRequest("testConnessioneDB");
 		
 		if(this.isConf){
-			this.nav.setVista("login");
+			dbConn = (Boolean)this.frontController.eseguiRichiesta(richiesta);
+			
+			if(dbConn){
+				this.nav.setVista("login");
+			} else {
+				System.out.println("Connessione Database Non Riuscita");
+			}
+			
 		}else {
 			this.nav.setVista("configurazione");
 		}

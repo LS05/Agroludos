@@ -25,4 +25,6 @@
 			<column name="email" not-null="true" />
 		</property>
 	</class>
+	<query name="getManagerDiSistema">
+        <![CDATA[ from agroludos.to.ManagerDiSistema m where m.username = :username ]]></query>
 </hibernate-mapping>

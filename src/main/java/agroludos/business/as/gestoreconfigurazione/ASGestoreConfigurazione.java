@@ -77,4 +77,18 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 	public void setDbFact(DBFactory dbFact) {
 		this.dbFact = dbFact;
 	}
+
+	@Override
+	public boolean testConnessioneDB() throws DatabaseException {
+		boolean res = false;
+		
+		try {
+			this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+			res = true;
+		} catch (DBFactoryException e) {
+			throw new DatabaseException(e.getMessage());
+		}
+		
+		return res;
+	}
 }

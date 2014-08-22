@@ -32,6 +32,7 @@ public class GeneralAC extends ApplicationController{
 		
 		if(obj instanceof Boolean)
 			res = (Boolean)obj;
+		
 		return res;
 	}
 
@@ -77,8 +78,7 @@ public class GeneralAC extends ApplicationController{
 		return res;
 	}
 	
-	public boolean autenticazioneUtente(AgroRequestContext request){
-		boolean res = false;
+	public UtenteTO autenticazioneUtente(AgroRequestContext request){
 		
 		UtenteTO uto = this.toFact.createUTO();
 		
@@ -88,15 +88,19 @@ public class GeneralAC extends ApplicationController{
 		} catch (DataFieldException e) {
 			e.printStackTrace();
 		}
-
-		return res;
+		
+		return (UtenteTO)gestisciServizio(request.getCommand(), uto);
+	}
+	
+	public boolean testConnessioneDB(AgroRequestContext request){
+		return (Boolean)gestisciServizio(request.getCommand());
 	}
 	
 	private Object gestisciServizio(String command){
 		Object res = null;
 		
 		try {
-			res = (Boolean)agroBD.gestisciServizio(command);
+			res = agroBD.gestisciServizio(command);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}
@@ -108,7 +112,7 @@ public class GeneralAC extends ApplicationController{
 		Object res = null;
 		
 		try {
-			res = (Boolean)agroBD.gestisciServizio(command, to);
+			res = agroBD.gestisciServizio(command, to);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}

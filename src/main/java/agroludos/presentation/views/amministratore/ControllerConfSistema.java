@@ -5,9 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import agroludos.presentation.fc.FrontController;
 import agroludos.presentation.req.AgroRequest;
-import agroludos.presentation.req.RequestFactory;
+import agroludos.presentation.views.AgroludosController;
 import agroludos.utility.SecurePassword;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,7 +21,7 @@ import javafx.scene.layout.GridPane;
 
 import java.security.NoSuchAlgorithmException;
 
-public class ControllerConfSistema implements Initializable{
+public class ControllerConfSistema extends AgroludosController implements Initializable{
 
 	@FXML private Button btnAvantiConf;
 	@FXML private Button btnIndietroConf;
@@ -49,10 +48,6 @@ public class ControllerConfSistema implements Initializable{
 	//hashmap dei contenuti delle text
 	private Map<String, String> parametriDB = new HashMap<>();
 	private Map<String, String> parametriMds = new HashMap<>();
-
-
-	private static FrontController frontController;
-	private static RequestFactory reqFact;
 	
 	private AgroRequest richiesta;
 
@@ -151,6 +146,7 @@ public class ControllerConfSistema implements Initializable{
 			//se non ci sono errori mostra la finestra di login
 			if(res){
 				System.out.println("Manager di Sistema inserito correttamente");
+				nav.setVista("login");
 			}
 			else
 				System.out.println("Inserimento fallito");
@@ -160,13 +156,4 @@ public class ControllerConfSistema implements Initializable{
 		}
 
 	}
-	
-	public void setFrontController(FrontController fc){
-		frontController = fc;
-	}
-
-	public void setReqFact(RequestFactory rFact) {
-		reqFact = rFact;
-	}
-
 }

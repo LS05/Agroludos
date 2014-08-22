@@ -1,23 +1,17 @@
 package agroludos.presentation.views.mds;
 
 import java.net.URL;
-import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import agroludos.presentation.fc.FC;
-import agroludos.presentation.req.FrameRequest;
-import agroludos.utility.SecurePassword;
+import agroludos.presentation.req.AgroRequest;
+import agroludos.presentation.views.AgroludosController;
 
-public class ControllerMdsMain implements Initializable{
+public class ControllerMdsMain extends AgroludosController implements Initializable{
 
 	//pane centrali
 	@FXML private GridPane paneGestioneCompetizioni;
@@ -42,12 +36,8 @@ public class ControllerMdsMain implements Initializable{
 	@FXML private Button btnPernotto;
 	@FXML private Button btnNuovoTipoOptional;
 
-	//texfield 
-
-
-
-	private FC frontController = FC.getInstance();
-	private FrameRequest richiesta;
+	
+	private AgroRequest richiesta;
 
 
 	public void initialize(URL arg0, ResourceBundle arg1) {

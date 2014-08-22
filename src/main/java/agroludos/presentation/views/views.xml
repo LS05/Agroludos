@@ -2,4 +2,5 @@
 <agro-views>
     <view name="login">/fxml/login/login.fxml</view>
     <view name="configurazione">/fxml/config/conf_sistema.fxml</view>
+    <view name="managerDiSistema">/fxml/mds/mdsMain.fxml</view>
 </agro-views>

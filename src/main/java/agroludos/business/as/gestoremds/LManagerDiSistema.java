@@ -1,5 +1,8 @@
 package agroludos.business.as.gestoremds;
 
-public interface LManagerDiSistema {
+import agroludos.to.ManagerDiSistemaTO;
+import agroludos.to.UtenteTO;
 
+public interface LManagerDiSistema {
+	ManagerDiSistemaTO getManagerDiSistema(UtenteTO uto);
 }

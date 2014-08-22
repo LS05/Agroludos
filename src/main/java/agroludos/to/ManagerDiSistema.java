@@ -64,5 +64,9 @@ class ManagerDiSistema implements ManagerDiSistemaTO {
 	@Override
 	public void setId(int id) {
 		this.id = id;
+	}
+	@Override
+	public String getTipo() {
+		return "managerDiSistema";
 	}	
 }

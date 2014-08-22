@@ -6,6 +6,7 @@ import agroludos.integration.dao.db.DBFactory;
 import agroludos.integration.dao.db.ManagerDiSistemaDAO;
 import agroludos.system.SystemConf;
 import agroludos.to.ManagerDiSistemaTO;
+import agroludos.to.UtenteTO;
 
 class ASGestoreManagerDiSistema implements LManagerDiSistema, SManagerDiSistema{
 	private SystemConf sysConf;
@@ -24,11 +25,11 @@ class ASGestoreManagerDiSistema implements LManagerDiSistema, SManagerDiSistema{
 		try {
 			daoMan = getManagerDiSistemaDAO();
 		} catch (DBFactoryException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		res = daoMan.crea(mdsto);
+		
 		return res;
 	}
 
@@ -38,5 +39,18 @@ class ASGestoreManagerDiSistema implements LManagerDiSistema, SManagerDiSistema{
 		dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 
 		return dbDAOFact.getManagerDiSistemaDAO();
+	}
+
+	@Override
+	public ManagerDiSistemaTO getManagerDiSistema(UtenteTO uto) {
+		ManagerDiSistemaDAO daoMan = null;
+		
+		try {
+			daoMan = getManagerDiSistemaDAO();
+		} catch (DBFactoryException e) {
+			e.printStackTrace();
+		}
+		
+		return daoMan.read(uto);
 	}
 }
