@@ -3,18 +3,12 @@ package agroludos.integration.dao.db.mysql;
 import java.util.List;
 
 import org.hibernate.Query;
-import org.hibernate.Session;
 
 import agroludos.integration.dao.db.ManagerDiSistemaDAO;
 import agroludos.to.ManagerDiSistemaTO;
 import agroludos.to.UtenteTO;
 
-public class MySqlManagerDiSistemaDAO implements ManagerDiSistemaDAO{
-	private Session session;
-	
-	MySqlManagerDiSistemaDAO(){
-		this.session = MySqlDAO.getSessionFactory().openSession();
-	}
+public class MySqlManagerDiSistemaDAO extends MySqlAgroludosDAO implements ManagerDiSistemaDAO{
 	
 	@Override
 	public boolean crea(ManagerDiSistemaTO mdsto) {

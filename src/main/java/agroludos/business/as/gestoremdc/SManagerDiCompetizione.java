@@ -1,5 +1,7 @@
 package agroludos.business.as.gestoremdc;
 
-public class SManagerDiCompetizione {
+import agroludos.to.ManagerDiCompetizioneTO;
 
+public interface SManagerDiCompetizione {
+	boolean inserisciManagerDiCompetizione(ManagerDiCompetizioneTO mdcto);
 }
