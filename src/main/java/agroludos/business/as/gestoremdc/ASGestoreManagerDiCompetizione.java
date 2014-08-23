@@ -1,21 +1,12 @@
 package agroludos.business.as.gestoremdc;
 
+import agroludos.business.as.AgroludosAS;
 import agroludos.exceptions.DBFactoryException;
 import agroludos.integration.dao.db.DBDAOFactory;
-import agroludos.integration.dao.db.DBFactory;
 import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
-import agroludos.system.SystemConf;
 import agroludos.to.ManagerDiCompetizioneTO;
-import agroludos.to.UtenteTO;
 
-class ASGestoreManagerDiCompetizione implements LManagerDiCompetizione, SManagerDiCompetizione{
-	private SystemConf sysConf;
-	private DBFactory dbFact;	
-
-	ASGestoreManagerDiCompetizione(DBFactory dbFact, SystemConf sysConf){
-		this.dbFact = dbFact;
-		this.sysConf = sysConf;
-	}
+class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCompetizione, SManagerDiCompetizione{
 
 	@Override
 	public boolean inserisciManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) {
@@ -33,16 +24,8 @@ class ASGestoreManagerDiCompetizione implements LManagerDiCompetizione, SManager
 		return res;
 	}
 
-	private ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO() throws DBFactoryException{
-		DBDAOFactory dbDAOFact = null;
-
-		dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-
-		return dbDAOFact.getManagerDiCompetizioneDAO();
-	}
-
 	@Override
-	public ManagerDiCompetizioneTO getManagerDiCompetizione(UtenteTO uto) {
+	public ManagerDiCompetizioneTO getManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) {
 		ManagerDiCompetizioneDAO daoMan = null;
 		
 		try {
@@ -51,6 +34,14 @@ class ASGestoreManagerDiCompetizione implements LManagerDiCompetizione, SManager
 			e.printStackTrace();
 		}
 		
-		return daoMan.read(uto);
+		return daoMan.read(mdcto);
+	}
+	
+	private ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO() throws DBFactoryException{
+		DBDAOFactory dbDAOFact = null;
+
+		dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+
+		return dbDAOFact.getManagerDiCompetizioneDAO();
 	}
 }

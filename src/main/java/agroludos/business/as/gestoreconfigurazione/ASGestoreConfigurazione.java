@@ -1,5 +1,6 @@
 package agroludos.business.as.gestoreconfigurazione;
 
+import agroludos.business.as.AgroludosAS;
 import agroludos.exceptions.DBFactoryException;
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.DBConfigurazioneDAO;
@@ -11,13 +12,11 @@ import agroludos.integration.dao.file.FileFactory;
 import agroludos.system.SystemConf;
 import agroludos.to.ConfigurazioneTO;
 import agroludos.to.DatabaseTO;
-import agroludos.to.TOFactory;
 
-class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
+class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SConfigurazione{
 
 	private DBFactory dbFact;
 	private FileDAOFactory fileDaoFact;
-	private TOFactory toFact;
 	private FConfigurazioneDAO fileConf;
 
 	private SystemConf sysConf;
@@ -68,14 +67,6 @@ class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
 			res = true;
 
 		return res;
-	}
-
-	public void setToFact(TOFactory toFact) {
-		this.toFact = toFact;
-	}
-
-	public void setDbFact(DBFactory dbFact) {
-		this.dbFact = dbFact;
 	}
 
 	@Override

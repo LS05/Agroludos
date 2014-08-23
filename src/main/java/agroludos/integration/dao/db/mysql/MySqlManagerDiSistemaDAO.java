@@ -9,7 +9,7 @@ import agroludos.to.ManagerDiSistemaTO;
 import agroludos.to.UtenteTO;
 
 public class MySqlManagerDiSistemaDAO extends MySqlAgroludosDAO implements ManagerDiSistemaDAO{
-	
+
 	@Override
 	public boolean crea(ManagerDiSistemaTO mdsto) {
 		boolean res = false;
@@ -27,16 +27,13 @@ public class MySqlManagerDiSistemaDAO extends MySqlAgroludosDAO implements Manag
 		this.session.beginTransaction();
 		Query query = this.session.getNamedQuery("getManagerDiSistema").setString("username", uto.getUsername());
 		List<ManagerDiSistemaTO> list = query.list();
-		
+
 		for(ManagerDiSistemaTO item : list){
-			if(item.getUsername().equals(uto.getUsername()))
+			if(item.getUsername().equals(uto.getUsername()) && item.getPassword().equals(uto.getPassword()))
 				res = item;
 		}
-		
+
 		this.session.getTransaction().commit();
 		return res;
 	}
-	
-	
-
 }

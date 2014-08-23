@@ -16,7 +16,7 @@
 #agrologo{
 	-fx-background-image: url("../../images/logo.png");
     -fx-background-repeat: stretch;   
-    -fx-background-size: 313 68;
+    -fx-background-size: 207 45;
     -fx-background-position: center center;
 }
 #btnPwdDimenticata{

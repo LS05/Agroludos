@@ -61,7 +61,8 @@ public class AgroludosBD extends BusinessDelegate{
 	}
 	
 	public UtenteTO autenticazioneUtente(UtenteTO uto){		
-		return lmanagerdisistema.getManagerDiSistema(uto);
+		ManagerDiSistemaTO mansis = lmanagerdisistema.getManagerDiSistema(uto);
+		return null;
 	}
 	
 	public void setLconfigurazione(LConfigurazione conf) {

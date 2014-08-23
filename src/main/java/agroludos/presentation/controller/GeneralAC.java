@@ -27,17 +27,24 @@ public class GeneralAC extends ApplicationController{
 	public boolean checkConfigurazione(AgroRequestContext request){
 		boolean res = false;
 		System.out.println(request.getCommand());
+
+		Object obj = null;
 		
-		Object obj = gestisciServizio(request.getCommand());
-		
+		try {
+			obj = gestisciServizio(request.getCommand());
+		} catch (ApplicationException e) {
+			e.printStackTrace();
+		}
+
 		if(obj instanceof Boolean)
 			res = (Boolean)obj;
-		
+
 		return res;
 	}
 
 	public boolean confermaConfigurazione(AgroRequestContext request){
 		boolean res = false;
+		Object obj = null;
 		System.out.println("GeneralAC.confermaConfigurazione");
 		DatabaseTO dbto = this.toFact.createDatabaseTO();
 
@@ -51,17 +58,26 @@ public class GeneralAC extends ApplicationController{
 		} catch (DataFieldException e) {
 			e.printStackTrace();
 		}
+
+		try {
+			obj = (Boolean)gestisciServizio(request.getCommand(), dbto);
+		} catch (ApplicationException e) {
+			e.printStackTrace();
+		}
 		
-		res = (Boolean)gestisciServizio(request.getCommand(), dbto);
+		if(obj instanceof Boolean)
+			res = (Boolean)obj;
 
 		return res;
 	}
-	
+
 	public boolean nuovoManagerDiSistema(AgroRequestContext request){
+		boolean res = false;
+		Object obj = null;
+		
 		System.out.println("GeneralAC.nuovoManagerDiSistema");
 		ManagerDiSistemaTO mnsto = this.toFact.createMdSTO();
-		boolean res = false;
-		
+
 		try {
 			mnsto.setNome((String)request.getData("nome"));
 			mnsto.setCognome((String)request.getData("cognome"));
@@ -72,14 +88,21 @@ public class GeneralAC extends ApplicationController{
 		} catch (DataFieldException e) {
 			e.printStackTrace();
 		}
+
+		try {
+			obj = gestisciServizio(request.getCommand(), mnsto);
+		} catch (ApplicationException e) {
+			e.printStackTrace();
+		}
 		
-		res = (Boolean)gestisciServizio(request.getCommand(), mnsto);
+		if(obj instanceof Boolean)
+			res = (Boolean)obj;
 		
 		return res;
 	}
-	
+
 	public UtenteTO autenticazioneUtente(AgroRequestContext request){
-		
+		Object obj = null;
 		UtenteTO uto = this.toFact.createUTO();
 		
 		try {
@@ -88,38 +111,43 @@ public class GeneralAC extends ApplicationController{
 		} catch (DataFieldException e) {
 			e.printStackTrace();
 		}
+
+		try {
+			obj = gestisciServizio(request.getCommand(), uto);
+		} catch (ApplicationException e) {
+			e.printStackTrace();
+		}
 		
-		return (UtenteTO)gestisciServizio(request.getCommand(), uto);
+		if(obj instanceof UtenteTO)
+			uto = (UtenteTO)obj;
+		
+		return uto;
 	}
-	
+
 	public boolean testConnessioneDB(AgroRequestContext request){
-		return (Boolean)gestisciServizio(request.getCommand());
-	}
-	
-	private Object gestisciServizio(String command){
-		Object res = null;
+		Object obj = null;
+		boolean res = false;
 		
 		try {
-			res = agroBD.gestisciServizio(command);
+			obj = gestisciServizio(request.getCommand());
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}
 		
-		return res;
-	}
-	
-	private Object gestisciServizio(String command, AgroludosTO to){
-		Object res = null;
-		
-		try {
-			res = agroBD.gestisciServizio(command, to);
-		} catch (ApplicationException e) {
-			e.printStackTrace();
-		}
+		if(obj instanceof Boolean)
+			res = (Boolean)obj;
 		
 		return res;
 	}
-	
+
+	private Object gestisciServizio(String command) throws ApplicationException{
+		return agroBD.gestisciServizio(command);
+	}
+
+	private Object gestisciServizio(String command, AgroludosTO to) throws ApplicationException{
+		return agroBD.gestisciServizio(command, to);
+	}
+
 	public void setToFact(TOFactory toFact) {
 		this.toFact = toFact;
 	}
