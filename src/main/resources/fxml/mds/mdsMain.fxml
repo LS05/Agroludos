@@ -5,6 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import java.net.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agroludos.presentation.views.mds.ControllerMdsMain">
 <children><BorderPane prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -502,4 +503,8 @@
 </children>
             </AnchorPane>
 </center></BorderPane>
-</children></AnchorPane>
+</children>
+<stylesheets>
+    <URL value="@main.css" />
+</stylesheets>
+</AnchorPane>

@@ -15,10 +15,6 @@ public interface PartecipanteTO extends UtenteTO{
 
 	public void setCognome(String cognome);
 
-	public String getTelefono();
-
-	public void setTelefono(String telefono);
-
 	public String getEmail();
 
 	public void setEmail(String email);
@@ -50,5 +46,5 @@ public interface PartecipanteTO extends UtenteTO{
 	public Date getDataSRC();
 
 	public void setDataSRC(Date dataSRC);
-	
+
 }

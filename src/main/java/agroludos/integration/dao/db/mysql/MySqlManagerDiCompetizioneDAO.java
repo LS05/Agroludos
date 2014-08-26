@@ -1,10 +1,14 @@
 package agroludos.integration.dao.db.mysql;
 
+import java.util.List;
+
+import org.hibernate.Query;
+
 import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.UtenteTO;
 
-public class MySqlManagerDiCompetizioneDAO extends MySqlAgroludosDAO implements ManagerDiCompetizioneDAO{
+class MySqlManagerDiCompetizioneDAO extends MySqlAgroludosDAO implements ManagerDiCompetizioneDAO{
 
 	@Override
 	public boolean crea(ManagerDiCompetizioneTO mdcto) {
@@ -22,5 +26,24 @@ public class MySqlManagerDiCompetizioneDAO extends MySqlAgroludosDAO implements 
 		// TODO Auto-generated method stub
 		return null;
 	}
-	//private ServerTOFactory toFact = ServerTOFactory.getTOFactory();
+
+	@Override
+	public <T> ManagerDiCompetizioneTO readByUsername(T username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T> ManagerDiCompetizioneTO readByID(T id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ManagerDiCompetizioneTO> readAll() {
+		this.session.beginTransaction();
+		Query query = this.session.getNamedQuery("getAllManagerDiCompetizione");
+		List<ManagerDiCompetizioneTO> list = query.list();
+		return list;
+	}
 }

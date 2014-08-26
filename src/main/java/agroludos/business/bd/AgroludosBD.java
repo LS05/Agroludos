@@ -5,9 +5,6 @@ import agroludos.business.as.gestoreconfigurazione.SConfigurazione;
 import agroludos.business.as.gestoremds.SManagerDiSistema;
 import agroludos.business.as.gestoremds.LManagerDiSistema;
 import agroludos.exceptions.ApplicationException;
-import agroludos.exceptions.DatabaseException;
-import agroludos.presentation.reqh.AgroRequestContext;
-import agroludos.to.AgroludosTO;
 import agroludos.to.DatabaseTO;
 import agroludos.to.ManagerDiSistemaTO;
 import agroludos.to.UtenteTO;
@@ -31,25 +28,14 @@ public class AgroludosBD extends BusinessDelegate{
 	}
 	
 	public boolean confermaConfigurazione(DatabaseTO to) throws ApplicationException{
-		boolean res = false;
 		System.out.println("AgroludosBD.confermaConfigurazione()");
-		try {
-			res = sconfigurazione.inserisciConfigurazione(to);
-		} catch (DatabaseException e) {
-			throw new ApplicationException(e.getMessage());
-		}
+		boolean res = sconfigurazione.inserisciConfigurazione(to);
 		return res;
 	}
 
 	public boolean testConnessioneDB() throws ApplicationException{
 		boolean res = false;
-		
-		try {
-			res = lconfigurazione.testConnessioneDB();
-		} catch (DatabaseException e) {
-			throw new ApplicationException(e.getMessage());
-		}
-		
+		res = lconfigurazione.testConnessioneDB();
 		return res;
 	}
 
@@ -60,9 +46,8 @@ public class AgroludosBD extends BusinessDelegate{
 		return res;
 	}
 	
-	public UtenteTO autenticazioneUtente(UtenteTO uto){		
-		ManagerDiSistemaTO mansis = lmanagerdisistema.getManagerDiSistema(uto);
-		return null;
+	public UtenteTO autenticazioneUtente(UtenteTO uto) throws ApplicationException{
+		return lmanagerdisistema.getManagerDiSistema(uto);
 	}
 	
 	public void setLconfigurazione(LConfigurazione conf) {

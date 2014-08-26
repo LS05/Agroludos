@@ -1,6 +1,7 @@
 package agroludos.presentation.views.mds;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.views.AgroludosController;
+import agroludos.to.ManagerDiCompetizioneTO;
 
 public class ControllerMdsMain extends AgroludosController implements Initializable{
 
@@ -36,9 +38,9 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 	@FXML private Button btnPernotto;
 	@FXML private Button btnNuovoTipoOptional;
 
-	
 	private AgroRequest richiesta;
-
+	
+	private List<ManagerDiCompetizioneTO> listManTO;
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		//setto visibile solo il primo pane
@@ -46,6 +48,12 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneManagerCompetizione.setVisible(false);
 		this.paneGestionePartecipanti.setVisible(false);
+
+		this.richiesta = AgroludosController.reqFact.createEFrameRequest("getAllManagerDiCompetizione");
+		Object res = AgroludosController.frontController.eseguiRichiesta(richiesta);
+		
+		if(res instanceof List)
+			this.listManTO = (List<ManagerDiCompetizioneTO>)res;
 	}
 
 	//----------------Main View--------------------

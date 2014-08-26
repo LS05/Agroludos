@@ -31,8 +31,8 @@ class MySqlDAO {
 
 		return res;
 	}
-
-	public static SessionFactory getSessionFactory() {
-		return sessionFactory;
+	
+	static SessionFactory getSessionFactory(){
+		return sessionFactory;		
 	}
 }

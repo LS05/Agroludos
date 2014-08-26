@@ -1,31 +1,23 @@
 package agroludos.business.as.gestoreutente;
 
 import agroludos.business.as.AgroludosAS;
-import agroludos.exceptions.DBFactoryException;
+import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.DBDAOFactory;
-import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
-import agroludos.integration.dao.db.ManagerDiSistemaDAO;
+import agroludos.integration.dao.db.UtenteDAO;
+import agroludos.to.ManagerDiCompetizioneTO;
+import agroludos.to.ManagerDiSistemaTO;
+import agroludos.to.PartecipanteTO;
 import agroludos.to.UtenteTO;
 
 class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
-	
+
 	@Override
-	public UtenteTO getUtente(UtenteTO uto) {
+	public UtenteTO getUtente(UtenteTO uto) throws DatabaseException {
 		String tipoDB = this.sysConf.getTipoDB();
-		UtenteTO res = this.toFact.createUTO();
-		DBDAOFactory dbDAOFact = null;
-		ManagerDiCompetizioneDAO mdcDAO = null;
-		ManagerDiSistemaDAO mdsDAO = null;
-		try {
-			dbDAOFact = this.dbFact.getDAOFactory(tipoDB);
-			mdcDAO = dbDAOFact.getManagerDiCompetizioneDAO();
-			mdsDAO = dbDAOFact.getManagerDiSistemaDAO();
-		} catch (DBFactoryException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(tipoDB);
+		UtenteDAO utDAO = dbDAOFact.getUtenteDAO();			
 		
-		return res;
+		return null;
 	}
-	
+
 }

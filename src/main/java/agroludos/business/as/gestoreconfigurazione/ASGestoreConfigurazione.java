@@ -1,11 +1,9 @@
 package agroludos.business.as.gestoreconfigurazione;
 
 import agroludos.business.as.AgroludosAS;
-import agroludos.exceptions.DBFactoryException;
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.DBConfigurazioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
-import agroludos.integration.dao.db.DBFactory;
 import agroludos.integration.dao.file.FConfigurazioneDAO;
 import agroludos.integration.dao.file.FileDAOFactory;
 import agroludos.integration.dao.file.FileFactory;
@@ -15,7 +13,6 @@ import agroludos.to.DatabaseTO;
 
 class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SConfigurazione{
 
-	private DBFactory dbFact;
 	private FileDAOFactory fileDaoFact;
 	private FConfigurazioneDAO fileConf;
 
@@ -36,8 +33,8 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 		// TODO Aggiungere controlli sui dati dei parametri
 
 		if(this.fileConf.creaConfigurazione(dbto)){
-			this.sysConf.setTipoDB(dbto.getTipo());
 			try {
+				this.sysConf.setTipoDB(dbto.getTipo());
 				dbDAO = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 				dbConf = dbDAO.getConfigurazioneDAO();
 				ConfigurazioneTO conf = this.toFact.createConfigurazioneTO(); 
@@ -49,9 +46,9 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 				conf.setServerDB(dbto.getServer());
 				conf.setTipoDB(dbto.getTipo());
 				res = dbConf.addConfigurazioneDB(conf);
-			} catch (DBFactoryException e) {
+			} catch (DatabaseException e) {
 				this.sysConf.setTipoDB("");
-				throw new DatabaseException(e.getMessage());
+				throw e;
 			}
 		}
 
@@ -72,14 +69,14 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 	@Override
 	public boolean testConnessioneDB() throws DatabaseException {
 		boolean res = false;
-		
+
 		try {
 			this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 			res = true;
-		} catch (DBFactoryException e) {
-			throw new DatabaseException(e.getMessage());
+		} catch (DatabaseException e) {
+			throw e;
 		}
-		
+
 		return res;
 	}
 }

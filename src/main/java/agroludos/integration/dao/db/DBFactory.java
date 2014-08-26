@@ -17,9 +17,9 @@ public class DBFactory{
 	 * implementazioni di questo factory, basate sulla specifica
 	 * dell'interfaccia DBDAOFactory
 	 * 
-	 * @throws DBFactoryException 
+	 * @throws DatabaseException 
 	 */
-	public DBDAOFactory getDAOFactory(String tipo) throws DBFactoryException{
+	public DBDAOFactory getDAOFactory(String tipo) throws DatabaseException{
 		DBDAOFactory res = null;
 		
 		if(tipo.toLowerCase().equals("mysql")){
@@ -27,7 +27,7 @@ public class DBFactory{
 				if(mySqlFact.initialize())
 					res = mySqlFact;
 			} catch (DatabaseException e) {
-				throw new DBFactoryException(e.getMessage());
+				throw new DatabaseException(e.getMessage());
 			}
 		} else {
 			throw new DBFactoryException("Tipo Database non riconosciuto.");
