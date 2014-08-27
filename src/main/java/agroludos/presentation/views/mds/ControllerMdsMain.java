@@ -1,7 +1,9 @@
 package agroludos.presentation.views.mds;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -64,7 +66,7 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 	
 	//setto visibile solo il primo pane
 	
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL url, ResourceBundle resBoundle) {
 		this.paneGestioneCompetizioni.setVisible(true);
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneManagerCompetizione.setVisible(false);
@@ -72,24 +74,7 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 		
 		this.listMdc = this.getAllManagerDiCompetizione();
 		this.listaTabMdc = this.getListTabellaMdC();
-		
-		this.initColumn(this.mdcNomeCol, "nome");
-		this.initColumn(this.mdcCognomeCol, "cognome");
-		this.initColumn(this.mdcEmailCol, "email");
-		this.tableManagerCompetizione.getItems().setAll(this.listaTabMdc);
-		this.tableManagerCompetizione.getSelectionModel().selectedItemProperty().addListener(
-				new ChangeListener<MdcModel>(){
-
-			@Override
-			public void changed(ObservableValue<? extends MdcModel> mdcModel,
-					MdcModel oldmod, MdcModel newmod) {
-				lblMdcNome.setText(newmod.getNome());
-				lblMdcCognome.setText(newmod.getCognome());
-				lblMdcEmail.setText(newmod.getEmail());
-				System.out.println(newmod);
-			}
-			
-		});
+		this.initMdcTable(this.tableManagerCompetizione);
 	}
 
 	//----------------Main View--------------------
@@ -122,6 +107,22 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 		this.paneGestioneManagerCompetizione.setVisible(false);
 		this.paneGestionePartecipanti.setVisible(true);
 	}
+	
+	//--------------------Gest Man Competizione ---------------
+	
+	@FXML protected void modificaManagerCompetizione(MouseEvent event){
+		MdcModel mdcMod = this.tableManagerCompetizione.getSelectionModel().getSelectedItem();
+		
+		Map<String, String> paramMod = new HashMap<String, String>();
+		paramMod.put("id", mdcMod.getId());
+		paramMod.put("usernmae", mdcMod.getUsername());
+		paramMod.put("nome", mdcMod.getNome());
+		paramMod.put("cognome", mdcMod.getCognome());
+		paramMod.put("email", mdcMod.getEmail());
+		paramMod.put("stato", mdcMod.getStato());
+		
+		System.out.println(paramMod);
+	}
 
 	//--------------------Gest Competizioni View---------------
 
@@ -149,6 +150,7 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 	@FXML protected void btnPernotto(MouseEvent event) {
 		//caricare optional nella tabella
 	}
+	
 	@FXML protected void btnNuovoTipoOptional(MouseEvent event) {
 	}
 	
@@ -179,5 +181,28 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 	private <S,T> TableColumn<S, T> initColumn(TableColumn<S, T> col, String colName){
 		col.setCellValueFactory(new PropertyValueFactory<S, T>(colName));
 		return col;
+	}
+	
+	private void initMdcTable(TableView<MdcModel> table){
+		this.initColumn(this.mdcNomeCol, "nome");
+		this.initColumn(this.mdcCognomeCol, "cognome");
+		this.initColumn(this.mdcEmailCol, "email");
+		
+		this.tableManagerCompetizione.getItems().setAll(this.listaTabMdc);
+		this.tableManagerCompetizione.getSelectionModel().selectedItemProperty().addListener(
+				new ChangeListener<MdcModel>(){
+
+			@Override
+			public void changed(ObservableValue<? extends MdcModel> mdcModel,
+					MdcModel oldMod, MdcModel newMod) {
+				lblMdcNome.setText(newMod.getNome());
+				lblMdcCognome.setText(newMod.getCognome());
+				lblMdcEmail.setText(newMod.getEmail());
+				lblMdcUsername.setText(newMod.getUsername());
+				lblMdcStato.setText(newMod.getStato());
+				System.out.println(newMod);
+			}
+			
+		});
 	}
 }

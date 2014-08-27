@@ -1,7 +1,6 @@
 package agroludos.factory;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;

@@ -1,7 +1,5 @@
 package agroludos.presentation.reqh;
 
-import java.util.Map;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.req.DataFieldException;
 
@@ -30,11 +28,6 @@ public class DataRequestContext implements AgroRequestContext{
 
 	public String getStringData(Object key) throws DataFieldException{
 		return this.richiesta.getData(key).toString();
-	}
-
-	@Override
-	public Map<String, String> getMainData() {
-		return (Map<String, String>)this.richiesta.getData();
 	}
 
 	@Override

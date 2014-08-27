@@ -33,8 +33,8 @@
 <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="NEVER" />
 <RowConstraints maxHeight="406.0" minHeight="10.0" prefHeight="252.0" vgrow="SOMETIMES" />
   </rowConstraints>
-<children><Button fx:id="btnGestManComp" mnemonicParsing="false" onMouseClicked="#btnGestManComp" prefHeight="65.0" prefWidth="200.0" text="Gestione &#10;Manager di Competizione" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-<Button fx:id="btnGestOptional" mnemonicParsing="false" onMouseClicked="#btnGestOptional" prefHeight="135.0" prefWidth="200.0" text="Gestione&#10;Optional" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" /><Button fx:id="btnGestComp" mnemonicParsing="false" onMouseClicked="#btnGestComp" prefHeight="65.0" prefWidth="200.0" text="Gestione &#10;Competizioni" textAlignment="CENTER" wrapText="true" /><Button fx:id="btnGestPart" mnemonicParsing="false" onMouseClicked="#btnGestPart" prefHeight="65.0" prefWidth="200.0" text="Gestione &#10;Partecipanti" textAlignment="CENTER" GridPane.rowIndex="3" />
+<children><Button fx:id="btnGestManComp" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#btnGestManComp" prefHeight="65.0" prefWidth="200.0" styleClass="mainMenuButton" text="Gestione &#10;Manager di Competizione" wrapText="true" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+<Button fx:id="btnGestOptional" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#btnGestOptional" prefHeight="65.0" prefWidth="200.0" styleClass="mainMenuButton" text="Gestione&#10;Optional" wrapText="true" GridPane.rowIndex="1" GridPane.valignment="TOP" /><Button fx:id="btnGestComp" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#btnGestComp" prefHeight="65.0" prefWidth="200.0" styleClass="mainMenuButton" text="Gestione&#10;Competizioni" wrapText="true" GridPane.valignment="TOP" /><Button fx:id="btnGestPart" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#btnGestPart" prefHeight="65.0" prefWidth="200.0" styleClass="mainMenuButton" text="Gestione &#10;Partecipanti" wrapText="true" GridPane.rowIndex="3" />
 </children>
 </GridPane>
 </left>
@@ -365,7 +365,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label id="lblNomeManagerCompetizione" fx:id="lblMdcNome" text="Label" GridPane.columnIndex="1" />
+                                    <Label fx:id="lblMdcNome" text="Label" GridPane.columnIndex="1" />
                                     <Label text="Cognome" GridPane.rowIndex="1">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
@@ -377,7 +377,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label id="lblEmailManagerCompetizione" fx:id="lblMdcEmail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label fx:id="lblMdcEmail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <Label text="Username" GridPane.rowIndex="3">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
@@ -392,7 +392,7 @@
                                     <Label id="lblUsernameManagerCompetizione" fx:id="lblMdcUsername" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                  </children>
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="79.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="162.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="235.0" />
                                  </columnConstraints>
                                  <rowConstraints>
@@ -422,12 +422,15 @@
                               </GridPane>
                               <GridPane GridPane.rowIndex="2">
                                  <children>
-                                    <Button id="btnModificaManagerCompetizione" mnemonicParsing="false" text="Modifica Manager" />
+                                    <Button id="btnModificaManagerCompetizione" mnemonicParsing="false" onMouseClicked="#modificaManagerCompetizione" text="Modifica Manager">
+<GridPane.margin>
+<Insets />
+</GridPane.margin></Button>
                                     <Button id="btnEliminaManagerCompetizione" mnemonicParsing="false" text="Elimina Manager" GridPane.columnIndex="1" />
                                  </children>
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                  </columnConstraints>
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -439,8 +442,8 @@
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="513.0" minHeight="10.0" prefHeight="478.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="478.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                         </GridPane>
                         <GridPane id="pameManagerCompetizioneCentrale" fx:id="paneTblManCpt">
@@ -450,14 +453,17 @@
                                     <Button id="btnNuovoManagerCompetizione" mnemonicParsing="false" text="Nuovo Manager di Competizione" textAlignment="CENTER" />
                                     <GridPane GridPane.columnIndex="1">
                                        <children>
-                                          <Button id="btnCercaManagerCompetizione" mnemonicParsing="false" prefHeight="26.0" prefWidth="297.0" text="Cerca Manager di Competizione" GridPane.columnIndex="1" />
-                                          <Button id="btnRicercaAvanzataManagerCompetizione" mnemonicParsing="false" text="Ricerca avanzata" GridPane.columnIndex="2" />
-                                          <TextField id="txtCercaManagerCompetizione" />
+                                          <Button id="btnCercaManagerCompetizione" maxWidth="300.0" mnemonicParsing="false" text="Cerca" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+<GridPane.margin>
+<Insets left="10.0" />
+</GridPane.margin></Button>
+                                          <Button id="btnRicercaAvanzataManagerCompetizione" mnemonicParsing="false" text="Ricerca avanzata" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+                                          <TextField id="txtCercaManagerCompetizione" GridPane.halignment="RIGHT" />
                                        </children>
                                        <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+                                          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
                                        </columnConstraints>
                                        <rowConstraints>
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -465,8 +471,8 @@
                                     </GridPane>
                                  </children>
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="158.0" prefWidth="158.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="158.0" prefWidth="158.0" />
+                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="500.0" prefWidth="500.0" />
                                  </columnConstraints>
                                  <rowConstraints>
                                     <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
@@ -481,6 +487,9 @@
                                     <TableColumn fx:id="mdcCognomeCol" prefWidth="75.0" text="Cognome" />
                                     <TableColumn fx:id="mdcEmailCol" prefWidth="75.0" text="Email" />
                                  </columns>
+<GridPane.margin>
+<Insets bottom="10.0" />
+</GridPane.margin>
                               </TableView>
                            </children>
                            <columnConstraints>
@@ -493,8 +502,8 @@
                         </GridPane>
                      </children>
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="428.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="400.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

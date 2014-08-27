@@ -19,4 +19,8 @@ public class TOFactory {
 	public ConfigurazioneTO createConfigurazioneTO(){
 		return new Configurazione();
 	}
+	
+	public ManagerDiCompetizioneTO createMdCTO(){
+		return new ManagerDiCompetizione();
+	}
 }

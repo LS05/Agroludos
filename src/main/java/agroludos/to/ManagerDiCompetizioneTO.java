@@ -1,6 +1,7 @@
 package agroludos.to;
 
 public interface ManagerDiCompetizioneTO extends UtenteTO{
+	
 	public int getId();
 
 	public void setId(int id);
@@ -16,5 +17,9 @@ public interface ManagerDiCompetizioneTO extends UtenteTO{
 	public String getEmail();
 
 	public void setEmail(String email);
+
+	int getStato();
+
+	void setStato(int stato);
 
 }

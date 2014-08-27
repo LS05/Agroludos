@@ -9,7 +9,6 @@ import agroludos.business.as.gestoremdc.SManagerDiCompetizione;
 import agroludos.business.as.gestoremds.SManagerDiSistema;
 import agroludos.business.as.gestoremds.LManagerDiSistema;
 import agroludos.exceptions.ApplicationException;
-import agroludos.presentation.reqh.AgroRequestContext;
 import agroludos.to.DatabaseTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.ManagerDiSistemaTO;

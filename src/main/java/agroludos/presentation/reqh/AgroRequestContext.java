@@ -12,8 +12,6 @@ public interface AgroRequestContext {
 	
 	public Object getData(Object key) throws DataFieldException;
 	
-	public Map<String, String> getMainData();
-	
 	public String getClassName();
 	
 	public boolean isParam();

@@ -2,7 +2,6 @@ package agroludos.factory;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
 class HandlerXMLRichieste extends HandlerXML{
 	private boolean richiestaXML;

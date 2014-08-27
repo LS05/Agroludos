@@ -7,6 +7,7 @@ class ManagerDiCompetizione implements ManagerDiCompetizioneTO {
 	private String username;
 	private String password;
 	private String email;
+	private int stato;
 	
 	@Override
 	public String getNome() {
@@ -68,6 +69,16 @@ class ManagerDiCompetizione implements ManagerDiCompetizioneTO {
 		this.id = id;
 	}
 	
+	@Override
+	public int getStato() {
+		return stato;
+	}
+
+	@Override
+	public void setStato(int stato) {
+		this.stato = stato;
+	}
+
 	@Override
 	public String getTipo() {
 		return "managerDiCompetizione";

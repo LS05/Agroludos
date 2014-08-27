@@ -24,6 +24,9 @@
 		<property name="email" type="string">
 			<column name="email" not-null="true" />
 		</property>
+		<property name="stato" type="java.lang.Integer">
+			<column name="stato" not-null="true" />
+		</property>
 	</class>
 	<query name="getAllManagerDiCompetizione">
         <![CDATA[ from agroludos.to.ManagerDiCompetizione m ]]></query>
