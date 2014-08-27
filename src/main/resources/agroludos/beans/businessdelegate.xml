@@ -13,5 +13,7 @@
 	    <property name="sconfigurazione" ref="gestoreConfigurazione" />
 	    <property name="lmanagerdisistema" ref="gestoreManagerSistema" />
 	    <property name="smanagerdisistema" ref="gestoreManagerSistema" />
+	    <property name="lmanagerdicompetizione" ref="gestoreManagerCompetizione" />
+	    <property name="smanagerdicompetizione" ref="gestoreManagerCompetizione" />
 	</bean>
 </beans>

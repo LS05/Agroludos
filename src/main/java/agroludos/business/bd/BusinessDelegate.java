@@ -10,6 +10,7 @@ public class BusinessDelegate{
 	
 	public Object gestisciServizio(String servizio) throws ApplicationException{
 		this.setClassMethod(servizio);
+		this.cmdMap.setArgs(null);
 		try {
 			return this.cmdMap.execute();
 		} catch (Throwable e) {

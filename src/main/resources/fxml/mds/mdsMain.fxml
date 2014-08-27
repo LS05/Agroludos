@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import java.net.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agroludos.presentation.views.mds.ControllerMdsMain">
 <children><BorderPane prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -365,19 +365,19 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label id="lblNomeManagerCompetizione" fx:id="lblNome2" text="Label" GridPane.columnIndex="1" />
+                                    <Label id="lblNomeManagerCompetizione" fx:id="lblMdcNome" text="Label" GridPane.columnIndex="1" />
                                     <Label text="Cognome" GridPane.rowIndex="1">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label id="lblCognomeManagerCompetizione" fx:id="lblCognome2" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label id="lblCognomeManagerCompetizione" fx:id="lblMdcCognome" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <Label text="Email" GridPane.rowIndex="2">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label id="lblEmailManagerCompetizione" fx:id="lblEmail2" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label id="lblEmailManagerCompetizione" fx:id="lblMdcEmail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <Label text="Username" GridPane.rowIndex="3">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
@@ -388,8 +388,8 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label id="lblStatoManagerCompetizione" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <Label id="lblUsernameManagerCompetizione" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label id="lblStatoManagerCompetizione" fx:id="lblMdcStato" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label id="lblUsernameManagerCompetizione" fx:id="lblMdcUsername" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                  </children>
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="79.0" />
@@ -477,9 +477,9 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <columns>
-                                    <TableColumn prefWidth="75.0" text="Nome" />
-                                    <TableColumn prefWidth="75.0" text="Cognome" />
-                                    <TableColumn prefWidth="75.0" text="Email" />
+                                    <TableColumn fx:id="mdcNomeCol" prefWidth="75.0" text="Nome" />
+                                    <TableColumn fx:id="mdcCognomeCol" prefWidth="75.0" text="Cognome" />
+                                    <TableColumn fx:id="mdcEmailCol" prefWidth="75.0" text="Email" />
                                  </columns>
                               </TableView>
                            </children>

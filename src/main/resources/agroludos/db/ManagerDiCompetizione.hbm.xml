@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="agroludos.to.ManagerDiSistema" table="tbl_mansis"
+	<class name="agroludos.to.ManagerDiCompetizione" table="tbl_mancomp"
 		catalog="agroludos">
 		<id name="id" type="java.lang.Integer">
 			<column name="idtmancomp" />
@@ -26,7 +26,7 @@
 		</property>
 	</class>
 	<query name="getAllManagerDiCompetizione">
-        <![CDATA[ from agroludos.to.ManagerDiCompetizione m]]></query>
+        <![CDATA[ from agroludos.to.ManagerDiCompetizione m ]]></query>
 	<query name="getManagerDiCompetizione">
         <![CDATA[ from agroludos.to.ManagerDiCompetizione m where m.username = :username ]]></query>
 </hibernate-mapping>

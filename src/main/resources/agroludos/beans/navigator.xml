@@ -7,7 +7,7 @@
            
 	<bean id="viewsLoader" class="agroludos.presentation.views.ViewsLoader">
 	    <constructor-arg ref="utilityXml" />
-	</bean>           
+	</bean>
 	<bean id="navigator" class="agroludos.presentation.views.Navigator">
 	    <constructor-arg ref="viewsLoader" />
 	</bean>

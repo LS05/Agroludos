@@ -13,10 +13,6 @@ public interface ManagerDiCompetizioneTO extends UtenteTO{
 
 	public void setCognome(String cognome);
 
-	public String getTelefono();
-
-	public void setTelefono(String telefono);
-
 	public String getEmail();
 
 	public void setEmail(String email);

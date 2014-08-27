@@ -1,14 +1,11 @@
 package agroludos.presentation.views;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -22,14 +19,14 @@ class ViewsLoader{
 	private ResourceBundle itBundle;
 	private Document docViews;
 	private Map<String, String> viewsPaths;
-	private Map<String, Scene> views;
+	private Map<String, FXMLLoader> views;
 	
 	ViewsLoader(XmlUtil utXml){
 		this.utXml = utXml;
 		this.docViews = this.utXml.getDocument(this.getClass().getResource("views.xml").toString());
 		this.itBundle = ResourceBundle.getBundle("bundles.Agroludos", Locale.forLanguageTag("it"));
 		this.viewsPaths = new HashMap<String, String>();
-		this.views = new HashMap<String, Scene>();
+		this.views = new HashMap<String, FXMLLoader>();
 		setViewMap();
 		setViews();
 	}
@@ -59,20 +56,12 @@ class ViewsLoader{
 		for (Map.Entry<String, String> entry : this.viewsPaths.entrySet()) {
 			FXMLLoader loader = null;
 			loader = new FXMLLoader(ViewsLoader.class.getResource(entry.getValue()), this.itBundle);
-			Pane root = null;
-
-			try {
-				 root = (Pane)loader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-		    this.views.put(entry.getKey(), new Scene(root));
+		    this.views.put(entry.getKey(), loader);
 		}
 	}
 	
 	
-	Scene getView(String view){
+	FXMLLoader getLoader(String view){
 		return this.views.get(view);
 	}
 }

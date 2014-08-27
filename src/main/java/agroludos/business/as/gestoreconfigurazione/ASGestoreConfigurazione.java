@@ -20,12 +20,12 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 
 	ASGestoreConfigurazione(SystemConf sysConf, FileFactory filefact){
 		this.sysConf = sysConf;
-		this.fileDaoFact = filefact.getDAOFactory(this.sysConf.getTipoConf());
+		this.fileDaoFact = filefact.getDAOFactory(sysConf.getTipoConf());
 		this.fileConf = this.fileDaoFact.getConfigurazioneDAO();
 	}
 
 	@Override
-	public boolean inserisciConfigurazione(DatabaseTO dbto) throws DatabaseException {
+	public boolean inserisciConfigurazione(DatabaseTO dbto) {
 		boolean res = false;
 		DBDAOFactory dbDAO = null;
 		DBConfigurazioneDAO dbConf = null; 
@@ -34,10 +34,10 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 
 		if(this.fileConf.creaConfigurazione(dbto)){
 			try {
-				this.sysConf.setTipoDB(dbto.getTipo());
-				dbDAO = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+				sysConf.setTipoDB(dbto.getTipo());
+				dbDAO = dbFact.getDAOFactory(sysConf.getTipoDB());
 				dbConf = dbDAO.getConfigurazioneDAO();
-				ConfigurazioneTO conf = this.toFact.createConfigurazioneTO(); 
+				ConfigurazioneTO conf = toFact.createConfigurazioneTO(); 
 				conf.setPathConf(this.fileConf.getConfPath());
 				conf.setNomeDB(dbto.getNome());
 				conf.setUserDB(dbto.getUsername());
@@ -47,7 +47,7 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 				conf.setTipoDB(dbto.getTipo());
 				res = dbConf.addConfigurazioneDB(conf);
 			} catch (DatabaseException e) {
-				this.sysConf.setTipoDB("");
+				sysConf.setTipoDB("");
 				throw e;
 			}
 		}
@@ -58,7 +58,7 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 	@Override
 	public boolean checkConfigurazione() {
 		boolean res = false;
-		String tipoDB = this.sysConf.getTipoDB();
+		String tipoDB = sysConf.getTipoDB();
 
 		if(!tipoDB.equals(""))
 			res = true;
@@ -71,7 +71,7 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 		boolean res = false;
 
 		try {
-			this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+			dbFact.getDAOFactory(sysConf.getTipoDB());
 			res = true;
 		} catch (DatabaseException e) {
 			throw e;

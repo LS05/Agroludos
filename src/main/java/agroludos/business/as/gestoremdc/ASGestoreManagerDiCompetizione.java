@@ -3,7 +3,6 @@ package agroludos.business.as.gestoremdc;
 import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
-import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
 import agroludos.to.ManagerDiCompetizioneTO;
@@ -11,7 +10,7 @@ import agroludos.to.ManagerDiCompetizioneTO;
 class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCompetizione, SManagerDiCompetizione{
 
 	@Override
-	public boolean inserisciManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) throws DatabaseException {
+	public boolean inserisciManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) {
 		boolean res = false;
 		
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
@@ -21,17 +20,17 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 	}
 
 	@Override
-	public ManagerDiCompetizioneTO getManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) throws DatabaseException {
+	public ManagerDiCompetizioneTO getManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) {
 		return getManagerDiCompetizioneDAO().read(mdcto);
 	}
 
 	@Override
-	public List<ManagerDiCompetizioneTO> getAllManagerCompetizione() throws DatabaseException {
+	public List<ManagerDiCompetizioneTO> getAllManagerCompetizione() {
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
 		return daoMan.readAll();
 	}
 	
-	private ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO() throws DatabaseException{
+	private ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO(){
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return dbDAOFact.getManagerDiCompetizioneDAO();
 	}

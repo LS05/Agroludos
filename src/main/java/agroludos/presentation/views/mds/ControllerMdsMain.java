@@ -4,9 +4,17 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import agroludos.presentation.req.AgroRequest;
@@ -37,23 +45,51 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 	@FXML private Button btnMerenda;
 	@FXML private Button btnPernotto;
 	@FXML private Button btnNuovoTipoOptional;
-
+	
+	//tabella manager di competizione
+	@FXML private TableView<MdcModel> tableManagerCompetizione;
+	@FXML private TableColumn<MdcModel, String> mdcNomeCol;
+	@FXML private TableColumn<MdcModel, String> mdcCognomeCol;
+	@FXML private TableColumn<MdcModel, String> mdcEmailCol;
+	@FXML private Label lblMdcNome;
+	@FXML private Label lblMdcCognome;
+	@FXML private Label lblMdcUsername;
+	@FXML private Label lblMdcStato;
+	@FXML private Label lblMdcEmail;
+	
 	private AgroRequest richiesta;
 	
-	private List<ManagerDiCompetizioneTO> listManTO;
-
+	private List<ManagerDiCompetizioneTO> listMdc;
+	private ObservableList<MdcModel> listaTabMdc;
+	
+	//setto visibile solo il primo pane
+	
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		//setto visibile solo il primo pane
 		this.paneGestioneCompetizioni.setVisible(true);
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneManagerCompetizione.setVisible(false);
 		this.paneGestionePartecipanti.setVisible(false);
-
-		this.richiesta = AgroludosController.reqFact.createEFrameRequest("getAllManagerDiCompetizione");
-		Object res = AgroludosController.frontController.eseguiRichiesta(richiesta);
 		
-		if(res instanceof List)
-			this.listManTO = (List<ManagerDiCompetizioneTO>)res;
+		this.listMdc = this.getAllManagerDiCompetizione();
+		this.listaTabMdc = this.getListTabellaMdC();
+		
+		this.initColumn(this.mdcNomeCol, "nome");
+		this.initColumn(this.mdcCognomeCol, "cognome");
+		this.initColumn(this.mdcEmailCol, "email");
+		this.tableManagerCompetizione.getItems().setAll(this.listaTabMdc);
+		this.tableManagerCompetizione.getSelectionModel().selectedItemProperty().addListener(
+				new ChangeListener<MdcModel>(){
+
+			@Override
+			public void changed(ObservableValue<? extends MdcModel> mdcModel,
+					MdcModel oldmod, MdcModel newmod) {
+				lblMdcNome.setText(newmod.getNome());
+				lblMdcCognome.setText(newmod.getCognome());
+				lblMdcEmail.setText(newmod.getEmail());
+				System.out.println(newmod);
+			}
+			
+		});
 	}
 
 	//----------------Main View--------------------
@@ -114,5 +150,34 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 		//caricare optional nella tabella
 	}
 	@FXML protected void btnNuovoTipoOptional(MouseEvent event) {
+	}
+	
+	private List<ManagerDiCompetizioneTO> getAllManagerDiCompetizione(){
+		List<ManagerDiCompetizioneTO> res = null;
+		
+		this.richiesta = AgroludosController.reqFact.createEFrameRequest("getAllManagerDiCompetizione");
+		Object obj = AgroludosController.frontController.eseguiRichiesta(richiesta);
+		
+		if(obj instanceof List)
+			res = (List<ManagerDiCompetizioneTO>)obj;
+		
+		return res;
+	}
+	
+	private ObservableList<MdcModel> getListTabellaMdC(){
+		ObservableList<MdcModel> res = FXCollections.observableArrayList();
+		MdcModel modelMdc = null;
+		
+		for(ManagerDiCompetizioneTO mdc : this.listMdc){
+			modelMdc = new MdcModel(mdc);
+			res.add(modelMdc);
+		}
+		
+		return res;
+	}
+	
+	private <S,T> TableColumn<S, T> initColumn(TableColumn<S, T> col, String colName){
+		col.setCellValueFactory(new PropertyValueFactory<S, T>(colName));
+		return col;
 	}
 }

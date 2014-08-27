@@ -1,11 +1,17 @@
 package agroludos.business.bd;
 
+import java.util.List;
+
 import agroludos.business.as.gestoreconfigurazione.LConfigurazione;
 import agroludos.business.as.gestoreconfigurazione.SConfigurazione;
+import agroludos.business.as.gestoremdc.LManagerDiCompetizione;
+import agroludos.business.as.gestoremdc.SManagerDiCompetizione;
 import agroludos.business.as.gestoremds.SManagerDiSistema;
 import agroludos.business.as.gestoremds.LManagerDiSistema;
 import agroludos.exceptions.ApplicationException;
+import agroludos.presentation.reqh.AgroRequestContext;
 import agroludos.to.DatabaseTO;
+import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.ManagerDiSistemaTO;
 import agroludos.to.UtenteTO;
 
@@ -16,6 +22,9 @@ public class AgroludosBD extends BusinessDelegate{
 	
 	private LManagerDiSistema lmanagerdisistema;
 	private SManagerDiSistema smanagerdisistema;
+	
+	private LManagerDiCompetizione lmanagerdicompetizione;
+	private SManagerDiCompetizione smanagerdicompetizione;
 
 	AgroludosBD(){
 		System.out.println("AgroludosBD");
@@ -50,6 +59,11 @@ public class AgroludosBD extends BusinessDelegate{
 		return lmanagerdisistema.getManagerDiSistema(uto);
 	}
 	
+	public List<ManagerDiCompetizioneTO> getAllManagerDiCompetizione(){
+		System.out.println("AgroludosBD.nuovoManagerDiSistema()");
+		return lmanagerdicompetizione.getAllManagerCompetizione();
+	}
+	
 	public void setLconfigurazione(LConfigurazione conf) {
 		this.lconfigurazione = conf;
 	}
@@ -64,5 +78,13 @@ public class AgroludosBD extends BusinessDelegate{
 
 	public void setSmanagerdisistema(SManagerDiSistema mansis) {
 		this.smanagerdisistema = mansis;
+	}
+	
+	public void setLmanagerdicompetizione(LManagerDiCompetizione lmanagerdicompetizione) {
+		this.lmanagerdicompetizione = lmanagerdicompetizione;
+	}
+
+	public void setSmanagerdicompetizione(SManagerDiCompetizione smanagerdicompetizione) {
+		this.smanagerdicompetizione = smanagerdicompetizione;
 	}
 }

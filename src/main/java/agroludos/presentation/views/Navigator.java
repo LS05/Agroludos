@@ -1,17 +1,16 @@
 package agroludos.presentation.views;
 
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import java.io.IOException;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import agroludos.exceptions.ViewLoadingException;
 import agroludos.presentation.views.utility.PositionHandler;
 
-/**
- * Utility class for controlling navigation between vistas.
- *
- * All methods on the navigator are static to facilitate
- * simple access from anywhere in the application.
- */
 public class Navigator {
+//	private AgroludosStage agroStage;
 	
 	private Stage mainStage;
 	
@@ -26,7 +25,16 @@ public class Navigator {
 	}
 
 	public void setVista(String vista) {
-		Scene view = this.viewsLoader.getView(vista);
+		FXMLLoader loader = this.viewsLoader.getLoader(vista);
+		Pane root = null;
+		
+		try {
+			root = (Pane)loader.load();
+		} catch (IOException e) {
+			throw new ViewLoadingException(e.getMessage(), e.getCause());
+		}
+		
+		Scene view = new Scene(root); 
 		this.mainStage.setScene(view);
 		PositionHandler.centerComp(this.mainStage, view);
 	}

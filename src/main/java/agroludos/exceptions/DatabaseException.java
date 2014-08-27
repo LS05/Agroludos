@@ -1,10 +1,13 @@
 package agroludos.exceptions;
 
 @SuppressWarnings("serial")
-public class DatabaseException extends ApplicationException {
-
-	public DatabaseException(String string) {
-		super(string);
+public class DatabaseException extends RuntimeException {
+	
+	public DatabaseException(String message) {
+		super(message);
 	}
 
+	public DatabaseException(String message, Throwable cause) {
+		super(message, cause);
+	}
 }

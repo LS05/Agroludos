@@ -1,11 +1,14 @@
 package agroludos.presentation.controller;
 
+import java.util.List;
+
 import agroludos.business.bd.BusinessDelegate;
 import agroludos.exceptions.ApplicationException;
 import agroludos.presentation.req.DataFieldException;
 import agroludos.presentation.reqh.AgroRequestContext;
 import agroludos.to.AgroludosTO;
 import agroludos.to.DatabaseTO;
+import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.ManagerDiSistemaTO;
 import agroludos.to.TOFactory;
 import agroludos.to.UtenteTO;
@@ -36,8 +39,7 @@ public class GeneralAC extends ApplicationController{
 			e.printStackTrace();
 		}
 
-		if(obj instanceof Boolean)
-			res = (Boolean)obj;
+		res = cast(obj, Boolean.class);
 
 		return res;
 	}
@@ -65,8 +67,7 @@ public class GeneralAC extends ApplicationController{
 			e.printStackTrace();
 		}
 		
-		if(obj instanceof Boolean)
-			res = (Boolean)obj;
+		res = cast(obj, Boolean.class);
 
 		return res;
 	}
@@ -95,8 +96,7 @@ public class GeneralAC extends ApplicationController{
 			e.printStackTrace();
 		}
 		
-		if(obj instanceof Boolean)
-			res = (Boolean)obj;
+		res = cast(obj, Boolean.class);
 		
 		return res;
 	}
@@ -118,8 +118,7 @@ public class GeneralAC extends ApplicationController{
 			e.printStackTrace();
 		}
 		
-		if(obj instanceof UtenteTO)
-			uto = (UtenteTO)obj;
+		uto = cast(obj, UtenteTO.class);
 		
 		return uto;
 	}
@@ -134,8 +133,23 @@ public class GeneralAC extends ApplicationController{
 			e.printStackTrace();
 		}
 		
-		if(obj instanceof Boolean)
-			res = (Boolean)obj;
+		res = cast(obj, Boolean.class);
+		
+		return res;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ManagerDiCompetizioneTO> getAllManagerDiCompetizione(AgroRequestContext request){
+		Object obj = null;
+		List<ManagerDiCompetizioneTO> res = null;
+		
+		try {
+			obj = gestisciServizio(request.getCommand());
+		} catch (ApplicationException e) {
+			e.printStackTrace();
+		}
+		
+		res = cast(obj, List.class);
 		
 		return res;
 	}
@@ -146,6 +160,14 @@ public class GeneralAC extends ApplicationController{
 
 	private Object gestisciServizio(String command, AgroludosTO to) throws ApplicationException{
 		return agroBD.gestisciServizio(command, to);
+	}
+	
+	private <T> T cast(Object o, Class<T> c) {
+	    try {
+	        return c.cast(o);
+	    } catch(ClassCastException e) {
+	        return null;
+	    }
 	}
 
 	public void setToFact(TOFactory toFact) {
