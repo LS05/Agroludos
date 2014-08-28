@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agro-views>
+	<views>
+		<view>
+			<name>login</name>
+			<url>/fxml/login/login.fxml</url>
+			<width>600</width>
+			<height>462</height>
+			<title>Agroludos | Login</title>
+		</view>
+		<view>
+			<name>configurazione</name>
+			<url>/fxml/config/conf_sistema.fxml</url>
+			<width>800</width>
+			<height>463</height>
+			<title>Agroludos | Configurazione</title>
+		</view>
+		<view>
+			<name>managerDiSistema</name>
+			<url>/fxml/mds/mdsMain.fxml</url>
+			<width>1440</width>
+			<height>900</height>
+			<title></title>
+		</view>
+	</views>
+	<dialogs>
+		<dialog>
+			<name>modificaMDC</name>
+			<url>/fxml/mds/mdsModificaMdc.fxml</url>
+			<width>600</width>
+			<height>400</height>
+		</dialog>
+	</dialogs>
+</agro-views>

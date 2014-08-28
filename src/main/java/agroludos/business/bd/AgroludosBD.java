@@ -63,6 +63,10 @@ public class AgroludosBD extends BusinessDelegate{
 		return lmanagerdicompetizione.getAllManagerCompetizione();
 	}
 	
+	public boolean modificaManagerDiCompetizione(ManagerDiCompetizioneTO manto){
+		return false;
+	}
+	
 	public void setLconfigurazione(LConfigurazione conf) {
 		this.lconfigurazione = conf;
 	}

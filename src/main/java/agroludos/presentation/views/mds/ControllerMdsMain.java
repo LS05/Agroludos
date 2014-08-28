@@ -21,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.views.AgroludosController;
+import agroludos.presentation.views.events.EditEvent;
 import agroludos.to.ManagerDiCompetizioneTO;
 
 public class ControllerMdsMain extends AgroludosController implements Initializable{
@@ -113,15 +114,23 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 	@FXML protected void modificaManagerCompetizione(MouseEvent event){
 		MdcModel mdcMod = this.tableManagerCompetizione.getSelectionModel().getSelectedItem();
 		
-		Map<String, String> paramMod = new HashMap<String, String>();
-		paramMod.put("id", mdcMod.getId());
-		paramMod.put("usernmae", mdcMod.getUsername());
-		paramMod.put("nome", mdcMod.getNome());
-		paramMod.put("cognome", mdcMod.getCognome());
-		paramMod.put("email", mdcMod.getEmail());
-		paramMod.put("stato", mdcMod.getStato());
+//		Map<String, String> paramMod = new HashMap<String, String>();
+//		paramMod.put("id", mdcMod.getId());
+//		paramMod.put("usernmae", mdcMod.getUsername());
+//		paramMod.put("nome", mdcMod.getNome());
+//		paramMod.put("cognome", mdcMod.getCognome());
+//		paramMod.put("email", mdcMod.getEmail());
+//		paramMod.put("stato", mdcMod.getStato());
 		
-		System.out.println(paramMod);
+		ManagerDiCompetizioneTO mdcto = toFact.createMdCTO();
+		mdcto.setNome(mdcMod.getNome());
+		mdcto.setCognome(mdcMod.getCognome());
+		mdcto.setId(Integer.valueOf(mdcMod.getId()));
+		mdcto.setUsername(mdcto.getUsername());
+
+		nav.showDialog("modificaMDC");
+		EditEvent evt = new EditEvent(mdcto);
+		eventBus.post(evt);
 	}
 
 	//--------------------Gest Competizioni View---------------

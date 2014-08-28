@@ -153,6 +153,14 @@ public class GeneralAC extends ApplicationController{
 		
 		return res;
 	}
+	
+	public void modificaManagerDiCompetizione(AgroRequestContext request){
+		try {
+			gestisciServizio(request.getCommand());
+		} catch (ApplicationException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private Object gestisciServizio(String command) throws ApplicationException{
 		return agroBD.gestisciServizio(command);

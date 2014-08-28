@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<agro-views>
-    <view name="login">/fxml/login/login.fxml</view>
-    <view name="configurazione">/fxml/config/conf_sistema.fxml</view>
-    <view name="managerDiSistema">/fxml/mds/mdsMain.fxml</view>
-</agro-views>

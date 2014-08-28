@@ -1,7 +1,7 @@
 package agroludos.exceptions;
 
 @SuppressWarnings("serial")
-public class ViewLoadingException extends RuntimeException{
+public class ViewLoadingException extends AgroRuntimeException{
 	
 	public ViewLoadingException(String msg){
 		super(msg);
