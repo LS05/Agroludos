@@ -19,7 +19,7 @@
                     <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
                 </rowConstraints>
                 <children>
-                    <PasswordField fx:id="txtPassword" prefHeight="33.0" prefWidth="407.0" promptText="%key75" />
+                    <PasswordField fx:id="txtPassword" onKeyPressed="#txtPassword" prefHeight="33.0" prefWidth="407.0" promptText="%key75" />
                     <Button id="btnPwdDimenticata" fx:id="btnPswDimenticata" mnemonicParsing="false" onMouseClicked="#btnPswDimenticata" text="%key84" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                 </children>
             </GridPane>
