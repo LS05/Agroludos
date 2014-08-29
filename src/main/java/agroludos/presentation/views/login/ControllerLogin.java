@@ -1,10 +1,14 @@
 package agroludos.presentation.views.login;
 
+import java.awt.Event;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+
+import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardEndHandler;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -39,6 +43,10 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 		this.agroLogoPane.setFocusTraversable(true);
 	}
 
+	@FXML protected void btnLoginEnter(KeyEvent evt) {
+		if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+			this.btnLogin(null);
+	}
 	@FXML protected void btnLogin(MouseEvent event) {
 		//controllo la validità delle textfield	
 
