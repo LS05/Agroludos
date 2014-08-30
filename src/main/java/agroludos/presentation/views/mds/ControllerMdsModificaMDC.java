@@ -5,12 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import com.google.common.eventbus.Subscribe;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.views.AgroludosController;
-import agroludos.presentation.views.events.EditEvent;
 import agroludos.to.ManagerDiCompetizioneTO;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -36,12 +34,10 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 	
 	@Override
 	public void initialize(URL url, ResourceBundle resBoundle) {
-		eventBus.register(this);
+		
 	}
 
-	@Subscribe
-	public void visualizzaManagerDiCompetizione(EditEvent e) {
-		this.mdcTO = e.getManagerData();
+	public void visualizzaManagerDiCompetizione() {
 		this.txtUsername.setText(this.mdcTO.getUsername());
 		this.txtNome.setText(this.mdcTO.getNome());
 		this.txtCognome.setText(this.mdcTO.getCognome());

@@ -57,6 +57,7 @@ public class Navigator {
 		
 		try {
 			root = (Pane)loader.load();
+			AgroludosController cont = loader.getController();
 		} catch (IOException e) {
 			throw new ViewLoadingException(e.getMessage(), e.getCause());
 		}

@@ -17,9 +17,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.views.AgroludosController;
-import agroludos.presentation.views.events.EditEvent;
 import agroludos.to.ManagerDiCompetizioneTO;
 
 public class ControllerMdsMain extends AgroludosController implements Initializable{
@@ -115,8 +115,6 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 		ManagerDiCompetizioneTO mdcto = this.getManagerDiCompetizione(mdcMod.getUsername());
 		
 		nav.showDialog("modificaMDC");
-		EditEvent evt = new EditEvent(mdcto);
-		eventBus.post(evt);
 	}
 
 	//--------------------Gest Competizioni View---------------
