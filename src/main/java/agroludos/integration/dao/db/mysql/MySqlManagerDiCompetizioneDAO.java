@@ -49,6 +49,7 @@ class MySqlManagerDiCompetizioneDAO extends MySqlAgroludosDAO implements Manager
 
 	@Override
 	public boolean update(ManagerDiCompetizioneTO mdcto) {
+		this.session.beginTransaction();
 		Query query = session.getNamedQuery("updateManagerDiCompetizione");
 		query.setParameter("nome", mdcto.getNome());
 		query.setParameter("cognome", mdcto.getCognome());
@@ -56,6 +57,7 @@ class MySqlManagerDiCompetizioneDAO extends MySqlAgroludosDAO implements Manager
 		query.setParameter("email", mdcto.getEmail());
 		query.setParameter("id", mdcto.getId());
 		int result = query.executeUpdate();
+		this.session.getTransaction().commit();
 		return false;
 	}
 }
