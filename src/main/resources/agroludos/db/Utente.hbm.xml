@@ -3,14 +3,13 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="agroludos.to.ManagerDiSistema" table="tbl_mansis"
-		catalog="agroludos">
+	<class name="agroludos.to.Utente" table="tbl_utenti" catalog="agroludos">
 		<id name="id" type="java.lang.Integer">
-			<column name="idmansis" />
+			<column name="idutente" />
 			<generator class="increment" />
 		</id>
 		<property name="nome" type="string">
-			<column name="nome" not-null="true"/>
+			<column name="nome" not-null="true" />
 		</property>
 		<property name="cognome" type="string">
 			<column name="cognome" not-null="true" />
@@ -24,7 +23,17 @@
 		<property name="email" type="string">
 			<column name="email" not-null="true" />
 		</property>
+		<property name="tipo" type="integer">
+			<column name="idruolo" not-null="true" default="0" />
+		</property>
+		<property name="stato" type="integer">
+			<column name="stato" not-null="true" default="1" />
+		</property>
 	</class>
-	<query name="getManagerDiSistema">
-        <![CDATA[ from agroludos.to.ManagerDiSistema m where m.username = :username ]]></query>
+	<query name="getUtente">
+        <![CDATA[ from agroludos.to.Utente u where u.username = :username and u.password = :password ]]></query>
+	<sql-query name="getRuoloUtente">
+        <![CDATA[SELECT tbl_utenti.idruolo, tbl_ruoli.descrizione FROM tbl_utenti, tbl_ruoli WHERE tbl_ruoli.idruolo = :idruolo
+ ]]>
+ </sql-query>
 </hibernate-mapping>

@@ -87,7 +87,7 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 			//se il login è andato a buon fine
 			if(res != null){
 				//entra nel pannello dell'untente che ha effettuato il login
-				nav.setVista(res.getTipo());
+				nav.setVista(res.getRuolo());
 			}
 			else
 				System.out.println("Utente non registrato");
