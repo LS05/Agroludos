@@ -10,7 +10,7 @@
 	<bean id="agroludosAC" class="agroludos.presentation.controller.ApplicationController">
 		<property name="cmdMap" ref="cmdMapper" />
 	</bean>
-	<bean id="acFactory" class="agroludos.presentation.controller.SpringACFactory" />
+	<bean id="acFactory" class="agroludos.presentation.controller.ApplicationControllerFactory" />
 	<bean id="generalAC" factory-bean="acFactory" factory-method="createGeneralAC"
 		parent="agroludosAC">
 		<property name="agroBD" ref="agroludosBD" />

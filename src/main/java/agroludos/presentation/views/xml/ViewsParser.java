@@ -9,12 +9,12 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-public class ViewsParser {
+class ViewsParser implements AgroViewsParser{
 	private Map<String, AgroludosWindow> views;
 	private Map<String, AgroludosWindow> dialogs;
 	private AgroViews agView = null;
 	
-	public ViewsParser(){
+	ViewsParser(){
 		this.views = new HashMap<String, AgroludosWindow>();
 		this.dialogs = new HashMap<String, AgroludosWindow>();
 		this.setViews();

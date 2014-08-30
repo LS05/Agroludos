@@ -16,6 +16,7 @@ class Partecipante implements PartecipanteTO {
 	private String numTS;
 	private String src;
 	private Date dataSRC;
+	private String tipo;
 	
 	@Override
 	public String getCF() {
@@ -148,8 +149,13 @@ class Partecipante implements PartecipanteTO {
 	}
 	
 	@Override
+	public void setTipo(String tipo) {
+		this.tipo = tipo;	
+	}
+	
+	@Override
 	public String getTipo() {
-		return "partecipante";
+		return this.tipo;
 	}
 	
 	@Override
@@ -160,13 +166,5 @@ class Partecipante implements PartecipanteTO {
 				+ indirizzo + ",\n\tannoNascita=" + annoNascita + ",\n\tSesso = "
 				+ sesso + ",\n\tNum. Tessera Sanitaria = " + numTS + ",\n\tData Certificato SRC = "
 				+ dataSRC + "\n}";
-	}
-	
-	public static void main(String args[]){
-		Partecipante part = new Partecipante();
-		part.setNome("luca");
-		part.setCognome("Suriano");
-		part.setCF("srnlcu89t05l328x");
-		System.out.println(part);
 	}
 }

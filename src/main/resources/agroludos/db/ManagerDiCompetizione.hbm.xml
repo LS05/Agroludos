@@ -32,4 +32,6 @@
         <![CDATA[ from agroludos.to.ManagerDiCompetizione m ]]></query>
 	<query name="getManagerDiCompetizione">
         <![CDATA[ from agroludos.to.ManagerDiCompetizione m where m.username = :username ]]></query>
+    <query name="updateManagerDiCompetizione">
+        <![CDATA[ update agroludos.to.ManagerDiCompetizione m set m.nome = :nome, m.cognome = :cognome, m.email = :email, m.username = :username where m.id = :id ]]></query>
 </hibernate-mapping>

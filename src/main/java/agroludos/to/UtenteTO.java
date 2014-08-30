@@ -11,5 +11,7 @@ public interface UtenteTO extends AgroludosTO {
 	public void setPassword(String password);
 	
 	public String getTipo();
-
+	
+	public void setTipo(String tipo);
+	
 }

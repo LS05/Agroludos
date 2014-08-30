@@ -46,6 +46,8 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.agroLogoPane.setFocusTraversable(true);
+		this.txtUsername.setText("LS05");
+		this.txtPassword.setText("891205");
 	}
 
 	@FXML protected void txtPassword(javafx.scene.input.KeyEvent evt) {

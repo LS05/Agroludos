@@ -1,7 +1,7 @@
 package agroludos.business.bd;
 
 import agroludos.exceptions.ApplicationException;
-import agroludos.req.mapper.CommandMapperI;
+import agroludos.presentation.req.mapper.CommandMapperI;
 import agroludos.to.AgroludosTO;
 
 public class BusinessDelegate{

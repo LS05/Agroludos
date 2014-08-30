@@ -1,9 +1,7 @@
 package agroludos.presentation.views.mds;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -114,20 +112,8 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 	@FXML protected void modificaManagerCompetizione(MouseEvent event){
 		MdcModel mdcMod = this.tableManagerCompetizione.getSelectionModel().getSelectedItem();
 		
-//		Map<String, String> paramMod = new HashMap<String, String>();
-//		paramMod.put("id", mdcMod.getId());
-//		paramMod.put("usernmae", mdcMod.getUsername());
-//		paramMod.put("nome", mdcMod.getNome());
-//		paramMod.put("cognome", mdcMod.getCognome());
-//		paramMod.put("email", mdcMod.getEmail());
-//		paramMod.put("stato", mdcMod.getStato());
+		ManagerDiCompetizioneTO mdcto = this.getManagerDiCompetizione(mdcMod.getUsername());
 		
-		ManagerDiCompetizioneTO mdcto = toFact.createMdCTO();
-		mdcto.setNome(mdcMod.getNome());
-		mdcto.setCognome(mdcMod.getCognome());
-		mdcto.setId(Integer.valueOf(mdcMod.getId()));
-		mdcto.setUsername(mdcto.getUsername());
-
 		nav.showDialog("modificaMDC");
 		EditEvent evt = new EditEvent(mdcto);
 		eventBus.post(evt);
@@ -213,5 +199,18 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 			}
 			
 		});
+	}
+	
+	private ManagerDiCompetizioneTO getManagerDiCompetizione(String username){
+		ManagerDiCompetizioneTO res = null;
+		
+		for(ManagerDiCompetizioneTO m : this.listMdc){
+			if(m.getUsername() == username){
+				res = m;
+				break;
+			}
+		}
+		
+		return res;
 	}
 }

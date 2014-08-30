@@ -1,6 +1,7 @@
 package agroludos.to;
 
 public interface ManagerDiSistemaTO extends UtenteTO{
+	
 	public int getId();
 
 	public void setId(int id);

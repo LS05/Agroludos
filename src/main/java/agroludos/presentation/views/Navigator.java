@@ -5,7 +5,9 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import agroludos.exceptions.ViewLoadingException;
 import agroludos.presentation.views.utility.PositionHandler;
 import agroludos.presentation.views.xml.AgroludosWindow;
@@ -43,7 +45,7 @@ public class Navigator {
 		this.mainStage.setTitle(agw.getTitle());
 		this.mainStage.setHeight(agw.getHeight());
 		this.mainStage.setWidth(agw.getWidth());
-		
+
 		PositionHandler.centerComp(this.mainStage, view);
 	}
 	
@@ -60,11 +62,13 @@ public class Navigator {
 		}
 		
 		Scene view = new Scene(root);
-		Stage s = new Stage();
+		Stage s = new Stage(StageStyle.UNDECORATED);
 		s.setScene(view);
 		s.setTitle(agw.getTitle());
 		s.setHeight(agw.getHeight());
 		s.setWidth(agw.getWidth());
+	    s.initModality(Modality.WINDOW_MODAL);
+	    s.initOwner(this.mainStage);
 		s.show();
 		PositionHandler.centerComp(s, view);
 	}

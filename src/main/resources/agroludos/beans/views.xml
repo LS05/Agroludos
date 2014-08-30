@@ -20,4 +20,8 @@
 		class="agroludos.presentation.views.amministratore.ControllerConfSistema"
 		parent="agroController">
 	</bean>
+	<bean id="viewsParser" class="agroludos.presentation.views.xml.ViewsParser"></bean>
+	<bean id="viewsLoader" class="agroludos.presentation.views.ViewsLoader">
+		<constructor-arg ref="viewsParser" />
+	</bean>
 </beans>

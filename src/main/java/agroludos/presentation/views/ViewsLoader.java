@@ -1,20 +1,20 @@
 package agroludos.presentation.views;
 
+import agroludos.presentation.views.xml.AgroViewsParser;
 import agroludos.presentation.views.xml.AgroludosWindow;
-import agroludos.presentation.views.xml.ViewsParser;
 
 class ViewsLoader{
-	private ViewsParser test;
+	private AgroViewsParser parser;
 	
-	ViewsLoader(){
-		this.test = new ViewsParser();
+	ViewsLoader(AgroViewsParser parser){
+		this.parser = parser;
 	}
 	
 	AgroludosWindow getView(String view){
-		return this.test.getView(view);
+		return this.parser.getView(view);
 	}
 	
 	AgroludosWindow getDialog(String dialog){
-		return this.test.getDialog(dialog);
+		return this.parser.getDialog(dialog);
 	}
 }

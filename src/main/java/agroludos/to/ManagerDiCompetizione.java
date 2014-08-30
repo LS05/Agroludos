@@ -8,6 +8,7 @@ class ManagerDiCompetizione implements ManagerDiCompetizioneTO {
 	private String password;
 	private String email;
 	private int stato;
+	private String tipo;
 	
 	@Override
 	public String getNome() {
@@ -81,6 +82,11 @@ class ManagerDiCompetizione implements ManagerDiCompetizioneTO {
 
 	@Override
 	public String getTipo() {
-		return "managerDiCompetizione";
+		return this.tipo;
+	}
+
+	@Override
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}	
 }

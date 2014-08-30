@@ -2,7 +2,7 @@ package agroludos.presentation.views.xml;
 
 import javafx.fxml.FXMLLoader;
 
-public class AgroludosView extends AgroludosWindow{
+class AgroludosView extends AgroludosWindow{
 	private View view;
 
 	AgroludosView(View view){

@@ -8,9 +8,5 @@
 	<bean id="fc" class="agroludos.presentation.fc.FC">
 			<constructor-arg ref="ctxFactory" />
 			<constructor-arg ref="acFactory" />
-<!-- 		<property name="requestContext"> -->
-<!-- 			<bean id="agroRequestContext" class="agroludos.presentation.reqresh.AgroRequestContext" /> -->
-<!-- 			</bean> -->
-<!-- 		</property> -->
 	</bean>
 </beans>

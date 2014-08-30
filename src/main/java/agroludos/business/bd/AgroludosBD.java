@@ -63,8 +63,8 @@ public class AgroludosBD extends BusinessDelegate{
 		return lmanagerdicompetizione.getAllManagerCompetizione();
 	}
 	
-	public boolean modificaManagerDiCompetizione(ManagerDiCompetizioneTO manto){
-		return false;
+	public boolean confermaModificaMDC(ManagerDiCompetizioneTO mdcto) throws ApplicationException{
+		return smanagerdicompetizione.modificaManagerDiCompetizione(mdcto);
 	}
 	
 	public void setLconfigurazione(LConfigurazione conf) {

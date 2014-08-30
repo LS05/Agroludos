@@ -32,14 +32,13 @@ public class GeneralAC extends ApplicationController{
 		System.out.println(request.getCommand());
 
 		Object obj = null;
-		
+
 		try {
 			obj = gestisciServizio(request.getCommand());
+			res = cast(obj, Boolean.class);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}
-
-		res = cast(obj, Boolean.class);
 
 		return res;
 	}
@@ -63,11 +62,10 @@ public class GeneralAC extends ApplicationController{
 
 		try {
 			obj = (Boolean)gestisciServizio(request.getCommand(), dbto);
+			res = cast(obj, Boolean.class);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}
-		
-		res = cast(obj, Boolean.class);
 
 		return res;
 	}
@@ -75,7 +73,7 @@ public class GeneralAC extends ApplicationController{
 	public boolean nuovoManagerDiSistema(AgroRequestContext request){
 		boolean res = false;
 		Object obj = null;
-		
+
 		System.out.println("GeneralAC.nuovoManagerDiSistema");
 		ManagerDiSistemaTO mnsto = this.toFact.createMdSTO();
 
@@ -92,19 +90,18 @@ public class GeneralAC extends ApplicationController{
 
 		try {
 			obj = gestisciServizio(request.getCommand(), mnsto);
+			res = cast(obj, Boolean.class);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}
-		
-		res = cast(obj, Boolean.class);
-		
+
 		return res;
 	}
 
 	public UtenteTO autenticazioneUtente(AgroRequestContext request){
 		Object obj = null;
 		UtenteTO uto = this.toFact.createUTO();
-		
+
 		try {
 			uto.setUsername((String)request.getData("username"));
 			uto.setPassword((String)request.getData("password"));
@@ -114,52 +111,63 @@ public class GeneralAC extends ApplicationController{
 
 		try {
 			obj = gestisciServizio(request.getCommand(), uto);
+			uto = cast(obj, UtenteTO.class);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}
-		
-		uto = cast(obj, UtenteTO.class);
-		
+
 		return uto;
 	}
 
 	public boolean testConnessioneDB(AgroRequestContext request){
 		Object obj = null;
 		boolean res = false;
-		
+
 		try {
 			obj = gestisciServizio(request.getCommand());
+			res = cast(obj, Boolean.class);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}
-		
-		res = cast(obj, Boolean.class);
-		
+
 		return res;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<ManagerDiCompetizioneTO> getAllManagerDiCompetizione(AgroRequestContext request){
 		Object obj = null;
 		List<ManagerDiCompetizioneTO> res = null;
-		
+
 		try {
 			obj = gestisciServizio(request.getCommand());
+			res = cast(obj, List.class);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}
-		
-		res = cast(obj, List.class);
-		
+
 		return res;
 	}
-	
-	public void modificaManagerDiCompetizione(AgroRequestContext request){
+
+	public boolean confermaModificaMDC(AgroRequestContext request){
+		ManagerDiCompetizioneTO mdcto = this.toFact.createMdCTO();
+
 		try {
-			gestisciServizio(request.getCommand());
+			int id = Integer.valueOf((String)request.getData("id"));
+			mdcto.setId(id);
+			mdcto.setNome((String)request.getData("nome"));
+			mdcto.setCognome((String)request.getData("cognome"));
+			mdcto.setUsername((String)request.getData("username"));
+			mdcto.setEmail((String)request.getData("email"));
+			gestisciServizio(request.getCommand(), mdcto);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (DataFieldException e) {
+			e.printStackTrace();
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}
+		
+		return false;
 	}
 
 	private Object gestisciServizio(String command) throws ApplicationException{
@@ -169,13 +177,13 @@ public class GeneralAC extends ApplicationController{
 	private Object gestisciServizio(String command, AgroludosTO to) throws ApplicationException{
 		return agroBD.gestisciServizio(command, to);
 	}
-	
+
 	private <T> T cast(Object o, Class<T> c) {
-	    try {
-	        return c.cast(o);
-	    } catch(ClassCastException e) {
-	        return null;
-	    }
+		try {
+			return c.cast(o);
+		} catch(ClassCastException e) {
+			return null;
+		}
 	}
 
 	public void setToFact(TOFactory toFact) {

@@ -8,6 +8,7 @@ class ManagerDiSistema implements ManagerDiSistemaTO {
 	private String password;
 	private String telefono;
 	private String email;
+	private String tipo;
 	
 	@Override
 	public String getNome() {
@@ -82,6 +83,11 @@ class ManagerDiSistema implements ManagerDiSistemaTO {
 	@Override
 	public String getTipo() {
 		return "managerDiSistema";
+	}
+	
+	@Override
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	
 	@Override
