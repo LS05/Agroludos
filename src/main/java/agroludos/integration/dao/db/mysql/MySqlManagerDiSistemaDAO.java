@@ -1,9 +1,5 @@
 package agroludos.integration.dao.db.mysql;
 
-import java.util.List;
-
-import org.hibernate.Query;
-
 import agroludos.integration.dao.db.ManagerDiSistemaDAO;
 import agroludos.to.ManagerDiSistemaTO;
 import agroludos.to.UtenteTO;
@@ -25,13 +21,6 @@ public class MySqlManagerDiSistemaDAO extends MySqlAgroludosDAO implements Manag
 	public ManagerDiSistemaTO read(UtenteTO uto) {
 		ManagerDiSistemaTO res = null;
 		this.session.beginTransaction();
-		Query query = this.session.getNamedQuery("getManagerDiSistema").setString("username", uto.getUsername());
-		List<ManagerDiSistemaTO> list = query.list();
-
-		for(ManagerDiSistemaTO item : list){
-			if(item.getUsername().equals(uto.getUsername()) && item.getPassword().equals(uto.getPassword()))
-				res = item;
-		}
 
 		this.session.getTransaction().commit();
 		return res;

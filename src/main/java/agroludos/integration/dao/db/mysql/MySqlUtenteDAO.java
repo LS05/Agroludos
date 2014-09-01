@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Query;
 
 import agroludos.integration.dao.db.UtenteDAO;
-import agroludos.to.ManagerDiSistemaTO;
 import agroludos.to.UtenteTO;
 
 public class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
@@ -13,15 +12,21 @@ public class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
 	@Override
 	public UtenteTO read(UtenteTO uto) {
 		UtenteTO res = null;
-		ManagerDiSistemaTO manTO = null;
-		this.session.beginTransaction();
-		Query query = this.session.getNamedQuery("getManagerDiSistema").setString("username", uto.getUsername());
 		
-		List<ManagerDiSistemaTO> list = query.list();
+		Query query = this.session.getNamedQuery("getUtente").setString("username", uto.getUsername())
+				.setString("password", uto.getPassword());
 
-		for(ManagerDiSistemaTO item : list){
-			if(item.getUsername().equals(uto.getUsername()) && item.getPassword().equals(uto.getPassword()))
-				manTO = item;
+		List<UtenteTO> list = query.list();
+		
+		if(list.size() == 1){
+			for(UtenteTO item : list){
+				if(item.getUsername().equals(uto.getUsername()) && item.getPassword().equals(uto.getPassword()))
+					res = item;
+			}
+			
+			Query queryRuolo = this.session.getNamedQuery("getRuoloUtente").setInteger("idruolo", res.getTipo());
+			List<String> ruolo = queryRuolo.list();
+			res.setRuolo(ruolo.get(0));
 		}
 		
 		return res;

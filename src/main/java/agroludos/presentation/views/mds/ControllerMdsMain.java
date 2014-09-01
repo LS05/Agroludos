@@ -150,7 +150,7 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 	private List<ManagerDiCompetizioneTO> getAllManagerDiCompetizione(){
 		List<ManagerDiCompetizioneTO> res = null;
 		
-		this.richiesta = AgroludosController.reqFact.createEFrameRequest("getAllManagerDiCompetizione");
+		this.richiesta = AgroludosController.reqFact.createSimpleRequest("getAllManagerDiCompetizione");
 		Object obj = AgroludosController.frontController.eseguiRichiesta(richiesta);
 		
 		if(obj instanceof List)

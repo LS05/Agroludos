@@ -1,27 +1,20 @@
 package agroludos.presentation.views.login;
 
-import java.awt.Event;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardEndHandler;
-
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.UtenteTO;

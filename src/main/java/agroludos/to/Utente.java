@@ -84,6 +84,7 @@ class Utente implements UtenteTO{
 		this.tipo = tipo;
 	}
 	
+	@Override
 	public Integer getTipo() {
 		return tipo;
 	}

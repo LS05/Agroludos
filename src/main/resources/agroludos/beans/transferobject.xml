@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	<bean id="toFactory" class="agroludos.to.TOFactory" />
+	<bean id="toFactory" class="agroludos.to.TransferObjectFactory" />
 	<bean id="databaseTO" factory-bean="toFactory" factory-method="createDatabaseTO"
 		scope="prototype" />
 	<bean id="managerDiSistemaTO" factory-bean="toFactory"
@@ -11,5 +11,7 @@
 	<bean id="configurazioneTO" factory-bean="toFactory"
 		factory-method="createConfigurazioneTO" scope="prototype" />
 	<bean id="managerDiCompetizioneTO" factory-bean="toFactory"
+		factory-method="createMdCTO" scope="prototype" />
+	<bean id="utenteTO" factory-bean="toFactory"
 		factory-method="createMdCTO" scope="prototype" />
 </beans>

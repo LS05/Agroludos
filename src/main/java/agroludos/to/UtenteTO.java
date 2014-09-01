@@ -31,5 +31,6 @@ public interface UtenteTO extends AgroludosTO {
 	Integer getStato();
 
 	void setStato(Integer stato);
-	
+
+	Integer getTipo();
 }
