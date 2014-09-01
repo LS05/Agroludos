@@ -1,6 +1,6 @@
 package agroludos.to;
 
-public class TipoCompetizione implements TipoCompetizioneTO{
+class TipoCompetizione implements TipoCompetizioneTO{
 	private String descrizione;
 	private String nome;
 	

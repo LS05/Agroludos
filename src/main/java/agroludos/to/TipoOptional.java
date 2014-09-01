@@ -1,6 +1,6 @@
 package agroludos.to;
 
-public class TipoOptional implements TipoOptionalTO{
+class TipoOptional implements TipoOptionalTO{
 	private String nome;
 	
 	@Override
