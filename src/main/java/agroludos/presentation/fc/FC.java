@@ -1,10 +1,12 @@
 package agroludos.presentation.fc;
 
 import agroludos.presentation.controller.ACFactory;
-import agroludos.presentation.controller.AgroludosAC;
+import agroludos.presentation.controller.ApplicationController;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.reqh.AgroRequestContext;
 import agroludos.presentation.reqh.RequestContextFactory;
+import agroludos.presentation.resp.AgroResponse;
+import agroludos.presentation.resph.AgroResponseContext;
 
 class FC implements FrontController{
 
@@ -17,9 +19,13 @@ class FC implements FrontController{
 		this.acFact = acFact;
 	}
 
-	public Object eseguiRichiesta(AgroRequest request){	
+	@Override
+	public void eseguiRichiesta(AgroRequest request, AgroResponse response) {
 		AgroRequestContext requestContext = this.reqFact.createRequestContext(request);
-		AgroludosAC ac = this.acFact.getAC(requestContext);
-		return ac.gestisciRichiesta(requestContext);
+		AgroResponseContext responseContext = null;
+		ApplicationController ac = this.acFact.getAC();
+		
+		responseContext = ac.gestisciRichiesta(requestContext);
+		ac.gestisciRisposta(requestContext, responseContext);
 	}
 }

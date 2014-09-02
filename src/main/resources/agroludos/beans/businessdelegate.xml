@@ -5,15 +5,15 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     <import resource="classpath:agroludos/beans/agroludosas.xml" />
     <import resource="classpath:agroludos/beans/commandmapper.xml" />
-    <bean id="businessDelegate" class="agroludos.business.bd.BusinessDelegate">
-	    <property name="cmdMap" ref="cmdMapper" />
-	</bean>
-	<bean id="agroludosBD" class="agroludos.business.bd.AgroludosBD" parent="businessDelegate">
+    
+	<bean id="agroludosBD" class="agroludos.business.bd.AgroludosBD">
 	    <property name="lconfigurazione" ref="gestoreConfigurazione" />
 	    <property name="sconfigurazione" ref="gestoreConfigurazione" />
 	    <property name="lmanagerdisistema" ref="gestoreManagerSistema" />
 	    <property name="smanagerdisistema" ref="gestoreManagerSistema" />
 	    <property name="lmanagerdicompetizione" ref="gestoreManagerCompetizione" />
 	    <property name="smanagerdicompetizione" ref="gestoreManagerCompetizione" />
+	    <property name="lutente" ref="gestoreUtente" />
+	    <property name="sutente" ref="gestoreUtente" />
 	</bean>
 </beans>

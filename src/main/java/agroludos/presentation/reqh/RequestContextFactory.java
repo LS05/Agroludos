@@ -1,7 +1,7 @@
 package agroludos.presentation.reqh;
 
+import agroludos.exceptions.FactoryInstantiationException;
 import agroludos.factory.Factory;
-import agroludos.factory.FactoryInstantiationException;
 import agroludos.presentation.req.AgroRequest;
 
 public class RequestContextFactory extends Factory{
@@ -10,12 +10,12 @@ public class RequestContextFactory extends Factory{
 		super("richieste");
 	}
 
-	public DataRequestContext createRequestContext(AgroRequest request) {
+	public AgroRequestContext createRequestContext(AgroRequest request) {
 		
-		DataRequestContext requestContext = null;
+		AgroRequestContext requestContext = null;
 
 		try {
-			String command = request.getCommand();
+			String command = request.getCommandName();
 			// Identify POJO RequestContext Class for the given Command,
 			// using CommandMap
 			requestContext = getContextObjectClass(command);
@@ -28,16 +28,16 @@ public class RequestContextFactory extends Factory{
 		return requestContext;
 	}
 
-	private DataRequestContext getContextObjectClass(String tipo) throws FactoryInstantiationException{
-		DataRequestContext res = null;
-		Object obj = this.getInstance(this.initData(tipo));
-		if(obj instanceof DataRequestContext)
-			res = (DataRequestContext)obj;
+	private AgroRequestContext getContextObjectClass(String commandName) throws FactoryInstantiationException{
+		AgroRequestContext res = null;
+		Object obj = this.getInstance(this.initData(commandName));
+		if(obj instanceof AgroRequestContext)
+			res = (AgroRequestContext)obj;
 		return res;
 	}
 
 	@Override
 	protected String getXMLPath() {
-		return this.getClass().getResource("ReqFactory.xml").toString();
+		return this.getClass().getResource("RequestFactory.xml").toString();
 	}
 }

@@ -17,8 +17,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-
 import agroludos.presentation.req.AgroRequest;
+import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.ManagerDiCompetizioneTO;
 
@@ -114,7 +114,7 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 		
 		ManagerDiCompetizioneTO mdcto = this.getManagerDiCompetizione(mdcMod.getUsername());
 		
-		nav.showDialog("modificaMDC");
+		nav.setDialog("modificaMDC");
 	}
 
 	//--------------------Gest Competizioni View---------------
@@ -150,7 +150,7 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 	private List<ManagerDiCompetizioneTO> getAllManagerDiCompetizione(){
 		List<ManagerDiCompetizioneTO> res = null;
 		
-		this.richiesta = AgroludosController.reqFact.createSimpleRequest("getAllManagerDiCompetizione");
+		this.richiesta = AgroludosController.reqFact.createRequest("getAllManagerDiCompetizione");
 		Object obj = AgroludosController.frontController.eseguiRichiesta(richiesta);
 		
 		if(obj instanceof List)
@@ -210,5 +210,11 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 		}
 		
 		return res;
+	}
+
+	@Override
+	public void forward(AgroRequest request, AgroResponse response) {
+		// TODO Auto-generated method stub
+		
 	}
 }

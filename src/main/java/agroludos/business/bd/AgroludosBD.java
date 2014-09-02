@@ -8,13 +8,15 @@ import agroludos.business.as.gestoremdc.LManagerDiCompetizione;
 import agroludos.business.as.gestoremdc.SManagerDiCompetizione;
 import agroludos.business.as.gestoremds.SManagerDiSistema;
 import agroludos.business.as.gestoremds.LManagerDiSistema;
+import agroludos.business.as.gestoreutente.LUtente;
+import agroludos.business.as.gestoreutente.SUtente;
 import agroludos.exceptions.ApplicationException;
 import agroludos.to.DatabaseTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.ManagerDiSistemaTO;
 import agroludos.to.UtenteTO;
 
-public class AgroludosBD extends BusinessDelegate{
+public class AgroludosBD {
 
 	private LConfigurazione lconfigurazione;
 	private SConfigurazione sconfigurazione;
@@ -24,6 +26,9 @@ public class AgroludosBD extends BusinessDelegate{
 	
 	private LManagerDiCompetizione lmanagerdicompetizione;
 	private SManagerDiCompetizione smanagerdicompetizione;
+	
+	private LUtente lutente;
+	private SUtente sutente;
 
 	AgroludosBD(){
 		System.out.println("AgroludosBD");
@@ -55,7 +60,7 @@ public class AgroludosBD extends BusinessDelegate{
 	}
 	
 	public UtenteTO autenticazioneUtente(UtenteTO uto) throws ApplicationException{
-		return lmanagerdisistema.getManagerDiSistema(uto);
+		return lutente.getUtente(uto);
 	}
 	
 	public List<ManagerDiCompetizioneTO> getAllManagerDiCompetizione(){
@@ -89,5 +94,13 @@ public class AgroludosBD extends BusinessDelegate{
 
 	public void setSmanagerdicompetizione(SManagerDiCompetizione smanagerdicompetizione) {
 		this.smanagerdicompetizione = smanagerdicompetizione;
+	}
+
+	public void setLutente(LUtente lutente) {
+		this.lutente = lutente;
+	}
+
+	public void setSutente(SUtente sutente) {
+		this.sutente = sutente;
 	}
 }

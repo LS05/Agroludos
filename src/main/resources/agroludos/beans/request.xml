@@ -11,5 +11,5 @@
 	<bean id="efRequest" factory-bean="reqFactory" factory-method="createEFrameRequest"
 		scope="prototype" />
 	<bean id="ctxFactory" class="agroludos.presentation.reqh.RequestContextFactory" />
-	<bean id="ctxRequest" class="agroludos.presentation.reqh.DataRequestContext" />
+	<bean id="ctxRequest" class="agroludos.presentation.reqh.DataRequestContextImpl" />
 </beans>

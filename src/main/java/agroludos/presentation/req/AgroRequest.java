@@ -1,19 +1,19 @@
 package agroludos.presentation.req;
 
 public abstract class AgroRequest {
-	String commandName;
-	boolean flagParam;
+	protected String commandName;
+	protected boolean isParam;
 	
-	public void setCommand(String command){
-		this.commandName = command;
+	AgroRequest(String commandName, boolean isParam){
+		this.commandName = commandName;
+		this.isParam = isParam;
 	}
 	
-	public String getCommand(){
+	public String getCommandName(){
 		return this.commandName;
 	}
 	
-	public abstract boolean isParameter();
-	
-	public abstract Object getData(Object key) throws DataFieldException;
-	public abstract Object getData();
+	public boolean isParameter(){
+		return this.isParam;
+	}
 }

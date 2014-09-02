@@ -1,37 +1,10 @@
 package agroludos.presentation.reqh;
 
-import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.req.DataFieldException;
 
-public class DataRequestContext implements AgroRequestContext{
-	protected AgroRequest richiesta;
-	protected boolean param;
+public interface DataRequestContext extends AgroRequestContext{
 	
-	public void initialize(AgroRequest request) {
-		this.richiesta = request;
-		this.param = request.isParameter();
-	}
+	public String getStringData(Object key) throws DataFieldException;
+	public Object getData(Object key) throws DataFieldException;
 	
-	public boolean isParam(){
-		return this.param;
-	}
-	
-	@Override
-	public String getCommand() {
-		return this.richiesta.getCommand();
-	}
-
-	@Override
-	public Object getData(Object key) throws DataFieldException{
-			return this.richiesta.getData(key);
-	}
-
-	public String getStringData(Object key) throws DataFieldException{
-		return this.richiesta.getData(key).toString();
-	}
-
-	@Override
-	public String getClassName() {
-		return this.getClass().getSimpleName();
-	}
 }

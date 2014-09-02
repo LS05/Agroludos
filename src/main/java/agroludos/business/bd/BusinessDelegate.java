@@ -1,12 +1,12 @@
 package agroludos.business.bd;
 
 import agroludos.exceptions.ApplicationException;
-import agroludos.presentation.req.mapper.CommandMapperI;
+import agroludos.presentation.controller.mapper.CommandProcessor;
 import agroludos.to.AgroludosTO;
 
 public class BusinessDelegate{
 	
-	private CommandMapperI cmdMap;
+	private CommandProcessor cmdMap;
 	
 	public Object gestisciServizio(String servizio) throws ApplicationException{
 		this.setClassMethod(servizio);
@@ -33,7 +33,7 @@ public class BusinessDelegate{
 		this.cmdMap.setObj(this);
 	}
 	
-	public void setCmdMap(CommandMapperI cmdMap) {
+	public void setCmdMap(CommandProcessor cmdMap) {
 		this.cmdMap = cmdMap;
 	}
 }

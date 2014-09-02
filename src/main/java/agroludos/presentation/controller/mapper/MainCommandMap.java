@@ -1,11 +1,13 @@
-package agroludos.presentation.controller;
+package agroludos.presentation.controller.mapper;
 
 import java.util.List;
 
+import agroludos.business.bd.AgroludosBD;
 import agroludos.business.bd.BusinessDelegate;
 import agroludos.exceptions.ApplicationException;
 import agroludos.presentation.req.DataFieldException;
-import agroludos.presentation.reqh.AgroRequestContext;
+import agroludos.presentation.reqh.DataRequestContext;
+import agroludos.presentation.reqh.EmptyRequestContext;
 import agroludos.to.AgroludosTO;
 import agroludos.to.DatabaseTO;
 import agroludos.to.ManagerDiCompetizioneTO;
@@ -13,37 +15,37 @@ import agroludos.to.ManagerDiSistemaTO;
 import agroludos.to.TOFactory;
 import agroludos.to.UtenteTO;
 
-public class GeneralAC extends ApplicationController{
+class MainCommandMap{
 
-	private BusinessDelegate agroBD;
+	private AgroludosBD agroBD;
 
 	private TOFactory toFact;
 
-	public GeneralAC(){
-		System.out.println("General AC");
+	public MainCommandMap(){
+		System.out.println("MainCommandMap");
 	}
 
 	public static void chiudiAgroludos(){
 		System.exit(0);
 	}
 
-	public boolean checkConfigurazione(AgroRequestContext request){
+	public boolean checkConfigurazione(EmptyRequestContext request){
 		boolean res = false;
-		System.out.println(request.getCommand());
+		System.out.println(request.getCommandName());
 
 		Object obj = null;
 
-		try {
-			obj = gestisciServizio(request.getCommand());
-			res = cast(obj, Boolean.class);
-		} catch (ApplicationException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			obj = gestisciServizio(request.getCommandName());
+//			res = cast(obj, Boolean.class);
+//		} catch (ApplicationException e) {
+//			e.printStackTrace();
+//		}
 
 		return res;
 	}
 
-	public boolean confermaConfigurazione(AgroRequestContext request){
+	public boolean confermaConfigurazione(DataRequestContext request){
 		boolean res = false;
 		Object obj = null;
 		System.out.println("GeneralAC.confermaConfigurazione");
@@ -61,7 +63,7 @@ public class GeneralAC extends ApplicationController{
 		}
 
 		try {
-			obj = (Boolean)gestisciServizio(request.getCommand(), dbto);
+			obj = (Boolean)gestisciServizio(request.getCommandName(), dbto);
 			res = cast(obj, Boolean.class);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
@@ -70,7 +72,7 @@ public class GeneralAC extends ApplicationController{
 		return res;
 	}
 
-	public boolean nuovoManagerDiSistema(AgroRequestContext request){
+	public boolean nuovoManagerDiSistema(DataRequestContext request){
 		boolean res = false;
 		Object obj = null;
 
@@ -83,14 +85,10 @@ public class GeneralAC extends ApplicationController{
 			mnsto.setEmail((String)request.getData("email"));
 			mnsto.setUsername((String)request.getData("username"));
 			mnsto.setPassword((String)request.getData("password"));
-			mnsto.setTelefono((String)request.getData("telefono"));
+			obj = gestisciServizio(request.getCommandName(), mnsto);
+			res = cast(obj, Boolean.class);
 		} catch (DataFieldException e) {
 			e.printStackTrace();
-		}
-
-		try {
-			obj = gestisciServizio(request.getCommand(), mnsto);
-			res = cast(obj, Boolean.class);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}
@@ -98,7 +96,7 @@ public class GeneralAC extends ApplicationController{
 		return res;
 	}
 
-	public UtenteTO autenticazioneUtente(AgroRequestContext request){
+	public UtenteTO autenticazioneUtente(DataRequestContext request){
 		Object obj = null;
 		UtenteTO uto = this.toFact.createUTO();
 
@@ -110,7 +108,7 @@ public class GeneralAC extends ApplicationController{
 		}
 
 		try {
-			obj = gestisciServizio(request.getCommand(), uto);
+			obj = gestisciServizio(request.getCommandName(), uto);
 			uto = cast(obj, UtenteTO.class);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
@@ -119,12 +117,12 @@ public class GeneralAC extends ApplicationController{
 		return uto;
 	}
 
-	public boolean testConnessioneDB(AgroRequestContext request){
+	public boolean testConnessioneDB(EmptyRequestContext request){
 		Object obj = null;
 		boolean res = false;
 
 		try {
-			obj = gestisciServizio(request.getCommand());
+			obj = gestisciServizio(request.getCommandName());
 			res = cast(obj, Boolean.class);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
@@ -134,12 +132,12 @@ public class GeneralAC extends ApplicationController{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<ManagerDiCompetizioneTO> getAllManagerDiCompetizione(AgroRequestContext request){
+	public List<ManagerDiCompetizioneTO> getAllManagerDiCompetizione(EmptyRequestContext request){
 		Object obj = null;
 		List<ManagerDiCompetizioneTO> res = null;
 
 		try {
-			obj = gestisciServizio(request.getCommand());
+			obj = gestisciServizio(request.getCommandName());
 			res = cast(obj, List.class);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
@@ -148,17 +146,15 @@ public class GeneralAC extends ApplicationController{
 		return res;
 	}
 
-	public boolean confermaModificaMDC(AgroRequestContext request){
+	public boolean confermaModificaMDC(DataRequestContext request){
 		ManagerDiCompetizioneTO mdcto = this.toFact.createMdCTO();
 
 		try {
-			int id = Integer.valueOf((String)request.getData("id"));
-			mdcto.setId(id);
 			mdcto.setNome((String)request.getData("nome"));
 			mdcto.setCognome((String)request.getData("cognome"));
 			mdcto.setUsername((String)request.getData("username"));
 			mdcto.setEmail((String)request.getData("email"));
-			gestisciServizio(request.getCommand(), mdcto);
+			gestisciServizio(request.getCommandName(), mdcto);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (DataFieldException e) {
@@ -190,7 +186,7 @@ public class GeneralAC extends ApplicationController{
 		this.toFact = toFact;
 	}
 
-	public void setAgroBD(BusinessDelegate agroBD){
+	public void setAgroBD(AgroludosBD agroBD){
 		this.agroBD = agroBD;
 	}
 }

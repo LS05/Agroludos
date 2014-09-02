@@ -3,15 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="ReqFactorySchema.xsd">
 	<richiesta tipo="checkConfigurazione">
-		<classe>agroludos.presentation.reqh.DataRequestContext</classe>
+		<classe>agroludos.presentation.reqh.EmptyRequestContextImpl</classe>
 	</richiesta>
 	<richiesta tipo="confermaConfigurazione">
-		<classe>agroludos.presentation.reqh.DataRequestContext</classe>
+		<classe>agroludos.presentation.reqh.DataRequestContextImpl</classe>
 	</richiesta>
 	<richiesta tipo="nuovoManagerDiSistema">
-		<classe>agroludos.presentation.reqh.DataRequestContext</classe>
+		<classe>agroludos.presentation.reqh.DataRequestContextImpl</classe>
 	</richiesta>
 	<richiesta tipo="autenticazioneUtente">
-		<classe>agroludos.presentation.reqh.DataRequestContext</classe>
+		<classe>agroludos.presentation.reqh.DataRequestContextImpl</classe>
 	</richiesta>
 </richieste>

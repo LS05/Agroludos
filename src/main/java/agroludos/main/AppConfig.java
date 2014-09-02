@@ -1,59 +1,51 @@
 package agroludos.main;
 
-import agroludos.presentation.fc.FrontController;
 import agroludos.presentation.req.AgroRequest;
-import agroludos.presentation.req.RequestFactory;
-import agroludos.presentation.views.Navigator;
-
+import agroludos.presentation.resp.AgroResponse;
+import agroludos.presentation.views.AgroludosController;
 import javafx.stage.Stage;
 
-class AppConfig implements App{
-	
-	private FrontController frontController;
-	
-	private RequestFactory reqFact;
-	
-	private Navigator nav;
+class AppConfig extends AgroludosController implements App{
 	
 	private Stage stage;
 	
 	private boolean isConf;
 	
-	AppConfig(FrontController frontController, RequestFactory reqFact){
-		this.frontController = frontController;
-		this.reqFact = reqFact;
-	}
-	
 	@Override
 	public void initialize(Stage stage){
 		this.stage = stage;
-		this.nav.setStage(stage);
-		AgroRequest richiesta = reqFact.createSimpleRequest("checkConfigurazione");
-		this.isConf = (Boolean)this.frontController.eseguiRichiesta(richiesta);
+		nav.setStage(stage);
+		AgroRequest richiesta = reqFact.createRequest("checkConfigurazione");
+		AgroResponse risposta = respFact.createResponse();
+		frontController.eseguiRichiesta(richiesta, risposta);
 	}
 	
 	@Override
 	public void show(){
-		boolean dbConn;
-		AgroRequest richiesta = reqFact.createSimpleRequest("testConnessioneDB");
+		boolean dbConn = false;
+		AgroRequest richiesta = reqFact.createRequest("testConnessioneDB");
+		AgroResponse risposta = respFact.createResponse();
 		
 		if(this.isConf){
-			dbConn = (Boolean)this.frontController.eseguiRichiesta(richiesta);
+			frontController.eseguiRichiesta(richiesta, risposta);
 			
 			if(dbConn){
-				this.nav.setVista("login");
+				nav.setVista("login");
 			} else {
 				System.out.println("Connessione Database Non Riuscita");
 			}
 			
 		}else {
-			this.nav.setVista("configurazione");
+			nav.setVista("configurazione");
 		}
 		
 		this.stage.show();
 	}
-	
-	public void setNav(Navigator nav) {
-		this.nav = nav;
+
+	@Override
+	public void forward(AgroRequest request, AgroResponse response) {
+		if(request.getCommandName().equals("checkConfigurazione")){
+			this.isConf = (Boolean)response.getRespData();
+		}
 	}
 }

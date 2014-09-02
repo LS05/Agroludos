@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<command name="checkConfigurazione">
+		<classe>agroludos.presentation.controller.mapper.GeneralAC</classe>
+		<forward type="failure" name="appConfig" path="agroludos.main.AppConfig"/>
+		<forward type="success" name="appConfig" path="agroludos.main.AppConfig"/>
+	</command>
+</commands>

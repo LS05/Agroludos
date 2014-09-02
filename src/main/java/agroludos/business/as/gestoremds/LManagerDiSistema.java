@@ -5,5 +5,5 @@ import agroludos.to.ManagerDiSistemaTO;
 import agroludos.to.UtenteTO;
 
 public interface LManagerDiSistema {
-	ManagerDiSistemaTO getManagerDiSistema(UtenteTO uto) throws DatabaseException;
+	ManagerDiSistemaTO getManagerDiSistema(ManagerDiSistemaTO uto) throws DatabaseException;
 }

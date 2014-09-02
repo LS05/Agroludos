@@ -1,18 +1,16 @@
 package agroludos.presentation.reqh;
 
-import java.util.Map;
-
-import agroludos.presentation.req.DataFieldException;
+import agroludos.presentation.req.AgroRequest;
 
 public interface AgroRequestContext {
 	
-	public String getCommand();
+	public void initialize(AgroRequest request);
 	
-	public String getStringData(Object key) throws DataFieldException;
-	
-	public Object getData(Object key) throws DataFieldException;
+	public String getCommandName();
 	
 	public String getClassName();
 	
 	public boolean isParam();
+	
+	public AgroRequest getRequest();
 }

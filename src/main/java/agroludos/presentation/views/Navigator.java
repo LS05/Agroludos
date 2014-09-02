@@ -19,37 +19,32 @@ public class Navigator {
 	
 	private ViewsLoader viewsLoader;
 	
-	Navigator(ViewsLoader viewsLoader){
-		this.viewsLoader = viewsLoader;	
+	private ViewsCache viewsCache;
+	
+	Navigator(ViewsCache viewsCache, ViewsLoader viewsLoader){
+		this.viewsLoader = viewsLoader;
+		this.viewsCache = viewsCache;
 	}
 	
 	public void setStage(Stage stage){
 		this.mainStage = stage;
 	}
 
-	public void setVista(String vista) {
-		AgroludosWindow agw = this.viewsLoader.getView(vista);
+	public void setVista(String viewName) {
+		AgroludosWindow agw = this.viewsLoader.getView(viewName);
+		this.viewsCache.addScene(agw);
 		
-		FXMLLoader loader = agw.getLoader();
-		Pane root = null;
+		Scene scene = this.viewsCache.getScene(viewName);
 		
-		try {
-			root = (Pane)loader.load();
-		} catch (IOException e) {
-			throw new ViewLoadingException(e.getMessage(), e.getCause());
-		}
-		
-		Scene view = new Scene(root);
-		
-		this.mainStage.setScene(view);
+		this.mainStage.setScene(scene);
 		this.mainStage.setTitle(agw.getTitle());
 		this.mainStage.setHeight(agw.getHeight());
 		this.mainStage.setWidth(agw.getWidth());
 
-		PositionHandler.centerComp(this.mainStage, view);
+		PositionHandler.centerComp(this.mainStage, scene);
 	}
 	
-	public void showDialog(String dialog) {
+	public void setDialog(String dialog) {
 		AgroludosWindow agw = this.viewsLoader.getDialog(dialog);
 		
 		FXMLLoader loader = agw.getLoader();
@@ -57,7 +52,6 @@ public class Navigator {
 		
 		try {
 			root = (Pane)loader.load();
-			AgroludosController cont = loader.getController();
 		} catch (IOException e) {
 			throw new ViewLoadingException(e.getMessage(), e.getCause());
 		}
@@ -72,5 +66,9 @@ public class Navigator {
 	    s.initOwner(this.mainStage);
 		s.show();
 		PositionHandler.centerComp(s, view);
+	}
+	
+	public AgroludosController getRequestDispatcher(String viewName){
+		return this.viewsLoader.getView(viewName).getLoader().getController();
 	}
 }

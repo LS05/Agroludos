@@ -1,20 +1,17 @@
 package agroludos.presentation.req;
 
-import java.util.ArrayList;
 import java.util.Map;
 
-class FrameRequest extends AgroRequest{
+class FrameRequest extends DataRequest {
 	private Map<String, String> reqData;
 	
-	public FrameRequest(Map<String, String> data, String commandName) {
-		this.setCommand(commandName);
+	FrameRequest(Map<String, String> data, String commandName) {
+		super(commandName, true);
 		this.reqData = data;
-		this.flagParam = true;
 	}
 	
-	public FrameRequest(String commandName) {
-		this.commandName = commandName;
-		this.flagParam = false;
+	FrameRequest(String commandName) {
+		super(commandName, false);
 	}
 
 	@Override
@@ -27,18 +24,6 @@ class FrameRequest extends AgroRequest{
 			throw new DataFieldException("Data Field: " + key.toString() + " Inesistente!");
 		
 		return data;
-	}
-	
-	public ArrayList getAllData(){
-		ArrayList<String> res = new ArrayList<String>();
-		for(String str : this.reqData.values())
-			res.add(str);
-		return res;
-	}
-
-	@Override
-	public boolean isParameter() {
-		return this.flagParam;
 	}
 
 	@Override

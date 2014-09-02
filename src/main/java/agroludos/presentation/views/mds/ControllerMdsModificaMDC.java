@@ -52,7 +52,7 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 		dataMDC.put("email", this.txtEmail.getText());
 		dataMDC.put("stato", this.cmbStato.getValue());
 		
-		this.richiesta = reqFact.createDFrameRequest(dataMDC, "confermaModificaMDC");
+		this.richiesta = reqFact.createDataRequest(dataMDC, "confermaModificaMDC");
 		frontController.eseguiRichiesta(richiesta);
 		
 	}

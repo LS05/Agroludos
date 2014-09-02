@@ -2,6 +2,13 @@
 <agro-views>
 	<views>
 		<view>
+			<name>appConfig</name>
+			<url>/fxml/config/init.fxml</url>
+			<width></width>
+			<height></height>
+			<title></title>
+		</view>
+		<view>
 			<name>login</name>
 			<url>/fxml/login/login.fxml</url>
 			<width>600</width>

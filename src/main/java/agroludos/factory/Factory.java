@@ -8,6 +8,8 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.SAXException;
 
+import agroludos.exceptions.FactoryInstantiationException;
+
 public abstract class Factory {
 	HandlerXML handler;
 	SAXParser saxParser;
@@ -47,7 +49,7 @@ public abstract class Factory {
 	public Object getInstance(String className) throws FactoryInstantiationException{
 		Object res = null;
 		Class<?> c = null;
-		
+
 		try {
 			System.out.println("Factory -> Classe: " + className);
 			c = Class.forName(className);
@@ -62,7 +64,7 @@ public abstract class Factory {
 
 		return res;
 	}
-
+	
 	protected abstract String getXMLPath();
 
 }

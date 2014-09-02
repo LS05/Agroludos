@@ -74,7 +74,7 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 			paramLogin.put("username", txtUsername.getText());
 			paramLogin.put("password", securePassword);
 
-			this.richiesta = reqFact.createDFrameRequest(paramLogin, "autenticazioneUtente");
+			this.richiesta = reqFact.createDataRequest(paramLogin, "autenticazioneUtente");
 			UtenteTO res = (UtenteTO) frontController.eseguiRichiesta(richiesta);
 
 			//se il login è andato a buon fine

@@ -92,7 +92,7 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 			parametriDB.put("username", txtUsernameDB.getText());
 			parametriDB.put("password", this.txtPasswordDB.getText());
 
-			this.richiesta = reqFact.createDFrameRequest(parametriDB, "confermaConfigurazione");
+			this.richiesta = reqFact.createDataRequest(parametriDB, "confermaConfigurazione");
 			boolean res = (boolean) frontController.eseguiRichiesta(richiesta);
 
 			//se la connessione al db è andata a buon fine procedi
@@ -141,7 +141,7 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 			parametriMds.put("email", txtEmailMds.getText());
 			parametriMds.put("telefono", txtTelefonoMds.getText());
 
-			this.richiesta = reqFact.createDFrameRequest(parametriMds, "nuovoManagerDiSistema");
+			this.richiesta = reqFact.createDataRequest(parametriMds, "nuovoManagerDiSistema");
 			boolean res = (boolean)frontController.eseguiRichiesta(richiesta);
 			//se non ci sono errori mostra la finestra di login
 			if(res){
