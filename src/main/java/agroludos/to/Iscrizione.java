@@ -6,6 +6,7 @@ class Iscrizione implements IscrizioneTO{
 
 	private Date data;
 	private Integer id;
+	private Integer stato;
 	
 	@Override
 	public Date getData() {
@@ -21,6 +22,14 @@ class Iscrizione implements IscrizioneTO{
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	@Override
+	public Integer getStato() {
+		return stato;
+	}
+	@Override
+	public void setStato(Integer stato) {
+		this.stato = stato;
 	}
 
 }

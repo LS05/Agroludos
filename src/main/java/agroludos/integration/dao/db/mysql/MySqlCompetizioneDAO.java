@@ -6,9 +6,8 @@ import org.hibernate.Query;
 
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.to.CompetizioneTO;
-import agroludos.to.OptionalTO;
 
-public class MySqlCompetizioneDAO extends MySqlAgroludosDAO implements CompetizioneDAO {
+class MySqlCompetizioneDAO extends MySqlAgroludosDAO implements CompetizioneDAO {
 
 	@Override
 	public boolean crea(CompetizioneTO cmpto) {

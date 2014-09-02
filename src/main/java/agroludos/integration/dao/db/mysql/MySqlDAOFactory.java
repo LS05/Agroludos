@@ -7,6 +7,7 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBConfigurazioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
+import agroludos.integration.dao.db.IscrizioneDAO;
 import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
 import agroludos.integration.dao.db.ManagerDiSistemaDAO;
 import agroludos.integration.dao.db.OptionalDAO;
@@ -70,5 +71,10 @@ public class MySqlDAOFactory implements DBDAOFactory {
 	@Override
 	public DBConfigurazioneDAO getConfigurazioneDAO() {
 		return new MySqlConfigurazioneDAO();
+	}
+
+	@Override
+	public IscrizioneDAO getIscrizioneDAO() {
+		return new MySqlIscrizioneDAO();
 	}
 }

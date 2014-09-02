@@ -7,7 +7,7 @@ import org.hibernate.Query;
 import agroludos.integration.dao.db.OptionalDAO;
 import agroludos.to.OptionalTO;
 
-public class MySqlOptionalDAO extends MySqlAgroludosDAO implements OptionalDAO {
+class MySqlOptionalDAO extends MySqlAgroludosDAO implements OptionalDAO {
 
 	@Override
 	public boolean crea(OptionalTO optto) {

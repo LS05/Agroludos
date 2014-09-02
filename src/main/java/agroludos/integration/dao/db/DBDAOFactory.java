@@ -54,4 +54,10 @@ public interface DBDAOFactory {
 	 * Partecipante
 	 */
 	public abstract DBConfigurazioneDAO getConfigurazioneDAO();	
+	
+	/**
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Iscrizione
+	 * 
+	 */
+	public abstract IscrizioneDAO getIscrizioneDAO();
 }

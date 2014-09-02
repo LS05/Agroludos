@@ -4,7 +4,7 @@ import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.UtenteTO;
 
-public class MySqlPartecipanteDAO implements PartecipanteDAO {
+class MySqlPartecipanteDAO implements PartecipanteDAO {
 
 	@Override
 	public boolean crea(PartecipanteTO mdcto) {

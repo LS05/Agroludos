@@ -9,5 +9,6 @@ import agroludos.to.CompetizioneTO;
 public interface LCompetizione {
 	List<CompetizioneTO> getCompetizioniByMdc(CompetizioneTO cmpto) throws DatabaseException;
 	List<CompetizioneTO> getCompetizioniByTipo(CompetizioneTO cmpto) throws DatabaseException;
+	List<CompetizioneTO> getAllCompetizione() throws DatabaseException;
 
 }

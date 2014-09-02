@@ -3,7 +3,7 @@ package agroludos.integration.dao.db.mysql;
 import agroludos.integration.dao.db.DBConfigurazioneDAO;
 import agroludos.to.ConfigurazioneTO;
 
-public class MySqlConfigurazioneDAO extends MySqlAgroludosDAO implements DBConfigurazioneDAO {
+class MySqlConfigurazioneDAO extends MySqlAgroludosDAO implements DBConfigurazioneDAO {
 
 	@Override
 	public boolean addConfigurazioneDB(ConfigurazioneTO conf) {

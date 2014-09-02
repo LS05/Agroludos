@@ -4,7 +4,7 @@ import agroludos.integration.dao.db.ManagerDiSistemaDAO;
 import agroludos.to.ManagerDiSistemaTO;
 import agroludos.to.UtenteTO;
 
-public class MySqlManagerDiSistemaDAO extends MySqlAgroludosDAO implements ManagerDiSistemaDAO{
+class MySqlManagerDiSistemaDAO extends MySqlAgroludosDAO implements ManagerDiSistemaDAO{
 
 	@Override
 	public boolean crea(ManagerDiSistemaTO mdsto) {

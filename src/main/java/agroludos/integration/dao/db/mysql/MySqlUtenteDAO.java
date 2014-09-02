@@ -7,7 +7,7 @@ import org.hibernate.Query;
 import agroludos.integration.dao.db.UtenteDAO;
 import agroludos.to.UtenteTO;
 
-public class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
+class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
 
 	@Override
 	public UtenteTO read(UtenteTO uto) {
