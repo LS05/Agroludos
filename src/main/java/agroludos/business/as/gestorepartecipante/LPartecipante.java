@@ -1,5 +1,5 @@
 package agroludos.business.as.gestorepartecipante;
 
-public class LPartecipante {
+public interface LPartecipante {
 
 }

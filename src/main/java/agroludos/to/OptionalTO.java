@@ -15,4 +15,6 @@ public interface OptionalTO {
 	Integer getTipo();
 	void setTipo(Integer tipo);
 	
+	int getId();
+	
 }

@@ -8,6 +8,7 @@ class Optional implements OptionalTO{
 
 	private int stato;
 	private int tipo;
+	private int id;
 
 	@Override
 	public String getNome() {
@@ -49,6 +50,13 @@ class Optional implements OptionalTO{
 	@Override
 	public void setCosto(Double costo) {
 		this.costo = costo;
+	}
+	@Override
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 

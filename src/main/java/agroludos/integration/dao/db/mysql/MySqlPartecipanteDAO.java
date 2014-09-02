@@ -29,4 +29,10 @@ public class MySqlPartecipanteDAO implements PartecipanteDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public boolean update(PartecipanteTO parto) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

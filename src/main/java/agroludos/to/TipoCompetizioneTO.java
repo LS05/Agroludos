@@ -5,4 +5,5 @@ public interface TipoCompetizioneTO {
 	public void setNome(String nome);
 	public String getDescrizione();
 	public void setDescrizione(String descrizione);
+	Integer getId();
 }

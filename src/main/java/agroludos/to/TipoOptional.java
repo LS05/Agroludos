@@ -2,6 +2,7 @@ package agroludos.to;
 
 class TipoOptional implements TipoOptionalTO{
 	private String nome;
+	private Integer id;
 	
 	@Override
 	public String getNome() {
@@ -10,6 +11,13 @@ class TipoOptional implements TipoOptionalTO{
 	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	@Override
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	

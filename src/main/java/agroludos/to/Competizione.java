@@ -5,17 +5,16 @@ import java.util.Date;
 class Competizione implements CompetizioneTO{
 
 	private String nome;
-	private String tipoCompetizione;
 	private Date data;
 	private int nMin;
 	private int nMax;
 	private String descrizione;
-	private String managerDiCompetizione;
 	private Double costo;
 
 	private int mdc;
 	private int stato;
 	private int tipo;
+	private Integer id;
 
 	@Override
 	public String getNome() {
@@ -24,10 +23,6 @@ class Competizione implements CompetizioneTO{
 	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	@Override
-	public String getTipoCompetizione() {
-		return tipoCompetizione;
 	}
 	@Override
 	public Date getData() {
@@ -56,14 +51,6 @@ class Competizione implements CompetizioneTO{
 	@Override
 	public Integer getMdc() {
 		return mdc;
-	}
-	@Override
-	public String getManagerDiCompetizione() {
-		return managerDiCompetizione;
-	}
-	@Override
-	public void setManagerDiCompetizione(String managerDiCompetizione) {
-		this.managerDiCompetizione =managerDiCompetizione;
 	}
 	@Override
 	public Integer getStato() {
@@ -101,7 +88,13 @@ class Competizione implements CompetizioneTO{
 	public void setCosto(Double costo) {
 		this.costo = costo;
 	}
-
+	@Override
+	public Integer getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 
 
 }

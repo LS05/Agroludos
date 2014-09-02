@@ -8,4 +8,5 @@ public interface PartecipanteDAO {
 	PartecipanteTO read(UtenteTO uto);
 	<T> PartecipanteTO readByUsername(T username);
 	<T> PartecipanteTO readByID(T id);
+	boolean update(PartecipanteTO parto);
 }

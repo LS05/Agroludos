@@ -3,7 +3,9 @@ package agroludos.to;
 class TipoCompetizione implements TipoCompetizioneTO{
 	private String descrizione;
 	private String nome;
+	private Integer id;
 	
+
 	@Override
 	public String getDescrizione() {
 		return descrizione;
@@ -20,7 +22,13 @@ class TipoCompetizione implements TipoCompetizioneTO{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+	@Override
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	
 	
 	

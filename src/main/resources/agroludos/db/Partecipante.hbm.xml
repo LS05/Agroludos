@@ -9,21 +9,6 @@
 			<column name="idmansis" />
 			<generator class="increment" />
 		</id>
-		<property name="nome" type="string">
-			<column name="nome" not-null="true"/>
-		</property>
-		<property name="cognome" type="string">
-			<column name="cognome" not-null="true" />
-		</property>
-		<property name="username" type="string">
-			<column name="username" not-null="true" />
-		</property>
-		<property name="password" type="string">
-			<column name="password" not-null="true" />
-		</property>
-		<property name="email" type="string">
-			<column name="email" not-null="true" />
-		</property>
 		<property name="cf" type="string">
 			<column name="cf" not-null="true" />
 		</property>
@@ -35,6 +20,9 @@
 		</property>
 		<property name="numTS" type="string">
 			<column name="n_tessan" not-null="true" />
+		</property>
+		<property name="indirizzo" type="string">
+			<column name="indirizzo" not-null="true" />
 		</property>
 		<property name="src" type="string">
 			<column name="src" not-null="true" />
