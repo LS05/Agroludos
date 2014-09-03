@@ -13,25 +13,29 @@ public class AppConfig extends AgroludosController implements App{
 	
 	private boolean dbConn;
 	
+	private AgroRequest richiesta;
+	
+	private AgroResponse risposta;
+	
 	@Override
 	public void initialize(Stage stage){
 		this.stage = stage;
 		nav.setStage(stage);
-		AgroRequest richiesta = reqFact.createRequest("checkConfigurazione");
-		AgroResponse risposta = respFact.createResponse();
+		this.richiesta = reqFact.createRequest("checkConfigurazione");
+		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(richiesta, risposta);
 	}
 	
 	@Override
 	public void show(){
-		AgroRequest richiesta = reqFact.createRequest("testConnessioneDB");
-		AgroResponse risposta = respFact.createResponse();
+		this.richiesta = reqFact.createRequest("testConnessioneDB");
+		this.risposta = respFact.createResponse();
 		
 		if(this.isConf){
 			frontController.eseguiRichiesta(richiesta, risposta);
 			
-			if(dbConn){
-				nav.setVista("login");
+			if(this.dbConn){
+				nav.setVista("autenticazione");
 			} else {
 				System.out.println("Connessione Database Non Riuscita");
 			}

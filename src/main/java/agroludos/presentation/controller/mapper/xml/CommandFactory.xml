@@ -6,4 +6,19 @@
 		<forward type="failure" name="appConfig" path="agroludos.main.AppConfig"/>
 		<forward type="success" name="appConfig" path="agroludos.main.AppConfig"/>
 	</command>
+	<command name="configurazione">
+		<classe>agroludos.presentation.controller.mapper.GeneralAC</classe>
+		<forward type="failure" name="configurazione" path="agroludos.presentation.views.amministratore.ControllerConfSistema"/>
+		<forward type="success" name="configurazione" path="agroludos.presentation.views.amministratore.ControllerConfSistema"/>
+	</command>
+	<command name="testConnessioneDB">
+		<classe>agroludos.presentation.controller.mapper.GeneralAC</classe>
+		<forward type="failure" name="appConfig" path="agroludos.main.AppConfig"/>
+		<forward type="success" name="appConfig" path="agroludos.main.AppConfig"/>
+	</command>
+	<command name="autenticazione">
+		<classe>agroludos.presentation.controller.mapper.GeneralAC</classe>
+		<forward type="failure" name="login" path="agroludos.presentation.views.login.ControllerLogin"/>
+		<forward type="success" name="login" path="agroludos.presentation.views.login.ControllerLogin"/>
+	</command>
 </commands>

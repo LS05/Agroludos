@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import agroludos.presentation.req.AgroRequest;
+import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.utility.SecurePassword;
 import javafx.collections.FXCollections;
@@ -50,6 +51,8 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 	private Map<String, String> parametriMds = new HashMap<>();
 	
 	private AgroRequest richiesta;
+	
+	private AgroResponse risposta;
 
 	private ObservableList<String> listaTipiDB;
 
@@ -93,15 +96,8 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 			parametriDB.put("password", this.txtPasswordDB.getText());
 
 			this.richiesta = reqFact.createDataRequest(parametriDB, "confermaConfigurazione");
-			boolean res = (boolean) frontController.eseguiRichiesta(richiesta);
-
-			//se la connessione al db è andata a buon fine procedi
-			if(res){
-				this.databasePane.setVisible(false);
-				this.managerSistemaPane.setVisible(true);
-			}
-			else
-				System.out.println("Connessione al DB fallita");
+			this.risposta = respFact.createResponse();
+			frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		}
 		else {
 			System.out.println("Campi vuoti o errati");
@@ -155,5 +151,17 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 			System.out.println("Campi vuoti o errati");
 		}
 
+	}
+
+	@Override
+	public void forward(AgroRequest request, AgroResponse response) {
+		if(request.getCommandName().equals("confermaConfigurazione")){
+			boolean res = (Boolean)response.getRespData();
+			if(res){
+				this.databasePane.setVisible(false);
+				this.managerSistemaPane.setVisible(true);
+			} else
+				System.out.println("Connessione al DB fallita");
+		}
 	}
 }

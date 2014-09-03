@@ -8,7 +8,6 @@ import agroludos.presentation.views.utility.PositionHandler;
 import agroludos.presentation.views.xml.AgroludosWindow;
 
 public class Navigator {
-//	private AgroludosStage agroStage;
 	
 	private Stage mainStage;
 	
@@ -25,28 +24,29 @@ public class Navigator {
 		this.mainStage = stage;
 	}
 
-	private void setVista(String viewName) {
+	public void setVista(String viewName) {
 		AgroludosWindow agw = this.viewsLoader.getView(viewName);
 		this.viewsCache.addScene(agw);
 		
 		Scene scene = this.viewsCache.getScene(viewName);
-		
-		this.mainStage.setScene(scene);
-		this.mainStage.setTitle(agw.getTitle());
-		this.mainStage.setHeight(agw.getHeight());
-		this.mainStage.setWidth(agw.getWidth());
 
 		if(agw.isDialog()){
-			Stage s = new Stage(StageStyle.UNDECORATED);
-			s.setScene(scene);
-			s.setTitle(agw.getTitle());
-			s.setHeight(agw.getHeight());
-			s.setWidth(agw.getWidth());
-		    s.initModality(Modality.WINDOW_MODAL);
-		    s.initOwner(this.mainStage);
-			s.show();
-			PositionHandler.centerComp(s, scene);
+			Stage stage = new Stage(StageStyle.UNDECORATED);
+			stage.setScene(scene);
+			stage.setTitle(agw.getTitle());
+			stage.setHeight(agw.getHeight());
+			stage.setWidth(agw.getWidth());
+		    stage.initModality(Modality.WINDOW_MODAL);
+		    stage.initOwner(this.mainStage);
+			stage.show();
+			
+			PositionHandler.centerComp(stage, scene);
 		} else {
+			this.mainStage.setScene(scene);
+			this.mainStage.setTitle(agw.getTitle());
+			this.mainStage.setHeight(agw.getHeight());
+			this.mainStage.setWidth(agw.getWidth());
+			
 			PositionHandler.centerComp(this.mainStage, scene);
 		}
 	}

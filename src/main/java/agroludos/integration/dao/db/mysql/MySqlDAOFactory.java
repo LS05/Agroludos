@@ -1,9 +1,5 @@
 package agroludos.integration.dao.db.mysql;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hibernate.SessionFactory;
 
 import agroludos.exceptions.DatabaseException;
@@ -18,10 +14,6 @@ import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.integration.dao.db.TipoOptionalDAO;
 import agroludos.integration.dao.db.UtenteDAO;
-import agroludos.to.CompetizioneTO;
-import agroludos.to.TipoCompetizioneTO;
-import agroludos.to.TipoOptionalTO;
-import agroludos.to.TransferObjectFactory;
 
 public class MySqlDAOFactory implements DBDAOFactory {
 
@@ -84,23 +76,4 @@ public class MySqlDAOFactory implements DBDAOFactory {
 	public IscrizioneDAO getIscrizioneDAO() {
 		return new MySqlIscrizioneDAO();
 	}
-
-	public static void main(String[] args){
-		TransferObjectFactory tof = new TransferObjectFactory();
-		TipoOptionalTO cmpto = tof.createTipoOptionalTO();
-		
-		MySqlDAOFactory mdao = new MySqlDAOFactory();
-		mdao.initialize();
-		List<TipoOptionalTO> list= new ArrayList<TipoOptionalTO>();
-		cmpto.setNome("lugo");
-		mdao.getTipoOptionalDAO().crea(cmpto);
-		cmpto.setNome("luadao");
-		mdao.getTipoOptionalDAO().crea(cmpto);
-		cmpto.setNome("posr");
-		mdao.getTipoOptionalDAO().crea(cmpto);
-		
-		list=mdao.getTipoOptionalDAO().readAll();
-		System.out.println(list.toString());
-	}
 }
-
