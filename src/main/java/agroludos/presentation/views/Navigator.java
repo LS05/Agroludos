@@ -30,7 +30,7 @@ public class Navigator {
 		this.mainStage = stage;
 	}
 
-	public void setVista(String viewName) {
+	private void setVista(String viewName) {
 		AgroludosWindow agw = this.viewsLoader.getView(viewName);
 		this.viewsCache.addScene(agw);
 		
@@ -44,7 +44,7 @@ public class Navigator {
 		PositionHandler.centerComp(this.mainStage, scene);
 	}
 	
-	public void setDialog(String dialog) {
+	private void setDialog(String dialog) {
 		AgroludosWindow agw = this.viewsLoader.getDialog(dialog);
 		
 		FXMLLoader loader = agw.getLoader();
@@ -69,6 +69,7 @@ public class Navigator {
 	}
 	
 	public AgroludosController getRequestDispatcher(String viewName){
+		this.setVista(viewName);
 		return this.viewsLoader.getView(viewName).getLoader().getController();
 	}
 }

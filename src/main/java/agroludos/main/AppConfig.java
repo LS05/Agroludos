@@ -5,11 +5,13 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import javafx.stage.Stage;
 
-class AppConfig extends AgroludosController implements App{
+public class AppConfig extends AgroludosController implements App{
 	
 	private Stage stage;
 	
 	private boolean isConf;
+	
+	private boolean dbConn;
 	
 	@Override
 	public void initialize(Stage stage){
@@ -22,7 +24,6 @@ class AppConfig extends AgroludosController implements App{
 	
 	@Override
 	public void show(){
-		boolean dbConn = false;
 		AgroRequest richiesta = reqFact.createRequest("testConnessioneDB");
 		AgroResponse risposta = respFact.createResponse();
 		
@@ -46,6 +47,10 @@ class AppConfig extends AgroludosController implements App{
 	public void forward(AgroRequest request, AgroResponse response) {
 		if(request.getCommandName().equals("checkConfigurazione")){
 			this.isConf = (Boolean)response.getRespData();
+		}
+		
+		if(request.getCommandName().equals("testConnessioneDB")){
+			this.dbConn = (Boolean)response.getRespData();
 		}
 	}
 }
