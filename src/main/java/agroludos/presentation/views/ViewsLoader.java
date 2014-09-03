@@ -13,8 +13,4 @@ class ViewsLoader{
 	AgroludosWindow getView(String view){
 		return this.parser.getView(view);
 	}
-	
-	AgroludosWindow getDialog(String dialog){
-		return this.parser.getDialog(dialog);
-	}
 }

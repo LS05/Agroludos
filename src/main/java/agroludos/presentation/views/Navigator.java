@@ -1,14 +1,9 @@
 package agroludos.presentation.views;
 
-import java.io.IOException;
-
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import agroludos.exceptions.ViewLoadingException;
 import agroludos.presentation.views.utility.PositionHandler;
 import agroludos.presentation.views.xml.AgroludosWindow;
 
@@ -41,35 +36,23 @@ public class Navigator {
 		this.mainStage.setHeight(agw.getHeight());
 		this.mainStage.setWidth(agw.getWidth());
 
-		PositionHandler.centerComp(this.mainStage, scene);
-	}
-	
-	private void setDialog(String dialog) {
-		AgroludosWindow agw = this.viewsLoader.getDialog(dialog);
-		
-		FXMLLoader loader = agw.getLoader();
-		Pane root = null;
-		
-		try {
-			root = (Pane)loader.load();
-		} catch (IOException e) {
-			throw new ViewLoadingException(e.getMessage(), e.getCause());
+		if(agw.isDialog()){
+			Stage s = new Stage(StageStyle.UNDECORATED);
+			s.setScene(scene);
+			s.setTitle(agw.getTitle());
+			s.setHeight(agw.getHeight());
+			s.setWidth(agw.getWidth());
+		    s.initModality(Modality.WINDOW_MODAL);
+		    s.initOwner(this.mainStage);
+			s.show();
+			PositionHandler.centerComp(s, scene);
+		} else {
+			PositionHandler.centerComp(this.mainStage, scene);
 		}
-		
-		Scene view = new Scene(root);
-		Stage s = new Stage(StageStyle.UNDECORATED);
-		s.setScene(view);
-		s.setTitle(agw.getTitle());
-		s.setHeight(agw.getHeight());
-		s.setWidth(agw.getWidth());
-	    s.initModality(Modality.WINDOW_MODAL);
-	    s.initOwner(this.mainStage);
-		s.show();
-		PositionHandler.centerComp(s, view);
 	}
 	
 	public AgroludosController getRequestDispatcher(String viewName){
 		this.setVista(viewName);
-		return this.viewsLoader.getView(viewName).getLoader().getController();
+		return this.viewsLoader.getView(viewName).getController();
 	}
 }

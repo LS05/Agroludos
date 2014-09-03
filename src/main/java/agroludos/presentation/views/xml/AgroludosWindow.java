@@ -3,6 +3,7 @@ package agroludos.presentation.views.xml;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import agroludos.presentation.views.AgroludosController;
 import javafx.fxml.FXMLLoader;
 
 public abstract class AgroludosWindow {
@@ -13,10 +14,6 @@ public abstract class AgroludosWindow {
 		this.initLoader(view.getUrl());	
 	}
 	
-	AgroludosWindow(Dialog dialog){
-		this.initLoader(dialog.getUrl());
-	}
-	
 	private void initLoader(String url){
 		this.itBundle = ResourceBundle.getBundle("bundles.Agroludos", Locale.forLanguageTag("it"));
 		this.loader = new FXMLLoader(this.getClass().getResource(url), itBundle);
@@ -24,6 +21,10 @@ public abstract class AgroludosWindow {
 	
 	public FXMLLoader getLoader(){
 		return this.loader;
+	}
+	
+	public AgroludosController getController(){
+		return this.loader.getController();
 	}
 
 	abstract public String getUrl();
@@ -35,4 +36,6 @@ public abstract class AgroludosWindow {
 	abstract public int getHeight();
 	
 	abstract public String getTitle();
+	
+	abstract public boolean isDialog();
 }

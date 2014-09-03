@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="agro-views">
     <xs:complexType>
@@ -10,27 +11,11 @@
                   <xs:sequence>
                     <xs:element type="xs:string" name="name"/>
                     <xs:element type="xs:string" name="url"/>
-                    <xs:element type="xs:short" name="width"/>
-                    <xs:element type="xs:short" name="height"/>
-                    <xs:element type="xs:string" name="title"/>
+                    <xs:element type="xs:int" name="width"/>
+                    <xs:element type="xs:int" name="height"/>
+                    <xs:element type="xs:string" name="title" minOccurs="0"/>
                   </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="dialogs">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="dialog">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element type="xs:string" name="url"/>
-                    <xs:element type="xs:string" name="width"/>
-                    <xs:element type="xs:string" name="height"/>
-                    <xs:element type="xs:string" name="modal"/>
-                  </xs:sequence>
-                  <xs:attribute type="xs:string" name="name"/>
+                  <xs:attribute type="xs:string" name="tipo" use="required"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>

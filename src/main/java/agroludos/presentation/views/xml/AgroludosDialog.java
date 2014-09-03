@@ -3,9 +3,9 @@ package agroludos.presentation.views.xml;
 import javafx.fxml.FXMLLoader;
 
 class AgroludosDialog extends AgroludosWindow{
-	private Dialog dialog;
+	private View dialog;
 	
-	AgroludosDialog(Dialog dialog){
+	AgroludosDialog(View dialog){
 		super(dialog);
 		this.dialog = dialog;
 	}
@@ -38,5 +38,10 @@ class AgroludosDialog extends AgroludosWindow{
 	@Override
 	public FXMLLoader getLoader() {
 		return this.loader;
+	}
+
+	@Override
+	public boolean isDialog() {
+		return true;
 	}
 }

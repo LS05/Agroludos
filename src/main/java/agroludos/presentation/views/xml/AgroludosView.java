@@ -38,5 +38,10 @@ class AgroludosView extends AgroludosWindow{
 	@Override
 	public FXMLLoader getLoader() {
 		return this.loader;
+	}
+
+	@Override
+	public boolean isDialog() {
+		return false;
 	}	
 }

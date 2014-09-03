@@ -11,25 +11,24 @@ import javax.xml.bind.Unmarshaller;
 
 class ViewsParser implements AgroViewsParser{
 	private Map<String, AgroludosWindow> views;
-	private Map<String, AgroludosWindow> dialogs;
 	private AgroViews agView = null;
 	
 	ViewsParser(){
 		this.views = new HashMap<String, AgroludosWindow>();
-		this.dialogs = new HashMap<String, AgroludosWindow>();
 		this.setViews();
 		
 		List<View> listView = agView.getViews().getView();
-		List<Dialog> listDialog = agView.getDialogs().getDialog();
 		
 		for(View e : listView){
-			AgroludosWindow agWindow = new AgroludosView(e);
+			AgroludosWindow agWindow = null;
+			
+			if(e.getTipo().equals("view")){
+				agWindow = new AgroludosView(e);
+			} else if(e.getTipo().equals("dialog")){
+				agWindow = new AgroludosDialog(e);
+			}
+			
 			this.views.put(e.getName(), agWindow);
-		}
-		
-		for(Dialog e : listDialog){
-			AgroludosWindow agWindow = new AgroludosDialog(e);
-			this.dialogs.put(e.getName(), agWindow);
 		}
 	}
 	
@@ -51,9 +50,5 @@ class ViewsParser implements AgroViewsParser{
 	
 	public AgroludosWindow getView(String name){
 		return this.views.get(name);
-	}
-	
-	public AgroludosWindow getDialog(String name){
-		return this.dialogs.get(name);
 	}
 }
