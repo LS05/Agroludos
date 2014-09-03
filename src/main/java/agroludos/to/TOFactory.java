@@ -11,5 +11,17 @@ public interface TOFactory {
 	ConfigurazioneTO createConfigurazioneTO();
 
 	ManagerDiCompetizioneTO createMdCTO();
+	
+	CompetizioneTO createCompetizioneTO();
+	
+	IscrizioneTO createIscrizioneTO();
+	
+	OptionalTO createOptionalTO();
+	
+	PartecipanteTO createPartecipanteTO();
+	
+	TipoCompetizioneTO createTipoCompetizioneTO();
+	
+	TipoOptionalTO createTipoOptionalTO();
 
 }

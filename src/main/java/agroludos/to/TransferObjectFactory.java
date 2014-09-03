@@ -26,4 +26,34 @@ class TransferObjectFactory implements TOFactory {
 	public ManagerDiCompetizioneTO createMdCTO(){
 		return new ManagerDiCompetizione();
 	}
+
+	@Override
+	public CompetizioneTO createCompetizioneTO() {
+		return new Competizione();
+	}
+
+	@Override
+	public IscrizioneTO createIscrizioneTO() {
+		return new Iscrizione();
+	}
+
+	@Override
+	public OptionalTO createOptionalTO() {
+		return new Optional();
+	}
+
+	@Override
+	public PartecipanteTO createPartecipanteTO() {
+		return new Partecipante();
+	}
+
+	@Override
+	public TipoCompetizioneTO createTipoCompetizioneTO() {
+		return new TipoCompetizione();
+	}
+
+	@Override
+	public TipoOptionalTO createTipoOptionalTO() {
+		return new TipoOptional();
+	}
 }

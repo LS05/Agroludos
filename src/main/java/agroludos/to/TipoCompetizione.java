@@ -29,6 +29,11 @@ class TipoCompetizione implements TipoCompetizioneTO{
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	@Override
+	public String toString() {
+		return "TipoCompetizione [nome=" + nome + ", descrizione="
+				+ descrizione + "]";
+	}
 	
 	
 	
