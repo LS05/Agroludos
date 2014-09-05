@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import agroludos.exceptions.MethodNotFoundException;
+
 class CommandMap {
 	private Map<String, Method> methods;
 	
@@ -24,8 +26,16 @@ class CommandMap {
 			this.methods.put(classMethods[i].getName(), classMethods[i]);
 	}
 	
-	Method getMethod(String methodName){
-		return this.methods.get(methodName);
+	Method getMethod(String methodName) throws MethodNotFoundException{
+		Method m = null;
+		
+		if(this.methods.containsKey(methodName)){
+			m = this.methods.get(methodName);
+		} else {
+			throw new MethodNotFoundException("Metodo: " + methodName + ". Metodo non presente.");
+		}
+		
+		return m;
 	}
 
 }

@@ -28,8 +28,8 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO implements CompetizioneDAO 
 		Query query = session.getNamedQuery("updateCompetizione");
 		query.setParameter("nome", cmpto.getNome());
 		query.setParameter("data", cmpto.getData());
-		query.setParameter("nmin", cmpto.getnMin());
-		query.setParameter("nmax", cmpto.getnMax());
+		query.setParameter("nmin", cmpto.getNmin());
+		query.setParameter("nmax", cmpto.getNmax());
 		query.setParameter("costo", cmpto.getCosto());
 		query.setParameter("descrizione", cmpto.getDescrizione());
 		query.setParameter("tipo", cmpto.getTipo());
@@ -85,6 +85,15 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO implements CompetizioneDAO 
 		this.session.beginTransaction();
 		Query query = this.session.getNamedQuery("getCompetizioneByTipo");
 		query.setParameter("mdc", cmpto.getMdc());
+		List<CompetizioneTO> list = query.list();
+		return list;
+	}
+	
+	@Override
+	public List<CompetizioneTO> readById(CompetizioneTO cmpto) {
+		this.session.beginTransaction();
+		Query query = this.session.getNamedQuery("getCompetizioneById");
+		query.setParameter("id", cmpto.getId());
 		List<CompetizioneTO> list = query.list();
 		return list;
 	}

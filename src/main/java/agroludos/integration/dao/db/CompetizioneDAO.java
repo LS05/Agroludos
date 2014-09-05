@@ -17,4 +17,6 @@ public interface CompetizioneDAO {
 	List<CompetizioneTO> readByTipo(CompetizioneTO cmpto);
 	
 	List<CompetizioneTO> readByMdc(CompetizioneTO cmpto);
+
+	List<CompetizioneTO> readById(CompetizioneTO cmpto);
 }

@@ -1,12 +1,20 @@
 package agroludos.business.bd;
 
+import agroludos.business.as.AgroludosAS;
 import agroludos.exceptions.ApplicationException;
+import agroludos.exceptions.BusinessDelegateException;
 import agroludos.presentation.controller.mapper.CommandProcessor;
 import agroludos.to.AgroludosTO;
 
 public class BusinessDelegate{
 	
 	private CommandProcessor cmdMap;
+	
+	private AgroludosAS service;
+	
+	BusinessDelegate(String serviceName) throws BusinessDelegateException{
+		
+	}
 	
 	public Object gestisciServizio(String servizio) throws ApplicationException{
 		this.setClassMethod(servizio);

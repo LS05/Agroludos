@@ -33,7 +33,6 @@
 	<query name="getUtente">
         <![CDATA[ from agroludos.to.Utente u where u.username = :username and u.password = :password ]]></query>
 	<sql-query name="getRuoloUtente">
-        <![CDATA[SELECT tbl_ruoli.descrizione FROM tbl_utenti, tbl_ruoli WHERE tbl_ruoli.idruolo = :idruolo
- ]]>
+        <![CDATA[ SELECT tbl_ruoli.descrizione FROM tbl_utenti, tbl_ruoli WHERE tbl_ruoli.idruolo = :idruolo ]]>
  </sql-query>
 </hibernate-mapping>

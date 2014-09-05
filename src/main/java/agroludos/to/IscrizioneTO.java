@@ -1,6 +1,7 @@
 package agroludos.to;
 
 import java.util.Date;
+import java.util.List;
 
 public interface IscrizioneTO {
 	public Date getData();
@@ -8,4 +9,5 @@ public interface IscrizioneTO {
 	public Integer getId();
 	Integer getStato();
 	void setStato(Integer stato);
+	List<OptionalTO> getAllOptionals();
 }

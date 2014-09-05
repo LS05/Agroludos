@@ -11,6 +11,7 @@ import agroludos.business.as.gestoremds.LManagerDiSistema;
 import agroludos.business.as.gestoreutente.LUtente;
 import agroludos.business.as.gestoreutente.SUtente;
 import agroludos.exceptions.ApplicationException;
+import agroludos.exceptions.BusinessDelegateException;
 import agroludos.to.DatabaseTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.ManagerDiSistemaTO;

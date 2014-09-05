@@ -76,4 +76,14 @@ public class MySqlDAOFactory implements DBDAOFactory {
 	public IscrizioneDAO getIscrizioneDAO() {
 		return new MySqlIscrizioneDAO();
 	}
+	
+	public static void main(String args[]){
+		/*TransferObjectFactory fact = new TransferObjectFactory();
+		
+		
+		MySqlDAOFactory mDAO = new MySqlDAOFactory();
+		mDAO.initialize();
+		
+		*/
+	}
 }
