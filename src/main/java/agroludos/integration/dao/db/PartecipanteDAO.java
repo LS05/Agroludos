@@ -7,4 +7,5 @@ public interface PartecipanteDAO {
 	<T> PartecipanteTO readByUsername(T username);
 	<T> PartecipanteTO readByID(T id);
 	boolean update(PartecipanteTO parto);
+	boolean delete(PartecipanteTO parto);
 }

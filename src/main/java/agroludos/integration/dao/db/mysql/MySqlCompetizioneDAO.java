@@ -72,28 +72,39 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO implements CompetizioneDAO 
 	}
 
 	@Override
-	public List<CompetizioneTO> readByTipo(CompetizioneTO cmpto) {
+	public <T>List<CompetizioneTO> readByTipo(T tipo) {
 		this.session.beginTransaction();
 		Query query = this.session.getNamedQuery("getCompetizioneByTipo");
-		query.setParameter("tipo", cmpto.getTipo());
+		query.setParameter("tipo", tipo);
 		List<CompetizioneTO> list = query.list();
 		return list;
 	}
 
 	@Override
-	public List<CompetizioneTO> readByMdc(CompetizioneTO cmpto) {
+	public <T> List<CompetizioneTO> readByMdc(T mdc) {
 		this.session.beginTransaction();
-		Query query = this.session.getNamedQuery("getCompetizioneByTipo");
-		query.setParameter("mdc", cmpto.getMdc());
+		Query query = this.session.getNamedQuery("getCompetizioniByMdc");
+		query.setParameter("mdc", mdc);
 		List<CompetizioneTO> list = query.list();
 		return list;
 	}
 	
 	@Override
-	public List<CompetizioneTO> readById(CompetizioneTO cmpto) {
+	public <T> CompetizioneTO readById(T id) {
+		CompetizioneTO res=null;
 		this.session.beginTransaction();
 		Query query = this.session.getNamedQuery("getCompetizioneById");
-		query.setParameter("id", cmpto.getId());
+		query.setParameter("id", id);
+		List<CompetizioneTO> list = query.list();
+		res = list.get(0);
+		return res;
+	}
+
+	@Override
+	public List<CompetizioneTO> readCompetizioniAttive() {
+		this.session.beginTransaction();
+		Query query = this.session.getNamedQuery("getCompetizioniAttive");
+		query.setParameter("stato", 1);
 		List<CompetizioneTO> list = query.list();
 		return list;
 	}

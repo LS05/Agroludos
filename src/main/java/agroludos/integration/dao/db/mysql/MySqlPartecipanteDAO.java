@@ -42,4 +42,11 @@ class MySqlPartecipanteDAO extends MySqlAgroludosDAO implements PartecipanteDAO 
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
+	@Override
+	public boolean delete(PartecipanteTO parto) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
