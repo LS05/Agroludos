@@ -10,7 +10,7 @@ import agroludos.to.UtenteTO;
 class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
 
 	@Override
-	public UtenteTO read(UtenteTO uto) {
+	public UtenteTO autenticazione(UtenteTO uto) {
 		UtenteTO res = null;
 		
 		Query query = this.session.getNamedQuery("getUtente").setString("username", uto.getUsername())
@@ -33,13 +33,13 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
 	}
 
 	@Override
-	public UtenteTO readByUsername(String username) {
+	public <T>UtenteTO readByUsername(T username) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public UtenteTO readByID(String id) {
+	public <T>UtenteTO readByID(T id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

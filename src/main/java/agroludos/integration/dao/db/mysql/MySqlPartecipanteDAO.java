@@ -6,7 +6,6 @@ import org.hibernate.Query;
 
 import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.to.PartecipanteTO;
-import agroludos.to.UtenteTO;
 
 class MySqlPartecipanteDAO extends MySqlAgroludosDAO implements PartecipanteDAO {
 
@@ -16,11 +15,6 @@ class MySqlPartecipanteDAO extends MySqlAgroludosDAO implements PartecipanteDAO 
 		return false;
 	}
 
-	@Override
-	public PartecipanteTO read(UtenteTO uto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public <T> PartecipanteTO readByUsername(T username) {
