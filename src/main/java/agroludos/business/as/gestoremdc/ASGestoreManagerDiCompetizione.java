@@ -21,8 +21,8 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 	}
 
 	@Override
-	public ManagerDiCompetizioneTO getManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) {
-		return getManagerDiCompetizioneDAO().readByUsername(mdcto.getUsername());
+	public <T> ManagerDiCompetizioneTO getManagerDiCompetizione(T username) {
+		return getManagerDiCompetizioneDAO().readByUsername(username);
 	}
 
 	@Override

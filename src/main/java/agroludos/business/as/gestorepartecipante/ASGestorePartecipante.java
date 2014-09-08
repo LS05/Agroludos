@@ -1,5 +1,7 @@
 package agroludos.business.as.gestorepartecipante;
 
+import java.util.List;
+
 import agroludos.business.as.AgroludosAS;
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.DBDAOFactory;
@@ -29,6 +31,26 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 			throws DatabaseException {
 		PartecipanteDAO daoPar = getPartecipanteDAO();
 		return daoPar.update(parto);
+	}
+
+	@Override
+	public <T> PartecipanteTO getPartecipante(T username)
+			throws DatabaseException {
+		PartecipanteDAO daoPar = getPartecipanteDAO();
+		return daoPar.readByUsername(username);
+	}
+
+	@Override
+	public List<PartecipanteTO> getAllPartecipante() throws DatabaseException {
+		PartecipanteDAO daoPar = getPartecipanteDAO();
+		return daoPar.readAll();
+	}
+
+	@Override
+	public <T> PartecipanteTO getPartecipanteById(T id)
+			throws DatabaseException {
+		PartecipanteDAO daoPar = getPartecipanteDAO();
+		return daoPar.readByUsername(id);
 	}
 
 }

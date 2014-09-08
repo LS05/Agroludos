@@ -14,5 +14,5 @@ public interface OptionalDAO {
 	
 	List<OptionalTO> readAll();
 	
-	List<OptionalTO> readByTipo(Integer tipo);
+	<T> List<OptionalTO> readByTipo(T tipo);
 }

@@ -41,23 +41,37 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	}
 
 	@Override
-	public List<CompetizioneTO> getCompetizioniByMdc(CompetizioneTO cmpto)
+	public <T> List<CompetizioneTO> getCompetizioniByMdc(T username)
 			throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
-		return daoCmp.readByMdc(cmpto);
+		return daoCmp.readByMdc(username);
 	}
 
 	@Override
-	public List<CompetizioneTO> getCompetizioniByTipo(CompetizioneTO cmpto)
+	public <T> List<CompetizioneTO> getCompetizioniByTipo(T tipo)
 			throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
-		return daoCmp.readByTipo(cmpto);
+		return daoCmp.readByTipo(tipo);
 	}
 
 	@Override
 	public List<CompetizioneTO> getAllCompetizione() throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
 		return daoCmp.readAll();
+	}
+
+	@Override
+	public <T> CompetizioneTO getCompetizioneById(T id)
+			throws DatabaseException {
+		CompetizioneDAO daoCmp = getCompetizioneDAO();
+		return daoCmp.readById(id);
+	}
+
+	@Override
+	public <T> List<CompetizioneTO> getCompetizioniAttive()
+			throws DatabaseException {
+		CompetizioneDAO daoCmp = getCompetizioneDAO();
+		return daoCmp.readCompetizioniAttive();
 	}
 
 }
