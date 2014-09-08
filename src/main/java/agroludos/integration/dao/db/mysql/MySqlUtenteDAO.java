@@ -71,7 +71,12 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
 
 	@Override
 	public boolean crea(UtenteTO uto) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean res = false;
+		// TODO Aggiungere gestione eccezioni hibernate
+		this.session.beginTransaction();
+		this.session.save(uto);
+		res = true;
+		this.session.getTransaction().commit();
+		return res;
 	}
 }

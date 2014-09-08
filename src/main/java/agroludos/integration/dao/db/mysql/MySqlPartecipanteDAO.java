@@ -10,9 +10,14 @@ import agroludos.to.PartecipanteTO;
 class MySqlPartecipanteDAO extends MySqlAgroludosDAO implements PartecipanteDAO {
 
 	@Override
-	public boolean crea(PartecipanteTO mdcto) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean crea(PartecipanteTO parto) {
+		boolean res = false;
+		// TODO Aggiungere gestione eccezioni hibernate
+		this.session.beginTransaction();
+		this.session.save(parto);
+		res = true;
+		this.session.getTransaction().commit();
+		return res;
 	}
 
 
@@ -48,5 +53,12 @@ class MySqlPartecipanteDAO extends MySqlAgroludosDAO implements PartecipanteDAO 
 	public boolean delete(PartecipanteTO parto) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+
+	@Override
+	public List<PartecipanteTO> readAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
