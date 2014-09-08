@@ -14,6 +14,8 @@ import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.integration.dao.db.TipoOptionalDAO;
 import agroludos.integration.dao.db.UtenteDAO;
+import agroludos.to.ManagerDiCompetizioneTO;
+import agroludos.to.TransferObjectFactory;
 
 public class MySqlDAOFactory implements DBDAOFactory {
 
@@ -76,14 +78,17 @@ public class MySqlDAOFactory implements DBDAOFactory {
 	public IscrizioneDAO getIscrizioneDAO() {
 		return new MySqlIscrizioneDAO();
 	}
-	
+
 	public static void main(String args[]){
 		/*TransferObjectFactory fact = new TransferObjectFactory();
-		
-		
+		ManagerDiCompetizioneTO manTO = fact.createMdCTO();
+		MySqlDAOFactory daoFact = new MySqlDAOFactory();
+		daoFact.initialize();
+		ManagerDiCompetizioneDAO mdcDAO = daoFact.getManagerDiCompetizioneDAO();
+		manTO.setUsername("prova");
+		manTO.setEmail("masdasd@live.it");
+		mdcDAO.crea(manTO);
 		MySqlDAOFactory mDAO = new MySqlDAOFactory();
-		mDAO.initialize();
-		
-		*/
+		mDAO.initialize();*/
 	}
 }

@@ -22,7 +22,7 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 
 	@Override
 	public ManagerDiCompetizioneTO getManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) {
-		return getManagerDiCompetizioneDAO().read(mdcto);
+		return getManagerDiCompetizioneDAO().readByUsername(mdcto.getUsername());
 	}
 
 	@Override
@@ -33,6 +33,13 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 	
 	@Override
 	public boolean modificaManagerDiCompetizione(ManagerDiCompetizioneTO mdcto)
+			throws DatabaseException {
+		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
+		return daoMan.update(mdcto);
+	}
+	
+	@Override
+	public boolean eliminaManagerDiCompetizione(ManagerDiCompetizioneTO mdcto)
 			throws DatabaseException {
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
 		return daoMan.update(mdcto);

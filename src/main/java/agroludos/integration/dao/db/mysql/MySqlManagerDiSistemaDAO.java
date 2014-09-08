@@ -2,7 +2,6 @@ package agroludos.integration.dao.db.mysql;
 
 import agroludos.integration.dao.db.ManagerDiSistemaDAO;
 import agroludos.to.ManagerDiSistemaTO;
-import agroludos.to.UtenteTO;
 
 class MySqlManagerDiSistemaDAO extends MySqlAgroludosDAO implements ManagerDiSistemaDAO{
 
@@ -18,11 +17,8 @@ class MySqlManagerDiSistemaDAO extends MySqlAgroludosDAO implements ManagerDiSis
 	}
 
 	@Override
-	public ManagerDiSistemaTO read(UtenteTO uto) {
-		ManagerDiSistemaTO res = null;
-		this.session.beginTransaction();
-
-		this.session.getTransaction().commit();
-		return res;
+	public <T> ManagerDiSistemaTO readByUsername(T username) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

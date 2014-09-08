@@ -159,4 +159,8 @@ class Competizione implements CompetizioneTO{
 	public void setPartecipanti(Set<Partecipante> partecipanti) {
 		this.iscritti = partecipanti;
 	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 }

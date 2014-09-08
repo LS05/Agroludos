@@ -61,7 +61,7 @@ public class AgroludosBD {
 	}
 	
 	public UtenteTO autenticazioneUtente(UtenteTO uto) throws ApplicationException{
-		return lutente.getUtente(uto);
+		return lutente.autencazioneUtente(uto);
 	}
 	
 	public List<ManagerDiCompetizioneTO> getAllManagerDiCompetizione(){

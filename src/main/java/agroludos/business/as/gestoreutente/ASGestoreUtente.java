@@ -9,9 +9,9 @@ import agroludos.to.UtenteTO;
 class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 
 	@Override
-	public UtenteTO getUtente(UtenteTO uto) throws DatabaseException {
+	public UtenteTO autencazioneUtente(UtenteTO uto) throws DatabaseException {
 		UtenteDAO udao = this.getUtenteDAO();
-		return udao.read(uto);
+		return udao.autenticazione(uto);
 	}
 	
 	private UtenteDAO getUtenteDAO() throws DatabaseException{

@@ -31,8 +31,17 @@
 		</property>
 	</class>
 	<query name="getUtente">
-        <![CDATA[ from agroludos.to.Utente u where u.username = :username and u.password = :password ]]></query>
+        <![CDATA[ from agroludos.to.Utente u where u.stato = 1 and u.username = :username and u.password = :password ]]></query>
 	<sql-query name="getRuoloUtente">
-        <![CDATA[ SELECT tbl_ruoli.descrizione FROM tbl_utenti, tbl_ruoli WHERE tbl_ruoli.idruolo = :idruolo ]]>
- </sql-query>
+        <![CDATA[ SELECT tbl_ruoli.descrizione FROM tbl_utenti, tbl_ruoli WHERE tbl_ruoli.idruolo = :idruolo ]]></sql-query>
+	<query name="getAllManagerDiCompetizione">
+		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and idruolo = 1]]></query>
+	<query name="deleteManagerDiCompetizione">
+		<![CDATA[ update agroludos.to.Utente m set m.stato = 0 where m.username = :username and idruolo = 1]]></query>
+	<query name="getAllPartecipanti">
+		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.ruolo = 2 ]]></query>
+	<query name="getByUsername">
+		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.ruolo = :ruolo and m.username = :username ]]></query>
+	<query name="getByID">
+		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.ruolo = :ruolo and m.id = :id]]></query>
 </hibernate-mapping>

@@ -12,7 +12,6 @@
 		<property name="hbm2ddl.auto">update</property>
 		<mapping resource="agroludos/db/Configurazione.hbm.xml" />
 		<mapping resource="agroludos/db/Utente.hbm.xml" />
-		<mapping resource="agroludos/db/ManagerDiCompetizione.hbm.xml" />
 		<mapping resource="agroludos/db/TipoCompetizione.hbm.xml" />
 		<mapping resource="agroludos/db/TipoOptional.hbm.xml" />
 		<mapping resource="agroludos/db/Optional.hbm.xml" />

@@ -1,6 +1,6 @@
 package agroludos.to;
 
-class TransferObjectFactory implements TOFactory {
+public class TransferObjectFactory implements TOFactory {
 	
 	@Override
 	public DatabaseTO createDatabaseTO(){
@@ -24,7 +24,7 @@ class TransferObjectFactory implements TOFactory {
 	
 	@Override
 	public ManagerDiCompetizioneTO createMdCTO(){
-		return new ManagerDiCompetizione();
+		return (ManagerDiCompetizioneTO) new Utente();
 	}
 
 	@Override

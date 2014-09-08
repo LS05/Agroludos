@@ -6,4 +6,5 @@ import agroludos.to.ManagerDiCompetizioneTO;
 public interface SManagerDiCompetizione {
 	boolean inserisciManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) throws DatabaseException;
 	boolean modificaManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) throws DatabaseException;
+	boolean eliminaManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) throws DatabaseException;
 }
