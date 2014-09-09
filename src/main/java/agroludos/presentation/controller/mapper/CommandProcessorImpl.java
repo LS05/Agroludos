@@ -11,19 +11,12 @@ import agroludos.presentation.resph.ResposeContextFactory;
 
 class CommandProcessorImpl implements CommandProcessor{
 	private CommandMap cmdMap;
-	private MainCommandMap mainClass;
-	
 	private ResposeContextFactory respFact;
 	private AgroResponse response;
 
 	CommandProcessorImpl(){
 		ResponseFactory respFact = new ResponseFactory();
 		this.response = respFact.createResponse();
-	}
-
-	@Override
-	public Object execute() throws Throwable {
-		return new Object();
 	}
 
 	@Override
