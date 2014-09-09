@@ -1,5 +1,7 @@
 package agroludos.integration.dao.db;
 
+import java.util.List;
+
 import agroludos.to.PartecipanteTO;
 
 public interface PartecipanteDAO {
@@ -8,4 +10,5 @@ public interface PartecipanteDAO {
 	<T> PartecipanteTO readByID(T id);
 	boolean update(PartecipanteTO parto);
 	boolean delete(PartecipanteTO parto);
+	List<PartecipanteTO> readAll();
 }

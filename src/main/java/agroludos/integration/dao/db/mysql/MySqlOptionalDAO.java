@@ -51,7 +51,7 @@ class MySqlOptionalDAO extends MySqlAgroludosDAO implements OptionalDAO {
 	}
 
 	@Override
-	public List<OptionalTO> readByTipo(Integer tipo) {
+	public <T> List<OptionalTO> readByTipo(T tipo) {
 		this.session.beginTransaction();
 		Query query = this.session.getNamedQuery("getOptionalByTipo");
 		query.setParameter("tipo", tipo);

@@ -29,7 +29,7 @@ class MySqlManagerDiCompetizioneDAO extends MySqlUtenteDAO implements ManagerDiC
 
 	@Override
 	public boolean crea(ManagerDiCompetizioneTO mdcto) {
-		return this.crea(mdcto);
+		return super.crea(mdcto);
 	}
 
 	@Override
