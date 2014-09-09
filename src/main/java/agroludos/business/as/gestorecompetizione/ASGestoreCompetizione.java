@@ -9,7 +9,12 @@ import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.to.CompetizioneTO;
 
 class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompetizione{
-
+	
+	private CompetizioneDAO getCompetizioneDAO() {
+		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		return dbDAOFact.getCompetizioneDAO();
+	}
+	
 	@Override
 	public boolean inserisciCompetizione(CompetizioneTO cmpto)
 			throws DatabaseException {
@@ -19,11 +24,6 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		res = daoCmp.crea(cmpto);
 
 		return res;
-	}
-
-	private CompetizioneDAO getCompetizioneDAO() {
-		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-		return dbDAOFact.getCompetizioneDAO();
 	}
 
 	@Override

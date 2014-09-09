@@ -39,9 +39,9 @@
 	<query name="deleteManagerDiCompetizione">
 		<![CDATA[ update agroludos.to.Utente m set m.stato = 0 where m.username = :username and idruolo = 1]]></query>
 	<query name="getAllPartecipanti">
-		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.ruolo = 2 ]]></query>
+		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.tipo = 2 ]]></query>
 	<query name="getByUsername">
-		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.ruolo = :ruolo and m.username = :username ]]></query>
+		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.tipo = :tipo and m.username = :username ]]></query>
 	<query name="getByID">
-		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.ruolo = :ruolo and m.id = :id]]></query>
+		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.tipo = :tipo and m.id = :id]]></query>
 </hibernate-mapping>

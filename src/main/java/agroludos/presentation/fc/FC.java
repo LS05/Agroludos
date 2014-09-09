@@ -22,10 +22,8 @@ class FC implements FrontController{
 	@Override
 	public void eseguiRichiesta(AgroRequest request, AgroResponse response) {
 		AgroRequestContext requestContext = this.reqFact.createRequestContext(request);
-		AgroResponseContext responseContext = null;
 		ApplicationController ac = this.acFact.getAC();
-		
-		responseContext = ac.gestisciRichiesta(requestContext);
+		AgroResponseContext responseContext = ac.gestisciRichiesta(requestContext);
 		ac.gestisciRisposta(requestContext, responseContext);
 	}
 }

@@ -1,5 +1,7 @@
 package agroludos.integration.dao.db.mysql;
 
+import java.util.List;
+
 import org.hibernate.Query;
 
 import agroludos.integration.dao.db.IscrizioneDAO;
@@ -53,6 +55,15 @@ class MySqlIscrizioneDAO extends MySqlAgroludosDAO implements IscrizioneDAO{
 		this.session.getTransaction().commit();
 
 		return res;
+	}
+
+	@Override
+	public List<IscrizioneTO> getAllIscrizioni() {
+		this.session.beginTransaction();
+		Query query = session.getNamedQuery("getAllIscrizioni");
+		List<IscrizioneTO> list = query.list();
+		this.session.getTransaction().commit();
+		return list;
 	}
 
 }

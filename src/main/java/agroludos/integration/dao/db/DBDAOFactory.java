@@ -5,59 +5,59 @@ public interface DBDAOFactory {
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
 	 * ManagerDiCompetizione
 	 */
-	public abstract ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO();
+	public ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO();
 
 	/**
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
 	 * ManagerDiSistema
 	 */
-	public abstract ManagerDiSistemaDAO getManagerDiSistemaDAO();
+	public ManagerDiSistemaDAO getManagerDiSistemaDAO();
 
 	/**
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
 	 * Competizione
 	 */
-	public abstract CompetizioneDAO getCompetizioneDAO();
+	public CompetizioneDAO getCompetizioneDAO();
 
 	/**
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
 	 * Partecipante
 	 */
-	public abstract TipoCompetizioneDAO getTipoCompetizioneDAO();
+	public TipoCompetizioneDAO getTipoCompetizioneDAO();
 
 	/**
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
 	 * Partecipante
 	 */
-	public abstract PartecipanteDAO getPartecipanteDAO();
+	public PartecipanteDAO getPartecipanteDAO();
 
 	/**
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
 	 * Partecipante
 	 */
-	public abstract TipoOptionalDAO getTipoOptionalDAO();
+	public TipoOptionalDAO getTipoOptionalDAO();
 
 	/**
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
 	 * Partecipante
 	 */
-	public abstract OptionalDAO getOptionalDAO();
+	public OptionalDAO getOptionalDAO();
 
 	/**
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
 	 * Partecipante
 	 */
-	public abstract UtenteDAO getUtenteDAO();
+	public UtenteDAO getUtenteDAO();
 
 	/**
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
 	 * Partecipante
 	 */
-	public abstract DBConfigurazioneDAO getConfigurazioneDAO();	
+	public DBConfigurazioneDAO getConfigurazioneDAO();	
 	
 	/**
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Iscrizione
 	 * 
 	 */
-	public abstract IscrizioneDAO getIscrizioneDAO();
+	public IscrizioneDAO getIscrizioneDAO();
 }

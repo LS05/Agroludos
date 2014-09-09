@@ -1,5 +1,7 @@
 package agroludos.integration.dao.db.mysql;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 
 import agroludos.exceptions.DatabaseException;
@@ -14,7 +16,9 @@ import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.integration.dao.db.TipoOptionalDAO;
 import agroludos.integration.dao.db.UtenteDAO;
+import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
+import agroludos.to.PartecipanteTO;
 import agroludos.to.TransferObjectFactory;
 
 public class MySqlDAOFactory implements DBDAOFactory {
@@ -80,15 +84,16 @@ public class MySqlDAOFactory implements DBDAOFactory {
 	}
 
 	public static void main(String args[]){
-		/*TransferObjectFactory fact = new TransferObjectFactory();
-		ManagerDiCompetizioneTO manTO = fact.createMdCTO();
+		TransferObjectFactory fact = new TransferObjectFactory();
+		IscrizioneTO iscTO = fact.createIscrizioneTO();
 		MySqlDAOFactory daoFact = new MySqlDAOFactory();
 		daoFact.initialize();
-		ManagerDiCompetizioneDAO mdcDAO = daoFact.getManagerDiCompetizioneDAO();
-		manTO.setUsername("prova");
-		manTO.setEmail("masdasd@live.it");
-		mdcDAO.crea(manTO);
-		MySqlDAOFactory mDAO = new MySqlDAOFactory();
-		mDAO.initialize();*/
+		PartecipanteDAO parDAO = daoFact.getPartecipanteDAO();
+		PartecipanteTO listPart = parDAO.readByID(62);
+		IscrizioneDAO iscDAO = daoFact.getIscrizioneDAO();
+		List<IscrizioneTO> list = iscDAO.getAllIscrizioni();
+		IscrizioneTO iscr = list.get(0);
+		System.out.println(iscr.getPartecipanteIscrizione().getSrc());
+		PartecipanteTO part = iscr.getPartecipanteIscrizione();
 	}
 }

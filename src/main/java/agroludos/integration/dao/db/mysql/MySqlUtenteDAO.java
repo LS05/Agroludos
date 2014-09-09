@@ -35,7 +35,7 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
 		this.session.beginTransaction();
 		Query query = this.session.getNamedQuery("getByUsername");
 		query.setParameter("username", username);
-		query.setParameter("ruolo", ruolo);
+		query.setParameter("tipo", ruolo);
 		List<UtenteTO> list = query.list();
 		res = list.get(0);
 		this.setRuolo(res);
@@ -46,7 +46,7 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
 		this.session.beginTransaction();
 		Query query = this.session.getNamedQuery("getByID");
 		query.setParameter("id", id);
-		query.setParameter("ruolo", ruolo);
+		query.setParameter("tipo", ruolo);
 		List<UtenteTO> list = query.list();
 		return list.get(0);
 	}

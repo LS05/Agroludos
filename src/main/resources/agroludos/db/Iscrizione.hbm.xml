@@ -18,16 +18,18 @@
 		<property name="idcompetizione" type="integer">
 			<column name="idcompetizione" not-null="true" />
 		</property>
-		<property name="idpartecipante" type="integer">
+		<many-to-one name="partecipante" class="agroludos.to.Partecipante" lazy="false">
 			<column name="idpartecipante" not-null="true" />
-		</property>
+		</many-to-one>
 		<set name="optionals" cascade="all" table="tbl_opt_iscr">
-			<key column="idiscrizione"/>
-         	<many-to-many column="idoptional" class="agroludos.to.Optional"/>
-      	</set>
+			<key column="idiscrizione" />
+			<many-to-many column="idoptional" class="agroludos.to.Optional" />
+		</set>
 	</class>
+	<query name="getAllIscrizioni">
+        <![CDATA[ from agroludos.to.Iscrizione i where i.stato = 1 ]]></query>
 	<query name="updateIscrizione">
-        <![CDATA[ update agroludos.to.Iscrizione i set i.data = :data, i.stato = :stato where i.id = :id ]]></query>	
+        <![CDATA[ update agroludos.to.Iscrizione i set i.data = :data, i.stato = :stato where i.id = :id ]]></query>
 	<query name="annullaIscrizione">
         <![CDATA[ update agroludos.to.Iscrizione i set i.stato = :stato where i.id = :id ]]></query>
 </hibernate-mapping>

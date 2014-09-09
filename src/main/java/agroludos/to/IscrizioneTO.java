@@ -10,4 +10,5 @@ public interface IscrizioneTO {
 	Integer getStato();
 	void setStato(Integer stato);
 	List<OptionalTO> getAllOptionals();
+	PartecipanteTO getPartecipanteIscrizione();
 }

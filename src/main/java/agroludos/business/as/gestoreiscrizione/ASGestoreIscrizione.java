@@ -7,35 +7,36 @@ import agroludos.integration.dao.db.IscrizioneDAO;
 import agroludos.to.IscrizioneTO;
 
 class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizione{
-
+	
+	private IscrizioneDAO getIscrizioneDAO() {
+		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		return dbDAOFact.getIscrizioneDAO();
+	}
+	
 	@Override
 	public boolean inserisciIscrizione(IscrizioneTO iscto)
 			throws DatabaseException {
 		boolean res = false;
 
-		IscrizioneDAO daoIsc = getIscrizioneDAO();
-		res = daoIsc.crea(iscto);
+		IscrizioneDAO iscDAO = getIscrizioneDAO();
+		res = iscDAO.crea(iscto);
 
 		return res;
-	}
-
-	private IscrizioneDAO getIscrizioneDAO() {
-		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-		return dbDAOFact.getIscrizioneDAO();
 	}
 
 	@Override
 	public boolean modificaIscrizione(IscrizioneTO iscto)
 			throws DatabaseException {
-		IscrizioneDAO daoIsc = getIscrizioneDAO();
-		return daoIsc.update(iscto);
+		IscrizioneDAO iscDAO = getIscrizioneDAO();
+		return iscDAO.update(iscto);
 	}
 
 	@Override
 	public boolean eliminaIscrizione(IscrizioneTO iscto)
 			throws DatabaseException {
-		IscrizioneDAO daoIsc = getIscrizioneDAO();
-		return daoIsc.annullaIscrizione(iscto);
+		IscrizioneDAO iscDAO = getIscrizioneDAO();
+		
+		return iscDAO.annullaIscrizione(iscto);
 	}
 
 

@@ -11,6 +11,9 @@ class Iscrizione implements IscrizioneTO{
 	private Integer id;
 	private Integer stato;
 	private Integer idcompetizione;
+	
+	private Partecipante partecipante;
+	
 	private Integer idpartecipante;
 	
 	public Set<Optional> optionals;
@@ -47,14 +50,6 @@ class Iscrizione implements IscrizioneTO{
 		this.idcompetizione = idcompetizione;
 	}
 	
-	public Integer getIdpartecipante() {
-		return idpartecipante;
-	}
-	
-	public void setIdpartecipante(Integer idpartecipante) {
-		this.idpartecipante = idpartecipante;
-	}
-	
 	@Override
 	public List<OptionalTO> getAllOptionals(){
 		List<OptionalTO> res = new ArrayList<OptionalTO>();
@@ -73,5 +68,25 @@ class Iscrizione implements IscrizioneTO{
 	public void setOptionals(Set<Optional> optionals) {
 		this.optionals = optionals;
 	}
+	public Integer getIdpartecipante() {
+		return idpartecipante;
+	}
+	public void setIdpartecipante(Integer idpartecipante) {
+		this.idpartecipante = idpartecipante;
+	}
+	
+	@Override
+	public PartecipanteTO getPartecipanteIscrizione() {
+		return this.partecipante;
+	}
+	
+	public Partecipante getPartecipante() {
+		return partecipante;
+	}
+	public void setPartecipante(Partecipante partecipante) {
+		this.partecipante = partecipante;
+	}
+
+	
 
 }

@@ -30,11 +30,11 @@
 		<property name="dataSRC" type="date">
 			<column name="data_src" not-null="true" />
 		</property>
-		<set name="iscrizioni" cascade="all" table="tbl_iscrizione">
-			<key column="idpartecipante"/>
-         	<many-to-many column="idiscrizione" class="agroludos.to.Iscrizione"/>
-      	</set>
+		<set name="iscrizioni" table="tbl_iscrizione" fetch="select">
+			<key column="idpartecipante" />
+			<one-to-many class="agroludos.to.Iscrizione" />
+		</set>
 	</class>
 	<query name="getPartecipanteById">
-        <![CDATA[ from agroludos.to.Partecipante p where p.id = :id ]]></query> 
+        <![CDATA[ from agroludos.to.Partecipante p where p.id = :id ]]></query>
 </hibernate-mapping>
