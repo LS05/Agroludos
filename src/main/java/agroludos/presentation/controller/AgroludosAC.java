@@ -13,24 +13,24 @@ import agroludos.presentation.views.Navigator;
 
 class AgroludosAC implements ApplicationController{
 	private CommandFactory commandFactory;
-	private Command command;
 	private CommandProcessor commandProcessor;
 	private Navigator nav;
 	
 	@Override
 	public AgroResponseContext gestisciRichiesta(AgroRequestContext request) {
 		AgroResponseContext response = null;
+		Command command = null;
 		String commandName = request.getCommandName();
 		
 		try {
-			this.command = this.commandFactory.getCommand(commandName);
+			command = this.commandFactory.getCommand(commandName);
 		} catch (ServiceNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		try {
-			response = this.commandProcessor.invoke(this.command, request);
+			response = this.commandProcessor.invoke(command, request);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
@@ -50,7 +50,7 @@ class AgroludosAC implements ApplicationController{
 			dispatcher = this.nav.getRequestDispatcher(page);
 			dispatcher.forward(request, response);
 		} catch(Exception e) {
-			// Handle Exception
+			// TODO Auto-generated catch block
 		}
 	}
 
