@@ -4,4 +4,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	<bean id="utilityXml" class="agroludos.utility.xml.XmlUtil" />
+	<bean id="passwordEncryptor" class="org.jasypt.util.password.ConfigurablePasswordEncryptor">
+	</bean>
+	<bean id="pwdEnc" class="agroludos.utility.PasswordEncryptionImpl">
+		<constructor-arg ref="passwordEncryptor" />
+	</bean>
 </beans>

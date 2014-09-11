@@ -6,6 +6,8 @@
 	<import resource="classpath:agroludos/beans/system.xml" />
 	<import resource="classpath:agroludos/beans/transferobject.xml" />
 	<import resource="classpath:agroludos/beans/dao.xml" />
+	<import resource="classpath:agroludos/beans/utility.xml" />
+	
 	<bean id="agroludosAS" class="agroludos.business.as.AgroludosAS" abstract="true">
 		<property name="dbFact" ref="dbFactory" />
 		<property name="sysConf" ref="systemConf" />
@@ -20,6 +22,7 @@
 	<bean id="gestoreManagerSistema"
 		class="agroludos.business.as.gestoremds.ASGestoreManagerDiSistema"
 		parent="agroludosAS">
+		<constructor-arg ref="pwdEnc" />
 	</bean>
 	<bean id="gestoreManagerCompetizione"
 		class="agroludos.business.as.gestoremdc.ASGestoreManagerDiCompetizione"
