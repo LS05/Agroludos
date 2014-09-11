@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
+import agroludos.to.DatabaseTO;
+import agroludos.to.ManagerDiSistemaTO;
 import agroludos.utility.SecurePassword;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -53,8 +55,10 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 	@FXML private TextField txtTelefonoMds;
 
 	//hashmap dei contenuti delle text
-	private Map<String, String> parametriDB = new HashMap<>();
-	private Map<String, String> parametriMds = new HashMap<>();
+	DatabaseTO dbto = null;
+	ManagerDiSistemaTO mdsto = null;
+//	private Map<String, String> parametriDB = new HashMap<>();
+//	private Map<String, String> parametriMds = new HashMap<>();
 
 	private AgroRequest richiesta;
 
@@ -103,14 +107,21 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 				) {
 
 			//copio il contenuto delle textfield nell'hashmap parametri
-			parametriDB.put("tipo", this.cmbTipoDB.getValue());
-			parametriDB.put("server", txtServerDB.getText());
-			parametriDB.put("porta", txtPortaDB.getText());
-			parametriDB.put("nome", txtNomeDB.getText());
-			parametriDB.put("username", txtUsernameDB.getText());
-			parametriDB.put("password", this.txtPasswordDB.getText());
+//			parametriDB.put("tipo", this.cmbTipoDB.getValue());
+//			parametriDB.put("server", txtServerDB.getText());
+//			parametriDB.put("porta", txtPortaDB.getText());
+//			parametriDB.put("nome", txtNomeDB.getText());
+//			parametriDB.put("username", txtUsernameDB.getText());
+//			parametriDB.put("password", this.txtPasswordDB.getText());
+			
+			dbto.setTipo(this.cmbTipoDB.getValue());
+			dbto.setServer(txtServerDB.getText());
+			dbto.setPorta(txtPortaDB.getText());
+			dbto.setNome(txtNomeDB.getText());
+			dbto.setUsername(txtUsernameDB.getText());
+			dbto.setPassword(this.txtPasswordDB.getText());
 
-			this.richiesta = reqFact.createDataRequest(parametriDB, "confermaConfigurazione");
+			this.richiesta = reqFact.createDataRequest(dbto, "confermaConfigurazione");
 			this.risposta = respFact.createResponse();
 			frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		}
@@ -153,14 +164,21 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 				e.printStackTrace();
 			}
 			//copio il contenuto delle textfield nell'hashmap parametri
-			parametriMds.put("nome", txtNomeMds.getText());
-			parametriMds.put("cognome", txtCognomeMds.getText());
-			parametriMds.put("username", txtUsernameMds.getText());
-			parametriMds.put("password", securePassword);
-			parametriMds.put("email", txtEmailMds.getText());
-			parametriMds.put("telefono", txtTelefonoMds.getText());
+//			parametriMds.put("nome", txtNomeMds.getText());
+//			parametriMds.put("cognome", txtCognomeMds.getText());
+//			parametriMds.put("username", txtUsernameMds.getText());
+//			parametriMds.put("password", securePassword);
+//			parametriMds.put("email", txtEmailMds.getText());
+//			parametriMds.put("telefono", txtTelefonoMds.getText());
+			
+			mdsto.setNome(txtNomeMds.getText());
+			mdsto.setCognome(txtCognomeMds.getText());
+			mdsto.setUsername(txtUsernameMds.getText());
+			mdsto.setPassword(securePassword);
+			mdsto.setEmail(txtEmailMds.getText());
+			//mnca il telefono
 
-			this.richiesta = reqFact.createDataRequest(parametriMds, "nuovoManagerDiSistema");
+			this.richiesta = reqFact.createDataRequest(mdsto, "nuovoManagerDiSistema");
 			boolean res = (boolean)frontController.eseguiRichiesta(richiesta);
 			//se non ci sono errori mostra la finestra di login
 			if(res){
