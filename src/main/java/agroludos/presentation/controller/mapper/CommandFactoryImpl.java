@@ -1,5 +1,6 @@
 package agroludos.presentation.controller.mapper;
 
+import agroludos.exceptions.ServiceNotFoundException;
 import agroludos.presentation.controller.mapper.xml.CommandParser;
 
 class CommandFactoryImpl implements CommandFactory{
@@ -11,7 +12,7 @@ class CommandFactoryImpl implements CommandFactory{
 	}
 
 	@Override
-	public Command getCommand(String commandName) {
+	public Command getCommand(String commandName) throws ServiceNotFoundException {
 		String className = this.cmdParser.getClassName(commandName);
 		String succView = this.cmdParser.getSuccView(commandName);
 		String failView = this.cmdParser.getFailView(commandName);

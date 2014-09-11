@@ -1,5 +1,6 @@
 package agroludos.presentation.controller;
 
+import agroludos.exceptions.ServiceNotFoundException;
 import agroludos.presentation.controller.mapper.Command;
 import agroludos.presentation.controller.mapper.CommandFactory;
 import agroludos.presentation.controller.mapper.CommandProcessor;
@@ -20,7 +21,13 @@ class AgroludosAC implements ApplicationController{
 	public AgroResponseContext gestisciRichiesta(AgroRequestContext request) {
 		AgroResponseContext response = null;
 		String commandName = request.getCommandName();
-		this.command = this.commandFactory.getCommand(commandName);
+		
+		try {
+			this.command = this.commandFactory.getCommand(commandName);
+		} catch (ServiceNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		try {
 			response = this.commandProcessor.invoke(this.command, request);

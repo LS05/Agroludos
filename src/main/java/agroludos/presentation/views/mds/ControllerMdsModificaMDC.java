@@ -1,8 +1,6 @@
 package agroludos.presentation.views.mds;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import agroludos.presentation.req.AgroRequest;

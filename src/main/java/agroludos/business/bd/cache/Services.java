@@ -6,7 +6,7 @@ import java.util.Map;
 import agroludos.business.as.AgroludosService;
 import agroludos.business.as.gestoreconfigurazione.LConfigurazione;
 import agroludos.business.as.gestoreconfigurazione.SConfigurazione;
-import agroludos.exceptions.ServiceCacheException;
+import agroludos.exceptions.ServiceNotFoundException;
 
 class Services {
 	private LConfigurazione lconfigurazione;
@@ -28,11 +28,11 @@ class Services {
 		this.services.put(SConfigurazione.class.getName(), this.sconfigurazione);
 	}
 	
-	public AgroludosService getService(String serviceName) throws ServiceCacheException{
+	public AgroludosService getService(String serviceName) throws ServiceNotFoundException{
 		AgroludosService service = this.services.get(serviceName);
 
 		if(service == null){
-			throw new ServiceCacheException("Servizio non trovato!");
+			throw new ServiceNotFoundException("Servizio non trovato!");
 		}
 
 		return service;
