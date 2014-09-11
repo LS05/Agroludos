@@ -1,33 +1,17 @@
 package agroludos.presentation.req;
 
-import java.util.Map;
+import agroludos.to.AgroludosTO;
 
 class FrameRequest extends DataRequest {
-	private Map<String, String> reqData;
+	private AgroludosTO reqData;
 	
-	FrameRequest(Map<String, String> data, String commandName) {
+	FrameRequest(AgroludosTO data, String commandName) {
 		super(commandName, true);
 		this.reqData = data;
 	}
-	
-	FrameRequest(String commandName) {
-		super(commandName, false);
-	}
 
 	@Override
-	public Object getData(Object key) throws DataFieldException{
-		Object data = null;
-		
-		if(this.reqData.containsKey(key))
-			data = this.reqData.get(key);
-		else
-			throw new DataFieldException("Data Field: " + key.toString() + " Inesistente!");
-		
-		return data;
-	}
-
-	@Override
-	public Object getData() {
+	public AgroludosTO getData() {
 		return this.reqData;
 	}
 }

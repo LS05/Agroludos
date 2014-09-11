@@ -13,7 +13,7 @@ public abstract class AgroRequest {
 		return this.commandName;
 	}
 	
-	public boolean isParameter(){
+	public boolean isParam(){
 		return this.isParam;
 	}
 }

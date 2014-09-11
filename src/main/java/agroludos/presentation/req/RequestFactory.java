@@ -1,16 +1,16 @@
 package agroludos.presentation.req;
 
-import java.util.Map;
+import agroludos.to.AgroludosTO;
 
 public class RequestFactory {
 	
 	private RequestFactory(){ }
 	
-	public DataRequest createDataRequest(Map<String, String> data, String commandName){
+	public DataRequest createDataRequest(AgroludosTO data, String commandName){
 		return new FrameRequest(data, commandName);
 	}
 	
-	public AgroRequest createRequest(String commandName){
+	public AgroRequest createSimpleRequest(String commandName){
 		return new SimpleRequest(commandName);
 	}
 }

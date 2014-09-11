@@ -5,8 +5,10 @@ import agroludos.presentation.resp.AgroResponse;
 class AgroResponseContextImpl implements AgroResponseContext{
 	private AgroResponse response;
 	private String viewName;
+	private Object mainData;
 	
-	AgroResponseContextImpl(String viewName){
+	@Override
+	public void setLogicalViewName(String viewName){
 		this.viewName = viewName;
 	}
 	
@@ -18,10 +20,21 @@ class AgroResponseContextImpl implements AgroResponseContext{
 	@Override
 	public void setResponse(AgroResponse response) {
 		this.response = response;
+		this.response.setResponse(this.mainData);
 	}
 
 	@Override
 	public AgroResponse getResponse() {
 		return this.response;
+	}
+
+	@Override
+	public void setData(Object data) {
+		this.mainData = data;
+	}
+
+	@Override
+	public Object getData() {
+		return this.mainData;
 	}
 }

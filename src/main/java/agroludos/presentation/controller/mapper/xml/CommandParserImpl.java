@@ -56,18 +56,6 @@ class CommandParserImpl implements CommandParser {
 	}
 	
 	@Override
-	public String getFailPath(String commandName){
-		Forward res = getRes(commandName, "failure");
-		return res.getPath();
-	}
-	
-	@Override
-	public String getSuccPath(String commandName){
-		Forward res = getRes(commandName, "success");
-		return res.getPath();
-	}
-	
-	@Override
 	public String getFailView(String commandName) {
 		Forward res = getRes(commandName, "failure");
 		return res.getName();

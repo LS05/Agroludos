@@ -15,8 +15,7 @@
 
 	<bean id="cmdProcess"
 		class="agroludos.presentation.controller.mapper.CommandProcessorImpl">
-		<property name="respFact" ref="respCtxFactory" />
-		<property name="businessDelegate" ref="agroludosBD" />
+		<constructor-arg ref="agroludosBD" />
 	</bean>
 
 </beans>

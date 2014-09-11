@@ -6,6 +6,8 @@
 	<import resource="classpath:agroludos/beans/agroludosas.xml" />
 	<import resource="classpath:agroludos/beans/commandmapper.xml" />
 	<import resource="classpath:agroludos/beans/services.xml" />
+	<import resource="classpath:agroludos/beans/response.xml" />
+	
 	<bean id="serviceCache" class="agroludos.business.bd.cache.ServiceCacheImpl">
 		<constructor-arg ref="services" />
 	</bean>
@@ -13,6 +15,7 @@
 		<constructor-arg ref="serviceCache" />
 	</bean>
 	<bean id="serviceHandler" class="agroludos.business.bd.ServiceHandler">
+		<property name="response" ref="respCtx" />
 	</bean>
 	<bean id="agroludosBD" class="agroludos.business.bd.AgroludosBD">
 		<constructor-arg ref="serviceLocator" />

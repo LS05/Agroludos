@@ -21,14 +21,14 @@ public class AppConfig extends AgroludosController implements App{
 	public void initialize(Stage stage){
 		this.stage = stage;
 		nav.setStage(stage);
-		this.richiesta = reqFact.createRequest("checkConfigurazione");
+		this.richiesta = reqFact.createSimpleRequest("checkConfigurazione");
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(richiesta, risposta);
 	}
 	
 	@Override
 	public void show(){
-		this.richiesta = reqFact.createRequest("testConnessioneDB");
+		this.richiesta = reqFact.createSimpleRequest("testConnessioneDB");
 		this.risposta = respFact.createResponse();
 		
 		if(this.isConf){

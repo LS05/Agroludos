@@ -13,15 +13,14 @@ class CommandFactoryImpl implements CommandFactory{
 	@Override
 	public Command getCommand(String commandName) {
 		String className = this.cmdParser.getClassName(commandName);
-		String failPath = cmdParser.getFailPath(commandName);
-		String succPath = cmdParser.getSuccPath(commandName);
-		String viewName = cmdParser.getSuccView(commandName);
+		String succView = this.cmdParser.getSuccView(commandName);
+		String failView = this.cmdParser.getFailView(commandName);
 		
 		this.command = new CommandImpl();
-		this.command.setFailPath(failPath);
-		this.command.setSuccessPath(succPath);
+		
 		this.command.setClassName(className);
-		this.command.setViewName(viewName);
+		this.command.setSuccView(succView);
+		this.command.setFailView(failView);
 		
 		return this.command;
 	}

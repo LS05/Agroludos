@@ -4,6 +4,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="respCtxFactory" class="agroludos.presentation.resph.ResposeContextFactory"></bean>
-	<bean id="respFactory" class="agroludos.presentation.resp.ResponseFactory"></bean>
+	<bean id="respCtx" class="agroludos.presentation.resph.AgroResponseContextImpl">
+	</bean>
+	<bean id="respFactory" class="agroludos.presentation.resp.ResponseFactory">
+	</bean>
 </beans>

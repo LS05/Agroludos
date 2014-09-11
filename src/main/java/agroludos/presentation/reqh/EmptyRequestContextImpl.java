@@ -1,8 +1,9 @@
 package agroludos.presentation.reqh;
 
 import agroludos.presentation.req.AgroRequest;
+import agroludos.to.AgroludosTO;
 
-public class EmptyRequestContextImpl implements EmptyRequestContext{
+public class EmptyRequestContextImpl implements AgroRequestContext{
 	private AgroRequest request;
 	
 	@Override
@@ -22,12 +23,17 @@ public class EmptyRequestContextImpl implements EmptyRequestContext{
 
 	@Override
 	public boolean isParam() {
-		return request.isParameter();
+		return request.isParam();
 	}
 
 	@Override
 	public AgroRequest getRequest() {
 		return this.request;
+	}
+
+	@Override
+	public AgroludosTO getData() {
+		return null;
 	}
 	
 }

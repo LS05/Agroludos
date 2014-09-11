@@ -1,17 +1,17 @@
 package agroludos.presentation.reqh;
 
 import agroludos.presentation.req.AgroRequest;
-import agroludos.presentation.req.DataFieldException;
 import agroludos.presentation.req.DataRequest;
+import agroludos.to.AgroludosTO;
 
-public class DataRequestContextImpl implements DataRequestContext{
+public class DataRequestContextImpl implements AgroRequestContext{
 	
 	protected DataRequest richiesta;
 	protected boolean param;
 	
 	public void initialize(AgroRequest request) {
 		this.richiesta = (DataRequest)request;
-		this.param = request.isParameter();
+		this.param = request.isParam();
 	}
 	
 	public boolean isParam(){
@@ -24,12 +24,8 @@ public class DataRequestContextImpl implements DataRequestContext{
 	}
 
 	@Override
-	public Object getData(Object key) throws DataFieldException{
-			return this.richiesta.getData(key);
-	}
-
-	public String getStringData(Object key) throws DataFieldException{
-		return this.richiesta.getData(key).toString();
+	public AgroludosTO getData(){
+			return this.richiesta.getData();
 	}
 
 	@Override

@@ -24,6 +24,7 @@ class FC implements FrontController{
 		AgroRequestContext requestContext = this.reqFact.createRequestContext(request);
 		ApplicationController ac = this.acFact.getAC();
 		AgroResponseContext responseContext = ac.gestisciRichiesta(requestContext);
+		responseContext.setResponse(response);
 		ac.gestisciRisposta(requestContext, responseContext);
 	}
 }

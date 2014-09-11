@@ -6,7 +6,7 @@ import agroludos.exceptions.ServiceCacheException;
 import agroludos.exceptions.ServiceHandlerException;
 import agroludos.presentation.controller.mapper.Command;
 import agroludos.presentation.reqh.AgroRequestContext;
-import agroludos.presentation.resp.AgroResponse;
+import agroludos.presentation.resph.AgroResponseContext;
 
 class AgroludosBD implements BusinessDelegate{
 	private ServiceLocator locator;
@@ -18,13 +18,13 @@ class AgroludosBD implements BusinessDelegate{
 	}
 	
 	@Override
-	public AgroResponse gestisciServizio(Command command, AgroRequestContext request) throws ApplicationException{
+	public AgroResponseContext gestisciServizio(Command command, AgroRequestContext request) throws ApplicationException{
 		AgroludosService service = null;
-		
+		AgroResponseContext res = null;
 		try {
 			service = this.locator.lookup(command.getClassName());
 			this.handler.setService(service);
-			this.handler.handleService(command, request);
+			res = this.handler.handleService(command, request);
 		} catch(ServiceHandlerException e){
 			e.printStackTrace();
 		} catch (ServiceCacheException e) {
@@ -32,6 +32,6 @@ class AgroludosBD implements BusinessDelegate{
 			e.printStackTrace();
 		}
 		
-		return null;
+		return res;
 	}
 }

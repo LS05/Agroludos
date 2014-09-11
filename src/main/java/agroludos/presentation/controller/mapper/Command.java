@@ -2,11 +2,9 @@ package agroludos.presentation.controller.mapper;
 
 public interface Command {
 
-	String getSuccPath();
+	String getSuccView();
 
-	String getFailPath();
-	
-	String getViewName();
+	String getFailView();
 	
 	String getClassName();
 }

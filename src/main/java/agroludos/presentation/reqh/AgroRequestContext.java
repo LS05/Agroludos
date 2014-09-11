@@ -1,6 +1,7 @@
 package agroludos.presentation.reqh;
 
 import agroludos.presentation.req.AgroRequest;
+import agroludos.to.AgroludosTO;
 
 public interface AgroRequestContext {
 	
@@ -13,4 +14,6 @@ public interface AgroRequestContext {
 	public boolean isParam();
 	
 	public AgroRequest getRequest();
+	
+	AgroludosTO getData();
 }
