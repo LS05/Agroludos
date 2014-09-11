@@ -59,6 +59,7 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 	@FXML private Label lblMdcEmail;
 	
 	private AgroRequest richiesta;
+	private AgroResponse risposta;
 	
 	private List<ManagerDiCompetizioneTO> listMdc;
 	private ObservableList<MdcModel> listaTabMdc;
@@ -114,7 +115,7 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 		
 		ManagerDiCompetizioneTO mdcto = this.getManagerDiCompetizione(mdcMod.getUsername());
 		
-		nav.setDialog("modificaMDC");
+		nav.setVista("modificaMDC");
 	}
 
 	//--------------------Gest Competizioni View---------------
@@ -150,11 +151,10 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 	private List<ManagerDiCompetizioneTO> getAllManagerDiCompetizione(){
 		List<ManagerDiCompetizioneTO> res = null;
 		
-		this.richiesta = AgroludosController.reqFact.createRequest("getAllManagerDiCompetizione");
-		Object obj = AgroludosController.frontController.eseguiRichiesta(richiesta);
+		this.richiesta = AgroludosController.reqFact.createSimpleRequest("getAllManagerDiCompetizione");
+		this.risposta = respFact.createResponse();
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		
-		if(obj instanceof List)
-			res = (List<ManagerDiCompetizioneTO>)obj;
 		
 		return res;
 	}

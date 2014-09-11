@@ -6,9 +6,9 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import agroludos.presentation.req.AgroRequest;
+import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.ManagerDiCompetizioneTO;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,19 +18,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class ControllerMdsModificaMDC extends AgroludosController implements Initializable{
-	@FXML Button annullaModifica;
-	@FXML Button confermaModificaMDC;
-	@FXML TextField txtUsername;
-	@FXML TextField txtEmail;
-	@FXML TextField txtNome;
-	@FXML TextField txtCognome;
-	@FXML ComboBox<String> cmbStato;
-	
-	private Map<String, String> dataMDC = new HashMap<String, String>();
+	@FXML private Button annullaModifica;
+	@FXML private Button confermaModificaMDC;
+	@FXML private TextField txtUsername;
+	@FXML private TextField txtEmail;
+	@FXML private TextField txtNome;
+	@FXML private TextField txtCognome;
+	@FXML private ComboBox<String> cmbStato;
 	
 	private AgroRequest richiesta;
 	
 	private ManagerDiCompetizioneTO mdcTO;
+	private AgroResponse risposta;
 	
 	@Override
 	public void initialize(URL url, ResourceBundle resBoundle) {
@@ -45,21 +44,25 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 	}
 	
 	@FXML public void confermaModificaManagerDiCompetizion(MouseEvent event){
-		dataMDC.put("id", String.valueOf(this.mdcTO.getId()));
-		dataMDC.put("nome", this.txtNome.getText());
-		dataMDC.put("cognome", this.txtCognome.getText());
-		dataMDC.put("username", this.txtUsername.getText());
-		dataMDC.put("email", this.txtEmail.getText());
-		dataMDC.put("stato", this.cmbStato.getValue());
-		
-		this.richiesta = reqFact.createDataRequest(dataMDC, "confermaModificaMDC");
-		frontController.eseguiRichiesta(richiesta);
-		
+		ManagerDiCompetizioneTO mdcTO = toFact.createMdCTO();
+		mdcTO.setCognome(this.txtCognome.getText());
+		mdcTO.setNome(this.txtNome.getText());
+		mdcTO.setUsername(this.txtUsername.getText());
+		mdcTO.setEmail(this.txtEmail.getText());
+		mdcTO.setStato(this.cmbStato.getSelectionModel().getSelectedIndex());
+		this.risposta = respFact.createResponse();
+		this.richiesta = reqFact.createDataRequest(mdcTO, "confermaModificaMDC");
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 	
 	@FXML public void annullaModificaManagerDiCompetizion(MouseEvent event){
 	    Stage stage = (Stage) annullaModifica.getScene().getWindow();
 	    stage.close();
+	}
+
+	@Override
+	public void forward(AgroRequest request, AgroResponse response) {
+		// TODO Auto-generated method stub
 	}
 
 }

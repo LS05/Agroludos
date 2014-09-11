@@ -1,8 +1,6 @@
 package agroludos.presentation.views.amministratore;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import agroludos.presentation.req.AgroRequest;
@@ -10,7 +8,6 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.DatabaseTO;
 import agroludos.to.ManagerDiSistemaTO;
-import agroludos.utility.SecurePassword;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
-import java.security.NoSuchAlgorithmException;
 /**
  * 
  * @author Luca Suriano
@@ -54,11 +50,9 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 	@FXML private TextField txtEmailMds;
 	@FXML private TextField txtTelefonoMds;
 
-	//hashmap dei contenuti delle text
 	DatabaseTO dbto = null;
+
 	ManagerDiSistemaTO mdsto = null;
-//	private Map<String, String> parametriDB = new HashMap<>();
-//	private Map<String, String> parametriMds = new HashMap<>();
 
 	private AgroRequest richiesta;
 
@@ -66,12 +60,9 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 
 	private ObservableList<String> listaTipiDB;
 
-	/**
-	 * 
-	 * @param arg0
-	 * @param arg1
-	 */
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL url, ResourceBundle resource) {
+		this.mdsto = toFact.createMdSTO();
+		this.dbto = toFact.createDatabaseTO();
 		this.listaTipiDB = FXCollections.observableArrayList();
 		//aggiungo i tipi di db alla combobox
 		this.listaTipiDB.add("mysql");
@@ -95,40 +86,17 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 	 * 
 	 * @param event
 	 */
-	@FXML protected void btnAvantiClicked(MouseEvent event) {
-		//controllo la validità delle textfield	
-
-		if((this.cmbTipoDB.getValue().length() != 0)  &&
-				(this.txtServerDB.getText().length() != 0)  && 
-				(this.txtPortaDB.getText().length() != 0)  && 
-				(this.txtNomeDB.getText().length() != 0)  &&
-				(this.txtUsernameDB.getText().length() != 0)  &&
-				(this.txtPasswordDB.getText().length() != 0)  
-				) {
-
-			//copio il contenuto delle textfield nell'hashmap parametri
-//			parametriDB.put("tipo", this.cmbTipoDB.getValue());
-//			parametriDB.put("server", txtServerDB.getText());
-//			parametriDB.put("porta", txtPortaDB.getText());
-//			parametriDB.put("nome", txtNomeDB.getText());
-//			parametriDB.put("username", txtUsernameDB.getText());
-//			parametriDB.put("password", this.txtPasswordDB.getText());
-			
-			dbto.setTipo(this.cmbTipoDB.getValue());
-			dbto.setServer(txtServerDB.getText());
-			dbto.setPorta(txtPortaDB.getText());
-			dbto.setNome(txtNomeDB.getText());
-			dbto.setUsername(txtUsernameDB.getText());
-			dbto.setPassword(this.txtPasswordDB.getText());
-
-			this.richiesta = reqFact.createDataRequest(dbto, "confermaConfigurazione");
-			this.risposta = respFact.createResponse();
-			frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		}
-		else {
-			System.out.println("Campi vuoti o errati");
-		}
-
+	@FXML protected void btnAvantiClicked(MouseEvent event) {	
+		//copio il contenuto delle textfield nell'hashmap parametri
+		this.dbto.setTipo(this.cmbTipoDB.getValue());
+		this.dbto.setServer(this.txtServerDB.getText());
+		this.dbto.setPorta(this.txtPortaDB.getText());
+		this.dbto.setNome(this.txtNomeDB.getText());
+		this.dbto.setUsername(this.txtUsernameDB.getText());
+		this.dbto.setPassword(this.txtPasswordDB.getText());
+		this.richiesta = reqFact.createDataRequest(dbto, "confermaConfigurazione");
+		this.risposta = respFact.createResponse();
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
 	/**
@@ -138,7 +106,6 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 	@FXML protected void btnIndietroClicked(MouseEvent event) {
 		this.databasePane.setVisible(true);
 		this.managerSistemaPane.setVisible(false);
-
 	}
 
 	/**
@@ -146,52 +113,15 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 	 * @param event
 	 */
 	@FXML protected void btnConfermaConfigurazione(MouseEvent event) {
-		//controllo la validità delle textfield
-		if((this.txtNomeMds.getText().length() != 0)  && 
-				(this.txtCognomeMds.getText().length() != 0)  &&
-				(this.txtUsernameMds.getText().length() != 0)  &&
-				(this.txtPasswordMds.getText().length() != 0)  &&
-				(this.txtEmailMds.getText().length() != 0)  &&
-				(this.txtTelefonoMds.getText().length() != 0)  
-				) {
-			//richiesta per creare il Manager di Sistema
-			//sicurezza password
-			String securePassword = null;
-			try {
-				securePassword = SecurePassword.stringToMD5(this.txtPasswordMds.getText());
-			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//copio il contenuto delle textfield nell'hashmap parametri
-//			parametriMds.put("nome", txtNomeMds.getText());
-//			parametriMds.put("cognome", txtCognomeMds.getText());
-//			parametriMds.put("username", txtUsernameMds.getText());
-//			parametriMds.put("password", securePassword);
-//			parametriMds.put("email", txtEmailMds.getText());
-//			parametriMds.put("telefono", txtTelefonoMds.getText());
-			
-			mdsto.setNome(txtNomeMds.getText());
-			mdsto.setCognome(txtCognomeMds.getText());
-			mdsto.setUsername(txtUsernameMds.getText());
-			mdsto.setPassword(securePassword);
-			mdsto.setEmail(txtEmailMds.getText());
-			//mnca il telefono
-
-			this.richiesta = reqFact.createDataRequest(mdsto, "nuovoManagerDiSistema");
-			boolean res = (boolean)frontController.eseguiRichiesta(richiesta);
-			//se non ci sono errori mostra la finestra di login
-			if(res){
-				System.out.println("Manager di Sistema inserito correttamente");
-				nav.setVista("login");
-			}
-			else
-				System.out.println("Inserimento fallito");
-		}
-		else {
-			System.out.println("Campi vuoti o errati");
-		}
-
+		this.mdsto.setNome(txtNomeMds.getText());
+		this.mdsto.setCognome(txtCognomeMds.getText());
+		this.mdsto.setUsername(txtUsernameMds.getText());
+		this.mdsto.setPassword(this.txtPasswordMds.getText());
+		this.mdsto.setEmail(txtEmailMds.getText());
+		//manca il telefono
+		this.richiesta = reqFact.createDataRequest(mdsto, "nuovoManagerDiSistema");
+		this.risposta = respFact.createResponse();
+		frontController.eseguiRichiesta(richiesta, this.risposta);
 	}
 
 	/**
@@ -206,8 +136,13 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 			if(res){
 				this.databasePane.setVisible(false);
 				this.managerSistemaPane.setVisible(true);
-			} else
-				System.out.println("Connessione al DB fallita");
+			}
+		}
+		if(request.getCommandName().equals("nuovoManagerDiSistema")){
+			boolean res = (Boolean)response.getRespData();
+			if(res){
+				nav.setVista("login");
+			}
 		}
 	}
 }

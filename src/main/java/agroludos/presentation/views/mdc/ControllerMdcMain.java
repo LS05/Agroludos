@@ -3,29 +3,22 @@ package agroludos.presentation.views.mdc;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import agroludos.presentation.req.AgroRequest;
+import agroludos.presentation.resp.AgroResponse;
+import agroludos.presentation.views.AgroludosController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import agroludos.presentation.fc.FC;
-import agroludos.presentation.req.FrameRequest;
 
-public class ControllerMdcMain implements Initializable{
+public class ControllerMdcMain extends AgroludosController implements Initializable{
 
-	//pane
 	@FXML private GridPane paneCompetizioni;
-	//button mainView
+	
 	@FXML private Button btnPaneComptizioni;
-	//texfield 
 
-
-
-	private FC frontController = FC.getInstance();
-	private FrameRequest richiesta;
-
-
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL url, ResourceBundle resource) {
 
 	}
 
@@ -33,6 +26,8 @@ public class ControllerMdcMain implements Initializable{
 		this.paneCompetizioni.setVisible(true);
 	}
 
-
-
+	@Override
+	public void forward(AgroRequest request, AgroResponse response) {
+		// TODO Auto-generated method stub		
+	}
 }
