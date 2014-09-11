@@ -1,6 +1,6 @@
 package agroludos.presentation.controller;
 
-class ApplicationControllerFactory implements ACFactory{
+class ACFactoryImpl implements ACFactory{
 
 	private static AgroludosAC applicationController = new AgroludosAC();
 

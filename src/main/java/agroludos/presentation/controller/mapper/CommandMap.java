@@ -6,10 +6,10 @@ import java.util.Map;
 
 import agroludos.exceptions.MethodNotFoundException;
 
-class CommandMap {
+public class CommandMap {
 	private Map<String, Method> methods;
 	
-	CommandMap(Class<?> c){
+	public CommandMap(Class<?> c){
 		this.methods = new HashMap<String, Method>();
 		Method[] classMethods = c.getMethods();
 		
@@ -26,7 +26,7 @@ class CommandMap {
 			this.methods.put(classMethods[i].getName(), classMethods[i]);
 	}
 	
-	Method getMethod(String methodName) throws MethodNotFoundException{
+	public Method getMethod(String methodName) throws MethodNotFoundException{
 		Method m = null;
 		
 		if(this.methods.containsKey(methodName)){

@@ -1,137 +1,123 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.agroludos</groupId>
 	<artifactId>agroludos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	
+
 	<name>agroludos</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<properties>
-	  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	  <org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
 	</properties>
-	
+
 	<build>
 		<pluginManagement>
 			<plugins>
 				<plugin>
-			        <groupId>org.apache.maven.plugins</groupId>
-			        <artifactId>maven-compiler-plugin</artifactId>          
-			        <configuration>
-			            <source>1.7</source>
-			            <target>1.7</target>
-			        </configuration>
-		   		</plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
-	
+
 	<dependencies>
-		<!--
-	    Core utilities used by other modules.
-	    Define this if you use Spring Utility APIs (org.springframework.core.*/org.springframework.util.*)
-		-->
+		<!-- Core utilities used by other modules. Define this if you use Spring 
+			Utility APIs (org.springframework.core.*/org.springframework.util.*) -->
 		<dependency>
-		  <groupId>org.springframework</groupId>
-		  <artifactId>spring-core</artifactId>
-		  <version>${org.springframework.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${org.springframework.version}</version>
 		</dependency>
-		<!-- 
-		    Bean Factory and JavaBeans utilities (depends on spring-core)
-		    Define this if you use Spring Bean APIs (org.springframework.beans.*) 
-		-->
+		<!-- Bean Factory and JavaBeans utilities (depends on spring-core) Define 
+			this if you use Spring Bean APIs (org.springframework.beans.*) -->
 		<dependency>
-		  <groupId>org.springframework</groupId>
-		  <artifactId>spring-beans</artifactId>
-		  <version>${org.springframework.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${org.springframework.version}</version>
 		</dependency>
-		
-		<!--
-		    Application Context (depends on spring-core, spring-expression, spring-aop, spring-beans) 
-		    This is the central artifact for Spring's Dependency Injection Container and is generally always defined
-		-->
+
+		<!-- Application Context (depends on spring-core, spring-expression, spring-aop, 
+			spring-beans) This is the central artifact for Spring's Dependency Injection 
+			Container and is generally always defined -->
 		<dependency>
-		  <groupId>org.springframework</groupId>
-		  <artifactId>spring-context</artifactId>
-		  <version>${org.springframework.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${org.springframework.version}</version>
 		</dependency>
-		
-		<!--
-		    Various Application Context utilities, including EhCache, JavaMail, Quartz, and Freemarker integration
-		    Define this if you need any of these integrations
-		-->
+
+		<!-- Various Application Context utilities, including EhCache, JavaMail, 
+			Quartz, and Freemarker integration Define this if you need any of these integrations -->
 		<dependency>
-		  <groupId>org.springframework</groupId>
-		  <artifactId>spring-context-support</artifactId>
-		  <version>${org.springframework.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework.version}</version>
 		</dependency>
-		
-		<!--
-		    Transaction Management Abstraction (depends on spring-core, spring-beans, spring-aop, spring-context)
-		    Define this if you use Spring Transactions or DAO Exception Hierarchy
-		    (org.springframework.transaction.*/org.springframework.dao.*)
-		-->
+
+		<!-- Transaction Management Abstraction (depends on spring-core, spring-beans, 
+			spring-aop, spring-context) Define this if you use Spring Transactions or 
+			DAO Exception Hierarchy (org.springframework.transaction.*/org.springframework.dao.*) -->
 		<dependency>
-		  <groupId>org.springframework</groupId>
-		  <artifactId>spring-tx</artifactId>
-		  <version>${org.springframework.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework.version}</version>
 		</dependency>
-		
-		<!--
-		    JDBC Data Access Library (depends on spring-core, spring-beans, spring-context, spring-tx)
-		    Define this if you use Spring's JdbcTemplate API (org.springframework.jdbc.*)
-		-->
+
+		<!-- JDBC Data Access Library (depends on spring-core, spring-beans, spring-context, 
+			spring-tx) Define this if you use Spring's JdbcTemplate API (org.springframework.jdbc.*) -->
 		<dependency>
-		  <groupId>org.springframework</groupId>
-		  <artifactId>spring-jdbc</artifactId>
-		  <version>${org.springframework.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework.version}</version>
 		</dependency>
-		
-		<!--
-		    Object-to-Relation-Mapping (ORM) integration with Hibernate, JPA, and iBatis.
-		    (depends on spring-core, spring-beans, spring-context, spring-tx)
-		    Define this if you need ORM (org.springframework.orm.*)
-		-->
+
+		<!-- Object-to-Relation-Mapping (ORM) integration with Hibernate, JPA, 
+			and iBatis. (depends on spring-core, spring-beans, spring-context, spring-tx) 
+			Define this if you need ORM (org.springframework.orm.*) -->
 		<dependency>
-		  <groupId>org.springframework</groupId>
-		  <artifactId>spring-orm</artifactId>
-		  <version>${org.springframework.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${org.springframework.version}</version>
 		</dependency>
-		
-		<!--
-		    Support for testing Spring applications with tools such as JUnit and TestNG
-		    This artifact is generally always defined with a 'test' scope for the integration testing framework and unit testing stubs
-		-->
+
+		<!-- Support for testing Spring applications with tools such as JUnit and 
+			TestNG This artifact is generally always defined with a 'test' scope for 
+			the integration testing framework and unit testing stubs -->
 		<dependency>
-		  <groupId>org.springframework</groupId>
-		  <artifactId>spring-test</artifactId>
-		  <version>${org.springframework.version}</version>
-		  <scope>test</scope>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.2</version>
-        </dependency>
 		<dependency>
-		     <groupId>junit</groupId>
-		     <artifactId>junit</artifactId>
-		     <version>3.8.1</version>
-		     <scope>test</scope>
-		   </dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.2</version>
+		</dependency>
 		<dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-entitymanager</artifactId>
-		    <version>4.3.5.Final</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.3.5.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
-			<version>3.15.0-GA</version>
+			<version>3.18.1-GA</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -149,6 +135,11 @@
 			<groupId>org.jasypt</groupId>
 			<artifactId>jasypt</artifactId>
 			<version>1.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
 		</dependency>
 	</dependencies>
 </project>

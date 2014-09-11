@@ -2,23 +2,18 @@
 <commands xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<command name="checkConfigurazione">
-		<classe>agroludos.presentation.controller.mapper.GeneralAC</classe>
-		<forward type="failure" name="appConfig" path="agroludos.main.AppConfig"/>
-		<forward type="success" name="appConfig" path="agroludos.main.AppConfig"/>
-	</command>
-	<command name="configurazione">
-		<classe>agroludos.presentation.controller.mapper.GeneralAC</classe>
-		<forward type="failure" name="configurazione" path="agroludos.presentation.views.amministratore.ControllerConfSistema"/>
-		<forward type="success" name="configurazione" path="agroludos.presentation.views.amministratore.ControllerConfSistema"/>
+		<classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe>
+		<forward type="failure" name="appConfig" path="agroludos.main.AppConfig" />
+		<forward type="success" name="appConfig" path="agroludos.main.AppConfig" />
 	</command>
 	<command name="testConnessioneDB">
-		<classe>agroludos.presentation.controller.mapper.GeneralAC</classe>
-		<forward type="failure" name="appConfig" path="agroludos.main.AppConfig"/>
-		<forward type="success" name="appConfig" path="agroludos.main.AppConfig"/>
+		<classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe>
+		<forward type="failure" name="appConfig" path="agroludos.main.AppConfig" />
+		<forward type="success" name="appConfig" path="agroludos.main.AppConfig" />
 	</command>
-	<command name="autenticazione">
-		<classe>agroludos.presentation.controller.mapper.GeneralAC</classe>
-		<forward type="failure" name="login" path="agroludos.presentation.views.login.ControllerLogin"/>
-		<forward type="success" name="login" path="agroludos.presentation.views.login.ControllerLogin"/>
+	<command name="autenticazioneUtente">
+		<classe>agroludos.business.as.gestoreutente.LUtente</classe>
+		<forward type="failure" name="login" path="agroludos.presentation.views.login.ControllerLogin" />
+		<forward type="success" name="login" path="agroludos.presentation.views.login.ControllerLogin" />
 	</command>
 </commands>

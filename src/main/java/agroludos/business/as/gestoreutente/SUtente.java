@@ -1,5 +1,7 @@
 package agroludos.business.as.gestoreutente;
 
-public interface SUtente {
+import agroludos.business.as.AgroludosService;
+
+public interface SUtente extends AgroludosService {
 	
 }

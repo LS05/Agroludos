@@ -7,4 +7,6 @@ public interface Command {
 	String getFailPath();
 	
 	String getViewName();
+	
+	String getClassName();
 }

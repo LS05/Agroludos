@@ -1,7 +1,8 @@
 package agroludos.exceptions;
 
+@SuppressWarnings("serial")
 public class BusinessDelegateException extends Exception {
-	BusinessDelegateException(String msg){
+	public BusinessDelegateException(String msg){
 		super(msg);
 	}
 }

@@ -9,7 +9,7 @@
 	<import resource="classpath:agroludos/beans/navigator.xml" />
 	
 	<bean id="acFactory"
-		class="agroludos.presentation.controller.ApplicationControllerFactory"></bean>
+		class="agroludos.presentation.controller.ACFactoryImpl"></bean>
 
 	<bean id="agroludosAC" class="agroludos.presentation.controller.AgroludosAC"
 		factory-bean="acFactory" factory-method="getAC">

@@ -13,15 +13,10 @@
 		<constructor-arg ref="cmdParser" />
 	</bean>
 
-	<bean id="mainCommandMap"
-		class="agroludos.presentation.controller.mapper.MainCommandMap">
-		<property name="agroBD" ref="agroludosBD" />
-	</bean>
-
 	<bean id="cmdProcess"
 		class="agroludos.presentation.controller.mapper.CommandProcessorImpl">
-		<property name="mainClass" ref="mainCommandMap" />
 		<property name="respFact" ref="respCtxFactory" />
+		<property name="businessDelegate" ref="agroludosBD" />
 	</bean>
 
 </beans>

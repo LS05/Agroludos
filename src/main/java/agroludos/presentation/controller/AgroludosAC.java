@@ -3,12 +3,10 @@ package agroludos.presentation.controller;
 import agroludos.presentation.controller.mapper.Command;
 import agroludos.presentation.controller.mapper.CommandFactory;
 import agroludos.presentation.controller.mapper.CommandProcessor;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.reqh.AgroRequestContext;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.resph.AgroResponseContext;
-
 import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.Navigator;
 
@@ -17,7 +15,7 @@ class AgroludosAC implements ApplicationController{
 	private Command command;
 	private CommandProcessor commandProcessor;
 	private Navigator nav;
-
+	
 	@Override
 	public AgroResponseContext gestisciRichiesta(AgroRequestContext request) {
 		AgroResponseContext response = null;
