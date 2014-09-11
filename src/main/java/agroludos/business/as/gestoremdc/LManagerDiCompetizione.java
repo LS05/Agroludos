@@ -7,6 +7,6 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.to.ManagerDiCompetizioneTO;
 
 public interface LManagerDiCompetizione extends AgroludosService {
-	<T> ManagerDiCompetizioneTO getManagerDiCompetizione(T username) throws DatabaseException;
+	ManagerDiCompetizioneTO getManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) throws DatabaseException;
 	List<ManagerDiCompetizioneTO> getAllManagerCompetizione() throws DatabaseException;
 }

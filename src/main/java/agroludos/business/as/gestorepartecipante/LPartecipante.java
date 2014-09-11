@@ -7,7 +7,7 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.to.PartecipanteTO;
 
 public interface LPartecipante extends AgroludosService {
-	<T> PartecipanteTO getPartecipante(T username) throws DatabaseException;
+	PartecipanteTO getPartecipante(PartecipanteTO parto) throws DatabaseException;
 	List<PartecipanteTO> getAllPartecipante() throws DatabaseException;
-	<T> PartecipanteTO getPartecipanteById(T id) throws DatabaseException;
+	PartecipanteTO getPartecipanteById(PartecipanteTO parto) throws DatabaseException;
 }

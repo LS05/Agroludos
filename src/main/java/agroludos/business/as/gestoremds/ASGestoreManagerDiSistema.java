@@ -18,8 +18,8 @@ class ASGestoreManagerDiSistema extends AgroludosAS implements LManagerDiSistema
 	}
 
 	@Override
-	public <T> ManagerDiSistemaTO getManagerDiSistema(T username) throws DatabaseException {
-		return getManagerDiSistemaDAO().readByUsername(username);
+	public ManagerDiSistemaTO getManagerDiSistema(ManagerDiSistemaTO mdsto) throws DatabaseException {
+		return getManagerDiSistemaDAO().readByUsername(mdsto.getUsername());
 	}
 	
 	private ManagerDiSistemaDAO getManagerDiSistemaDAO() throws DatabaseException{

@@ -5,5 +5,5 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.to.ManagerDiSistemaTO;
 
 public interface LManagerDiSistema  extends AgroludosService{
-	<T> ManagerDiSistemaTO getManagerDiSistema(T username) throws DatabaseException;
+	ManagerDiSistemaTO getManagerDiSistema(ManagerDiSistemaTO mdsto) throws DatabaseException;
 }

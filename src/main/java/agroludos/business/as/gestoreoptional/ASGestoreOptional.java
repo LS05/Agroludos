@@ -38,10 +38,10 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 	}
 
 	@Override
-	public <T> List<OptionalTO> getOptionalByTipo(T tipo)
+	public List<OptionalTO> getOptionalByTipo(OptionalTO optto)
 			throws DatabaseException {
 		OptionalDAO daoOpt = getOptionalDAO();
-		return daoOpt.readByTipo(tipo);
+		return daoOpt.readByTipo(optto.getTipo());
 	}
 
 	@Override

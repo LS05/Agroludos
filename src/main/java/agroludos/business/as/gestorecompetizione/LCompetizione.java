@@ -7,9 +7,9 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.to.CompetizioneTO;
 
 public interface LCompetizione extends AgroludosService {
-	<T> List<CompetizioneTO> getCompetizioniByMdc(T username) throws DatabaseException;
-	<T> List<CompetizioneTO> getCompetizioniByTipo(T tipo) throws DatabaseException;
+	List<CompetizioneTO> getCompetizioniByMdc(CompetizioneTO cmpto) throws DatabaseException;
+	List<CompetizioneTO> getCompetizioniByTipo(CompetizioneTO cmpto) throws DatabaseException;
 	List<CompetizioneTO> getAllCompetizione() throws DatabaseException;
-	<T> CompetizioneTO getCompetizioneById(T id) throws DatabaseException;
-	<T> List<CompetizioneTO> getCompetizioniAttive() throws DatabaseException;
+	CompetizioneTO getCompetizioneById(CompetizioneTO cmpto) throws DatabaseException;
+	List<CompetizioneTO> getCompetizioniAttive() throws DatabaseException;
 }

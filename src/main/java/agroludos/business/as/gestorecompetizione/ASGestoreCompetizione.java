@@ -41,17 +41,17 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	}
 
 	@Override
-	public <T> List<CompetizioneTO> getCompetizioniByMdc(T username)
+	public List<CompetizioneTO> getCompetizioniByMdc(CompetizioneTO cmpto)
 			throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
-		return daoCmp.readByMdc(username);
+		return daoCmp.readByMdc(cmpto.getMdc());
 	}
 
 	@Override
-	public <T> List<CompetizioneTO> getCompetizioniByTipo(T tipo)
+	public List<CompetizioneTO> getCompetizioniByTipo(CompetizioneTO cmpto)
 			throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
-		return daoCmp.readByTipo(tipo);
+		return daoCmp.readByTipo(cmpto.getTipo());
 	}
 
 	@Override
@@ -61,14 +61,14 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	}
 
 	@Override
-	public <T> CompetizioneTO getCompetizioneById(T id)
+	public CompetizioneTO getCompetizioneById(CompetizioneTO cmpto)
 			throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
-		return daoCmp.readById(id);
+		return daoCmp.readById(cmpto.getId());
 	}
 
 	@Override
-	public <T> List<CompetizioneTO> getCompetizioniAttive()
+	public List<CompetizioneTO> getCompetizioniAttive()
 			throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
 		return daoCmp.readCompetizioniAttive();

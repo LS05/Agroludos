@@ -8,7 +8,7 @@ import agroludos.to.OptionalTO;
 
 
 public interface LOptional extends AgroludosService{
-	<T> List<OptionalTO> getOptionalByTipo(T tipo) throws DatabaseException;
+	List<OptionalTO> getOptionalByTipo(OptionalTO optto) throws DatabaseException;
 	List<OptionalTO> getAllOptional() throws DatabaseException;
 
 }

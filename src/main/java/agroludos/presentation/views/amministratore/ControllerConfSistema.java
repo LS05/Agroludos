@@ -21,7 +21,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.security.NoSuchAlgorithmException;
-
+/**
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ * @version 1.0, 11/09/2014
+ *
+ */
 public class ControllerConfSistema extends AgroludosController implements Initializable{
 
 	@FXML private Button btnAvantiConf;
@@ -49,13 +55,18 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 	//hashmap dei contenuti delle text
 	private Map<String, String> parametriDB = new HashMap<>();
 	private Map<String, String> parametriMds = new HashMap<>();
-	
+
 	private AgroRequest richiesta;
-	
+
 	private AgroResponse risposta;
 
 	private ObservableList<String> listaTipiDB;
 
+	/**
+	 * 
+	 * @param arg0
+	 * @param arg1
+	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.listaTipiDB = FXCollections.observableArrayList();
 		//aggiungo i tipi di db alla combobox
@@ -76,6 +87,10 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 		this.txtPasswordDB.setText("root");  
 	}
 
+	/**
+	 * 
+	 * @param event
+	 */
 	@FXML protected void btnAvantiClicked(MouseEvent event) {
 		//controllo la validità delle textfield	
 
@@ -105,12 +120,20 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 
 	}
 
+	/**
+	 * 
+	 * @param event
+	 */
 	@FXML protected void btnIndietroClicked(MouseEvent event) {
 		this.databasePane.setVisible(true);
 		this.managerSistemaPane.setVisible(false);
 
 	}
 
+	/**
+	 * 
+	 * @param event
+	 */
 	@FXML protected void btnConfermaConfigurazione(MouseEvent event) {
 		//controllo la validità delle textfield
 		if((this.txtNomeMds.getText().length() != 0)  && 
@@ -153,6 +176,11 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 
 	}
 
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 */
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		if(request.getCommandName().equals("confermaConfigurazione")){
