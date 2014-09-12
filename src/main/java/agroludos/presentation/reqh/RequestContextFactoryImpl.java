@@ -4,21 +4,25 @@ import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.req.DataRequest;
 import agroludos.presentation.req.SimpleRequest;
 
-class RequestContextFactoryImpl{
+class RequestContextFactoryImpl implements RequestContextFactory {
 
-	private static DataRequestContextImpl dataRequest = new DataRequestContextImpl(); ;
-	
-	private static EmptyRequestContextImpl emptyRequest = new EmptyRequestContextImpl();
-	
+	private DataRequestContextImpl dataRequest;
+
+	private EmptyRequestContextImpl emptyRequest;
+
 	public AgroRequestContext createRequestContext(AgroRequest request) {
 		AgroRequestContext res = null;
-		
+
 		if(request instanceof DataRequest){
+			this.dataRequest = new DataRequestContextImpl();
+			this.dataRequest.initialize(request);
 			res = dataRequest;
 		}else if(request instanceof SimpleRequest){
-			res = emptyRequest;
+			this.emptyRequest = new EmptyRequestContextImpl();
+			this.emptyRequest.initialize(request);
+			res = this.emptyRequest;
 		}
-		
+
 		return res;
 	}
 }
