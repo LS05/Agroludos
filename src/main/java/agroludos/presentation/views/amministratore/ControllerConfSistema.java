@@ -24,7 +24,6 @@ import javafx.scene.layout.GridPane;
  * 
  * @author Luca Suriano
  * @author Francesco Zagaria
- * @version 1.0, 11/09/2014
  *
  */
 public class ControllerConfSistema extends AgroludosController implements Initializable{

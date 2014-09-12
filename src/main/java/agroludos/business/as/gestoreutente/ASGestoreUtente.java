@@ -19,4 +19,9 @@ class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 		return dbDAOFact.getUtenteDAO();
 	}
 
+	@Override
+	public boolean nuovaRegistrazione() throws DatabaseException {
+		return true;
+	}
+
 }

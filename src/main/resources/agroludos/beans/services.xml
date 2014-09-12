@@ -6,5 +6,9 @@
 	<bean id="services" class="agroludos.business.bd.cache.Services">
 		<property name="lconfigurazione" ref="gestoreConfigurazione" />
 		<property name="sconfigurazione" ref="gestoreConfigurazione" />
+		<property name="lutente" ref="gestoreUtente" />
+		<property name="sutente" ref="gestoreUtente" />
+		<property name="lmds" ref="gestoreManagerSistema" />
+		<property name="smds" ref="gestoreManagerSistema" />
 	</bean>
 </beans>

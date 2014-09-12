@@ -5,5 +5,5 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.to.ManagerDiSistemaTO;
 
 public interface SManagerDiSistema extends AgroludosService{
-	boolean inserisciManagerDiSistema(ManagerDiSistemaTO mdsto) throws DatabaseException;
+	boolean nuovoManagerDiSistema(ManagerDiSistemaTO mdsto) throws DatabaseException;
 }

@@ -62,7 +62,9 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	}
 
 	@FXML protected void btnRegistrati(MouseEvent event) {
-		//TODO
+		this.risposta = respFact.createResponse();
+		this.richiesta = reqFact.createSimpleRequest("nuovaRegistrazione");
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
 	@Override

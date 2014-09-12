@@ -23,6 +23,13 @@
 			<title>Agroludos | Configurazione</title>
 		</view>
 		<view tipo="view">
+			<name>nuovaRegistrazione</name>
+			<url>/fxml/login/registrazione.fxml</url>
+			<width>1440</width>
+			<height>900</height>
+			<title></title>
+		</view>
+		<view tipo="view">
 			<name>managerDiSistema</name>
 			<url>/fxml/mds/mdsMain.fxml</url>
 			<width>1440</width>

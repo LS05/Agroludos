@@ -21,4 +21,16 @@
 		<classe>agroludos.business.as.gestoremds.SManagerDiSistema</classe>
 		<forward success="login" failure="configurazione"/>
 	</command>
+	<command name="nuovoManagerDiCompetizione">
+		<classe>agroludos.business.as.gestoremds.SManagerDiCompetizione</classe>
+		<forward success="managerDiSistema" failure="managerDiSistema"/>
+	</command>
+		<command name="nuovaRegistrazione">
+		<classe>agroludos.business.as.gestoreutente.SUtente</classe>
+		<forward success="nuovaRegistrazione" failure="nuovaRegistrazione"/>
+	</command>
+	<command name="nuovoPartecipante">
+		<classe>agroludos.business.as.gestoreutente.SUtente</classe>
+		<forward success="login" failure="nuovaRegistrazione"/>
+	</command>
 </commands>

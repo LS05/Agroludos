@@ -6,12 +6,21 @@ import java.util.Map;
 import agroludos.business.as.AgroludosService;
 import agroludos.business.as.gestoreconfigurazione.LConfigurazione;
 import agroludos.business.as.gestoreconfigurazione.SConfigurazione;
+import agroludos.business.as.gestoremds.LManagerDiSistema;
+import agroludos.business.as.gestoremds.SManagerDiSistema;
+import agroludos.business.as.gestoreutente.LUtente;
+import agroludos.business.as.gestoreutente.SUtente;
 import agroludos.exceptions.ServiceNotFoundException;
 
 class Services {
 	private LConfigurazione lconfigurazione;
 	private SConfigurazione sconfigurazione;
+	private LUtente lutente;
+	private SUtente sutente;
+	private LManagerDiSistema lmds;
+	private SManagerDiSistema smds;
 	
+
 	private Map<String, AgroludosService> services;
 	
 	Services(){
@@ -26,6 +35,26 @@ class Services {
 	public void setSconfigurazione(SConfigurazione conf) {
 		this.sconfigurazione = conf;
 		this.services.put(SConfigurazione.class.getName(), this.sconfigurazione);
+	}
+	
+	public void setLutente(LUtente lutente) {
+		this.lutente = lutente;
+		this.services.put(LUtente.class.getName(),this.lutente);
+	}
+
+	public void setSutente(SUtente sutente) {
+		this.sutente = sutente;
+		this.services.put(SUtente.class.getName(),this.sutente);
+	}
+
+	public void setLmds(LManagerDiSistema lmds) {
+		this.lmds = lmds;
+		this.services.put(LManagerDiSistema.class.getName(),this.lmds);
+	}
+
+	public void setSmds(SManagerDiSistema smds) {
+		this.smds = smds;
+		this.services.put(SManagerDiSistema.class.getName(),this.smds);
 	}
 	
 	public AgroludosService getService(String serviceName) throws ServiceNotFoundException{
