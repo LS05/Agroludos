@@ -7,7 +7,12 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.to.CompetizioneTO;
-
+/**
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompetizione{
 	
 	private CompetizioneDAO getCompetizioneDAO() {

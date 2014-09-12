@@ -41,9 +41,9 @@ public class Forward {
 
     @XmlValue
     protected String value;
-    @XmlAttribute(name = "type")
+    @XmlAttribute(name = "success")
     protected String type;
-    @XmlAttribute(name = "name")
+    @XmlAttribute(name = "failure")
     protected String name;
 
     /**
