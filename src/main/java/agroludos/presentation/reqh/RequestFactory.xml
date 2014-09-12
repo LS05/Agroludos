@@ -5,7 +5,7 @@
 	<richiesta tipo="checkConfigurazione">
 		<classe>agroludos.presentation.reqh.EmptyRequestContextImpl</classe>
 	</richiesta>
-	<richiesta tipo="confermaConfigurazione">
+	<richiesta tipo="inserisciConfigurazione">
 		<classe>agroludos.presentation.reqh.DataRequestContextImpl</classe>
 	</richiesta>
 	<richiesta tipo="nuovoManagerDiSistema">

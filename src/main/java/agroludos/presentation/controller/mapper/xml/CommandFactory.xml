@@ -16,4 +16,14 @@
 		<forward type="failure" name="login" />
 		<forward type="success" name="login" />
 	</command>
+	<command name="inserisciConfigurazione">
+		<classe>agroludos.business.as.gestoreconfigurazione.SConfigurazione</classe>
+		<forward type="failure" name="configurazione" />
+		<forward type="success" name="configurazione" />
+	</command>
+	<command name="nuovoManagerDiSistema">
+		<classe>agroludos.business.as.gestoremds.SManagerDiSistema</classe>
+		<forward type="failure" name="configurazione" />
+		<forward type="success" name="login" />
+	</command>
 </commands>

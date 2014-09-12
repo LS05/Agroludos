@@ -24,14 +24,12 @@ class AgroludosAC implements ApplicationController{
 		
 		try {
 			command = this.commandFactory.getCommand(commandName);
+			response = this.commandProcessor.invoke(command, request);
 		} catch (ServiceNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-
-		try {
-			response = this.commandProcessor.invoke(command, request);
 		} catch (Throwable e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -51,6 +49,7 @@ class AgroludosAC implements ApplicationController{
 			dispatcher.forward(request, response);
 		} catch(Exception e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

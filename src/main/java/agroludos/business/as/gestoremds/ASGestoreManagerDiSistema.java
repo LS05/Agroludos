@@ -13,6 +13,7 @@ class ASGestoreManagerDiSistema extends AgroludosAS implements LManagerDiSistema
 	ASGestoreManagerDiSistema(PasswordEncryption pwdEnc){
 		this.pwdEnc = pwdEnc;
 	}
+	
 	@Override
 	public boolean inserisciManagerDiSistema(ManagerDiSistemaTO mdsto) throws DatabaseException {
 		// TODO Auto-generated catch block

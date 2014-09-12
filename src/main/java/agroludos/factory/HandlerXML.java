@@ -15,12 +15,17 @@ class HandlerXML extends DefaultHandler{
 	protected String mainData;
 	protected String res;
 	
+	void reset(){
+		this.mainData = "";
+		this.res = "";
+	}
+	
 	String getResult(){
 		return this.res;
 	}
 	
-	String setDataToRead(String data){
-		return this.mainData = data;
+	void setDataToRead(String data){
+		this.mainData = data;
 	}
 	
 }

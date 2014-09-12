@@ -95,7 +95,7 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 		this.dbto.setNome(this.txtNomeDB.getText());
 		this.dbto.setUsername(this.txtUsernameDB.getText());
 		this.dbto.setPassword(this.txtPasswordDB.getText());
-		this.richiesta = reqFact.createDataRequest(dbto, "confermaConfigurazione");
+		this.richiesta = reqFact.createDataRequest(dbto, "inserisciConfigurazione");
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
@@ -132,7 +132,7 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 	 */
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		if(request.getCommandName().equals("confermaConfigurazione")){
+		if(request.getCommandName().equals("inserisciConfigurazione")){
 			boolean res = (Boolean)response.getRespData();
 			if(res){
 				this.databasePane.setVisible(false);

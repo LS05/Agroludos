@@ -33,6 +33,7 @@ public abstract class Factory {
 
 	public String initData(String data){
 		try {
+			this.handler.reset();
 			this.handler.setDataToRead(data);
 			this.saxParser.parse(this.getXMLPath(), handler);
 		} catch (SAXException e) {
