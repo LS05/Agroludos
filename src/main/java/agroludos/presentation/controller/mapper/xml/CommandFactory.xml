@@ -15,12 +15,10 @@
 	</command>
 	<command name="inserisciConfigurazione">
 		<classe>agroludos.business.as.gestoreconfigurazione.SConfigurazione</classe>
-		<forward type="failure" name="configurazione" />
-		<forward type="success" name="configurazione" />
+		<forward success="configurazione" failure="configurazione"/>
 	</command>
 	<command name="nuovoManagerDiSistema">
 		<classe>agroludos.business.as.gestoremds.SManagerDiSistema</classe>
-		<forward type="failure" name="configurazione" />
-		<forward type="success" name="login" />
+		<forward success="login" failure="configurazione"/>
 	</command>
 </commands>

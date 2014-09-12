@@ -68,26 +68,12 @@ class CommandParserImpl implements CommandParser {
 		return res;
 	}
 
-	private Forward getRes(Command command, String type){
-		Forward res = null;
-
-		for(Forward f : command.getForward()){
-			if(f.getType().equals(type)){
-				res = f;
-				break;
-			}
-		}
-
-		return res;
-	}
-
 	@Override
 	public String getFailView(String commandName) throws ServiceNotFoundException {
 		String res = "";
 		if(this.hasCommand(commandName)){
 			Command command = this.getCommand(commandName);
-			Forward failFwd = getRes(command, "failure");
-			res = failFwd.getName();
+			res = command.getForward().getFailure();
 		} else {
 			throw new ServiceNotFoundException("Servizio richiesto non presente!");
 		}
@@ -99,8 +85,7 @@ class CommandParserImpl implements CommandParser {
 		String res = "";
 		if(this.hasCommand(commandName)){
 			Command command = this.getCommand(commandName);
-			Forward succFwd = getRes(command, "success");
-			res = succFwd.getName();
+			res = command.getForward().getSuccess();
 		} else {
 			throw new ServiceNotFoundException("Servizio richiesto non presente!");
 		}
