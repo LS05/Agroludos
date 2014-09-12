@@ -7,6 +7,12 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.resp.ResponseFactory;
 import agroludos.to.TOFactory;
 
+/**
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public abstract class AgroludosController {
 	protected static Navigator nav;
 	protected static FrontController frontController;

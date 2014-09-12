@@ -3,17 +3,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<command name="checkConfigurazione">
 		<classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe>
-		<forward type="failure" name="appConfig" />
-		<forward type="success" name="appConfig" />
+		<forward success="appConfig" failure="appConfig"/>		
 	</command>
 	<command name="testConnessioneDB">
 		<classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe>
-		<forward type="failure" name="appConfig" />
-		<forward type="success" name="appConfig" />
+		<forward success="appConfig" failure="appConfig"/>	
 	</command>
 	<command name="autenticazioneUtente">
 		<classe>agroludos.business.as.gestoreutente.LUtente</classe>
-		<forward type="failure" name="login" />
-		<forward type="success" name="login" />
+		<forward success="appConfig" failure="appConfig"/>	
 	</command>
 </commands>

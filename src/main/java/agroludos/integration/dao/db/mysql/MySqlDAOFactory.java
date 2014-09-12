@@ -16,6 +16,7 @@ import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.integration.dao.db.TipoOptionalDAO;
 import agroludos.integration.dao.db.UtenteDAO;
+import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.PartecipanteTO;
@@ -88,12 +89,18 @@ public class MySqlDAOFactory implements DBDAOFactory {
 		IscrizioneTO iscTO = fact.createIscrizioneTO();
 		MySqlDAOFactory daoFact = new MySqlDAOFactory();
 		daoFact.initialize();
-		PartecipanteDAO parDAO = daoFact.getPartecipanteDAO();
-		PartecipanteTO listPart = parDAO.readByID(62);
-		IscrizioneDAO iscDAO = daoFact.getIscrizioneDAO();
-		List<IscrizioneTO> list = iscDAO.getAllIscrizioni();
-		IscrizioneTO iscr = list.get(0);
-		System.out.println(iscr.getPartecipanteIscrizione().getSrc());
-		PartecipanteTO part = iscr.getPartecipanteIscrizione();
+		
+		ManagerDiCompetizioneDAO mdcDAO = daoFact.getManagerDiCompetizioneDAO();
+		List<ManagerDiCompetizioneTO> mdcto = mdcDAO.readAll();
+		
+		CompetizioneDAO dao = daoFact.getCompetizioneDAO();
+		CompetizioneTO cmpto = dao.readById(65);
+//		PartecipanteDAO parDAO = daoFact.getPartecipanteDAO();
+//		PartecipanteTO listPart = parDAO.readByID(62);
+//		IscrizioneDAO iscDAO = daoFact.getIscrizioneDAO();
+//		List<IscrizioneTO> list = iscDAO.getAllIscrizioni();
+//		IscrizioneTO iscr = list.get(0);
+//		System.out.println(iscr.getPartecipanteIscrizione().getSrc());
+//		PartecipanteTO part = iscr.getPartecipanteIscrizione();
 	}
 }
