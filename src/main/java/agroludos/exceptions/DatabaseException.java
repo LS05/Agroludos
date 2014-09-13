@@ -1,7 +1,7 @@
 package agroludos.exceptions;
 
 @SuppressWarnings("serial")
-public class DatabaseException extends AgroRuntimeException {
+public class DatabaseException extends AgroludosException {
 	
 	public DatabaseException(String message) {
 		super(message);

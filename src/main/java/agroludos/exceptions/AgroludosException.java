@@ -1,14 +1,17 @@
 package agroludos.exceptions;
 
 @SuppressWarnings("serial")
-public class AgroRuntimeException extends RuntimeException{
+public class AgroludosException extends Exception{
 
-	public AgroRuntimeException(String message) {
+	public AgroludosException(String message) {
 		super(message);
 	}
 
-	public AgroRuntimeException(String message, Throwable cause) {
+	public AgroludosException(String message, Throwable cause) {
 		super(message, cause);
 	}
-
+	
+	public AgroludosException(Throwable cause){
+		super(cause);
+	}
 }
