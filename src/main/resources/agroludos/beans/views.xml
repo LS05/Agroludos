@@ -9,7 +9,7 @@
 	<import resource="classpath:agroludos/beans/navigator.xml" />
 	<import resource="classpath:agroludos/beans/transferobject.xml" />
 
-	<bean id="agroController" class="agroludos.presentation.views.AgroludosController"
+	<bean id="agroController" class="agroludos.presentation.views.Controller"
 		abstract="true">
 		<property name="nav" ref="navigator" />
 		<property name="frontController" ref="fc" />

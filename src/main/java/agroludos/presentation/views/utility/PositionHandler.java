@@ -14,6 +14,18 @@ import javafx.stage.Stage;
  *
  */
 public class PositionHandler {
+	
+	private static Rectangle2D getVisualBounds(){
+		return Screen.getPrimary().getVisualBounds();
+	}
+	
+	public static Double getScreenWidth(){
+		return getVisualBounds().getWidth();
+	}
+	
+	public static Double getScreenHeight(){
+		return getVisualBounds().getHeight();
+	}
 
 	public static void centerComp(Stage stage, Scene scene){
 		Pane p = (Pane)scene.getRoot();

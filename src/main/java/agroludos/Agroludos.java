@@ -19,7 +19,6 @@ public class Agroludos extends Application{
         ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         this.mainApp = (App)context.getBean("mainApp");
         this.mainApp.initialize(stage);
-		this.mainApp.show();
 	}
 	
     public static void main( String[] args )

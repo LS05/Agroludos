@@ -3,15 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<command name="checkConfigurazione">
 		<classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe>
-		<forward success="appConfig" failure="appConfig"/>		
+		<forward success="initView" failure="initView"/>		
 	</command>
 	<command name="testConnessioneDB">
 		<classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe>
-		<forward success="appConfig" failure="appConfig"/>	
+		<forward success="initView" failure="initView"/>	
 	</command>
 	<command name="autenticazioneUtente">
 		<classe>agroludos.business.as.gestoreutente.LUtente</classe>
-		<forward success="appConfig" failure="appConfig"/>	
+		<forward success="login" failure="login"/>	
 	</command>
 	<command name="inserisciConfigurazione">
 		<classe>agroludos.business.as.gestoreconfigurazione.SConfigurazione</classe>

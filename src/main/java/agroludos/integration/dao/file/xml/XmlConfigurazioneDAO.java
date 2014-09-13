@@ -18,7 +18,6 @@ class XmlConfigurazioneDAO implements FConfigurazioneDAO{
 	private XmlUtil utXml;
 
 	XmlConfigurazioneDAO(){
-		System.out.println("XmlConfigurazioneDAO()");
 		this.confPath = XmlData.getConfPath();
 	}
 

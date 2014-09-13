@@ -34,8 +34,6 @@ public class Navigator {
 			Stage stage = new Stage(StageStyle.UNDECORATED);
 			stage.setScene(scene);
 			stage.setTitle(agw.getTitle());
-			stage.setHeight(agw.getHeight());
-			stage.setWidth(agw.getWidth());
 		    stage.initModality(Modality.WINDOW_MODAL);
 		    stage.initOwner(this.mainStage);
 			stage.show();
@@ -44,8 +42,6 @@ public class Navigator {
 		} else {
 			this.mainStage.setScene(scene);
 			this.mainStage.setTitle(agw.getTitle());
-			this.mainStage.setHeight(agw.getHeight());
-			this.mainStage.setWidth(agw.getWidth());
 			
 			PositionHandler.centerComp(this.mainStage, scene);
 		}

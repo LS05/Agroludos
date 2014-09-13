@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agro-views>
 	<views>
-		<view tipo="view">
-			<name>appConfig</name>
+		<view tipo="dialog">
+			<name>initView</name>
 			<url>/fxml/config/init.fxml</url>
-			<width></width>
-			<height></height>
+			<width>0</width>
+			<height>0</height>
 			<title></title>
 		</view>
 		<view tipo="dialog">

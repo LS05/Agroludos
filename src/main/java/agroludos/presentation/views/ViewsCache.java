@@ -30,7 +30,7 @@ class ViewsCache {
 				throw new ViewLoadingException(e.getMessage(), e.getCause());
 			}
 			
-			Scene view = new Scene(root);
+			Scene view = new Scene(root, window.getWidth(), window.getHeight());
 			this.scenes.put(window.getName(), view);
 		}
 	}
