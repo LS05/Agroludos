@@ -1,7 +1,7 @@
 package agroludos.business.bd.cache;
 
 import agroludos.business.as.AgroludosService;
-import agroludos.exceptions.ServiceNotFoundException;
+import agroludos.exceptions.BusinessComponentNotFoundException;
 
 class ServiceCacheImpl implements ServiceCache {
 	private Services services;
@@ -11,7 +11,7 @@ class ServiceCacheImpl implements ServiceCache {
 	}
 
 	@Override
-	public AgroludosService getService(String serviceName) throws ServiceNotFoundException{
+	public AgroludosService getService(String serviceName) throws BusinessComponentNotFoundException{
 		return this.services.getService(serviceName);
 	}
 }

@@ -2,7 +2,7 @@ package agroludos.business.bd;
 
 import agroludos.business.as.AgroludosService;
 import agroludos.business.bd.cache.ServiceCache;
-import agroludos.exceptions.ServiceNotFoundException;
+import agroludos.exceptions.BusinessComponentNotFoundException;
 
 class ServiceLocator {
 	private ServiceCache serviceCache;
@@ -11,7 +11,7 @@ class ServiceLocator {
 		this.serviceCache = serviceCache;
 	}
 	
-	AgroludosService lookup(String serviceName) throws ServiceNotFoundException{
+	AgroludosService lookup(String serviceName) throws BusinessComponentNotFoundException{
 		return this.serviceCache.getService(serviceName);
 	}
 }

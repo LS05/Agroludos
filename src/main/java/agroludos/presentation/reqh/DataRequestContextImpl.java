@@ -4,7 +4,7 @@ import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.req.DataRequest;
 import agroludos.to.AgroludosTO;
 
-public class DataRequestContextImpl implements AgroRequestContext{
+class DataRequestContextImpl implements AgroRequestContext{
 	
 	protected DataRequest richiesta;
 	protected boolean param;

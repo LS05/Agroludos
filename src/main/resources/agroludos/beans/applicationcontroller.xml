@@ -11,7 +11,7 @@
 	<bean id="acFactory"
 		class="agroludos.presentation.controller.ACFactoryImpl"></bean>
 
-	<bean id="agroludosAC" class="agroludos.presentation.controller.AgroludosAC"
+	<bean id="agroludosAC" class="agroludos.presentation.controller.ApplicationControllerImpl"
 		factory-bean="acFactory" factory-method="getAC">
 		<property name="commandFactory" ref="cmdFactory" />
 		<property name="commandProcessor" ref="cmdProcess" />

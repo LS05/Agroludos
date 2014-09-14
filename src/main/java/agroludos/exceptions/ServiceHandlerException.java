@@ -1,8 +1,10 @@
 package agroludos.exceptions;
 
 @SuppressWarnings("serial")
-public class ServiceHandlerException extends Exception {
-	public ServiceHandlerException(String msg){
-		super(msg);
+public class ServiceHandlerException extends AgroludosException {
+	
+	public ServiceHandlerException(String message, Throwable cause) {
+		super(message, cause);
 	}
+
 }

@@ -1,13 +1,13 @@
 package agroludos.presentation.controller.mapper.xml;
 
-import agroludos.exceptions.ServiceNotFoundException;
+import agroludos.exceptions.BusinessComponentNotFoundException;
 
 public interface CommandParser {
 
-	String getClassName(String commandName) throws ServiceNotFoundException;
+	String getClassName(String commandName) throws BusinessComponentNotFoundException;
 	
-	String getSuccView(String commandName) throws ServiceNotFoundException;
+	String getSuccView(String commandName) throws BusinessComponentNotFoundException;
 
-	String getFailView(String commandName) throws ServiceNotFoundException;
+	String getFailView(String commandName) throws BusinessComponentNotFoundException;
 
 }

@@ -10,7 +10,7 @@ import agroludos.business.as.gestoremds.LManagerDiSistema;
 import agroludos.business.as.gestoremds.SManagerDiSistema;
 import agroludos.business.as.gestoreutente.LUtente;
 import agroludos.business.as.gestoreutente.SUtente;
-import agroludos.exceptions.ServiceNotFoundException;
+import agroludos.exceptions.BusinessComponentNotFoundException;
 
 class Services {
 	private LConfigurazione lconfigurazione;
@@ -57,11 +57,11 @@ class Services {
 		this.services.put(SManagerDiSistema.class.getName(),this.smds);
 	}
 	
-	public AgroludosService getService(String serviceName) throws ServiceNotFoundException{
+	public AgroludosService getService(String serviceName) throws BusinessComponentNotFoundException{
 		AgroludosService service = this.services.get(serviceName);
 
 		if(service == null){
-			throw new ServiceNotFoundException("Servizio non trovato!");
+			throw new BusinessComponentNotFoundException("Servizio non trovato!");
 		}
 
 		return service;

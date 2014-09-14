@@ -6,13 +6,13 @@ import agroludos.to.OptionalTO;
 
 public interface OptionalDAO {
 
-	boolean crea(OptionalTO optto);
+	boolean crea(OptionalTO optTO);
 
-	boolean update(OptionalTO optto);
+	boolean update(OptionalTO optTO);
 	
-	boolean eliminaOptional(OptionalTO optto);
+	boolean eliminaOptional(OptionalTO optTO);
 	
 	List<OptionalTO> readAll();
 	
-	<T> List<OptionalTO> readByTipo(T tipo);
+	List<OptionalTO> readByTipo(OptionalTO optTO);
 }

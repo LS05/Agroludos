@@ -3,7 +3,7 @@ package agroludos.presentation.reqh;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.to.AgroludosTO;
 
-public class EmptyRequestContextImpl implements AgroRequestContext{
+class EmptyRequestContextImpl implements AgroRequestContext{
 	private AgroRequest request;
 	
 	@Override

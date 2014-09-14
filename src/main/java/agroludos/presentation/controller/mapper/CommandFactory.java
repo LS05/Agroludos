@@ -1,7 +1,7 @@
 package agroludos.presentation.controller.mapper;
 
-import agroludos.exceptions.ServiceNotFoundException;
+import agroludos.exceptions.BusinessComponentNotFoundException;
 
 public interface CommandFactory {
-	public Command getCommand(String commandName) throws ServiceNotFoundException;
+	public Command getCommand(String commandName) throws BusinessComponentNotFoundException;
 }

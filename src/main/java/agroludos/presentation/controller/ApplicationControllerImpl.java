@@ -1,6 +1,7 @@
 package agroludos.presentation.controller;
 
-import agroludos.exceptions.ServiceNotFoundException;
+import agroludos.exceptions.ApplicationException;
+import agroludos.exceptions.BusinessComponentNotFoundException;
 import agroludos.presentation.controller.mapper.Command;
 import agroludos.presentation.controller.mapper.CommandFactory;
 import agroludos.presentation.controller.mapper.CommandProcessor;
@@ -11,7 +12,7 @@ import agroludos.presentation.resph.AgroResponseContext;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.Navigator;
 
-class AgroludosAC implements ApplicationController{
+class ApplicationControllerImpl implements ApplicationController{
 	private CommandFactory commandFactory;
 	private CommandProcessor commandProcessor;
 	private Navigator nav;
@@ -25,11 +26,13 @@ class AgroludosAC implements ApplicationController{
 		try {
 			command = this.commandFactory.getCommand(commandName);
 			response = this.commandProcessor.invoke(command, request);
-		} catch (ServiceNotFoundException e) {
+		} catch (BusinessComponentNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
+		} catch (ApplicationException e) {
+			// TODO Eccezione di programmazione
+			// Sollevata solo in caso in cui ho una ServiceNotFoundException, IllegalAccess o IllegalArgument
+			// quindi da qui il programma deve chiudersi; 
 			e.printStackTrace();
 		}
 

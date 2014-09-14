@@ -1,25 +1,29 @@
 package agroludos.integration.dao.db.mysql;
 
+import org.hibernate.Transaction;
+
+import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.DBConfigurazioneDAO;
 import agroludos.to.ConfigurazioneTO;
 
 class MySqlConfigurazioneDAO extends MySqlAgroludosDAO implements DBConfigurazioneDAO {
 
 	@Override
-	public boolean addConfigurazioneDB(ConfigurazioneTO conf) {
+	public boolean addConfigurazioneDB(ConfigurazioneTO conf) throws DatabaseException {
 		boolean res = false;
 		// TODO Aggiungere gestione eccezioni hibernate
-		this.session.beginTransaction();		
-		this.session.save(conf);
-		res = true;
-		this.session.getTransaction().commit();
+		Transaction tx = null;
+		
+		try {
+			tx = this.session.beginTransaction();
+			this.session.save(conf);
+			res = true;
+			this.session.getTransaction().commit();
+		} catch (Exception e){
+		     if (tx != null) tx.rollback();
+		     throw new DatabaseException(e.getMessage(), e);
+		}
+		
 		return res;
 	}
-
-	@Override
-	public boolean getStatoConfigurazione() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

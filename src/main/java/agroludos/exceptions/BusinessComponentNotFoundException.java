@@ -1,16 +1,16 @@
 package agroludos.exceptions;
 
 @SuppressWarnings("serial")
-public class ServiceNotFoundException extends Exception {
-	public ServiceNotFoundException(String msg){
+public class BusinessComponentNotFoundException extends Exception {
+	public BusinessComponentNotFoundException(String msg){
 		super(msg);
 	}
 	
-	public ServiceNotFoundException(String msg, Throwable cause){
+	public BusinessComponentNotFoundException(String msg, Throwable cause){
 		super(msg, cause);
 	}
 	
-	public ServiceNotFoundException(Throwable cause){
+	public BusinessComponentNotFoundException(Throwable cause){
 		super(cause);
 	}
 }

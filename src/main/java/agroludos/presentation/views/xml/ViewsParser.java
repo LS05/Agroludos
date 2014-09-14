@@ -9,6 +9,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import agroludos.exceptions.ViewNotFoundException;
+
 class ViewsParser implements AgroViewsParser{
 	private Map<String, AgroludosWindow> views;
 	private AgroViews agView = null;
@@ -48,7 +50,13 @@ class ViewsParser implements AgroViewsParser{
 		}
 	}
 	
-	public AgroludosWindow getView(String name){
-		return this.views.get(name);
+	public AgroludosWindow getView(String viewName) throws ViewNotFoundException{
+		AgroludosWindow view = null;
+		if(this.views.containsKey(viewName)){
+			view = this.views.get(viewName);
+		} else {
+			throw new ViewNotFoundException("Vista: " + " \"" + viewName + " \"" +  "non trovata! Controllare che il nome della vista sia presente nel file xml views.xml in agroludos.presentation.views.xml");
+		}
+		return view;
 	}
 }

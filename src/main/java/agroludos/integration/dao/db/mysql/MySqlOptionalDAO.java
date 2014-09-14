@@ -10,28 +10,28 @@ import agroludos.to.OptionalTO;
 class MySqlOptionalDAO extends MySqlAgroludosDAO implements OptionalDAO {
 
 	@Override
-	public boolean crea(OptionalTO optto) {
+	public boolean crea(OptionalTO optTO) {
 		boolean res = false;
 		// TODO Aggiungere gestione eccezioni hibernate
 		this.session.beginTransaction();
-		this.session.save(optto);
+		this.session.save(optTO);
 		res = true;
 		this.session.getTransaction().commit();
 		return res;
 	}
 
 	@Override
-	public boolean update(OptionalTO optto) {
+	public boolean update(OptionalTO optTO) {
 		boolean res = false;
 		this.session.beginTransaction();
 
 		Query query = session.getNamedQuery("updateOptional");
-		query.setParameter("nome", optto.getNome());
-		query.setParameter("descrizione", optto.getDescrizione());
-		query.setParameter("tipo", optto.getTipo());
-		query.setParameter("costo", optto.getCosto());
-		query.setParameter("stato", optto.getStato());
-		query.setParameter("id", optto.getId());
+		query.setParameter("nome", optTO.getNome());
+		query.setParameter("descrizione", optTO.getDescrizione());
+		query.setParameter("tipo", optTO.getTipo());
+		query.setParameter("costo", optTO.getCosto());
+		query.setParameter("stato", optTO.getStato());
+		query.setParameter("id", optTO.getId());
 
 		if(query.executeUpdate() == 1){
 			res = true;
@@ -51,22 +51,22 @@ class MySqlOptionalDAO extends MySqlAgroludosDAO implements OptionalDAO {
 	}
 
 	@Override
-	public <T> List<OptionalTO> readByTipo(T tipo) {
+	public List<OptionalTO> readByTipo(OptionalTO optTO) {
 		this.session.beginTransaction();
 		Query query = this.session.getNamedQuery("getOptionalByTipo");
-		query.setParameter("tipo", tipo);
+		query.setParameter("tipo", optTO.getTipo());
 		List<OptionalTO> list = query.list();
 		return list;
 	}
 
 	@Override
-	public boolean eliminaOptional(OptionalTO optto) {
+	public boolean eliminaOptional(OptionalTO optTO) {
 		boolean res = false;
 		this.session.beginTransaction();
 
 		Query query = session.getNamedQuery("eliminaOptional");
 		query.setParameter("stato", 0);
-		query.setParameter("id", optto.getId());
+		query.setParameter("id", optTO.getId());
 
 		if(query.executeUpdate() == 1){
 			res = true;

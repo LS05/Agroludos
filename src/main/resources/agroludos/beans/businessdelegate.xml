@@ -17,7 +17,7 @@
 	<bean id="serviceHandler" class="agroludos.business.bd.ServiceHandler">
 		<property name="response" ref="respCtx" />
 	</bean>
-	<bean id="agroludosBD" class="agroludos.business.bd.AgroludosBD">
+	<bean id="agroludosBD" class="agroludos.business.bd.BusinessDelegateImpl">
 		<constructor-arg ref="serviceLocator" />
 		<constructor-arg ref="serviceHandler" />
 	</bean>
