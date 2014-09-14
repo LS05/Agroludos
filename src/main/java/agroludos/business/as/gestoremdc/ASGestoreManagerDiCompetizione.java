@@ -10,43 +10,48 @@ import agroludos.to.ManagerDiCompetizioneTO;
 
 class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCompetizione, SManagerDiCompetizione{
 
+	private ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO() throws DatabaseException{
+		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		return dbDAOFact.getManagerDiCompetizioneDAO();
+	}
+
 	@Override
-	public boolean inserisciManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) {
+	public boolean inserisciManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) throws DatabaseException {
 		boolean res = false;
-		
+
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
 		res = daoMan.crea(mdcto);
-		
+
 		return res;
 	}
 
 	@Override
-	public ManagerDiCompetizioneTO getManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) {
-		return getManagerDiCompetizioneDAO().readByUsername(mdcto.getUsername());
+	public ManagerDiCompetizioneTO getManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) throws DatabaseException {
+		ManagerDiCompetizioneTO manTO = null;
+		
+		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
+		manTO = daoMan.readByUsername(mdcto.getUsername());
+		
+		return manTO;
 	}
 
 	@Override
-	public List<ManagerDiCompetizioneTO> getAllManagerCompetizione() {
+	public List<ManagerDiCompetizioneTO> getAllManagerCompetizione() throws DatabaseException {
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
 		return daoMan.readAll();
 	}
-	
+
 	@Override
 	public boolean modificaManagerDiCompetizione(ManagerDiCompetizioneTO mdcto)
 			throws DatabaseException {
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
 		return daoMan.update(mdcto);
 	}
-	
+
 	@Override
 	public boolean eliminaManagerDiCompetizione(ManagerDiCompetizioneTO mdcto)
 			throws DatabaseException {
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
 		return daoMan.update(mdcto);
-	}
-	
-	private ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO(){
-		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-		return dbDAOFact.getManagerDiCompetizioneDAO();
 	}
 }

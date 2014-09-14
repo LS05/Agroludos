@@ -10,6 +10,11 @@ import agroludos.to.OptionalTO;
 
 class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 
+	private OptionalDAO getOptionalDAO() throws DatabaseException {
+		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		return dbDAOFact.getOptionalDAO();
+	}
+
 	@Override
 	public boolean inserisciOptional(OptionalTO optto) throws DatabaseException {
 		boolean res = false;
@@ -18,11 +23,6 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 		res = daoOpt.crea(optto);
 
 		return res;
-	}
-
-	private OptionalDAO getOptionalDAO() {
-		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-		return dbDAOFact.getOptionalDAO();
 	}
 
 	@Override
@@ -41,7 +41,7 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 	public List<OptionalTO> getOptionalByTipo(OptionalTO optto)
 			throws DatabaseException {
 		OptionalDAO daoOpt = getOptionalDAO();
-		return daoOpt.readByTipo(optto.getTipo());
+		return daoOpt.readByTipo(optto);
 	}
 
 	@Override
@@ -49,6 +49,4 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 		OptionalDAO daoOpt = getOptionalDAO();
 		return daoOpt.readAll();
 	}
-
-
 }

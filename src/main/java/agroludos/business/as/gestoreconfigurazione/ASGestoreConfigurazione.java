@@ -1,6 +1,7 @@
 package agroludos.business.as.gestoreconfigurazione;
 
 import agroludos.business.as.AgroludosAS;
+import agroludos.exceptions.DBFactoryException;
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.DBConfigurazioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
@@ -14,18 +15,19 @@ import agroludos.to.DatabaseTO;
 class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SConfigurazione{
 
 	private FileDAOFactory fileDaoFact;
+
 	private FConfigurazioneDAO fileConf;
 
 	private SystemConf sysConf;
 
 	ASGestoreConfigurazione(SystemConf sysConf, FileFactory filefact){
 		this.sysConf = sysConf;
-		this.fileDaoFact = filefact.getDAOFactory(sysConf.getTipoConf());
+		this.fileDaoFact = filefact.getDAOFactory(this.sysConf.getTipoConf());
 		this.fileConf = this.fileDaoFact.getConfigurazioneDAO();
 	}
 
 	@Override
-	public boolean inserisciConfigurazione(DatabaseTO dbto) {
+	public boolean inserisciConfigurazione(DatabaseTO dbto) throws DatabaseException {
 		boolean res = false;
 		DBDAOFactory dbDAO = null;
 		DBConfigurazioneDAO dbConf = null; 
@@ -34,10 +36,10 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 
 		if(this.fileConf.creaConfigurazione(dbto)){
 			try {
-				sysConf.setTipoDB(dbto.getTipo());
-				dbDAO = dbFact.getDAOFactory(sysConf.getTipoDB());
+				this.sysConf.setTipoDB(dbto.getTipo());
+				dbDAO = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 				dbConf = dbDAO.getConfigurazioneDAO();
-				ConfigurazioneTO conf = toFact.createConfigurazioneTO(); 
+				ConfigurazioneTO conf = this.toFact.createConfigurazioneTO(); 
 				conf.setPathConf(this.fileConf.getConfPath());
 				conf.setNomeDB(dbto.getNome());
 				conf.setUserDB(dbto.getUsername());
@@ -47,7 +49,7 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 				conf.setTipoDB(dbto.getTipo());
 				res = dbConf.addConfigurazioneDB(conf);
 			} catch (DatabaseException e) {
-				sysConf.setTipoDB("");
+				this.sysConf.setTipoDB("");
 				throw e;
 			}
 		}
@@ -58,7 +60,7 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 	@Override
 	public boolean checkConfigurazione() {
 		boolean res = false;
-		String tipoDB = sysConf.getTipoDB();
+		String tipoDB = this.sysConf.getTipoDB();
 
 		if(!tipoDB.equals(""))
 			res = true;
@@ -71,10 +73,10 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 		boolean res = false;
 
 		try {
-			dbFact.getDAOFactory(sysConf.getTipoDB());
+			this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 			res = true;
-		} catch (DatabaseException e) {
-			throw e;
+		} catch (DBFactoryException e) {
+			throw new DatabaseException(e.getMessage(), e.getCause());
 		}
 
 		return res;

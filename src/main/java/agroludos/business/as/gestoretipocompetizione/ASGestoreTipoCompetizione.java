@@ -9,6 +9,11 @@ import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.to.TipoCompetizioneTO;
 
 class ASGestoreTipoCompetizione extends AgroludosAS implements LTipoCompetizione, STipoCompetizione{
+	
+	private TipoCompetizioneDAO getTipoCompetizioneDAO() throws DatabaseException {
+		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		return dbDAOFact.getTipoCompetizioneDAO();
+	}
 
 	@Override
 	public boolean inserisciTipoCompetizione(TipoCompetizioneTO tcmto)
@@ -21,17 +26,10 @@ class ASGestoreTipoCompetizione extends AgroludosAS implements LTipoCompetizione
 		return res;
 	}
 
-	private TipoCompetizioneDAO getTipoCompetizioneDAO() {
-		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-		return dbDAOFact.getTipoCompetizioneDAO();
-	}
-
 	@Override
 	public List<TipoCompetizioneTO> getAllTipoCompetizioneTOs()
 			throws DatabaseException {
 		TipoCompetizioneDAO daoTcm = getTipoCompetizioneDAO();
 		return daoTcm.readAll();
 	}
-
-
 }

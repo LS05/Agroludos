@@ -9,11 +9,16 @@ import agroludos.utility.PasswordEncryption;
 
 class ASGestoreManagerDiSistema extends AgroludosAS implements LManagerDiSistema, SManagerDiSistema{
 	PasswordEncryption pwdEnc;
-	
+
 	ASGestoreManagerDiSistema(PasswordEncryption pwdEnc){
 		this.pwdEnc = pwdEnc;
 	}
-	
+
+	private ManagerDiSistemaDAO getManagerDiSistemaDAO() throws DatabaseException{
+		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		return dbDAOFact.getManagerDiSistemaDAO();
+	}
+
 	@Override
 	public boolean nuovoManagerDiSistema(ManagerDiSistemaTO mdsto) throws DatabaseException {
 		// TODO Auto-generated catch block
@@ -27,12 +32,6 @@ class ASGestoreManagerDiSistema extends AgroludosAS implements LManagerDiSistema
 
 	@Override
 	public ManagerDiSistemaTO getManagerDiSistema(ManagerDiSistemaTO mdsto) throws DatabaseException {
-		return getManagerDiSistemaDAO().readByUsername(mdsto.getUsername());
+		return getManagerDiSistemaDAO().readByUsername(mdsto);
 	}
-	
-	private ManagerDiSistemaDAO getManagerDiSistemaDAO() throws DatabaseException{
-		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-		return dbDAOFact.getManagerDiSistemaDAO();
-	}
-
 }

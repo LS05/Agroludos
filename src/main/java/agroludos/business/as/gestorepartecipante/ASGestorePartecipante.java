@@ -10,6 +10,11 @@ import agroludos.to.PartecipanteTO;
 
 class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SPartecipante{
 
+	private PartecipanteDAO getPartecipanteDAO() throws DatabaseException {
+		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		return dbDAOFact.getPartecipanteDAO();
+	}
+
 	@Override
 	public boolean inserisciPartecipante(PartecipanteTO parto)
 			throws DatabaseException {
@@ -19,11 +24,6 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 		res = daoPar.crea(parto);
 
 		return res;
-	}
-
-	private PartecipanteDAO getPartecipanteDAO() {
-		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-		return dbDAOFact.getPartecipanteDAO();
 	}
 
 	@Override
@@ -52,5 +52,4 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 		PartecipanteDAO daoPar = getPartecipanteDAO();
 		return daoPar.readByUsername(parto.getId());
 	}
-
 }

@@ -9,6 +9,11 @@ import agroludos.integration.dao.db.TipoOptionalDAO;
 import agroludos.to.TipoOptionalTO;
 
 class ASGestoreTipoOptional extends AgroludosAS implements LTipoOptional, STipoOptional{
+	
+	private TipoOptionalDAO getTipoOptionalDAO() throws DatabaseException {
+		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		return dbDAOFact.getTipoOptionalDAO();
+	}
 
 	@Override
 	public boolean inserisciTipoOptional(TipoOptionalTO topto)
@@ -21,17 +26,9 @@ class ASGestoreTipoOptional extends AgroludosAS implements LTipoOptional, STipoO
 		return res;
 	}
 
-	private TipoOptionalDAO getTipoOptionalDAO() {
-		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-		return dbDAOFact.getTipoOptionalDAO();
-	}
-
 	@Override
 	public List<TipoOptionalTO> getAllTipoOptional() throws DatabaseException {
 		TipoOptionalDAO daoTop = getTipoOptionalDAO();
 		return daoTop.readAll();
 	}
-
-
-
 }
