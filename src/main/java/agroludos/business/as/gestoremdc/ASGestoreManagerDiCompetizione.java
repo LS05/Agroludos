@@ -30,7 +30,7 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 		ManagerDiCompetizioneTO manTO = null;
 		
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
-		manTO = daoMan.readByUsername(mdcto.getUsername());
+		manTO = daoMan.getByUsername(mdcto.getUsername());
 		
 		return manTO;
 	}

@@ -48,12 +48,6 @@ public interface DBDAOFactory {
 	 * Partecipante
 	 */
 	public UtenteDAO getUtenteDAO();
-
-	/**
-	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
-	 * Partecipante
-	 */
-	public DBConfigurazioneDAO getConfigurazioneDAO();	
 	
 	/**
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Iscrizione

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 
+import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.PartecipanteTO;
@@ -12,7 +13,7 @@ import agroludos.to.UtenteTO;
 class MySqlPartecipanteDAO extends MySqlUtenteDAO implements PartecipanteDAO {
 
 	@Override
-	public boolean crea(PartecipanteTO parto) {
+	public boolean crea(PartecipanteTO parto) throws DatabaseException {
 		return super.crea(parto);
 	}
 
@@ -34,16 +35,14 @@ class MySqlPartecipanteDAO extends MySqlUtenteDAO implements PartecipanteDAO {
 	}
 
 	@Override
-	public boolean update(PartecipanteTO parto) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(PartecipanteTO parto) throws DatabaseException {
+		return super.update(parto);
 	}
 
 
 	@Override
-	public boolean delete(PartecipanteTO parto) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean delete(PartecipanteTO parto) throws DatabaseException {
+		return super.delete(parto);
 	}
 
 

@@ -8,8 +8,6 @@ public interface TOFactory {
 
 	UtenteTO createUTO();
 
-	ConfigurazioneTO createConfigurazioneTO();
-
 	ManagerDiCompetizioneTO createMdCTO();
 	
 	CompetizioneTO createCompetizioneTO();
@@ -23,5 +21,7 @@ public interface TOFactory {
 	TipoCompetizioneTO createTipoCompetizioneTO();
 	
 	TipoOptionalTO createTipoOptionalTO();
+
+	UtenteTO createNullUTO();
 
 }

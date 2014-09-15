@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.CompetizioneDAO;
-import agroludos.integration.dao.db.DBConfigurazioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.IscrizioneDAO;
 import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
@@ -73,11 +72,6 @@ public class MySqlDAOFactory implements DBDAOFactory {
 	@Override
 	public UtenteDAO getUtenteDAO() {
 		return new MySqlUtenteDAO();
-	}
-
-	@Override
-	public DBConfigurazioneDAO getConfigurazioneDAO() {
-		return new MySqlConfigurazioneDAO();
 	}
 
 	@Override

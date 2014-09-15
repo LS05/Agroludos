@@ -78,7 +78,7 @@
 		
 	</class>
 	<query name="getUtente">
-        <![CDATA[ from agroludos.to.Utente u where u.stato = 1 and u.username = :username and u.password = :password ]]></query>
+        <![CDATA[ from agroludos.to.Utente u where u.stato = 1 and u.username = :username and u.password = :password and u.stato = 1 ]]></query>
 		<query name="getByID">
         <![CDATA[ from agroludos.to.Utente u where u.stato = 1 and u.id = :id and u.idruolo = :idruolo ]]></query>
 		<query name="getPartecipante">

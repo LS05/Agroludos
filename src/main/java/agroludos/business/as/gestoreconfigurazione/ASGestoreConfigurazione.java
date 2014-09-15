@@ -3,13 +3,10 @@ package agroludos.business.as.gestoreconfigurazione;
 import agroludos.business.as.AgroludosAS;
 import agroludos.exceptions.DBFactoryException;
 import agroludos.exceptions.DatabaseException;
-import agroludos.integration.dao.db.DBConfigurazioneDAO;
-import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.file.FConfigurazioneDAO;
 import agroludos.integration.dao.file.FileDAOFactory;
 import agroludos.integration.dao.file.FileFactory;
 import agroludos.system.SystemConf;
-import agroludos.to.ConfigurazioneTO;
 import agroludos.to.DatabaseTO;
 
 class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SConfigurazione{
@@ -29,29 +26,11 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 	@Override
 	public boolean inserisciConfigurazione(DatabaseTO dbto) throws DatabaseException {
 		boolean res = false;
-		DBDAOFactory dbDAO = null;
-		DBConfigurazioneDAO dbConf = null; 
 
 		// TODO Aggiungere controlli sui dati dei parametri
 
 		if(this.fileConf.creaConfigurazione(dbto)){
-			try {
-				this.sysConf.setTipoDB(dbto.getTipo());
-				dbDAO = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-				dbConf = dbDAO.getConfigurazioneDAO();
-				ConfigurazioneTO conf = this.toFact.createConfigurazioneTO(); 
-				conf.setPathConf(this.fileConf.getConfPath());
-				conf.setNomeDB(dbto.getNome());
-				conf.setUserDB(dbto.getUsername());
-				conf.setPwdDB(dbto.getPassword());
-				conf.setPortaDB(dbto.getPorta());
-				conf.setServerDB(dbto.getServer());
-				conf.setTipoDB(dbto.getTipo());
-				res = dbConf.addConfigurazioneDB(conf);
-			} catch (DatabaseException e) {
-				this.sysConf.setTipoDB("");
-				throw e;
-			}
+			this.sysConf.setTipoDB(dbto.getTipo());
 		}
 
 		return res;

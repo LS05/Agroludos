@@ -4,6 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     <import resource="classpath:agroludos/beans/utility.xml" />
+    <import resource="classpath:agroludos/beans/transferobject.xml" />
 	<bean id="fileFactory" class="agroludos.integration.dao.file.FileFactory" />
 	<bean id="dbFactory" class="agroludos.integration.dao.db.DBFactory" />
 	<bean id="xmlDaoFactory" class="agroludos.integration.dao.file.xml.XmlDAOFactory" />
@@ -21,4 +22,11 @@
 		  class="agroludos.integration.dao.db.mysql.MySqlDAOFactory"
 		  factory-bean="dbFactory"
 		  factory-method="createMySqlDAOFactory" />
+		  
+	<bean id="mysqlAgroludosDAO" 
+		  class="agroludos.integration.dao.db.mysql.MySqlAgroludosDAO">
+		  <property name="toFact" ref="toFactory" />
+	</bean>
+		  
+		  
 </beans>
