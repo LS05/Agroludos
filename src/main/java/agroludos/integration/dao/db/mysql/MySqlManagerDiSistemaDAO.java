@@ -18,7 +18,7 @@ class MySqlManagerDiSistemaDAO extends MySqlUtenteDAO implements ManagerDiSistem
 	}
 
 	@Override
-	public ManagerDiSistemaTO readByUsername(String username) throws DatabaseException {
+	public ManagerDiSistemaTO getByUsername(String username) throws DatabaseException {
 		return (ManagerDiSistemaTO) super.getByUsername(username);
 	}
 }

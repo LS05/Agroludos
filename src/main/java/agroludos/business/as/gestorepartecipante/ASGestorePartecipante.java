@@ -50,6 +50,6 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 	public PartecipanteTO getPartecipanteById(PartecipanteTO parto)
 			throws DatabaseException {
 		PartecipanteDAO daoPar = getPartecipanteDAO();
-		return daoPar.getByUsername(parto.getId());
+		return daoPar.readByID(parto.getId());
 	}
 }
