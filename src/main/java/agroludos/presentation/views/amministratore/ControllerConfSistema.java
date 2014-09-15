@@ -8,7 +8,6 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.DatabaseTO;
 import agroludos.to.ManagerDiSistemaTO;
-import agroludos.to.UtenteTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

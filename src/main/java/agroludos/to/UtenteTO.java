@@ -30,6 +30,8 @@ public interface UtenteTO extends AgroludosTO {
 
 	Integer getIdruolo();
 	
+	String getRuolo();
+	
 	void setIdruolo(Integer idruolo);
 
 }

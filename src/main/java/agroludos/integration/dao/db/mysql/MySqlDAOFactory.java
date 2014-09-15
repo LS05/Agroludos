@@ -97,8 +97,10 @@ public class MySqlDAOFactory implements DBDAOFactory {
 		
 		PartecipanteTO mdcto = fact.createPartecipanteTO();
 		
+		
+		
 		PartecipanteDAO mdcDAO = daoFact.getPartecipanteDAO();
-		mdcto = mdcDAO.readByCF("asdffad");
+		List<PartecipanteTO> list =  mdcDAO.readAll();
 		
 	}
 }

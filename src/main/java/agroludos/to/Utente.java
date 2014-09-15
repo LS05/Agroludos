@@ -9,6 +9,7 @@ class Utente implements UtenteTO{
 	private String email;
 	private Integer idruolo; //id ruolo utente
 	private Integer stato;
+	private String ruolo;
 	
 	@Override
 	public Integer getId() {
@@ -87,6 +88,11 @@ class Utente implements UtenteTO{
 	@Override
 	public void setStato(Integer stato) {
 		this.stato = stato;
+	}
+
+	@Override
+	public String getRuolo() {
+		return this.ruolo;
 	}
 
 }
