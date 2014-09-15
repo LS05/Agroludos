@@ -1,83 +1,73 @@
 package agroludos.integration.dao.db.mysql;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
+import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.to.CompetizioneTO;
 
-class MySqlCompetizioneDAO extends MySqlAgroludosDAO implements CompetizioneDAO {
+class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements CompetizioneDAO {
 
-	@Override
-	public boolean crea(CompetizioneTO cmpto) {
-		boolean res = false;
-		// TODO Aggiungere gestione eccezioni hibernate
-		this.session.beginTransaction();
-		this.session.save(cmpto);
-		res = true;
-		this.session.getTransaction().commit();
-		return res;
+	MySqlCompetizioneDAO(SessionFactory sessionFactory) {
+		super(sessionFactory);
 	}
 
 	@Override
-	public boolean update(CompetizioneTO cmpto) {
+	public boolean crea(CompetizioneTO cmpto) throws DatabaseException {
+		return super.create(cmpto);
+	}
+
+	@Override
+	public boolean update(CompetizioneTO cmpto) throws DatabaseException {
+		return super.update(cmpto);
+	}
+
+	@Override
+	public boolean annullaCompetizione(CompetizioneTO cmpto) throws DatabaseException {
+		Transaction tx = null;
 		boolean res = false;
-		this.session.beginTransaction();
 
-		Query query = session.getNamedQuery("updateCompetizione");
-		query.setParameter("nome", cmpto.getNome());
-		query.setParameter("data", cmpto.getData());
-		query.setParameter("nmin", cmpto.getNmin());
-		query.setParameter("nmax", cmpto.getNmax());
-		query.setParameter("costo", cmpto.getCosto());
-		query.setParameter("descrizione", cmpto.getDescrizione());
-		query.setParameter("tipo", cmpto.getTipo());
-		query.setParameter("stato", cmpto.getStato());
-		query.setParameter("id", cmpto.getId());
+		try {
+			tx = this.session.beginTransaction();
 
-		if(query.executeUpdate() == 1){
-			res = true;
+			Query query = session.getNamedQuery("annullaCompetizione");
+			query.setParameter("stato", 0);
+			query.setParameter("id", cmpto.getId());
+
+			if(query.executeUpdate() == 1){
+				res = true;
+			}
+
+			this.session.getTransaction().commit();
+		} catch (HibernateException e){
+			if (tx != null) tx.rollback();
+			throw new DatabaseException(e.getMessage(), e);
 		}
-
-		this.session.getTransaction().commit();
-
+		
 		return res;
 	}
 
 	@Override
-	public boolean annullaCompetizione(CompetizioneTO cmpto) {
-		boolean res = false;
-		this.session.beginTransaction();
+	public List<CompetizioneTO> readAll() throws DatabaseException {
+		List<CompetizioneTO> res = super.executeQuery("getAllCompetizione");
+		return  res;
+	}
 
-		Query query = session.getNamedQuery("annullaCompetizione");
-		query.setParameter("stato", 0);
-		query.setParameter("id", cmpto.getId());
+	@Override
+	public List<CompetizioneTO> readByTipo(Integer tipo) throws DatabaseException{
 
-		if(query.executeUpdate() == 1){
-			res = true;
-		}
+		List<Integer> param = new ArrayList<Integer>();
+		param.add(tipo);
 
-		this.session.getTransaction().commit();
+		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioneByTipo", param);
 
 		return res;
-	}
-
-	@Override
-	public List<CompetizioneTO> readAll() {
-		this.session.beginTransaction();
-		Query query = this.session.getNamedQuery("getAllCompetizione");
-		List<CompetizioneTO> list = query.list();
-		return list;
-	}
-
-	@Override
-	public <T>List<CompetizioneTO> readByTipo(T tipo) {
-		this.session.beginTransaction();
-		Query query = this.session.getNamedQuery("getCompetizioneByTipo");
-		query.setParameter("tipo", tipo);
-		List<CompetizioneTO> list = query.list();
-		return list;
 	}
 
 	@Override
@@ -88,24 +78,26 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO implements CompetizioneDAO 
 		List<CompetizioneTO> list = query.list();
 		return list;
 	}
-	
+
 	@Override
-	public <T> CompetizioneTO readById(T id) {
-		CompetizioneTO res=null;
-		this.session.beginTransaction();
-		Query query = this.session.getNamedQuery("getCompetizioneById");
-		query.setParameter("id", id);
-		List<CompetizioneTO> list = query.list();
+	public CompetizioneTO readById(Integer id) throws DatabaseException{
+		CompetizioneTO res = null;
+		List<Integer> param = new ArrayList<Integer>();
+		param.add(id);
+
+		List<CompetizioneTO> list = super.executeParamQuery("getCompetizioneById", param);
 		res = list.get(0);
+
 		return res;
 	}
 
 	@Override
-	public List<CompetizioneTO> readCompetizioniAttive() {
-		this.session.beginTransaction();
-		Query query = this.session.getNamedQuery("getCompetizioniAttive");
-		query.setParameter("stato", 1);
-		List<CompetizioneTO> list = query.list();
+	public List<CompetizioneTO> readCompetizioniAttive() throws DatabaseException {
+		List<Integer> param = new ArrayList<Integer>();
+		param.add(1);
+
+		List<CompetizioneTO> list = super.executeParamQuery("getCompetizioniAttive", param);
+
 		return list;
 	}
 

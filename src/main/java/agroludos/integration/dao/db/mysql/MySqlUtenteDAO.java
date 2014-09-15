@@ -12,7 +12,12 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.UtenteTO;
 
 class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
-
+	
+	@Override
+	public boolean crea(UtenteTO uto) throws DatabaseException {
+		return super.create(uto);
+	}
+	
 	@Override
 	public UtenteTO autenticazione(UtenteTO uto) throws UserNotFoundException {
 		UtenteTO res = null;
@@ -51,7 +56,7 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
 	@Override
 	public UtenteTO getByUsername(String username) throws DatabaseException {
 
-		ArrayList<String> param = new ArrayList<String>();
+		List<String> param = new ArrayList<String>();
 		param.add(username);
 
 		return this.getUtenteBy("getByUsername", param);
@@ -59,7 +64,7 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
 
 	@Override
 	public UtenteTO readByID(Integer id) throws DatabaseException {
-		
+
 		List<Integer> param = new ArrayList<Integer>();
 		param.add(id);
 
@@ -69,31 +74,34 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
 	@Override
 	public boolean esisteUsername(UtenteTO uto) throws DatabaseException {
 		boolean res = false;
-		ArrayList<String> param = new ArrayList<String>();
+
+		List<String> param = new ArrayList<String>();
 		param.add(uto.getUsername());
+
 		UtenteTO user = this.getUtenteBy("getByUsername", param);
+
 		if(user.getUsername() == "")
 			res = false;
 		else
 			res = true;
+
 		return res;
 	}
 
 	@Override
 	public boolean esisteEmail(UtenteTO uto) throws DatabaseException {
 		boolean res = false;
-		ArrayList<String> param = new ArrayList<String>();
+
+		List<String> param = new ArrayList<String>();
 		param.add(uto.getEmail());
+
 		UtenteTO user = this.getUtenteBy("getByEmail", param);
+
 		if(user.getUsername() == "")
 			res = false;
 		else
 			res = true;
-		return res;
-	}
 
-	@Override
-	public boolean crea(UtenteTO uto) throws DatabaseException {
-		return super.create(uto);
+		return res;
 	}
 }

@@ -2,23 +2,25 @@ package agroludos.integration.dao.db;
 
 import java.util.List;
 
+import agroludos.exceptions.DatabaseException;
 import agroludos.to.CompetizioneTO;
 
 public interface CompetizioneDAO {
 
-	boolean crea(CompetizioneTO cmpto);
+	boolean crea(CompetizioneTO cmpto) throws DatabaseException;
 
-	boolean update(CompetizioneTO cmpto);
+	boolean update(CompetizioneTO cmpto) throws DatabaseException;
 
-	boolean annullaCompetizione(CompetizioneTO cmpto);
+	boolean annullaCompetizione(CompetizioneTO cmpto) throws DatabaseException;
 
-	List<CompetizioneTO> readAll();
+	List<CompetizioneTO> readAll() throws DatabaseException;
 
-	<T>List<CompetizioneTO> readByTipo(T tipo);
-	
+	List<CompetizioneTO> readByTipo(Integer tipo) throws DatabaseException;
+
+	//TODO Da rivedere: Generalizzare o meno?
 	<T>List<CompetizioneTO> readByMdc(T mdc);
 
-	<T>CompetizioneTO readById(T id);
+	CompetizioneTO readById(Integer id) throws DatabaseException;
 	
-	List<CompetizioneTO> readCompetizioniAttive();
+	List<CompetizioneTO> readCompetizioniAttive() throws DatabaseException;
 }
