@@ -23,25 +23,76 @@
 		<property name="email" type="string">
 			<column name="email" not-null="true" />
 		</property>
-		<property name="tipo" type="integer">
-			<column name="idruolo" not-null="true" default="0" />
+		<property name="idruolo" type="integer">
+			<column name="idruolo" not-null="true" default="1" />
 		</property>
 		<property name="stato" type="integer">
 			<column name="stato" not-null="true" default="1" />
 		</property>
+
+		<joined-subclass name="agroludos.to.ManagerDiSistema"
+			table="tbl_mds" extends="agroludos.to.Utente">
+			<key column="idmds" />
+			<property name="indirizzo" type="string">
+				<column name="indirizzo" />
+			</property>
+		</joined-subclass>
+		<joined-subclass name="agroludos.to.ManagerDiCompetizione"
+			table="tbl_mdc" extends="agroludos.to.Utente">
+			<key column="idmdc" />
+			<property name="stipendio" type="double">
+				<column name="stipendio" />
+			</property>
+		</joined-subclass>
+		<joined-subclass name="agroludos.to.Partecipante"
+			table="tbl_partecipante" extends="agroludos.to.Utente">
+			<key column="idpartecipante" />
+			<property name="cf" type="string">
+				<column name="cf" not-null="true" />
+			</property>
+			<property name="dataNasc" type="date">
+				<column name="datanasc" not-null="true" />
+			</property>
+			<property name="sesso" type="string">
+				<column name="sesso" not-null="true" />
+			</property>
+			<property name="numTS" type="string">
+				<column name="n_tessan" not-null="true" />
+			</property>
+			<property name="indirizzo" type="string">
+				<column name="indirizzo" not-null="true" />
+			</property>
+			<property name="src" type="string">
+				<column name="src" not-null="true" />
+			</property>
+			<property name="dataSRC" type="date">
+				<column name="data_src" not-null="true" />
+			</property>
+			<set name="iscrizioni" table="tbl_iscrizione" fetch="select">
+				<key column="idpartecipante" />
+				<one-to-many class="agroludos.to.Iscrizione" />
+			</set>
+			
+		</joined-subclass>
+
+		
 	</class>
 	<query name="getUtente">
         <![CDATA[ from agroludos.to.Utente u where u.stato = 1 and u.username = :username and u.password = :password ]]></query>
-	<sql-query name="getRuoloUtente">
-        <![CDATA[ SELECT tbl_ruoli.descrizione FROM tbl_utenti, tbl_ruoli WHERE tbl_ruoli.idruolo = :idruolo ]]></sql-query>
-	<query name="getAllManagerDiCompetizione">
-		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and idruolo = 1]]></query>
-	<query name="deleteManagerDiCompetizione">
-		<![CDATA[ update agroludos.to.Utente m set m.stato = 0 where m.username = :username and idruolo = 1]]></query>
-	<query name="getAllPartecipanti">
-		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.tipo = 2 ]]></query>
-	<query name="getByUsername">
-		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.tipo = :tipo and m.username = :username ]]></query>
-	<query name="getByID">
-		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.tipo = :tipo and m.id = :id]]></query>
+		<query name="getByID">
+        <![CDATA[ from agroludos.to.Utente u where u.stato = 1 and u.id = :id and u.idruolo = :idruolo ]]></query>
+		<query name="getPartecipante">
+        <![CDATA[ from agroludos.to.Partecipante p where p.stato = 1 and p.id = :id ]]></query>
+		<query name="getPartecipanteByCF">
+        <![CDATA[ from agroludos.to.Partecipante p where p.stato = 1 and p.cf = :cf ]]></query>
+		<sql-query name="getRuoloUtente">
+        <![CDATA[ SELECT tbl_ruoli.descrizione FROM tbl_ruoli WHERE tbl_ruoli.idruolo = :idruolo ]]></sql-query>
+		<query name="getAllManagerDiCompetizione">
+		<![CDATA[ from agroludos.to.ManagerDiCompetizione m where m.stato = 1]]></query>
+		<query name="deleteManagerDiCompetizione">
+		<![CDATA[ update agroludos.to.ManagerDiCompetizione m set m.stato = 0 where m.username = :username]]></query>
+		<query name="getAllPartecipanti">
+		<![CDATA[ from agroludos.to.Partecipante m where m.stato = 1 ]]></query>
+		<query name="getByUsername">
+		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.username = :username ]]></query>
 </hibernate-mapping>

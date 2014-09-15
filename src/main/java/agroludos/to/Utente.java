@@ -1,16 +1,24 @@
 package agroludos.to;
 
 class Utente implements UtenteTO{
-	private int id;
+	private Integer id;
 	private String nome;
 	private String cognome;
 	private String username;
 	private String password;
 	private String email;
-	private Integer tipo;
+	private Integer idruolo; //id ruolo utente
 	private Integer stato;
-	private String ruolo;
-
+	
+	@Override
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 	@Override
 	public String getNome() {
 		return nome;
@@ -62,31 +70,13 @@ class Utente implements UtenteTO{
 	}
 	
 	@Override
-	public int getId() {
-		return id;
-	}
-	
-	void setId(int id) {
-		this.id = id;
+	public Integer getIdruolo() {
+		return idruolo;
 	}
 	
 	@Override
-	public void setRuolo(String ruolo) {
-		this.ruolo = ruolo;
-	}
-	
-	@Override
-	public String getRuolo() {
-		return this.ruolo;
-	}
-	
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
-	}
-	
-	@Override
-	public Integer getTipo() {
-		return tipo;
+	public void setIdruolo(Integer idruolo) {
+		this.idruolo = idruolo;
 	}
 	
 	@Override
@@ -98,4 +88,5 @@ class Utente implements UtenteTO{
 	public void setStato(Integer stato) {
 		this.stato = stato;
 	}
+
 }

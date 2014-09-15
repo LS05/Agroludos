@@ -5,19 +5,15 @@ import java.util.List;
 import org.hibernate.Query;
 
 import agroludos.integration.dao.db.PartecipanteDAO;
+import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.PartecipanteTO;
+import agroludos.to.UtenteTO;
 
-class MySqlPartecipanteDAO extends MySqlAgroludosDAO implements PartecipanteDAO {
+class MySqlPartecipanteDAO extends MySqlUtenteDAO implements PartecipanteDAO {
 
 	@Override
 	public boolean crea(PartecipanteTO parto) {
-		boolean res = false;
-		// TODO Aggiungere gestione eccezioni hibernate
-		this.session.beginTransaction();
-		this.session.save(parto);
-		res = true;
-		this.session.getTransaction().commit();
-		return res;
+		return super.crea(parto);
 	}
 
 
@@ -29,16 +25,11 @@ class MySqlPartecipanteDAO extends MySqlAgroludosDAO implements PartecipanteDAO 
 
 	@Override
 	public <T> PartecipanteTO readByID(T id) {
-		PartecipanteTO res = null;
 		this.session.beginTransaction();
-
-		Query query = session.getNamedQuery("getPartecipanteById");
+		Query query = this.session.getNamedQuery("getPartecipante");
 		query.setParameter("id", id);
-		List<PartecipanteTO> lspart = query.list();
-		res = lspart.get(0);
-		this.session.getTransaction().commit();
-		
-		return res;
+		List<PartecipanteTO> list = query.list();
+		return list.get(0);
 
 	}
 
@@ -58,7 +49,19 @@ class MySqlPartecipanteDAO extends MySqlAgroludosDAO implements PartecipanteDAO 
 
 	@Override
 	public List<PartecipanteTO> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.beginTransaction();
+		Query query = this.session.getNamedQuery("getAllPartecipanti");
+		List<PartecipanteTO> list = query.list();
+		return list;
+	}
+
+
+	@Override
+	public <T> PartecipanteTO readByCF(T cf) {
+		this.session.beginTransaction();
+		Query query = this.session.getNamedQuery("getPartecipanteByCF");
+		query.setParameter("cf", cf);
+		List<PartecipanteTO> list = query.list();
+		return list.get(0);
 	}
 }

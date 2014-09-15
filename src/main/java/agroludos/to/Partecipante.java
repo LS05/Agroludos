@@ -5,8 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-class Partecipante implements PartecipanteTO {
-	private Integer id;
+class Partecipante extends Utente implements PartecipanteTO {
 	private String cf;
 	private String indirizzo;
 	private Date dataNasc;
@@ -14,11 +13,6 @@ class Partecipante implements PartecipanteTO {
 	private String numTS;
 	private String src;
 	private Date dataSRC;
-	private String username;
-	private String nome;
-	private String cognome;
-	private String email;
-	private String stato;
 	
 	public Set<Iscrizione> iscrizioni;
 	
@@ -112,63 +106,4 @@ class Partecipante implements PartecipanteTO {
 		this.iscrizioni = iscrizioni;
 	}
 
-	@Override
-	public Integer getId() {
-		return id;
-	}
-	
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	@Override
-	public String getUsername() {
-		return username;
-	}
-
-	@Override
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	@Override
-	public String getNome() {
-		return nome;
-	}
-
-	@Override
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	@Override
-	public String getCognome() {
-		return cognome;
-	}
-
-	@Override
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
-
-	@Override
-	public String getEmail() {
-		return email;
-	}
-
-	@Override
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	@Override
-	public String getStato() {
-		return stato;
-	}
-	
-	@Override
-	public void setStato(String stato) {
-		this.stato = stato;
-	}
 }

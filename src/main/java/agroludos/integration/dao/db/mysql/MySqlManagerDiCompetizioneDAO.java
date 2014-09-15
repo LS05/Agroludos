@@ -16,7 +16,7 @@ class MySqlManagerDiCompetizioneDAO extends MySqlUtenteDAO implements ManagerDiC
 
 	@Override
 	public <T> ManagerDiCompetizioneTO readByID(T id) {
-		return (ManagerDiCompetizioneTO) this.readByID(id, 1);
+		return (ManagerDiCompetizioneTO) super.readByID(id, 1);
 	}
 
 	@Override

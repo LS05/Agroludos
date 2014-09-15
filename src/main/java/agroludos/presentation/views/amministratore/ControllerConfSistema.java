@@ -8,7 +8,7 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.DatabaseTO;
 import agroludos.to.ManagerDiSistemaTO;
-
+import agroludos.to.UtenteTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -118,6 +118,8 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 		this.mdsto.setUsername(txtUsernameMds.getText());
 		this.mdsto.setPassword(this.txtPasswordMds.getText());
 		this.mdsto.setEmail(txtEmailMds.getText());
+		this.mdsto.setIdruolo(0);
+		this.mdsto.setStato(1);
 		//manca il telefono
 		this.richiesta = reqFact.createDataRequest(mdsto, "nuovoManagerDiSistema");
 		this.risposta = respFact.createResponse();

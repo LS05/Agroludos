@@ -6,7 +6,7 @@ import agroludos.business.as.AgroludosService;
 import agroludos.exceptions.DatabaseException;
 import agroludos.to.CompetizioneTO;
 /**
- * 
+ * L'interfaccia rappresenta i servizi di lettura applicabili ad una competizione
  * 
  * @author Luca Suriano
  * @author Francesco Zagaria

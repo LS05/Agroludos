@@ -24,7 +24,7 @@ public class TransferObjectFactory implements TOFactory {
 	
 	@Override
 	public ManagerDiCompetizioneTO createMdCTO(){
-		return (ManagerDiCompetizioneTO) new Utente();
+		return new ManagerDiCompetizione();
 	}
 
 	@Override

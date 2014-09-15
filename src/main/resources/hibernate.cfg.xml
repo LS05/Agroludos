@@ -16,7 +16,6 @@
 		<mapping resource="agroludos/db/TipoOptional.hbm.xml"/>
 		<mapping resource="agroludos/db/Optional.hbm.xml"/>
 		<mapping resource="agroludos/db/Competizione.hbm.xml"/>
-		<mapping resource="agroludos/db/Partecipante.hbm.xml"/>
 		<mapping resource="agroludos/db/Iscrizione.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>

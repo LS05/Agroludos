@@ -1,5 +1,6 @@
 package agroludos.integration.dao.db.mysql;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -86,21 +87,18 @@ public class MySqlDAOFactory implements DBDAOFactory {
 
 	public static void main(String args[]){
 		TransferObjectFactory fact = new TransferObjectFactory();
-		IscrizioneTO iscTO = fact.createIscrizioneTO();
 		MySqlDAOFactory daoFact = new MySqlDAOFactory();
-		daoFact.initialize();
+		try {
+			daoFact.initialize();
+		} catch (DatabaseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		ManagerDiCompetizioneDAO mdcDAO = daoFact.getManagerDiCompetizioneDAO();
-		List<ManagerDiCompetizioneTO> mdcto = mdcDAO.readAll();
+		PartecipanteTO mdcto = fact.createPartecipanteTO();
 		
-		CompetizioneDAO dao = daoFact.getCompetizioneDAO();
-		CompetizioneTO cmpto = dao.readById(65);
-//		PartecipanteDAO parDAO = daoFact.getPartecipanteDAO();
-//		PartecipanteTO listPart = parDAO.readByID(62);
-//		IscrizioneDAO iscDAO = daoFact.getIscrizioneDAO();
-//		List<IscrizioneTO> list = iscDAO.getAllIscrizioni();
-//		IscrizioneTO iscr = list.get(0);
-//		System.out.println(iscr.getPartecipanteIscrizione().getSrc());
-//		PartecipanteTO part = iscr.getPartecipanteIscrizione();
+		PartecipanteDAO mdcDAO = daoFact.getPartecipanteDAO();
+		mdcto = mdcDAO.readByCF("asdffad");
+		
 	}
 }

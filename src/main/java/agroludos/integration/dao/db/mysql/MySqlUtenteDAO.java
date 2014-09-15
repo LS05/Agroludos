@@ -24,7 +24,6 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
 					res = item;
 			}
 			
-			this.setRuolo(res);
 		}
 		
 		return res;
@@ -38,7 +37,6 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
 		query.setParameter("tipo", ruolo);
 		List<UtenteTO> list = query.list();
 		res = list.get(0);
-		this.setRuolo(res);
 		return res;
 	}
 
@@ -46,7 +44,7 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
 		this.session.beginTransaction();
 		Query query = this.session.getNamedQuery("getByID");
 		query.setParameter("id", id);
-		query.setParameter("tipo", ruolo);
+		query.setParameter("idruolo", ruolo);
 		List<UtenteTO> list = query.list();
 		return list.get(0);
 	}
@@ -61,12 +59,6 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
 	public <T> boolean checkEmail(T email) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-	
-	private void setRuolo(UtenteTO uto){
-		Query queryRuolo = this.session.getNamedQuery("getRuoloUtente").setInteger("idruolo", uto.getTipo());
-		List<String> ruolo = queryRuolo.list();
-		uto.setRuolo(ruolo.get(0));
 	}
 
 	@Override

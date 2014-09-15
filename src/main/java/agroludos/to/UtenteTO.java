@@ -9,10 +9,6 @@ public interface UtenteTO extends AgroludosTO {
 	public String getPassword();
 
 	public void setPassword(String password);
-	
-	public String getRuolo();
-	
-	void setRuolo(String ruolo);
 
 	String getNome();
 
@@ -22,7 +18,7 @@ public interface UtenteTO extends AgroludosTO {
 
 	String getCognome();
 
-	int getId();
+	Integer getId();
 
 	String getEmail();
 
@@ -32,5 +28,8 @@ public interface UtenteTO extends AgroludosTO {
 
 	void setStato(Integer stato);
 
-	Integer getTipo();
+	Integer getIdruolo();
+	
+	void setIdruolo(Integer idruolo);
+
 }
