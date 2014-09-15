@@ -5,21 +5,25 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.to.AgroludosTO;
 import agroludos.to.TOFactory;
 
-class MySqlAgroludosDAO {
+abstract class MySqlAgroludosDAO<T extends AgroludosTO> {
+	
 	protected Session session;
 	protected TOFactory toFact;
+	
+	MySqlAgroludosDAO(){ }
 
-	MySqlAgroludosDAO(){
+	MySqlAgroludosDAO(SessionFactory sessionFactory){
 		this.session = MySqlDAO.getSessionFactory().openSession();
 	}
 
-	protected boolean create(AgroludosTO mainTO) throws DatabaseException{
+	protected boolean create(T mainTO) throws DatabaseException{
 		Transaction tx = null;
 		boolean res = false;
 
@@ -38,7 +42,7 @@ class MySqlAgroludosDAO {
 		return res;
 	}
 
-	protected boolean delete(AgroludosTO mainTO) throws DatabaseException{
+	protected boolean delete(T mainTO) throws DatabaseException{
 		Transaction tx = null;
 		boolean res = false;
 
@@ -57,7 +61,7 @@ class MySqlAgroludosDAO {
 		return res;
 	}
 
-	protected boolean update(AgroludosTO mainTO) throws DatabaseException{
+	protected boolean update(T mainTO) throws DatabaseException{
 		Transaction tx = null;
 		boolean res = false;
 
@@ -76,9 +80,9 @@ class MySqlAgroludosDAO {
 		return res;		
 	}
 
-	protected List<AgroludosTO> executeParamQuery(String queryName, List<?> parameters) throws DatabaseException {
+	protected List<T> executeParamQuery(String queryName, List<?> parameters) throws DatabaseException {
 		Transaction tx = null;
-		List<AgroludosTO> res = null;
+		List<T> res = null;
 
 		try {
 			tx = this.session.beginTransaction();
@@ -101,9 +105,9 @@ class MySqlAgroludosDAO {
 		return res;
 	}
 
-	protected List<AgroludosTO> executeQuery(String queryName) throws DatabaseException {
+	protected List<T> executeQuery(String queryName) throws DatabaseException {
 		Transaction tx = null;
-		List<AgroludosTO> res = null;
+		List<T> res = null;
 
 		try {
 			tx = this.session.beginTransaction();
