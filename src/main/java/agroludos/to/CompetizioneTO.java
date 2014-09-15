@@ -48,6 +48,4 @@ public interface CompetizioneTO extends AgroludosTO{
 	List<PartecipanteTO> getAllIscritti();
 
 	List<OptionalTO> getAllOptionals();
-
-	List<IscrizioneTO> getAllIscrizioni();
 }
