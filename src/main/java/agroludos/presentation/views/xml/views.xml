@@ -42,5 +42,12 @@
 			<width>600</width>
 			<height>400</height>
 		</view>
+		<view tipo="dialog">
+			<name>errorDialog</name>
+			<url>/fxml/dialogs/errorDialog.fxml</url>
+			<width>600</width>
+			<height>400</height>
+			<title>Agroludos | Errore</title>
+		</view>
 	</views>
 </agro-views>

@@ -3,7 +3,7 @@ package agroludos.to;
 import java.util.Date;
 import java.util.List;
 
-public interface CompetizioneTO {
+public interface CompetizioneTO extends AgroludosTO{
 	
 	public String getNome();
 	
