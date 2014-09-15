@@ -1,18 +1,17 @@
 package agroludos.presentation.views.login;
 
 import java.net.URL;
-
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -23,12 +22,10 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	@FXML private Button btnLogin;
 	@FXML private Button btnPswDimenticata;
 	@FXML private Button btnRegistrati;
-
 	@FXML private Pane agroLogoPane;
-
-	//texfield 
 	@FXML private TextField txtUsername;
 	@FXML private PasswordField txtPassword;
+	@FXML private Label lblErroreLogin;
 
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
@@ -39,7 +36,7 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 		this.txtPassword.setText("891205");
 	}
 
-	@FXML protected void txtPassword(javafx.scene.input.KeyEvent evt) {
+	@FXML protected void txtKeyPressed(javafx.scene.input.KeyEvent evt) {
 		if (evt.getCode() == KeyCode.ENTER)
 			eseguiLogin();
 	}
@@ -70,13 +67,16 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		if(request.getCommandName().equals("autenticazioneUtente")){
-			UtenteTO res = (UtenteTO)response.getRespData();
-			if(res != null){
-				//entra nel pannello dell'untente che ha effettuato il login
-				nav.setVista(res.getRuolo());
+			Object res = (Object)response.getRespData();
+			if(res instanceof UtenteTO){
+				UtenteTO uto = (UtenteTO)res;
+				nav.setVista(uto.getRuolo());
 			}
-			else
-				System.out.println("Utente non registrato");
+			if(res instanceof String){
+				String errMsg = (String)res;
+				this.lblErroreLogin.setVisible(true);
+				this.lblErroreLogin.setText(errMsg);
+			}
 		}
 	}
 
