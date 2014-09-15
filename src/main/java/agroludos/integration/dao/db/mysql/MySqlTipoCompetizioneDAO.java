@@ -2,30 +2,27 @@ package agroludos.integration.dao.db.mysql;
 
 import java.util.List;
 
-import org.hibernate.Query;
+import org.hibernate.SessionFactory;
 
+import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.to.TipoCompetizioneTO;
 
-class MySqlTipoCompetizioneDAO extends MySqlAgroludosDAO implements TipoCompetizioneDAO {
-
-	@Override
-	public boolean crea(TipoCompetizioneTO tcpto) {
-		boolean res = false;
-		// TODO Aggiungere gestione eccezioni hibernate
-		this.session.beginTransaction();
-		this.session.save(tcpto);
-		res = true;
-		this.session.getTransaction().commit();
-		return res;
+class MySqlTipoCompetizioneDAO extends MySqlAgroludosDAO<TipoCompetizioneTO> implements TipoCompetizioneDAO {
+	
+	MySqlTipoCompetizioneDAO(SessionFactory sessionFactory){
+		super(sessionFactory);
 	}
 
 	@Override
-	public List<TipoCompetizioneTO> readAll() {
-		this.session.beginTransaction();
-		Query query = this.session.getNamedQuery("getAllTipoCompetizione");
-		List<TipoCompetizioneTO> list = query.list();
-		return list;
+	public boolean crea(TipoCompetizioneTO tcpto) throws DatabaseException {
+		return super.create(tcpto);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TipoCompetizioneTO> readAll() throws DatabaseException {
+		List<?> list = super.executeQuery("getAllTipoCompetizione");
+		return (List<TipoCompetizioneTO>)list;
+	}
 }

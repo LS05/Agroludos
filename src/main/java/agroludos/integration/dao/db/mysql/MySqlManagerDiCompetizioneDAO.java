@@ -2,22 +2,26 @@ package agroludos.integration.dao.db.mysql;
 
 import java.util.List;
 
-import org.hibernate.Query;
+import org.hibernate.SessionFactory;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
 import agroludos.to.ManagerDiCompetizioneTO;
 
 class MySqlManagerDiCompetizioneDAO extends MySqlUtenteDAO implements ManagerDiCompetizioneDAO{
-
-	@Override
-	public ManagerDiCompetizioneTO getByUsername(String username) {
-		return (ManagerDiCompetizioneTO) this.getByUsername(username);
+	
+	MySqlManagerDiCompetizioneDAO(SessionFactory sessionFactory){
+		super(sessionFactory);
 	}
 
 	@Override
-	public ManagerDiCompetizioneTO readByID(Integer id) throws DatabaseException {
-		return (ManagerDiCompetizioneTO) super.readByID(id);
+	public ManagerDiCompetizioneTO getByUsername(String username) throws DatabaseException {
+		return (ManagerDiCompetizioneTO) super.getByUsername(username);
+	}
+
+	@Override
+	public ManagerDiCompetizioneTO getByID(Integer id) throws DatabaseException {
+		return (ManagerDiCompetizioneTO) super.getByID(id);
 	}
 
 	@Override
@@ -35,11 +39,10 @@ class MySqlManagerDiCompetizioneDAO extends MySqlUtenteDAO implements ManagerDiC
 		return this.update(mdcto);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<ManagerDiCompetizioneTO> readAll() {
-		this.session.beginTransaction();
-		Query query = this.session.getNamedQuery("getAllManagerDiCompetizione");
-		List<ManagerDiCompetizioneTO> list = query.list();
-		return list;
+	public List<ManagerDiCompetizioneTO> readAll() throws DatabaseException {
+		List<?> list = super.executeQuery("getAllManagerDiCompetizione");
+		return (List<ManagerDiCompetizioneTO>)list;
 	}
 }

@@ -37,7 +37,7 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 	public PartecipanteTO getPartecipante(PartecipanteTO parto)
 			throws DatabaseException {
 		PartecipanteDAO daoPar = getPartecipanteDAO();
-		return daoPar.readByUsername(parto.getUsername());
+		return daoPar.getByUsername(parto.getUsername());
 	}
 
 	@Override
@@ -50,6 +50,6 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 	public PartecipanteTO getPartecipanteById(PartecipanteTO parto)
 			throws DatabaseException {
 		PartecipanteDAO daoPar = getPartecipanteDAO();
-		return daoPar.readByUsername(parto.getId());
+		return daoPar.getByUsername(parto.getId());
 	}
 }

@@ -36,47 +36,47 @@ public class MySqlDAOFactory implements DBDAOFactory {
 
 	@Override
 	public ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO() {
-		return new MySqlManagerDiCompetizioneDAO();
+		return new MySqlManagerDiCompetizioneDAO(sessionFactory);
 	}
 
 	@Override
 	public ManagerDiSistemaDAO getManagerDiSistemaDAO() {
-		return new MySqlManagerDiSistemaDAO();
+		return new MySqlManagerDiSistemaDAO(sessionFactory);
 	}
 
 	@Override
 	public CompetizioneDAO getCompetizioneDAO() {
-		return new MySqlCompetizioneDAO();
+		return new MySqlCompetizioneDAO(sessionFactory);
 	}
 
 	@Override
 	public PartecipanteDAO getPartecipanteDAO() {
-		return new MySqlPartecipanteDAO();
+		return new MySqlPartecipanteDAO(sessionFactory);
 	}
 
 	@Override
 	public TipoCompetizioneDAO getTipoCompetizioneDAO() {
-		return new MySqlTipoCompetizioneDAO();
+		return new MySqlTipoCompetizioneDAO(sessionFactory);
 	}
 
 	@Override
 	public TipoOptionalDAO getTipoOptionalDAO() {
-		return new MySqlTipoOptionalDAO();
+		return new MySqlTipoOptionalDAO(sessionFactory);
 	}
 
 	@Override
 	public OptionalDAO getOptionalDAO() {
-		return new MySqlOptionalDAO();
+		return new MySqlOptionalDAO(sessionFactory);
 	}
 
 	@Override
 	public UtenteDAO getUtenteDAO() {
-		return new MySqlUtenteDAO();
+		return new MySqlUtenteDAO(sessionFactory);
 	}
 
 	@Override
 	public IscrizioneDAO getIscrizioneDAO() {
-		return new MySqlIscrizioneDAO();
+		return new MySqlIscrizioneDAO(sessionFactory);
 	}
 
 	public static void main(String args[]){
@@ -84,18 +84,14 @@ public class MySqlDAOFactory implements DBDAOFactory {
 		MySqlDAOFactory daoFact = new MySqlDAOFactory();
 		try {
 			daoFact.initialize();
+			CompetizioneTO cmpto = fact.createCompetizioneTO();
+			CompetizioneDAO cmpDAO = daoFact.getCompetizioneDAO();
+			List<CompetizioneTO> listcmp = cmpDAO.readAll();
+
+			cmpto = listcmp.get(2);
+			PartecipanteTO parto = cmpto.getAllIscritti().get(0);
 		} catch (DatabaseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		CompetizioneTO cmpto = fact.createCompetizioneTO();
-		CompetizioneDAO cmpDAO = daoFact.getCompetizioneDAO();
-		List<CompetizioneTO> listcmp = cmpDAO.readAll();
-		
-		cmpto = listcmp.get(2);
-		PartecipanteTO parto = cmpto.getAllIscritti().get(0);
-		List<IscrizioneTO> listisc = cmpto.getAllIscrizioni();
-		
+		}	
 	}
 }

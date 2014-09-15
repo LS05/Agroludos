@@ -3,7 +3,7 @@ package agroludos.to;
 import java.util.Date;
 import java.util.List;
 
-public interface IscrizioneTO {
+public interface IscrizioneTO extends AgroludosTO{
 	public Date getData();
 	public void setData(Date data);
 	public Integer getId();

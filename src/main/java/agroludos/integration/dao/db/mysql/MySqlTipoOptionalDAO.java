@@ -2,30 +2,27 @@ package agroludos.integration.dao.db.mysql;
 
 import java.util.List;
 
-import org.hibernate.Query;
+import org.hibernate.SessionFactory;
 
+import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.TipoOptionalDAO;
 import agroludos.to.TipoOptionalTO;
 
-class MySqlTipoOptionalDAO extends MySqlAgroludosDAO implements TipoOptionalDAO {
+class MySqlTipoOptionalDAO extends MySqlAgroludosDAO<TipoOptionalTO> implements TipoOptionalDAO {
 
-	@Override
-	public boolean crea(TipoOptionalTO topto) {
-		boolean res = false;
-		// TODO Aggiungere gestione eccezioni hibernate
-		this.session.beginTransaction();
-		this.session.save(topto);
-		res = true;
-		this.session.getTransaction().commit();
-		return res;
+	MySqlTipoOptionalDAO(SessionFactory sessionFactory){
+		super(sessionFactory);
 	}
 
 	@Override
-	public List<TipoOptionalTO> readAll() {
-		this.session.beginTransaction();
-		Query query = this.session.getNamedQuery("getAllTipoOptional");
-		List<TipoOptionalTO> list = query.list();
-		return list;
+	public boolean crea(TipoOptionalTO tipoOptTO) throws DatabaseException {
+		return super.create(tipoOptTO);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TipoOptionalTO> readAll() throws DatabaseException {
+		List<?> list = super.executeQuery("getAllTipoOptional");
+		return (List<TipoOptionalTO>)list;
+	}
 }

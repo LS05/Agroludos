@@ -1,36 +1,33 @@
 package agroludos.integration.dao.db.mysql;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Query;
+import org.hibernate.SessionFactory;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.PartecipanteDAO;
-import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.PartecipanteTO;
-import agroludos.to.UtenteTO;
 
 class MySqlPartecipanteDAO extends MySqlUtenteDAO implements PartecipanteDAO {
+
+	MySqlPartecipanteDAO(SessionFactory sessionFactory) {
+		super(sessionFactory);
+	}
 
 	@Override
 	public boolean crea(PartecipanteTO parto) throws DatabaseException {
 		return super.crea(parto);
 	}
 
-
 	@Override
-	public <T> PartecipanteTO readByUsername(T username) {
-		// TODO Auto-generated method stub
-		return null;
+	public PartecipanteTO getByUsername(String username) throws DatabaseException {
+		return (PartecipanteTO) super.getByUsername(username);
 	}
 
 	@Override
-	public <T> PartecipanteTO readByID(T id) {
-		this.session.beginTransaction();
-		Query query = this.session.getNamedQuery("getPartecipante");
-		query.setParameter("id", id);
-		List<PartecipanteTO> list = query.list();
-		return list.get(0);
+	public PartecipanteTO readByID(Integer id) throws DatabaseException {
+		return (PartecipanteTO) super.getByID(id);
 
 	}
 
@@ -45,22 +42,21 @@ class MySqlPartecipanteDAO extends MySqlUtenteDAO implements PartecipanteDAO {
 		return super.delete(parto);
 	}
 
-
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<PartecipanteTO> readAll() {
-		this.session.beginTransaction();
-		Query query = this.session.getNamedQuery("getAllPartecipanti");
-		List<PartecipanteTO> list = query.list();
-		return list;
+	public List<PartecipanteTO> readAll() throws DatabaseException {
+		List<?> res = super.executeQuery("getAllPartecipanti");
+		return (List<PartecipanteTO>)res;
 	}
 
-
 	@Override
-	public <T> PartecipanteTO readByCF(T cf) {
-		this.session.beginTransaction();
-		Query query = this.session.getNamedQuery("getPartecipanteByCF");
-		query.setParameter("cf", cf);
-		List<PartecipanteTO> list = query.list();
-		return list.get(0);
+	public PartecipanteTO readByCF(String cf) throws DatabaseException {
+
+		List<String> param = new ArrayList<String>();
+		param.add(cf);
+
+		List<?> list = super.executeParamQuery("getPartecipanteByCF", param);
+		PartecipanteTO res = (PartecipanteTO)list.get(0);
+		return res;
 	}
 }

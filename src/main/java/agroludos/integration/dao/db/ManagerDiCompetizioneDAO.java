@@ -15,7 +15,7 @@ public interface ManagerDiCompetizioneDAO {
 
 	ManagerDiCompetizioneTO getByUsername(String username) throws DatabaseException;
 
-	ManagerDiCompetizioneTO readByID(Integer id) throws DatabaseException;
+	ManagerDiCompetizioneTO getByID(Integer id) throws DatabaseException;
 
-	List<ManagerDiCompetizioneTO> readAll();
+	List<ManagerDiCompetizioneTO> readAll() throws DatabaseException;
 }

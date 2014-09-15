@@ -10,5 +10,5 @@ public interface UtenteDAO {
 	boolean esisteUsername(UtenteTO uto) throws DatabaseException;
 	boolean esisteEmail(UtenteTO uto) throws DatabaseException;
 	UtenteTO getByUsername(String username) throws DatabaseException;
-	UtenteTO readByID(Integer id) throws DatabaseException;
+	UtenteTO getByID(Integer id) throws DatabaseException;
 }

@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SessionFactory;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.UserNotFoundException;
 import agroludos.integration.dao.db.UtenteDAO;
-import agroludos.to.AgroludosTO;
 import agroludos.to.UtenteTO;
 
-class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
+class MySqlUtenteDAO extends MySqlAgroludosDAO<UtenteTO> implements UtenteDAO {
+	
+	MySqlUtenteDAO(SessionFactory sessionFactory){
+		super(sessionFactory);
+	}
 	
 	@Override
 	public boolean crea(UtenteTO uto) throws DatabaseException {
@@ -42,7 +46,7 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
 
 	private UtenteTO getUtenteBy(String queryName, List<?> params) throws DatabaseException{
 		UtenteTO res = null;
-		List<AgroludosTO> list = super.executeParamQuery(queryName, params);
+		List<UtenteTO> list = super.executeParamQuery(queryName, params);
 
 		if(list.size() == 0){
 			res = this.toFact.createNullUTO();
@@ -63,7 +67,7 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO implements UtenteDAO {
 	}
 
 	@Override
-	public UtenteTO readByID(Integer id) throws DatabaseException {
+	public UtenteTO getByID(Integer id) throws DatabaseException {
 
 		List<Integer> param = new ArrayList<Integer>();
 		param.add(id);
