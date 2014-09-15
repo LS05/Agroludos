@@ -22,6 +22,7 @@ class Competizione implements CompetizioneTO{
 	public Set<Optional> optionals;
 	
 	public Set<Partecipante> iscritti;
+	public Set<Iscrizione> iscrizioni;
 
 	Competizione(){
 		this.optionals = new HashSet<Optional>();
@@ -159,6 +160,26 @@ class Competizione implements CompetizioneTO{
 	public void setPartecipanti(Set<Partecipante> partecipanti) {
 		this.iscritti = partecipanti;
 	}
+	
+	@Override
+	public List<IscrizioneTO> getAllIscrizioni() {
+		List<IscrizioneTO> res = new ArrayList<IscrizioneTO>();
+		
+		for(Iscrizione item : this.iscrizioni){
+			res.add(item);
+		}
+		
+		return res;
+	}
+
+	public Set<Iscrizione> getIscrizioni() {
+		return iscrizioni;
+	}
+
+	public void setIscrizioni(Set<Iscrizione> iscrizioni) {
+		this.iscrizioni = iscrizioni;
+	}
+	
 
 	public void setId(Integer id) {
 		this.id = id;

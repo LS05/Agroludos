@@ -89,12 +89,13 @@ public class MySqlDAOFactory implements DBDAOFactory {
 			e.printStackTrace();
 		}
 		
-		PartecipanteTO mdcto = fact.createPartecipanteTO();
+		CompetizioneTO cmpto = fact.createCompetizioneTO();
+		CompetizioneDAO cmpDAO = daoFact.getCompetizioneDAO();
+		List<CompetizioneTO> listcmp = cmpDAO.readAll();
 		
-		
-		
-		PartecipanteDAO mdcDAO = daoFact.getPartecipanteDAO();
-		List<PartecipanteTO> list =  mdcDAO.readAll();
+		cmpto = listcmp.get(2);
+		PartecipanteTO parto = cmpto.getAllIscritti().get(0);
+		List<IscrizioneTO> listisc = cmpto.getAllIscrizioni();
 		
 	}
 }

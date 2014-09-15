@@ -37,13 +37,17 @@
 			<column name="idmdc" not-null="true" default="1" />
 		</property>
 		<set name="optionals" cascade="all" table="tbl_opt_comp">
-			<key column="idcompetizione"/>
-         	<many-to-many column="idoptional" class="agroludos.to.Optional"/>
-      	</set>
-      	<set name="partecipanti" cascade="all" table="tbl_iscrizione">
-			<key column="idcompetizione"/>
-         	<many-to-many column="idpartecipante" class="agroludos.to.Partecipante"/>
-      	</set>
+			<key column="idcompetizione" />
+			<many-to-many column="idoptional" class="agroludos.to.Optional" />
+		</set>
+		<set name="partecipanti" cascade="all" table="tbl_iscrizione">
+			<key column="idcompetizione" />
+			<many-to-many column="idpartecipante" class="agroludos.to.Partecipante" />
+		</set>
+		<set name="iscrizioni" cascade="all" table="tbl_iscrizione">
+			<key column="idcompetizione" />
+			<one-to-many class="agroludos.to.Iscrizione" />
+		</set>
 	</class>
 	<query name="updateCompetizione">
         <![CDATA[ update agroludos.to.Competizione c set c.nome = :nome, c.data = :data, c.nmin = :nmin, c.nmax = :nmax, c.costo = :costo, c.descrizione = :descrizione, c.tipo = :tipo, c.stato = :stato, c.mdc = :mdc where c.id = :id ]]></query>
@@ -51,7 +55,7 @@
         <![CDATA[ from agroludos.to.Competizione c ]]></query>
 	<query name="getCompetizioneByTipo">
         <![CDATA[ from agroludos.to.Competizione c where c.tipo = :tipo]]></query>
-    <query name="getCompetizioneById">
+	<query name="getCompetizioneById">
         <![CDATA[ from agroludos.to.Competizione c where c.id = :id]]></query>
 	<query name="getCompetizioneByMdc">
         <![CDATA[ from agroludos.to.Competizione c where c.mdc = :mdc]]></query>

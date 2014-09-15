@@ -1,0 +1,11 @@
+diff a/src/main/java/agroludos/integration/dao/db/mysql/MySqlUtenteDAO.java b/src/main/java/agroludos/integration/dao/db/mysql/MySqlUtenteDAO.java	(rejected hunks)
+@@ -69,6 +69,8 @@
+ 		this.session.save(uto);
+ 		res = true;
+ 		this.session.getTransaction().commit();
++		session.flush();
++        session.clear();
+ 		return res;
+ 	}
+ }
+\ No newline at end of file
