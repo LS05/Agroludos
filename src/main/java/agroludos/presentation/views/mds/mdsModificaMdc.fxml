@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="selezionaOptionalPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="714.0" stylesheets="@../manager-competizione/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="selezionaOptionalPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="714.0" xmlns:fx="http://javafx.com/fxml">
 <children><BorderPane prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <GridPane BorderPane.alignment="CENTER">
@@ -150,7 +150,7 @@
                   </GridPane>
                   <GridPane GridPane.rowIndex="1">
                      <children>
-                        <Button disable="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" styleClass="btnNuovaComp" stylesheets="@../manager-competizione/main.css" text="Conferma" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+                        <Button disable="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" styleClass="btnNuovaComp" text="Conferma" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
                         <Button mnemonicParsing="false" styleClass="undoBtn" text="Annulla" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                      </children>
                      <columnConstraints>
@@ -158,9 +158,6 @@
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="566.0" minWidth="10.0" prefWidth="191.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="396.0" minWidth="10.0" prefWidth="123.0" />
                      </columnConstraints>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>

@@ -1,4 +1,4 @@
-package agroludos.presentation.views.mdc;
+package agroludos.presentation.views.partecipante;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -28,7 +28,7 @@ public class LoadFxmls {
 	public static void main(String[] args) {
 
 		try {
-			new LoadFxmls("mdcNuovaCompetizione.fxml");
+			new LoadFxmls("partVisualizzaIscrizione.fxml");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
