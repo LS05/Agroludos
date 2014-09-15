@@ -35,9 +35,10 @@ public class Navigator {
 			Scene scene = this.viewsCache.getScene(viewName);
 
 			if(agw.isDialog()){
-				Stage stage = new Stage(StageStyle.UNDECORATED);
+				Stage stage = new Stage(StageStyle.UTILITY);
 				stage.setScene(scene);
 				stage.setTitle(agw.getTitle());
+				stage.setResizable(false);
 				stage.initModality(Modality.WINDOW_MODAL);
 				stage.initOwner(this.mainStage);
 				stage.show();

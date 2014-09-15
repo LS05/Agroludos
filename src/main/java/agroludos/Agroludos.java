@@ -23,16 +23,16 @@ import javafx.stage.Stage;
 
 public class Agroludos extends Application{
 	private App mainApp;
-	
-	public void setMainApp(App mainApp) {
-		this.mainApp = mainApp;
-	}
 
 	@Override
 	public void start(Stage stage) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         this.mainApp = (App)context.getBean("mainApp");
         this.mainApp.initialize(stage);
+	}
+	
+	public void setMainApp(App mainApp) {
+		this.mainApp = mainApp;
 	}
 	
     public static void main( String[] args )

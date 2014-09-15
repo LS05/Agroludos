@@ -5,22 +5,22 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.Controller;
 import javafx.stage.Stage;
 
-class AppConfig extends Controller implements App{
-	
-	private Stage stage;
-	
-	private AgroRequest richiesta;
+/**
+ * La classe rappresenta l'implementazione dell'interfaccia {@link agroludos.main.App}.
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ */
 
-	private AgroResponse risposta;
+class AppConfig extends Controller implements App{
 
 	@Override
 	public void initialize(Stage stage){
-		this.stage = stage;
-		this.stage.show();
+		AgroRequest richiesta = reqFact.createSimpleRequest("checkConfigurazione");
+		AgroResponse risposta = respFact.createResponse();
+		stage.show();
 		nav.setStage(stage);
 		nav.setVista("initView");
-		this.richiesta = reqFact.createSimpleRequest("checkConfigurazione");
-		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(richiesta, risposta);
 	}
 }
