@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agro-views>
 	<views>
-		<view tipo="dialog">
+		<view tipo="view">
 			<name>initView</name>
 			<url>/fxml/config/init.fxml</url>
 			<width>0</width>
 			<height>0</height>
 			<title></title>
 		</view>
-		<view tipo="dialog">
+		<view tipo="view">
 			<name>login</name>
 			<url>/fxml/login/login.fxml</url>
 			<width>600</width>
@@ -45,8 +45,8 @@
 		<view tipo="dialog">
 			<name>errorDialog</name>
 			<url>/fxml/dialogs/errorDialog.fxml</url>
-			<width>600</width>
-			<height>400</height>
+			<width>516</width>
+			<height>127</height>
 			<title>Agroludos | Errore</title>
 		</view>
 	</views>
