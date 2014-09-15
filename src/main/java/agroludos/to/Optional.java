@@ -2,6 +2,12 @@ package agroludos.to;
 
 class Optional implements OptionalTO{
 
+	@Override
+	public String toString() {
+		return "Optional [nome=" + nome + ", descrizione=" + descrizione
+				+ ", costo=" + costo + ", stato=" + stato + ", tipo=" + tipo
+				+ ", id=" + id + "]";
+	}
 	private String nome;
 	private String descrizione;
 	private Double costo;
@@ -9,6 +15,8 @@ class Optional implements OptionalTO{
 	private int stato;
 	private int tipo;
 	private int id;
+	private String nomeTipoOpt;
+	private String nomeStatoOpt;
 
 	@Override
 	public String getNome() {
@@ -57,6 +65,24 @@ class Optional implements OptionalTO{
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	@Override
+	public String getNomeStatoOpt() {
+		return this.nomeStatoOpt;
+	}
+	@Override
+	public String getNomeTipoOpt() {
+		return this.nomeTipoOpt;
+	}
+	@Override
+	public void setNomeStatoOpt(String nomeStato) {
+		this.nomeStatoOpt = nomeStato;
+		
+	}
+	@Override
+	public void setNomeTipoOpt(String nomeTipo) {
+		this.nomeTipoOpt = nomeTipo;
+		
 	}
 
 

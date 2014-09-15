@@ -34,4 +34,12 @@ public interface UtenteTO extends AgroludosTO {
 	
 	void setIdruolo(Integer idruolo);
 
+	String getNomeRuolo();
+
+	void setNomeRuolo(String nomeRuolo);
+
+	String getNomeStatoUtente();
+
+	void setNomeStatoUtente(String nomeStatoUtente);
+
 }

@@ -30,6 +30,10 @@
         <![CDATA[ from agroludos.to.Optional o ]]></query>
 	<query name="getOptionalByTipo">
         <![CDATA[ from agroludos.to.Optional o where o.tipo = :tipo]]></query>
-    <query name="eliminaOptional">
+	<query name="eliminaOptional">
         <![CDATA[ update agroludos.to.Optional o set o.stato = :stato where o.id = :id]]></query>
+	<sql-query name="getNomeStatoOpt">
+       <![CDATA[ SELECT tbl_statiopt.nome FROM tbl_statiopt WHERE tbl_statiopt.idstatiopt = ? ]]></sql-query>
+	<sql-query name="getNomeTipoOpt">
+       <![CDATA[ SELECT tbl_tipoopt.nome FROM tbl_tipoopt WHERE tbl_tipoopt.idtipooptional = ? ]]></sql-query>
 </hibernate-mapping>

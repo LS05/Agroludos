@@ -7,6 +7,13 @@ import java.util.Set;
 
 class Iscrizione implements IscrizioneTO{
 
+	@Override
+	public String toString() {
+		return "Iscrizione [data=" + data + ", id=" + id + ", stato=" + stato
+				+ ", idcompetizione=" + idcompetizione + ", partecipante="
+				+ partecipante + ", idpartecipante=" + idpartecipante
+				+ ", optionals=" + optionals + "]";
+	}
 	private Date data;
 	private Integer id;
 	private Integer stato;
@@ -17,6 +24,7 @@ class Iscrizione implements IscrizioneTO{
 	private Integer idpartecipante;
 	
 	public Set<Optional> optionals;
+	private String nomeStato;
 	
 	@Override
 	public Date getData() {
@@ -85,6 +93,15 @@ class Iscrizione implements IscrizioneTO{
 	}
 	public void setPartecipante(Partecipante partecipante) {
 		this.partecipante = partecipante;
+	}
+	@Override
+	public String getNomeStato() {
+		return this.nomeStato;
+	}
+	@Override
+	public void setNomeStato(String nomeStato) {
+		this.nomeStato = nomeStato;
+		
 	}
 
 	

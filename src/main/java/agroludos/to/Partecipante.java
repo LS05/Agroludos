@@ -6,6 +6,15 @@ import java.util.List;
 import java.util.Set;
 
 class Partecipante extends Utente implements PartecipanteTO {
+	@Override
+	public String toString() {
+		return "Partecipante [cf=" + cf + ", indirizzo=" + indirizzo
+				+ ", dataNasc=" + dataNasc + ", sesso=" + sesso + ", numTS="
+				+ numTS + ", src=" + src + ", dataSRC=" + dataSRC
+				+ ", iscrizioni=" + iscrizioni + "]";
+	}
+
+
 	private String cf;
 	private String indirizzo;
 	private Date dataNasc;

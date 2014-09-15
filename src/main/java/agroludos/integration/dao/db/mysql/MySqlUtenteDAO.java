@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.UserNotFoundException;
 import agroludos.integration.dao.db.UtenteDAO;
+import agroludos.to.CompetizioneTO;
 import agroludos.to.UtenteTO;
 
 class MySqlUtenteDAO extends MySqlAgroludosDAO<UtenteTO> implements UtenteDAO {
@@ -45,6 +46,7 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO<UtenteTO> implements UtenteDAO {
 	}
 
 	private UtenteTO getUtenteBy(String queryName, List<?> params) throws DatabaseException{
+		
 		UtenteTO res = null;
 		List<UtenteTO> list = super.executeParamQuery(queryName, params);
 
@@ -54,6 +56,9 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO<UtenteTO> implements UtenteDAO {
 			res = (UtenteTO)list.get(0);
 		}
 
+		this.setNomeRuolo(res);
+		this.setNomeStatoUtente(res);
+		
 		return res;
 	}
 
@@ -108,4 +113,19 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO<UtenteTO> implements UtenteDAO {
 
 		return res;
 	}
+	
+	@Override
+	public void setNomeRuolo(UtenteTO uto) throws DatabaseException {
+		List<Integer> param = new ArrayList<Integer>();
+		param.add(uto.getIdruolo());
+		uto.setNomeRuolo(super.executeParamStringQuery("getNomeRuolo", param));
+	}
+
+	@Override
+	public void setNomeStatoUtente(UtenteTO uto) throws DatabaseException {
+		List<Integer> param = new ArrayList<Integer>();
+		param.add(uto.getStato());
+		uto.setNomeStatoUtente(super.executeParamStringQuery("getNomeStatoUtente", param));
+	}
+	
 }

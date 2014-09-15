@@ -16,4 +16,8 @@ public interface OptionalDAO {
 	List<OptionalTO> readAll() throws DatabaseException;
 	
 	List<OptionalTO> readByTipo(OptionalTO optTO) throws DatabaseException;
+
+	void setNomeStatoOpt(OptionalTO optTO) throws DatabaseException;
+
+	void setNomeTipoOpt(OptionalTO optTO) throws DatabaseException;
 }

@@ -14,4 +14,6 @@ public interface IscrizioneDAO {
 	boolean annullaIscrizione(IscrizioneTO iscto) throws DatabaseException;
 	
 	List<IscrizioneTO> getAllIscrizioni() throws DatabaseException;
+
+	void setNomeStato(IscrizioneTO iscto) throws DatabaseException;
 }

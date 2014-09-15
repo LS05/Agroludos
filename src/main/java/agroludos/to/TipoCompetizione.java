@@ -31,8 +31,8 @@ class TipoCompetizione implements TipoCompetizioneTO{
 	}
 	@Override
 	public String toString() {
-		return "TipoCompetizione [nome=" + nome + ", descrizione="
-				+ descrizione + "]";
+		return "TipoCompetizione [descrizione=" + descrizione + ", nome="
+				+ nome + ", id=" + id + "]";
 	}
 	
 	

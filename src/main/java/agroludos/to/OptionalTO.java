@@ -24,4 +24,11 @@ public interface OptionalTO extends AgroludosTO{
 
 	int getId();
 
+	String getNomeStatoOpt();
+	String getNomeTipoOpt();
+
+	void setNomeStatoOpt(String nomeStato);
+
+	void setNomeTipoOpt(String nomeTipo);
+	
 }

@@ -72,27 +72,31 @@
 				<key column="idpartecipante" />
 				<one-to-many class="agroludos.to.Iscrizione" />
 			</set>
-			
+
 		</joined-subclass>
 
-		
+
 	</class>
 	<query name="getUtente">
         <![CDATA[ from agroludos.to.Utente u where u.stato = 1 and u.username = :username and u.password = :password and u.stato = 1 ]]></query>
-		<query name="getByID">
+	<query name="getByID">
         <![CDATA[ from agroludos.to.Utente u where u.stato = 1 and u.id = :id and u.idruolo = :idruolo ]]></query>
-		<query name="getPartecipante">
+	<query name="getPartecipante">
         <![CDATA[ from agroludos.to.Partecipante p where p.stato = 1 and p.id = :id ]]></query>
-		<query name="getPartecipanteByCF">
+	<query name="getPartecipanteByCF">
         <![CDATA[ from agroludos.to.Partecipante p where p.stato = 1 and p.cf = :cf ]]></query>
-		<sql-query name="getRuoloUtente">
-        <![CDATA[ SELECT tbl_ruoli.descrizione FROM tbl_ruoli WHERE tbl_ruoli.idruolo = :idruolo ]]></sql-query>
-		<query name="getAllManagerDiCompetizione">
+	<query name="getAllManagerDiCompetizione">
 		<![CDATA[ from agroludos.to.ManagerDiCompetizione m where m.stato = 1]]></query>
-		<query name="deleteManagerDiCompetizione">
+	<query name="deleteManagerDiCompetizione">
 		<![CDATA[ update agroludos.to.ManagerDiCompetizione m set m.stato = 0 where m.username = :username]]></query>
-		<query name="getAllPartecipanti">
+	<query name="getAllPartecipanti">
 		<![CDATA[ from agroludos.to.Partecipante m where m.stato = 1 ]]></query>
-		<query name="getByUsername">
+	<query name="getByUsername">
 		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.username = :username ]]></query>
+	<sql-query name="getNomeRuolo">
+       <![CDATA[ SELECT tbl_ruoli.nome FROM tbl_ruoli WHERE tbl_ruoli.idruolo = ? ]]></sql-query>
+	<sql-query name="getNomeStatoUtente">
+       <![CDATA[ SELECT tbl_statiutente.nome FROM tbl_statiutente WHERE tbl_statiutente.idstatiutente = ? ]]></sql-query>
+
+
 </hibernate-mapping>

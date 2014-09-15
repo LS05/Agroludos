@@ -18,9 +18,13 @@ public interface CompetizioneDAO {
 	List<CompetizioneTO> readByTipo(Integer tipo) throws DatabaseException;
 
 	//TODO Da rivedere: Generalizzare o meno?
-	<T>List<CompetizioneTO> readByMdc(T mdc);
+	List<CompetizioneTO> readByMdc(Integer mdc) throws DatabaseException;
 
 	CompetizioneTO readById(Integer id) throws DatabaseException;
 	
 	List<CompetizioneTO> readCompetizioniAttive() throws DatabaseException;
+	
+	void setNomeTipo(CompetizioneTO cmpto) throws DatabaseException;
+	void setNomeStato(CompetizioneTO cmpto) throws DatabaseException;
+
 }

@@ -42,24 +42,24 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> {
 		return res;
 	}
 
-	protected boolean delete(T mainTO) throws DatabaseException{
-		Transaction tx = null;
-		boolean res = false;
-
-		try {
-			tx = this.session.beginTransaction();
-
-			this.session.delete(mainTO);
-
-			res = true;
-			this.session.getTransaction().commit();
-		} catch (HibernateException e){
-			if (tx != null) tx.rollback();
-			throw new DatabaseException(e.getMessage(), e);
-		}
-
-		return res;
-	}
+//	protected boolean delete(T mainTO) throws DatabaseException{
+//		Transaction tx = null;
+//		boolean res = false;
+//
+//		try {
+//			tx = this.session.beginTransaction();
+//
+//			this.session.delete(mainTO);
+//
+//			res = true;
+//			this.session.getTransaction().commit();
+//		} catch (HibernateException e){
+//			if (tx != null) tx.rollback();
+//			throw new DatabaseException(e.getMessage(), e);
+//		}
+//
+//		return res;
+//	}
 
 	protected boolean update(T mainTO) throws DatabaseException{
 		Transaction tx = null;
@@ -124,6 +124,31 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> {
 		return res;
 	}
 
+	protected String executeParamStringQuery(String queryName, List<?> parameters) throws DatabaseException {
+		Transaction tx = null;
+		List<String> res = null;
+
+		try {
+			tx = this.session.beginTransaction();
+			Query query = this.session.getNamedQuery(queryName);
+			int index = 0;
+
+			for(Object param : parameters){
+				query.setParameter(index, parameters.get(index));
+				index++;
+			}
+
+			res = query.list();
+
+			this.session.getTransaction().commit();
+		} catch (Exception e){
+			if (tx != null) tx.rollback();
+			throw new DatabaseException(e.getMessage(), e);
+		}
+
+		return res.get(0);
+	}
+	
 	protected void setToFact(TOFactory toFact) {
 		this.toFact = toFact;
 	}

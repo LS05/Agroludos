@@ -8,6 +8,16 @@ import java.util.Set;
 
 class Competizione implements CompetizioneTO{
 
+	@Override
+	public String toString() {
+		return "Competizione [nome=" + nome + ", data=" + data + ", nmin="
+				+ nmin + ", nmax=" + nmax + ", descrizione=" + descrizione
+				+ ", costo=" + costo + ", mdc=" + mdc + ", stato=" + stato
+				+ ", tipo=" + tipo + ", id=" + id + ", nomeStato=" + nomeStato
+				+ ", nomeTipo=" + nomeTipo + ", optionals=" + optionals
+				+ ", iscritti=" + iscritti + ", iscrizioni=" + iscrizioni + "]";
+	}
+
 	private String nome;
 	private Date data;
 	private int nmin;
@@ -19,6 +29,29 @@ class Competizione implements CompetizioneTO{
 	private int tipo;
 	private Integer id;
 	
+	private String nomeStato;
+	private String nomeTipo;
+	
+	@Override
+	public void setNomeStato(String nomeStato) {
+		this.nomeStato = nomeStato;
+	}
+
+	@Override
+	public void setNomeTipo(String nomeTipo) {
+		this.nomeTipo = nomeTipo;
+	}
+
+	@Override
+	public String getNomeStato() {
+		return this.nomeStato;
+	}
+
+	@Override
+	public String getNomeTipo() {
+		return this.nomeTipo;
+	}
+
 	public Set<Optional> optionals;
 	
 	public Set<Partecipante> iscritti;

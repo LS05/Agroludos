@@ -3,10 +3,7 @@ package agroludos.integration.dao.db.mysql;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.CompetizioneDAO;
@@ -30,32 +27,21 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 
 	@Override
 	public boolean annullaCompetizione(CompetizioneTO cmpto) throws DatabaseException {
-		Transaction tx = null;
-		boolean res = false;
-
-		try {
-			tx = this.session.beginTransaction();
-
-			Query query = session.getNamedQuery("annullaCompetizione");
-			query.setParameter("stato", 0);
-			query.setParameter("id", cmpto.getId());
-
-			if(query.executeUpdate() == 1){
-				res = true;
-			}
-
-			this.session.getTransaction().commit();
-		} catch (HibernateException e){
-			if (tx != null) tx.rollback();
-			throw new DatabaseException(e.getMessage(), e);
-		}
-		
-		return res;
+		cmpto.setStato(0);
+		return super.update(cmpto);
 	}
 
 	@Override
 	public List<CompetizioneTO> readAll() throws DatabaseException {
 		List<CompetizioneTO> res = super.executeQuery("getAllCompetizione");
+
+		int index=0;
+		for(Object cmp: res){
+			this.setNomeStato(res.get(index));
+			this.setNomeTipo(res.get(index));
+			index++;
+		}
+
 		return  res;
 	}
 
@@ -67,16 +53,32 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 
 		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioneByTipo", param);
 
+		int index=0;
+		for(Object cmp: res){
+			this.setNomeStato(res.get(index));
+			this.setNomeTipo(res.get(index));
+			index++;
+		}
+		
 		return res;
 	}
 
 	@Override
-	public <T> List<CompetizioneTO> readByMdc(T mdc) {
-		this.session.beginTransaction();
-		Query query = this.session.getNamedQuery("getCompetizioniByMdc");
-		query.setParameter("mdc", mdc);
-		List<CompetizioneTO> list = query.list();
-		return list;
+	public List<CompetizioneTO> readByMdc(Integer mdc) throws DatabaseException {
+		List<Integer> param = new ArrayList<Integer>();
+		param.add(mdc);
+
+		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioniByMdc", param);
+
+		int index=0;
+		for(Object cmp: res){
+			this.setNomeStato(res.get(index));
+			this.setNomeTipo(res.get(index));
+			index++;
+		}
+		
+		return res;
+
 	}
 
 	@Override
@@ -88,6 +90,11 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 		List<CompetizioneTO> list = super.executeParamQuery("getCompetizioneById", param);
 		res = list.get(0);
 
+		//setto il nome dello stato e del tipo
+		this.setNomeStato(res);
+		this.setNomeTipo(res);
+
+
 		return res;
 	}
 
@@ -98,7 +105,29 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 
 		List<CompetizioneTO> list = super.executeParamQuery("getCompetizioniAttive", param);
 
+		int index=0;
+		for(Object cmp: list){
+			this.setNomeStato(list.get(index));
+			this.setNomeTipo(list.get(index));
+			index++;
+		}
+		
+		
 		return list;
+	}
+
+	@Override
+	public void setNomeTipo(CompetizioneTO cmpto) throws DatabaseException {
+		List<Integer> param = new ArrayList<Integer>();
+		param.add(cmpto.getTipo());
+		cmpto.setNomeTipo(super.executeParamStringQuery("getNomeTipoComp", param));
+	}
+
+	@Override
+	public void setNomeStato(CompetizioneTO cmpto) throws DatabaseException {
+		List<Integer> param = new ArrayList<Integer>();
+		param.add(cmpto.getStato());
+		cmpto.setNomeStato(super.executeParamStringQuery("getNomeStatoComp", param));
 	}
 
 }

@@ -56,9 +56,11 @@
 	<query name="getCompetizioneByTipo">
         <![CDATA[ from agroludos.to.Competizione c where c.tipo = :tipo]]></query>
 	<query name="getCompetizioneById">
-        <![CDATA[ from agroludos.to.Competizione c where c.id = :id]]></query>
+        <![CDATA[ from agroludos.to.Competizione c where c.id = ?]]></query>
 	<query name="getCompetizioneByMdc">
         <![CDATA[ from agroludos.to.Competizione c where c.mdc = :mdc]]></query>
-	<query name="annullaCompetizione">
-        <![CDATA[ update agroludos.to.Competizione c set c.stato = :stato where c.id = :id]]></query>
+	<sql-query name="getNomeStatoComp">
+       <![CDATA[ SELECT tbl_statocomp.nome FROM tbl_statocomp WHERE tbl_statocomp.idstatocomp = ? ]]></sql-query>
+	<sql-query name="getNomeTipoComp">
+       <![CDATA[ SELECT tbl_tipocomp.nome FROM tbl_tipocomp WHERE tbl_tipocomp.idtipocomp = ? ]]></sql-query>
 </hibernate-mapping>

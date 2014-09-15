@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.PartecipanteDAO;
+import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.PartecipanteTO;
 
 class MySqlPartecipanteDAO extends MySqlUtenteDAO implements PartecipanteDAO {
@@ -39,14 +40,24 @@ class MySqlPartecipanteDAO extends MySqlUtenteDAO implements PartecipanteDAO {
 
 	@Override
 	public boolean delete(PartecipanteTO parto) throws DatabaseException {
-		return super.delete(parto);
+		parto.setStato(0);
+		return super.update(parto);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<PartecipanteTO> readAll() throws DatabaseException {
-		List<?> res = super.executeQuery("getAllPartecipanti");
-		return (List<PartecipanteTO>)res;
+		List<?> list = super.executeQuery("getAllPartecipanti");		
+		List<PartecipanteTO> res = (List<PartecipanteTO>)list;
+
+		int index=0;
+		for(Object cmp: list){
+			this.setNomeRuolo(res.get(index));
+			this.setNomeStatoUtente(res.get(index));
+			index++;
+		}
+		return res;
+
 	}
 
 	@Override
@@ -57,6 +68,10 @@ class MySqlPartecipanteDAO extends MySqlUtenteDAO implements PartecipanteDAO {
 
 		List<?> list = super.executeParamQuery("getPartecipanteByCF", param);
 		PartecipanteTO res = (PartecipanteTO)list.get(0);
+		
+		this.setNomeRuolo(res);
+		this.setNomeStatoUtente(res);
+		
 		return res;
 	}
 }

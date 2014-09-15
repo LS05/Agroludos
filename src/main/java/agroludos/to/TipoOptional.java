@@ -21,7 +21,7 @@ class TipoOptional implements TipoOptionalTO{
 	}
 	@Override
 	public String toString() {
-		return "TipoOptional [nome=" + nome + "]";
+		return "TipoOptional [nome=" + nome + ", id=" + id + "]";
 	}
 	
 	

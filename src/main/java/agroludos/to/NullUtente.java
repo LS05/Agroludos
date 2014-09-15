@@ -89,4 +89,28 @@ class NullUtente implements UtenteTO{
 	public String getRuolo() {
 		return "";
 	}
+
+	@Override
+	public String getNomeRuolo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setNomeRuolo(String nomeRuolo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getNomeStatoUtente() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setNomeStatoUtente(String nomeStatoUtente) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -1,6 +1,15 @@
 package agroludos.to;
 
 class Utente implements UtenteTO{
+	@Override
+	public String toString() {
+		return "Utente [id=" + id + ", nome=" + nome + ", cognome=" + cognome
+				+ ", username=" + username + ", password=" + password
+				+ ", email=" + email + ", idruolo=" + idruolo + ", stato="
+				+ stato + ", nomeRuolo=" + nomeRuolo + ", nomeStatoUtente="
+				+ nomeStatoUtente + "]";
+	}
+
 	private Integer id;
 	private String nome;
 	private String cognome;
@@ -9,7 +18,27 @@ class Utente implements UtenteTO{
 	private String email;
 	private Integer idruolo; //id ruolo utente
 	private Integer stato;
-	private String ruolo;
+	
+	private String nomeRuolo;
+	private String nomeStatoUtente;
+	
+	@Override
+	public String getNomeRuolo() {
+		return nomeRuolo;
+	}
+	@Override
+	public void setNomeRuolo(String nomeRuolo) {
+		this.nomeRuolo = nomeRuolo;
+	}
+	@Override
+	public String getNomeStatoUtente() {
+		return nomeStatoUtente;
+	}
+	@Override
+	public void setNomeStatoUtente(String nomeStatoUtente) {
+		this.nomeStatoUtente = nomeStatoUtente;
+	}
+
 	
 	@Override
 	public Integer getId() {
@@ -92,7 +121,7 @@ class Utente implements UtenteTO{
 
 	@Override
 	public String getRuolo() {
-		return this.ruolo;
+		return this.nomeRuolo;
 	}
 
 }
