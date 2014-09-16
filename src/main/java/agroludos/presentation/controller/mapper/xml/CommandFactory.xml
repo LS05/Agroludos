@@ -9,6 +9,10 @@
 		<classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe>
 		<forward success="initView" failure="initView"/>	
 	</command>
+	<command name="checkMds">
+		<classe>agroludos.business.as.gestoremds.LManagerDiSistema</classe>
+		<forward success="initView" failure="errorDialog"/>	
+	</command>
 	<command name="autenticazioneUtente">
 		<classe>agroludos.business.as.gestoreutente.LUtente</classe>
 		<forward success="login" failure="login"/>	
