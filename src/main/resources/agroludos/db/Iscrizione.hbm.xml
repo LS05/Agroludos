@@ -29,10 +29,6 @@
 	</class>
 	<query name="getAllIscrizioni">
         <![CDATA[ from agroludos.to.Iscrizione i where i.stato = 1 ]]></query>
-	<query name="updateIscrizione">
-        <![CDATA[ update agroludos.to.Iscrizione i set i.data = :data, i.stato = :stato where i.id = :id ]]></query>
-	<query name="annullaIscrizione">
-        <![CDATA[ update agroludos.to.Iscrizione i set i.stato = :stato where i.id = :id ]]></query>
 	<sql-query name="getNomeStatoIscr">
        <![CDATA[ SELECT tbl_statiiscr.nome FROM tbl_statiiscr WHERE tbl_statiiscr.idstatiiscr = ? ]]></sql-query>
 </hibernate-mapping>
