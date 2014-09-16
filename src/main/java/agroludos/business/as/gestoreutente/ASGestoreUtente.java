@@ -11,6 +11,10 @@ import agroludos.utility.PasswordEncryption;
 class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 	PasswordEncryption pwdEnc;
 
+	ASGestoreUtente(PasswordEncryption pwdEnc){
+		this.pwdEnc = pwdEnc;
+	}
+	
 	private UtenteDAO<UtenteTO> getUtenteDAO() throws DatabaseException{
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return dbDAOFact.getUtenteDAO();

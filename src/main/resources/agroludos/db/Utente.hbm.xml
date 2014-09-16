@@ -80,21 +80,19 @@
 	<query name="checkMds">
 		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.idruolo = 0 ]]></query>
 	<query name="getUtente">
-        <![CDATA[ from agroludos.to.Utente u where u.stato = 1 and u.username = :username and u.password = :password and u.stato = 1 ]]></query>
+        <![CDATA[ from agroludos.to.Utente u where u.stato = 1 and u.username = ? and u.password = ? and u.stato = 1 ]]></query>
 	<query name="getByID">
-        <![CDATA[ from agroludos.to.Utente u where u.stato = 1 and u.id = :id and u.idruolo = :idruolo ]]></query>
+        <![CDATA[ from agroludos.to.Utente u where u.stato = 1 and u.id = ? and u.idruolo = ? ]]></query>
 	<query name="getPartecipante">
-        <![CDATA[ from agroludos.to.Partecipante p where p.stato = 1 and p.id = :id ]]></query>
+        <![CDATA[ from agroludos.to.Partecipante p where p.stato = 1 and p.id = ? ]]></query>
 	<query name="getPartecipanteByCF">
-        <![CDATA[ from agroludos.to.Partecipante p where p.stato = 1 and p.cf = :cf ]]></query>
+        <![CDATA[ from agroludos.to.Partecipante p where p.stato = 1 and p.cf = ? ]]></query>
 	<query name="getAllManagerDiCompetizione">
 		<![CDATA[ from agroludos.to.ManagerDiCompetizione m where m.stato = 1]]></query>
-	<query name="deleteManagerDiCompetizione">
-		<![CDATA[ update agroludos.to.ManagerDiCompetizione m set m.stato = 0 where m.username = :username]]></query>
 	<query name="getAllPartecipanti">
 		<![CDATA[ from agroludos.to.Partecipante m where m.stato = 1 ]]></query>
 	<query name="getByUsername">
-		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.username = :username ]]></query>
+		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.username = ? ]]></query>
 	<sql-query name="getNomeRuolo">
        <![CDATA[ SELECT tbl_ruoli.nome FROM tbl_ruoli WHERE tbl_ruoli.idruolo = ? ]]></sql-query>
 	<sql-query name="getNomeStatoUtente">
