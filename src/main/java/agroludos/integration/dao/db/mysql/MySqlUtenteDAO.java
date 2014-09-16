@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.UserNotFoundException;
 import agroludos.integration.dao.db.UtenteDAO;
-import agroludos.to.CompetizioneTO;
 import agroludos.to.UtenteTO;
 
 class MySqlUtenteDAO extends MySqlAgroludosDAO<UtenteTO> implements UtenteDAO {

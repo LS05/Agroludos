@@ -42,24 +42,6 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> {
 		return res;
 	}
 
-//	protected boolean delete(T mainTO) throws DatabaseException{
-//		Transaction tx = null;
-//		boolean res = false;
-//
-//		try {
-//			tx = this.session.beginTransaction();
-//
-//			this.session.delete(mainTO);
-//
-//			res = true;
-//			this.session.getTransaction().commit();
-//		} catch (HibernateException e){
-//			if (tx != null) tx.rollback();
-//			throw new DatabaseException(e.getMessage(), e);
-//		}
-//
-//		return res;
-//	}
 
 	protected boolean update(T mainTO) throws DatabaseException{
 		Transaction tx = null;
@@ -90,7 +72,7 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> {
 			int index = 0;
 
 			for(Object param : parameters){
-				query.setParameter(index, parameters.get(index));
+				query.setParameter(index, param);
 				index++;
 			}
 
@@ -134,7 +116,7 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> {
 			int index = 0;
 
 			for(Object param : parameters){
-				query.setParameter(index, parameters.get(index));
+				query.setParameter(index, param);
 				index++;
 			}
 

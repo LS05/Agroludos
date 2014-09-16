@@ -7,8 +7,6 @@ public interface ManagerDiSistemaDAO {
 	
 	public boolean crea(ManagerDiSistemaTO mdsTO) throws DatabaseException;
 	
-	public ManagerDiSistemaTO readByUsername(String username) throws DatabaseException;
-	
 	public ManagerDiSistemaTO getByUsername(String username) throws DatabaseException;
 	
 }

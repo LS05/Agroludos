@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.OptionalDAO;
-import agroludos.to.CompetizioneTO;
 import agroludos.to.OptionalTO;
 
 class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements OptionalDAO {
@@ -30,11 +29,9 @@ class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements Optional
 	public List<OptionalTO> readAll() throws DatabaseException {
 		List<OptionalTO> res = super.executeQuery("getAllOptional");
 		
-		int index=0;
-		for(Object cmp: res){
-			this.setNomeStatoOpt(res.get(index));
-			this.setNomeTipoOpt(res.get(index));
-			index++;
+		for(OptionalTO opt: res){
+			this.setNomeStatoOpt(opt);
+			this.setNomeTipoOpt(opt);
 		}
 		
 		return res;
@@ -47,11 +44,9 @@ class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements Optional
 
 		List<OptionalTO> res = super.executeParamQuery("getOptionalByTipo", param);
 
-		int index=0;
-		for(Object cmp: res){
-			this.setNomeStatoOpt(res.get(index));
-			this.setNomeTipoOpt(res.get(index));
-			index++;
+		for(OptionalTO opt: res){
+			this.setNomeStatoOpt(opt);
+			this.setNomeTipoOpt(opt);
 		}
 		
 		return res;

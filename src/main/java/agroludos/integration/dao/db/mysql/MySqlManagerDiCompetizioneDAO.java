@@ -30,14 +30,14 @@ class MySqlManagerDiCompetizioneDAO extends MySqlUtenteDAO implements ManagerDiC
 	}
 
 	@Override
-	public boolean update(ManagerDiCompetizioneTO mdcto) {
-		return this.update(mdcto);
+	public boolean update(ManagerDiCompetizioneTO mdcto) throws DatabaseException {
+		return super.update(mdcto);
 	}
 
 	@Override
-	public boolean delete(ManagerDiCompetizioneTO mdcto) {
+	public boolean delete(ManagerDiCompetizioneTO mdcto) throws DatabaseException {
 		mdcto.setStato(0);
-		return this.update(mdcto);
+		return super.update(mdcto);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -46,11 +46,9 @@ class MySqlManagerDiCompetizioneDAO extends MySqlUtenteDAO implements ManagerDiC
 		List<?> list = super.executeQuery("getAllManagerDiCompetizione");
 		 List<ManagerDiCompetizioneTO> res = (List<ManagerDiCompetizioneTO>)list;
 		
-		int index=0;
-		for(Object cmp: list){
-			this.setNomeRuolo(res.get(index));
-			this.setNomeStatoUtente(res.get(index));
-			index++;
+		for(ManagerDiCompetizioneTO cmp: res){
+			this.setNomeRuolo(cmp);
+			this.setNomeStatoUtente(cmp);
 		}
 		return res;
 	}

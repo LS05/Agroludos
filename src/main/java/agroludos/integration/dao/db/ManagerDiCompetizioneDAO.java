@@ -11,7 +11,7 @@ public interface ManagerDiCompetizioneDAO {
 
 	boolean update(ManagerDiCompetizioneTO mdcto) throws DatabaseException;
 
-	boolean delete(ManagerDiCompetizioneTO mdcto);
+	boolean delete(ManagerDiCompetizioneTO mdcto) throws DatabaseException;
 
 	ManagerDiCompetizioneTO getByUsername(String username) throws DatabaseException;
 

@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.PartecipanteDAO;
-import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.PartecipanteTO;
 
 class MySqlPartecipanteDAO extends MySqlUtenteDAO implements PartecipanteDAO {
@@ -50,11 +49,9 @@ class MySqlPartecipanteDAO extends MySqlUtenteDAO implements PartecipanteDAO {
 		List<?> list = super.executeQuery("getAllPartecipanti");		
 		List<PartecipanteTO> res = (List<PartecipanteTO>)list;
 
-		int index=0;
-		for(Object cmp: list){
-			this.setNomeRuolo(res.get(index));
-			this.setNomeStatoUtente(res.get(index));
-			index++;
+		for(PartecipanteTO par: res){
+			this.setNomeRuolo(par);
+			this.setNomeStatoUtente(par);
 		}
 		return res;
 

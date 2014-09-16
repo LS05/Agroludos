@@ -24,7 +24,7 @@ public interface CompetizioneDAO {
 	
 	List<CompetizioneTO> readCompetizioniAttive() throws DatabaseException;
 	
-	void setNomeTipo(CompetizioneTO cmpto) throws DatabaseException;
-	void setNomeStato(CompetizioneTO cmpto) throws DatabaseException;
+	void setNomeTipoComp(CompetizioneTO cmpto) throws DatabaseException;
+	void setNomeStatoComp(CompetizioneTO cmpto) throws DatabaseException;
 
 }

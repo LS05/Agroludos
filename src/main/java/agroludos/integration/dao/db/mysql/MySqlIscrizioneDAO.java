@@ -3,14 +3,10 @@ package agroludos.integration.dao.db.mysql;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.IscrizioneDAO;
-import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 
 class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements IscrizioneDAO{
@@ -39,10 +35,8 @@ class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements Iscr
 	public List<IscrizioneTO> getAllIscrizioni() throws DatabaseException {
 		List<IscrizioneTO> res = super.executeQuery("getAllIscrizioni");
 		
-		int index=0;
-		for(Object isc: res){
-			this.setNomeStato(res.get(index));
-			index++;
+		for(IscrizioneTO isc: res){
+			this.setNomeStato(isc);
 		}
 
 		return  res;
