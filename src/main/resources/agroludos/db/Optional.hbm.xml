@@ -24,14 +24,10 @@
 			<column name="tipoopt" not-null="true" default="1" />
 		</property>
 	</class>
-	<query name="updateOptional">
-        <![CDATA[ update agroludos.to.Optional o set o.nome = :nome, o.descrizione = :descrizione, o.costo = :costo, o.stato = :stato, o.tipo = :tipo where o.id = :id ]]></query>
 	<query name="getAllOptional">
         <![CDATA[ from agroludos.to.Optional o ]]></query>
 	<query name="getOptionalByTipo">
-        <![CDATA[ from agroludos.to.Optional o where o.tipo = :tipo]]></query>
-	<query name="eliminaOptional">
-        <![CDATA[ update agroludos.to.Optional o set o.stato = :stato where o.id = :id]]></query>
+        <![CDATA[ from agroludos.to.Optional o where o.tipo = ?]]></query>
 	<sql-query name="getNomeStatoOpt">
        <![CDATA[ SELECT tbl_statiopt.nome FROM tbl_statiopt WHERE tbl_statiopt.idstatiopt = ? ]]></sql-query>
 	<sql-query name="getNomeTipoOpt">

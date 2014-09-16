@@ -36,5 +36,5 @@
 		</set>
 	</class>
 	<query name="getPartecipanteById">
-        <![CDATA[ from agroludos.to.Partecipante p where p.id = :id ]]></query>
+        <![CDATA[ from agroludos.to.Partecipante p where p.id = ? ]]></query>
 </hibernate-mapping>

@@ -49,16 +49,14 @@
 			<one-to-many class="agroludos.to.Iscrizione" />
 		</set>
 	</class>
-	<query name="updateCompetizione">
-        <![CDATA[ update agroludos.to.Competizione c set c.nome = :nome, c.data = :data, c.nmin = :nmin, c.nmax = :nmax, c.costo = :costo, c.descrizione = :descrizione, c.tipo = :tipo, c.stato = :stato, c.mdc = :mdc where c.id = :id ]]></query>
 	<query name="getAllCompetizione">
         <![CDATA[ from agroludos.to.Competizione c ]]></query>
 	<query name="getCompetizioneByTipo">
-        <![CDATA[ from agroludos.to.Competizione c where c.tipo = :tipo]]></query>
+        <![CDATA[ from agroludos.to.Competizione c where c.tipo = ?]]></query>
 	<query name="getCompetizioneById">
         <![CDATA[ from agroludos.to.Competizione c where c.id = ?]]></query>
 	<query name="getCompetizioneByMdc">
-        <![CDATA[ from agroludos.to.Competizione c where c.mdc = :mdc]]></query>
+        <![CDATA[ from agroludos.to.Competizione c where c.mdc = ?]]></query>
 	<sql-query name="getNomeStatoComp">
        <![CDATA[ SELECT tbl_statocomp.nome FROM tbl_statocomp WHERE tbl_statocomp.idstatocomp = ? ]]></sql-query>
 	<sql-query name="getNomeTipoComp">
