@@ -36,6 +36,13 @@
 			<height>900</height>
 			<title></title>
 		</view>
+		<view tipo="view">
+			<name>managerDiCompetizione</name>
+			<url>/fxml/mdc/mdcMain.fxml</url>
+			<width>1440</width>
+			<height>900</height>
+			<title></title>
+		</view>
 		<view tipo="dialog">
 			<name>modificaMDC</name>
 			<url>/fxml/mds/mdsModificaMdc.fxml</url>

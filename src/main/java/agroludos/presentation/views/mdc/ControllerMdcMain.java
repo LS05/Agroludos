@@ -17,9 +17,10 @@ public class ControllerMdcMain extends AgroludosController implements Initializa
 	@FXML private GridPane paneCompetizioni;
 	
 	@FXML private Button btnPaneComptizioni;
+	@FXML private Button btnNuovaCompetizione;
 
 	public void initialize(URL url, ResourceBundle resource) {
-
+		
 	}
 
 	@FXML protected void btnPaneComptizioni(MouseEvent event) {
