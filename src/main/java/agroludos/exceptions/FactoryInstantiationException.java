@@ -1,11 +1,17 @@
 package agroludos.exceptions;
 
 @SuppressWarnings("serial")
-public class FactoryInstantiationException extends AgroludosException{
-	public FactoryInstantiationException(String msg){
-		super(msg);
+public class FactoryInstantiationException extends Exception{
+	
+	public FactoryInstantiationException(String message){
+		super(message);
 	}
-	public FactoryInstantiationException(Exception e){
-		super(e.getMessage());
+	
+	public FactoryInstantiationException(String message, Throwable cause){
+		super(message, cause);
+	}
+	
+	public FactoryInstantiationException(Throwable cause){
+		super(cause);
 	}
 }

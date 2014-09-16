@@ -1,7 +1,7 @@
 package agroludos.exceptions;
 
 @SuppressWarnings("serial")
-public class ViewNotFoundException extends AgroludosException{
+public class ViewNotFoundException extends Exception{
 	
 	public ViewNotFoundException(String msg){
 		super(msg);
