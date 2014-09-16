@@ -10,5 +10,7 @@
 		<property name="sutente" ref="gestoreUtente" />
 		<property name="lmds" ref="gestoreManagerSistema" />
 		<property name="smds" ref="gestoreManagerSistema" />
+		<property name="lmdc" ref="gestoreManagerCompetizione" />
+		<property name="smdc" ref="gestoreManagerCompetizione" />
 	</bean>
 </beans>

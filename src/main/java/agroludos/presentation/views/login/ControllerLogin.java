@@ -1,10 +1,6 @@
 package agroludos.presentation.views.login;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -17,7 +13,7 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.UtenteTO;
 
-public class ControllerLogin extends AgroludosController implements Initializable{
+public class ControllerLogin extends AgroludosController{
 
 	@FXML private Button btnLogin;
 	@FXML private Button btnPswDimenticata;
@@ -30,12 +26,6 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
 
-	public void initialize(URL url, ResourceBundle resource) {
-		this.agroLogoPane.setFocusTraversable(true);
-		this.txtUsername.setText("LS05");
-		this.txtPassword.setText("891205");
-	}
-
 	@FXML protected void txtKeyPressed(javafx.scene.input.KeyEvent evt) {
 		if (evt.getCode() == KeyCode.ENTER)
 			eseguiLogin();
@@ -43,6 +33,13 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 
 	@FXML protected void btnLogin(MouseEvent event) {	
 		eseguiLogin();
+	}
+	
+	@Override
+	public void initializeView() {
+		this.agroLogoPane.setFocusTraversable(true);
+		this.txtUsername.setText("agroludos");
+		this.txtPassword.setText("agroludos");
 	}
 
 	protected void eseguiLogin() {	
@@ -79,5 +76,4 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 			}
 		}
 	}
-
 }

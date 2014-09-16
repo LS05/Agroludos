@@ -37,4 +37,8 @@
 		<classe>agroludos.business.as.gestoreutente.SUtente</classe>
 		<forward success="login" failure="nuovaRegistrazione"/>
 	</command>
+	<command name="getAllManagerDiCompetizione">
+		<classe>agroludos.business.as.gestoremdc.LManagerDiCompetizione</classe>
+		<forward success="managerDiSistema" failure="managerDiSistema"/>
+	</command>
 </commands>

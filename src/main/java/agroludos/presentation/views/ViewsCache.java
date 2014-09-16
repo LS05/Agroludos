@@ -31,6 +31,8 @@ class ViewsCache {
 			
 			Scene view = new Scene(root, window.getWidth(), window.getHeight());
 			this.scenes.put(window.getName(), view);
+			
+			window.getController().initializeView();
 		}
 	}
 	

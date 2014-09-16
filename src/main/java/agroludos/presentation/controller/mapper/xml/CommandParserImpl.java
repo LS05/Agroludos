@@ -9,6 +9,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import agroludos.exceptions.BusinessComponentNotFoundException;
+import agroludos.exceptions.CommandFactoryException;
 
 class CommandParserImpl implements CommandParser {
 
@@ -55,39 +56,39 @@ class CommandParserImpl implements CommandParser {
 	}
 
 	@Override
-	public String getClassName(String commandName) throws BusinessComponentNotFoundException{
+	public String getClassName(String commandName) throws CommandFactoryException{
 		String res = "";
 
 		if(this.hasCommand(commandName)){
 			Command c = this.getCommand(commandName);
 			res = c.getClasse();
 		} else {
-			throw new BusinessComponentNotFoundException("Servizio richiesto non presente!");
+			throw new CommandFactoryException("Servizio richiesto non presente!");
 		}
 
 		return res;
 	}
 
 	@Override
-	public String getFailView(String commandName) throws BusinessComponentNotFoundException {
+	public String getFailView(String commandName) throws CommandFactoryException {
 		String res = "";
 		if(this.hasCommand(commandName)){
 			Command command = this.getCommand(commandName);
 			res = command.getForward().getFailure();
 		} else {
-			throw new BusinessComponentNotFoundException("Servizio richiesto non presente!");
+			throw new CommandFactoryException("Servizio richiesto non presente!");
 		}
 		return res;
 	}
 
 	@Override
-	public String getSuccView(String commandName) throws BusinessComponentNotFoundException {
+	public String getSuccView(String commandName) throws CommandFactoryException {
 		String res = "";
 		if(this.hasCommand(commandName)){
 			Command command = this.getCommand(commandName);
 			res = command.getForward().getSuccess();
 		} else {
-			throw new BusinessComponentNotFoundException("Servizio richiesto non presente!");
+			throw new CommandFactoryException("Servizio richiesto non presente!");
 		}
 		return res;
 	}

@@ -11,4 +11,5 @@ import agroludos.presentation.resp.AgroResponse;
  */
 public abstract class AgroludosController extends Controller{	
 	public abstract void forward(AgroRequest request, AgroResponse response);
+	public abstract void initializeView();
 }

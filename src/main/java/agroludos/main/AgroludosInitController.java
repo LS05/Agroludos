@@ -40,4 +40,10 @@ public class AgroludosInitController extends AgroludosController{
 			}
 		}
 	}
+
+	@Override
+	public void initializeView() {
+		// TODO Auto-generated method stub
+		
+	}
 }

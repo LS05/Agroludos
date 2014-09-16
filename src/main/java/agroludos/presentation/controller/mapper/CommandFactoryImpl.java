@@ -1,6 +1,6 @@
 package agroludos.presentation.controller.mapper;
 
-import agroludos.exceptions.BusinessComponentNotFoundException;
+import agroludos.exceptions.CommandFactoryException;
 import agroludos.presentation.controller.mapper.xml.CommandParser;
 
 class CommandFactoryImpl implements CommandFactory{
@@ -12,7 +12,7 @@ class CommandFactoryImpl implements CommandFactory{
 	}
 
 	@Override
-	public Command getCommand(String commandName) throws BusinessComponentNotFoundException {
+	public Command getCommand(String commandName) throws CommandFactoryException {
 		String className = this.cmdParser.getClassName(commandName);
 		String succView = this.cmdParser.getSuccView(commandName);
 		String failView = this.cmdParser.getFailView(commandName);

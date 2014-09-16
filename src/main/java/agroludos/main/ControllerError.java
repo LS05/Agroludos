@@ -1,6 +1,5 @@
 package agroludos.main;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -27,5 +26,11 @@ public class ControllerError  extends AgroludosController{
 	    Stage stage  = (Stage) source.getScene().getWindow();
 	    stage.close();
 		nav.setVista("configurazione");
+	}
+	
+	@Override
+	public void initializeView() {
+		// TODO Auto-generated method stub
+		
 	}
 }

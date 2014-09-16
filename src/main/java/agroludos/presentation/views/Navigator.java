@@ -31,7 +31,7 @@ public class Navigator {
 		try {
 			AgroludosWindow agw = this.viewsLoader.getView(viewName);
 			this.viewsCache.addScene(agw);
-
+			
 			Scene scene = this.viewsCache.getScene(viewName);
 
 			if(agw.isDialog()){

@@ -1,7 +1,7 @@
 package agroludos.presentation.controller;
 
 import agroludos.exceptions.ApplicationException;
-import agroludos.exceptions.BusinessComponentNotFoundException;
+import agroludos.exceptions.CommandFactoryException;
 import agroludos.presentation.controller.mapper.Command;
 import agroludos.presentation.controller.mapper.CommandFactory;
 import agroludos.presentation.controller.mapper.CommandProcessor;
@@ -26,8 +26,8 @@ class ApplicationControllerImpl implements ApplicationController{
 		try {
 			command = this.commandFactory.getCommand(commandName);
 			response = this.commandProcessor.invoke(command, request);
-		} catch (BusinessComponentNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (CommandFactoryException e) {
+			// TODO Eccezione di programmazione
 			e.printStackTrace();
 		} catch (ApplicationException e) {
 			// TODO Eccezione di programmazione

@@ -1,21 +1,18 @@
 package agroludos.presentation.views.mds;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.ManagerDiCompetizioneTO;
+
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class ControllerMdsModificaMDC extends AgroludosController implements Initializable{
+public class ControllerMdsModificaMDC extends AgroludosController{
 	@FXML private Button annullaModifica;
 	@FXML private Button confermaModificaMDC;
 	@FXML private TextField txtUsername;
@@ -30,8 +27,8 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 	private AgroResponse risposta;
 	
 	@Override
-	public void initialize(URL url, ResourceBundle resBoundle) {
-		
+	public void initializeView() {
+		// TODO Auto-generated method stub	
 	}
 
 	public void visualizzaManagerDiCompetizione() {
@@ -62,5 +59,4 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 	public void forward(AgroRequest request, AgroResponse response) {
 		// TODO Auto-generated method stub
 	}
-
 }

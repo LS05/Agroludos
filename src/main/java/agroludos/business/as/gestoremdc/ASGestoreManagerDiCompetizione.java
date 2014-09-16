@@ -32,7 +32,7 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 	}
 
 	@Override
-	public List<ManagerDiCompetizioneTO> getAllManagerCompetizione() throws DatabaseException {
+	public List<ManagerDiCompetizioneTO> getAllManagerDiCompetizione() throws DatabaseException {
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO(); 
 		return daoMan.getAll();
 	}

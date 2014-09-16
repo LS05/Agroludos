@@ -1,15 +1,12 @@
 package agroludos.presentation.views.mds;
 
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -17,12 +14,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.ManagerDiCompetizioneTO;
 
-public class ControllerMdsMain extends AgroludosController implements Initializable{
+public class ControllerMdsMain extends AgroludosController{
 
 	//pane centrali
 	@FXML private GridPane paneGestioneCompetizioni;
@@ -46,7 +44,7 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 	@FXML private Button btnMerenda;
 	@FXML private Button btnPernotto;
 	@FXML private Button btnNuovoTipoOptional;
-	
+
 	//tabella manager di competizione
 	@FXML private TableView<MdcModel> tableManagerCompetizione;
 	@FXML private TableColumn<MdcModel, String> mdcNomeCol;
@@ -57,22 +55,26 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 	@FXML private Label lblMdcUsername;
 	@FXML private Label lblMdcStato;
 	@FXML private Label lblMdcEmail;
-	
+
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
-	
+
 	private List<ManagerDiCompetizioneTO> listMdc;
 	private ObservableList<MdcModel> listaTabMdc;
-	
+
 	//setto visibile solo il primo pane
 	
-	public void initialize(URL url, ResourceBundle resBoundle) {
+	@Override
+	public void initializeView() {
 		this.paneGestioneCompetizioni.setVisible(true);
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneManagerCompetizione.setVisible(false);
 		this.paneGestionePartecipanti.setVisible(false);
+
+		this.richiesta = reqFact.createSimpleRequest("getAllManagerDiCompetizione");
+		this.risposta = respFact.createResponse();
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		
-		this.listMdc = this.getAllManagerDiCompetizione();
 		this.listaTabMdc = this.getListTabellaMdC();
 		this.initMdcTable(this.tableManagerCompetizione);
 	}
@@ -107,14 +109,14 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 		this.paneGestioneManagerCompetizione.setVisible(false);
 		this.paneGestionePartecipanti.setVisible(true);
 	}
-	
+
 	//--------------------Gest Man Competizione ---------------
-	
+
 	@FXML protected void modificaManagerCompetizione(MouseEvent event){
 		MdcModel mdcMod = this.tableManagerCompetizione.getSelectionModel().getSelectedItem();
-		
+
 		ManagerDiCompetizioneTO mdcto = this.getManagerDiCompetizione(mdcMod.getUsername());
-		
+
 		nav.setVista("modificaMDC");
 	}
 
@@ -144,77 +146,74 @@ public class ControllerMdsMain extends AgroludosController implements Initializa
 	@FXML protected void btnPernotto(MouseEvent event) {
 		//caricare optional nella tabella
 	}
-	
+
 	@FXML protected void btnNuovoTipoOptional(MouseEvent event) {
 	}
-	
-	private List<ManagerDiCompetizioneTO> getAllManagerDiCompetizione(){
-		List<ManagerDiCompetizioneTO> res = null;
-		
-		this.richiesta = AgroludosController.reqFact.createSimpleRequest("getAllManagerDiCompetizione");
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		
-		
-		return res;
-	}
-	
+
 	private ObservableList<MdcModel> getListTabellaMdC(){
 		ObservableList<MdcModel> res = FXCollections.observableArrayList();
 		MdcModel modelMdc = null;
-		
+
 		for(ManagerDiCompetizioneTO mdc : this.listMdc){
 			modelMdc = new MdcModel(mdc);
 			res.add(modelMdc);
 		}
-		
+
 		return res;
 	}
-	
+
 	private <S,T> TableColumn<S, T> initColumn(TableColumn<S, T> col, String colName){
 		col.setCellValueFactory(new PropertyValueFactory<S, T>(colName));
 		return col;
 	}
-	
+
 	private void initMdcTable(TableView<MdcModel> table){
 		this.initColumn(this.mdcNomeCol, "nome");
 		this.initColumn(this.mdcCognomeCol, "cognome");
 		this.initColumn(this.mdcEmailCol, "email");
-		
+
 		this.tableManagerCompetizione.getItems().setAll(this.listaTabMdc);
 		this.tableManagerCompetizione.getSelectionModel().selectedItemProperty().addListener(
 				new ChangeListener<MdcModel>(){
 
-			@Override
-			public void changed(ObservableValue<? extends MdcModel> mdcModel,
-					MdcModel oldMod, MdcModel newMod) {
-				lblMdcNome.setText(newMod.getNome());
-				lblMdcCognome.setText(newMod.getCognome());
-				lblMdcEmail.setText(newMod.getEmail());
-				lblMdcUsername.setText(newMod.getUsername());
-				lblMdcStato.setText(newMod.getStato());
-				System.out.println(newMod);
-			}
-			
-		});
+					@Override
+					public void changed(ObservableValue<? extends MdcModel> mdcModel,
+							MdcModel oldMod, MdcModel newMod) {
+						lblMdcNome.setText(newMod.getNome());
+						lblMdcCognome.setText(newMod.getCognome());
+						lblMdcEmail.setText(newMod.getEmail());
+						lblMdcUsername.setText(newMod.getUsername());
+						lblMdcStato.setText(newMod.getStato());
+						System.out.println(newMod);
+					}
+
+				});
 	}
-	
+
 	private ManagerDiCompetizioneTO getManagerDiCompetizione(String username){
 		ManagerDiCompetizioneTO res = null;
-		
+
 		for(ManagerDiCompetizioneTO m : this.listMdc){
 			if(m.getUsername() == username){
 				res = m;
 				break;
 			}
 		}
-		
+
 		return res;
 	}
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		// TODO Auto-generated method stub
-		
+		if(request.getCommandName().equals("getAllManagerDiCompetizione")){
+			Object res = (Object)response.getRespData();
+			if(res instanceof List<?>){
+				List<ManagerDiCompetizioneTO> mdcList = (List<ManagerDiCompetizioneTO>)res;
+				this.listMdc = mdcList;
+			}
+			if(res instanceof String){
+			}
+		}
+
 	}
 }

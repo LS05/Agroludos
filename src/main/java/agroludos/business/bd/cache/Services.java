@@ -6,6 +6,8 @@ import java.util.Map;
 import agroludos.business.as.AgroludosService;
 import agroludos.business.as.gestoreconfigurazione.LConfigurazione;
 import agroludos.business.as.gestoreconfigurazione.SConfigurazione;
+import agroludos.business.as.gestoremdc.LManagerDiCompetizione;
+import agroludos.business.as.gestoremdc.SManagerDiCompetizione;
 import agroludos.business.as.gestoremds.LManagerDiSistema;
 import agroludos.business.as.gestoremds.SManagerDiSistema;
 import agroludos.business.as.gestoreutente.LUtente;
@@ -19,24 +21,26 @@ class Services {
 	private SUtente sutente;
 	private LManagerDiSistema lmds;
 	private SManagerDiSistema smds;
-	
+
 
 	private Map<String, AgroludosService> services;
-	
+	private LManagerDiCompetizione lmdc;
+	private SManagerDiCompetizione smdc;
+
 	Services(){
 		this.services = new HashMap<String,  AgroludosService>();
 	}
-	
+
 	public void setLconfigurazione(LConfigurazione conf) {
 		this.lconfigurazione = conf;
 		this.services.put(LConfigurazione.class.getName(), this.lconfigurazione);
 	}
-	
+
 	public void setSconfigurazione(SConfigurazione conf) {
 		this.sconfigurazione = conf;
 		this.services.put(SConfigurazione.class.getName(), this.sconfigurazione);
 	}
-	
+
 	public void setLutente(LUtente lutente) {
 		this.lutente = lutente;
 		this.services.put(LUtente.class.getName(),this.lutente);
@@ -56,12 +60,22 @@ class Services {
 		this.smds = smds;
 		this.services.put(SManagerDiSistema.class.getName(),this.smds);
 	}
-	
+
+	public void setLmdc(LManagerDiCompetizione lmdc) {
+		this.lmdc = lmdc;
+		this.services.put(LManagerDiCompetizione.class.getName(),this.lmdc);
+	}
+
+	public void setSmdc(SManagerDiCompetizione smdc) {
+		this.smdc = smdc;
+		this.services.put(SManagerDiCompetizione.class.getName(),this.smdc);
+	}
+
 	public AgroludosService getService(String serviceName) throws BusinessComponentNotFoundException{
 		AgroludosService service = this.services.get(serviceName);
 
 		if(service == null){
-			throw new BusinessComponentNotFoundException("Servizio non trovato!");
+			throw new BusinessComponentNotFoundException("Gestore del servizio non trovato! Istanziare la classe ASGestore per il servizio: " + serviceName);
 		}
 
 		return service;

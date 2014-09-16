@@ -25,7 +25,7 @@ import javafx.scene.layout.GridPane;
  * @author Francesco Zagaria
  *
  */
-public class ControllerConfSistema extends AgroludosController implements Initializable{
+public class ControllerConfSistema extends AgroludosController {
 
 	@FXML private Button btnAvantiConf;
 	@FXML private Button btnIndietroConf;
@@ -59,7 +59,8 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 
 	private ObservableList<String> listaTipiDB;
 
-	public void initialize(URL url, ResourceBundle resource) {
+	@Override
+	public void initializeView() {
 		this.mdsto = toFact.createMdSTO();
 		this.dbto = toFact.createDatabaseTO();
 		this.listaTipiDB = FXCollections.observableArrayList();
