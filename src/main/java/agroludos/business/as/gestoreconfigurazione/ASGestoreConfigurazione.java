@@ -31,6 +31,7 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 
 		if(this.fileConf.creaConfigurazione(dbto)){
 			this.sysConf.setTipoDB(dbto.getTipo());
+			res = true;
 		}
 
 		return res;

@@ -86,6 +86,7 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 	 * @param event
 	 */
 	@FXML protected void btnAvantiClicked(MouseEvent event) {	
+		System.out.println("INSERISCI CONF");
 		//copio il contenuto delle textfield nell'hashmap parametri
 		this.dbto.setTipo(this.cmbTipoDB.getValue());
 		this.dbto.setServer(this.txtServerDB.getText());
@@ -96,6 +97,7 @@ public class ControllerConfSistema extends AgroludosController implements Initia
 		this.richiesta = reqFact.createDataRequest(dbto, "inserisciConfigurazione");
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		
 	}
 
 	/**
