@@ -49,6 +49,9 @@ public class Navigator {
 				this.mainStage.setTitle(agw.getTitle());
 
 				PositionHandler.centerComp(this.mainStage, scene);
+				// TODO aggiungre splash screen
+				if(!viewName.equals("initView"))
+					this.mainStage.show();
 			}
 		} catch (ViewNotFoundException e) {
 			// TODO Auto-generated catch block
