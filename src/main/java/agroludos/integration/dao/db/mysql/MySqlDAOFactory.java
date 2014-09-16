@@ -21,6 +21,7 @@ import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.TransferObjectFactory;
+import agroludos.to.UtenteTO;
 
 public class MySqlDAOFactory implements DBDAOFactory {
 
@@ -70,8 +71,8 @@ public class MySqlDAOFactory implements DBDAOFactory {
 	}
 
 	@Override
-	public UtenteDAO getUtenteDAO() {
-		return new MySqlUtenteDAO(sessionFactory);
+	public UtenteDAO<UtenteTO> getUtenteDAO() {
+		return new MySqlUtenteDAO<UtenteTO>(sessionFactory);
 	}
 
 	@Override
