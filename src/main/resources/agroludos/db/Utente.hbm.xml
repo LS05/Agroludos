@@ -77,6 +77,8 @@
 
 
 	</class>
+	<query name="checkMds">
+		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.idruolo = 0 ]]></query>
 	<query name="getUtente">
         <![CDATA[ from agroludos.to.Utente u where u.stato = 1 and u.username = :username and u.password = :password and u.stato = 1 ]]></query>
 	<query name="getByID">

@@ -9,4 +9,6 @@ public interface ManagerDiSistemaDAO {
 	
 	public ManagerDiSistemaTO getByUsername(String username) throws DatabaseException;
 	
+	public boolean checkMds() throws DatabaseException;
+	
 }
