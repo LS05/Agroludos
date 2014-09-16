@@ -9,37 +9,37 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.UtenteDAO;
 import agroludos.to.UtenteTO;
 
-class MySqlUtenteDAO extends MySqlAgroludosDAO<UtenteTO> implements UtenteDAO{
+class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements UtenteDAO<T>{
 
 	MySqlUtenteDAO(SessionFactory sessionFactory){
 		super(sessionFactory);
 	}
 
 	@Override
-	public UtenteTO getUtente(UtenteTO uto) throws DatabaseException {
+	public T getUtente(UtenteTO uto) throws DatabaseException {
 		UtenteTO res = null;
 
 		List<String> param = new ArrayList<String>();
 		param.add(uto.getUsername());
 		param.add(uto.getPassword());
 
-		List<UtenteTO> list = this.executeParamQuery("getUtente", param);
+		List<T> list = this.executeParamQuery("getUtente", param);
 
 		if(list.size() == 1){
-			UtenteTO utente = list.get(0);
-			this.setNomeRuolo(utente);
-			this.setNomeStatoUtente(utente);
+			res = list.get(0);
+			this.setNomeRuolo(res);
+			this.setNomeStatoUtente(res);
 		} else {
 			res = this.toFact.createNullUTO();
 		}
 
-		return res;
+		return (T)res;
 	}
 
-	private UtenteTO getUtenteBy(String queryName, List<?> params) throws DatabaseException{
+	private T getUtenteBy(String queryName, List<?> params) throws DatabaseException{
 
 		UtenteTO res = null;
-		List<UtenteTO> list = super.executeParamQuery(queryName, params);
+		List<T> list = super.executeParamQuery(queryName, params);
 
 		if(list.size() == 0){
 			res = this.toFact.createNullUTO();
@@ -50,11 +50,11 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO<UtenteTO> implements UtenteDAO{
 		this.setNomeRuolo(res);
 		this.setNomeStatoUtente(res);
 
-		return res;
+		return (T)res;
 	}
 
 	@Override
-	public UtenteTO getByUsername(String username) throws DatabaseException {
+	public T getByUsername(String username) throws DatabaseException {
 
 		List<String> param = new ArrayList<String>();
 		param.add(username);
@@ -63,7 +63,7 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO<UtenteTO> implements UtenteDAO{
 	}
 
 	@Override
-	public UtenteTO getByID(Integer id) throws DatabaseException {
+	public T getByID(Integer id) throws DatabaseException {
 
 		List<Integer> param = new ArrayList<Integer>();
 		param.add(id);
@@ -119,5 +119,14 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO<UtenteTO> implements UtenteDAO{
 		param.add(uto.getStato());
 		String stato = super.<String>executeValParamQuery("getNomeStatoUtente", param);
 		uto.setNomeStatoUtente(stato );
+	}
+
+	@Override
+	public T deleteUtente(T entity) throws DatabaseException {
+
+		entity.setStato(0);
+		super.update(entity);
+
+		return entity;
 	}	
 }

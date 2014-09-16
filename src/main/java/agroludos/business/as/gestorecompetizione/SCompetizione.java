@@ -20,7 +20,7 @@ public interface SCompetizione extends AgroludosService {
 	 * @return
 	 * @throws DatabaseException
 	 */
-	boolean modificaCompetizione(CompetizioneTO cmpto) throws DatabaseException;
+	CompetizioneTO modificaCompetizione(CompetizioneTO cmpto) throws DatabaseException;
 	
 	/**
 	 * 

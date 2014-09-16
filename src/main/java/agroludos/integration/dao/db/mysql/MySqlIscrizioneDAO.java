@@ -13,37 +13,33 @@ class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements Iscr
 
 	MySqlIscrizioneDAO(SessionFactory sessionFactory) {
 		super(sessionFactory);
-		this.setClazz(IscrizioneTO.class);
+		this.setClasse(IscrizioneTO.class);
 	}
-	
+
 	@Override
 	public List< IscrizioneTO > getAll() throws DatabaseException{
 		List< IscrizioneTO > res = super.getAll();
-		
+
 		for(IscrizioneTO iscr : res){
 			this.setNomeStato(iscr);
 		}
-		
+
 		return res;
 	}
-	
-	@Override
-	public IscrizioneTO annullaIscrizione(IscrizioneTO iscto) throws DatabaseException {
-		iscto.setStato(0);
-		return super.update(iscto);
-	}
 
-//	@Override
-//	public List<IscrizioneTO> getAllIscrizioni() throws DatabaseException {
-//		List<IscrizioneTO> res = super.executeQuery("getAllIscrizioni");
-//		
-//		for(IscrizioneTO isc: res){
-//			this.setNomeStato(isc);
-//		}
-//
-//		return  res;
-//		
-//	}
+	@Override
+	public boolean annullaIscrizione(IscrizioneTO iscto) throws DatabaseException {
+		boolean res = false;
+		iscto.setStato(0);
+		
+		if(super.update(iscto) != null){
+			res = true;
+		} else {
+			res = false;
+		}
+
+		return res;
+	}
 
 	@Override
 	public void setNomeStato(IscrizioneTO iscto) throws DatabaseException {
@@ -52,5 +48,4 @@ class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements Iscr
 		String stato = super.<String>executeValParamQuery("getNomeStatoIscr", param);
 		iscto.setNomeStato(stato);
 	}
-
 }

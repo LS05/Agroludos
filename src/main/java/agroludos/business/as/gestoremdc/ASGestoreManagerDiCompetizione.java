@@ -20,36 +20,33 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 		boolean res = false;
 
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
-		res = daoMan.crea(mdcto);
+		res = daoMan.create(mdcto);
 
 		return res;
 	}
 
 	@Override
 	public ManagerDiCompetizioneTO getManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) throws DatabaseException {
-		ManagerDiCompetizioneTO manTO = null;
-		
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
-		manTO = daoMan.getByUsername(mdcto.getUsername());
-		
-		return manTO;
+		return daoMan.getByUsername(mdcto.getUsername());
 	}
 
 	@Override
 	public List<ManagerDiCompetizioneTO> getAllManagerCompetizione() throws DatabaseException {
-		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
-		return daoMan.readAll();
+		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO(); 
+		return daoMan.getAll();
 	}
 
 	@Override
-	public boolean modificaManagerDiCompetizione(ManagerDiCompetizioneTO mdcto)
+	public ManagerDiCompetizioneTO modificaManagerDiCompetizione(ManagerDiCompetizioneTO mdcto)
 			throws DatabaseException {
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
-		return daoMan.update(mdcto);
+		ManagerDiCompetizioneTO res = (ManagerDiCompetizioneTO)daoMan.update(mdcto);
+		return res;
 	}
 
 	@Override
-	public boolean eliminaManagerDiCompetizione(ManagerDiCompetizioneTO mdcto)
+	public ManagerDiCompetizioneTO eliminaManagerDiCompetizione(ManagerDiCompetizioneTO mdcto)
 			throws DatabaseException {
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
 		return daoMan.update(mdcto);

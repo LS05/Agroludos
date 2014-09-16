@@ -9,7 +9,7 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.to.PartecipanteTO;
 
-class MySqlPartecipanteDAO extends MySqlUtenteDAO implements PartecipanteDAO {
+class MySqlPartecipanteDAO extends MySqlUtenteDAO<PartecipanteTO> implements PartecipanteDAO {
 
 	MySqlPartecipanteDAO(SessionFactory sessionFactory) {
 		super(sessionFactory);
@@ -21,12 +21,12 @@ class MySqlPartecipanteDAO extends MySqlUtenteDAO implements PartecipanteDAO {
 		List<String> param = new ArrayList<String>();
 		param.add(cf);
 
-		List<?> list = super.executeParamQuery("getPartecipanteByCF", param);
+		List<PartecipanteTO> list = super.executeParamQuery("getPartecipanteByCF", param);
 		PartecipanteTO res = (PartecipanteTO)list.get(0);
-		
+
 		this.setNomeRuolo(res);
 		this.setNomeStatoUtente(res);
-		
+
 		return res;
 	}
 }

@@ -5,7 +5,7 @@ import agroludos.to.IscrizioneTO;
 
 public interface IscrizioneDAO extends DAO<IscrizioneTO>{
 	
-	IscrizioneTO annullaIscrizione(IscrizioneTO iscto) throws DatabaseException;
+	boolean annullaIscrizione(IscrizioneTO iscto) throws DatabaseException;
 
 	void setNomeStato(IscrizioneTO iscto) throws DatabaseException;
 }

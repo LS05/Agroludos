@@ -22,4 +22,5 @@ public interface DAO<T extends Serializable> {
 	<V> V executeValParamQuery(String queryName, List<?> parameters) throws DatabaseException;
 
 	<V> V executeValQuery(String queryName) throws DatabaseException;
+	
 }

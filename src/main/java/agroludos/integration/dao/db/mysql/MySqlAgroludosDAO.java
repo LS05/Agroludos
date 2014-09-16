@@ -1,6 +1,5 @@
 package agroludos.integration.dao.db.mysql;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -11,9 +10,10 @@ import org.hibernate.Transaction;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.DAO;
+import agroludos.to.AgroludosTO;
 import agroludos.to.TOFactory;
 
-abstract class MySqlAgroludosDAO<T extends Serializable> implements DAO<T> {
+abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 
 	protected Session session;
 
@@ -27,36 +27,38 @@ abstract class MySqlAgroludosDAO<T extends Serializable> implements DAO<T> {
 		this.session = MySqlDAO.getSessionFactory().openSession();
 	}
 
-	protected void setClazz( final Class< T > clazzToSet ){
+	protected void setClasse( final Class< T > clazzToSet ){
 		classe = clazzToSet;
 	}
 
 	@Override
 	public List< T > getAll() throws DatabaseException {
 		List<T> res = null;
+
 		try{
 			res = this.session.createQuery( "from " + this.classe.getName() ).list();
 		}catch (HibernateException e){
 			throw new DatabaseException(e.getMessage(), e);
 		}
+
 		return res; 
 	}
-	
+
 	@Override
 	public T findOne(long id) throws DatabaseException {
 		T entity = null;
-		
+
 		try{
 			entity = (T) this.session.get( this.classe, id );
 		} catch (HibernateException e){
 			throw new DatabaseException(e.getMessage(), e);
 		}
-		
+
 		return entity; 
 	}
 
 	@Override
-	public boolean create(T mainTO) throws DatabaseException{
+	public boolean create(final T mainTO) throws DatabaseException{
 		Transaction tx = null;
 		boolean res = false;
 
@@ -76,7 +78,7 @@ abstract class MySqlAgroludosDAO<T extends Serializable> implements DAO<T> {
 	}
 
 	@Override
-	public T update(T entity) throws DatabaseException{
+	public T update(final T entity) throws DatabaseException{
 		Transaction tx = null;
 		boolean res = false;
 

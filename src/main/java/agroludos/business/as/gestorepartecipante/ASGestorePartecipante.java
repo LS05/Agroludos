@@ -7,6 +7,7 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.to.PartecipanteTO;
+import agroludos.to.UtenteTO;
 
 class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SPartecipante{
 
@@ -21,35 +22,38 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 		boolean res = false;
 
 		PartecipanteDAO daoPar = getPartecipanteDAO();
-		res = daoPar.crea(parto);
+		res = daoPar.create(parto);
 
 		return res;
 	}
 
 	@Override
-	public boolean modificaPartecipante(PartecipanteTO parto)
+	public PartecipanteTO modificaPartecipante(PartecipanteTO parto)
 			throws DatabaseException {
 		PartecipanteDAO daoPar = getPartecipanteDAO();
-		return daoPar.update(parto);
+		PartecipanteTO part = (PartecipanteTO)daoPar.update(parto);
+		return part;
 	}
 
 	@Override
 	public PartecipanteTO getPartecipante(PartecipanteTO parto)
 			throws DatabaseException {
 		PartecipanteDAO daoPar = getPartecipanteDAO();
-		return daoPar.getByUsername(parto.getUsername());
+		UtenteTO user = daoPar.getByUsername(parto.getUsername());
+		return (PartecipanteTO)user;
 	}
 
 	@Override
 	public List<PartecipanteTO> getAllPartecipante() throws DatabaseException {
 		PartecipanteDAO daoPar = getPartecipanteDAO();
-		return daoPar.readAll();
+		return daoPar.getAll();
 	}
 
 	@Override
 	public PartecipanteTO getPartecipanteById(PartecipanteTO parto)
 			throws DatabaseException {
 		PartecipanteDAO daoPar = getPartecipanteDAO();
-		return daoPar.readByID(parto.getId());
+		UtenteTO user = daoPar.getByID(parto.getId());
+		return (PartecipanteTO)user;
 	}
 }

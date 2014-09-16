@@ -1,5 +1,7 @@
 package agroludos.integration.dao.db;
 
+import agroludos.to.UtenteTO;
+
 public interface DBDAOFactory {
 	/**
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
@@ -47,7 +49,7 @@ public interface DBDAOFactory {
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
 	 * Partecipante
 	 */
-	public UtenteDAO getUtenteDAO();
+	public UtenteDAO<UtenteTO> getUtenteDAO();
 	
 	/**
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Iscrizione

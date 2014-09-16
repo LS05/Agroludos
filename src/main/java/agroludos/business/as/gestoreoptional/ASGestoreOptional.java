@@ -20,13 +20,13 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 		boolean res = false;
 
 		OptionalDAO daoOpt = getOptionalDAO();
-		res = daoOpt.crea(optto);
+		res = daoOpt.create(optto);
 
 		return res;
 	}
 
 	@Override
-	public boolean modificaOptional(OptionalTO optto) throws DatabaseException {
+	public OptionalTO modificaOptional(OptionalTO optto) throws DatabaseException {
 		OptionalDAO daoOpt = getOptionalDAO();
 		return daoOpt.update(optto);
 	}
@@ -47,6 +47,6 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 	@Override
 	public List<OptionalTO> getAllOptional() throws DatabaseException {
 		OptionalDAO daoOpt = getOptionalDAO();
-		return daoOpt.readAll();
+		return daoOpt.getAll();
 	}
 }

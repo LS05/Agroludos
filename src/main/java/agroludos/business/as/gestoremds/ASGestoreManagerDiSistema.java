@@ -5,13 +5,12 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.MdsNotFoundException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.ManagerDiSistemaDAO;
-import agroludos.system.SystemConf;
 import agroludos.to.ManagerDiSistemaTO;
+import agroludos.to.UtenteTO;
 import agroludos.utility.PasswordEncryption;
 
 class ASGestoreManagerDiSistema extends AgroludosAS implements LManagerDiSistema, SManagerDiSistema{
 	PasswordEncryption pwdEnc;
-//	private SystemConf sysConf;
 
 	ASGestoreManagerDiSistema(PasswordEncryption pwdEnc){
 		this.pwdEnc = pwdEnc;
@@ -29,25 +28,27 @@ class ASGestoreManagerDiSistema extends AgroludosAS implements LManagerDiSistema
 		// resettare il tipo di DB nel file xml
 		String inputPassword = mdsto.getPassword();
 		mdsto.setPassword(this.pwdEnc.encryptPassword(inputPassword));
-		boolean res = this.getManagerDiSistemaDAO().crea(mdsto);
+		boolean res = this.getManagerDiSistemaDAO().create(mdsto);
 		return res;
 	}
 
 	@Override
 	public ManagerDiSistemaTO getManagerDiSistema(ManagerDiSistemaTO mdsto) throws DatabaseException {
-		return this.getManagerDiSistemaDAO().getByUsername(mdsto.getUsername());
+		UtenteTO uTO = this.getManagerDiSistemaDAO().getByUsername(mdsto.getUsername());
+		return (ManagerDiSistemaTO) uTO;
 	}
 
 	@Override
 	public boolean checkMds() throws DatabaseException, MdsNotFoundException {
 		boolean res;
+
 		if(this.getManagerDiSistemaDAO().checkMds()){
 			res = true;
-		}else{
-//			this.sysConf.setTipoDB("");
+		} else {
 			throw new MdsNotFoundException("Attenzione Manager Di Sistema non trovato,"
 					+ " è necessario effettuare la configurazione iniziale");
-		}	
+		}
+		
 		return res;
 	}
 }

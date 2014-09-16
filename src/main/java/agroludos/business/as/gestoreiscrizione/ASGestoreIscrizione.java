@@ -19,13 +19,13 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 		boolean res = false;
 
 		IscrizioneDAO iscDAO = getIscrizioneDAO();
-		res = iscDAO.crea(iscto);
+		res = iscDAO.create(iscto);
 
 		return res;
 	}
 
 	@Override
-	public boolean modificaIscrizione(IscrizioneTO iscto)
+	public IscrizioneTO modificaIscrizione(IscrizioneTO iscto)
 			throws DatabaseException {
 		IscrizioneDAO iscDAO = getIscrizioneDAO();
 		return iscDAO.update(iscto);

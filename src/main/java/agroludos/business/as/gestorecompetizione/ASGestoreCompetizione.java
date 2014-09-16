@@ -26,13 +26,13 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		boolean res = false;
 
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
-		res = daoCmp.crea(cmpto);
+		res = daoCmp.create(cmpto);
 
 		return res;
 	}
 
 	@Override
-	public boolean modificaCompetizione(CompetizioneTO cmpto)
+	public CompetizioneTO modificaCompetizione(CompetizioneTO cmpto)
 			throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
 		return daoCmp.update(cmpto);
@@ -62,7 +62,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	@Override
 	public List<CompetizioneTO> getAllCompetizione() throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
-		return daoCmp.readAll();
+		return daoCmp.getAll();
 	}
 
 	@Override

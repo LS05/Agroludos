@@ -6,5 +6,5 @@ import agroludos.to.PartecipanteTO;
 
 public interface SPartecipante extends AgroludosService{
 	boolean inserisciPartecipante(PartecipanteTO parto) throws DatabaseException;
-	boolean modificaPartecipante (PartecipanteTO parto) throws DatabaseException;
+	PartecipanteTO modificaPartecipante (PartecipanteTO parto) throws DatabaseException;
 }

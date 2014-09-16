@@ -81,7 +81,7 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	private void setNomeTipoComp(CompetizioneTO cmpto) throws DatabaseException {
 		List<Integer> param = new ArrayList<Integer>();
 		param.add(cmpto.getTipo());
