@@ -13,41 +13,44 @@ class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements Iscr
 
 	MySqlIscrizioneDAO(SessionFactory sessionFactory) {
 		super(sessionFactory);
+		this.setClazz(IscrizioneTO.class);
 	}
-
+	
 	@Override
-	public boolean crea(IscrizioneTO iscto) throws DatabaseException {
-		return super.create(iscto);
+	public List< IscrizioneTO > getAll() throws DatabaseException{
+		List< IscrizioneTO > res = super.getAll();
+		
+		for(IscrizioneTO iscr : res){
+			this.setNomeStato(iscr);
+		}
+		
+		return res;
 	}
-
+	
 	@Override
-	public boolean update(IscrizioneTO iscto) throws DatabaseException {
-		return super.update(iscto);
-	}
-
-	@Override
-	public boolean annullaIscrizione(IscrizioneTO iscto) throws DatabaseException {
+	public IscrizioneTO annullaIscrizione(IscrizioneTO iscto) throws DatabaseException {
 		iscto.setStato(0);
 		return super.update(iscto);
 	}
 
-	@Override
-	public List<IscrizioneTO> getAllIscrizioni() throws DatabaseException {
-		List<IscrizioneTO> res = super.executeQuery("getAllIscrizioni");
-		
-		for(IscrizioneTO isc: res){
-			this.setNomeStato(isc);
-		}
-
-		return  res;
-		
-	}
+//	@Override
+//	public List<IscrizioneTO> getAllIscrizioni() throws DatabaseException {
+//		List<IscrizioneTO> res = super.executeQuery("getAllIscrizioni");
+//		
+//		for(IscrizioneTO isc: res){
+//			this.setNomeStato(isc);
+//		}
+//
+//		return  res;
+//		
+//	}
 
 	@Override
 	public void setNomeStato(IscrizioneTO iscto) throws DatabaseException {
 		List<Integer> param = new ArrayList<Integer>();
 		param.add(iscto.getStato());
-		iscto.setNomeStato(super.executeParamStringQuery("getNomeStatoIscr", param));
+		String stato = super.<String>executeValParamQuery("getNomeStatoIscr", param);
+		iscto.setNomeStato(stato);
 	}
 
 }

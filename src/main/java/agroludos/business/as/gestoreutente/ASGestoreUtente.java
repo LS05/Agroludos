@@ -17,7 +17,12 @@ class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 	@Override
 	public UtenteTO autenticazioneUtente(UtenteTO uto) throws DatabaseException, UserNotFoundException {
 		UtenteDAO udao = this.getUtenteDAO();
-		return udao.autenticazione(uto);
+		UtenteTO res = udao.getUtente(uto);
+		
+		if(res.getUsername() == "")
+			throw new UserNotFoundException("Username e/o Password errati!");
+		
+		return res;
 	}
 
 	@Override

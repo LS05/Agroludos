@@ -16,34 +16,6 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 	}
 
 	@Override
-	public boolean crea(CompetizioneTO cmpto) throws DatabaseException {
-		return super.create(cmpto);
-	}
-
-	@Override
-	public boolean update(CompetizioneTO cmpto) throws DatabaseException {
-		return super.update(cmpto);
-	}
-
-	@Override
-	public boolean annullaCompetizione(CompetizioneTO cmpto) throws DatabaseException {
-		cmpto.setStato(0);
-		return super.update(cmpto);
-	}
-
-	@Override
-	public List<CompetizioneTO> readAll() throws DatabaseException {
-		List<CompetizioneTO> res = super.executeQuery("getAllCompetizione");
-
-		for(CompetizioneTO cmp: res){
-			this.setNomeStatoComp(cmp);
-			this.setNomeTipoComp(cmp);
-		}
-
-		return  res;
-	}
-
-	@Override
 	public List<CompetizioneTO> readByTipo(Integer tipo) throws DatabaseException{
 
 		List<Integer> param = new ArrayList<Integer>();
@@ -55,7 +27,7 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 			this.setNomeStatoComp(cmp);
 			this.setNomeTipoComp(cmp);
 		}
-		
+
 		return res;
 	}
 
@@ -70,21 +42,16 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 			this.setNomeStatoComp(cmp);
 			this.setNomeTipoComp(cmp);
 		}
-		
+
 		return res;
 
 	}
 
 	@Override
 	public CompetizioneTO readById(Integer id) throws DatabaseException{
-		CompetizioneTO res = null;
-		List<Integer> param = new ArrayList<Integer>();
-		param.add(id);
 
-		List<CompetizioneTO> list = super.executeParamQuery("getCompetizioneById", param);
-		res = list.get(0);
+		CompetizioneTO res = super.findOne(id);
 
-		//setto il nome dello stato e del tipo
 		this.setNomeStatoComp(res);
 		this.setNomeTipoComp(res);
 
@@ -103,23 +70,29 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 			this.setNomeStatoComp(cmp);
 			this.setNomeTipoComp(cmp);
 		}
-		
-		
+
+
 		return list;
 	}
 
 	@Override
-	public void setNomeTipoComp(CompetizioneTO cmpto) throws DatabaseException {
+	public boolean annullaCompetizione(CompetizioneTO cmpto)
+			throws DatabaseException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	private void setNomeTipoComp(CompetizioneTO cmpto) throws DatabaseException {
 		List<Integer> param = new ArrayList<Integer>();
 		param.add(cmpto.getTipo());
-		cmpto.setNomeTipo(super.executeParamStringQuery("getNomeTipoComp", param));
+		String tipo = super.<String>executeValParamQuery("getNomeTipoComp", param);
+		cmpto.setNomeTipo(tipo);
 	}
 
-	@Override
-	public void setNomeStatoComp(CompetizioneTO cmpto) throws DatabaseException {
+	private void setNomeStatoComp(CompetizioneTO cmpto) throws DatabaseException {
 		List<Integer> param = new ArrayList<Integer>();
 		param.add(cmpto.getStato());
-		cmpto.setNomeStato(super.executeParamStringQuery("getNomeStatoComp", param));
+		String stato = super.<String>executeValParamQuery("getNomeStatoComp", param);
+		cmpto.setNomeStato(stato);
 	}
-
 }

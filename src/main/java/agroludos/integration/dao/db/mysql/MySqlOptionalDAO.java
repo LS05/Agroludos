@@ -10,31 +10,9 @@ import agroludos.integration.dao.db.OptionalDAO;
 import agroludos.to.OptionalTO;
 
 class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements OptionalDAO {
-	
+
 	MySqlOptionalDAO(SessionFactory sessionFactory){
 		super(sessionFactory);
-	}
-
-	@Override
-	public boolean crea(OptionalTO optTO) throws DatabaseException {
-		return super.create(optTO);
-	}
-
-	@Override
-	public boolean update(OptionalTO optTO) throws DatabaseException {
-		return super.update(optTO);
-	}
-
-	@Override
-	public List<OptionalTO> readAll() throws DatabaseException {
-		List<OptionalTO> res = super.executeQuery("getAllOptional");
-		
-		for(OptionalTO opt: res){
-			this.setNomeStatoOpt(opt);
-			this.setNomeTipoOpt(opt);
-		}
-		
-		return res;
 	}
 
 	@Override
@@ -48,28 +26,30 @@ class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements Optional
 			this.setNomeStatoOpt(opt);
 			this.setNomeTipoOpt(opt);
 		}
-		
+
 		return res;
 	}
 
 	@Override
 	public boolean eliminaOptional(OptionalTO optTO) throws DatabaseException {
 		optTO.setStato(0);
-		return super.update(optTO);
+		//		return super.update(optTO);
+		return false;
 	}
-	
+
 	@Override
 	public void setNomeTipoOpt(OptionalTO optTO) throws DatabaseException {
 		List<Integer> param = new ArrayList<Integer>();
 		param.add(optTO.getTipo());
-		optTO.setNomeTipoOpt(super.executeParamStringQuery("getNomeTipoOpt", param));
+		String tipo = super.executeValParamQuery("getNomeTipoOpt", param);
+		optTO.setNomeTipoOpt(tipo);
 	}
 
 	@Override
 	public void setNomeStatoOpt(OptionalTO optTO) throws DatabaseException {
 		List<Integer> param = new ArrayList<Integer>();
 		param.add(optTO.getStato());
-		optTO.setNomeStatoOpt(super.executeParamStringQuery("getNomeStatoOpt", param));
+		String stato = super.executeValParamQuery("getNomeStatoOpt", param);
+		optTO.setNomeStatoOpt(stato);
 	}
-	
 }

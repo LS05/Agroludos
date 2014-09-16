@@ -16,48 +16,6 @@ class MySqlPartecipanteDAO extends MySqlUtenteDAO implements PartecipanteDAO {
 	}
 
 	@Override
-	public boolean crea(PartecipanteTO parto) throws DatabaseException {
-		return super.crea(parto);
-	}
-
-	@Override
-	public PartecipanteTO getByUsername(String username) throws DatabaseException {
-		return (PartecipanteTO) super.getByUsername(username);
-	}
-
-	@Override
-	public PartecipanteTO readByID(Integer id) throws DatabaseException {
-		return (PartecipanteTO) super.getByID(id);
-
-	}
-
-	@Override
-	public boolean update(PartecipanteTO parto) throws DatabaseException {
-		return super.update(parto);
-	}
-
-
-	@Override
-	public boolean delete(PartecipanteTO parto) throws DatabaseException {
-		parto.setStato(0);
-		return super.update(parto);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<PartecipanteTO> readAll() throws DatabaseException {
-		List<?> list = super.executeQuery("getAllPartecipanti");		
-		List<PartecipanteTO> res = (List<PartecipanteTO>)list;
-
-		for(PartecipanteTO par: res){
-			this.setNomeRuolo(par);
-			this.setNomeStatoUtente(par);
-		}
-		return res;
-
-	}
-
-	@Override
 	public PartecipanteTO readByCF(String cf) throws DatabaseException {
 
 		List<String> param = new ArrayList<String>();

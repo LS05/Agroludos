@@ -11,14 +11,10 @@ class MySqlManagerDiSistemaDAO extends MySqlUtenteDAO implements ManagerDiSistem
 	MySqlManagerDiSistemaDAO(SessionFactory sessionFactory){
 		super(sessionFactory);
 	}
-	
-	@Override
-	public boolean crea(ManagerDiSistemaTO mdsto) throws DatabaseException {
-		return super.crea(mdsto);
-	}
 
 	@Override
-	public ManagerDiSistemaTO getByUsername(String username) throws DatabaseException {
-		return (ManagerDiSistemaTO) super.getByUsername(username);
+	public ManagerDiSistemaTO getByTelefono(String telefono) throws DatabaseException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

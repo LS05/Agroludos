@@ -1,5 +1,7 @@
 package agroludos.to;
 
-public interface AgroludosTO {
+import java.io.Serializable;
+
+public interface AgroludosTO extends Serializable{
 	String toString();
 }

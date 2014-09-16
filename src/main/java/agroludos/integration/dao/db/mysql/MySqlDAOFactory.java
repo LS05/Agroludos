@@ -87,7 +87,7 @@ public class MySqlDAOFactory implements DBDAOFactory {
 			IscrizioneTO cmpto = fact.createIscrizioneTO();
 			IscrizioneDAO cmpDAO = daoFact.getIscrizioneDAO();
 
-			List<IscrizioneTO> list = cmpDAO.getAllIscrizioni();
+			List<IscrizioneTO> list = cmpDAO.getAll();
 			int i=0;
 			for(Object lst: list){
 				System.out.println(list.get(i).getId() + " " + list.get(i).getNomeStato());

@@ -3,49 +3,41 @@ package agroludos.integration.dao.db.mysql;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 
 import agroludos.exceptions.DatabaseException;
-import agroludos.exceptions.UserNotFoundException;
 import agroludos.integration.dao.db.UtenteDAO;
 import agroludos.to.UtenteTO;
 
-class MySqlUtenteDAO extends MySqlAgroludosDAO<UtenteTO> implements UtenteDAO {
-	
+class MySqlUtenteDAO extends MySqlAgroludosDAO<UtenteTO> implements UtenteDAO{
+
 	MySqlUtenteDAO(SessionFactory sessionFactory){
 		super(sessionFactory);
 	}
-	
+
 	@Override
-	public boolean crea(UtenteTO uto) throws DatabaseException {
-		return super.create(uto);
-	}
-	
-	@Override
-	public UtenteTO autenticazione(UtenteTO uto) throws UserNotFoundException {
+	public UtenteTO getUtente(UtenteTO uto) throws DatabaseException {
 		UtenteTO res = null;
 
-		Query query = this.session.getNamedQuery("getUtente").setString("username", uto.getUsername())
-				.setString("password", uto.getPassword());
+		List<String> param = new ArrayList<String>();
+		param.add(uto.getUsername());
+		param.add(uto.getPassword());
 
-		List<UtenteTO> list = query.list();
+		List<UtenteTO> list = this.executeParamQuery("getUtente", param);
 
 		if(list.size() == 1){
-			for(UtenteTO item : list){
-				if(item.getUsername().equals(uto.getUsername()) && item.getPassword().equals(uto.getPassword()))
-					res = item;
-			}
-
+			UtenteTO utente = list.get(0);
+			this.setNomeRuolo(utente);
+			this.setNomeStatoUtente(utente);
 		} else {
-			throw new UserNotFoundException("Username e/o Password errati!");
+			res = this.toFact.createNullUTO();
 		}
 
 		return res;
 	}
 
 	private UtenteTO getUtenteBy(String queryName, List<?> params) throws DatabaseException{
-		
+
 		UtenteTO res = null;
 		List<UtenteTO> list = super.executeParamQuery(queryName, params);
 
@@ -57,7 +49,7 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO<UtenteTO> implements UtenteDAO {
 
 		this.setNomeRuolo(res);
 		this.setNomeStatoUtente(res);
-		
+
 		return res;
 	}
 
@@ -112,19 +104,20 @@ class MySqlUtenteDAO extends MySqlAgroludosDAO<UtenteTO> implements UtenteDAO {
 
 		return res;
 	}
-	
+
 	@Override
 	public void setNomeRuolo(UtenteTO uto) throws DatabaseException {
 		List<Integer> param = new ArrayList<Integer>();
 		param.add(uto.getIdruolo());
-		uto.setNomeRuolo(super.executeParamStringQuery("getNomeRuolo", param));
+		String ruolo = super.<String>executeValParamQuery("getNomeRuolo", param);
+		uto.setNomeRuolo(ruolo);
 	}
 
 	@Override
 	public void setNomeStatoUtente(UtenteTO uto) throws DatabaseException {
 		List<Integer> param = new ArrayList<Integer>();
 		param.add(uto.getStato());
-		uto.setNomeStatoUtente(super.executeParamStringQuery("getNomeStatoUtente", param));
-	}
-	
+		String stato = super.<String>executeValParamQuery("getNomeStatoUtente", param);
+		uto.setNomeStatoUtente(stato );
+	}	
 }

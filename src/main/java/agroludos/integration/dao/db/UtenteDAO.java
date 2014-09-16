@@ -1,14 +1,11 @@
 package agroludos.integration.dao.db;
 
 import agroludos.exceptions.DatabaseException;
-import agroludos.exceptions.UserNotFoundException;
 import agroludos.to.UtenteTO;
 
-public interface UtenteDAO {
+public interface UtenteDAO extends DAO<UtenteTO>{
 
-	boolean crea(UtenteTO uto) throws DatabaseException;
-
-	UtenteTO autenticazione(UtenteTO uto) throws UserNotFoundException;
+	UtenteTO getUtente(UtenteTO uto) throws DatabaseException;
 
 	boolean esisteUsername(UtenteTO uto) throws DatabaseException;
 
