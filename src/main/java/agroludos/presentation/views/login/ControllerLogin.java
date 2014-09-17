@@ -65,7 +65,7 @@ public class ControllerLogin extends AgroludosController{
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		if(request.getCommandName().equals("autenticazioneUtente")){
-			Object res = (Object)response.getRespData();
+			Object res = response.getRespData();
 			if(res instanceof UtenteTO){
 				UtenteTO uto = (UtenteTO)res;
 				nav.setVista(uto.getRuolo());
