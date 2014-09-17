@@ -105,9 +105,10 @@ public class ControllerMdcMain extends ControllerUtenti{
             public void handle(MouseEvent event) {
                 if (event.getClickCount() > 1) {
                     System.out.println("double clicked!");
-                    TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
+                    @SuppressWarnings("unchecked")
+					TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
                     CmpModel cmpRow = table.getSelectionModel().getSelectedItem();
-                    this.richiesta = reqFact.createDataRequest(cmpRow.getCompetizioneTO(),"mostraCompetizione");
+                    this.richiesta = reqFact.createDataRequest(cmpRow.getCompetizioneTO(),"mostraCmp");
             		this.risposta = respFact.createResponse();
             		frontController.eseguiRichiesta(this.richiesta, this.risposta);
                 }
