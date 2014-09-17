@@ -4,20 +4,22 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
+<?scenebuilder-preview-i18n-resource ../../../../../../../Dropbox/Ingegneria del Software/interfaccia/bundles/Agroludos_it.properties?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="644.0" prefWidth="1092.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="644.0" prefWidth="1092.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="agroludos.presentation.views.mdc.ControllerMdcCompetizione">
   <children>
     <BorderPane prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <center>
         <GridPane BorderPane.alignment="CENTER">
           <children>
-            <Label fx:id="nomeCompetizione" text="Competizione" wrapText="true">
+            <Label id="nomeCompetizione" fx:id="lblNomeCompetizione" text="Competizione" wrapText="true">
               <font>
                 <Font size="20.0" />
               </font>
               <GridPane.margin>
-                <Insets left="10.0" />
+                <Insets left="10.0" fx:id="x3" />
               </GridPane.margin>
             </Label>
             <GridPane GridPane.rowIndex="2">
@@ -26,39 +28,58 @@
                   <children>
                     <GridPane prefHeight="140.0" prefWidth="636.0">
                       <children>
-                        <Label text="%key22">
+                        <Label text="%key22" GridPane.rowIndex="0">
                           <font>
                             <Font name="System Bold" size="13.0" fx:id="x1" />
                           </font>
                           <GridPane.margin>
-                            <Insets left="10.0" />
-                          </GridPane.margin>
-                        </Label>
-                        <Label font="$x1" text="%key29" GridPane.rowIndex="1">
-                          <GridPane.margin>
-                            <Insets left="10.0" />
-                          </GridPane.margin>
-                        </Label>
-                        <Label font="$x1" text="%key30" GridPane.rowIndex="2">
-                          <GridPane.margin>
-                            <Insets left="10.0" />
+                            <Insets left="10.0" fx:id="x3" />
                           </GridPane.margin>
                         </Label>
                         <Label text="%key31" GridPane.rowIndex="3">
                           <font>
                             <Font name="System Bold" size="18.0" fx:id="x2" />
                           </font>
+                          <GridPane.margin>
+                            <Insets left="10.0" fx:id="x3" />
+                          </GridPane.margin>
                         </Label>
-                        <Label font="$x2" text="€ 50" textFill="#18ad18" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                        <Label font="$x2" text="%key32" GridPane.rowIndex="4" />
+                        <Label fx:id="lblData" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                        <Label fx:id="lblNmin" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                        <Label fx:id="lblNmax" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                        <Label font="$x2" text="%key32" GridPane.margin="$x3" GridPane.rowIndex="4" />
                         <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="%key58" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                           <GridPane.margin>
                             <Insets right="10.0" />
                           </GridPane.margin>
                         </Button>
+                        <Label font="$x1" text="%key30" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                          <GridPane.margin>
+                            <Insets left="10.0" fx:id="x3" />
+                          </GridPane.margin>
+                        </Label>
+                        <Label font="$x1" text="%key29" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                          <GridPane.margin>
+                            <Insets left="10.0" fx:id="x3" />
+                          </GridPane.margin>
+                        </Label>
+                        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                          <children>
+                            <Label fx:id="lblCosto" font="$x2" text="€ 50" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+                              <textFill>
+                                <Color blue="0.094" green="0.678" red="0.094" fx:id="x4" />
+                              </textFill>
+                            </Label>
+                            <Label id="lblCosto" alignment="CENTER_RIGHT" contentDisplay="RIGHT" font="$x2" text="%key94" textFill="$x4" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+                          </children>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="246.0" minWidth="10.0" prefWidth="246.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="101.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
@@ -92,12 +113,12 @@
               <children>
                 <GridPane prefHeight="84.0" prefWidth="1000.0">
                   <children>
-                    <Label font="$x1" text="%key28" textFill="#8a8a8a">
+                    <Label fx:id="lblTipo" font="$x1" text="%key28" textFill="#8a8a8a">
                       <GridPane.margin>
-                        <Insets left="10.0" />
+                        <Insets left="10.0" fx:id="x3" />
                       </GridPane.margin>
                     </Label>
-                    <Label font="$x1" text="Stato" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                    <Label id="tblStato" fx:id="lblStato" font="$x1" text="Stato" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                       <GridPane.margin>
                         <Insets right="10.0" />
                       </GridPane.margin>
@@ -111,9 +132,9 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <TextArea editable="false" GridPane.rowIndex="1">
+                <TextArea fx:id="txtDescrizione" editable="false" GridPane.rowIndex="1">
                   <GridPane.margin>
-                    <Insets left="10.0" />
+                    <Insets left="10.0" fx:id="x3" />
                   </GridPane.margin>
                 </TextArea>
               </children>
@@ -129,7 +150,7 @@
               <children>
                 <Button maxWidth="200.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="%key33" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                   <GridPane.margin>
-                    <Insets left="10.0" />
+                    <Insets left="10.0" fx:id="x3" />
                   </GridPane.margin>
                 </Button>
                 <Button maxWidth="200.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="%key34" GridPane.halignment="RIGHT">
@@ -161,14 +182,6 @@
       <right>
         <GridPane prefHeight="535.0" prefWidth="545.0" BorderPane.alignment="CENTER">
           <children>
-            <Label text="%key35">
-              <font>
-                <Font name="System Bold" size="19.0" />
-              </font>
-              <GridPane.margin>
-                <Insets left="10.0" />
-              </GridPane.margin>
-            </Label>
             <TableView prefHeight="689.0" prefWidth="558.0" GridPane.rowIndex="1">
               <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -186,7 +199,7 @@
               <children>
                 <Button disable="true" mnemonicParsing="false" text="%key60" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                   <GridPane.margin>
-                    <Insets left="10.0" />
+                    <Insets left="10.0" fx:id="x3" />
                   </GridPane.margin>
                 </Button>
                 <Button disable="true" mnemonicParsing="false" text="%key59" GridPane.halignment="RIGHT">
@@ -201,6 +214,26 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <children>
+                <Label text="%key35" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                  <font>
+                    <Font name="System Bold" size="19.0" fx:id="x5" />
+                  </font>
+                  <GridPane.margin>
+                    <Insets left="10.0" fx:id="x3" />
+                  </GridPane.margin>
+                </Label>
+                <Label fx:id="lblNiscritti" font="$x5" text="%key35" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="13.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
           </children>

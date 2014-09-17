@@ -20,6 +20,7 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -33,6 +34,8 @@ public class ControllerMdcMain extends ControllerUtenti{
 
 	@FXML private Button btnPaneComptizioni;
 	@FXML private Button btnNuovaCompetizione;
+
+
 
 	//tabella competizioni gestite
 	@FXML private TableView<CmpModel> tableCompetizione;
@@ -49,7 +52,6 @@ public class ControllerMdcMain extends ControllerUtenti{
 	private List<CompetizioneTO> listCmp;
 
 	private AgroResponse risposta;
-
 	private DataRequest richiesta;
 
 	@Override
@@ -108,9 +110,7 @@ public class ControllerMdcMain extends ControllerUtenti{
                     @SuppressWarnings("unchecked")
 					TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
                     CmpModel cmpRow = table.getSelectionModel().getSelectedItem();
-                    this.richiesta = reqFact.createDataRequest(cmpRow.getCompetizioneTO(),"mostraCmp");
-            		this.risposta = respFact.createResponse();
-            		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+                    nav.setVista("mostraCmp", cmpRow.getCompetizioneTO());
                 }
             }
         });

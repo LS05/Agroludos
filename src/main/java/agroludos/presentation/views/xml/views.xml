@@ -66,8 +66,8 @@
 		<view tipo="dialog">
 			<name>mostraCmp</name>
 			<url>/fxml/mdc/mdcCompetizione.fxml</url>
-			<width>600</width>
-			<height>400</height>
+			<width>1092</width>
+			<height>644</height>
 		</view>
 		<view tipo="dialog">
 			<name>errorDialog</name>
