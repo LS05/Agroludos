@@ -7,6 +7,8 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.ManagerDiCompetizioneTO;
+import agroludos.to.TipoCompetizioneTO;
 /**
  * 
  * @author Luca Suriano
@@ -46,17 +48,17 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	}
 
 	@Override
-	public List<CompetizioneTO> getCompetizioniByMdc(CompetizioneTO cmpto)
+	public List<CompetizioneTO> getCompetizioneByMdc(ManagerDiCompetizioneTO mdcto)
 			throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
-		return daoCmp.readByMdc(cmpto.getMdc());
+		return daoCmp.readByMdc(mdcto.getId());
 	}
 
 	@Override
-	public List<CompetizioneTO> getCompetizioniByTipo(CompetizioneTO cmpto)
+	public List<CompetizioneTO> getCompetizioniByTipo(TipoCompetizioneTO tcmto)
 			throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
-		return daoCmp.readByTipo(cmpto.getTipo());
+		return daoCmp.readByTipo(tcmto.getId());
 	}
 
 	@Override

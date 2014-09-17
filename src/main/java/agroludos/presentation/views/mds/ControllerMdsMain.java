@@ -14,13 +14,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
-import agroludos.presentation.views.AgroludosController;
+import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.ManagerDiCompetizioneTO;
 
-public class ControllerMdsMain extends AgroludosController{
+public class ControllerMdsMain extends ControllerUtenti{
 
 	//pane centrali
 	@FXML private GridPane paneGestioneCompetizioni;

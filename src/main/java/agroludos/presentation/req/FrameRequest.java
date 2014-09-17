@@ -5,10 +5,13 @@ import agroludos.to.AgroludosTO;
 class FrameRequest implements DataRequest{
 	private AgroludosTO reqData;
 	private String commandName;
+	private AgroSession session;
 	
-	FrameRequest(AgroludosTO data, String commandName) {
+	
+	FrameRequest(AgroludosTO data, String commandName, AgroSession session) {
 		this.commandName = commandName;
 		this.reqData = data;
+		this.session = session;
 	}
 
 	@Override
@@ -24,5 +27,10 @@ class FrameRequest implements DataRequest{
 	@Override
 	public boolean isParam() {
 		return true;
+	}
+
+	@Override
+	public AgroSession getSession() {
+		return this.session;
 	}
 }

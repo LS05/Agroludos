@@ -4,7 +4,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="reqFactory" class="agroludos.presentation.req.RequestFactoryImpl" />
+	<bean id="agroSession" class="agroludos.presentation.req.AgroSessionImpl"/>
+	<bean id="reqFactory" class="agroludos.presentation.req.RequestFactoryImpl">
+		<constructor-arg ref="agroSession"/>
+	</bean>
 	<bean id="ctxFactory" class="agroludos.presentation.reqh.RequestContextFactoryImpl" />
-	
+
 </beans>

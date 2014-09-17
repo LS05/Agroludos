@@ -12,5 +12,7 @@
 		<property name="smds" ref="gestoreManagerSistema" />
 		<property name="lmdc" ref="gestoreManagerCompetizione" />
 		<property name="smdc" ref="gestoreManagerCompetizione" />
+		<property name="lcmp" ref="gestoreCompetizione" />
+		<property name="scmp" ref="gestoreCompetizione" />
 	</bean>
 </beans>

@@ -5,6 +5,8 @@ import java.util.List;
 import agroludos.business.as.AgroludosService;
 import agroludos.exceptions.DatabaseException;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.ManagerDiCompetizioneTO;
+import agroludos.to.TipoCompetizioneTO;
 /**
  * L'interfaccia rappresenta i servizi di lettura applicabili ad una competizione
  * 
@@ -19,7 +21,7 @@ public interface LCompetizione extends AgroludosService {
 	 * @return
 	 * @throws DatabaseException
 	 */
-	List<CompetizioneTO> getCompetizioniByMdc(CompetizioneTO cmpto) throws DatabaseException;
+	List<CompetizioneTO> getCompetizioneByMdc(ManagerDiCompetizioneTO mdcto) throws DatabaseException;
 	
 	/**
 	 * 
@@ -27,7 +29,7 @@ public interface LCompetizione extends AgroludosService {
 	 * @return
 	 * @throws DatabaseException
 	 */
-	List<CompetizioneTO> getCompetizioniByTipo(CompetizioneTO cmpto) throws DatabaseException;
+	List<CompetizioneTO> getCompetizioniByTipo(TipoCompetizioneTO tcmto) throws DatabaseException;
 	
 	/**
 	 * 

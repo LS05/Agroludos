@@ -28,6 +28,10 @@
 		class="agroludos.business.as.gestoremdc.ASGestoreManagerDiCompetizione"
 		parent="agroludosAS">
 	</bean>
+	<bean id="gestoreCompetizione"
+		class="agroludos.business.as.gestorecompetizione.ASGestoreCompetizione"
+		parent="agroludosAS">
+	</bean>
 	<bean id="gestoreUtente"
 		class="agroludos.business.as.gestoreutente.ASGestoreUtente"
 		parent="agroludosAS">

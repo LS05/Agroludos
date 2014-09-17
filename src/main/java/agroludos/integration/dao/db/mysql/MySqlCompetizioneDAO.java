@@ -37,7 +37,7 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 		List<Integer> param = new ArrayList<Integer>();
 		param.add(mdc);
 
-		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioniByMdc", param);
+		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioneByMdc", param);
 
 		for(CompetizioneTO cmp: res){
 			this.setNomeStatoComp(cmp);

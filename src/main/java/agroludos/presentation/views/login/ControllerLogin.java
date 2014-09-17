@@ -66,15 +66,17 @@ public class ControllerLogin extends AgroludosController{
 	public void forward(AgroRequest request, AgroResponse response) {
 		if(request.getCommandName().equals("autenticazioneUtente")){
 			Object res = response.getRespData();
-			if(res instanceof UtenteTO){
-				UtenteTO uto = (UtenteTO)res;
-				nav.setVista(uto.getRuolo());
-			}
 			if(res instanceof String){
 				String errMsg = (String)res;
 				this.lblErroreLogin.setVisible(true);
 				this.lblErroreLogin.setText(errMsg);
 			}
+		}else if(request.getCommandName().equals("sessione.managerDiSistema") ||
+				request.getCommandName().equals("sessione.managerDiCompetizione") ||
+				request.getCommandName().equals("sessione.partecipante")){
+			//TODO exception??
+			System.out.println("errore nella creazione della sessione");
+			
 		}
 	}
 }

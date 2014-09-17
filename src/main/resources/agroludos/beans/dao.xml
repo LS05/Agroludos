@@ -29,7 +29,7 @@
 	<bean id="mysqlAgroludosDAO" 
 		  class="agroludos.integration.dao.db.mysql.MySqlAgroludosDAO"
 		  abstract="true">
-		  <property name="toFact" ref="toFactory" />
+		  <constructor-arg ref="toFactory" />
 	</bean>
 	
 	<bean id="xmlData" class="agroludos.integration.dao.file.xml.XmlData" />

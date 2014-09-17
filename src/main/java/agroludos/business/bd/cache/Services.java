@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import agroludos.business.as.AgroludosService;
+import agroludos.business.as.gestorecompetizione.LCompetizione;
+import agroludos.business.as.gestorecompetizione.SCompetizione;
 import agroludos.business.as.gestoreconfigurazione.LConfigurazione;
 import agroludos.business.as.gestoreconfigurazione.SConfigurazione;
 import agroludos.business.as.gestoremdc.LManagerDiCompetizione;
@@ -21,12 +23,12 @@ class Services {
 	private SUtente sutente;
 	private LManagerDiSistema lmds;
 	private SManagerDiSistema smds;
-
-
-	private Map<String, AgroludosService> services;
 	private LManagerDiCompetizione lmdc;
 	private SManagerDiCompetizione smdc;
+	private LCompetizione lcmp;
+	private SCompetizione scmp;
 
+	private Map<String, AgroludosService> services;
 	Services(){
 		this.services = new HashMap<String,  AgroludosService>();
 	}
@@ -69,6 +71,16 @@ class Services {
 	public void setSmdc(SManagerDiCompetizione smdc) {
 		this.smdc = smdc;
 		this.services.put(SManagerDiCompetizione.class.getName(),this.smdc);
+	}
+	
+	public void setLcmp(LCompetizione lcmp) {
+		this.lcmp = lcmp;
+		this.services.put(LCompetizione.class.getName(),this.lcmp);
+	}
+
+	public void setScmp(SCompetizione scmp) {
+		this.scmp = scmp;
+		this.services.put(SCompetizione.class.getName(),this.scmp);
 	}
 
 	public AgroludosService getService(String serviceName) throws BusinessComponentNotFoundException{

@@ -15,7 +15,7 @@
 	</command>
 	<command name="autenticazioneUtente">
 		<classe>agroludos.business.as.gestoreutente.LUtente</classe>
-		<forward success="login" failure="login"/>	
+		<forward success="session" failure="login"/>	
 	</command>
 	<command name="inserisciConfigurazione">
 		<classe>agroludos.business.as.gestoreconfigurazione.SConfigurazione</classe>
@@ -40,5 +40,9 @@
 	<command name="getAllManagerDiCompetizione">
 		<classe>agroludos.business.as.gestoremdc.LManagerDiCompetizione</classe>
 		<forward success="managerDiSistema" failure="managerDiSistema"/>
+	</command>
+	<command name="getCompetizioneByMdc">
+		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
+		<forward success="managerDiCompetizione" failure="managerDiCompetizione"/>	
 	</command>
 </commands>
