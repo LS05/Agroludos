@@ -42,12 +42,20 @@ class ViewsCache {
 		return res;
 	}
 
+	
 	void addScene(AgroludosWindow window) throws IOException{
-		if(this.addSceneSupp(window) || window.isDialog()){
+		if(this.addSceneSupp(window)){
 			window.getController().initializeView();
 		}
 	}
 
+	/**
+	 * Il dialog per essere aggiornato e ricevere di nuovo un TO,
+	 * ha bisogno di essere inizializzato nuovamente.
+	 * 
+	 * @param window
+	 * @throws IOException
+	 */
 	void addScene(AgroludosWindow window, AgroludosTO mainTO) throws IOException{
 		if(this.addSceneSupp(window) || window.isDialog()){
 			window.getController().initializeView(mainTO);
