@@ -94,7 +94,7 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 			throw new DatabaseException(e.getMessage(), e);
 		}
 
-		return null;		
+		return entity;		
 	}
 
 	@Override

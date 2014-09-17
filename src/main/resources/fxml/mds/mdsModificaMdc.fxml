@@ -35,13 +35,6 @@
                 <TextField fx:id="txtCognome" prefWidth="200.0" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="2" />
                 <TextField fx:id="txtEmail" prefWidth="200.0" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="3" />
                 <ComboBox fx:id="cmbStato" prefWidth="169.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="Item 1" />
-                      <String fx:value="Item 2" />
-                      <String fx:value="Item 3" />
-                    </FXCollections>
-                  </items>
                 </ComboBox>
               </children>
               <columnConstraints>

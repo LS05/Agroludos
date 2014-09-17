@@ -25,8 +25,10 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 	
 	private AgroRequest richiesta;
 	
-	private ManagerDiCompetizioneTO mdcTO;
 	private AgroResponse risposta;
+	
+	private ManagerDiCompetizioneTO mdcTO;
+	
 	
 	@Override
 	public void initializeView() {
@@ -35,38 +37,35 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 	
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		ManagerDiCompetizioneTO mdcTO = (ManagerDiCompetizioneTO)mainTO;
+		this.mdcTO  = (ManagerDiCompetizioneTO)mainTO;
+		
 		this.txtUsername.setText(mdcTO.getUsername());
 		this.txtCognome.setText(mdcTO.getCognome());
 		this.txtNome.setText(mdcTO.getNome());
 		this.txtEmail.setText(mdcTO.getEmail());
+		
 		ObservableList<String> listStati = FXCollections.observableArrayList();
 		listStati.add("attivo");
 		listStati.add("disattivo");
+		
+		this.cmbStato.setItems(listStati);
 		this.cmbStato.setValue(mdcTO.getNomeStatoUtente());
-	}
-
-	public void visualizzaManagerDiCompetizione() {
-		this.txtUsername.setText(this.mdcTO.getUsername());
-		this.txtNome.setText(this.mdcTO.getNome());
-		this.txtCognome.setText(this.mdcTO.getCognome());
-		this.txtEmail.setText(this.mdcTO.getEmail());
 	}
 	
 	@FXML public void confermaModificaManagerDiCompetizion(MouseEvent event){
-		ManagerDiCompetizioneTO mdcTO = toFact.createMdCTO();
-		mdcTO.setCognome(this.txtCognome.getText());
-		mdcTO.setNome(this.txtNome.getText());
-		mdcTO.setUsername(this.txtUsername.getText());
-		mdcTO.setEmail(this.txtEmail.getText());
-		mdcTO.setStato(this.cmbStato.getSelectionModel().getSelectedIndex());
+		this.mdcTO.setNome(this.txtNome.getText());
+		this.mdcTO.setCognome(this.txtCognome.getText());
+		this.mdcTO.setUsername(this.txtUsername.getText());
+		this.mdcTO.setEmail(this.txtEmail.getText());
+		this.mdcTO.setStato(this.cmbStato.getSelectionModel().getSelectedIndex());
+		
 		this.risposta = respFact.createResponse();
-		this.richiesta = reqFact.createDataRequest(mdcTO, "confermaModificaMDC");
+		this.richiesta = reqFact.createDataRequest(mdcTO, "modificaManagerDiCompetizione");
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 	
 	@FXML public void annullaModificaManagerDiCompetizion(MouseEvent event){
-	    Stage stage = (Stage) annullaModifica.getScene().getWindow();
+	    Stage stage = (Stage) this.annullaModifica.getScene().getWindow();
 	    stage.close();
 	}
 
