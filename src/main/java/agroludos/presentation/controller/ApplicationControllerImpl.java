@@ -2,6 +2,7 @@ package agroludos.presentation.controller;
 
 import agroludos.exceptions.ApplicationException;
 import agroludos.exceptions.CommandFactoryException;
+import agroludos.exceptions.EnrichableException;
 import agroludos.presentation.controller.mapper.Command;
 import agroludos.presentation.controller.mapper.CommandFactory;
 import agroludos.presentation.controller.mapper.CommandProcessor;
@@ -29,7 +30,8 @@ class ApplicationControllerImpl implements ApplicationController{
 		} catch (CommandFactoryException e) {
 			
 			// TODO Eccezione di programmazione
-			e.printStackTrace();
+			// Il servizio richiesto (commandName) non è presente nel file CommandFactory.xml
+			throw new EnrichableException("gestisciRichiesta", "E1", "Errore in ApplicationControllerImpl.gestisciRichiesta()", e);
 		} catch (ApplicationException e) {
 			
 			// TODO Eccezione di programmazione

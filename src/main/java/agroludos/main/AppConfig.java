@@ -21,7 +21,6 @@ class AppConfig extends Controller implements App{
 		//stage.show();
 		nav.setStage(stage);
 		nav.setVista("initView");
-		frontController.eseguiRichiesta(richiesta, risposta);
-		
+		frontController.eseguiRichiesta(richiesta, risposta);	
 	}
 }

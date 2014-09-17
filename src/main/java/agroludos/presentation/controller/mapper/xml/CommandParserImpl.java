@@ -48,7 +48,7 @@ class CommandParserImpl extends AgroParser implements CommandParser {
 			Command c = this.getCommand(commandName);
 			res = c.getClasse();
 		} else {
-			throw new CommandFactoryException("Servizio richiesto non presente!");
+			throw new CommandFactoryException();
 		}
 
 		return res;
@@ -61,7 +61,7 @@ class CommandParserImpl extends AgroParser implements CommandParser {
 			Command command = this.getCommand(commandName);
 			res = command.getForward().getFailure();
 		} else {
-			throw new CommandFactoryException("Servizio richiesto non presente!");
+			throw new CommandFactoryException();
 		}
 		return res;
 	}
@@ -73,7 +73,7 @@ class CommandParserImpl extends AgroParser implements CommandParser {
 			Command command = this.getCommand(commandName);
 			res = command.getForward().getSuccess();
 		} else {
-			throw new CommandFactoryException("Servizio richiesto non presente!");
+			throw new CommandFactoryException();
 		}
 		return res;
 	}
