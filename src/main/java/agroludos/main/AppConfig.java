@@ -18,7 +18,7 @@ class AppConfig extends Controller implements App{
 	public void initialize(Stage stage){
 		AgroRequest richiesta = reqFact.createSimpleRequest("checkConfigurazione");
 		AgroResponse risposta = respFact.createResponse();
-		//stage.show();
+		stage.show();
 		nav.setStage(stage);
 		nav.setVista("initView");
 		frontController.eseguiRichiesta(richiesta, risposta);	

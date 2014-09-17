@@ -7,11 +7,12 @@ import org.hibernate.service.ServiceRegistry;
 
 import agroludos.exceptions.DatabaseException;
 
-class MySqlDAO {
+class MySqlDAO implements MySqlDAOUtil{
 
 	private static SessionFactory sessionFactory;
-
-	static SessionFactory buildSessionFactory() throws DatabaseException{
+	
+	@Override
+	public SessionFactory buildSessionFactory() throws DatabaseException{
 		SessionFactory res = null;
 
 		if(sessionFactory == null){
@@ -32,7 +33,8 @@ class MySqlDAO {
 		return res;
 	}
 	
-	static SessionFactory getSessionFactory(){
+	@Override
+	public SessionFactory getSessionFactory(){
 		return sessionFactory;		
 	}
 }

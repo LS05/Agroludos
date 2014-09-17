@@ -3,13 +3,14 @@ package agroludos.integration.dao.db;
 import agroludos.exceptions.DBFactoryException;
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.mysql.MySqlDAOFactory;
-
+import agroludos.integration.dao.db.mysql.MySqlDAOUtil;
 
 public class DBFactory{
-	private static MySqlDAOFactory mySqlFact = new MySqlDAOFactory();
+	private MySqlDAOFactory mySqlFact;
 
-	DBDAOFactory createMySqlDAOFactory(){
-		return mySqlFact;
+	public DBDAOFactory createMySqlDAOFactory(MySqlDAOUtil daoUtil) throws DatabaseException{
+		this.mySqlFact = new MySqlDAOFactory(daoUtil);
+		return this.mySqlFact;
 	}
 
 	/**
@@ -23,10 +24,10 @@ public class DBFactory{
 		DBDAOFactory res = null;
 
 		if(tipo.toLowerCase().equals("mysql")){
-			if(mySqlFact.initialize())
-				res = mySqlFact;
+			if(this.mySqlFact.testConnection())
+				res = this.mySqlFact;
 		} else {
-			throw new DBFactoryException("Tipo Database non riconosciuto.");
+			throw new DBFactoryException();
 		}
 
 		return res;

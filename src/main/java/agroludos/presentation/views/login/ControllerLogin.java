@@ -8,10 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
+import agroludos.to.AgroludosTO;
 import agroludos.to.UtenteTO;
 
 public class ControllerLogin extends AgroludosController{
@@ -41,6 +41,12 @@ public class ControllerLogin extends AgroludosController{
 		this.agroLogoPane.setFocusTraversable(true);
 		this.txtUsername.setText("agroludos");
 		this.txtPassword.setText("agroludos");
+	}
+	
+	@Override
+	public void initializeView(AgroludosTO mainTO) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	protected void eseguiLogin() {	

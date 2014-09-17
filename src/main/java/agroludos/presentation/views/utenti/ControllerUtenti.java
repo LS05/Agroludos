@@ -3,6 +3,7 @@ package agroludos.presentation.views.utenti;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
+import agroludos.to.AgroludosTO;
 import agroludos.to.UtenteTO;
 
 public class ControllerUtenti extends AgroludosController {
@@ -28,5 +29,11 @@ public class ControllerUtenti extends AgroludosController {
 		}
 
 
+	}
+
+	@Override
+	public void initializeView(AgroludosTO mainTO) {
+		// TODO Auto-generated method stub
+		
 	}
 }

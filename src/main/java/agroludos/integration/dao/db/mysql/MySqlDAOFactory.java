@@ -2,6 +2,7 @@ package agroludos.integration.dao.db.mysql;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 
 import agroludos.exceptions.DatabaseException;
@@ -22,66 +23,80 @@ import agroludos.to.UtenteTO;
 
 public class MySqlDAOFactory implements DBDAOFactory {
 
-	private static SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
+	
+	private MySqlDAOUtil daoUtil;
+	
+	public MySqlDAOFactory(){ }
+	
+	public MySqlDAOFactory(MySqlDAOUtil daoUtil) throws DatabaseException{ 
+		this.daoUtil = daoUtil;
+		this.sessionFactory = this.daoUtil.buildSessionFactory();
+	}
 
-	public boolean initialize() throws DatabaseException{
+	public boolean testConnection() throws DatabaseException{
 		boolean res = false;
-		sessionFactory = MySqlDAO.buildSessionFactory();
-		if(sessionFactory != null)
+		
+		try{
+			this.sessionFactory.openSession();
 			res = true;
+		}catch(HibernateException e){
+			throw new DatabaseException(e.getMessage());
+		}
+			
 		return res;
 	}
 
 	@Override
 	public ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO() {
-		return new MySqlManagerDiCompetizioneDAO(sessionFactory);
+		return new MySqlManagerDiCompetizioneDAO(this.sessionFactory);
 	}
 
 	@Override
 	public ManagerDiSistemaDAO getManagerDiSistemaDAO() {
-		return new MySqlManagerDiSistemaDAO(sessionFactory);
+		return new MySqlManagerDiSistemaDAO(this.sessionFactory);
 	}
 
 	@Override
 	public CompetizioneDAO getCompetizioneDAO() {
-		return new MySqlCompetizioneDAO(sessionFactory);
+		return new MySqlCompetizioneDAO(this.sessionFactory);
 	}
 
 	@Override
 	public PartecipanteDAO getPartecipanteDAO() {
-		return new MySqlPartecipanteDAO(sessionFactory);
+		return new MySqlPartecipanteDAO(this.sessionFactory);
 	}
 
 	@Override
 	public TipoCompetizioneDAO getTipoCompetizioneDAO() {
-		return new MySqlTipoCompetizioneDAO(sessionFactory);
+		return new MySqlTipoCompetizioneDAO(this.sessionFactory);
 	}
 
 	@Override
 	public TipoOptionalDAO getTipoOptionalDAO() {
-		return new MySqlTipoOptionalDAO(sessionFactory);
+		return new MySqlTipoOptionalDAO(this.sessionFactory);
 	}
 
 	@Override
 	public OptionalDAO getOptionalDAO() {
-		return new MySqlOptionalDAO(sessionFactory);
+		return new MySqlOptionalDAO(this.sessionFactory);
 	}
 
 	@Override
 	public UtenteDAO<UtenteTO> getUtenteDAO() {
-		return new MySqlUtenteDAO<UtenteTO>(sessionFactory);
+		return new MySqlUtenteDAO<UtenteTO>(this.sessionFactory);
 	}
 
 	@Override
 	public IscrizioneDAO getIscrizioneDAO() {
-		return new MySqlIscrizioneDAO(sessionFactory);
+		return new MySqlIscrizioneDAO(this.sessionFactory);
 	}
 
 	public static void main(String args[]){
 		TransferObjectFactory fact = new TransferObjectFactory();
 		MySqlDAOFactory daoFact = new MySqlDAOFactory();
 		try {
-			daoFact.initialize();
+			daoFact.testConnection();
 			IscrizioneTO cmpto = fact.createIscrizioneTO();
 			ManagerDiCompetizioneDAO cmpDAO = daoFact.getManagerDiCompetizioneDAO();
 

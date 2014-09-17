@@ -3,6 +3,7 @@ package agroludos.main;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
+import agroludos.to.AgroludosTO;
 
 public class AgroludosInitController extends AgroludosController{
 
@@ -43,6 +44,12 @@ public class AgroludosInitController extends AgroludosController{
 
 	@Override
 	public void initializeView() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void initializeView(AgroludosTO mainTO) {
 		// TODO Auto-generated method stub
 		
 	}

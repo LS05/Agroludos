@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import agroludos.presentation.views.xml.AgroludosWindow;
+import agroludos.to.AgroludosTO;
 
 class ViewsCache {
 	
@@ -17,7 +18,9 @@ class ViewsCache {
 		this.scenes = new HashMap<String, Scene>();
 	}
 	
-	void addScene(AgroludosWindow window) throws IOException{
+	private boolean addSceneSupp(AgroludosWindow window) throws IOException{
+		boolean res = false;
+		
 		if(!this.scenes.containsKey(window.getName())){
 			FXMLLoader loader = window.getLoader();
 			
@@ -31,8 +34,23 @@ class ViewsCache {
 			
 			Scene view = new Scene(root, window.getWidth(), window.getHeight());
 			this.scenes.put(window.getName(), view);
-			
+			res = true;
+		} else {
+			res = false;
+		}
+		
+		return res;
+	}
+	
+	void addScene(AgroludosWindow window) throws IOException{
+		if(this.addSceneSupp(window)){
 			window.getController().initializeView();
+		}
+	}
+	
+	void addScene(AgroludosWindow window, AgroludosTO mainTO) throws IOException{
+		if(this.addSceneSupp(window)){
+			window.getController().initializeView(mainTO);
 		}
 	}
 	

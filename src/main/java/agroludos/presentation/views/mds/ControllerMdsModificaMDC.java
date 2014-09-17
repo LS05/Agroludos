@@ -3,8 +3,10 @@ package agroludos.presentation.views.mds;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
+import agroludos.to.AgroludosTO;
 import agroludos.to.ManagerDiCompetizioneTO;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -29,6 +31,19 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 	@Override
 	public void initializeView() {
 		// TODO Auto-generated method stub	
+	}
+	
+	@Override
+	public void initializeView(AgroludosTO mainTO) {
+		ManagerDiCompetizioneTO mdcTO = (ManagerDiCompetizioneTO)mainTO;
+		this.txtUsername.setText(mdcTO.getUsername());
+		this.txtCognome.setText(mdcTO.getCognome());
+		this.txtNome.setText(mdcTO.getNome());
+		this.txtEmail.setText(mdcTO.getEmail());
+		ObservableList<String> listStati = FXCollections.observableArrayList();
+		listStati.add("attivo");
+		listStati.add("disattivo");
+		this.cmbStato.setValue(mdcTO.getNomeStatoUtente());
 	}
 
 	public void visualizzaManagerDiCompetizione() {

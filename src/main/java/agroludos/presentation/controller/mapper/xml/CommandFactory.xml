@@ -45,4 +45,8 @@
 		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
 		<forward success="managerDiCompetizione" failure="managerDiCompetizione"/>	
 	</command>
+	<command name="apriModificaMdC">
+		<classe>agroludos.business.as.gestoremdc.SManagerDiCompetizione</classe>
+		<forward success="modificaMDC" failure="modificaMDC"/>	
+	</command>
 </commands>

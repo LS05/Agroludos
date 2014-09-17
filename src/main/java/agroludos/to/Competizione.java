@@ -6,9 +6,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@SuppressWarnings("serial")
-class Competizione implements CompetizioneTO{
 
+/**
+ * Implementazione dell'interfaccia CompetizioneTO. L'implementazione sull'assunzione
+ * per quale alcuni metodi non sono resi pubblici nell'interfaccia, in quanto chiamati
+ * da Hibernate per settare o leggere i campi in base a quelli presenti nella tabella
+ * competizione.
+ * In particolare i campi seguono 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
+class Competizione implements CompetizioneTO{
+	private static final long serialVersionUID = 6648039519261379934L;
+	
 	private String nome;
 	private Date data;
 	private int nmin;

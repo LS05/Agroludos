@@ -3,6 +3,10 @@ package agroludos.exceptions;
 @SuppressWarnings("serial")
 public class DBFactoryException extends DatabaseException{
 	
+	public DBFactoryException(){
+		super("Tipo Database non riconosciuto.");
+	}
+	
 	public DBFactoryException(String message){
 		super(message);
 	}

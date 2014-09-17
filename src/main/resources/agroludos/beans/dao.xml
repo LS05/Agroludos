@@ -5,9 +5,11 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     <import resource="classpath:agroludos/beans/utility.xml" />
     <import resource="classpath:agroludos/beans/transferobject.xml" />
+    
 	<bean id="fileFactory" class="agroludos.integration.dao.file.FileFactory" />
-	<bean id="dbFactory" class="agroludos.integration.dao.db.DBFactory" />
+	
 	<bean id="xmlDaoFactory" class="agroludos.integration.dao.file.xml.XmlDAOFactory" />
+	
 	<bean id="txtDaoFactory" class="agroludos.integration.dao.file.txt.TxtDAOFactory" />
 	
 	<bean id="xmlConfigFile" class="agroludos.integration.dao.file.xml.XMLConfigFile">
@@ -21,20 +23,29 @@
 		<property name="xmlFile" ref="xmlConfigFile" />
 		<property name="utXml" ref="utilityXml" />
 	</bean>
-	<bean id="mysqlDBDAO" 
-		  class="agroludos.integration.dao.db.mysql.MySqlDAOFactory"
-		  factory-bean="dbFactory"
-		  factory-method="createMySqlDAOFactory" />
-		  
+	
+	<bean id="dbFactory" class="agroludos.integration.dao.db.DBFactory" />
+	
+	<bean id="mySqlDaoUtil" class="agroludos.integration.dao.db.mysql.MySqlDAO" />
+	
 	<bean id="mysqlAgroludosDAO" 
 		  class="agroludos.integration.dao.db.mysql.MySqlAgroludosDAO"
 		  abstract="true">
 		  <constructor-arg ref="toFactory" />
 	</bean>
 	
+	<bean id="mySqlDaoFactory" 
+		  class="agroludos.integration.dao.db.mysql.MySqlDAOFactory"
+		  factory-bean="dbFactory"
+		  factory-method="createMySqlDAOFactory">
+		  <constructor-arg ref="mySqlDaoUtil" />
+	</bean>
+		  
+	<bean id="mySqlUtenteDAO" class="agroludos.integration.dao.db.mysql.MySqlUtenteDAO"
+		factory-bean="mySqlDaoFactory"
+		factory-method="getUtenteDAO">
+	</bean>
+	
 	<bean id="xmlData" class="agroludos.integration.dao.file.xml.XmlData" />
 	
-
-		  
-		  
 </beans>

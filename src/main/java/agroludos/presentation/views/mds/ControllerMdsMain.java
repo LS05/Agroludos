@@ -116,9 +116,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 		ManagerDiCompetizioneTO mdcto = this.getManagerDiCompetizione(mdcMod.getUsername());
 
-		this.richiesta = reqFact.createDataRequest(mdcto, "modificaManagerDiCompetizione");
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		nav.setVista("modificaMDC", mdcto);
 	}
 
 	//--------------------Gest Competizioni View---------------

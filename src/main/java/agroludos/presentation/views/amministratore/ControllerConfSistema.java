@@ -3,9 +3,9 @@ package agroludos.presentation.views.amministratore;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
+import agroludos.to.AgroludosTO;
 import agroludos.to.DatabaseTO;
 import agroludos.to.ManagerDiSistemaTO;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -145,5 +145,11 @@ public class ControllerConfSistema extends AgroludosController {
 				nav.setVista("login");
 			}
 		}
+	}
+
+	@Override
+	public void initializeView(AgroludosTO mainTO) {
+		// TODO Auto-generated method stub
+		
 	}
 }

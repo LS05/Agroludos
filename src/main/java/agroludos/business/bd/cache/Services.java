@@ -87,7 +87,7 @@ class Services {
 		AgroludosService service = this.services.get(serviceName);
 
 		if(service == null){
-			throw new BusinessComponentNotFoundException("Gestore del servizio non trovato! Istanziare la classe ASGestore per il servizio: " + serviceName);
+			throw new BusinessComponentNotFoundException("Gestore del servizio non trovato! Percorso errato oppure classe ASGestore non istanziata: " + serviceName);
 		}
 
 		return service;

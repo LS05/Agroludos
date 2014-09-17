@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
+import agroludos.to.AgroludosTO;
 
 public class ControllerError  extends AgroludosController{
 	@FXML private Label lblErrore;
@@ -30,6 +31,10 @@ public class ControllerError  extends AgroludosController{
 	
 	@Override
 	public void initializeView() {
+		// TODO Auto-generated method stub
+	}
+	@Override
+	public void initializeView(AgroludosTO mainTO) {
 		// TODO Auto-generated method stub
 		
 	}
