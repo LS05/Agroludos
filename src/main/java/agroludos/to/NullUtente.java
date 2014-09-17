@@ -9,6 +9,8 @@ class NullUtente implements UtenteTO{
 	private String email;
 	private Integer idruolo;
 	private Integer stato;
+	private String nomeRuolo;
+	private String nomeStatoUtente;
 	
 	@Override
 	public Integer getId() {
@@ -92,25 +94,21 @@ class NullUtente implements UtenteTO{
 
 	@Override
 	public String getNomeRuolo() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.nomeRuolo;
 	}
 
 	@Override
 	public void setNomeRuolo(String nomeRuolo) {
-		// TODO Auto-generated method stub
-		
+		this.nomeRuolo = "";
 	}
 
 	@Override
 	public String getNomeStatoUtente() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.nomeStatoUtente;
 	}
 
 	@Override
 	public void setNomeStatoUtente(String nomeStatoUtente) {
-		// TODO Auto-generated method stub
-		
+		this.nomeStatoUtente = "";
 	}
 }

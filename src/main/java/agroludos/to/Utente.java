@@ -1,45 +1,37 @@
 package agroludos.to;
 
 class Utente implements UtenteTO{
-	@Override
-	public String toString() {
-		return "Utente [id=" + id + ", nome=" + nome + ", cognome=" + cognome
-				+ ", username=" + username + ", password=" + password
-				+ ", email=" + email + ", idruolo=" + idruolo + ", stato="
-				+ stato + ", nomeRuolo=" + nomeRuolo + ", nomeStatoUtente="
-				+ nomeStatoUtente + "]";
-	}
-
-	private Integer id;
-	private String nome;
-	private String cognome;
-	private String username;
-	private String password;
-	private String email;
-	private Integer idruolo; //id ruolo utente
-	private Integer stato;
-	
-	private String nomeRuolo;
-	private String nomeStatoUtente;
+	protected Integer id;
+	protected String nome;
+	protected String cognome;
+	protected String username;
+	protected String password;
+	protected String email;
+	protected Integer idruolo; //id ruolo utente
+	protected Integer stato;
+	protected String nomeRuolo;
+	protected String nomeStatoUtente;
 	
 	@Override
 	public String getNomeRuolo() {
 		return nomeRuolo;
 	}
+	
 	@Override
 	public void setNomeRuolo(String nomeRuolo) {
 		this.nomeRuolo = nomeRuolo;
 	}
+	
 	@Override
 	public String getNomeStatoUtente() {
 		return nomeStatoUtente;
 	}
+	
 	@Override
 	public void setNomeStatoUtente(String nomeStatoUtente) {
 		this.nomeStatoUtente = nomeStatoUtente;
 	}
 
-	
 	@Override
 	public Integer getId() {
 		return id;
@@ -124,4 +116,12 @@ class Utente implements UtenteTO{
 		return this.nomeRuolo;
 	}
 
+	@Override
+	public String toString() {
+		return "Utente [id=" + id + ", nome=" + nome + ", cognome=" + cognome
+				+ ", username=" + username + ", password=" + password
+				+ ", email=" + email + ", idruolo=" + idruolo + ", stato="
+				+ stato + ", nomeRuolo=" + nomeRuolo + ", nomeStatoUtente="
+				+ nomeStatoUtente + "]";
+	}
 }

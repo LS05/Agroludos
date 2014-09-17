@@ -9,14 +9,17 @@
 	<bean id="dbFactory" class="agroludos.integration.dao.db.DBFactory" />
 	<bean id="xmlDaoFactory" class="agroludos.integration.dao.file.xml.XmlDAOFactory" />
 	<bean id="txtDaoFactory" class="agroludos.integration.dao.file.txt.TxtDAOFactory" />
+	
+	<bean id="xmlConfigFile" class="agroludos.integration.dao.file.xml.XMLConfigFile">
+		<constructor-arg ref="xmlData" />
+	</bean>
+	
 	<bean id="xmlConfDAO" 
 		  class="agroludos.integration.dao.file.xml.XmlConfigurazioneDAO"
 		  factory-bean="xmlDaoFactory"
 		  factory-method="getConfigurazioneDAO">
+		<property name="xmlFile" ref="xmlConfigFile" />
 		<property name="utXml" ref="utilityXml" />
-		<property name="xmlFile">
-			<bean class="agroludos.integration.dao.file.xml.XMLConfigFile" />
-		</property>
 	</bean>
 	<bean id="mysqlDBDAO" 
 		  class="agroludos.integration.dao.db.mysql.MySqlDAOFactory"
@@ -28,6 +31,10 @@
 		  abstract="true">
 		  <property name="toFact" ref="toFactory" />
 	</bean>
+	
+	<bean id="xmlData" class="agroludos.integration.dao.file.xml.XmlData" />
+	
+
 		  
 		  
 </beans>

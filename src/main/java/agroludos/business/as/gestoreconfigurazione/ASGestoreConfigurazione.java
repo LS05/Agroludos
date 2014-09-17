@@ -1,7 +1,6 @@
 package agroludos.business.as.gestoreconfigurazione;
 
 import agroludos.business.as.AgroludosAS;
-import agroludos.exceptions.DBFactoryException;
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.file.FConfigurazioneDAO;
 import agroludos.integration.dao.file.FileDAOFactory;
@@ -42,8 +41,9 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 		boolean res = false;
 		String tipoDB = this.sysConf.getTipoDB();
 
-		if(!tipoDB.equals(""))
+		if(tipoDB.length() != 0){
 			res = true;
+		}
 
 		return res;
 	}
@@ -52,12 +52,8 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 	public boolean testConnessioneDB() throws DatabaseException {
 		boolean res = false;
 
-		try {
-			this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-			res = true;
-		} catch (DBFactoryException e) {
-			throw new DatabaseException(e.getMessage(), e.getCause());
-		}
+		this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		res = true;
 
 		return res;
 	}

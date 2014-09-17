@@ -6,15 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 class Partecipante extends Utente implements PartecipanteTO {
-	@Override
-	public String toString() {
-		return "Partecipante [cf=" + cf + ", indirizzo=" + indirizzo
-				+ ", dataNasc=" + dataNasc + ", sesso=" + sesso + ", numTS="
-				+ numTS + ", src=" + src + ", dataSRC=" + dataSRC
-				+ ", iscrizioni=" + iscrizioni + "]";
-	}
-
-
 	private String cf;
 	private String indirizzo;
 	private Date dataNasc;
@@ -22,8 +13,7 @@ class Partecipante extends Utente implements PartecipanteTO {
 	private String numTS;
 	private String src;
 	private Date dataSRC;
-	
-	public Set<Iscrizione> iscrizioni;
+	private Set<Iscrizione> iscrizioni;
 	
 	@Override
 	public String getCf() {
@@ -114,5 +104,12 @@ class Partecipante extends Utente implements PartecipanteTO {
 	public void setIscrizioni(Set<Iscrizione> iscrizioni) {
 		this.iscrizioni = iscrizioni;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Partecipante [cf=" + cf + ", indirizzo=" + indirizzo
+				+ ", dataNasc=" + dataNasc + ", sesso=" + sesso + ", numTS="
+				+ numTS + ", src=" + src + ", dataSRC=" + dataSRC
+				+ ", iscrizioni=" + iscrizioni + "]";
+	}
 }

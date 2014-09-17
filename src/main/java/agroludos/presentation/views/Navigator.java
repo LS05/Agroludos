@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
 import agroludos.exceptions.ViewNotFoundException;
 import agroludos.presentation.views.utility.PositionHandler;
 import agroludos.presentation.views.xml.AgroludosWindow;

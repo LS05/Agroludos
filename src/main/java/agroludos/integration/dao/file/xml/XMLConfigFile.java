@@ -15,8 +15,17 @@ class XMLConfigFile {
 	private String portaDB;
 	private String usernameDB;
 	private String passwordDB;
+	private XmlData confData;
+	
+	XMLConfigFile(XmlData confData){
+		this.confData = confData;
+	}
+	
+	String getConfPath(){
+		return this.confData.getConfPath();
+	}
 
-	boolean setDocument(Document doc, DatabaseTO dbto){
+	boolean setHibernateDocument(Document doc, DatabaseTO dbto){
 
 		boolean res = false;
 
@@ -45,28 +54,28 @@ class XMLConfigFile {
 					Node attr = attributes.item(a);
 					String attrValue = attr.getNodeValue();
 
-					if(attrValue.equals(XmlData.hibDriver)){
-						node.setTextContent(XmlData.getDriver(tipoDB));
+					if(attrValue.equals(this.confData.getHibDriver())){
+						node.setTextContent(this.confData.getDriver());
 						res = true;
 					}
 
-					if(attrValue.equals(XmlData.hibDialect)){
-						node.setTextContent(XmlData.getDialect(tipoDB));
+					if(attrValue.equals(this.confData.getHibDialect())){
+						node.setTextContent(this.confData.getDialect());
 						res = true;
 					}
 
-					if(attrValue.equals(XmlData.hibUsername)){
+					if(attrValue.equals(this.confData.getHibUsername())){
 						node.setTextContent(usernameDB);
 						res = true;
 					}
 
-					if(attrValue.equals(XmlData.hibPassword)){
+					if(attrValue.equals(this.confData.getHibPassword())){
 						node.setTextContent(passwordDB);
 						res = true;
 					}
 
-					if(attrValue.equals(XmlData.hibUrl)){
-						String urlDB = XmlData.getUrl(tipoDB) + serverDB + ":" + portaDB + "/" + nomeDB;
+					if(attrValue.equals(this.confData.getHibUrl())){
+						String urlDB = this.confData.getUrl() + serverDB + ":" + portaDB + "/" + nomeDB;
 						node.setTextContent(urlDB);
 						res = true;
 					}

@@ -17,17 +17,13 @@ class XmlConfigurazioneDAO implements FConfigurazioneDAO{
 
 	private XmlUtil utXml;
 
-	XmlConfigurazioneDAO(){
-		this.confPath = XmlData.getConfPath();
-	}
-
 	@Override
 	public boolean creaConfigurazione(DatabaseTO dbto) {
 
 		boolean res = false;
 
 		if(this.doc != null){
-			res = xmlFile.setDocument(this.doc, dbto);
+			res = xmlFile.setHibernateDocument(this.doc, dbto);
 			try {
 				utXml.writeFile(this.doc, this.confPath);
 			} catch (TransformerException e) {
@@ -53,5 +49,6 @@ class XmlConfigurazioneDAO implements FConfigurazioneDAO{
 
 	public void setXmlFile(XMLConfigFile xmlFile) {
 		this.xmlFile = xmlFile;
+		this.confPath = xmlFile.getConfPath();
 	}
 }

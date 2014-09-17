@@ -10,7 +10,7 @@ import agroludos.to.UtenteTO;
 import agroludos.utility.PasswordEncryption;
 
 class ASGestoreManagerDiSistema extends AgroludosAS implements LManagerDiSistema, SManagerDiSistema{
-	PasswordEncryption pwdEnc;
+	private PasswordEncryption pwdEnc;
 
 	ASGestoreManagerDiSistema(PasswordEncryption pwdEnc){
 		this.pwdEnc = pwdEnc;

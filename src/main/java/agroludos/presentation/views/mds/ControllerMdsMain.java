@@ -14,7 +14,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -116,8 +115,10 @@ public class ControllerMdsMain extends AgroludosController{
 		MdcModel mdcMod = this.tableManagerCompetizione.getSelectionModel().getSelectedItem();
 
 		ManagerDiCompetizioneTO mdcto = this.getManagerDiCompetizione(mdcMod.getUsername());
-
-		nav.setVista("modificaMDC");
+		
+		this.richiesta = reqFact.createDataRequest(mdcto, "modificaManagerDiCompetizione");
+		this.risposta = respFact.createResponse();
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
 	//--------------------Gest Competizioni View---------------
@@ -203,6 +204,7 @@ public class ControllerMdsMain extends AgroludosController{
 		return res;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		if(request.getCommandName().equals("getAllManagerDiCompetizione")){
@@ -210,8 +212,6 @@ public class ControllerMdsMain extends AgroludosController{
 			if(res instanceof List<?>){
 				List<ManagerDiCompetizioneTO> mdcList = (List<ManagerDiCompetizioneTO>)res;
 				this.listMdc = mdcList;
-			}
-			if(res instanceof String){
 			}
 		}
 

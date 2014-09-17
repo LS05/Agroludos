@@ -1,17 +1,14 @@
 package agroludos.presentation.views.amministratore;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.DatabaseTO;
 import agroludos.to.ManagerDiSistemaTO;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;

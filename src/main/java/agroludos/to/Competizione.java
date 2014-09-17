@@ -6,17 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@SuppressWarnings("serial")
 class Competizione implements CompetizioneTO{
-
-	@Override
-	public String toString() {
-		return "Competizione [nome=" + nome + ", data=" + data + ", nmin="
-				+ nmin + ", nmax=" + nmax + ", descrizione=" + descrizione
-				+ ", costo=" + costo + ", mdc=" + mdc + ", stato=" + stato
-				+ ", tipo=" + tipo + ", id=" + id + ", nomeStato=" + nomeStato
-				+ ", nomeTipo=" + nomeTipo + ", optionals=" + optionals
-				+ ", iscritti=" + iscritti + ", iscrizioni=" + iscrizioni + "]";
-	}
 
 	private String nome;
 	private Date data;
@@ -28,10 +19,16 @@ class Competizione implements CompetizioneTO{
 	private int stato;
 	private int tipo;
 	private Integer id;
-	
 	private String nomeStato;
 	private String nomeTipo;
+	private Set<Optional> optionals;
+	private Set<Partecipante> iscritti;
+	private Set<Iscrizione> iscrizioni;
 	
+	Competizione(){
+		this.optionals = new HashSet<Optional>();
+	}
+
 	@Override
 	public void setNomeStato(String nomeStato) {
 		this.nomeStato = nomeStato;
@@ -52,15 +49,6 @@ class Competizione implements CompetizioneTO{
 		return this.nomeTipo;
 	}
 
-	public Set<Optional> optionals;
-	
-	public Set<Partecipante> iscritti;
-	public Set<Iscrizione> iscrizioni;
-
-	Competizione(){
-		this.optionals = new HashSet<Optional>();
-	}
-	
 	@Override
 	public String getNome() {
 		return nome;
@@ -77,7 +65,7 @@ class Competizione implements CompetizioneTO{
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
+
 	@Override
 	public Integer getMdc() {
 		return mdc;
@@ -125,6 +113,7 @@ class Competizione implements CompetizioneTO{
 
 	@Override
 	public void addOptional(OptionalTO optional) {
+		
 		//TODO Effettuare controlli prima di aggiungere l'optional
 		Optional opt = new Optional();
 		opt.setId(optional.getId());
@@ -163,26 +152,26 @@ class Competizione implements CompetizioneTO{
 	public void setOptionals(Set<Optional> optionals) {
 		this.optionals = optionals;
 	}
-	
+
 	@Override
 	public List<OptionalTO> getAllOptionals() {
 		List<OptionalTO> res = new ArrayList<OptionalTO>();
-		
+
 		for(Optional item : this.optionals){
 			res.add(item);
 		}
-		
+
 		return res;
 	}
-	
+
 	@Override
 	public List<PartecipanteTO> getAllIscritti() {
 		List<PartecipanteTO> res = new ArrayList<PartecipanteTO>();
-		
+
 		for(Partecipante item : this.iscritti){
 			res.add(item);
 		}
-		
+
 		return res;
 	}
 
@@ -193,18 +182,18 @@ class Competizione implements CompetizioneTO{
 	public void setPartecipanti(Set<Partecipante> partecipanti) {
 		this.iscritti = partecipanti;
 	}
-	
+
 	@Override
 	public List<IscrizioneTO> getAllIscrizioni() {
 		List<IscrizioneTO> res = new ArrayList<IscrizioneTO>();
-		
+
 		for(Iscrizione item : this.iscrizioni){
 			res.add(item);
 		}
-		
+
 		return res;
 	}
-
+	
 	public Set<Iscrizione> getIscrizioni() {
 		return iscrizioni;
 	}
@@ -212,9 +201,19 @@ class Competizione implements CompetizioneTO{
 	public void setIscrizioni(Set<Iscrizione> iscrizioni) {
 		this.iscrizioni = iscrizioni;
 	}
-	
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		
+		return "Competizione [nome=" + nome + ", data=" + data + ", nmin="
+				+ nmin + ", nmax=" + nmax + ", descrizione=" + descrizione
+				+ ", costo=" + costo + ", mdc=" + mdc + ", stato=" + stato
+				+ ", tipo=" + tipo + ", id=" + id + ", nomeStato=" + nomeStato
+				+ ", nomeTipo=" + nomeTipo + ", optionals=" + optionals
+				+ ", iscritti=" + iscritti + ", iscrizioni=" + iscrizioni + "]";
 	}
 }

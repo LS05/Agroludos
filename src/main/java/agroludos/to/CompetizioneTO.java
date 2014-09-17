@@ -52,11 +52,10 @@ public interface CompetizioneTO extends AgroludosTO{
 	List<IscrizioneTO> getAllIscrizioni();
 	
 	String getNomeStato();
+	
 	String getNomeTipo();
 
 	void setNomeStato(String nomeStato);
 
-	void setNomeTipo(String nomeTipo);
-	
-	
+	void setNomeTipo(String nomeTipo);	
 }

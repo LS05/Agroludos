@@ -26,7 +26,7 @@ import agroludos.presentation.resph.AgroResponseContext;
  * @see <a href="http://martinfowler.com/eaaCatalog/frontController.html">http://martinfowler.com/eaaCatalog/frontController.html</a>
  * @see <a href="http://it.wikipedia.org/wiki/Front_Controller_pattern">http://it.wikipedia.org/wiki/Front_Controller_pattern</a>
  */
-class FC implements FrontController{
+class FrontControllerImpl implements FrontController{
 
 	/**
 	 * Factory dell'application controller.<br>
@@ -48,7 +48,7 @@ class FC implements FrontController{
 	 * @param reqFact
 	 * @param acFact
 	 */
-	FC(RequestContextFactory reqFact, ACFactory acFact){
+	FrontControllerImpl(RequestContextFactory reqFact, ACFactory acFact){
 		this.reqFact = reqFact;
 		this.acFact = acFact;
 	}

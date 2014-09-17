@@ -4,7 +4,7 @@ import javafx.fxml.FXMLLoader;
 
 class AgroludosView extends AgroludosWindow{
 	private View view;
-
+	
 	AgroludosView(View view){
 		super(view);
 		this.view = view;

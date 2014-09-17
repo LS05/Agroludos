@@ -1,6 +1,5 @@
 package agroludos.integration.dao.db.mysql;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -16,10 +15,8 @@ import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.integration.dao.db.TipoOptionalDAO;
 import agroludos.integration.dao.db.UtenteDAO;
-import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
-import agroludos.to.PartecipanteTO;
 import agroludos.to.TransferObjectFactory;
 import agroludos.to.UtenteTO;
 

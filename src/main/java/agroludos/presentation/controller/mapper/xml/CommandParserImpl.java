@@ -1,40 +1,23 @@
 package agroludos.presentation.controller.mapper.xml;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 
-import agroludos.exceptions.BusinessComponentNotFoundException;
 import agroludos.exceptions.CommandFactoryException;
+import agroludos.utility.xml.AgroParser;
 
-class CommandParserImpl implements CommandParser {
+class CommandParserImpl extends AgroParser implements CommandParser {
 
-	private Commands commands;
+	private Commands parsedCommands;
 
-	public CommandParserImpl() {
-		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(Commands.class);
-			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			Path xmlPath = Paths.get("src/main/java/agroludos/presentation/controller/mapper/xml/CommandFactory.xml");
-			// specify the location and name of xml file to be read
-			File XMLfile = new File(xmlPath.toString());
-
-			// this will create Java object - country from the XML file
-			this.commands = (Commands) jaxbUnmarshaller.unmarshal(XMLfile);
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	CommandParserImpl() throws JAXBException {
+		super();
+		this.parsedCommands = (Commands) this.parseRes;
 	}
 
 	private Command getCommand(String commandName){
 		Command res = null;
 
-		for(Command c : commands.getCommand()){
+		for(Command c : this.parsedCommands.getCommand()){
 			if(c.getName().equals(commandName)){
 				res = c;
 			}
@@ -44,14 +27,16 @@ class CommandParserImpl implements CommandParser {
 	}
 
 	private boolean hasCommand(String commandName){
-		boolean res;
+		boolean res = false;
 
 		Command c = this.getCommand(commandName);
-		if(c != null)
+		
+		if(c != null) {
 			res = true;
-		else
+		} else {
 			res = false;
-
+		}
+		
 		return res;
 	}
 

@@ -17,7 +17,7 @@
 		<property name="respFact" ref="respFactory" />
 		<property name="toFact" ref="toFactory" />
 	</bean>
-	<bean id="viewsParser" class="agroludos.presentation.views.xml.ViewsParser"></bean>
+	<bean id="viewsParser" class="agroludos.presentation.views.xml.ViewsParser" />
 	<bean id="viewsLoader" class="agroludos.presentation.views.ViewsLoader">
 		<constructor-arg ref="viewsParser" />
 	</bean>

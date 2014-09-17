@@ -27,9 +27,11 @@ class ApplicationControllerImpl implements ApplicationController{
 			command = this.commandFactory.getCommand(commandName);
 			response = this.commandProcessor.invoke(command, request);
 		} catch (CommandFactoryException e) {
+			
 			// TODO Eccezione di programmazione
 			e.printStackTrace();
 		} catch (ApplicationException e) {
+			
 			// TODO Eccezione di programmazione
 			// Sollevata solo in caso in cui ho una ServiceNotFoundException, IllegalAccess o IllegalArgument
 			// quindi da qui il programma deve chiudersi; 

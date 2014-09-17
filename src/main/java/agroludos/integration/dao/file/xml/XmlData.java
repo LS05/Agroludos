@@ -1,43 +1,76 @@
 package agroludos.integration.dao.file.xml;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 class XmlData {
+	
+	private String hibDriver;
+	private String hibUsername;
+	private String hibPassword;
+	private String hibUrl;
+	private String hibDialect;
+	
+	private String confPath;
+	private String driver;
+	private String dialect;
+	private String url;
 
-	public static String hibDriver = "hibernate.connection.driver_class";
-	public static String hibUsername = "hibernate.connection.username";
-	public static String hibPassword = "hibernate.connection.password";
-	public static String hibUrl = "hibernate.connection.url";
-	public static String hibDialect = "hibernate.dialect";
-
-	public static String getConfPath(){
-		return "src/main/resources/hibernate.cfg.xml";
+	XmlData() throws IOException{
+		try {
+			Properties prop = new Properties();
+			InputStream inputStream = new FileInputStream("src/main/resources/properties/config.properties");
+			prop.load(inputStream);
+			hibDriver = prop.getProperty("hibDriver");
+			hibUsername = prop.getProperty("hibUsername");
+			hibPassword = prop.getProperty("hibPassword");
+			hibDialect = prop.getProperty("hibDialect");
+			hibUrl = prop.getProperty("hibUrl");
+			
+			confPath = prop.getProperty("confPath");
+			driver = prop.getProperty("mySqlDriver");
+			dialect = prop.getProperty("MySQLDialect");
+			url = prop.getProperty("MySQLUrl");
+		} catch (IOException e) {
+			throw new IOException("File config.properties non trovato!");
+		}
 	}
 
-	public static String getDriver(String tipoDB){
-		String driver = null;
-
-		if(tipoDB.toLowerCase().equals("mysql"))
-			driver = "com.mysql.jdbc.Driver";
-
-		return driver;
+	public String getConfPath(){
+		return this.confPath;
+	}
+	
+	public String getDriver(){
+		return this.driver;
 	}
 
-	public static String getDialect(String tipoDB){
-		String dialect = null;
-
-		if(tipoDB.toLowerCase().equals("mysql"))
-			dialect = "org.hibernate.dialect.MySQLDialect";
-
-		return dialect;
+	public String getDialect(){
+		return this.dialect;
 	}
 
-	public static String getUrl(String tipoDB){
-		String url = null;
-
-		if(tipoDB.toLowerCase().equals("mysql"))
-			url = "jdbc:mysql://";
-
-		return url;
-
+	public String getUrl(){
+		return this.url;
 	}
-
+	
+	public String getHibDriver(){
+		return this.hibDriver;
+	}
+	
+	public String getHibUsername(){
+		return this.hibUsername;
+	}
+	
+	public String getHibPassword(){
+		return this.hibPassword;
+	}
+	
+	public String getHibUrl(){
+		return this.hibUrl;
+	}
+	
+	public String getHibDialect(){
+		return this.hibDialect;
+	}
 }
