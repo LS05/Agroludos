@@ -17,8 +17,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -37,6 +39,9 @@ public class ControllerMdcMain extends ControllerUtenti{
 	@FXML private TableColumn<CmpModel, String> cmpIdCol;
 	@FXML private TableColumn<CmpModel, String> cmpNomeCol;
 	@FXML private TableColumn<CmpModel, String> cmpDataCol;
+	@FXML private TableColumn<CmpModel, String> cmpNIscrittiCol;
+	@FXML private TableColumn<CmpModel, String> cmpNminCol;
+	@FXML private TableColumn<CmpModel, String> cmpNmaxCol;
 	@FXML private TableColumn<CmpModel, String> cmpTipoCol;
 	@FXML private TableColumn<CmpModel, String> cmpStatoCol;
 
@@ -49,7 +54,7 @@ public class ControllerMdcMain extends ControllerUtenti{
 
 	@Override
 	public void initializeView() {
-		this.richiesta = reqFact.createDataRequest(super.utente,"getCompetizioneByMdc");
+		this.richiesta = reqFact.createDataRequest(utente,"getCompetizioneByMdc");
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
@@ -81,28 +86,33 @@ public class ControllerMdcMain extends ControllerUtenti{
 	}
 	
 	private void initCmpTable(){
-		this.initColumn(this.cmpIdCol, "Id");
+		this.initColumn(this.cmpIdCol, "id");
 		this.initColumn(this.cmpNomeCol, "nome");
 		this.initColumn(this.cmpDataCol, "data");
+		this.initColumn(this.cmpNIscrittiCol, "niscritti");
+		this.initColumn(this.cmpNminCol, "nmin");
+		this.initColumn(this.cmpNmaxCol, "nmax");
 		this.initColumn(this.cmpTipoCol, "tipo");
 		this.initColumn(this.cmpStatoCol, "stato");
 
 		this.tableCompetizione.getItems().setAll(this.listaTabCmp);
-//		this.tableCompetizione.getSelectionModel().selectedItemProperty().addListener(
-//				new ChangeListener<MdcModel>(){
-//
-//					@Override
-//					public void changed(ObservableValue<? extends MdcModel> mdcModel,
-//							MdcModel oldMod, MdcModel newMod) {
-//						lblMdcNome.setText(newMod.getNome());
-//						lblMdcCognome.setText(newMod.getCognome());
-//						lblMdcEmail.setText(newMod.getEmail());
-//						lblMdcUsername.setText(newMod.getUsername());
-//						lblMdcStato.setText(newMod.getStato());
-//						System.out.println(newMod);
-//					}
-//
-//				});
+		
+		this.tableCompetizione.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            private DataRequest richiesta;
+			private AgroResponse risposta;
+
+			@Override
+            public void handle(MouseEvent event) {
+                if (event.getClickCount() > 1) {
+                    System.out.println("double clicked!");
+                    TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
+                    CmpModel cmpRow = table.getSelectionModel().getSelectedItem();
+                    this.richiesta = reqFact.createDataRequest(cmpRow.getCompetizioneTO(),"mostraCompetizione");
+            		this.risposta = respFact.createResponse();
+            		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+                }
+            }
+        });
 	}
 	
 	@Override
