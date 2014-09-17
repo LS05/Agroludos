@@ -13,6 +13,7 @@ class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements Optional
 
 	MySqlOptionalDAO(SessionFactory sessionFactory){
 		super(sessionFactory);
+		this.setClasse(OptionalTO.class);
 	}
 
 	@Override
@@ -31,10 +32,9 @@ class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements Optional
 	}
 
 	@Override
-	public boolean eliminaOptional(OptionalTO optTO) throws DatabaseException {
+	public OptionalTO eliminaOptional(OptionalTO optTO) throws DatabaseException {
 		optTO.setStato(0);
-		//		return super.update(optTO);
-		return false;
+		return super.update(optTO);
 	}
 
 	@Override

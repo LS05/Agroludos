@@ -1,13 +1,7 @@
 package agroludos.integration.dao.db;
 
-import java.util.List;
-
-import agroludos.exceptions.DatabaseException;
 import agroludos.to.TipoCompetizioneTO;
 
-public interface TipoCompetizioneDAO {
+public interface TipoCompetizioneDAO extends DAO<TipoCompetizioneTO>{
 
-	boolean crea(TipoCompetizioneTO tcpto) throws DatabaseException;
-	
-	List<TipoCompetizioneTO> readAll() throws DatabaseException;
 }

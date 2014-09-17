@@ -13,6 +13,7 @@ class MySqlPartecipanteDAO extends MySqlUtenteDAO<PartecipanteTO> implements Par
 
 	MySqlPartecipanteDAO(SessionFactory sessionFactory) {
 		super(sessionFactory);
+		this.setClasse(PartecipanteTO.class);
 	}
 
 	@Override

@@ -10,7 +10,7 @@ import agroludos.integration.dao.db.UtenteDAO;
 import agroludos.to.UtenteTO;
 
 class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements UtenteDAO<T>{
-
+	
 	MySqlUtenteDAO(SessionFactory sessionFactory){
 		super(sessionFactory);
 	}

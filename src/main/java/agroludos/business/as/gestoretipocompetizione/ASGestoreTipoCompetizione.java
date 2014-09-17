@@ -21,7 +21,7 @@ class ASGestoreTipoCompetizione extends AgroludosAS implements LTipoCompetizione
 		boolean res = false;
 
 		TipoCompetizioneDAO daoTcm = getTipoCompetizioneDAO();
-		res = daoTcm.crea(tcmto);
+		res = daoTcm.create(tcmto);
 
 		return res;
 	}
@@ -30,6 +30,6 @@ class ASGestoreTipoCompetizione extends AgroludosAS implements LTipoCompetizione
 	public List<TipoCompetizioneTO> getAllTipoCompetizioneTOs()
 			throws DatabaseException {
 		TipoCompetizioneDAO daoTcm = getTipoCompetizioneDAO();
-		return daoTcm.readAll();
+		return daoTcm.getAll();
 	}
 }

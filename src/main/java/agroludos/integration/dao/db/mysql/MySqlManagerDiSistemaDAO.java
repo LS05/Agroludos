@@ -12,6 +12,7 @@ class MySqlManagerDiSistemaDAO extends MySqlUtenteDAO<ManagerDiSistemaTO> implem
 
 	MySqlManagerDiSistemaDAO(SessionFactory sessionFactory){
 		super(sessionFactory);
+		this.setClasse(ManagerDiSistemaTO.class);
 	}
 
 	@Override

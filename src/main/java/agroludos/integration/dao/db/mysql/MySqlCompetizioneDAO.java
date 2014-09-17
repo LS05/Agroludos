@@ -13,6 +13,7 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 
 	MySqlCompetizioneDAO(SessionFactory sessionFactory) {
 		super(sessionFactory);
+		this.setClasse(CompetizioneTO.class);
 	}
 
 	@Override

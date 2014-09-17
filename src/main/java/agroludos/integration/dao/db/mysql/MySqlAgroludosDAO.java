@@ -27,8 +27,8 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 		this.session = MySqlDAO.getSessionFactory().openSession();
 	}
 
-	protected void setClasse( final Class< T > clazzToSet ){
-		classe = clazzToSet;
+	protected void setClasse( final Class< T > classToSet ){
+		classe = classToSet;
 	}
 
 	@Override
