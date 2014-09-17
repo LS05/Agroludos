@@ -30,10 +30,13 @@
                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                           </columnResizePolicy>
                           <columns>
-                            <TableColumn prefWidth="75.0" text="%key20" fx:id="cmpIdCol" />
-                            <TableColumn prefWidth="75.0" text="%key21" fx:id="cmpNomeCol" />
-                            <TableColumn prefWidth="75.0" text="%key22" fx:id="cmpDataCol" />
-                            <TableColumn prefWidth="75.0" text="%key23" fx:id="cmpTipoCol" />
+                            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="50.0" text="%key20" fx:id="cmpIdCol" />
+                            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="119.0" text="%key21" fx:id="cmpNomeCol" />
+                            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="38.0" text="%key22" fx:id="cmpDataCol" />
+                            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="61.0" text="%key90" fx:id="cmpNIscrittiCol" />
+                            <TableColumn prefWidth="75.0" text="%key91" fx:id="cmpNminCol" />
+                            <TableColumn prefWidth="75.0" text="%key92" fx:id="cmpNmaxCol" />
+                            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" text="%key23" fx:id="cmpTipoCol" />
                             <TableColumn minWidth="100.0" prefWidth="100.0" text="%key24" fx:id="cmpStatoCol" />
                           </columns>
                         </TableView>
