@@ -43,6 +43,9 @@ public class ServiceHandler {
 			}  catch (MethodNotFoundException e) {
 				throw new ServiceNotFoundException("Servizio " + request.getCommandName() + " non presente!", e.getCause());
 			} catch (InvocationTargetException e) {
+				
+				//TODO Controllare se l'eccezione è di sistema o
+				//di applicazione
 				this.response.setLogicalViewName(command.getFailView());
 				this.response.setData(e.getTargetException().getMessage());
 			}

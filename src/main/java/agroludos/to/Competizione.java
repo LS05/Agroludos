@@ -24,7 +24,7 @@ class Competizione implements CompetizioneTO{
 	private Set<Optional> optionals;
 	private Set<Partecipante> iscritti;
 	private Set<Iscrizione> iscrizioni;
-	
+
 	Competizione(){
 		this.optionals = new HashSet<Optional>();
 	}
@@ -53,14 +53,17 @@ class Competizione implements CompetizioneTO{
 	public String getNome() {
 		return nome;
 	}
+
 	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	@Override
 	public Date getData() {
 		return data;
 	}
+
 	@Override
 	public void setData(Date data) {
 		this.data = data;
@@ -70,42 +73,51 @@ class Competizione implements CompetizioneTO{
 	public Integer getMdc() {
 		return mdc;
 	}
+
 	@Override
 	public Integer getStato() {
 		return stato;
 	}
+
 	@Override
 	public void setStato(Integer stato) {
 		this.stato = stato;
 	}
+
 	@Override
 	public Integer getTipo() {
 		return tipo;
 	}
-	@Override
+
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
 	}
+
 	@Override
 	public void setMdc(Integer mdc) {
 		this.mdc = mdc;
 	}
+
 	@Override
 	public String getDescrizione() {
 		return descrizione;
 	}
+
 	@Override
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
+
 	@Override
 	public Double getCosto() {
 		return costo;
 	}
+
 	@Override
 	public void setCosto(Double costo) {
 		this.costo = costo;
 	}
+
 	@Override
 	public Integer getId() {
 		return id;
@@ -113,7 +125,7 @@ class Competizione implements CompetizioneTO{
 
 	@Override
 	public void addOptional(OptionalTO optional) {
-		
+
 		//TODO Effettuare controlli prima di aggiungere l'optional
 		Optional opt = new Optional();
 		opt.setId(optional.getId());
@@ -193,7 +205,7 @@ class Competizione implements CompetizioneTO{
 
 		return res;
 	}
-	
+
 	public Set<Iscrizione> getIscrizioni() {
 		return iscrizioni;
 	}
@@ -208,7 +220,7 @@ class Competizione implements CompetizioneTO{
 
 	@Override
 	public String toString() {
-		
+
 		return "Competizione [nome=" + nome + ", data=" + data + ", nmin="
 				+ nmin + ", nmax=" + nmax + ", descrizione=" + descrizione
 				+ ", costo=" + costo + ", mdc=" + mdc + ", stato=" + stato
