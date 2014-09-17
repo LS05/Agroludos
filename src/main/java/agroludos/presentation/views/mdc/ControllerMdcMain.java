@@ -124,6 +124,8 @@ public class ControllerMdcMain extends ControllerUtenti{
 				List<CompetizioneTO> cmpList = (List<CompetizioneTO>)res;
 				this.listCmp = cmpList;
 			}
+		}else if(request.getCommandName().equals("modificaCompetizione")){
+			//TODO ???
 		}
 		
 	}	

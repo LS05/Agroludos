@@ -14,4 +14,6 @@ public abstract class AgroludosController extends Controller{
 	public abstract void forward(AgroRequest request, AgroResponse response);
 	public abstract void initializeView(AgroludosTO mainTO);
 	public abstract void initializeView();
+	//TODO da chiedere a luca F.Z
+	//public abstract void closeStageFromEvent(MouseEvent event);
 }
