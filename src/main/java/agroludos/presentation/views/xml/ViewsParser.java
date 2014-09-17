@@ -14,7 +14,7 @@ class ViewsParser extends AgroParser implements AgroViewsParser{
 	private AgroViews parsedViews = null;
 	
 	ViewsParser() throws JAXBException{
-		super();
+		super(AgroViews.class, "src/main/java/agroludos/presentation/views/xml/views.xml");
 		this.parsedViews = (AgroViews) this.parseRes;
 		this.views = new HashMap<String, AgroludosWindow>();
 		

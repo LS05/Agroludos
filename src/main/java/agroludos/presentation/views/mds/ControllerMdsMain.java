@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -62,7 +63,7 @@ public class ControllerMdsMain extends AgroludosController{
 	private ObservableList<MdcModel> listaTabMdc;
 
 	//setto visibile solo il primo pane
-	
+
 	@Override
 	public void initializeView() {
 		this.paneGestioneCompetizioni.setVisible(true);
@@ -73,9 +74,9 @@ public class ControllerMdsMain extends AgroludosController{
 		this.richiesta = reqFact.createSimpleRequest("getAllManagerDiCompetizione");
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		
+
 		this.listaTabMdc = this.getListTabellaMdC();
-		this.initMdcTable(this.tableManagerCompetizione);
+		this.initMdcTable();
 	}
 
 	//----------------Main View--------------------
@@ -115,7 +116,7 @@ public class ControllerMdsMain extends AgroludosController{
 		MdcModel mdcMod = this.tableManagerCompetizione.getSelectionModel().getSelectedItem();
 
 		ManagerDiCompetizioneTO mdcto = this.getManagerDiCompetizione(mdcMod.getUsername());
-		
+
 		this.richiesta = reqFact.createDataRequest(mdcto, "modificaManagerDiCompetizione");
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
@@ -168,7 +169,7 @@ public class ControllerMdsMain extends AgroludosController{
 		return col;
 	}
 
-	private void initMdcTable(TableView<MdcModel> table){
+	private void initMdcTable(){
 		this.initColumn(this.mdcNomeCol, "nome");
 		this.initColumn(this.mdcCognomeCol, "cognome");
 		this.initColumn(this.mdcEmailCol, "email");
@@ -214,6 +215,5 @@ public class ControllerMdsMain extends AgroludosController{
 				this.listMdc = mdcList;
 			}
 		}
-
 	}
 }

@@ -9,7 +9,6 @@ import agroludos.to.DatabaseTO;
 
 class XMLConfigFile {
 
-	private String tipoDB;
 	private String nomeDB;
 	private String serverDB;
 	private String portaDB;
@@ -29,7 +28,6 @@ class XMLConfigFile {
 
 		boolean res = false;
 
-		this.tipoDB = dbto.getTipo();
 		this.nomeDB = dbto.getNome();
 		this.serverDB = dbto.getServer();
 		this.portaDB = dbto.getPorta();
@@ -85,5 +83,4 @@ class XMLConfigFile {
 
 		return res;
 	}
-
 }

@@ -10,7 +10,7 @@ class CommandParserImpl extends AgroParser implements CommandParser {
 	private Commands parsedCommands;
 
 	CommandParserImpl() throws JAXBException {
-		super();
+		super(Commands.class, "src/main/java/agroludos/presentation/controller/mapper/xml/CommandFactory.xml");
 		this.parsedCommands = (Commands) this.parseRes;
 	}
 

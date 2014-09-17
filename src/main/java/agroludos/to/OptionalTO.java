@@ -14,21 +14,22 @@ public interface OptionalTO extends AgroludosTO{
 
 	public void setCosto(Double costo);
 
-	Integer getStato();
+	public Integer getStato();
 
-	void setStato(Integer stato);
+	public void setStato(Integer stato);
 
-	Integer getTipo();
+	public Integer getTipo();
 
-	void setTipo(Integer tipo);
+	public void setTipo(Integer tipo);
 
-	int getId();
+	public Integer getId();
 
-	String getNomeStatoOpt();
-	String getNomeTipoOpt();
+	public String getNomeStatoOpt();
 
-	void setNomeStatoOpt(String nomeStato);
+	public String getNomeTipoOpt();
 
-	void setNomeTipoOpt(String nomeTipo);
-	
+	public void setNomeStatoOpt(String nomeStato);
+
+	public void setNomeTipoOpt(String nomeTipo);
+
 }

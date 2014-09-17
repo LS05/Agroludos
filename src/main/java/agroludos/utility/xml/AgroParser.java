@@ -15,10 +15,10 @@ public abstract class AgroParser {
 	protected Unmarshaller jaxbUnmarshaller;
 	protected Object parseRes;
 
-	protected AgroParser() throws JAXBException{
-		JAXBContext jaxbContext = JAXBContext.newInstance(Commands.class);
+	protected AgroParser(Class<?> parseClass, String path) throws JAXBException{
+		JAXBContext jaxbContext = JAXBContext.newInstance(parseClass);
 		this.jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		Path xmlPath = Paths.get("src/main/java/agroludos/presentation/controller/mapper/xml/CommandFactory.xml");
+		Path xmlPath = Paths.get(path);
 		this.xmlFile = new File(xmlPath.toString());
 		this.parseRes = this.jaxbUnmarshaller.unmarshal(this.xmlFile);
 	}
