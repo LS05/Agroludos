@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 /**
  * Implementazione dell'interfaccia CompetizioneTO. L'implementazione sull'assunzione
  * per quale alcuni metodi non sono resi pubblici nell'interfaccia, in quanto chiamati
@@ -19,7 +18,7 @@ import java.util.Set;
  */
 class Competizione implements CompetizioneTO{
 	private static final long serialVersionUID = 6648039519261379934L;
-	
+
 	private String nome;
 	private Date data;
 	private int nmin;
@@ -238,5 +237,32 @@ class Competizione implements CompetizioneTO{
 				+ ", tipo=" + tipo + ", id=" + id + ", nomeStato=" + nomeStato
 				+ ", nomeTipo=" + nomeTipo + ", optionals=" + optionals
 				+ ", iscritti=" + iscritti + ", iscrizioni=" + iscrizioni + "]";
+	}
+
+	@Override
+	public boolean equals(Object competizione){
+		if (competizione == null) return false;
+		if (competizione == this) return true;
+		if (!(competizione instanceof CompetizioneTO)) return false;
+
+		Competizione otherComp = (Competizione)competizione;
+		if(this.id == otherComp.getId()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	@Override
+	public int compareTo(CompetizioneTO cpt) {
+		int res = 0;
+
+		if(this.id == cpt.getId()){
+			res = 0;
+		} else {
+			res = 1;
+		}
+
+		return res;
 	}
 }
