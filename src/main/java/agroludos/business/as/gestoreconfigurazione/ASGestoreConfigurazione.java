@@ -8,6 +8,15 @@ import agroludos.integration.dao.file.FileFactory;
 import agroludos.system.SystemConf;
 import agroludos.to.DatabaseTO;
 
+/**
+ * <b>Business Tier</b></br>
+ * La classe modella e implementa un <b>Application Service</b> e rappresenta il componente:
+ * <b>Gestore di Competizione.</b><br /> 
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SConfigurazione{
 
 	private FileDAOFactory fileDaoFact;
