@@ -51,7 +51,6 @@ public class ControllerLogin extends AgroludosController{
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	protected void eseguiLogin() {	
@@ -64,7 +63,7 @@ public class ControllerLogin extends AgroludosController{
 	}
 
 	@FXML protected void btnPswDimenticata(MouseEvent event) {
-		//TODO
+		//TODO Gestire Servizio
 	}
 
 	@FXML protected void btnRegistrati(MouseEvent event) {

@@ -1,18 +1,8 @@
 package agroludos.presentation.views;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.io.IOException;
-
-
-
-
-
-
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import agroludos.exceptions.ViewNotFoundException;

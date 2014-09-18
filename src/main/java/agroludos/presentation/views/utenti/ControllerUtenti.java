@@ -9,10 +9,10 @@ import agroludos.to.UtenteTO;
 public class ControllerUtenti extends AgroludosController {
 
 	protected static UtenteTO utente;
+
 	@Override
 	public void initializeView() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -21,19 +21,16 @@ public class ControllerUtenti extends AgroludosController {
 			Object res = response.getRespData();
 			if(res instanceof UtenteTO){
 				UtenteTO uto = (UtenteTO)res;
-				this.utente = uto;
+				utente = uto;
 				request.getSession().setAttribute(uto);
 				nav.setVista(uto.getNomeRuolo());
 			}
-
 		}
-
-
 	}
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
