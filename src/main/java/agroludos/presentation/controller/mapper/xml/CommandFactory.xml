@@ -3,54 +3,58 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<command name="checkConfigurazione">
 		<classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe>
-		<forward success="initView" failure="initView"/>		
+		<forward success="initView" failure="initView" />
 	</command>
 	<command name="testConnessioneDB">
 		<classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe>
-		<forward success="initView" failure="initView"/>	
+		<forward success="initView" failure="initView" />
 	</command>
 	<command name="checkMds">
 		<classe>agroludos.business.as.gestoremds.LManagerDiSistema</classe>
-		<forward success="initView" failure="errorDialog"/>	
+		<forward success="initView" failure="errorDialog" />
 	</command>
 	<command name="autenticazioneUtente">
 		<classe>agroludos.business.as.gestoreutente.LUtente</classe>
-		<forward success="session" failure="login"/>	
+		<forward success="session" failure="login" />
 	</command>
 	<command name="inserisciConfigurazione">
 		<classe>agroludos.business.as.gestoreconfigurazione.SConfigurazione</classe>
-		<forward success="configurazione" failure="configurazione"/>
+		<forward success="configurazione" failure="configurazione" />
 	</command>
 	<command name="nuovoManagerDiSistema">
 		<classe>agroludos.business.as.gestoremds.SManagerDiSistema</classe>
-		<forward success="login" failure="configurazione"/>
+		<forward success="login" failure="configurazione" />
 	</command>
 	<command name="nuovoManagerDiCompetizione">
 		<classe>agroludos.business.as.gestoremds.SManagerDiCompetizione</classe>
-		<forward success="managerDiSistema" failure="managerDiSistema"/>
+		<forward success="managerDiSistema" failure="managerDiSistema" />
 	</command>
-		<command name="nuovaRegistrazione">
+	<command name="nuovaRegistrazione">
 		<classe>agroludos.business.as.gestoreutente.SUtente</classe>
-		<forward success="nuovaRegistrazione" failure="nuovaRegistrazione"/>
+		<forward success="nuovaRegistrazione" failure="nuovaRegistrazione" />
 	</command>
 	<command name="nuovoPartecipante">
 		<classe>agroludos.business.as.gestoreutente.SUtente</classe>
-		<forward success="login" failure="nuovaRegistrazione"/>
+		<forward success="login" failure="nuovaRegistrazione" />
 	</command>
 	<command name="getAllManagerDiCompetizione">
 		<classe>agroludos.business.as.gestoremdc.LManagerDiCompetizione</classe>
-		<forward success="managerDiSistema" failure="managerDiSistema"/>
+		<forward success="managerDiSistema" failure="managerDiSistema" />
 	</command>
 	<command name="getCompetizioneByMdc">
 		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
-		<forward success="managerDiCompetizione" failure="managerDiCompetizione"/>	
+		<forward success="managerDiCompetizione" failure="managerDiCompetizione" />
 	</command>
 	<command name="apriModificaMdC">
 		<classe>agroludos.business.as.gestoremdc.SManagerDiCompetizione</classe>
-		<forward success="modificaMDC" failure="modificaMDC"/>	
+		<forward success="modificaMDC" failure="modificaMDC" />
+	</command>
+	<command name="modificaCompetizione">
+		<classe>agroludos.business.as.gestorecompetizione.SCompetizione</classe>
+		<forward success="managerDiCompetizione" failure="MostraModificaCmp" />
 	</command>
 	<command name="modificaManagerDiCompetizione">
 		<classe>agroludos.business.as.gestoremdc.SManagerDiCompetizione</classe>
-		<forward success="modificaMDC" failure="modificaMDC"/>	
+		<forward success="modificaMDC" failure="modificaMDC" />
 	</command>
 </commands>

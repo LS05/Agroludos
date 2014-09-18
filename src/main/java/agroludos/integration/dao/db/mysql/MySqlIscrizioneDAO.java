@@ -3,7 +3,7 @@ package agroludos.integration.dao.db.mysql;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.SessionFactory;
+import org.hibernate.Session;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.IscrizioneDAO;
@@ -11,8 +11,8 @@ import agroludos.to.IscrizioneTO;
 
 class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements IscrizioneDAO{
 
-	MySqlIscrizioneDAO(SessionFactory sessionFactory) {
-		super(sessionFactory);
+	MySqlIscrizioneDAO(Session session) {
+		super(session);
 		this.setClasse(IscrizioneTO.class);
 	}
 

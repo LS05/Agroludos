@@ -3,7 +3,7 @@ package agroludos.integration.dao.db.mysql;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.SessionFactory;
+import org.hibernate.Session;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.OptionalDAO;
@@ -11,8 +11,8 @@ import agroludos.to.OptionalTO;
 
 class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements OptionalDAO {
 
-	MySqlOptionalDAO(SessionFactory sessionFactory){
-		super(sessionFactory);
+	MySqlOptionalDAO(Session session){
+		super(session);
 		this.setClasse(OptionalTO.class);
 	}
 

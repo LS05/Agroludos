@@ -2,7 +2,7 @@ package agroludos.integration.dao.db.mysql;
 
 import java.util.List;
 
-import org.hibernate.SessionFactory;
+import org.hibernate.Session;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.ManagerDiSistemaDAO;
@@ -10,8 +10,8 @@ import agroludos.to.ManagerDiSistemaTO;
 
 class MySqlManagerDiSistemaDAO extends MySqlUtenteDAO<ManagerDiSistemaTO> implements ManagerDiSistemaDAO{
 
-	MySqlManagerDiSistemaDAO(SessionFactory sessionFactory){
-		super(sessionFactory);
+	MySqlManagerDiSistemaDAO(Session session){
+		super(session);
 		this.setClasse(ManagerDiSistemaTO.class);
 	}
 

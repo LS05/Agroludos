@@ -3,6 +3,7 @@ package agroludos.integration.dao.db.mysql;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import agroludos.exceptions.DatabaseException;
@@ -11,9 +12,10 @@ import agroludos.to.UtenteTO;
 
 class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements UtenteDAO<T>{
 	
-	MySqlUtenteDAO(SessionFactory sessionFactory){
-		super(sessionFactory);
+	MySqlUtenteDAO(Session session){
+		super(session);
 	}
+
 
 	@Override
 	public T getUtente(UtenteTO uto) throws DatabaseException {

@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import agroludos.exceptions.DatabaseException;
@@ -23,8 +22,8 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 
 	MySqlAgroludosDAO(){ }
 
-	MySqlAgroludosDAO(SessionFactory sessionFactory){
-		this.session = sessionFactory.openSession();
+	MySqlAgroludosDAO(Session session){
+		this.session = session;
 	}
 
 	protected void setClasse( final Class< T > classToSet ){
@@ -80,14 +79,10 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 	@Override
 	public T update(final T entity) throws DatabaseException{
 		Transaction tx = null;
-		boolean res = false;
 
 		try {
 			tx = this.session.beginTransaction();
-
 			this.session.update(entity);
-
-			res = true;
 			this.session.getTransaction().commit();
 		} catch (HibernateException e){
 			if (tx != null) tx.rollback();
