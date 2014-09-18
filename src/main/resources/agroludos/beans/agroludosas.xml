@@ -37,4 +37,8 @@
 		parent="agroludosAS">
 		<constructor-arg ref="pwdEnc" />
 	</bean>
+	<bean id="gestoreOptional"
+		class="agroludos.business.as.gestoreoptional.ASGestoreOptional"
+		parent="agroludosAS">
+	</bean>
 </beans>

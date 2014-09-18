@@ -14,5 +14,7 @@
 		<property name="smdc" ref="gestoreManagerCompetizione" />
 		<property name="lcmp" ref="gestoreCompetizione" />
 		<property name="scmp" ref="gestoreCompetizione" />
+		<property name="lopt" ref="gestoreOptional" />
+		<property name="sopt" ref="gestoreOptional" />
 	</bean>
 </beans>
