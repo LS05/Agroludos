@@ -32,7 +32,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 	@FXML private ComboBox<Integer> cmbNmin;
 	@FXML private ComboBox<Integer> cmbNmax;
 	@FXML private TextField txtCosto;
-	@FXML private ComboBox<String> cmbTipoCmp;
+	@FXML private TextField txtTipoCmp;
 	@FXML private TextArea txtDescrizione;
 
 	@FXML private Button btnSelezioneOpt;
@@ -52,12 +52,14 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		this.txtData.setText(this.cmpto.getData().toString());
 
 
-		//carico tipi nella combo box
-		ObservableList<String> listTipiCmp = FXCollections.observableArrayList();
-		listTipiCmp.add("Tiro con l'arco");
-		listTipiCmp.add("Corsa campestre");
-		this.cmbTipoCmp.setItems(listTipiCmp);
-		this.cmbTipoCmp.setValue(this.cmpto.getNomeTipo());
+//		//carico tipi nella combo box
+//		ObservableList<String> listTipiCmp = FXCollections.observableArrayList();
+//		listTipiCmp.add("Tiro con l'arco");
+//		listTipiCmp.add("Corsa campestre");
+//		this.cmbTipoCmp.setItems(listTipiCmp);
+//		this.cmbTipoCmp.setValue(this.cmpto.getNomeTipo());
+		
+		this.txtTipoCmp.setText(this.cmpto.getNomeTipo());
 
 		//carico numeri per nmin
 		ObservableList<Integer> listNmin = FXCollections.observableArrayList();
@@ -81,10 +83,10 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		
 	}
 	@FXML private void btnAnnulla(MouseEvent event){
-		nav.setVista("mostraCmp", this.cmpto);
+//		nav.setVista("mostraCmp", this.cmpto);
 		this.source = (Node)event.getSource(); 
 		this.stage  = (Stage)this.source.getScene().getWindow();
-	    this.stage.close();
+	    this.stage.hide();
 	}
 	@FXML private void btnConferma(MouseEvent event){
 		this.cmpto.setCosto(Double.valueOf(txtCosto.getText()));
@@ -100,15 +102,21 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		//e refreshare la tabella??
 		
 		
-//		this.risposta = respFact.createResponse();
-//		this.richiesta = reqFact.createDataRequest(this.cmpto, "modificaCompetizione");
-//		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		nav.setVista("mostraCmp", this.cmpto);
-		this.source = (Node)event.getSource(); 
-		this.stage  = (Stage)this.source.getScene().getWindow();
-	    this.stage.close();
+		this.risposta = respFact.createResponse();
+		this.richiesta = reqFact.createDataRequest(this.cmpto, "modificaCompetizione");
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+	    
+//		nav.setVista("successDialog",this.cmpto);
+		
+		this.hideStageFromEvent(event);
+		
 	}
 
+	private void hideStageFromEvent(MouseEvent event){
+		this.source = (Node)event.getSource(); 
+		this.stage  = (Stage)this.source.getScene().getWindow();
+	    this.stage.hide();
+	}
 
 	@Override
 	public void initializeView() {

@@ -1,9 +1,18 @@
 package agroludos.presentation.views;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 
+
+
+
+
+
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import agroludos.exceptions.ViewNotFoundException;
@@ -42,18 +51,26 @@ public class Navigator {
 
 			PositionHandler.centerComp(stage, scene);
 		} else {
+			//TODO non dovrebbe farlo una volta sola? quindi controllare se è già stato inserito
 			this.mainStage.setScene(scene);
 			this.mainStage.setTitle(agw.getTitle());
 
-			PositionHandler.centerComp(this.mainStage, scene);
+			if(viewName.equals("initView")){
+				this.mainStage.hide();
+			}else{				
+				this.mainStage.show();
+			}
+			//PositionHandler.centerComp(this.mainStage, scene);
 		}
 	}
 
+	//le proprietà di una view le chiama una volta sola
 	public void setVista(String viewName) {
 		AgroludosWindow agw = null;
+		boolean res = false;
 		try {
 			agw = this.viewsLoader.getView(viewName);
-			this.viewsCache.addScene(agw);
+			res = this.viewsCache.addScene(agw);
 		} catch (ViewNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,15 +78,21 @@ public class Navigator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setViewProperties(viewName, agw);
+		if(res)
+			this.setViewProperties(viewName, agw);
 	}
 
+	//le proprietà di una view le chiama una volta sola
+	//TODO controllare la gestione delle view e dei dialog
+	//se le view non vengono ne reinizializzate ne vengono reinizializzate le proprietà
+	//allora non avrà un to
 	public void setVista(String viewName, AgroludosTO mainTO) {
 		AgroludosWindow agw = null;
+		boolean res = false;
 		try {
 			agw = this.viewsLoader.getView(viewName);
 
-			this.viewsCache.addScene(agw, mainTO);
+			res = this.viewsCache.addScene(agw, mainTO);
 		} catch (ViewNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,7 +100,8 @@ public class Navigator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setViewProperties(viewName, agw);
+		if(res)
+			this.setViewProperties(viewName, agw);
 	}
 
 	public AgroludosController getRequestDispatcher(String viewName) throws ViewNotFoundException, IOException{

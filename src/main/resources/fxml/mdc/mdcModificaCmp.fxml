@@ -80,7 +80,7 @@
                             <Insets left="10.0" fx:id="x2" />
                           </GridPane.margin>
                         </Label>
-                        <ComboBox fx:id="cmbTipoCmp" prefWidth="200.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="txtTipoCmp" editable="false" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

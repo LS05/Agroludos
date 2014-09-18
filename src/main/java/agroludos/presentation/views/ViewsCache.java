@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
 import agroludos.presentation.views.xml.AgroludosWindow;
 import agroludos.to.AgroludosTO;
 
@@ -32,7 +34,21 @@ class ViewsCache {
 				throw new IOException(e.getMessage(), e.getCause());
 			}
 
-			Scene view = new Scene(root, window.getWidth(), window.getHeight());
+			Screen screen = Screen.getPrimary();
+			Rectangle2D bounds = screen.getVisualBounds();
+			
+			double height = 0;
+			double width = 0;
+			
+			if(window.isDialog()){
+				height = window.getHeight();
+				width =  window.getWidth();
+			}else{
+				height = bounds.getHeight();
+				width =  bounds.getWidth();
+			}
+					
+			Scene view = new Scene(root, width, height);
 			this.scenes.put(window.getName(), view);
 			res = true;
 		} else {
@@ -42,11 +58,14 @@ class ViewsCache {
 		return res;
 	}
 
-	
-	void addScene(AgroludosWindow window) throws IOException{
+	//TODO
+	boolean addScene(AgroludosWindow window) throws IOException{
+		boolean res = false;
 		if(this.addSceneSupp(window)){
 			window.getController().initializeView();
+			res = true;
 		}
+		return res;
 	}
 
 	/**
@@ -55,11 +74,13 @@ class ViewsCache {
 	 * 
 	 * @param window
 	 * @throws IOException
-	 */
-	void addScene(AgroludosWindow window, AgroludosTO mainTO) throws IOException{
-		if(this.addSceneSupp(window) || window.isDialog()){
-			window.getController().initializeView(mainTO);
-		}
+	 *///TODO DA CANCELLARE quello scritto sopra
+	boolean addScene(AgroludosWindow window, AgroludosTO mainTO) throws IOException{
+		boolean res = false;
+		if(this.addSceneSupp(window) || window.isDialog())
+			res = true;
+		window.getController().initializeView(mainTO);
+		return res;
 	}
 
 	Scene getScene(String viewName){

@@ -51,7 +51,7 @@
 	</command>
 	<command name="modificaCompetizione">
 		<classe>agroludos.business.as.gestorecompetizione.SCompetizione</classe>
-		<forward success="managerDiCompetizione" failure="MostraModificaCmp" />
+		<forward success="mostraCmp" failure="mostraModificaCmp" />
 	</command>
 	<command name="modificaManagerDiCompetizione">
 		<classe>agroludos.business.as.gestoremdc.SManagerDiCompetizione</classe>

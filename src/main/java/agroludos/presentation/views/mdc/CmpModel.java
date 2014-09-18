@@ -30,7 +30,9 @@ public class CmpModel {
 	public CompetizioneTO getCompetizioneTO() {
 		return this.cmpto;
 	}
-
+	public void setCompetizioneTO(CompetizioneTO cmpto) {
+		this.cmpto = cmpto;
+	}
 
 	public String getId() {
 		return id.get();
@@ -96,6 +98,33 @@ public class CmpModel {
 		this.nmax.set(nmax);
 	}
 
+	
+	public SimpleStringProperty idProperty(){
+		return this.id;
+	}
+	public SimpleStringProperty nomeProperty(){
+		return this.nome;
+	}
+	public SimpleStringProperty dataProperty(){
+		return this.data;
+	}
+	public SimpleStringProperty niscrittiProperty(){
+		return this.niscritti;
+	}
+	public SimpleStringProperty nminProperty(){
+		return this.nmin;
+	}
+	public SimpleStringProperty nmaxProperty(){
+		return this.nmax;
+	}
+	public SimpleStringProperty tipoProperty(){
+		return this.tipo;
+	}
+	public SimpleStringProperty statoProperty(){
+		return this.stato;
+	}
+
+	
 
 	@Override
 	public String toString() {

@@ -8,7 +8,7 @@
 			<height>1</height>
 			<title></title>
 		</view>
-		<view tipo="view">
+		<view tipo="dialog">
 			<name>login</name>
 			<url>/fxml/login/login.fxml</url>
 			<width>600</width>
@@ -46,15 +46,15 @@
 		<view tipo="view">
 			<name>partecipante</name>
 			<url>/fxml/partecipante/partecipanteMain.fxml</url>
-			<width>1440</width>
-			<height>900</height>
+			<width>1240</width>
+			<height>800</height>
 			<title></title>
 		</view>
 		<view tipo="view">
 			<name>managerDiCompetizione</name>
 			<url>/fxml/mdc/mdcMain.fxml</url>
-			<width>1440</width>
-			<height>900</height>
+			<width>882</width>
+			<height>697</height>
 			<title></title>
 		</view>
 		<view tipo="dialog">
@@ -64,7 +64,7 @@
 			<height>400</height>
 		</view>
 		<view tipo="dialog">
-			<name>MostraModificaCmp</name>
+			<name>mostraModificaCmp</name>
 			<url>/fxml/mdc/mdcModificaCmp.fxml</url>
 			<width>800</width>
 			<height>459</height>
@@ -81,6 +81,13 @@
 			<width>516</width>
 			<height>127</height>
 			<title>Agroludos | Errore</title>
+		</view>
+		<view tipo="dialog">
+			<name>successDialog</name>
+			<url>/fxml/dialogs/successDialog.fxml</url>
+			<width>516</width>
+			<height>127</height>
+			<title>Agroludos | Successo</title>
 		</view>
 	</views>
 </agro-views>

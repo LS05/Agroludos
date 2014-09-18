@@ -35,6 +35,7 @@ public class AgroludosInitController extends AgroludosController{
 		}else if(request.getCommandName().equals("checkMds")){
 			boolean mds = (Boolean)response.getRespData();
 			if(mds){
+				
 				nav.setVista("login");
 			} else {
 				nav.setVista("configurazione");
