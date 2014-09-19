@@ -11,15 +11,12 @@ public interface IscrizioneTO extends AgroludosTO, Comparable<IscrizioneTO>{
 	
 	public Integer getId();
 	
-	Integer getStato();
-	
-	void setStato(Integer stato);
-	
 	List<OptionalTO> getAllOptionals();
+
+	StatoIscrizione getStatoIscrizione();
+
+	PartecipanteTO getPartecipante();
+
+	CompetizioneTO getCompetizione();
 	
-	PartecipanteTO getPartecipanteIscrizione();
-	
-	String getNomeStato();
-	
-	void setNomeStato(String nomeStato);
 }

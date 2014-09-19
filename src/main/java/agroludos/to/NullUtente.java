@@ -8,10 +8,6 @@ class NullUtente implements UtenteTO{
 	private String username;
 	private String password;
 	private String email;
-	private Integer idruolo;
-	private Integer stato;
-	private String nomeRuolo;
-	private String nomeStatoUtente;
 	
 	@Override
 	public Integer getId() {
@@ -67,55 +63,20 @@ class NullUtente implements UtenteTO{
 	public void setEmail(String email) {
 		this.email = "";
 	}
-	
-	@Override
-	public Integer getIdruolo() {
-		return this.idruolo;
-	}
-	
-	@Override
-	public void setIdruolo(Integer idruolo) {
-		this.idruolo = -1;
-	}
-	
-	@Override
-	public Integer getStato() {
-		return this.stato;
-	}
-	
-	@Override
-	public void setStato(Integer stato) {
-		this.stato = -1;
-	}
-
-	@Override
-	public String getRuolo() {
-		return "";
-	}
-
-	@Override
-	public String getNomeRuolo() {
-		return this.nomeRuolo;
-	}
-
-	@Override
-	public void setNomeRuolo(String nomeRuolo) {
-		this.nomeRuolo = "";
-	}
-
-	@Override
-	public String getNomeStatoUtente() {
-		return this.nomeStatoUtente;
-	}
-
-	@Override
-	public void setNomeStatoUtente(String nomeStatoUtente) {
-		this.nomeStatoUtente = "";
-	}
 
 	@Override
 	public int compareTo(UtenteTO o) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public TipoUtenteTO getTipoUtente() {
+		return new TipoUtente();
+	}
+
+	@Override
+	public StatoUtenteTO getStatoUtente() {
+		return new StatoUtente();
 	}
 }

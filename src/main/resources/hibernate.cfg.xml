@@ -10,11 +10,16 @@
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="show_sql">true</property>
 		<property name="hbm2ddl.auto">update</property>
-		<mapping resource="agroludos/db/Utente.hbm.xml"/>
-		<mapping resource="agroludos/db/TipoCompetizione.hbm.xml"/>
-		<mapping resource="agroludos/db/TipoOptional.hbm.xml"/>
-		<mapping resource="agroludos/db/Optional.hbm.xml"/>
-		<mapping resource="agroludos/db/Competizione.hbm.xml"/>
-		<mapping resource="agroludos/db/Iscrizione.hbm.xml"/>
+		<mapping resource="agroludos/db/Utente.hbm.xml" />
+		<mapping resource="agroludos/db/TipoCompetizione.hbm.xml" />
+		<mapping resource="agroludos/db/TipoOptional.hbm.xml" />
+		<mapping resource="agroludos/db/Optional.hbm.xml" />
+		<mapping resource="agroludos/db/Competizione.hbm.xml" />
+		<mapping resource="agroludos/db/Iscrizione.hbm.xml" />
+		<mapping resource="agroludos/db/StatoCompetizione.hbm.xml" />
+		<mapping resource="agroludos/db/StatoOptional.hbm.xml" />
+		<mapping resource="agroludos/db/StatoUtente.hbm.xml" />
+		<mapping resource="agroludos/db/TipoUtente.hbm.xml" />
+		<mapping resource="agroludos/db/StatoIscrizione.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

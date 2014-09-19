@@ -12,12 +12,14 @@
 		<property name="data" type="date">
 			<column name="data" not-null="true" />
 		</property>
-		<property name="stato" type="integer">
-			<column name="stato" not-null="true" default="0" />
-		</property>
-		<property name="idcompetizione" type="integer">
+		<many-to-one name="statoIscrizione" class="agroludos.to.StatoIscrizione"
+			lazy="false">
+			<column name="stato" not-null="true" />
+		</many-to-one>
+		<many-to-one name="competizione" class="agroludos.to.Competizione"
+			lazy="false">
 			<column name="idcompetizione" not-null="true" />
-		</property>
+		</many-to-one>
 		<many-to-one name="partecipante" class="agroludos.to.Partecipante"
 			lazy="false">
 			<column name="idpartecipante" not-null="true" />
@@ -28,7 +30,5 @@
 		</set>
 	</class>
 	<query name="getAllIscrizioni">
-        <![CDATA[ from agroludos.to.Iscrizione i where i.stato = 1 ]]></query>
-	<sql-query name="getNomeStatoIscr">
-       <![CDATA[ SELECT tbl_statiiscr.nome FROM tbl_statiiscr WHERE tbl_statiiscr.idstatiiscr = ? ]]></sql-query>
+        <![CDATA[ from agroludos.to.Iscrizione i where i.statoIscrizione = 1 ]]></query>
 </hibernate-mapping>

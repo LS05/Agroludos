@@ -14,22 +14,10 @@ public interface OptionalTO extends AgroludosTO, Comparable<OptionalTO>{
 
 	public void setCosto(Double costo);
 
-	public Integer getStato();
-
-	public void setStato(Integer stato);
-
-	public Integer getTipo();
-
-	public void setTipo(Integer tipo);
-
 	public Integer getId();
 
-	public String getNomeStatoOpt();
+	TipoOptional getTipoOptional();
 
-	public String getNomeTipoOpt();
-
-	public void setNomeStatoOpt(String nomeStato);
-
-	public void setNomeTipoOpt(String nomeTipo);
+	StatoOptional getStatoOptional();
 
 }

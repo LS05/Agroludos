@@ -9,12 +9,20 @@ class Iscrizione implements IscrizioneTO{
 	private static final long serialVersionUID = 1L;
 	private Date data;
 	private Integer id;
-	private Integer stato;
 	private Integer idcompetizione;	
 	private Partecipante partecipante;
-	private Integer idpartecipante;
+	private Competizione competizione;
 	private Set<Optional> optionals;
-	private String nomeStato;
+	private StatoIscrizione statoIscrizione;
+
+	@Override
+	public StatoIscrizione getStatoIscrizione() {
+		return statoIscrizione;
+	}
+
+	public void setStatoIscrizione(StatoIscrizione statoIscrizione) {
+		this.statoIscrizione = statoIscrizione;
+	}
 	
 	@Override
 	public Date getData() {
@@ -35,16 +43,7 @@ class Iscrizione implements IscrizioneTO{
 		this.id = id;
 	}
 	
-	@Override
-	public Integer getStato() {
-		return stato;
-	}
-	
-	@Override
-	public void setStato(Integer stato) {
-		this.stato = stato;
-	}
-	
+
 	public Integer getIdcompetizione() {
 		return idcompetizione;
 	}
@@ -72,21 +71,9 @@ class Iscrizione implements IscrizioneTO{
 		this.optionals = optionals;
 	}
 	
-	public Integer getIdpartecipante() {
-		return idpartecipante;
-	}
-	
-	public void setIdpartecipante(Integer idpartecipante) {
-		this.idpartecipante = idpartecipante;
-	}
-	
 	@Override
-	public PartecipanteTO getPartecipanteIscrizione() {
-		return this.partecipante;
-	}
-	
 	public Partecipante getPartecipante() {
-		return partecipante;
+		return this.partecipante;
 	}
 	
 	public void setPartecipante(Partecipante partecipante) {
@@ -94,23 +81,14 @@ class Iscrizione implements IscrizioneTO{
 	}
 	
 	@Override
-	public String getNomeStato() {
-		return this.nomeStato;
+	public Competizione getCompetizione() {
+		return this.competizione;
 	}
 	
-	@Override
-	public void setNomeStato(String nomeStato) {
-		this.nomeStato = nomeStato;
-		
+	public void setCompetizione(Competizione competizione) {
+		this.competizione = competizione;
 	}
 	
-	@Override
-	public String toString() {
-		return "Iscrizione [data=" + data + ", id=" + id + ", stato=" + stato
-				+ ", idcompetizione=" + idcompetizione + ", partecipante="
-				+ partecipante + ", idpartecipante=" + idpartecipante
-				+ ", optionals=" + optionals + "]";
-	}
 
 	@Override
 	public int compareTo(IscrizioneTO o) {

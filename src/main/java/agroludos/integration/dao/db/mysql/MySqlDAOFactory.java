@@ -16,6 +16,7 @@ import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.integration.dao.db.TipoOptionalDAO;
 import agroludos.integration.dao.db.UtenteDAO;
+import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.TransferObjectFactory;
@@ -93,18 +94,15 @@ public class MySqlDAOFactory implements DBDAOFactory {
 
 	public static void main(String args[]){
 		TransferObjectFactory fact = new TransferObjectFactory();
-		MySqlDAOFactory daoFact = new MySqlDAOFactory();
+		MySqlDAOUtil daoUtil = new MySqlDAO();
+		
+		
 		try {
+			MySqlDAOFactory daoFact = new MySqlDAOFactory(daoUtil);
 			daoFact.testConnection();
-			IscrizioneTO cmpto = fact.createIscrizioneTO();
-			ManagerDiCompetizioneDAO cmpDAO = daoFact.getManagerDiCompetizioneDAO();
-
-			List<ManagerDiCompetizioneTO> list = cmpDAO.getAll();
-			int i=0;
-			for(Object lst: list){
-				System.out.println(list.get(i).getId() + " " + list.get(i).getNomeStatoUtente());
-				i++;
-			}
+			CompetizioneDAO cmpDao = daoFact.getCompetizioneDAO();
+			List<CompetizioneTO> listCmp = cmpDao.getAll();
+			listCmp.get(0).getAllIscrizioni().get(0).getPartecipante();
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}	

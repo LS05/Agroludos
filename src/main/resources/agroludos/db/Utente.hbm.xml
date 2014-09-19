@@ -23,13 +23,14 @@
 		<property name="email" type="string">
 			<column name="email" not-null="true" />
 		</property>
-		<property name="idruolo" type="integer">
-			<column name="idruolo" not-null="true" default="1" />
-		</property>
-		<property name="stato" type="integer">
-			<column name="stato" not-null="true" default="1" />
-		</property>
-
+		<many-to-one name="tipoUtente" class="agroludos.to.TipoUtente"
+			lazy="false">
+			<column name="idruolo" not-null="true" />
+		</many-to-one>
+		<many-to-one name="statoUtente" class="agroludos.to.StatoUtente"
+			lazy="false">
+			<column name="stato" not-null="true" />
+		</many-to-one>
 		<joined-subclass name="agroludos.to.ManagerDiSistema"
 			table="tbl_mds" extends="agroludos.to.Utente">
 			<key column="idmds" />
@@ -78,21 +79,21 @@
 
 	</class>
 	<query name="checkMds">
-		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.idruolo = 0 ]]></query>
+		<![CDATA[ from agroludos.to.Utente m where m.statoUtente = 1 and m.tipoUtente = 0 ]]></query>
 	<query name="getUtente">
-        <![CDATA[ from agroludos.to.Utente u where u.stato = 1 and u.username = ? and u.password = ? and u.stato = 1 ]]></query>
+        <![CDATA[ from agroludos.to.Utente u where u.statoUtente = 1 and u.username = ? and u.password = ? and u.statoUtente = 1 ]]></query>
 	<query name="getByID">
-        <![CDATA[ from agroludos.to.Utente u where u.stato = 1 and u.id = ? and u.idruolo = ? ]]></query>
+        <![CDATA[ from agroludos.to.Utente u where u.statoUtente = 1 and u.id = ? and u.tipoUtente = ? ]]></query>
 	<query name="getPartecipante">
-        <![CDATA[ from agroludos.to.Partecipante p where p.stato = 1 and p.id = ? ]]></query>
+        <![CDATA[ from agroludos.to.Partecipante p where p.statoUtente = 1 and p.id = ? ]]></query>
 	<query name="getPartecipanteByCF">
-        <![CDATA[ from agroludos.to.Partecipante p where p.stato = 1 and p.cf = ? ]]></query>
+        <![CDATA[ from agroludos.to.Partecipante p where p.statoUtente = 1 and p.cf = ? ]]></query>
 	<query name="getAllManagerDiCompetizione">
-		<![CDATA[ from agroludos.to.ManagerDiCompetizione m where m.stato = 1]]></query>
+		<![CDATA[ from agroludos.to.ManagerDiCompetizione m where m.statoUtente = 1]]></query>
 	<query name="getAllPartecipanti">
-		<![CDATA[ from agroludos.to.Partecipante m where m.stato = 1 ]]></query>
+		<![CDATA[ from agroludos.to.Partecipante m where m.statoUtente = 1 ]]></query>
 	<query name="getByUsername">
-		<![CDATA[ from agroludos.to.Utente m where m.stato = 1 and m.username = ? ]]></query>
+		<![CDATA[ from agroludos.to.Utente m where m.statoUtente = 1 and m.username = ? ]]></query>
 	<sql-query name="getNomeRuolo">
        <![CDATA[ SELECT tbl_ruoli.nome FROM tbl_ruoli WHERE tbl_ruoli.idruolo = ? ]]></sql-query>
 	<sql-query name="getNomeStatoUtente">

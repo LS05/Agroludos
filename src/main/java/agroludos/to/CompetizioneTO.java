@@ -74,49 +74,7 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 */
 	public void setCosto(Double costo);
 	
-	/**
-	 * Ritorna lo stato della competizione
-	 * 
-	 * @return
-	 */
-	Integer getStato();
-	
-	/**
-	 * Inserisce lo stato della competizione
-	 * 
-	 * @param stato
-	 */
-	void setStato(Integer stato);
-
-	/**
-	 * Ritorna un intero che rappresenta il tipo di competizione.
-	 * Tale intero può essere utilizzato nelle query nel db.
-	 * 
-	 * @return {@code Integer} Il tipo di competizione
-	 */
-	Integer getTipo();
-		
-	/**
-	 * Ritorna un intero che rappresenta il manager di competizione, 
-	 * che gestisce la competizione.
-	 * 
-	 * Tale intero può essere utilizzato nelle query nel db.
-	 * 
-	 * @return {@code Integer} L'id del manager di competizione
-	 */
-	Integer getMdc();
-	
-	/**
-	 * Setta un intero che rappresenta l'id del manager di competizione, 
-	 * che gestisce la competizione.
-	 * 
-	 * Tale intero può essere utilizzato nelle query nel db.
-	 * 
-	 * @return
-	 */
-	void setMdc(Integer mdc);
-	
-	/**
+		/**
 	 * Ritorna un intero che rappresenta l'id della competizione.
 	 * 
 	 * Tale intero può essere utilizzato nelle query nel db.
@@ -189,36 +147,13 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 * @return
 	 */
 	List<IscrizioneTO> getAllIscrizioni();
-	
-	/**
-	 * Ritorna una rappresentazione in stringa dello stato della competizione.
-	 * 
-	 * @return Lo stato della competizione
-	 */
-	String getNomeStato();
-	
-	/**
-	 * Ritorna una rappresentazione in stringa del tipo della competizione.
-	 * 
-	 * @return Il tipo competizione
-	 */	
-	String getNomeTipo();
-
-	/**
-	 * Setta una rappresentazione in stringa dello stato della competizione.
-	 * 
-	 * @param nomeStato Lo stato della competizione
-	 */
-	void setNomeStato(String nomeStato);
-
-	/**
-	 * Setta una rappresentazione in stringa del tipo della competizione.
-	 * 
-	 * @param nomeTipo Il tipo della competizione
-	 */
-	void setNomeTipo(String nomeTipo);
 
 	boolean isTerminata();
 
-	boolean isChiusa();	
+	boolean isChiusa();
+
+	//TODO
+	TipoCompetizioneTO getTipoCompetizione();
+	StatoCompetizioneTO getStatoCompetizione();
+	ManagerDiCompetizioneTO getManagerDiCompetizione();	
 }

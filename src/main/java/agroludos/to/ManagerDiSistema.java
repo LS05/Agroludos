@@ -16,10 +16,11 @@ class ManagerDiSistema extends Utente implements ManagerDiSistemaTO {
 
 	@Override
 	public String toString() {
-		return "[id=" + id + ", nome=" + nome
-				+ ", cognome=" + cognome + ", username=" + username
-				+ ", password=" + password + ", email=" + email + ", idruolo="
-				+ idruolo + ", stato=" + stato + ", nomeRuolo=" + nomeRuolo
-				+ ", nomeStatoUtente=" + nomeStatoUtente + "indirizzo=" + indirizzo + "]";
+		return "ManagerDiSistema [indirizzo=" + indirizzo + ", id=" + id
+				+ ", nome=" + nome + ", cognome=" + cognome + ", username="
+				+ username + ", password=" + password + ", email=" + email
+				+ "]";
 	}
+
+	
 }

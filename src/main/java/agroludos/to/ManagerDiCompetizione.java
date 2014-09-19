@@ -19,13 +19,14 @@ class ManagerDiCompetizione extends Utente implements ManagerDiCompetizioneTO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "[stipendio=" + stipendio + ", id=" + id + ", nome=" + nome
-				+ ", cognome=" + cognome + ", username=" + username
-				+ ", password=" + password + ", email=" + email + ", idruolo="
-				+ idruolo + ", stato=" + stato + ", nomeRuolo=" + nomeRuolo
-				+ ", nomeStatoUtente=" + nomeStatoUtente + "]";
+		return "ManagerDiCompetizione [stipendio=" + stipendio + ", id=" + id
+				+ ", nome=" + nome + ", cognome=" + cognome + ", username="
+				+ username + ", password=" + password + ", email=" + email
+				+ "]";
 	}
+	
+	
 }

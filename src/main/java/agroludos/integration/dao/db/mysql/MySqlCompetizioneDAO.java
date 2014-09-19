@@ -24,11 +24,6 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 
 		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioneByTipo", param);
 
-		for(CompetizioneTO cmp: res){
-			this.setNomeStatoComp(cmp);
-			this.setNomeTipoComp(cmp);
-		}
-
 		return res;
 	}
 
@@ -39,10 +34,6 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 
 		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioneByMdc", param);
 
-		for(CompetizioneTO cmp: res){
-			this.setNomeStatoComp(cmp);
-			this.setNomeTipoComp(cmp);
-		}
 
 		return res;
 
@@ -52,10 +43,6 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 	public CompetizioneTO readById(Integer id) throws DatabaseException{
 
 		CompetizioneTO res = super.findOne(id);
-
-		this.setNomeStatoComp(res);
-		this.setNomeTipoComp(res);
-
 
 		return res;
 	}
@@ -67,10 +54,6 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 
 		List<CompetizioneTO> list = super.executeParamQuery("getCompetizioniAttive", param);
 
-		for(CompetizioneTO cmp: list){
-			this.setNomeStatoComp(cmp);
-			this.setNomeTipoComp(cmp);
-		}
 
 
 		return list;
@@ -83,17 +66,4 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 			return super.update(cmpto);	
 	}
 
-	private void setNomeTipoComp(CompetizioneTO cmpto) throws DatabaseException {
-		List<Integer> param = new ArrayList<Integer>();
-		param.add(cmpto.getTipo());
-		String tipo = super.<String>executeValParamQuery("getNomeTipoComp", param);
-		cmpto.setNomeTipo(tipo);
-	}
-
-	private void setNomeStatoComp(CompetizioneTO cmpto) throws DatabaseException {
-		List<Integer> param = new ArrayList<Integer>();
-		param.add(cmpto.getStato());
-		String stato = super.<String>executeValParamQuery("getNomeStatoComp", param);
-		cmpto.setNomeStato(stato);
-	}
 }

@@ -1,6 +1,7 @@
 package agroludos.to;
 
 class Utente implements UtenteTO{
+
 	private static final long serialVersionUID = -5750807819852265909L;
 	protected Integer id;
 	protected String nome;
@@ -8,29 +9,26 @@ class Utente implements UtenteTO{
 	protected String username;
 	protected String password;
 	protected String email;
-	protected Integer idruolo; //id ruolo utente
-	protected Integer stato;
-	protected String nomeRuolo;
-	protected String nomeStatoUtente;
+	
+	private TipoUtente tipoUtente;
+	private StatoUtente statoUtente;
 	
 	@Override
-	public String getNomeRuolo() {
-		return nomeRuolo;
+	public TipoUtente getTipoUtente() {
+		return tipoUtente;
+	}
+
+	public void setTipoUtente(TipoUtente tipoUtente) {
+		this.tipoUtente = tipoUtente;
 	}
 	
 	@Override
-	public void setNomeRuolo(String nomeRuolo) {
-		this.nomeRuolo = nomeRuolo;
+	public StatoUtente getStatoUtente() {
+		return statoUtente;
 	}
-	
-	@Override
-	public String getNomeStatoUtente() {
-		return nomeStatoUtente;
-	}
-	
-	@Override
-	public void setNomeStatoUtente(String nomeStatoUtente) {
-		this.nomeStatoUtente = nomeStatoUtente;
+
+	public void setStatoUtente(StatoUtente statoUtente) {
+		this.statoUtente = statoUtente;
 	}
 
 	@Override
@@ -93,31 +91,6 @@ class Utente implements UtenteTO{
 	}
 	
 	@Override
-	public Integer getIdruolo() {
-		return idruolo;
-	}
-	
-	@Override
-	public void setIdruolo(Integer idruolo) {
-		this.idruolo = idruolo;
-	}
-	
-	@Override
-	public Integer getStato() {
-		return stato;
-	}
-	
-	@Override
-	public void setStato(Integer stato) {
-		this.stato = stato;
-	}
-
-	@Override
-	public String getRuolo() {
-		return this.nomeRuolo;
-	}
-	
-	@Override
 	public int compareTo(UtenteTO o) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -127,8 +100,9 @@ class Utente implements UtenteTO{
 	public String toString() {
 		return "Utente [id=" + id + ", nome=" + nome + ", cognome=" + cognome
 				+ ", username=" + username + ", password=" + password
-				+ ", email=" + email + ", idruolo=" + idruolo + ", stato="
-				+ stato + ", nomeRuolo=" + nomeRuolo + ", nomeStatoUtente="
-				+ nomeStatoUtente + "]";
+				+ ", email=" + email + ", tipoUtente=" + tipoUtente
+				+ ", statoUtente=" + statoUtente + "]";
 	}
+
+
 }

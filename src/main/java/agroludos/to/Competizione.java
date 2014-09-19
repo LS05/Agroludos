@@ -30,38 +30,44 @@ class Competizione implements CompetizioneTO{
 	private int nmax;
 	private String descrizione;
 	private Double costo;
-	private int mdc;
-	private int stato;
-	private int tipo;
-	private String nomeStato;
-	private String nomeTipo;
 	private Set<Optional> optionals;
 	private Set<Partecipante> iscritti;
 	private Set<Iscrizione> iscrizioni;
+	private TipoCompetizione tipoCompetizione;
+	private StatoCompetizione statoCompetizione;
+	private ManagerDiCompetizione managerDiCompetizione;
+	
+	@Override
+	public ManagerDiCompetizione getManagerDiCompetizione() {
+		return managerDiCompetizione;
+	}
 
+	public void setManagerDiCompetizione(ManagerDiCompetizione managerDiCompetizione) {
+		this.managerDiCompetizione = managerDiCompetizione;
+	}
+	
+	@Override
+	public TipoCompetizione getTipoCompetizione() {
+		return tipoCompetizione;
+	}
+
+	public void setTipoCompetizione(TipoCompetizione tipoCompetizione) {
+		this.tipoCompetizione = tipoCompetizione;
+	}
+	@Override
+	public StatoCompetizione getStatoCompetizione() {
+		return statoCompetizione;
+	}
+
+	public void setStatoCompetizione(StatoCompetizione statoCompetizione) {
+		this.statoCompetizione = statoCompetizione;
+	}
+
+	
 	Competizione(){
 		this.optionals = new HashSet<Optional>();
 	}
 
-	@Override
-	public void setNomeStato(String nomeStato) {
-		this.nomeStato = nomeStato;
-	}
-
-	@Override
-	public void setNomeTipo(String nomeTipo) {
-		this.nomeTipo = nomeTipo;
-	}
-
-	@Override
-	public String getNomeStato() {
-		return this.nomeStato;
-	}
-
-	@Override
-	public String getNomeTipo() {
-		return this.nomeTipo;
-	}
 
 	@Override
 	public String getNome() {
@@ -84,34 +90,6 @@ class Competizione implements CompetizioneTO{
 		this.data = data;
 	}
 
-	@Override
-	public Integer getMdc() {
-		return mdc;
-	}
-
-	@Override
-	public Integer getStato() {
-		return stato;
-	}
-
-	@Override
-	public void setStato(Integer stato) {
-		this.stato = stato;
-	}
-
-	@Override
-	public Integer getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
-	}
-
-	@Override
-	public void setMdc(Integer mdc) {
-		this.mdc = mdc;
-	}
 
 	@Override
 	public String getDescrizione() {
@@ -146,8 +124,6 @@ class Competizione implements CompetizioneTO{
 		opt.setId(optional.getId());
 		opt.setCosto(optional.getCosto());
 		opt.setDescrizione(optional.getDescrizione());
-		opt.setStato(optional.getStato());
-		opt.setTipo(optional.getTipo());
 		opt.setNome(optional.getNome());
 		this.optionals.add(opt);
 	}
@@ -287,12 +263,14 @@ class Competizione implements CompetizioneTO{
 
 	@Override
 	public String toString() {
-
-		return "Competizione [nome=" + nome + ", data=" + data + ", nmin="
-				+ nmin + ", nmax=" + nmax + ", descrizione=" + descrizione
-				+ ", costo=" + costo + ", mdc=" + mdc + ", stato=" + stato
-				+ ", tipo=" + tipo + ", id=" + id + ", nomeStato=" + nomeStato
-				+ ", nomeTipo=" + nomeTipo + ", optionals=" + optionals
-				+ ", iscritti=" + iscritti + ", iscrizioni=" + iscrizioni + "]";
+		return "Competizione [id=" + id + ", nome=" + nome + ", suppData="
+				+ suppData + ", data=" + data + ", nmin=" + nmin + ", nmax="
+				+ nmax + ", descrizione=" + descrizione + ", costo=" + costo
+				+ ", optionals=" + optionals + ", iscritti=" + iscritti
+				+ ", iscrizioni=" + iscrizioni + ", tipoCompetizione="
+				+ tipoCompetizione + ", statoCompetizione=" + statoCompetizione
+				+ ", managerDiCompetizione=" + managerDiCompetizione + "]";
 	}
+
+
 }

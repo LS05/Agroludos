@@ -17,19 +17,17 @@
 		<property name="costo" type="double">
 			<column name="costo" not-null="true" />
 		</property>
-		<property name="stato" type="integer">
-			<column name="stato" not-null="true" default="1" />
-		</property>
-		<property name="tipo" type="integer">
-			<column name="tipoopt" not-null="true" default="1" />
-		</property>
+		<many-to-one name="tipoOptional" class="agroludos.to.TipoOptional"
+			lazy="false">
+			<column name="tipoopt" not-null="true" />
+		</many-to-one>
+		<many-to-one name="statoOptional" class="agroludos.to.StatoOptional"
+			lazy="false">
+			<column name="stato" not-null="true" />
+		</many-to-one>
 	</class>
 	<query name="getAllOptional">
         <![CDATA[ from agroludos.to.Optional o ]]></query>
 	<query name="getOptionalByTipo">
-        <![CDATA[ from agroludos.to.Optional o where o.tipo = ?]]></query>
-	<sql-query name="getNomeStatoOpt">
-       <![CDATA[ SELECT tbl_statiopt.nome FROM tbl_statiopt WHERE tbl_statiopt.idstatiopt = ? ]]></sql-query>
-	<sql-query name="getNomeTipoOpt">
-       <![CDATA[ SELECT tbl_tipoopt.nome FROM tbl_tipoopt WHERE tbl_tipoopt.idtipooptional = ? ]]></sql-query>
+        <![CDATA[ from agroludos.to.Optional o where o.tipoOptional = ?]]></query>
 </hibernate-mapping>
