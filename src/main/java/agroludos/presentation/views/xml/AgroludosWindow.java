@@ -5,10 +5,14 @@ import java.util.ResourceBundle;
 
 import agroludos.presentation.views.AgroludosController;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public abstract class AgroludosWindow {
 	private ResourceBundle itBundle;
 	protected FXMLLoader loader;
+	private Stage stage;
+
 	
 	AgroludosWindow(View view){
 		this.initLoader(view.getUrl());	
@@ -26,6 +30,15 @@ public abstract class AgroludosWindow {
 	public AgroludosController getController(){
 		return this.loader.getController();
 	}
+	
+	public Stage getStage() {
+		return stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+
 
 	abstract public String getUrl();
 	
@@ -38,4 +51,5 @@ public abstract class AgroludosWindow {
 	abstract public String getTitle();
 	
 	abstract public boolean isDialog();
+
 }
