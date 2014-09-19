@@ -23,6 +23,7 @@ public class ControllerUtenti extends AgroludosController {
 				UtenteTO uto = (UtenteTO)res;
 				utente = uto;
 				request.getSession().setAttribute(uto);
+				//aggiungo la scena al mainStage
 				nav.setVista(uto.getNomeRuolo());
 			}
 		}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agro-views>
 	<views>
-		<view tipo="view">
+		<view tipo="dialog">
 			<name>initView</name>
 			<url>/fxml/config/init.fxml</url>
 			<width>1</width>
@@ -15,11 +15,11 @@
 			<height>462</height>
 			<title>Agroludos | Login</title>
 		</view>
-		<view tipo="view">
+		<view tipo="dialog">
 			<name>session</name>
 			<url>/fxml/config/session.fxml</url>
-			<width>1</width>
-			<height>1</height>
+			<width>600</width>
+			<height>400</height>
 			<title></title>
 		</view>
 		<view tipo="view">
