@@ -1,6 +1,7 @@
 package agroludos.presentation.views.tablemodel;
 
 import agroludos.to.PartecipanteTO;
+
 import javafx.beans.property.SimpleStringProperty;
 
 public class PartModel {
@@ -9,6 +10,7 @@ public class PartModel {
 	private SimpleStringProperty cognome;
 	private SimpleStringProperty email;
 	private SimpleStringProperty username;
+
 	private SimpleStringProperty stato;
 	private SimpleStringProperty dataSRC;
 	private SimpleStringProperty cf;
@@ -16,6 +18,7 @@ public class PartModel {
 	private SimpleStringProperty sesso;
 	private SimpleStringProperty dataNasc;
 	private SimpleStringProperty numTessera;
+	private PartecipanteTO part;
 
 	public PartModel(PartecipanteTO part){
 		this.id = new SimpleStringProperty(Integer.toString(1));
@@ -23,13 +26,15 @@ public class PartModel {
 		this.cognome = new SimpleStringProperty(part.getCognome());
 		this.email = new SimpleStringProperty(part.getEmail());
 		this.username = new SimpleStringProperty(part.getUsername());
-		this.stato = new SimpleStringProperty(part.getNomeStatoUtente());
+		//TODO Aggiungere stato		
+		//this.stato = new SimpleStringProperty(part.getNomeStatoUtente());
 		this.dataSRC = new SimpleStringProperty(part.getDataSRC().toString());
 		this.cf = new SimpleStringProperty(part.getCf());
 		this.indirizzo = new SimpleStringProperty(part.getIndirizzo());
 		this.sesso = new SimpleStringProperty(part.getSesso());
 		this.dataNasc = new SimpleStringProperty(part.getDataNasc().toString());
 		this.numTessera = new SimpleStringProperty(part.getNumTS());
+		this.part = part;
 	}
 
 	public String getId() {
@@ -76,7 +81,7 @@ public class PartModel {
 		return stato.get();
 	}
 
-	public String getData() {
+	public String getDataSRC() {
 		return dataSRC.get();
 	}
 
@@ -131,7 +136,7 @@ public class PartModel {
 	public SimpleStringProperty nomeProperty() {
 		return this.nome;
 	}
-	
+
 	public SimpleStringProperty usernameProperty() {
 		return this.username;
 	}
@@ -144,9 +149,44 @@ public class PartModel {
 		return this.email;
 	}
 
+	public SimpleStringProperty statoProperty() {
+		return this.stato;
+	}
+
+	public SimpleStringProperty dataSRCProperty() {
+		return this.dataSRC;
+	}
+
+	public SimpleStringProperty cfProperty() {
+		return this.cf;
+	}
+
+	public SimpleStringProperty indirizzoProperty() {
+		return this.indirizzo;
+	}
+
+	public SimpleStringProperty sessoProperty() {
+		return this.sesso;
+	}
+
+	public SimpleStringProperty dataNascProperty() {
+		return this.dataNasc;
+	}
+
+	public SimpleStringProperty numTesseraProperty() {
+		return this.numTessera;
+	}
+
+	public PartecipanteTO getPart() {
+		return part;
+	}
+	
 	@Override
 	public String toString() {
-		return "[ id = " + id.get() + ",   nome = " + nome.get() + ",   cognome=" + cognome.get()
-				+ ",   email=" + email.get() + ",   username=" + username.get() + " ]";
+		return "[id=" + id + ", nome=" + nome + ", cognome=" + cognome
+				+ ", email=" + email + ", username=" + username + ", stato="
+				+ stato + ", dataSRC=" + dataSRC + ", cf=" + cf
+				+ ", indirizzo=" + indirizzo + ", sesso=" + sesso
+				+ ", dataNasc=" + dataNasc + ", numTessera=" + numTessera + "]";
 	}
 }

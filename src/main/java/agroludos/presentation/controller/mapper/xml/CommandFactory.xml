@@ -73,4 +73,9 @@
 		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
 		<forward success="managerDiSistema" failure="managerDiSistema" />
 	</command>
+	<command name="disattivaOptional">
+		<!-- Aggiungere come success un Dialog -->
+		<classe>agroludos.business.as.gestoreoptional.SOptional</classe>
+		<forward success="managerDiSistema" failure="managerDiSistema" />
+	</command>
 </commands>

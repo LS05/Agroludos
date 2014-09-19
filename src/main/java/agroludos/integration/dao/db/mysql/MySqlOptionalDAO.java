@@ -32,7 +32,7 @@ class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements Optional
 	}
 
 	@Override
-	public OptionalTO eliminaOptional(OptionalTO optTO) throws DatabaseException {
+	public OptionalTO disattivaOptional(OptionalTO optTO) throws DatabaseException {
 		optTO.setStato(0);
 		return super.update(optTO);
 	}

@@ -7,7 +7,7 @@ import agroludos.to.OptionalTO;
 
 public interface OptionalDAO extends DAO<OptionalTO>{
 
-	public OptionalTO eliminaOptional(OptionalTO optTO) throws DatabaseException;
+	public OptionalTO disattivaOptional(OptionalTO optTO) throws DatabaseException;
 
 	public List<OptionalTO> readByTipo(OptionalTO optTO) throws DatabaseException;
 

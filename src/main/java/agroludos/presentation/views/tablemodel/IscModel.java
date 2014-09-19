@@ -1,6 +1,7 @@
 package agroludos.presentation.views.tablemodel;
 
 import javafx.beans.property.SimpleStringProperty;
+
 import agroludos.to.IscrizioneTO;
 
 public class IscModel {
@@ -9,7 +10,7 @@ public class IscModel {
 	private SimpleStringProperty cognome;
 	private SimpleStringProperty email;
 	private IscrizioneTO iscto;
-	
+
 	public IscModel(IscrizioneTO iscto){
 		this.id = new SimpleStringProperty(Integer.toString(iscto.getId()));
 		this.nome = new SimpleStringProperty(iscto.getPartecipanteIscrizione().getNome());
@@ -18,10 +19,10 @@ public class IscModel {
 		this.iscto = iscto;
 	}
 
-
 	public IscrizioneTO getIscrizioneTO() {
 		return this.iscto;
 	}
+
 	public void setIscrizioneTO(IscrizioneTO iscto) {
 		this.iscto = iscto;
 	}
@@ -58,20 +59,25 @@ public class IscModel {
 		this.email.set(email);
 	}
 
-	
 	public SimpleStringProperty idProperty(){
 		return this.id;
 	}
+
 	public SimpleStringProperty nomeProperty(){
 		return this.nome;
 	}
+
 	public SimpleStringProperty cognomeProperty(){
 		return this.cognome;
 	}
+
 	public SimpleStringProperty emailProperty(){
 		return this.email;
 	}
 
-	
-
+	@Override
+	public String toString() {
+		return "[id=" + id + ", nome=" + nome + ", cognome=" + cognome
+				+ ", email=" + email + ", iscto=" + iscto + "]";
+	}
 }

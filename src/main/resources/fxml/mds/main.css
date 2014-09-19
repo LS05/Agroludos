@@ -13,6 +13,11 @@
 	-fx-text-alignment: left;
 }
 
+.mainMenuButton:active{
+	 -fx-background-color: #ffffff;
+	 -fx-text-fill: #465660;
+}
+
 .mainMenuButton:hover{
 	-fx-background-color: #4F616D;
 }

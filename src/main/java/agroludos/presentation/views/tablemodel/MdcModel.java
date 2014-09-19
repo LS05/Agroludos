@@ -1,6 +1,7 @@
 package agroludos.presentation.views.tablemodel;
 
 import agroludos.to.ManagerDiCompetizioneTO;
+
 import javafx.beans.property.SimpleStringProperty;
 
 public class MdcModel {
@@ -10,6 +11,7 @@ public class MdcModel {
 	private SimpleStringProperty email;
 	private SimpleStringProperty username;
 	private SimpleStringProperty stato;
+	private ManagerDiCompetizioneTO manComp;
 	
 	public MdcModel(ManagerDiCompetizioneTO manComp){
 		this.id = new SimpleStringProperty(Integer.toString(1));
@@ -18,6 +20,7 @@ public class MdcModel {
 		this.email = new SimpleStringProperty(manComp.getEmail());
 		this.username = new SimpleStringProperty(manComp.getUsername());
 		this.stato = new SimpleStringProperty(manComp.getNomeStatoUtente());
+		this.manComp = manComp;
 	}
 
 	public String getId() {
@@ -88,6 +91,10 @@ public class MdcModel {
 	    return this.stato;
 	}
 
+	public ManagerDiCompetizioneTO getManComp() {
+		return manComp;
+	}
+	
 	@Override
 	public String toString() {
 		return "[ id = " + id.get() + ",   nome = " + nome.get() + ",   cognome=" + cognome.get()

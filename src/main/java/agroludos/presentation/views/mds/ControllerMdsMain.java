@@ -59,12 +59,26 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML private TableColumn<PartModel, String> partColCognome;
 	@FXML private TableColumn<PartModel, String> partColEmail;
 	@FXML private TableColumn<PartModel, String> partColUsername;
-	
+
+	@FXML private Label lblParNome;
+	@FXML private Label lblParCognome;
+	@FXML private Label lblParUsername;
+	@FXML private Label lblParStato;
+	@FXML private Label lblParDataSRC;
+	@FXML private Label lblParCodFisc;
+	@FXML private Label lblParIndirizzo;
+	@FXML private Label lblParSesso;
+	@FXML private Label lblParEmail;
+	@FXML private Label lblParAnnoNasc;
+	@FXML private Label lblParNumTessSan;
+
 	//gestione Optionlal
 	@FXML private Button btnPranzo;
 	@FXML private Button btnMerenda;
 	@FXML private Button btnPernotto;
 	@FXML private Button btnNuovoTipoOptional;
+	@FXML private Button btnDisattivaOptional;
+	
 	@FXML private TableView<OptModel> tableOptional;
 	@FXML private TableColumn<OptModel, String> optColNome;
 	@FXML private TableColumn<OptModel, String> optColDesc;
@@ -92,6 +106,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 	private AgroResponse risposta;
 	private List<String> richieste;
 	private List<PartecipanteTO> listPart;
+	private int selectedPart;
 
 	@SuppressWarnings("serial")
 	@Override
@@ -112,6 +127,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 		this.listaTabMdc = this.getListTabellaMdC();
 		this.selectedMDC = 0;
+		this.selectedPart = 0;
 		this.initMdcTable();
 		this.initOptTable();
 		this.initCompTable();
@@ -147,7 +163,6 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneManagerCompetizione.setVisible(true);
 		this.paneGestionePartecipanti.setVisible(false);
-
 	}
 
 	@FXML protected void btnGestPart(MouseEvent event) {
@@ -155,6 +170,14 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneManagerCompetizione.setVisible(false);
 		this.paneGestionePartecipanti.setVisible(true);
+	}
+	
+	@FXML protected void btnDisattivaOptionalClicked(MouseEvent event){
+		OptModel optModel = this.tableOptional.getSelectionModel().getSelectedItem();
+		OptionalTO optTO = optModel.getOptTO();
+		AgroRequest request = this.getRichiesta(optTO, "disattivaOptional");
+		AgroResponse response = respFact.createResponse();
+		frontController.eseguiRichiesta(request, response);
 	}
 
 	//--------------------Gest Man Competizione ---------------
@@ -306,7 +329,22 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 		this.tableCompetizioni.getItems().setAll(res);
 	}
-	
+
+	private void setDxPartColumn(int selected) {
+		PartModel selModel = this.tablePartecipanti.getItems().get(selected);
+		this.lblParNome.setText(selModel.getNome());
+		this.lblParCognome.setText(selModel.getCognome());
+		this.lblParEmail.setText(selModel.getEmail());
+		this.lblParUsername.setText(selModel.getUsername());
+		//		this.lblParStato.setText(selModel.getStato());
+		this.lblParDataSRC.setText(selModel.getDataSRC());
+		this.lblParCodFisc.setText(selModel.getCf());
+		this.lblParIndirizzo.setText(selModel.getIndirizzo());
+		this.lblParSesso.setText(selModel.getSesso());
+		this.lblParAnnoNasc.setText(selModel.getDataNasc());
+		this.lblParNumTessSan.setText(selModel.getNumTessera());
+	}
+
 	private void initPartTable(){
 		this.initColumn(this.partColNome, "nome");
 		this.initColumn(this.partColCognome, "cognome");
@@ -321,36 +359,64 @@ public class ControllerMdsMain extends ControllerUtenti{
 		}
 
 		this.tablePartecipanti.getItems().setAll(res);
-	}
+
+		this.tablePartecipanti.getSelectionModel().select(0);
+
+		this.setDxPartColumn(this.selectedPart);
+
+		this.tablePartecipanti.getSelectionModel().selectedItemProperty().addListener(
+				new ChangeListener<PartModel>(){
+
+					@Override
+					public void changed(ObservableValue<? extends PartModel> partModel,
+							PartModel oldMod, PartModel newMod) {
+
+						selectedPart = tablePartecipanti.getSelectionModel().getSelectedIndex();
+						setDxPartColumn(selectedPart);
+					}
+
+				});
+	}	
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		if(request.getCommandName().equals("getAllManagerDiCompetizione")){
+		String commandName = request.getCommandName();
+		
+		if(commandName.equals( this.reqProperties.getProperty("getAllManagerDiCompetizione") )){
+			
 			Object res = (Object)response.getRespData();
 			if(res instanceof List<?>){
 				List<ManagerDiCompetizioneTO> mdcList = (List<ManagerDiCompetizioneTO>)res;
 				this.listMdc = mdcList;
 			}
-		} else if(request.getCommandName().equals("getAllOptional")){
+			
+		} else if(commandName.equals( this.reqProperties.getProperty("getAllOptional") )){
+			
 			Object res = (Object)response.getRespData();
 			if(res instanceof List<?>){
 				List<OptionalTO> optList = (List<OptionalTO>)res;
 				this.listOpt = optList;
 			}
-		} else if(request.getCommandName().equals("getAllPartecipante")){
+			
+		} else if(commandName.equals( this.reqProperties.getProperty("getAllPartecipante") )){
+			
 			Object res = (Object)response.getRespData();
 			if(res instanceof List<?>){
 				List<PartecipanteTO> mdcList = (List<PartecipanteTO>)res;
 				this.listPart = mdcList;
 			}
-		} else if(request.getCommandName().equals("getAllCompetizione")){
+
+		} else if(commandName.equals( this.reqProperties.getProperty("getAllCompetizione") )){
+			
 			Object res = (Object)response.getRespData();
 			if(res instanceof List<?>){
 				List<CompetizioneTO> comList = (List<CompetizioneTO>)res;
 				this.listComp = comList;
 			}
-		} else if(request.getCommandName().equals("modificaManagerDiCompetizione")){
+			
+		} else if(commandName.equals( this.reqProperties.getProperty("modificaManagerDiCompetizione") )){
+			
 			Object res = (Object)response.getRespData();
 			if(res instanceof ManagerDiCompetizioneTO){
 				ManagerDiCompetizioneTO mdcTO = (ManagerDiCompetizioneTO)res;
@@ -362,6 +428,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 				mdc.setStato(mdcTO.getNomeStatoUtente());
 				setDxColumn(this.selectedMDC);
 			}
+
 		}
 	}
 }

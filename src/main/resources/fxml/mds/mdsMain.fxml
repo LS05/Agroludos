@@ -83,7 +83,7 @@
                 <RowConstraints maxHeight="-1.0" minHeight="-1.0" prefHeight="-1.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <GridPane fx:id="paneGestioneOptional" prefHeight="-1.0" prefWidth="600.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane fx:id="paneGestioneOptional" prefHeight="-1.0" prefWidth="600.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <GridPane id="paneTipiOptional" GridPane.rowIndex="1">
                   <children>
@@ -121,7 +121,7 @@
                     <Button mnemonicParsing="false" text="%key100" GridPane.halignment="CENTER" />
                     <Button mnemonicParsing="false" text="%key101" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                     <Button mnemonicParsing="false" text="Attiva Optional" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                    <Button mnemonicParsing="false" text="%key102" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                    <Button fx:id="btnDisattivaOptional" mnemonicParsing="false" onMouseClicked="#btnDisattivaOptionalClicked" text="%key102" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                       <GridPane.margin>
                         <Insets right="10.0" />
                       </GridPane.margin>
@@ -200,25 +200,25 @@
                             <Font name="System Bold" size="13.0" fx:id="x2" />
                           </font>
                         </Label>
-                        <Label id="lblNomePartecipante" fx:id="lblNome" text="Label" GridPane.columnIndex="1" />
+                        <Label id="lblNomePartecipante" fx:id="lblParNome" text="Label" GridPane.columnIndex="1" />
                         <Label font="$x2" text="%key3" GridPane.rowIndex="1" />
-                        <Label id="lblCognomePartecipante" fx:id="lblCognome" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label id="lblCognomePartecipante" fx:id="lblParCognome" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label font="$x2" text="%key74" GridPane.rowIndex="2" />
-                        <Label id="lblUsernamePartecipante" fx:id="lblUsername" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label id="lblUsernamePartecipante" fx:id="lblParUsername" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label font="$x2" text="%key110" GridPane.rowIndex="3" />
-                        <Label id="lblDataSRCPartecipante" fx:id="lblDataSRC" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label id="lblDataSRCPartecipante" fx:id="lblParDataSRC" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label font="$x2" text="%key111" GridPane.rowIndex="4" />
                         <Label font="$x2" text="%key8" GridPane.rowIndex="5" />
                         <Label font="$x2" text="%key6" GridPane.rowIndex="6" />
                         <Label font="$x2" text="%key4" GridPane.rowIndex="7" />
                         <Label font="$x2" text="%key5" GridPane.rowIndex="8" />
                         <Label font="$x2" prefHeight="46.0" prefWidth="129.0" text="%key7" wrapText="true" GridPane.rowIndex="9" />
-                        <Label id="lblCFPartecipante" fx:id="lblCodFisc" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label id="lblIndirizzoPartecipante" fx:id="lblIndirizzo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label id="lblSessoPartecipante" fx:id="lblSesso" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Label id="lblEmailPartecipante" fx:id="lblEmail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Label id="lblDataNascitaPartecipante" fx:id="lblAnnoNasc" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <Label id="lblNumeroTSPartecipante" fx:id="lblNumTessSan" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <Label id="lblCFPartecipante" fx:id="lblParCodFisc" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label id="lblIndirizzoPartecipante" fx:id="lblParIndirizzo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label id="lblSessoPartecipante" fx:id="lblParSesso" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label id="lblEmailPartecipante" fx:id="lblParEmail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label id="lblDataNascitaPartecipante" fx:id="lblParAnnoNasc" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label id="lblNumeroTSPartecipante" fx:id="lblParNumTessSan" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                         <Label font="$x2" prefHeight="46.0" prefWidth="129.0" text="%key10" wrapText="true" GridPane.rowIndex="10" />
                         <Button id="btnVisualizzaCertificatoPartecipante" mnemonicParsing="false" text="%key58" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                       </children>
@@ -295,7 +295,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <GridPane fx:id="paneGestioneManagerCompetizione" padding="$x4" prefHeight="-1.0" prefWidth="400.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane fx:id="paneGestioneManagerCompetizione" padding="$x4" prefHeight="-1.0" prefWidth="400.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <GridPane id="paneDettaglioManagerCompetizione" fx:id="panInfoManCpt" GridPane.columnIndex="1">
                   <children>
