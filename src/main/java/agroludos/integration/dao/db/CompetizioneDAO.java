@@ -7,7 +7,7 @@ import agroludos.to.CompetizioneTO;
 
 public interface CompetizioneDAO extends DAO<CompetizioneTO>{
 
-	boolean annullaCompetizione(CompetizioneTO cmpto) throws DatabaseException;
+	CompetizioneTO annullaCompetizione(CompetizioneTO cmpto) throws DatabaseException;
 
 	List<CompetizioneTO> readByTipo(Integer tipo) throws DatabaseException;
 

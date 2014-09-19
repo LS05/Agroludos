@@ -2,6 +2,7 @@ package agroludos.presentation.views.mdc;
 
 import java.util.List;
 
+import javassist.Loader;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.req.DataRequest;
 import agroludos.presentation.resp.AgroResponse;
@@ -18,6 +19,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class ControllerMdcMain extends ControllerUtenti{
 
@@ -49,6 +52,8 @@ public class ControllerMdcMain extends ControllerUtenti{
 	private CmpModel cmpModelRow;
 	private CompetizioneTO cmpto;
 
+	private Stage stage;
+
 	//chiamato dai set vista con parametro
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
@@ -64,16 +69,25 @@ public class ControllerMdcMain extends ControllerUtenti{
 		cmpModelRow.setTipo(this.cmpto.getNomeTipo());
 		
 	}
-	
+ 
 	@Override
 	public void initializeView() {
 		
 			this.richiesta = reqFact.createDataRequest(utente,"getCompetizioneByMdc");
 			this.risposta = respFact.createResponse();
 			frontController.eseguiRichiesta(this.richiesta, this.risposta);
-	
+			
 			this.listaTabCmp = this.getListTabellaCmp();
 			this.initCmpTable();
+			
+			
+			
+			this.stage = (Stage)this.paneCompetizioni.getScene().getWindow();
+			this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		        public void handle(WindowEvent we) {
+		            System.out.println("inviare richiesta chiudi");
+		        }
+		    });
 	}
 
 	@FXML protected void btnPaneComptizioni(MouseEvent event) {

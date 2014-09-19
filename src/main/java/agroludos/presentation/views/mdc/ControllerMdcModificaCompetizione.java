@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -12,12 +13,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.req.DataRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.UtenteTO;
 
 
 
@@ -50,14 +53,6 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		this.txtDescrizione.setText(this.cmpto.getDescrizione());
 		this.txtCosto.setText(Double.toString(this.cmpto.getCosto()));
 		this.txtData.setText(this.cmpto.getData().toString());
-
-
-//		//carico tipi nella combo box
-//		ObservableList<String> listTipiCmp = FXCollections.observableArrayList();
-//		listTipiCmp.add("Tiro con l'arco");
-//		listTipiCmp.add("Corsa campestre");
-//		this.cmbTipoCmp.setItems(listTipiCmp);
-//		this.cmbTipoCmp.setValue(this.cmpto.getNomeTipo());
 		
 		this.txtTipoCmp.setText(this.cmpto.getNomeTipo());
 
@@ -76,6 +71,13 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		}
 		this.cmbNmax.setItems(listNmax);
 		this.cmbNmax.setValue(this.cmpto.getNmax());
+		
+		this.stage = (Stage)this.btnConferma.getScene().getWindow();
+		this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+	        public void handle(WindowEvent we) {
+	            stage.hide();
+	        }
+	    });
 
 	}
 
@@ -83,10 +85,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		
 	}
 	@FXML private void btnAnnulla(MouseEvent event){
-//		nav.setVista("mostraCmp", this.cmpto);
-		this.source = (Node)event.getSource(); 
-		this.stage  = (Stage)this.source.getScene().getWindow();
-	    this.stage.hide();
+		this.hideStageFromEvent(event);
 	}
 	@FXML private void btnConferma(MouseEvent event){
 		this.cmpto.setCosto(Double.valueOf(txtCosto.getText()));
@@ -96,17 +95,10 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		this.cmpto.setNmin(cmbNmin.getSelectionModel().getSelectedItem());
 		this.cmpto.setNome(txtNome.getText());
 		
-		//TODO se modificacompetizione andasse a finire sulla view managerDiCompetizione??
-		// oppure dopo la request modificaCompetizione richiamassimo tramite getSession la 
-		//request getCompetizioneByMdc così da chiamare forword di managerDiCompetizione
-		//e refreshare la tabella??
-		
 		
 		this.risposta = respFact.createResponse();
 		this.richiesta = reqFact.createDataRequest(this.cmpto, "modificaCompetizione");
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-	    
-//		nav.setVista("successDialog",this.cmpto);
 		
 		this.hideStageFromEvent(event);
 		
@@ -126,7 +118,9 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		// TODO Auto-generated method stub
+		if(request.getCommandName().equals("modificaCompetizione")){
+			System.out.println("errore nella modifica");
+		}
 
 	}
 

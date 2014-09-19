@@ -77,10 +77,10 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 	}
 
 	@Override
-	public boolean annullaCompetizione(CompetizioneTO cmpto)
+	public CompetizioneTO annullaCompetizione(CompetizioneTO cmpto)
 			throws DatabaseException {
-		// TODO Auto-generated method stub
-		return false;
+			cmpto.setStato(0);
+			return super.update(cmpto);	
 	}
 
 	private void setNomeTipoComp(CompetizioneTO cmpto) throws DatabaseException {

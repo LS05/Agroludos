@@ -41,7 +41,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	}
 
 	@Override
-	public boolean annullaCompetizione(CompetizioneTO cmpto)
+	public CompetizioneTO annullaCompetizione(CompetizioneTO cmpto)
 			throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
 		return daoCmp.annullaCompetizione(cmpto);
