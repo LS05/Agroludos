@@ -14,6 +14,8 @@ import agroludos.business.as.gestoremds.LManagerDiSistema;
 import agroludos.business.as.gestoremds.SManagerDiSistema;
 import agroludos.business.as.gestoreoptional.LOptional;
 import agroludos.business.as.gestoreoptional.SOptional;
+import agroludos.business.as.gestorepartecipante.LPartecipante;
+import agroludos.business.as.gestorepartecipante.SPartecipante;
 import agroludos.business.as.gestoreutente.LUtente;
 import agroludos.business.as.gestoreutente.SUtente;
 import agroludos.exceptions.BusinessComponentNotFoundException;
@@ -29,6 +31,8 @@ class Services {
 	private SManagerDiCompetizione smdc;
 	private LCompetizione lcmp;
 	private SCompetizione scmp;
+	private LPartecipante lpartecipante;
+	private SPartecipante spartecipante;
 
 	private Map<String, AgroludosService> services;
 	private LOptional lopt;
@@ -96,6 +100,16 @@ class Services {
 	public void setSopt(SOptional sopt) {
 		this.sopt = sopt;
 		this.services.put(SOptional.class.getName(), this.sopt);
+	}
+
+	public void setLpartecipante(LPartecipante lpartecipante) {
+		this.lpartecipante = lpartecipante;
+		this.services.put(LPartecipante.class.getName(), this.lpartecipante);
+	}
+
+	public void setSpartecipante(SPartecipante spartecipante) {
+		this.spartecipante = spartecipante;
+		this.services.put(SPartecipante.class.getName(), this.spartecipante);
 	}
 
 	public AgroludosService getService(String serviceName) throws BusinessComponentNotFoundException{

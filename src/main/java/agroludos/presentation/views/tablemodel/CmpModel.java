@@ -12,8 +12,10 @@ public class CmpModel {
 	private SimpleStringProperty nmax;
 	private SimpleStringProperty tipo;
 	private SimpleStringProperty stato;
+	private SimpleStringProperty descrizione;
+	private SimpleStringProperty costo;
 	private CompetizioneTO cmpto;
-	
+
 	public CmpModel(CompetizioneTO cmpto){
 		this.id = new SimpleStringProperty(Integer.toString(cmpto.getId()));
 		this.nome = new SimpleStringProperty(cmpto.getNome());
@@ -22,7 +24,9 @@ public class CmpModel {
 		this.nmin = new SimpleStringProperty(Integer.toString(cmpto.getNmin()));
 		this.nmax = new SimpleStringProperty(Integer.toString(cmpto.getNmax()));
 		this.tipo = new SimpleStringProperty(cmpto.getNomeTipo());
-		this.stato = new SimpleStringProperty(cmpto.getNomeStato());
+		this.stato = new SimpleStringProperty(Integer.toString(cmpto.getStato()));
+		this.descrizione = new SimpleStringProperty(cmpto.getDescrizione());
+		this.costo = new SimpleStringProperty(Double.toString(cmpto.getCosto()));
 		this.cmpto = cmpto;
 	}
 
@@ -81,7 +85,7 @@ public class CmpModel {
 	public void setNiscritti(String niscritti) {
 		this.niscritti.set(niscritti);
 	}
-	
+
 	public String getNmin() {
 		return nmin.get();
 	}
@@ -98,33 +102,53 @@ public class CmpModel {
 		this.nmax.set(nmax);
 	}
 
-	
+	public String getDescrizione() {
+		return descrizione.get();
+	}
+
+	public String getCosto() {
+		return costo.get();
+	}
+
 	public SimpleStringProperty idProperty(){
 		return this.id;
 	}
+
 	public SimpleStringProperty nomeProperty(){
 		return this.nome;
 	}
+
 	public SimpleStringProperty dataProperty(){
 		return this.data;
 	}
+
 	public SimpleStringProperty niscrittiProperty(){
 		return this.niscritti;
 	}
+
 	public SimpleStringProperty nminProperty(){
 		return this.nmin;
 	}
+
 	public SimpleStringProperty nmaxProperty(){
 		return this.nmax;
 	}
+
 	public SimpleStringProperty tipoProperty(){
 		return this.tipo;
 	}
+
+	public SimpleStringProperty descrizioneProperty(){
+		return this.descrizione;
+	}
+
+	public SimpleStringProperty costoProperty(){
+		return this.costo;
+	}
+
 	public SimpleStringProperty statoProperty(){
 		return this.stato;
 	}
-
-	
 
 	@Override
 	public String toString() {
@@ -132,10 +156,4 @@ public class CmpModel {
 				+ ", niscritti=" + niscritti + ", nmin=" + nmin + ", nmax="
 				+ nmax + ", tipo=" + tipo + ", stato=" + stato + "]";
 	}
-
-
-
-
-
-	
 }

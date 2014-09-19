@@ -18,11 +18,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
+import agroludos.presentation.views.tablemodel.CmpModel;
 import agroludos.presentation.views.tablemodel.MdcModel;
 import agroludos.presentation.views.tablemodel.OptModel;
+import agroludos.presentation.views.tablemodel.PartModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
+import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.OptionalTO;
+import agroludos.to.PartecipanteTO;
 
 public class ControllerMdsMain extends ControllerUtenti{
 
@@ -39,10 +43,23 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML private Button btnGestPart;
 
 	//button gest competizioni
+	@FXML private TableView<CmpModel> tableCompetizioni;
+	@FXML private TableColumn<OptModel, String> cmpColNome;
+	@FXML private TableColumn<OptModel, String> cmpColDesc;
+	@FXML private TableColumn<OptModel, String> cmpColPrezzo;
+	@FXML private TableColumn<OptModel, String> cmpColStato;
 	@FXML private Button btnCorsaCampestre;
 	@FXML private Button btnTiroConArco;
 	@FXML private Button btnNuovoTipoCompetizione;
+	private List<CompetizioneTO> listComp;
 
+	//gestione partecipanti
+	@FXML private TableView<PartModel> tablePartecipanti;
+	@FXML private TableColumn<PartModel, String> partColNome;
+	@FXML private TableColumn<PartModel, String> partColCognome;
+	@FXML private TableColumn<PartModel, String> partColEmail;
+	@FXML private TableColumn<PartModel, String> partColUsername;
+	
 	//gestione Optionlal
 	@FXML private Button btnPranzo;
 	@FXML private Button btnMerenda;
@@ -74,6 +91,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
 	private List<String> richieste;
+	private List<PartecipanteTO> listPart;
 
 	@SuppressWarnings("serial")
 	@Override
@@ -86,6 +104,8 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.richieste = new ArrayList<String>(){{
 			this.add("getAllManagerDiCompetizione");
 			this.add("getAllOptional");
+			this.add("getAllPartecipante");
+			this.add("getAllCompetizione");
 		}};
 
 		initRequests();
@@ -93,6 +113,9 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.listaTabMdc = this.getListTabellaMdC();
 		this.selectedMDC = 0;
 		this.initMdcTable();
+		this.initOptTable();
+		this.initCompTable();
+		this.initPartTable();
 	}
 
 	private void initRequests(){
@@ -252,6 +275,54 @@ public class ControllerMdsMain extends ControllerUtenti{
 		return res;
 	}
 
+	private void initOptTable(){
+		this.initColumn(this.optColNome, "nome");
+		this.initColumn(this.optColDesc, "descrizione");
+		this.initColumn(this.optColPrezzo, "costo");
+		this.initColumn(this.optColStato, "stato");
+
+		ObservableList<OptModel> res = FXCollections.observableArrayList();
+
+		for(OptionalTO opt : this.listOpt){
+			OptModel modelOpt = new OptModel(opt);
+			res.add(modelOpt);
+		}
+
+		this.tableOptional.getItems().setAll(res);
+	}
+
+	private void initCompTable(){
+		this.initColumn(this.cmpColNome, "nome");
+		this.initColumn(this.cmpColDesc, "descrizione");
+		this.initColumn(this.cmpColPrezzo, "costo");
+		this.initColumn(this.cmpColStato, "stato");
+
+		ObservableList<CmpModel> res = FXCollections.observableArrayList();
+
+		for(CompetizioneTO comp : this.listComp){
+			CmpModel modelCmp = new CmpModel(comp);
+			res.add(modelCmp);
+		}
+
+		this.tableCompetizioni.getItems().setAll(res);
+	}
+	
+	private void initPartTable(){
+		this.initColumn(this.partColNome, "nome");
+		this.initColumn(this.partColCognome, "cognome");
+		this.initColumn(this.partColEmail, "email");
+		this.initColumn(this.partColUsername, "username");
+
+		ObservableList<PartModel> res = FXCollections.observableArrayList();
+
+		for(PartecipanteTO part : this.listPart){
+			PartModel partModel = new PartModel(part);
+			res.add(partModel);
+		}
+
+		this.tablePartecipanti.getItems().setAll(res);
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
@@ -261,11 +332,23 @@ public class ControllerMdsMain extends ControllerUtenti{
 				List<ManagerDiCompetizioneTO> mdcList = (List<ManagerDiCompetizioneTO>)res;
 				this.listMdc = mdcList;
 			}
-		}if(request.getCommandName().equals("getAllOptional")){
+		} else if(request.getCommandName().equals("getAllOptional")){
 			Object res = (Object)response.getRespData();
 			if(res instanceof List<?>){
 				List<OptionalTO> optList = (List<OptionalTO>)res;
 				this.listOpt = optList;
+			}
+		} else if(request.getCommandName().equals("getAllPartecipante")){
+			Object res = (Object)response.getRespData();
+			if(res instanceof List<?>){
+				List<PartecipanteTO> mdcList = (List<PartecipanteTO>)res;
+				this.listPart = mdcList;
+			}
+		} else if(request.getCommandName().equals("getAllCompetizione")){
+			Object res = (Object)response.getRespData();
+			if(res instanceof List<?>){
+				List<CompetizioneTO> comList = (List<CompetizioneTO>)res;
+				this.listComp = comList;
 			}
 		} else if(request.getCommandName().equals("modificaManagerDiCompetizione")){
 			Object res = (Object)response.getRespData();

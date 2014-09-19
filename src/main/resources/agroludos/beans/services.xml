@@ -16,5 +16,7 @@
 		<property name="scmp" ref="gestoreCompetizione" />
 		<property name="lopt" ref="gestoreOptional" />
 		<property name="sopt" ref="gestoreOptional" />
+		<property name="lpartecipante" ref="gestorePartecipante" />
+		<property name="spartecipante" ref="gestorePartecipante" />
 	</bean>
 </beans>

@@ -41,4 +41,8 @@
 		class="agroludos.business.as.gestoreoptional.ASGestoreOptional"
 		parent="agroludosAS">
 	</bean>
+		<bean id="gestorePartecipante"
+		class="agroludos.business.as.gestorepartecipante.ASGestorePartecipante"
+		parent="agroludosAS">
+	</bean>
 </beans>

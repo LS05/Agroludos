@@ -65,4 +65,12 @@
 		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
 		<forward success="managerDiSistema" failure="managerDiSistema" />
 	</command>
+	<command name="getAllPartecipante">
+		<classe>agroludos.business.as.gestorepartecipante.LPartecipante</classe>
+		<forward success="managerDiSistema" failure="managerDiSistema" />
+	</command>
+	<command name="getAllCompetizione">
+		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
+		<forward success="managerDiSistema" failure="managerDiSistema" />
+	</command>
 </commands>
