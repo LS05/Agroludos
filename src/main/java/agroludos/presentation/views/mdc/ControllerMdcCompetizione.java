@@ -1,6 +1,5 @@
 package agroludos.presentation.views.mdc;
 
-
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -17,10 +16,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
+import agroludos.presentation.views.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
@@ -28,7 +27,7 @@ import agroludos.to.IscrizioneTO;
 public class ControllerMdcCompetizione extends AgroludosController {
 
 	private CompetizioneTO cmpto;
-	
+
 	@FXML private GridPane paneVisualizzaCmp;
 	@FXML private GridPane paneIscritti;
 
@@ -40,7 +39,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	private ObservableList<IscModel> listaTabIsc;
 	private List<IscrizioneTO> listIsc;
 	private IscModel iscModelRow;
-	
+
 	//label della competizione da visualizzare
 	@FXML private Label lblNomeCompetizione;
 	@FXML private Label lblData;
@@ -87,10 +86,10 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.lblNiscritti.setText(Integer.toString(this.cmpto.getAllIscritti().size()));
 		this.lblStato.setText(this.cmpto.getNomeStato());
 		this.txtDescrizione.setText(this.cmpto.getDescrizione());
-		
+
 		//popolo la lista delle iscrizioni
 		this.listIsc = this.cmpto.getAllIscrizioni();
-		
+
 		this.listaTabIsc = this.getListTabellaIsc();
 		this.initIscTable();
 
@@ -107,41 +106,41 @@ public class ControllerMdcCompetizione extends AgroludosController {
 
 		return res;
 	}
-	
+
 	private <S,T> TableColumn<S, T> initColumn(TableColumn<S, T> col, String colName){
 		col.setCellValueFactory(new PropertyValueFactory<S, T>(colName));
 		return col;
 	}
-	
+
 	private void initIscTable(){
 		this.initColumn(this.iscNomeCol, "nome");
 		this.initColumn(this.iscCognomeCol, "cognome");
 		this.initColumn(this.iscEmailCol, "email");
-		
+
 		this.tblIscritti.getItems().setAll(this.listaTabIsc);
-		
+
 		this.tblIscritti.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
 			@Override
-            public void handle(MouseEvent event) {
-                if (event.getClickCount() > 1) {
-                    System.out.println("double clicked!");
-                    @SuppressWarnings("unchecked")
+			public void handle(MouseEvent event) {
+				if (event.getClickCount() > 1) {
+					System.out.println("double clicked!");
+					@SuppressWarnings("unchecked")
 					TableView<IscModel> table = (TableView<IscModel>) event.getSource();
-                    iscModelRow = table.getSelectionModel().getSelectedItem();
-                    nav.setVista("mostraIscrizoine", iscModelRow.getIscrizioneTO());
-                }
-            }
-        });
+					iscModelRow = table.getSelectionModel().getSelectedItem();
+					nav.setVista("mostraIscrizoine", iscModelRow.getIscrizioneTO());
+				}
+			}
+		});
 	}
-	
+
 	@FXML protected void btnAnnullaCmp(MouseEvent event) {
 
 		System.out.println("Confermi? si...");
 		this.risposta = respFact.createResponse();
 		this.richiesta = reqFact.createDataRequest(this.cmpto, "annullaCompetizione");
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		
+
 	}
 
 	@FXML protected void btnChiudi(MouseEvent event) {
@@ -152,7 +151,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	}
 
 	@FXML protected void btnModificaCmp(MouseEvent event) {
-		
+
 		this.lblModificaOk.setVisible(false);
 		nav.setVista("mostraModificaCmp", this.cmpto);
 	}
@@ -162,8 +161,6 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.stage  = (Stage)this.source.getScene().getWindow();
 		this.stage.hide();
 	}
-
-
 
 	@Override
 	public void initializeView() {
@@ -182,11 +179,9 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		}else if(request.getCommandName().equals("annullaCompetizione")){
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){
-				
+
 			}
 		}
 
 	}
-
-
 }

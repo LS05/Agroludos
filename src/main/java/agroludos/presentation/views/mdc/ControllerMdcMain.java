@@ -2,14 +2,13 @@ package agroludos.presentation.views.mdc;
 
 import java.util.List;
 
-import javassist.Loader;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.req.DataRequest;
 import agroludos.presentation.resp.AgroResponse;
+import agroludos.presentation.views.tablemodel.CmpModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
-import agroludos.to.IscrizioneTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -21,7 +20,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 public class ControllerMdcMain extends ControllerUtenti{
 
@@ -45,8 +43,6 @@ public class ControllerMdcMain extends ControllerUtenti{
 	private ObservableList<CmpModel> listaTabCmp;
 	private List<CompetizioneTO> listCmp;
 
-
-
 	private AgroResponse risposta;
 	private DataRequest richiesta;
 
@@ -55,21 +51,21 @@ public class ControllerMdcMain extends ControllerUtenti{
 	private CompetizioneTO cmpto;
 	private Stage stage;
 
-	
+
 	@Override
 	public void initializeView() {
-		
-			this.richiesta = reqFact.createDataRequest(utente,"getCompetizioneByMdc");
-			this.risposta = respFact.createResponse();
-			frontController.eseguiRichiesta(this.richiesta, this.risposta);
-			
-			this.listaTabCmp = this.getListTabellaCmp();
-			this.initCmpTable();
-			
+
+		this.richiesta = reqFact.createDataRequest(utente,"getCompetizioneByMdc");
+		this.risposta = respFact.createResponse();
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+
+		this.listaTabCmp = this.getListTabellaCmp();
+		this.initCmpTable();
+
 
 	}
-	
-	
+
+
 	//chiamato dai set vista con parametro per aggiornare la tabella
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
@@ -84,18 +80,18 @@ public class ControllerMdcMain extends ControllerUtenti{
 		cmpModelRow.setNome(this.cmpto.getNome());
 		cmpModelRow.setStato(this.cmpto.getNomeStato());
 		cmpModelRow.setTipo(this.cmpto.getNomeTipo());
-		
-		
+
+
 	}
- 
+
 
 
 	@FXML protected void btnPaneComptizioni(MouseEvent event) {
 		this.paneCompetizioni.setVisible(true);
 	}
 
-		
-	
+
+
 	private ObservableList<CmpModel> getListTabellaCmp(){
 		ObservableList<CmpModel> res = FXCollections.observableArrayList();
 		CmpModel modelCmp = null;
@@ -107,12 +103,12 @@ public class ControllerMdcMain extends ControllerUtenti{
 
 		return res;
 	}
-	
+
 	private <S,T> TableColumn<S, T> initColumn(TableColumn<S, T> col, String colName){
 		col.setCellValueFactory(new PropertyValueFactory<S, T>(colName));
 		return col;
 	}
-	
+
 	private void initCmpTable(){
 		this.initColumn(this.cmpIdCol, "id");
 		this.initColumn(this.cmpNomeCol, "nome");
@@ -124,22 +120,22 @@ public class ControllerMdcMain extends ControllerUtenti{
 		this.initColumn(this.cmpStatoCol, "stato");
 
 		this.tableCompetizione.getItems().setAll(this.listaTabCmp);
-		
+
 		this.tableCompetizione.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
 			@Override
-            public void handle(MouseEvent event) {
-                if (event.getClickCount() > 1) {
-                    System.out.println("double clicked!");
-                    @SuppressWarnings("unchecked")
+			public void handle(MouseEvent event) {
+				if (event.getClickCount() > 1) {
+					System.out.println("double clicked!");
+					@SuppressWarnings("unchecked")
 					TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
-                    cmpModelRow = table.getSelectionModel().getSelectedItem();
-                    nav.setVista("mostraCmp", cmpModelRow.getCompetizioneTO());
-                }
-            }
-        });
+					cmpModelRow = table.getSelectionModel().getSelectedItem();
+					nav.setVista("mostraCmp", cmpModelRow.getCompetizioneTO());
+				}
+			}
+		});
 	}
-	
+
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		if(request.getCommandName().equals("getCompetizioneByMdc")){
@@ -148,9 +144,8 @@ public class ControllerMdcMain extends ControllerUtenti{
 				List<CompetizioneTO> cmpList = (List<CompetizioneTO>)res;
 				this.listCmp = cmpList;
 			}	
-			
+
 		}
-		
+
 	}	
 }
-

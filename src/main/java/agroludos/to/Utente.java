@@ -1,6 +1,7 @@
 package agroludos.to;
 
 class Utente implements UtenteTO{
+	private static final long serialVersionUID = -5750807819852265909L;
 	protected Integer id;
 	protected String nome;
 	protected String cognome;
@@ -114,6 +115,12 @@ class Utente implements UtenteTO{
 	@Override
 	public String getRuolo() {
 		return this.nomeRuolo;
+	}
+	
+	@Override
+	public int compareTo(UtenteTO o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override

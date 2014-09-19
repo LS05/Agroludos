@@ -1,6 +1,7 @@
 package agroludos.to;
 
 class Database implements DatabaseTO{
+	private static final long serialVersionUID = -5536152960444041292L;
 	private String nome;
 	private String server;
 	private String porta;

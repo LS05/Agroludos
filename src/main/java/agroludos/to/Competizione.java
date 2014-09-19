@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+
 /**
  * Implementazione dell'interfaccia CompetizioneTO. L'implementazione sull'assunzione
  * per quale alcuni metodi non sono resi pubblici nell'interfaccia, in quanto chiamati
@@ -19,7 +22,9 @@ import java.util.Set;
 class Competizione implements CompetizioneTO{
 	private static final long serialVersionUID = 6648039519261379934L;
 
+	private Integer id;
 	private String nome;
+	private DateTime suppData;
 	private Date data;
 	private int nmin;
 	private int nmax;
@@ -28,7 +33,6 @@ class Competizione implements CompetizioneTO{
 	private int mdc;
 	private int stato;
 	private int tipo;
-	private Integer id;
 	private String nomeStato;
 	private String nomeTipo;
 	private Set<Optional> optionals;
@@ -76,6 +80,7 @@ class Competizione implements CompetizioneTO{
 
 	@Override
 	public void setData(Date data) {
+		this.suppData = new DateTime(data).withTimeAtStartOfDay();
 		this.data = data;
 	}
 
@@ -229,14 +234,28 @@ class Competizione implements CompetizioneTO{
 	}
 
 	@Override
-	public String toString() {
+	public boolean isTerminata(){
+		LocalDate date = new DateTime(this.getData()).toLocalDate();
+		LocalDate today = new DateTime().toLocalDate();
+		boolean res = false;
 
-		return "Competizione [nome=" + nome + ", data=" + data + ", nmin="
-				+ nmin + ", nmax=" + nmax + ", descrizione=" + descrizione
-				+ ", costo=" + costo + ", mdc=" + mdc + ", stato=" + stato
-				+ ", tipo=" + tipo + ", id=" + id + ", nomeStato=" + nomeStato
-				+ ", nomeTipo=" + nomeTipo + ", optionals=" + optionals
-				+ ", iscritti=" + iscritti + ", iscrizioni=" + iscrizioni + "]";
+		if(date.isBefore(today)){
+			res = true;
+		}
+
+		return res;
+	}
+
+	@Override
+	public boolean isChiusa(){
+		DateTime date = new DateTime().withTimeAtStartOfDay();
+		boolean res = false;
+
+		if(date.plusDays(2).isEqual(this.suppData)){
+			res = true;
+		}
+
+		return res;
 	}
 
 	@Override
@@ -260,9 +279,20 @@ class Competizione implements CompetizioneTO{
 		if(this.id == cpt.getId()){
 			res = 0;
 		} else {
-			res = 1;
+			this.suppData.compareTo(new DateTime(cpt.getData()));
 		}
 
 		return res;
+	}
+
+	@Override
+	public String toString() {
+
+		return "Competizione [nome=" + nome + ", data=" + data + ", nmin="
+				+ nmin + ", nmax=" + nmax + ", descrizione=" + descrizione
+				+ ", costo=" + costo + ", mdc=" + mdc + ", stato=" + stato
+				+ ", tipo=" + tipo + ", id=" + id + ", nomeStato=" + nomeStato
+				+ ", nomeTipo=" + nomeTipo + ", optionals=" + optionals
+				+ ", iscritti=" + iscritti + ", iscrizioni=" + iscrizioni + "]";
 	}
 }

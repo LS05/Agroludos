@@ -216,5 +216,9 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 * 
 	 * @param nomeTipo Il tipo della competizione
 	 */
-	void setNomeTipo(String nomeTipo);	
+	void setNomeTipo(String nomeTipo);
+
+	boolean isTerminata();
+
+	boolean isChiusa();	
 }

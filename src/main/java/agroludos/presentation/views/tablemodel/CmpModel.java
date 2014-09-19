@@ -1,4 +1,4 @@
-package agroludos.presentation.views.mdc;
+package agroludos.presentation.views.tablemodel;
 
 import agroludos.to.CompetizioneTO;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,7 +14,7 @@ public class CmpModel {
 	private SimpleStringProperty stato;
 	private CompetizioneTO cmpto;
 	
-	CmpModel(CompetizioneTO cmpto){
+	public CmpModel(CompetizioneTO cmpto){
 		this.id = new SimpleStringProperty(Integer.toString(cmpto.getId()));
 		this.nome = new SimpleStringProperty(cmpto.getNome());
 		this.data = new SimpleStringProperty(cmpto.getData().toString());

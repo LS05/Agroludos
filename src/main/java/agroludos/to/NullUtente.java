@@ -1,6 +1,7 @@
 package agroludos.to;
 
 class NullUtente implements UtenteTO{
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String nome;
 	private String cognome;
@@ -110,5 +111,11 @@ class NullUtente implements UtenteTO{
 	@Override
 	public void setNomeStatoUtente(String nomeStatoUtente) {
 		this.nomeStatoUtente = "";
+	}
+
+	@Override
+	public int compareTo(UtenteTO o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

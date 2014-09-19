@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 class Partecipante extends Utente implements PartecipanteTO {
+	private static final long serialVersionUID = -4787024687328022378L;
 	private String cf;
 	private String indirizzo;
 	private Date dataNasc;
@@ -111,5 +112,11 @@ class Partecipante extends Utente implements PartecipanteTO {
 				+ ", dataNasc=" + dataNasc + ", sesso=" + sesso + ", numTS="
 				+ numTS + ", src=" + src + ", dataSRC=" + dataSRC
 				+ ", iscrizioni=" + iscrizioni + "]";
+	}
+	
+	@Override
+	public int compareTo(UtenteTO o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

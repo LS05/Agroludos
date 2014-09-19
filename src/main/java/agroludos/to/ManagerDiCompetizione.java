@@ -1,7 +1,7 @@
 package agroludos.to;
 
 class ManagerDiCompetizione extends Utente implements ManagerDiCompetizioneTO {
-
+	private static final long serialVersionUID = 8563751281065371435L;
 	private Double stipendio;
 
 	@Override
@@ -14,6 +14,12 @@ class ManagerDiCompetizione extends Utente implements ManagerDiCompetizioneTO {
 		this.stipendio = stipendio;
 	}
 
+	@Override
+	public int compareTo(UtenteTO o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 	@Override
 	public String toString() {
 		return "[stipendio=" + stipendio + ", id=" + id + ", nome=" + nome

@@ -1,4 +1,4 @@
-package agroludos.presentation.views.mdc;
+package agroludos.presentation.views.tablemodel;
 
 import javafx.beans.property.SimpleStringProperty;
 import agroludos.to.IscrizioneTO;
@@ -10,7 +10,7 @@ public class IscModel {
 	private SimpleStringProperty email;
 	private IscrizioneTO iscto;
 	
-	IscModel(IscrizioneTO iscto){
+	public IscModel(IscrizioneTO iscto){
 		this.id = new SimpleStringProperty(Integer.toString(iscto.getId()));
 		this.nome = new SimpleStringProperty(iscto.getPartecipanteIscrizione().getNome());
 		this.cognome = new SimpleStringProperty(iscto.getPartecipanteIscrizione().getCognome());

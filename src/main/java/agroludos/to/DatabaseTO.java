@@ -1,16 +1,27 @@
 package agroludos.to;
 
 public interface DatabaseTO extends AgroludosTO{
-	String getNome();
-	String getTipo();
-	String getUsername();
-	String getPassword();
-	String getServer();
-	String getPorta();
-	void setNome(String nome);
-	void setTipo(String tipo);
-	void setUsername(String username);
-	void setPassword(String password);
-	void setServer(String server);
-	void setPorta(String porta);
+	public String getNome();
+
+	public String getTipo();
+
+	public String getUsername();
+
+	public String getPassword();
+
+	public String getServer();
+
+	public String getPorta();
+
+	public void setNome(String nome);
+
+	public void setTipo(String tipo);
+
+	public void setUsername(String username);
+
+	public void setPassword(String password);
+
+	public void setServer(String server);
+
+	public void setPorta(String porta);
 }

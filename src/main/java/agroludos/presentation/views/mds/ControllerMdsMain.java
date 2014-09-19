@@ -18,6 +18,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
+import agroludos.presentation.views.tablemodel.MdcModel;
+import agroludos.presentation.views.tablemodel.OptModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.OptionalTO;

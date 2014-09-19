@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 class Iscrizione implements IscrizioneTO{
+	private static final long serialVersionUID = 1L;
 	private Date data;
 	private Integer id;
 	private Integer stato;
@@ -109,5 +110,11 @@ class Iscrizione implements IscrizioneTO{
 				+ ", idcompetizione=" + idcompetizione + ", partecipante="
 				+ partecipante + ", idpartecipante=" + idpartecipante
 				+ ", optionals=" + optionals + "]";
+	}
+
+	@Override
+	public int compareTo(IscrizioneTO o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

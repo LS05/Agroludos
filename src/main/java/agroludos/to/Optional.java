@@ -1,6 +1,7 @@
 package agroludos.to;
 
 class Optional implements OptionalTO{
+	private static final long serialVersionUID = 4962907532320055278L;
 	private String nome;
 	private String descrizione;
 	private Double costo;
@@ -96,5 +97,11 @@ class Optional implements OptionalTO{
 		return "Optional [nome=" + nome + ", descrizione=" + descrizione
 				+ ", costo=" + costo + ", stato=" + stato + ", tipo=" + tipo
 				+ ", id=" + id + "]";
+	}
+
+	@Override
+	public int compareTo(OptionalTO o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

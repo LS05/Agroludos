@@ -1,6 +1,6 @@
 package agroludos.to;
 
-public interface UtenteTO extends AgroludosTO {
+public interface UtenteTO extends AgroludosTO, Comparable<UtenteTO> {
 	
 	public String getUsername();
 

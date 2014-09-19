@@ -1,6 +1,6 @@
 package agroludos.to;
 
-public interface OptionalTO extends AgroludosTO{
+public interface OptionalTO extends AgroludosTO, Comparable<OptionalTO>{
 
 	public String getNome();
 

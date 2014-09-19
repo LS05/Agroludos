@@ -1,4 +1,4 @@
-package agroludos.presentation.views.mds;
+package agroludos.presentation.views.tablemodel;
 
 import agroludos.to.ManagerDiCompetizioneTO;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,7 +11,7 @@ public class MdcModel {
 	private SimpleStringProperty username;
 	private SimpleStringProperty stato;
 	
-	MdcModel(ManagerDiCompetizioneTO manComp){
+	public MdcModel(ManagerDiCompetizioneTO manComp){
 		this.id = new SimpleStringProperty(Integer.toString(1));
 		this.nome = new SimpleStringProperty(manComp.getNome());
 		this.cognome = new SimpleStringProperty(manComp.getCognome());
