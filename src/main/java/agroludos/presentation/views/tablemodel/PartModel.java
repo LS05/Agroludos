@@ -18,6 +18,7 @@ public class PartModel {
 	private SimpleStringProperty sesso;
 	private SimpleStringProperty dataNasc;
 	private SimpleStringProperty numTessera;
+	private PartecipanteTO part;
 
 	public PartModel(PartecipanteTO part){
 		this.id = new SimpleStringProperty(Integer.toString(1));
@@ -33,6 +34,7 @@ public class PartModel {
 		this.sesso = new SimpleStringProperty(part.getSesso());
 		this.dataNasc = new SimpleStringProperty(part.getDataNasc().toString());
 		this.numTessera = new SimpleStringProperty(part.getNumTS());
+		this.part = part;
 	}
 
 	public String getId() {
@@ -175,6 +177,10 @@ public class PartModel {
 		return this.numTessera;
 	}
 
+	public PartecipanteTO getPart() {
+		return part;
+	}
+	
 	@Override
 	public String toString() {
 		return "[id=" + id + ", nome=" + nome + ", cognome=" + cognome

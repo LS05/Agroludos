@@ -13,6 +13,7 @@ public class OptModel {
 	private SimpleStringProperty stato;
 	private SimpleStringProperty nomeStato;
 	private SimpleDoubleProperty costo;
+	private OptionalTO optTO;
 
 	public OptModel(OptionalTO optTO){
 		this.id = new SimpleStringProperty(Integer.toString(1));
@@ -23,6 +24,7 @@ public class OptModel {
 		this.stato = new SimpleStringProperty(String.valueOf(optTO.getStato()));
 		this.nomeStato = new SimpleStringProperty(String.valueOf(optTO.getNomeStatoOpt()));
 		this.costo = new SimpleDoubleProperty(optTO.getCosto());
+		this.optTO = optTO;
 	}
 
 	public String getId() {
@@ -87,5 +89,17 @@ public class OptModel {
 
 	public void setCosto(Double costo) {
 		this.costo.set(costo);
+	}
+
+	public OptionalTO getOptTO() {
+		return optTO;
+	}
+
+	@Override
+	public String toString() {
+		return "[id=" + id + ", nome=" + nome + ", descrizione=" + descrizione
+				+ ", tipo=" + tipo + ", nomeTipo=" + nomeTipo + ", stato="
+				+ stato + ", nomeStato=" + nomeStato + ", costo=" + costo
+				+ ", optTO=" + optTO + "]";
 	}
 }
