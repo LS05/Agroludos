@@ -59,7 +59,19 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML private TableColumn<PartModel, String> partColCognome;
 	@FXML private TableColumn<PartModel, String> partColEmail;
 	@FXML private TableColumn<PartModel, String> partColUsername;
-	
+
+	@FXML private Label lblParNome;
+	@FXML private Label lblParCognome;
+	@FXML private Label lblParUsername;
+	@FXML private Label lblParStato;
+	@FXML private Label lblParDataSRC;
+	@FXML private Label lblParCodFisc;
+	@FXML private Label lblParIndirizzo;
+	@FXML private Label lblParSesso;
+	@FXML private Label lblParEmail;
+	@FXML private Label lblParAnnoNasc;
+	@FXML private Label lblParNumTessSan;
+
 	//gestione Optionlal
 	@FXML private Button btnPranzo;
 	@FXML private Button btnMerenda;
@@ -92,6 +104,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 	private AgroResponse risposta;
 	private List<String> richieste;
 	private List<PartecipanteTO> listPart;
+	private int selectedPart;
 
 	@SuppressWarnings("serial")
 	@Override
@@ -112,6 +125,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 		this.listaTabMdc = this.getListTabellaMdC();
 		this.selectedMDC = 0;
+		this.selectedPart = 0;
 		this.initMdcTable();
 		this.initOptTable();
 		this.initCompTable();
@@ -306,7 +320,22 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 		this.tableCompetizioni.getItems().setAll(res);
 	}
-	
+
+	private void setDxPartColumn(int selected) {
+		PartModel selModel = this.tablePartecipanti.getItems().get(selected);
+		this.lblParNome.setText(selModel.getNome());
+		this.lblParCognome.setText(selModel.getCognome());
+		this.lblParEmail.setText(selModel.getEmail());
+		this.lblParUsername.setText(selModel.getUsername());
+		//		this.lblParStato.setText(selModel.getStato());
+		this.lblParDataSRC.setText(selModel.getDataSRC());
+		this.lblParCodFisc.setText(selModel.getCf());
+		this.lblParIndirizzo.setText(selModel.getIndirizzo());
+		this.lblParSesso.setText(selModel.getSesso());
+		this.lblParAnnoNasc.setText(selModel.getDataNasc());
+		this.lblParNumTessSan.setText(selModel.getNumTessera());
+	}
+
 	private void initPartTable(){
 		this.initColumn(this.partColNome, "nome");
 		this.initColumn(this.partColCognome, "cognome");
@@ -321,7 +350,24 @@ public class ControllerMdsMain extends ControllerUtenti{
 		}
 
 		this.tablePartecipanti.getItems().setAll(res);
-	}
+
+		this.tablePartecipanti.getSelectionModel().select(0);
+
+		this.setDxPartColumn(this.selectedPart);
+
+		this.tablePartecipanti.getSelectionModel().selectedItemProperty().addListener(
+				new ChangeListener<PartModel>(){
+
+					@Override
+					public void changed(ObservableValue<? extends PartModel> partModel,
+							PartModel oldMod, PartModel newMod) {
+
+						selectedPart = tablePartecipanti.getSelectionModel().getSelectedIndex();
+						setDxPartColumn(selectedPart);
+					}
+
+				});
+	}	
 
 	@SuppressWarnings("unchecked")
 	@Override
