@@ -23,5 +23,7 @@ public interface TOFactory {
 	TipoOptionalTO createTipoOptionalTO();
 
 	UtenteTO createNullUTO();
+	
+	StatoCompetizioneTO createStatoCompetizioneTO();
 
 }

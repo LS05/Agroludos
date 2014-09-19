@@ -94,6 +94,8 @@
 		<![CDATA[ from agroludos.to.Partecipante m where m.statoUtente = 1 ]]></query>
 	<query name="getByUsername">
 		<![CDATA[ from agroludos.to.Utente m where m.statoUtente = 1 and m.username = ? ]]></query>
+	<query name="updateManager">
+		<![CDATA[ update agroludos.to.Utente set statoUtente = ? ]]></query>
 	<sql-query name="getNomeRuolo">
        <![CDATA[ SELECT tbl_ruoli.nome FROM tbl_ruoli WHERE tbl_ruoli.idruolo = ? ]]></sql-query>
 	<sql-query name="getNomeStatoUtente">

@@ -7,7 +7,5 @@ public interface ManagerDiCompetizioneTO extends UtenteTO{
 	public Double getStipendio();
 	
 	public void setStipendio(Double stipendio);
-
-	public void setStato(int selectedIndex);
 	
 }

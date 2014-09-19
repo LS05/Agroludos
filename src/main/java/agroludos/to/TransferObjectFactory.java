@@ -56,4 +56,9 @@ public class TransferObjectFactory implements TOFactory {
 	public TipoOptionalTO createTipoOptionalTO() {
 		return new TipoOptional();
 	}
+	
+	@Override
+	public StatoCompetizioneTO createStatoCompetizioneTO() {
+		return new StatoCompetizione();
+	}
 }

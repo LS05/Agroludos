@@ -61,7 +61,8 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 		this.mdcTO.setCognome(this.txtCognome.getText());
 		this.mdcTO.setUsername(this.txtUsername.getText());
 		this.mdcTO.setEmail(this.txtEmail.getText());
-		this.mdcTO.setStato(this.cmbStato.getSelectionModel().getSelectedIndex());
+		//TODO rivedere come far cambiare ;
+		this.mdcTO.getStatoUtente().setId(this.cmbStato.getSelectionModel().getSelectedIndex());
 
 		this.richiesta = this.getRichiesta(mdcTO, "modificaManagerDiCompetizione");
 		this.risposta = respFact.createResponse();

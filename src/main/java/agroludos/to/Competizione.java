@@ -59,8 +59,9 @@ class Competizione implements CompetizioneTO{
 		return statoCompetizione;
 	}
 
-	public void setStatoCompetizione(StatoCompetizione statoCompetizione) {
-		this.statoCompetizione = statoCompetizione;
+	@Override
+	public void setStatoCompetizione(StatoCompetizioneTO statoCompetizione) {
+		this.statoCompetizione = (StatoCompetizione) statoCompetizione;
 	}
 
 	

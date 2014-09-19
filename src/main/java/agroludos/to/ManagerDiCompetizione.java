@@ -27,12 +27,6 @@ class ManagerDiCompetizione extends Utente implements ManagerDiCompetizioneTO {
 				+ username + ", password=" + password + ", email=" + email
 				+ "]";
 	}
-
-	@Override
-	public void setStato(int selectedIndex) {
-		this.getStatoUtente().setId(selectedIndex);
-		
-	}
 	
 	
 }

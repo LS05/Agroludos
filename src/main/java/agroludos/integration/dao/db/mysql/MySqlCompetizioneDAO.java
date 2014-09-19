@@ -9,7 +9,9 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
+import agroludos.to.StatoCompetizioneTO;
 import agroludos.to.TipoCompetizioneTO;
+import agroludos.to.TransferObjectFactory;
 
 class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements CompetizioneDAO {
 
@@ -64,7 +66,11 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 	@Override
 	public CompetizioneTO annullaCompetizione(CompetizioneTO cmpto)
 			throws DatabaseException {
-			cmpto.getStatoCompetizione().setId(0);
+		TransferObjectFactory fact = new TransferObjectFactory();
+		StatoCompetizioneTO scto = fact.createStatoCompetizioneTO();
+		scto.setId(0);
+		scto.setNome("annullata");
+			cmpto.setStatoCompetizione(scto);
 			return super.update(cmpto);	
 	}
 

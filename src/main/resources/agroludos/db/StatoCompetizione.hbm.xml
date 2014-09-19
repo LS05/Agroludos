@@ -15,4 +15,6 @@
 	</class>
 	<query name="getAllStatoCompetizione">
         <![CDATA[ from agroludos.to.StatoCompetizione o ]]></query>
+	<query name="getStatoAnnullata">
+        <![CDATA[ from agroludos.to.StatoCompetizione o where o.id = 0]]></query>
 </hibernate-mapping>

@@ -155,5 +155,8 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	//TODO
 	TipoCompetizioneTO getTipoCompetizione();
 	StatoCompetizioneTO getStatoCompetizione();
-	ManagerDiCompetizioneTO getManagerDiCompetizione();	
+	ManagerDiCompetizioneTO getManagerDiCompetizione();
+
+	void setStatoCompetizione(StatoCompetizioneTO statoCompetizione);
+
 }
