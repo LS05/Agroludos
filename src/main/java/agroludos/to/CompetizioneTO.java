@@ -12,7 +12,7 @@ import java.util.List;
  * @author Francesco Zagaria
  * @see <a href="http://en.wikipedia.org/wiki/Data_transfer_object">http://en.wikipedia.org/wiki/Data_transfer_object</a>
  */
-public interface CompetizioneTO extends AgroludosTO{
+public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	
 	/**
 	 * Il metodo ritorna il nome della competizione

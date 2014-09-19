@@ -59,6 +59,10 @@
 	</command>
 	<command name="modificaManagerDiCompetizione">
 		<classe>agroludos.business.as.gestoremdc.SManagerDiCompetizione</classe>
-		<forward success="modificaMDC" failure="modificaMDC" />
+		<forward success="managerDiSistema" failure="modificaMDC" />
+	</command>
+	<command name="getAllOptional">
+		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
+		<forward success="managerDiSistema" failure="managerDiSistema" />
 	</command>
 </commands>

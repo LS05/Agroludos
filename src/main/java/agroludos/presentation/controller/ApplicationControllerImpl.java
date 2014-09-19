@@ -34,8 +34,8 @@ class ApplicationControllerImpl implements ApplicationController{
 			throw new EnrichableException("gestisciRichiesta", "E1", "Errore in ApplicationControllerImpl.gestisciRichiesta()", e);
 		} catch (ApplicationException e) {
 			
-			// TODO Eccezione di programmazione
-			// Sollevata solo in caso in cui ho una ServiceNotFoundException, IllegalAccess o IllegalArgument
+			// TODO Da controllare se è un'eccezione di programmazione
+			// In caso in cui ho una BusinessComponentNotFoundException, ServiceNotFoundException, IllegalAccess o IllegalArgument
 			// quindi da qui il programma deve chiudersi; 
 			e.printStackTrace();
 		}

@@ -1,10 +1,12 @@
 package agroludos.presentation.views.mds;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,6 +20,7 @@ import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.ManagerDiCompetizioneTO;
+import agroludos.to.OptionalTO;
 
 public class ControllerMdsMain extends ControllerUtenti{
 
@@ -38,17 +41,28 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML private Button btnTiroConArco;
 	@FXML private Button btnNuovoTipoCompetizione;
 
-	//button gest optionlal
+	//gestione Optionlal
 	@FXML private Button btnPranzo;
 	@FXML private Button btnMerenda;
 	@FXML private Button btnPernotto;
 	@FXML private Button btnNuovoTipoOptional;
+	@FXML private TableView<OptModel> tableOptional;
+	@FXML private TableColumn<OptModel, String> optColNome;
+	@FXML private TableColumn<OptModel, String> optColDesc;
+	@FXML private TableColumn<OptModel, String> optColPrezzo;
+	@FXML private TableColumn<OptModel, String> optColStato;
+	private List<OptionalTO> listOpt;
 
-	//tabella manager di competizione
+	//gestione manager di competizione
 	@FXML private TableView<MdcModel> tableManagerCompetizione;
 	@FXML private TableColumn<MdcModel, String> mdcNomeCol;
 	@FXML private TableColumn<MdcModel, String> mdcCognomeCol;
 	@FXML private TableColumn<MdcModel, String> mdcEmailCol;
+
+	private List<ManagerDiCompetizioneTO> listMdc;
+	private ObservableList<MdcModel> listaTabMdc;
+	private int selectedMDC;
+
 	@FXML private Label lblMdcNome;
 	@FXML private Label lblMdcCognome;
 	@FXML private Label lblMdcUsername;
@@ -57,12 +71,9 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
+	private List<String> richieste;
 
-	private List<ManagerDiCompetizioneTO> listMdc;
-	private ObservableList<MdcModel> listaTabMdc;
-
-	//setto visibile solo il primo pane
-
+	@SuppressWarnings("serial")
 	@Override
 	public void initializeView() {
 		this.paneGestioneCompetizioni.setVisible(true);
@@ -70,12 +81,24 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.paneGestioneManagerCompetizione.setVisible(false);
 		this.paneGestionePartecipanti.setVisible(false);
 
-		this.richiesta = reqFact.createSimpleRequest("getAllManagerDiCompetizione");
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.richieste = new ArrayList<String>(){{
+			this.add("getAllManagerDiCompetizione");
+			this.add("getAllOptional");
+		}};
+
+		initRequests();
 
 		this.listaTabMdc = this.getListTabellaMdC();
+		this.selectedMDC = 0;
 		this.initMdcTable();
+	}
+
+	private void initRequests(){
+		for(String req : this.richieste){
+			this.richiesta = this.getRichiesta(req);
+			this.risposta = respFact.createResponse();
+			frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		}
 	}
 
 	//----------------Main View--------------------
@@ -112,10 +135,10 @@ public class ControllerMdsMain extends ControllerUtenti{
 	//--------------------Gest Man Competizione ---------------
 
 	@FXML protected void modificaManagerCompetizione(MouseEvent event){
+
 		MdcModel mdcMod = this.tableManagerCompetizione.getSelectionModel().getSelectedItem();
-
 		ManagerDiCompetizioneTO mdcto = this.getManagerDiCompetizione(mdcMod.getUsername());
-
+		this.selectedMDC = this.tableManagerCompetizione.getSelectionModel().getSelectedIndex();
 		nav.setVista("modificaMDC", mdcto);
 	}
 
@@ -153,6 +176,20 @@ public class ControllerMdsMain extends ControllerUtenti{
 		ObservableList<MdcModel> res = FXCollections.observableArrayList();
 		MdcModel modelMdc = null;
 
+		res.addListener(new ListChangeListener<MdcModel>() {
+
+			@Override
+			public void onChanged(Change<? extends MdcModel> c) {
+				while (c.next()) {
+					if (c.wasUpdated()) {
+						//update MdcModel
+						System.out.println("Elemento della lista cambiato!");
+					} 
+				}
+
+			}
+		});
+
 		for(ManagerDiCompetizioneTO mdc : this.listMdc){
 			modelMdc = new MdcModel(mdc);
 			res.add(modelMdc);
@@ -166,24 +203,35 @@ public class ControllerMdsMain extends ControllerUtenti{
 		return col;
 	}
 
+	private void setDxColumn(Integer selected){
+		MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
+		this.lblMdcNome.setText(selModel.getNome());
+		this.lblMdcCognome.setText(selModel.getCognome());
+		this.lblMdcEmail.setText(selModel.getEmail());
+		this.lblMdcUsername.setText(selModel.getUsername());
+		this.lblMdcStato.setText(selModel.getStato());
+	}
+
 	private void initMdcTable(){
 		this.initColumn(this.mdcNomeCol, "nome");
 		this.initColumn(this.mdcCognomeCol, "cognome");
 		this.initColumn(this.mdcEmailCol, "email");
 
 		this.tableManagerCompetizione.getItems().setAll(this.listaTabMdc);
+
+		this.tableManagerCompetizione.getSelectionModel().select(0);
+
+		this.setDxColumn(this.selectedMDC);
+
 		this.tableManagerCompetizione.getSelectionModel().selectedItemProperty().addListener(
 				new ChangeListener<MdcModel>(){
 
 					@Override
 					public void changed(ObservableValue<? extends MdcModel> mdcModel,
 							MdcModel oldMod, MdcModel newMod) {
-						lblMdcNome.setText(newMod.getNome());
-						lblMdcCognome.setText(newMod.getCognome());
-						lblMdcEmail.setText(newMod.getEmail());
-						lblMdcUsername.setText(newMod.getUsername());
-						lblMdcStato.setText(newMod.getStato());
-						System.out.println(newMod);
+
+						selectedMDC = tableManagerCompetizione.getSelectionModel().getSelectedIndex();
+						setDxColumn(selectedMDC);
 					}
 
 				});
@@ -193,7 +241,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 		ManagerDiCompetizioneTO res = null;
 
 		for(ManagerDiCompetizioneTO m : this.listMdc){
-			if(m.getUsername() == username){
+			if(m.getUsername().equals(username)){
 				res = m;
 				break;
 			}
@@ -210,6 +258,24 @@ public class ControllerMdsMain extends ControllerUtenti{
 			if(res instanceof List<?>){
 				List<ManagerDiCompetizioneTO> mdcList = (List<ManagerDiCompetizioneTO>)res;
 				this.listMdc = mdcList;
+			}
+		}if(request.getCommandName().equals("getAllOptional")){
+			Object res = (Object)response.getRespData();
+			if(res instanceof List<?>){
+				List<OptionalTO> optList = (List<OptionalTO>)res;
+				this.listOpt = optList;
+			}
+		} else if(request.getCommandName().equals("modificaManagerDiCompetizione")){
+			Object res = (Object)response.getRespData();
+			if(res instanceof ManagerDiCompetizioneTO){
+				ManagerDiCompetizioneTO mdcTO = (ManagerDiCompetizioneTO)res;
+				MdcModel mdc = this.tableManagerCompetizione.getItems().get(this.selectedMDC);
+				mdc.setNome(mdcTO.getNome());
+				mdc.setCognome(mdcTO.getCognome());
+				mdc.setEmail(mdcTO.getEmail());
+				mdc.setUsername(mdcTO.getUsername());
+				mdc.setStato(mdcTO.getNomeStatoUtente());
+				setDxColumn(this.selectedMDC);
 			}
 		}
 	}

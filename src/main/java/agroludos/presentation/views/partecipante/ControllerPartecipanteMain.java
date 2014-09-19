@@ -3,8 +3,6 @@ package agroludos.presentation.views.partecipante;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.utenti.ControllerUtenti;
-import agroludos.to.PartecipanteTO;
-import agroludos.to.UtenteTO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;

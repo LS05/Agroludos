@@ -1,7 +1,5 @@
 package agroludos.main;
 
-import java.util.List;
-
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;

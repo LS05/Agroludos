@@ -42,6 +42,8 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 			throws DatabaseException {
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
 		ManagerDiCompetizioneTO res = (ManagerDiCompetizioneTO)daoMan.update(mdcto);
+		daoMan.setNomeStatoUtente(res);
+		daoMan.setNomeRuolo(res);
 		return res;
 	}
 

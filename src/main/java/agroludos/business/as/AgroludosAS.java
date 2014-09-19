@@ -9,6 +9,8 @@ public abstract class AgroludosAS {
 	protected DBFactory dbFact;
 	protected TOFactory toFact;
 	
+	//TODO Da rendere privati
+	
 	public void setSysConf(SystemConf sysConf) {
 		this.sysConf = sysConf;
 	}

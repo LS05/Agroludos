@@ -46,6 +46,9 @@ public class ServiceHandler {
 				
 				//TODO Controllare se l'eccezione è di sistema o
 				//di applicazione
+				//Controllare se è un'eccezione di controllo-dati 
+				//(o di un altro tipo particolare) 
+				//allora passo il TO, altrimenti il messaggio.
 				this.response.setLogicalViewName(command.getFailView());
 				this.response.setData(e.getTargetException().getMessage());
 			}

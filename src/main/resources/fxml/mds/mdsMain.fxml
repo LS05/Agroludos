@@ -6,6 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?scenebuilder-preview-i18n-resource ../../bundles/Agroludos_it.properties?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="agroludos.presentation.views.mds.ControllerMdsMain">
   <children>
@@ -51,11 +52,11 @@
                     <TableColumn prefWidth="75.0" text="Stato" />
                   </columns>
                 </TableView>
-                <Button fx:id="btnNuovoTipoCompetizione" mnemonicParsing="false" onMouseClicked="#btnNuovoTipoCompetizione" prefHeight="25.0" prefWidth="222.0" text="Nuovo Tipo" GridPane.halignment="CENTER" />
+                <Button fx:id="btnNuovoTipoCompetizione" mnemonicParsing="false" onMouseClicked="#btnNuovoTipoCompetizione" prefHeight="25.0" prefWidth="222.0" text="%key104" GridPane.halignment="CENTER" />
                 <GridPane GridPane.columnIndex="1">
                   <children>
-                    <Button mnemonicParsing="false" text="Cerca Competizione" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
-                    <Button mnemonicParsing="false" text="Ricerca Avanzata" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                    <Button mnemonicParsing="false" text="%key18" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                    <Button mnemonicParsing="false" text="%key50" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                     <TextField GridPane.halignment="CENTER" />
                   </children>
                   <columnConstraints>
@@ -77,7 +78,7 @@
                 <RowConstraints maxHeight="595.0" minHeight="10.0" prefHeight="595.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <GridPane fx:id="paneGestioneOptional" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane fx:id="paneGestioneOptional" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <GridPane id="paneTipiOptional" GridPane.rowIndex="1">
                   <children>
@@ -100,19 +101,19 @@
                 </GridPane>
                 <TableView columnResizePolicy="$x1" GridPane.columnIndex="1" GridPane.rowIndex="1">
                   <columns>
-                    <TableColumn prefWidth="75.0" text="%key21" />
-                    <TableColumn prefWidth="75.0" text="%key48" />
-                    <TableColumn prefWidth="75.0" text="%key69" />
-                    <TableColumn prefWidth="75.0" text="Stato" />
+                    <TableColumn prefWidth="75.0" text="%key21" fx:id="optColNome" />
+                    <TableColumn prefWidth="75.0" text="%key48" fx:id="optColDesc" />
+                    <TableColumn prefWidth="75.0" text="%key69" fx:id="optColPrezzo" />
+                    <TableColumn prefWidth="75.0" text="%key24" fx:id="optColStato" />
                   </columns>
                 </TableView>
-                <Button fx:id="btnNuovoTipoOptional" mnemonicParsing="false" onMouseClicked="#btnNuovoTipoOptional" prefHeight="25.0" prefWidth="222.0" text="Nuovo Tipo" GridPane.halignment="CENTER" />
+                <Button fx:id="btnNuovoTipoOptional" mnemonicParsing="false" onMouseClicked="#btnNuovoTipoOptional" prefHeight="25.0" prefWidth="222.0" text="%key103" GridPane.halignment="CENTER" />
                 <GridPane GridPane.columnIndex="1">
                   <children>
-                    <Button mnemonicParsing="false" text="Nuovo Optional" GridPane.halignment="CENTER" />
-                    <Button mnemonicParsing="false" text="Modifica Optional" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                    <Button mnemonicParsing="false" text="%key100" GridPane.halignment="CENTER" />
+                    <Button mnemonicParsing="false" text="%key101" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                     <Button mnemonicParsing="false" text="Attiva Optional" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                    <Button mnemonicParsing="false" text="Disattiva Optional" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                    <Button mnemonicParsing="false" text="%key102" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -139,8 +140,8 @@
                   <children>
                     <GridPane maxHeight="50.0" prefHeight="50.0">
                       <children>
-                        <Button id="btnCercaPartecipante" mnemonicParsing="false" text="Cerca Partecipante" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                        <Button id="btnRiceracaAvanzataPartecipante" mnemonicParsing="false" text="Ricerca avanzata" GridPane.columnIndex="2" />
+                        <Button id="btnCercaPartecipante" mnemonicParsing="false" text="%key114" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                        <Button id="btnRiceracaAvanzataPartecipante" mnemonicParsing="false" text="%key50" GridPane.columnIndex="2" />
                         <TextField id="txtCercaPartecipante" />
                       </children>
                       <columnConstraints>
@@ -154,10 +155,10 @@
                     </GridPane>
                     <TableView id="tableManagerCompetizione" columnResizePolicy="$x1" GridPane.rowIndex="1">
                       <columns>
-                        <TableColumn prefWidth="75.0" text="Nome" />
-                        <TableColumn prefWidth="75.0" text="Cognome" />
-                        <TableColumn prefWidth="75.0" text="Username" />
-                        <TableColumn prefWidth="75.0" text="Email" />
+                        <TableColumn prefWidth="75.0" text="%key2" />
+                        <TableColumn prefWidth="75.0" text="%key3" />
+                        <TableColumn prefWidth="75.0" text="%key74" />
+                        <TableColumn prefWidth="75.0" text="%key4" />
                       </columns>
                     </TableView>
                   </children>
@@ -171,7 +172,7 @@
                 </GridPane>
                 <GridPane id="paneDettagliPartecipante" fx:id="paneInfoPartecipante" GridPane.columnIndex="1">
                   <children>
-                    <Label text="Partecipante" GridPane.halignment="CENTER">
+                    <Label text="%key109" GridPane.halignment="CENTER">
                       <font>
                         <Font size="22.0" fx:id="x3" />
                       </font>
@@ -181,32 +182,32 @@
                     </Label>
                     <GridPane GridPane.rowIndex="1">
                       <children>
-                        <Label text="Nome">
+                        <Label text="%key2">
                           <font>
                             <Font name="System Bold" size="13.0" fx:id="x2" />
                           </font>
                         </Label>
                         <Label id="lblNomePartecipante" fx:id="lblNome" text="Label" GridPane.columnIndex="1" />
-                        <Label font="$x2" text="Cognome" GridPane.rowIndex="1" />
+                        <Label font="$x2" text="%key3" GridPane.rowIndex="1" />
                         <Label id="lblCognomePartecipante" fx:id="lblCognome" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label font="$x2" text="Username" GridPane.rowIndex="2" />
+                        <Label font="$x2" text="%key74" GridPane.rowIndex="2" />
                         <Label id="lblUsernamePartecipante" fx:id="lblUsername" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label font="$x2" text="Data CSRC" GridPane.rowIndex="3" />
+                        <Label font="$x2" text="%key110" GridPane.rowIndex="3" />
                         <Label id="lblDataSRCPartecipante" fx:id="lblDataSRC" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label font="$x2" text="C.F." GridPane.rowIndex="4" />
-                        <Label font="$x2" text="Indirizzo" GridPane.rowIndex="5" />
-                        <Label font="$x2" text="Sesso" GridPane.rowIndex="6" />
-                        <Label font="$x2" text="Email" GridPane.rowIndex="7" />
-                        <Label font="$x2" text="Data di Nascita" GridPane.rowIndex="8" />
-                        <Label font="$x2" prefHeight="46.0" prefWidth="129.0" text="N.ro Tessera Sanitaria" wrapText="true" GridPane.rowIndex="9" />
+                        <Label font="$x2" text="%key111" GridPane.rowIndex="4" />
+                        <Label font="$x2" text="%key8" GridPane.rowIndex="5" />
+                        <Label font="$x2" text="%key6" GridPane.rowIndex="6" />
+                        <Label font="$x2" text="%key4" GridPane.rowIndex="7" />
+                        <Label font="$x2" text="%key5" GridPane.rowIndex="8" />
+                        <Label font="$x2" prefHeight="46.0" prefWidth="129.0" text="%key7" wrapText="true" GridPane.rowIndex="9" />
                         <Label id="lblCFPartecipante" fx:id="lblCodFisc" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label id="lblIndirizzoPartecipante" fx:id="lblIndirizzo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Label id="lblSessoPartecipante" fx:id="lblSesso" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <Label id="lblEmailPartecipante" fx:id="lblEmail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <Label id="lblDataNascitaPartecipante" fx:id="lblAnnoNasc" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                         <Label id="lblNumeroTSPartecipante" fx:id="lblNumTessSan" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                        <Label font="$x2" prefHeight="46.0" prefWidth="129.0" text="Certificato SRC" wrapText="true" GridPane.rowIndex="10" />
-                        <Button id="btnVisualizzaCertificatoPartecipante" mnemonicParsing="false" text="Visualizza" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                        <Label font="$x2" prefHeight="46.0" prefWidth="129.0" text="%key10" wrapText="true" GridPane.rowIndex="10" />
+                        <Button id="btnVisualizzaCertificatoPartecipante" mnemonicParsing="false" text="%key58" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="129.0" />
@@ -235,8 +236,8 @@
                         <Button fx:id="btnModPart" mnemonicParsing="false" text="Modifica Dati" visible="false" GridPane.halignment="CENTER" />
                         <GridPane>
                           <children>
-                            <Button id="btnModificaPartecipante" mnemonicParsing="false" text="Modifica Partecipante" />
-                            <Button id="btnVisualizzaPartecipante" mnemonicParsing="false" text="Visualizza Partecipante" GridPane.columnIndex="1" />
+                            <Button id="btnModificaPartecipante" mnemonicParsing="false" text="%key112" />
+                            <Button id="btnVisualizzaPartecipante" mnemonicParsing="false" text="%key113" GridPane.columnIndex="1" />
                           </children>
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -273,11 +274,11 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <GridPane fx:id="paneGestioneManagerCompetizione" prefHeight="118.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+            <GridPane fx:id="paneGestioneManagerCompetizione" prefHeight="118.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
               <children>
                 <GridPane id="paneDettaglioManagerCompetizione" fx:id="panInfoManCpt" GridPane.columnIndex="1">
                   <children>
-                    <Label font="$x3" text="Manager di Competizione" GridPane.halignment="CENTER">
+                    <Label font="$x3" text="%key115" GridPane.halignment="CENTER">
                       <GridPane.margin>
                         <Insets left="10.0" />
                       </GridPane.margin>
@@ -326,12 +327,12 @@
                     </GridPane>
                     <GridPane GridPane.rowIndex="2">
                       <children>
-                        <Button id="btnModificaManagerCompetizione" mnemonicParsing="false" onMouseClicked="#modificaManagerCompetizione" text="Modifica Manager">
+                        <Button id="btnModificaManagerCompetizione" mnemonicParsing="false" onMouseClicked="#modificaManagerCompetizione" text="%key93">
                           <GridPane.margin>
                             <Insets />
                           </GridPane.margin>
                         </Button>
-                        <Button id="btnEliminaManagerCompetizione" mnemonicParsing="false" text="Elimina Manager" GridPane.columnIndex="1" />
+                        <Button id="btnEliminaManagerCompetizione" mnemonicParsing="false" text="%key118" GridPane.columnIndex="1" />
                       </children>
                       <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -355,15 +356,15 @@
                   <children>
                     <GridPane maxHeight="50.0" prefHeight="50.0">
                       <children>
-                        <Button id="btnNuovoManagerCompetizione" mnemonicParsing="false" text="Nuovo Manager di Competizione" textAlignment="CENTER" />
+                        <Button id="btnNuovoManagerCompetizione" mnemonicParsing="false" text="%key116" textAlignment="CENTER" />
                         <GridPane GridPane.columnIndex="1">
                           <children>
-                            <Button id="btnCercaManagerCompetizione" maxWidth="300.0" mnemonicParsing="false" text="Cerca" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                            <Button id="btnCercaManagerCompetizione" maxWidth="300.0" mnemonicParsing="false" text="%key117" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                               <GridPane.margin>
                                 <Insets left="10.0" />
                               </GridPane.margin>
                             </Button>
-                            <Button id="btnRicercaAvanzataManagerCompetizione" mnemonicParsing="false" text="Ricerca avanzata" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+                            <Button id="btnRicercaAvanzataManagerCompetizione" mnemonicParsing="false" text="%key50" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
                             <TextField id="txtCercaManagerCompetizione" GridPane.halignment="RIGHT" />
                           </children>
                           <columnConstraints>
@@ -386,9 +387,9 @@
                     </GridPane>
                     <TableView fx:id="tableManagerCompetizione" columnResizePolicy="$x1" GridPane.rowIndex="1">
                       <columns>
-                        <TableColumn prefWidth="75.0" text="Nome" fx:id="mdcNomeCol" />
-                        <TableColumn prefWidth="75.0" text="Cognome" fx:id="mdcCognomeCol" />
-                        <TableColumn prefWidth="75.0" text="Email" fx:id="mdcEmailCol" />
+                        <TableColumn prefWidth="75.0" text="%key2" fx:id="mdcNomeCol" />
+                        <TableColumn prefWidth="75.0" text="%key3" fx:id="mdcCognomeCol" />
+                        <TableColumn prefWidth="75.0" text="%key4" fx:id="mdcEmailCol" />
                       </columns>
                       <GridPane.margin>
                         <Insets bottom="10.0" />
@@ -418,10 +419,10 @@
       <left>
         <GridPane id="paneMainMenu" hgap="10.0" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
           <children>
-            <Button fx:id="btnGestManComp" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#btnGestManComp" prefHeight="65.0" prefWidth="200.0" styleClass="mainMenuButton" text="Gestione &#10;Manager di Competizione" wrapText="true" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-            <Button fx:id="btnGestOptional" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#btnGestOptional" prefHeight="65.0" prefWidth="200.0" styleClass="mainMenuButton" text="Gestione&#10;Optional" wrapText="true" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-            <Button fx:id="btnGestComp" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#btnGestComp" prefHeight="65.0" prefWidth="200.0" styleClass="mainMenuButton" text="Gestione&#10;Competizioni" wrapText="true" GridPane.valignment="TOP" />
-            <Button fx:id="btnGestPart" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#btnGestPart" prefHeight="65.0" prefWidth="200.0" styleClass="mainMenuButton" text="Gestione &#10;Partecipanti" wrapText="true" GridPane.rowIndex="3" />
+            <Button fx:id="btnGestManComp" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#btnGestManComp" prefHeight="65.0" prefWidth="200.0" styleClass="mainMenuButton" text="%key107" wrapText="true" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+            <Button fx:id="btnGestOptional" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#btnGestOptional" prefHeight="65.0" prefWidth="200.0" styleClass="mainMenuButton" text="%key106" wrapText="true" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+            <Button fx:id="btnGestComp" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#btnGestComp" prefHeight="65.0" prefWidth="200.0" styleClass="mainMenuButton" text="%key105" wrapText="true" GridPane.valignment="TOP" />
+            <Button fx:id="btnGestPart" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#btnGestPart" prefHeight="65.0" prefWidth="200.0" styleClass="mainMenuButton" text="%key108" wrapText="true" GridPane.rowIndex="3" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />

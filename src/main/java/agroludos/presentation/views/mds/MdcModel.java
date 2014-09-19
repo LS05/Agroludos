@@ -12,12 +12,12 @@ public class MdcModel {
 	private SimpleStringProperty stato;
 	
 	MdcModel(ManagerDiCompetizioneTO manComp){
-		this.id = new SimpleStringProperty(Integer.toString(manComp.getId()));
+		this.id = new SimpleStringProperty(Integer.toString(1));
 		this.nome = new SimpleStringProperty(manComp.getNome());
 		this.cognome = new SimpleStringProperty(manComp.getCognome());
 		this.email = new SimpleStringProperty(manComp.getEmail());
 		this.username = new SimpleStringProperty(manComp.getUsername());
-		this.stato = new SimpleStringProperty(Integer.toString(manComp.getStato()));
+		this.stato = new SimpleStringProperty(manComp.getNomeStatoUtente());
 	}
 
 	public String getId() {
@@ -66,6 +66,26 @@ public class MdcModel {
 
 	public void setStato(String stato) {
 		this.stato.set(stato);
+	}
+	
+	public SimpleStringProperty nomeProperty() {
+	    return this.nome;
+	}
+
+	public SimpleStringProperty cognomeProperty() {
+	    return this.cognome;
+	}
+
+	public SimpleStringProperty emailProperty() {
+	    return this.email;
+	}
+	
+	public SimpleStringProperty usernameProperty() {
+	    return this.username;
+	}
+	
+	public SimpleStringProperty statoProperty() {
+	    return this.stato;
 	}
 
 	@Override
