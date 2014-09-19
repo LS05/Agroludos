@@ -9,6 +9,7 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.IscrizioneTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -41,9 +42,10 @@ public class ControllerMdcMain extends ControllerUtenti{
 	@FXML private TableColumn<CmpModel, String> cmpNmaxCol;
 	@FXML private TableColumn<CmpModel, String> cmpTipoCol;
 	@FXML private TableColumn<CmpModel, String> cmpStatoCol;
-
 	private ObservableList<CmpModel> listaTabCmp;
 	private List<CompetizioneTO> listCmp;
+
+
 
 	private AgroResponse risposta;
 	private DataRequest richiesta;
@@ -51,25 +53,9 @@ public class ControllerMdcMain extends ControllerUtenti{
 	private Integer tableCompetizioneItemIndex;
 	private CmpModel cmpModelRow;
 	private CompetizioneTO cmpto;
-
 	private Stage stage;
 
-	//chiamato dai set vista con parametro
-	@Override
-	public void initializeView(AgroludosTO mainTO) {
-		this.cmpto = (CompetizioneTO)mainTO;
-		cmpModelRow.setCompetizioneTO(this.cmpto);
-		cmpModelRow.setData(this.cmpto.getData().toString());
-		cmpModelRow.setId(Integer.toString(this.cmpto.getId()));
-		cmpModelRow.setNiscritti(Integer.toString(this.cmpto.getAllIscritti().size()));
-		cmpModelRow.setNmax(Integer.toString(this.cmpto.getNmax()));
-		cmpModelRow.setNmin(Integer.toString(this.cmpto.getNmin()));
-		cmpModelRow.setNome(this.cmpto.getNome());
-		cmpModelRow.setStato(this.cmpto.getNomeStato());
-		cmpModelRow.setTipo(this.cmpto.getNomeTipo());
-		
-	}
- 
+	
 	@Override
 	public void initializeView() {
 		
@@ -80,15 +66,29 @@ public class ControllerMdcMain extends ControllerUtenti{
 			this.listaTabCmp = this.getListTabellaCmp();
 			this.initCmpTable();
 			
-			
-			
-			this.stage = (Stage)this.paneCompetizioni.getScene().getWindow();
-			this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-		        public void handle(WindowEvent we) {
-		            System.out.println("inviare richiesta chiudi");
-		        }
-		    });
+
 	}
+	
+	
+	//chiamato dai set vista con parametro per aggiornare la tabella
+	@Override
+	public void initializeView(AgroludosTO mainTO) {
+		this.cmpto = (CompetizioneTO)mainTO;
+		//model di competizione
+		cmpModelRow.setCompetizioneTO(this.cmpto);
+		cmpModelRow.setData(this.cmpto.getData().toString());
+		cmpModelRow.setId(Integer.toString(this.cmpto.getId()));
+		cmpModelRow.setNiscritti(Integer.toString(this.cmpto.getAllIscritti().size()));
+		cmpModelRow.setNmax(Integer.toString(this.cmpto.getNmax()));
+		cmpModelRow.setNmin(Integer.toString(this.cmpto.getNmin()));
+		cmpModelRow.setNome(this.cmpto.getNome());
+		cmpModelRow.setStato(this.cmpto.getNomeStato());
+		cmpModelRow.setTipo(this.cmpto.getNomeTipo());
+		
+		
+	}
+ 
+
 
 	@FXML protected void btnPaneComptizioni(MouseEvent event) {
 		this.paneCompetizioni.setVisible(true);
@@ -134,8 +134,6 @@ public class ControllerMdcMain extends ControllerUtenti{
                     @SuppressWarnings("unchecked")
 					TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
                     cmpModelRow = table.getSelectionModel().getSelectedItem();
-                    //mi salvo l'indice del item selezionato per poi aggiornarlo
-                    tableCompetizioneItemIndex = table.getSelectionModel().getSelectedIndex();
                     nav.setVista("mostraCmp", cmpModelRow.getCompetizioneTO());
                 }
             }
@@ -149,23 +147,7 @@ public class ControllerMdcMain extends ControllerUtenti{
 			if(res instanceof List<?>){
 				List<CompetizioneTO> cmpList = (List<CompetizioneTO>)res;
 				this.listCmp = cmpList;
-			}
-		}else if(request.getCommandName().equals("modificaCompetizione")){
-			CmpModel cmpModelRow = this.tableCompetizione.getItems().get(this.tableCompetizioneItemIndex);
-			Object res = (Object)response.getRespData();
-			if(res instanceof CompetizioneTO){
-				CompetizioneTO cmpto = (CompetizioneTO)res;
-				cmpModelRow.setData(cmpto.getData().toString());
-				cmpModelRow.setId(Integer.toString(cmpto.getId()));
-				cmpModelRow.setNiscritti(Integer.toString(cmpto.getAllIscritti().size()));
-				cmpModelRow.setNmax(Integer.toString(cmpto.getNmax()));
-				cmpModelRow.setNmin(Integer.toString(cmpto.getNmin()));
-				cmpModelRow.setNome(cmpto.getNome());
-				cmpModelRow.setStato(cmpto.getNomeStato());
-				cmpModelRow.setTipo(cmpto.getNomeTipo());
-				
-			}
-			
+			}	
 			
 		}
 		

@@ -179,7 +179,7 @@
                             <Font name="System Bold Italic" size="16.0" fx:id="x6" />
                           </font>
                         </Label>
-                        <Label fx:id="lblAnnullaOk" font="$x6" text="%key100" textFill="#ce2929" visible="false" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+                        <Label fx:id="lblAnnullaOk" font="$x6" text="%key119" textFill="#ce2929" visible="false" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

@@ -1,15 +1,19 @@
 package agroludos.presentation.views.mdc;
 
-import java.sql.Date;
 
+import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -19,6 +23,7 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.IscrizioneTO;
 
 public class ControllerMdcCompetizione extends AgroludosController {
 
@@ -27,6 +32,15 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	@FXML private GridPane paneVisualizzaCmp;
 	@FXML private GridPane paneIscritti;
 
+	//tabella iscrizioni alla competizione
+	@FXML private TableView<IscModel> tblIscritti;
+	@FXML private TableColumn<IscModel, String> iscNomeCol;
+	@FXML private TableColumn<IscModel, String> iscCognomeCol;
+	@FXML private TableColumn<IscModel, String> iscEmailCol;
+	private ObservableList<IscModel> listaTabIsc;
+	private List<IscrizioneTO> listIsc;
+	private IscModel iscModelRow;
+	
 	//label della competizione da visualizzare
 	@FXML private Label lblNomeCompetizione;
 	@FXML private Label lblData;
@@ -74,16 +88,53 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.lblStato.setText(this.cmpto.getNomeStato());
 		this.txtDescrizione.setText(this.cmpto.getDescrizione());
 		
-		this.stage = (Stage)this.paneVisualizzaCmp.getScene().getWindow();
-		this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-	        public void handle(WindowEvent we) {
-	        	nav.setVista("managerDiCompetizione",cmpto);
-	            stage.hide();
-	        }
-	    });
+		//popolo la lista delle iscrizioni
+		this.listIsc = this.cmpto.getAllIscrizioni();
+		
+		this.listaTabIsc = this.getListTabellaIsc();
+		this.initIscTable();
 
 	}
 
+	private ObservableList<IscModel> getListTabellaIsc(){
+		ObservableList<IscModel> res = FXCollections.observableArrayList();
+		IscModel modelIsc = null;
+
+		for(IscrizioneTO isc : this.listIsc){
+			modelIsc = new IscModel(isc);
+			res.add(modelIsc);
+		}
+
+		return res;
+	}
+	
+	private <S,T> TableColumn<S, T> initColumn(TableColumn<S, T> col, String colName){
+		col.setCellValueFactory(new PropertyValueFactory<S, T>(colName));
+		return col;
+	}
+	
+	private void initIscTable(){
+		this.initColumn(this.iscNomeCol, "nome");
+		this.initColumn(this.iscCognomeCol, "cognome");
+		this.initColumn(this.iscEmailCol, "email");
+		
+		this.tblIscritti.getItems().setAll(this.listaTabIsc);
+		
+		this.tblIscritti.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+			@Override
+            public void handle(MouseEvent event) {
+                if (event.getClickCount() > 1) {
+                    System.out.println("double clicked!");
+                    @SuppressWarnings("unchecked")
+					TableView<IscModel> table = (TableView<IscModel>) event.getSource();
+                    iscModelRow = table.getSelectionModel().getSelectedItem();
+                    nav.setVista("mostraIscrizoine", iscModelRow.getIscrizioneTO());
+                }
+            }
+        });
+	}
+	
 	@FXML protected void btnAnnullaCmp(MouseEvent event) {
 
 		System.out.println("Confermi? si...");
@@ -131,10 +182,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		}else if(request.getCommandName().equals("annullaCompetizione")){
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){
-				//disabilito i pane
-				this.lblAnnullaOk.setVisible(true);
-				this.paneVisualizzaCmp.setDisable(true);
-				this.paneIscritti.setDisable(true);
+				
 			}
 		}
 

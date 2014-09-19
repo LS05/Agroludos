@@ -73,11 +73,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		this.cmbNmax.setValue(this.cmpto.getNmax());
 		
 		this.stage = (Stage)this.btnConferma.getScene().getWindow();
-		this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-	        public void handle(WindowEvent we) {
-	            stage.hide();
-	        }
-	    });
+
 
 	}
 
