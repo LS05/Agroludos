@@ -4,7 +4,6 @@ import java.sql.Date;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -13,14 +12,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.req.DataRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
-import agroludos.to.UtenteTO;
 
 
 
@@ -54,7 +51,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		this.txtCosto.setText(Double.toString(this.cmpto.getCosto()));
 		this.txtData.setText(this.cmpto.getData().toString());
 		
-		this.txtTipoCmp.setText(this.cmpto.getNomeTipo());
+		this.txtTipoCmp.setText(this.cmpto.getTipoCompetizione().getNome());
 
 		//carico numeri per nmin
 		ObservableList<Integer> listNmin = FXCollections.observableArrayList();

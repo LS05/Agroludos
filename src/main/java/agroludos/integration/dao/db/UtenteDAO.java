@@ -17,8 +17,4 @@ public interface UtenteDAO<T extends UtenteTO> extends DAO<T>{
 
 	T getByID(Integer id) throws DatabaseException;
 
-	void setNomeRuolo(UtenteTO uto) throws DatabaseException;
-
-	void setNomeStatoUtente(UtenteTO uto) throws DatabaseException;
-
 }

@@ -6,4 +6,6 @@ public interface StatoOptionalTO extends AgroludosTO, Comparable<StatoCompetizio
 	public void setNome(String nome);
 
 	Integer getId();
+
+	void setId(Integer id);
 }

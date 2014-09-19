@@ -25,9 +25,6 @@ class MySqlPartecipanteDAO extends MySqlUtenteDAO<PartecipanteTO> implements Par
 		List<PartecipanteTO> list = super.executeParamQuery("getPartecipanteByCF", param);
 		PartecipanteTO res = (PartecipanteTO)list.get(0);
 
-		this.setNomeRuolo(res);
-		this.setNomeStatoUtente(res);
-
 		return res;
 	}
 }

@@ -28,8 +28,6 @@ class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements
 
 		if(list.size() == 1){
 			res = list.get(0);
-			this.setNomeRuolo(res);
-			this.setNomeStatoUtente(res);
 		} else {
 			res = this.toFact.createNullUTO();
 		}
@@ -47,9 +45,6 @@ class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements
 		} else {
 			res = (UtenteTO)list.get(0);
 		}
-
-		this.setNomeRuolo(res);
-		this.setNomeStatoUtente(res);
 
 		return (T)res;
 	}
@@ -107,25 +102,9 @@ class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements
 	}
 
 	@Override
-	public void setNomeRuolo(UtenteTO uto) throws DatabaseException {
-		List<Integer> param = new ArrayList<Integer>();
-		param.add(uto.getIdruolo());
-		String ruolo = super.<String>executeValParamQuery("getNomeRuolo", param);
-		uto.setNomeRuolo(ruolo);
-	}
-
-	@Override
-	public void setNomeStatoUtente(UtenteTO uto) throws DatabaseException {
-		List<Integer> param = new ArrayList<Integer>();
-		param.add(uto.getStato());
-		String stato = super.<String>executeValParamQuery("getNomeStatoUtente", param);
-		uto.setNomeStatoUtente(stato );
-	}
-
-	@Override
 	public T deleteUtente(T entity) throws DatabaseException {
 
-		entity.setStato(0);
+		entity.getStatoUtente().setId(0);
 		super.update(entity);
 
 		return entity;

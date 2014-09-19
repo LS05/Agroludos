@@ -425,7 +425,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 				mdc.setCognome(mdcTO.getCognome());
 				mdc.setEmail(mdcTO.getEmail());
 				mdc.setUsername(mdcTO.getUsername());
-				mdc.setStato(mdcTO.getNomeStatoUtente());
+				mdc.setStato(mdcTO.getStatoUtente().getNome());
 				setDxColumn(this.selectedMDC);
 			}
 

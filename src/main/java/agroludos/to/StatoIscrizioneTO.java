@@ -6,4 +6,6 @@ public interface StatoIscrizioneTO extends AgroludosTO, Comparable<StatoCompetiz
 	public void setNome(String nome);
 
 	Integer getId();
+
+	void setId(Integer id);
 }

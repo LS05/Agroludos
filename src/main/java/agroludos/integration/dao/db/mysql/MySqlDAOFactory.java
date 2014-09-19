@@ -13,23 +13,29 @@ import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
 import agroludos.integration.dao.db.ManagerDiSistemaDAO;
 import agroludos.integration.dao.db.OptionalDAO;
 import agroludos.integration.dao.db.PartecipanteDAO;
+import agroludos.integration.dao.db.StatoCompetizioneDAO;
+import agroludos.integration.dao.db.StatoIscrizioneDAO;
+import agroludos.integration.dao.db.StatoOptionalDAO;
+import agroludos.integration.dao.db.StatoUtenteDAO;
 import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.integration.dao.db.TipoOptionalDAO;
+import agroludos.integration.dao.db.TipoUtenteDAO;
 import agroludos.integration.dao.db.UtenteDAO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
+import agroludos.to.TipoUtenteTO;
 import agroludos.to.TransferObjectFactory;
 import agroludos.to.UtenteTO;
 
 public class MySqlDAOFactory implements DBDAOFactory {
-	
+
 	private MySqlDAOUtil daoUtil;
 
 	private Session session;
-	
+
 	public MySqlDAOFactory(){ }
-	
+
 	public MySqlDAOFactory(MySqlDAOUtil daoUtil) throws DatabaseException{ 
 		this.daoUtil = daoUtil;
 		this.session = this.daoUtil.buildSessionFactory().openSession();
@@ -37,13 +43,13 @@ public class MySqlDAOFactory implements DBDAOFactory {
 
 	public boolean testConnection() throws DatabaseException{
 		boolean res = false;
-		
+
 		try{
 			res = this.session.isConnected() && this.session.isOpen();
 		}catch(HibernateException e){
 			throw new DatabaseException(e.getMessage());
 		}
-			
+
 		return res;
 	}
 
@@ -92,19 +98,47 @@ public class MySqlDAOFactory implements DBDAOFactory {
 		return new MySqlIscrizioneDAO(this.session);
 	}
 
+	@Override
+	public StatoCompetizioneDAO getStatoCompetizioneDAO() {
+		return new MySqlStatoCompetizioneDAO(this.session);
+	}
+
+	@Override
+	public StatoIscrizioneDAO getStatoIscrizioneDAO() {
+		return new MySqlStatoIscrizioneDAO(this.session);
+	}
+
+	@Override
+	public StatoOptionalDAO getStatoOptionalDAO() {
+		return new MySqlStatoOptionalDAO(this.session);
+	}
+
+	@Override
+	public StatoUtenteDAO getStatoUtenteDAO() {
+		return new MySqlStatoUtenteDAO(this.session);
+	}
+
+	@Override
+	public TipoUtenteDAO getTipoUtenteDAO() {
+		return new MySqlTipoUtenteDAO(this.session);
+	}
+
 	public static void main(String args[]){
 		TransferObjectFactory fact = new TransferObjectFactory();
 		MySqlDAOUtil daoUtil = new MySqlDAO();
-		
-		
+
+
 		try {
 			MySqlDAOFactory daoFact = new MySqlDAOFactory(daoUtil);
 			daoFact.testConnection();
-			CompetizioneDAO cmpDao = daoFact.getCompetizioneDAO();
-			List<CompetizioneTO> listCmp = cmpDao.getAll();
-			listCmp.get(0).getAllIscrizioni().get(0).getPartecipante();
+			TipoUtenteDAO cmpDao = daoFact.getTipoUtenteDAO();
+			List<TipoUtenteTO> tuto = cmpDao.getAll();
+			tuto.toString();
+			
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}	
 	}
+
+
 }

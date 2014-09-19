@@ -117,8 +117,6 @@ public class ControllerConfSistema extends AgroludosController {
 		this.mdsto.setUsername(txtUsernameMds.getText());
 		this.mdsto.setPassword(this.txtPasswordMds.getText());
 		this.mdsto.setEmail(txtEmailMds.getText());
-		this.mdsto.setIdruolo(0);
-		this.mdsto.setStato(1);
 		//manca il telefono
 		this.richiesta = reqFact.createDataRequest(mdsto, "nuovoManagerDiSistema");
 		this.risposta = respFact.createResponse();

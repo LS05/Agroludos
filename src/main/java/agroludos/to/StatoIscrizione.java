@@ -21,7 +21,8 @@ public class StatoIscrizione implements StatoIscrizioneTO{
 		return id;
 	}
 	
-	void setId(Integer id) {
+	@Override
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

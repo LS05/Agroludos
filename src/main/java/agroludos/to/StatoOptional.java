@@ -21,8 +21,8 @@ public class StatoOptional implements StatoOptionalTO{
 	public Integer getId() {
 		return id;
 	}
-	
-	void setId(Integer id) {
+	@Override
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

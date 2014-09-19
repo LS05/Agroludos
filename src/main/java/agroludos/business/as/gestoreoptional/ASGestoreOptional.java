@@ -7,6 +7,7 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.OptionalDAO;
 import agroludos.to.OptionalTO;
+import agroludos.to.TipoOptionalTO;
 
 class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 
@@ -38,7 +39,7 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 	}
 
 	@Override
-	public List<OptionalTO> getOptionalByTipo(OptionalTO optto)
+	public List<OptionalTO> getOptionalByTipo(TipoOptionalTO optto)
 			throws DatabaseException {
 		OptionalDAO daoOpt = getOptionalDAO();
 		return daoOpt.readByTipo(optto);

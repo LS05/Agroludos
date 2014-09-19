@@ -7,5 +7,5 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.to.TipoCompetizioneTO;
 
 public interface LTipoCompetizione extends AgroludosService{
-	List<TipoCompetizioneTO> getAllTipoCompetizioneTOs() throws DatabaseException;
+	List<TipoCompetizioneTO> getAllTipoCompetizioneTO() throws DatabaseException;
 }

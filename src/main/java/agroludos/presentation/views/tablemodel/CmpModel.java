@@ -24,8 +24,8 @@ public class CmpModel {
 		this.niscritti = new SimpleStringProperty(Integer.toString(cmpto.getAllIscritti().size()));
 		this.nmin = new SimpleStringProperty(Integer.toString(cmpto.getNmin()));
 		this.nmax = new SimpleStringProperty(Integer.toString(cmpto.getNmax()));
-		this.tipo = new SimpleStringProperty(cmpto.getNomeTipo());
-		this.stato = new SimpleStringProperty(Integer.toString(cmpto.getStato()));
+		this.tipo = new SimpleStringProperty(cmpto.getTipoCompetizione().getNome());
+		this.stato = new SimpleStringProperty(cmpto.getStatoCompetizione().getNome());
 		this.descrizione = new SimpleStringProperty(cmpto.getDescrizione());
 		this.costo = new SimpleStringProperty(Double.toString(cmpto.getCosto()));
 		this.cmpto = cmpto;

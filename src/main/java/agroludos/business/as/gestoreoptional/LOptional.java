@@ -5,10 +5,11 @@ import java.util.List;
 import agroludos.business.as.AgroludosService;
 import agroludos.exceptions.DatabaseException;
 import agroludos.to.OptionalTO;
+import agroludos.to.TipoOptionalTO;
 
 
 public interface LOptional extends AgroludosService{
-	List<OptionalTO> getOptionalByTipo(OptionalTO optto) throws DatabaseException;
+	List<OptionalTO> getOptionalByTipo(TipoOptionalTO optto) throws DatabaseException;
 	List<OptionalTO> getAllOptional() throws DatabaseException;
 
 }

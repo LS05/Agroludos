@@ -82,9 +82,9 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.lblNmin.setText(Integer.toString(this.cmpto.getNmin()));
 		this.lblNmax.setText(Integer.toString(this.cmpto.getNmax()));
 		this.lblCosto.setText(Double.toString(this.cmpto.getCosto()));
-		this.lblTipo.setText(this.cmpto.getNomeTipo());
+		this.lblTipo.setText(this.cmpto.getTipoCompetizione().getNome());
 		this.lblNiscritti.setText(Integer.toString(this.cmpto.getAllIscritti().size()));
-		this.lblStato.setText(this.cmpto.getNomeStato());
+		this.lblStato.setText(this.cmpto.getStatoCompetizione().getNome());
 		this.txtDescrizione.setText(this.cmpto.getDescrizione());
 
 		//popolo la lista delle iscrizioni
@@ -135,7 +135,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	}
 
 	@FXML protected void btnAnnullaCmp(MouseEvent event) {
-
+//TODO
 		System.out.println("Confermi? si...");
 		this.risposta = respFact.createResponse();
 		this.richiesta = reqFact.createDataRequest(this.cmpto, "annullaCompetizione");
@@ -179,7 +179,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		}else if(request.getCommandName().equals("annullaCompetizione")){
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){
-
+				//TODO
 			}
 		}
 

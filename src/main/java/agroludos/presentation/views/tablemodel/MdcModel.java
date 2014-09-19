@@ -19,7 +19,7 @@ public class MdcModel {
 		this.cognome = new SimpleStringProperty(manComp.getCognome());
 		this.email = new SimpleStringProperty(manComp.getEmail());
 		this.username = new SimpleStringProperty(manComp.getUsername());
-		this.stato = new SimpleStringProperty(manComp.getNomeStatoUtente());
+		this.stato = new SimpleStringProperty(manComp.getStatoUtente().getNome());
 		this.manComp = manComp;
 	}
 

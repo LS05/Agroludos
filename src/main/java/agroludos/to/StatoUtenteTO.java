@@ -7,4 +7,6 @@ public interface StatoUtenteTO extends AgroludosTO, Comparable<StatoUtenteTO>{
 	public void setNome(String nome);
 
 	Integer getId();
+
+	void setId(Integer id);
 }

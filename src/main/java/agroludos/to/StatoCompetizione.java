@@ -20,7 +20,8 @@ public class StatoCompetizione implements StatoCompetizioneTO{
 		return id;
 	}
 	
-	void setId(Integer id) {
+	@Override
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	

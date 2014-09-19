@@ -7,5 +7,4 @@ public interface IscrizioneDAO extends DAO<IscrizioneTO>{
 	
 	boolean annullaIscrizione(IscrizioneTO iscto) throws DatabaseException;
 
-	void setNomeStato(IscrizioneTO iscto) throws DatabaseException;
 }

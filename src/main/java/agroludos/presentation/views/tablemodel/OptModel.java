@@ -20,10 +20,8 @@ public class OptModel {
 		this.id = new SimpleStringProperty(Integer.toString(1));
 		this.nome = new SimpleStringProperty(optTO.getNome());
 		this.descrizione = new SimpleStringProperty(optTO.getDescrizione());
-		this.tipo = new SimpleStringProperty(String.valueOf(optTO.getTipo()));
-		this.nomeTipo = new SimpleStringProperty(optTO.getNomeTipoOpt());
-		this.stato = new SimpleStringProperty(String.valueOf(optTO.getStato()));
-		this.nomeStato = new SimpleStringProperty(String.valueOf(optTO.getNomeStatoOpt()));
+		this.tipo = new SimpleStringProperty(optTO.getTipoOptional().getNome());
+		this.stato = new SimpleStringProperty(optTO.getStatoOptional().getNome());
 		this.costo = new SimpleDoubleProperty(optTO.getCosto());
 		this.optTO = optTO;
 	}
@@ -98,9 +96,11 @@ public class OptModel {
 
 	@Override
 	public String toString() {
-		return "[id=" + id + ", nome=" + nome + ", descrizione=" + descrizione
-				+ ", tipo=" + tipo + ", nomeTipo=" + nomeTipo + ", stato="
-				+ stato + ", nomeStato=" + nomeStato + ", costo=" + costo
-				+ ", optTO=" + optTO + "]";
+		return "OptModel [id=" + id + ", nome=" + nome + ", descrizione="
+				+ descrizione + ", tipo=" + tipo + ", nomeTipo=" + nomeTipo
+				+ ", stato=" + stato + ", nomeStato=" + nomeStato + ", costo="
+				+ costo + ", optTO=" + optTO + "]";
 	}
+
+
 }

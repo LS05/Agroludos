@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.OptionalDAO;
 import agroludos.to.OptionalTO;
+import agroludos.to.TipoOptionalTO;
 
 class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements OptionalDAO {
 
@@ -17,39 +18,18 @@ class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements Optional
 	}
 
 	@Override
-	public List<OptionalTO> readByTipo(OptionalTO optTO) throws DatabaseException {
-		List<Integer> param = new ArrayList<Integer>();
-		param.add(optTO.getTipo());
+	public List<OptionalTO> readByTipo(TipoOptionalTO optTO) throws DatabaseException {
+		List<TipoOptionalTO> param = new ArrayList<TipoOptionalTO>();
+		param.add(optTO);
 
 		List<OptionalTO> res = super.executeParamQuery("getOptionalByTipo", param);
-
-		for(OptionalTO opt: res){
-			this.setNomeStatoOpt(opt);
-			this.setNomeTipoOpt(opt);
-		}
 
 		return res;
 	}
 
 	@Override
 	public OptionalTO disattivaOptional(OptionalTO optTO) throws DatabaseException {
-		optTO.setStato(0);
+		optTO.getStatoOptional().setId(0);
 		return super.update(optTO);
-	}
-
-	@Override
-	public void setNomeTipoOpt(OptionalTO optTO) throws DatabaseException {
-		List<Integer> param = new ArrayList<Integer>();
-		param.add(optTO.getTipo());
-		String tipo = super.executeValParamQuery("getNomeTipoOpt", param);
-		optTO.setNomeTipoOpt(tipo);
-	}
-
-	@Override
-	public void setNomeStatoOpt(OptionalTO optTO) throws DatabaseException {
-		List<Integer> param = new ArrayList<Integer>();
-		param.add(optTO.getStato());
-		String stato = super.executeValParamQuery("getNomeStatoOpt", param);
-		optTO.setNomeStatoOpt(stato);
 	}
 }

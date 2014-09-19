@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.ManagerDiCompetizioneTO;
+import agroludos.to.TipoCompetizioneTO;
 
 class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements CompetizioneDAO {
 
@@ -17,9 +19,9 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 	}
 
 	@Override
-	public List<CompetizioneTO> readByTipo(Integer tipo) throws DatabaseException{
+	public List<CompetizioneTO> readByTipo(TipoCompetizioneTO tipo) throws DatabaseException{
 
-		List<Integer> param = new ArrayList<Integer>();
+		List<TipoCompetizioneTO> param = new ArrayList<TipoCompetizioneTO>();
 		param.add(tipo);
 
 		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioneByTipo", param);
@@ -28,8 +30,8 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 	}
 
 	@Override
-	public List<CompetizioneTO> readByMdc(Integer mdc) throws DatabaseException {
-		List<Integer> param = new ArrayList<Integer>();
+	public List<CompetizioneTO> readByMdc(ManagerDiCompetizioneTO mdc) throws DatabaseException {
+		List<ManagerDiCompetizioneTO> param = new ArrayList<ManagerDiCompetizioneTO>();
 		param.add(mdc);
 
 		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioneByMdc", param);
@@ -62,7 +64,7 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 	@Override
 	public CompetizioneTO annullaCompetizione(CompetizioneTO cmpto)
 			throws DatabaseException {
-			cmpto.setStato(0);
+			cmpto.getStatoCompetizione().setId(0);
 			return super.update(cmpto);	
 	}
 

@@ -19,7 +19,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 public class ControllerMdcMain extends ControllerUtenti{
 
@@ -45,11 +44,9 @@ public class ControllerMdcMain extends ControllerUtenti{
 
 	private AgroResponse risposta;
 	private DataRequest richiesta;
-
-	private Integer tableCompetizioneItemIndex;
+	
 	private CmpModel cmpModelRow;
 	private CompetizioneTO cmpto;
-	private Stage stage;
 
 
 	@Override
@@ -58,7 +55,6 @@ public class ControllerMdcMain extends ControllerUtenti{
 		this.richiesta = reqFact.createDataRequest(utente,"getCompetizioneByMdc");
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-
 		this.listaTabCmp = this.getListTabellaCmp();
 		this.initCmpTable();
 
@@ -78,8 +74,8 @@ public class ControllerMdcMain extends ControllerUtenti{
 		cmpModelRow.setNmax(Integer.toString(this.cmpto.getNmax()));
 		cmpModelRow.setNmin(Integer.toString(this.cmpto.getNmin()));
 		cmpModelRow.setNome(this.cmpto.getNome());
-		cmpModelRow.setStato(this.cmpto.getNomeStato());
-		cmpModelRow.setTipo(this.cmpto.getNomeTipo());
+		cmpModelRow.setStato(this.cmpto.getStatoCompetizione().getNome());
+		cmpModelRow.setTipo(this.cmpto.getTipoCompetizione().getNome());
 
 
 	}

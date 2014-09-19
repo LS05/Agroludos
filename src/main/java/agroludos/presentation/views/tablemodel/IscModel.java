@@ -13,9 +13,9 @@ public class IscModel {
 
 	public IscModel(IscrizioneTO iscto){
 		this.id = new SimpleStringProperty(Integer.toString(iscto.getId()));
-		this.nome = new SimpleStringProperty(iscto.getPartecipanteIscrizione().getNome());
-		this.cognome = new SimpleStringProperty(iscto.getPartecipanteIscrizione().getCognome());
-		this.email =  new SimpleStringProperty(iscto.getPartecipanteIscrizione().getEmail());
+		this.nome = new SimpleStringProperty(iscto.getPartecipante().getNome());
+		this.cognome = new SimpleStringProperty(iscto.getPartecipante().getCognome());
+		this.email =  new SimpleStringProperty(iscto.getPartecipante().getEmail());
 		this.iscto = iscto;
 	}
 

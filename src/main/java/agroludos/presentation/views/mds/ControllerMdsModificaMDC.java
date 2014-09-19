@@ -53,7 +53,7 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 		listStati.add("attivo");
 
 		this.cmbStato.setItems(listStati);
-		this.cmbStato.setValue(this.mdcTO.getNomeStatoUtente());
+		this.cmbStato.setValue(this.mdcTO.getStatoUtente().getNome());
 	}
 
 	@FXML public void confermaModificaManagerDiCompetizion(MouseEvent event){

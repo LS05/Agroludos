@@ -19,15 +19,12 @@ class MySqlManagerDiCompetizioneDAO extends MySqlUtenteDAO<ManagerDiCompetizione
 	public List< ManagerDiCompetizioneTO > getAll() throws DatabaseException{
 		List< ManagerDiCompetizioneTO > res = super.getAll();
 
-		for(ManagerDiCompetizioneTO mdc : res){
-			this.setNomeStatoUtente(mdc);
-		}
-
 		return res;
 	}
 
 	@Override
-	public ManagerDiCompetizioneTO getByStipendio(Integer id) throws DatabaseException {
+	public ManagerDiCompetizioneTO getByStipendio(Double stipendio) throws DatabaseException {
+		//TODO
 		return null;
 	}
 }
