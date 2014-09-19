@@ -28,7 +28,8 @@ class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 		uto.setPassword(this.pwdEnc.encryptPassword(inputPassword));
 
 		UtenteTO res = udao.getUtente(uto);
-
+		
+		//TODO Inserire res instanceof NullUtenteTO
 		if(res.getUsername() == "")
 			throw new UserNotFoundException("Username e/o Password errati!");
 

@@ -77,6 +77,8 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML private Button btnMerenda;
 	@FXML private Button btnPernotto;
 	@FXML private Button btnNuovoTipoOptional;
+	@FXML private Button btnDisattivaOptional;
+	
 	@FXML private TableView<OptModel> tableOptional;
 	@FXML private TableColumn<OptModel, String> optColNome;
 	@FXML private TableColumn<OptModel, String> optColDesc;
@@ -161,7 +163,6 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneManagerCompetizione.setVisible(true);
 		this.paneGestionePartecipanti.setVisible(false);
-
 	}
 
 	@FXML protected void btnGestPart(MouseEvent event) {
@@ -169,6 +170,14 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneManagerCompetizione.setVisible(false);
 		this.paneGestionePartecipanti.setVisible(true);
+	}
+	
+	@FXML protected void btnDisattivaOptionalClicked(MouseEvent event){
+		OptModel optModel = this.tableOptional.getSelectionModel().getSelectedItem();
+		OptionalTO optTO = optModel.getOptTO();
+		AgroRequest request = this.getRichiesta(optTO, "disattivaOptional");
+		AgroResponse response = respFact.createResponse();
+		frontController.eseguiRichiesta(request, response);
 	}
 
 	//--------------------Gest Man Competizione ---------------
@@ -372,31 +381,42 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		if(request.getCommandName().equals("getAllManagerDiCompetizione")){
+		String commandName = request.getCommandName();
+		
+		if(commandName.equals( this.reqProperties.getProperty("getAllManagerDiCompetizione") )){
+			
 			Object res = (Object)response.getRespData();
 			if(res instanceof List<?>){
 				List<ManagerDiCompetizioneTO> mdcList = (List<ManagerDiCompetizioneTO>)res;
 				this.listMdc = mdcList;
 			}
-		} else if(request.getCommandName().equals("getAllOptional")){
+			
+		} else if(commandName.equals( this.reqProperties.getProperty("getAllOptional") )){
+			
 			Object res = (Object)response.getRespData();
 			if(res instanceof List<?>){
 				List<OptionalTO> optList = (List<OptionalTO>)res;
 				this.listOpt = optList;
 			}
-		} else if(request.getCommandName().equals("getAllPartecipante")){
+			
+		} else if(commandName.equals( this.reqProperties.getProperty("getAllPartecipante") )){
+			
 			Object res = (Object)response.getRespData();
 			if(res instanceof List<?>){
 				List<PartecipanteTO> mdcList = (List<PartecipanteTO>)res;
 				this.listPart = mdcList;
 			}
-		} else if(request.getCommandName().equals("getAllCompetizione")){
+
+		} else if(commandName.equals( this.reqProperties.getProperty("getAllCompetizione") )){
+			
 			Object res = (Object)response.getRespData();
 			if(res instanceof List<?>){
 				List<CompetizioneTO> comList = (List<CompetizioneTO>)res;
 				this.listComp = comList;
 			}
-		} else if(request.getCommandName().equals("modificaManagerDiCompetizione")){
+			
+		} else if(commandName.equals( this.reqProperties.getProperty("modificaManagerDiCompetizione") )){
+			
 			Object res = (Object)response.getRespData();
 			if(res instanceof ManagerDiCompetizioneTO){
 				ManagerDiCompetizioneTO mdcTO = (ManagerDiCompetizioneTO)res;
@@ -408,6 +428,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 				mdc.setStato(mdcTO.getNomeStatoUtente());
 				setDxColumn(this.selectedMDC);
 			}
+
 		}
 	}
 }

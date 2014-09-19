@@ -1,6 +1,7 @@
 package agroludos.presentation.views.tablemodel;
 
 import javafx.beans.property.SimpleStringProperty;
+
 import agroludos.to.IscrizioneTO;
 
 public class IscModel {

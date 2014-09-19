@@ -32,9 +32,9 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 	}
 
 	@Override
-	public OptionalTO eliminaOptional(OptionalTO optto) throws DatabaseException {
+	public OptionalTO disattivaOptional(OptionalTO optto) throws DatabaseException {
 		OptionalDAO daoOpt = getOptionalDAO();
-		return daoOpt.eliminaOptional(optto);
+		return daoOpt.disattivaOptional(optto);
 	}
 
 	@Override

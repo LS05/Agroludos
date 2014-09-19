@@ -1,6 +1,7 @@
 package agroludos.presentation.views.tablemodel;
 
 import agroludos.to.OptionalTO;
+
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 
