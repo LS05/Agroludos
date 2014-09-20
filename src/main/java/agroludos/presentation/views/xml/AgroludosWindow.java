@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 import agroludos.presentation.views.AgroludosController;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public abstract class AgroludosWindow {

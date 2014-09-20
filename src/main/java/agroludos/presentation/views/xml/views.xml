@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<agro-views>
+<agro-views xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="views.xsd">
 	<views>
 		<view tipo="dialog">
 			<name>initView</name>
@@ -81,6 +81,13 @@
 			<width>516</width>
 			<height>127</height>
 			<title>Agroludos | Errore</title>
+		</view>
+		<view tipo="dialog">
+			<name>successDialog</name>
+			<url>/fxml/dialogs/successDialog.fxml</url>
+			<width>516</width>
+			<height>127</height>
+			<title>Agroludos | Successo</title>
 		</view>
 		<view tipo="dialog">
 			<name>successDialog</name>
