@@ -244,30 +244,10 @@
                         <Insets left="10.0" fx:id="x4" />
                       </GridPane.margin>
                     </GridPane>
-                    <GridPane GridPane.rowIndex="2">
+                    <GridPane alignment="CENTER" GridPane.rowIndex="2">
                       <children>
                         <Button fx:id="btnModPart" mnemonicParsing="false" text="Modifica Dati" visible="false" GridPane.halignment="CENTER" />
-                        <GridPane>
-                          <children>
-                            <Button id="btnModificaPartecipante" mnemonicParsing="false" text="%key112" GridPane.halignment="RIGHT">
-                              <GridPane.margin>
-                                <Insets right="5.0" />
-                              </GridPane.margin>
-                            </Button>
-                            <Button id="btnVisualizzaPartecipante" mnemonicParsing="false" text="%key113" GridPane.columnIndex="1" GridPane.halignment="LEFT">
-                              <GridPane.margin>
-                                <Insets left="5.0" />
-                              </GridPane.margin>
-                            </Button>
-                          </children>
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                        </GridPane>
+                        <Button id="btnModificaPartecipante" contentDisplay="CENTER" mnemonicParsing="false" text="%key120" textAlignment="LEFT" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

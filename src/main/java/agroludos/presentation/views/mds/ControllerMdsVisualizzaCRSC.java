@@ -2,7 +2,7 @@ package agroludos.presentation.views.mds;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-
+import javafx.scene.control.TextArea;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -13,7 +13,7 @@ public class ControllerMdsVisualizzaCRSC extends AgroludosController {
 
 	@FXML private Label lblNomeCognome;
 	@FXML private Label lblDataSrc;
-	private String certificatoSRC;
+	@FXML private TextArea txtAreaCertificato;
 	
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
@@ -29,6 +29,7 @@ public class ControllerMdsVisualizzaCRSC extends AgroludosController {
 		nomeCognome.append(part.getCognome());
 		this.lblNomeCognome.setText(nomeCognome.toString());
 		this.lblDataSrc.setText(part.getDataSRC().toString());
+		this.txtAreaCertificato.setText(part.getCertificato());
 	}
 
 	@Override

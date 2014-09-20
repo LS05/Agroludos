@@ -15,6 +15,7 @@ class Partecipante extends Utente implements PartecipanteTO {
 	private String src;
 	private Date dataSRC;
 	private Set<Iscrizione> iscrizioni;
+	private String certificato;
 	
 	@Override
 	public String getCf() {
@@ -104,6 +105,16 @@ class Partecipante extends Utente implements PartecipanteTO {
 
 	public void setIscrizioni(Set<Iscrizione> iscrizioni) {
 		this.iscrizioni = iscrizioni;
+	}
+	
+	@Override
+	public String getCertificato() {
+		return this.certificato;
+	}
+
+	@Override
+	public void setCertificato(String certificato) {
+		this.certificato = certificato;
 	}
 	
 	@Override

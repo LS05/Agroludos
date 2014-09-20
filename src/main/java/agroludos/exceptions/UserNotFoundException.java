@@ -2,6 +2,10 @@ package agroludos.exceptions;
 
 @SuppressWarnings("serial")
 public class UserNotFoundException extends Exception {
+	
+	public UserNotFoundException(){
+		super("Utente Inesistente!");
+	}
 
 	public UserNotFoundException(String message){
 		super(message);

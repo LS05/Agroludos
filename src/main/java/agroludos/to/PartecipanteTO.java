@@ -32,6 +32,10 @@ public interface PartecipanteTO extends UtenteTO {
 	public Date getDataNasc();
 
 	public void setDataNasc(Date dataNasc);
-
+	
+	public void setCertificato(String certificato);
+	
+	public String getCertificato();
+	
 	public List<IscrizioneTO> getAllIscrizioni();
 }
