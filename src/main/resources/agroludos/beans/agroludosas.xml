@@ -7,8 +7,9 @@
 	<import resource="classpath:agroludos/beans/transferobject.xml" />
 	<import resource="classpath:agroludos/beans/dao.xml" />
 	<import resource="classpath:agroludos/beans/utility.xml" />
-	
-	<bean id="agroludosAS" class="agroludos.business.as.AgroludosAS" abstract="true">
+
+	<bean id="agroludosAS" class="agroludos.business.as.AgroludosAS"
+		abstract="true">
 		<property name="dbFact" ref="dbFactory" />
 		<property name="sysConf" ref="systemConf" />
 		<property name="toFact" ref="toFactory" />
@@ -32,17 +33,35 @@
 		class="agroludos.business.as.gestorecompetizione.ASGestoreCompetizione"
 		parent="agroludosAS">
 	</bean>
-	<bean id="gestoreUtente"
-		class="agroludos.business.as.gestoreutente.ASGestoreUtente"
+	<bean id="gestoreStatoCompetizione"
+		class="agroludos.business.as.gestorestatocompetizione.ASGestoreStatoCompetizione"
+		parent="agroludosAS">
+	</bean>
+	<bean id="gestoreUtente" class="agroludos.business.as.gestoreutente.ASGestoreUtente"
 		parent="agroludosAS">
 		<constructor-arg ref="pwdEnc" />
 	</bean>
-	<bean id="gestoreOptional"
-		class="agroludos.business.as.gestoreoptional.ASGestoreOptional"
+	<bean id="gestoreStatoUtente"
+		class="agroludos.business.as.gestorestatoutente.ASGestoreStatoUtente"
 		parent="agroludosAS">
 	</bean>
-		<bean id="gestorePartecipante"
+	<bean id="gestoreOptional" class="agroludos.business.as.gestoreoptional.ASGestoreOptional"
+		parent="agroludosAS">
+	</bean>
+	<bean id="gestoreStatoOptional"
+		class="agroludos.business.as.gestorestatooptional.ASGestoreStatoOptional"
+		parent="agroludosAS">
+	</bean>
+	<bean id="gestorePartecipante"
 		class="agroludos.business.as.gestorepartecipante.ASGestorePartecipante"
+		parent="agroludosAS">
+	</bean>
+	<bean id="gestoreIscrizione"
+		class="agroludos.business.as.gestoreiscrizione.ASGestoreIscrizione"
+		parent="agroludosAS">
+	</bean>
+	<bean id="gestoreStatoIscrizione"
+		class="agroludos.business.as.gestorestatoiscrizione.ASGestoreStatoIscrizione"
 		parent="agroludosAS">
 	</bean>
 </beans>

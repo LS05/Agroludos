@@ -1,5 +1,7 @@
 package agroludos.business.as.gestoreiscrizione;
 
+import java.util.List;
+
 import agroludos.business.as.AgroludosAS;
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.DBDAOFactory;
@@ -37,5 +39,11 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 		IscrizioneDAO iscDAO = getIscrizioneDAO();
 
 		return iscDAO.annullaIscrizione(iscto);
+	}
+
+	@Override
+	public List<IscrizioneTO> getAllIscrizione() throws DatabaseException {
+		IscrizioneDAO daoMan = getIscrizioneDAO(); 
+		return daoMan.getAll();
 	}
 }

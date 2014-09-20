@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -23,6 +24,7 @@ import agroludos.presentation.views.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
+import agroludos.to.StatoCompetizioneTO;
 
 public class ControllerMdcCompetizione extends AgroludosController {
 
@@ -68,12 +70,27 @@ public class ControllerMdcCompetizione extends AgroludosController {
 
 	private AgroResponse risposta;
 
+	private String viewName;
+
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
+		final CompetizioneTO cmpto = (CompetizioneTO) mainTO;
+		this.viewName = "mostraCmp";
+		this.stage = nav.getStage(this.viewName);
+		this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent we) {
+				//TODO eliminare stampa
+				//	        	  CompetizioneTO cmpto = (CompetizioneTO) mainTO;
+				System.out.println("Stage is closing");
+				nav.setVista("managerDiCompetizione", cmpto);
+			}
+		}); 
 		this.paneVisualizzaCmp.setVisible(true);
+		this.paneVisualizzaCmp.setDisable(false);
 		this.paneIscritti.setDisable(false);
 		this.lblModificaOk.setVisible(false);
+		this.lblAnnullaOk.setVisible(false);
 
 		this.cmpto =(CompetizioneTO) mainTO;
 
@@ -135,10 +152,12 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	}
 
 	@FXML protected void btnAnnullaCmp(MouseEvent event) {
-//TODO
+		//TODO
+		this.lblModificaOk.setVisible(false);
+		this.lblAnnullaOk.setVisible(false);
 		System.out.println("Confermi? si...");
 		this.risposta = respFact.createResponse();
-		this.richiesta = reqFact.createDataRequest(this.cmpto, "annullaCompetizione");
+		this.richiesta = reqFact.createSimpleRequest("annullaCompetizione");
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
 	}
@@ -153,6 +172,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	@FXML protected void btnModificaCmp(MouseEvent event) {
 
 		this.lblModificaOk.setVisible(false);
+		this.lblAnnullaOk.setVisible(false);
 		nav.setVista("mostraModificaCmp", this.cmpto);
 	}
 
@@ -180,6 +200,9 @@ public class ControllerMdcCompetizione extends AgroludosController {
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){
 				//TODO
+				this.lblAnnullaOk.setVisible(true);
+				this.paneVisualizzaCmp.setDisable(true);
+				this.paneIscritti.setDisable(true);
 			}
 		}
 

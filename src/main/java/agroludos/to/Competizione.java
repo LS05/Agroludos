@@ -30,6 +30,17 @@ class Competizione implements CompetizioneTO{
 	private int nmax;
 	private String descrizione;
 	private Double costo;
+	private int idStato;
+	
+	@Override
+	public int getIdStato() {
+		return idStato;
+	}
+	@Override
+	public void setIdStato(int idStato) {
+		this.idStato = idStato;
+	}
+
 	private Set<Optional> optionals;
 	private Set<Partecipante> iscritti;
 	private Set<Iscrizione> iscrizioni;

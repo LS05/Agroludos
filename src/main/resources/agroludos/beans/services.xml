@@ -16,7 +16,17 @@
 		<property name="scmp" ref="gestoreCompetizione" />
 		<property name="lopt" ref="gestoreOptional" />
 		<property name="sopt" ref="gestoreOptional" />
+		<property name="lisc" ref="gestoreIscrizione" />
+		<property name="sisc" ref="gestoreIscrizione" />
 		<property name="lpartecipante" ref="gestorePartecipante" />
 		<property name="spartecipante" ref="gestorePartecipante" />
+		<property name="lstatocmp" ref="gestoreStatoCompetizione" />
+		<property name="sstatocmp" ref="gestoreStatoCompetizione" />
+		<property name="lstatoopt" ref="gestoreStatoOptional" />
+		<property name="sstatoopt" ref="gestoreStatoOptional" />
+		<property name="lstatoutente" ref="gestoreStatoUtente" />
+		<property name="sstatoutente" ref="gestoreStatoUtente" />
+		<property name="lstatoisc" ref="gestoreStatoIscrizione" />
+		<property name="sstatoisc" ref="gestoreStatoIscrizione" />
 	</bean>
 </beans>
