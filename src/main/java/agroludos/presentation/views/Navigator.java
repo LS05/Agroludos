@@ -58,6 +58,7 @@ public class Navigator {
 			}else{
 				agw = this.viewsLoader.getView(viewName);
 				this.viewsCache.addView(agw,this.mainStage);
+				//TODO Gestire l'eccezione di un controller null
 				agw.getController().initializeView();
 			}
 			//TODO inserire tipo initView ad agroludosView
