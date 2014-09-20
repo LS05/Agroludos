@@ -69,6 +69,7 @@ class ViewsCache {
 			stage.setResizable(false);
 			stage.initModality(Modality.WINDOW_MODAL);
 			stage.initOwner(mainStage);
+			window.setOwnerStage(mainStage);
 			window.setStage(stage);
 			PositionHandler.centerComp(window.getStage(), window.getStage().getScene());
 		}else{

@@ -24,7 +24,6 @@ import agroludos.presentation.views.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
-import agroludos.to.StatoCompetizioneTO;
 
 public class ControllerMdcCompetizione extends AgroludosController {
 
@@ -62,6 +61,10 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	@FXML private Button btnModificaCmp;
 	@FXML private Button btnChiudi;
 
+	//bottoni per visualizzare e annullare un'iscrizione
+	@FXML private Button btnAnnullaIsc;
+	@FXML private Button btnVisualizzaIsc;
+	
 	private Node source;
 
 	private Stage stage;
@@ -86,6 +89,8 @@ public class ControllerMdcCompetizione extends AgroludosController {
 				nav.setVista("managerDiCompetizione", cmpto);
 			}
 		}); 
+		
+		//inizializzazione interfaccia
 		this.paneVisualizzaCmp.setVisible(true);
 		this.paneVisualizzaCmp.setDisable(false);
 		this.paneIscritti.setDisable(false);
@@ -146,9 +151,13 @@ public class ControllerMdcCompetizione extends AgroludosController {
 					TableView<IscModel> table = (TableView<IscModel>) event.getSource();
 					iscModelRow = table.getSelectionModel().getSelectedItem();
 					nav.setVista("mostraIscrizoine", iscModelRow.getIscrizioneTO());
+				}else{
+					
 				}
 			}
+			
 		});
+		
 	}
 
 	@FXML protected void btnAnnullaCmp(MouseEvent event) {
@@ -165,7 +174,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	@FXML protected void btnChiudi(MouseEvent event) {
 
 		nav.setVista("managerDiCompetizione",this.cmpto);
-		this.hideStageFromEvent(event);
+		this.closeStageFromEvent(event);
 
 	}
 
@@ -176,10 +185,10 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		nav.setVista("mostraModificaCmp", this.cmpto);
 	}
 
-	private void hideStageFromEvent(MouseEvent event){
+	private void closeStageFromEvent(MouseEvent event){
 		this.source = (Node)event.getSource(); 
 		this.stage  = (Stage)this.source.getScene().getWindow();
-		this.stage.hide();
+		this.stage.close();
 	}
 
 	@Override
