@@ -61,7 +61,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML private TableColumn<PartModel, String> partColCognome;
 	@FXML private TableColumn<PartModel, String> partColEmail;
 	@FXML private TableColumn<PartModel, String> partColUsername;
-
+	@FXML private Button btnMostraSRC;
 	@FXML private Label lblParNome;
 	@FXML private Label lblParCognome;
 	@FXML private Label lblParUsername;
@@ -222,6 +222,12 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML protected void btnNuovoTipoOptional(MouseEvent event) {
 	}
 
+	@FXML protected void visualizzaCertificatoSrc(MouseEvent event){
+		PartModel partModel = this.tablePartecipanti.getSelectionModel().getSelectedItem();
+		PartecipanteTO sPart = partModel.getPart();
+		nav.setVista("visualizzaSRC", sPart);
+	}
+	
 	private ObservableList<MdcModel> getListTabellaMdC(){
 		ObservableList<MdcModel> res = FXCollections.observableArrayList();
 		MdcModel modelMdc = null;

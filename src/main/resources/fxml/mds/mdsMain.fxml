@@ -82,7 +82,7 @@
                 <RowConstraints maxHeight="-1.0" minHeight="-1.0" prefHeight="-1.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <GridPane fx:id="paneGestioneOptional" prefHeight="-1.0" prefWidth="600.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane fx:id="paneGestioneOptional" prefHeight="-1.0" prefWidth="600.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <GridPane id="paneTipiOptional" GridPane.rowIndex="1">
                   <children>
@@ -146,7 +146,7 @@
                 <RowConstraints maxHeight="-1.0" minHeight="10.0" prefHeight="-1.0" vgrow="ALWAYS" />
               </rowConstraints>
             </GridPane>
-            <GridPane fx:id="paneGestionePartecipanti" prefHeight="118.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane fx:id="paneGestionePartecipanti" prefHeight="118.0" prefWidth="200.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <GridPane id="panePartecipanteCentrale" fx:id="paneTblPart">
                   <children>
@@ -220,7 +220,7 @@
                         <Label id="lblDataNascitaPartecipante" fx:id="lblParAnnoNasc" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                         <Label id="lblNumeroTSPartecipante" fx:id="lblParNumTessSan" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                         <Label font="$x2" prefHeight="46.0" prefWidth="129.0" text="%key10" wrapText="true" GridPane.rowIndex="10" />
-                        <Button id="btnVisualizzaCertificatoPartecipante" mnemonicParsing="false" text="%key58" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                        <Button id="" fx:id="btnMostraSRC" mnemonicParsing="false" onMouseClicked="#visualizzaCertificatoSrc" text="%key58" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="129.0" />

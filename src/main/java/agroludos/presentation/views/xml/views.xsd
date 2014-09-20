@@ -27,6 +27,10 @@
 						<xs:selector xpath="view" />
 						<xs:field xpath="name" />
 					</xs:unique>
+					<xs:unique name="urlViewUniqueKey">
+						<xs:selector xpath="view" />
+						<xs:field xpath="url" />
+					</xs:unique>
 				</xs:element>
 			</xs:sequence>
 		</xs:complexType>

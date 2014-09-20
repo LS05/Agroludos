@@ -90,11 +90,11 @@
 			<title>Agroludos | Successo</title>
 		</view>
 		<view tipo="dialog">
-			<name>successDialog</name>
-			<url>/fxml/dialogs/successDialog.fxml</url>
-			<width>516</width>
-			<height>127</height>
-			<title>Agroludos | Successo</title>
+			<name>visualizzaSRC</name>
+			<url>/fxml/dialogs/visualizzaCSRC.fxml</url>
+			<width>1000</width>
+			<height>600</height>
+			<title>Agroludos | Certificato di "Sana e Robusta Costituzione"</title>
 		</view>
 	</views>
 </agro-views>
