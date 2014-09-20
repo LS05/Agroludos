@@ -8,15 +8,18 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
@@ -29,6 +32,8 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.PartecipanteTO;
+import agroludos.to.TipiAgroludosTO;
+import agroludos.to.TipoOptionalTO;
 
 public class ControllerMdsMain extends ControllerUtenti{
 
@@ -103,12 +108,16 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML private Label lblMdcUsername;
 	@FXML private Label lblMdcStato;
 	@FXML private Label lblMdcEmail;
+	
+	@FXML private GridPane paneListaTipiOpt;
 
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
 	private List<String> richieste;
 	private List<PartecipanteTO> listPart;
 	private int selectedPart;
+	
+	private List<TipiAgroludosTO> listTipiOpt;
 
 	@SuppressWarnings("serial")
 	@Override
@@ -117,12 +126,14 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneManagerCompetizione.setVisible(false);
 		this.paneGestionePartecipanti.setVisible(false);
+		
 
 		this.richieste = new ArrayList<String>(){{
 			this.add("getAllManagerDiCompetizione");
 			this.add("getAllOptional");
 			this.add("getAllPartecipante");
 			this.add("getAllCompetizione");
+			this.add("getTipoOptionalByMds");
 		}};
 
 		initRequests();
@@ -134,6 +145,18 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.initOptTable();
 		this.initCompTable();
 		this.initPartTable();
+		
+		ListaViewTipi listViewOpt = new ListaViewTipi(this.listTipiOpt);
+		this.paneListaTipiOpt.getChildren().add(listViewOpt);
+		
+		listViewOpt.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				ListView<String> source = (ListView<String>)event.getSource();
+				System.out.println("clicked on " + source.getSelectionModel().getSelectedItem());
+			}
+		});
 	}
 
 	private void initRequests(){
@@ -464,7 +487,12 @@ public class ControllerMdsMain extends ControllerUtenti{
 				mdc.setStato(mdcTO.getStatoUtente().getNome());
 				setDxColumn(this.selectedMDC);
 			}
-
+		} else if( commandName.equals( this.reqProperties.getProperty("getTipoOptionalByMds") )){
+			Object res = (Object)response.getRespData();
+			if(res instanceof List<?>){
+				List<TipiAgroludosTO> tipiOptList = (List<TipiAgroludosTO>)res;
+				this.listTipiOpt = tipiOptList;
+			}
 		}
 	}
 }

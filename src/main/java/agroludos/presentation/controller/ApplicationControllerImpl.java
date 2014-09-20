@@ -22,6 +22,8 @@ class ApplicationControllerImpl implements ApplicationController{
 	public AgroResponseContext gestisciRichiesta(AgroRequestContext request) {
 		AgroResponseContext response = null;
 		Command command = null;
+		
+		//TODO Controllare quando il commandName è null (non presente nel file delle proprietà dulle richieste)
 		String commandName = request.getCommandName();
 		
 		try {

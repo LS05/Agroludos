@@ -78,4 +78,8 @@
 		<classe>agroludos.business.as.gestoreoptional.SOptional</classe>
 		<forward success="managerDiSistema" failure="managerDiSistema" />
 	</command>
+	<command name="getTipoOptionalByMds">
+		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
+		<forward success="managerDiSistema" failure="managerDiSistema" />
+	</command>
 </commands>

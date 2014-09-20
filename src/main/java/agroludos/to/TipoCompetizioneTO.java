@@ -1,6 +1,6 @@
 package agroludos.to;
 
-public interface TipoCompetizioneTO extends AgroludosTO, Comparable<TipoCompetizioneTO>{
+public interface TipoCompetizioneTO extends TipiAgroludosTO, AgroludosTO, Comparable<TipoCompetizioneTO>{
 	
 	public String getNome();
 	
