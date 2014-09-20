@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<agro-views>
+<agro-views xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="views.xsd">
 	<views>
 		<view tipo="dialog">
 			<name>initView</name>
@@ -88,6 +88,13 @@
 			<width>516</width>
 			<height>127</height>
 			<title>Agroludos | Successo</title>
+		</view>
+		<view tipo="dialog">
+			<name>visualizzaSRC</name>
+			<url>/fxml/dialogs/visualizzaCSRC.fxml</url>
+			<width>1000</width>
+			<height>600</height>
+			<title>Agroludos | Certificato di "Sana e Robusta Costituzione"</title>
 		</view>
 	</views>
 </agro-views>

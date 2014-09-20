@@ -11,11 +11,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.util.Callback;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.tablemodel.CmpModel;
@@ -59,7 +61,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML private TableColumn<PartModel, String> partColCognome;
 	@FXML private TableColumn<PartModel, String> partColEmail;
 	@FXML private TableColumn<PartModel, String> partColUsername;
-
+	@FXML private Button btnMostraSRC;
 	@FXML private Label lblParNome;
 	@FXML private Label lblParCognome;
 	@FXML private Label lblParUsername;
@@ -78,7 +80,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML private Button btnPernotto;
 	@FXML private Button btnNuovoTipoOptional;
 	@FXML private Button btnDisattivaOptional;
-	
+
 	@FXML private TableView<OptModel> tableOptional;
 	@FXML private TableColumn<OptModel, String> optColNome;
 	@FXML private TableColumn<OptModel, String> optColDesc;
@@ -171,7 +173,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.paneGestioneManagerCompetizione.setVisible(false);
 		this.paneGestionePartecipanti.setVisible(true);
 	}
-	
+
 	@FXML protected void btnDisattivaOptionalClicked(MouseEvent event){
 		OptModel optModel = this.tableOptional.getSelectionModel().getSelectedItem();
 		OptionalTO optTO = optModel.getOptTO();
@@ -220,6 +222,12 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML protected void btnNuovoTipoOptional(MouseEvent event) {
 	}
 
+	@FXML protected void visualizzaCertificatoSrc(MouseEvent event){
+		PartModel partModel = this.tablePartecipanti.getSelectionModel().getSelectedItem();
+		PartecipanteTO sPart = partModel.getPart();
+		nav.setVista("visualizzaSRC", sPart);
+	}
+	
 	private ObservableList<MdcModel> getListTabellaMdC(){
 		ObservableList<MdcModel> res = FXCollections.observableArrayList();
 		MdcModel modelMdc = null;
@@ -302,7 +310,35 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.initColumn(this.optColNome, "nome");
 		this.initColumn(this.optColDesc, "descrizione");
 		this.initColumn(this.optColPrezzo, "costo");
-		this.initColumn(this.optColStato, "stato");
+		this.initColumn(this.optColStato, "nomeStato");
+
+		this.optColStato.setCellFactory(new Callback<TableColumn<OptModel, String>, TableCell<OptModel, String>>() {
+			@Override public TableCell<OptModel, String> call(TableColumn<OptModel, String> statoColumn) {
+				return new TableCell<OptModel, String>() {
+					@Override public void updateItem(final String item, final boolean empty) {
+						super.updateItem(item, empty);
+
+						// clear any custom styles
+
+						this.getStyleClass().remove("disattivoCell");
+						this.getStyleClass().remove("attivoCell");
+						this.getTableRow().getStyleClass().remove("disattivoRow");
+						this.getTableRow().getStyleClass().remove("attivoRow");
+
+						// update the item and set a custom style if necessary
+						if (item != null) {
+							setText(item.toString());
+							int index = this.getIndex();
+							OptModel optional = this.getTableView().getItems().get(index);
+							this.getStyleClass().add(optional.getStato() == 0 ? "disattivoCell" : "attivoCell");
+							this.getTableRow().getStyleClass().add(optional.getStato() == 0 ? "disattivoRow" : "attivoRow");
+						}
+					}
+				};
+			}
+		});
+
+		//		this.optColIdStato.setVisible(false);
 
 		ObservableList<OptModel> res = FXCollections.observableArrayList();
 
@@ -382,25 +418,25 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		
+
 		if(commandName.equals( this.reqProperties.getProperty("getAllManagerDiCompetizione") )){
-			
+
 			Object res = (Object)response.getRespData();
 			if(res instanceof List<?>){
 				List<ManagerDiCompetizioneTO> mdcList = (List<ManagerDiCompetizioneTO>)res;
 				this.listMdc = mdcList;
 			}
-			
+
 		} else if(commandName.equals( this.reqProperties.getProperty("getAllOptional") )){
-			
+
 			Object res = (Object)response.getRespData();
 			if(res instanceof List<?>){
 				List<OptionalTO> optList = (List<OptionalTO>)res;
 				this.listOpt = optList;
 			}
-			
+
 		} else if(commandName.equals( this.reqProperties.getProperty("getAllPartecipante") )){
-			
+
 			Object res = (Object)response.getRespData();
 			if(res instanceof List<?>){
 				List<PartecipanteTO> mdcList = (List<PartecipanteTO>)res;
@@ -408,15 +444,15 @@ public class ControllerMdsMain extends ControllerUtenti{
 			}
 
 		} else if(commandName.equals( this.reqProperties.getProperty("getAllCompetizione") )){
-			
+
 			Object res = (Object)response.getRespData();
 			if(res instanceof List<?>){
 				List<CompetizioneTO> comList = (List<CompetizioneTO>)res;
 				this.listComp = comList;
 			}
-			
+
 		} else if(commandName.equals( this.reqProperties.getProperty("modificaManagerDiCompetizione") )){
-			
+
 			Object res = (Object)response.getRespData();
 			if(res instanceof ManagerDiCompetizioneTO){
 				ManagerDiCompetizioneTO mdcTO = (ManagerDiCompetizioneTO)res;
