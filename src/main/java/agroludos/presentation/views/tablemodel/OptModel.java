@@ -1,17 +1,17 @@
 package agroludos.presentation.views.tablemodel;
 
 import agroludos.to.OptionalTO;
-
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class OptModel {
 	private SimpleStringProperty id;
 	private SimpleStringProperty nome;
 	private SimpleStringProperty descrizione;
-	private SimpleStringProperty tipo;
+	private SimpleIntegerProperty tipo;
 	private SimpleStringProperty nomeTipo;
-	private SimpleStringProperty stato;
+	private SimpleIntegerProperty stato;
 	private SimpleStringProperty nomeStato;
 	private SimpleDoubleProperty costo;
 	private OptionalTO optTO;
@@ -20,8 +20,10 @@ public class OptModel {
 		this.id = new SimpleStringProperty(Integer.toString(1));
 		this.nome = new SimpleStringProperty(optTO.getNome());
 		this.descrizione = new SimpleStringProperty(optTO.getDescrizione());
-		this.tipo = new SimpleStringProperty(optTO.getTipoOptional().getNome());
-		this.stato = new SimpleStringProperty(optTO.getStatoOptional().getNome());
+		this.tipo = new SimpleIntegerProperty(optTO.getTipoOptional().getId());
+		this.nomeTipo = new SimpleStringProperty(optTO.getTipoOptional().getNome());
+		this.stato = new SimpleIntegerProperty(optTO.getStatoOptional().getId());
+		this.nomeStato = new SimpleStringProperty(optTO.getStatoOptional().getNome());
 		this.costo = new SimpleDoubleProperty(optTO.getCosto());
 		this.optTO = optTO;
 	}
@@ -50,11 +52,11 @@ public class OptModel {
 		this.descrizione.set(descrizione);
 	}
 
-	public String getTipo() {
+	public Integer getTipo() {
 		return this.tipo.get();
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(Integer tipo) {
 		this.tipo.set(tipo);
 	}
 
@@ -66,11 +68,11 @@ public class OptModel {
 		this.nomeTipo.set(nomeTipo);
 	}
 
-	public String getStato() {
+	public Integer getStato() {
 		return stato.get();
 	}
 
-	public void setStato(String stato) {
+	public void setStato(Integer stato) {
 		this.stato.set(stato);
 	}
 
@@ -92,6 +94,34 @@ public class OptModel {
 
 	public OptionalTO getOptTO() {
 		return optTO;
+	}
+
+	public SimpleStringProperty nomeProperty() {
+		return this.nome;
+	}
+
+	public SimpleStringProperty descrizioneProperty() {
+		return this.descrizione;
+	}
+
+	public SimpleIntegerProperty tipoProperty() {
+		return this.tipo;
+	}
+
+	public SimpleStringProperty nomeTipoProperty() {
+		return this.nomeTipo;
+	}
+
+	public SimpleIntegerProperty statoProperty() {
+		return this.stato;
+	}
+
+	public SimpleStringProperty nomeStatoProperty() {
+		return this.nomeStato;
+	}
+
+	public SimpleDoubleProperty costoProperty() {
+		return this.costo;
 	}
 
 	@Override

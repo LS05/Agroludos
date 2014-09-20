@@ -6,7 +6,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?scenebuilder-preview-i18n-resource ../../bundles/Agroludos_it.properties?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="agroludos.presentation.views.mds.ControllerMdsMain">
   <children>
@@ -106,6 +105,7 @@
                 </GridPane>
                 <TableView fx:id="tableOptional" columnResizePolicy="$x1" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                   <columns>
+                    <TableColumn prefWidth="75.0" text="NotVisible" visible="false" fx:id="optColIdStato" />
                     <TableColumn prefWidth="75.0" text="%key21" fx:id="optColNome" />
                     <TableColumn prefWidth="75.0" text="%key48" fx:id="optColDesc" />
                     <TableColumn prefWidth="75.0" text="%key69" fx:id="optColPrezzo" />

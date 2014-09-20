@@ -61,3 +61,19 @@
 .btnAvanti:hover{
     -fx-background-color:#70cff3;
 }
+
+.attivoRow{
+	-fx-background-color:#94dc70;
+}
+
+.disattivoRow{
+	-fx-background-color:#ea5a53;
+}
+
+.attivoRow:selected, .disattivoRow:selected{
+   -fx-background-color: steelblue; 
+}
+
+.attivoRow:selected .text, .disattivoRow:selected .text{
+       -fx-fill: white ;
+}

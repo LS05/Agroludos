@@ -74,7 +74,7 @@
 		<forward success="managerDiSistema" failure="managerDiSistema" />
 	</command>
 	<command name="disattivaOptional">
-		<!-- Aggiungere come success un Dialog -->
+		<!-- Aggiungere come success un dialog -->
 		<classe>agroludos.business.as.gestoreoptional.SOptional</classe>
 		<forward success="managerDiSistema" failure="managerDiSistema" />
 	</command>
