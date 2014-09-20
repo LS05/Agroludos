@@ -81,7 +81,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
 				//TODO eliminare stampa
-				//	        	  CompetizioneTO cmpto = (CompetizioneTO) mainTO;
+				//CompetizioneTO cmpto = (CompetizioneTO) mainTO;
 				System.out.println("Stage is closing");
 				nav.setVista("managerDiCompetizione", cmpto);
 			}
@@ -157,7 +157,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.lblAnnullaOk.setVisible(false);
 		System.out.println("Confermi? si...");
 		this.risposta = respFact.createResponse();
-		this.richiesta = reqFact.createSimpleRequest("annullaCompetizione");
+		this.richiesta = reqFact.createDataRequest(this.cmpto,"annullaCompetizione");
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
 	}

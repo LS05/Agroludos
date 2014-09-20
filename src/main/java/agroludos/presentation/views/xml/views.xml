@@ -8,7 +8,7 @@
 			<height>1</height>
 			<title></title>
 		</view>
-		<view tipo="dialog">
+		<view tipo="view">
 			<name>login</name>
 			<url>/fxml/login/login.fxml</url>
 			<width>600</width>

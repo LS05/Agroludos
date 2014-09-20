@@ -36,9 +36,10 @@ public class ControllerLogin extends AgroludosController{
 
 	@FXML protected void btnLogin(MouseEvent event) {	
 		eseguiLogin();
-		Node  source = (Node)  event.getSource(); 
-		Stage stage  = (Stage) source.getScene().getWindow();
-		stage.close();
+		//view: non deve chiudere lo stage
+//		Node  source = (Node)  event.getSource(); 
+//		Stage stage  = (Stage) source.getScene().getWindow();
+//		stage.close();
 	}
 	
 	@Override
