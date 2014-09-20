@@ -1,6 +1,7 @@
 package agroludos.presentation.views.xml;
 
 import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
 
 class AgroludosView extends AgroludosWindow{
 	private View view;
@@ -43,5 +44,16 @@ class AgroludosView extends AgroludosWindow{
 	@Override
 	public boolean isDialog() {
 		return false;
+	}
+
+	@Override
+	public void setOwnerStage(Stage ownerStage) {
+		
+	}
+
+	@Override
+	public Stage getOwnerStage() {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 }

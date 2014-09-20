@@ -78,7 +78,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		
 	}
 	@FXML private void btnAnnulla(MouseEvent event){
-		this.hideStageFromEvent(event);
+		this.closeStageFromEvent(event);
 	}
 	@FXML private void btnConferma(MouseEvent event){
 		this.cmpto.setCosto(Double.valueOf(txtCosto.getText()));
@@ -93,14 +93,14 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		this.richiesta = reqFact.createDataRequest(this.cmpto, "modificaCompetizione");
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		
-		this.hideStageFromEvent(event);
+		this.closeStageFromEvent(event);
 		
 	}
 
-	private void hideStageFromEvent(MouseEvent event){
+	private void closeStageFromEvent(MouseEvent event){
 		this.source = (Node)event.getSource(); 
 		this.stage  = (Stage)this.source.getScene().getWindow();
-	    this.stage.hide();
+	    this.stage.close();
 	}
 
 	@Override
