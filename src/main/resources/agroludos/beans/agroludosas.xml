@@ -55,6 +55,8 @@
 	<bean id="gestorePartecipante"
 		class="agroludos.business.as.gestorepartecipante.ASGestorePartecipante"
 		parent="agroludosAS">
+		<constructor-arg ref="systemConf" />
+		<constructor-arg ref="fileFactory" />
 	</bean>
 	<bean id="gestoreIscrizione"
 		class="agroludos.business.as.gestoreiscrizione.ASGestoreIscrizione"

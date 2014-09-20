@@ -9,6 +9,10 @@ class NullUtente implements UtenteTO{
 	private String password;
 	private String email;
 	
+	NullUtente(){
+		this.id = -1;
+	}
+	
 	@Override
 	public Integer getId() {
 		return this.id;
