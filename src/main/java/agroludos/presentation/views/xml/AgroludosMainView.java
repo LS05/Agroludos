@@ -1,37 +1,39 @@
 package agroludos.presentation.views.xml;
 
 import javafx.fxml.FXMLLoader;
-class AgroludosDialog extends AgroludosWindow{
-	private View dialog;
-	
-	AgroludosDialog(View dialog){
-		super(dialog);
-		this.dialog = dialog;
+
+public class AgroludosMainView extends AgroludosWindow{
+
+	private View mainView;
+
+	AgroludosMainView(View mainView) {
+		super(mainView);
+		this.mainView = mainView;
 	}
-	
+
 	@Override
 	public String getUrl() {
-		return this.dialog.getUrl();
+		return this.mainView.getUrl();
 	}
-	
+
 	@Override
 	public String getName() {
-		return this.dialog.getName();
+		return this.mainView.getName();
 	}
-	
+
 	@Override
 	public int getWidth() {
-		return this.dialog.getWidth();
+		return this.mainView.getWidth();
 	}
-	
+
 	@Override
 	public int getHeight() {
-		return this.dialog.getHeight();
+		return this.mainView.getHeight();
 	}
-	
+
 	@Override
 	public String getTitle() {
-		return "";
+		return this.mainView.getTitle();
 	}
 
 	@Override
@@ -41,11 +43,12 @@ class AgroludosDialog extends AgroludosWindow{
 
 	@Override
 	public boolean isDialog() {
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean isMainView() {
-		return false;
+		return true;
 	}
+
 }

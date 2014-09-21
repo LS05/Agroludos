@@ -1,12 +1,11 @@
 package agroludos.presentation.views.xml;
 
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
 
-class AgroludosView extends AgroludosWindow{
+class AgroludosControlView extends AgroludosWindow{
 	private View view;
 	
-	AgroludosView(View view){
+	AgroludosControlView(View view){
 		super(view);
 		this.view = view;
 	}
@@ -47,13 +46,8 @@ class AgroludosView extends AgroludosWindow{
 	}
 
 	@Override
-	public void setOwnerStage(Stage ownerStage) {
-		
+	public boolean isMainView() {
+		return false;
 	}
 
-	@Override
-	public Stage getOwnerStage() {
-		// TODO Auto-generated method stub
-		return null;
-	}	
 }
