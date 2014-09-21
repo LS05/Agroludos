@@ -52,6 +52,9 @@ public class Navigator {
 		try {
 			if(this.viewsCache.checkView(viewName)){
 				agw = this.viewsCache.getView(viewName);
+				//se si tratta di un dialog imposto di nuovo l'evento in chiusura dello stage
+				if(agw.isDialog())
+					this.viewsCache.addEventOnStageClose(agw);
 			}else{
 				agw = this.viewsLoader.getView(viewName);
 				this.viewsCache.addView(agw);
@@ -68,6 +71,17 @@ public class Navigator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
+	}
+
+	public void closeVista(String viewName, String setViewName, AgroludosTO mainTO) {
+		this.viewsCache.popStack(viewName);
+		this.getStage(viewName).close();
+		this.setVista(setViewName, mainTO);		
+	}
+	
+	public void closeVista(String viewName) {
+		this.viewsCache.popStack(viewName);
+		this.getStage(viewName).close();	
 	}
 	
 }
