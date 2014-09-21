@@ -22,12 +22,13 @@ class ViewsParser extends AgroParser implements AgroViewsParser{
 
 		for(View e : listView){
 
-			if("view".equals(e.getTipo())){
-				this.views.put(e.getName(), new AgroludosView(e));
+			if("controlView".equals(e.getTipo())){
+				this.views.put(e.getName(), new AgroludosControlView(e));
 			} else if("dialog".equals(e.getTipo())){
 				this.views.put(e.getName(), new AgroludosDialog(e));
+			}else if("mainView".equals(e.getTipo())){
+				this.views.put(e.getName(), new AgroludosMainView(e));
 			}
-
 		}
 	}
 

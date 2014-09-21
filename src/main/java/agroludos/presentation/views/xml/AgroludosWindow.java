@@ -50,10 +50,9 @@ public abstract class AgroludosWindow {
 	abstract public String getTitle();
 	
 	abstract public boolean isDialog();
+	
+	abstract public boolean isMainView();
 
-	abstract public void setOwnerStage(Stage ownerStage);
-
-	abstract public Stage getOwnerStage();
 
 
 }

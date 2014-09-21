@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agro-views xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="views.xsd">
 	<views>
-		<view tipo="dialog">
+		<view tipo="controlView">
 			<name>initView</name>
 			<url>/fxml/config/init.fxml</url>
 			<width>1</width>
 			<height>1</height>
 			<title></title>
 		</view>
-		<view tipo="view">
+		<view tipo="mainView">
 			<name>login</name>
 			<url>/fxml/login/login.fxml</url>
 			<width>600</width>
 			<height>462</height>
 			<title>Agroludos | Login</title>
 		</view>
-		<view tipo="dialog">
+		<view tipo="controlView">
 			<name>session</name>
 			<url>/fxml/config/session.fxml</url>
 			<width>600</width>
 			<height>400</height>
 			<title></title>
 		</view>
-		<view tipo="view">
+		<view tipo="mainView">
 			<name>configurazione</name>
 			<url>/fxml/config/conf_sistema.fxml</url>
 			<width>800</width>
 			<height>463</height>
 			<title>Agroludos | Configurazione</title>
 		</view>
-		<view tipo="view">
+		<view tipo="dialog">
 			<name>nuovaRegistrazione</name>
 			<url>/fxml/login/registrazione.fxml</url>
 			<width>1440</width>
 			<height>900</height>
 			<title></title>
 		</view>
-		<view tipo="view">
+		<view tipo="mainView">
 			<name>managerDiSistema</name>
 			<url>/fxml/mds/mdsMain.fxml</url>
 			<width>1440</width>
 			<height>900</height>
 			<title></title>
 		</view>
-		<view tipo="view">
+		<view tipo="mainView">
 			<name>partecipante</name>
 			<url>/fxml/partecipante/partecipanteMain.fxml</url>
 			<width>1240</width>
 			<height>800</height>
 			<title></title>
 		</view>
-		<view tipo="view">
+		<view tipo="mainView">
 			<name>managerDiCompetizione</name>
 			<url>/fxml/mdc/mdcMain.fxml</url>
 			<width>882</width>
