@@ -13,10 +13,10 @@ import javafx.stage.Stage;
  */
 
 class AppConfig extends Controller implements App{
-	private final String fromName = "mainController";
+	
 	@Override
 	public void initialize(Stage stage){
-		AgroRequest richiesta = reqFact.createSimpleRequest("checkConfigurazione", this.fromName);
+		AgroRequest richiesta = reqFact.createSimpleRequest("checkConfigurazione", "mainController");
 		AgroResponse risposta = respFact.createResponse();
 		
 		nav.setMainStage(stage);

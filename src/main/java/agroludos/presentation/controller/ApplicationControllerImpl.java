@@ -32,8 +32,8 @@ class ApplicationControllerImpl implements ApplicationController{
 		return res;
 	}
 	
-	private String getFromName(AgroRequestContext request) throws RequestInitializationException{
-		String res = request.getFromName();
+	private String getviewName(AgroRequestContext request) throws RequestInitializationException{
+		String res = request.getviewName();
 		
 		if(res == "" || res == null){
 			throw new RequestInitializationException();
@@ -49,17 +49,17 @@ class ApplicationControllerImpl implements ApplicationController{
 		
 		//TODO Controllare quando il commandName è null (non presente nel file delle proprietà dulle richieste)
 		String commandName = null;
-		String fromName = null; 
+		String viewName = null; 
 		
 		try{
 			commandName = this.getCommandName(request);
-			fromName = this.getFromName(request);
+			viewName = this.getviewName(request);
 		} catch(RequestInitializationException e){
 			throw new EnrichableException("gestisciRichiesta", "E3", "Errore in ApplicationControllerImpl.gestisciRichiesta()", e);
 		}
 		
 		try {
-			command = this.commandFactory.getCommand(commandName, fromName);
+			command = this.commandFactory.getCommand(commandName, viewName);
 			response = this.commandProcessor.invoke(command, request);
 		} catch (CommandFactoryException e) {
 

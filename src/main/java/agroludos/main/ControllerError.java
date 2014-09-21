@@ -23,19 +23,29 @@ public class ControllerError  extends AgroludosController{
 		}
 	}
 	@FXML protected void btnOkClicked(MouseEvent event) {	
-		Node  source = (Node)  event.getSource(); 
-	    Stage stage  = (Stage) source.getScene().getWindow();
-	    stage.close();
+		this.close();
 		nav.setVista("configurazione");
 	}
 	
 	@Override
-	public void initializeView() {
-		// TODO Auto-generated method stub
+	public void initializeView(String nameView) {
+		this.nameView = nameView;
+		
 	}
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	private String nameView;
+	@Override
+	protected String getNameView() {
+		return this.nameView;
+	}
+
+	@Override
+	protected void setNameView(String nameView) {
+		this.nameView = nameView;
 	}
 }

@@ -6,8 +6,8 @@ public interface CommandParser {
 
 	String getClassName(String commandName) throws CommandFactoryException;
 	
-	public String getFailView(String commandName, String fromName) throws CommandFactoryException;
+	public String getFailView(String commandName, String viewName) throws CommandFactoryException;
 	
-	public String getSuccView(String commandName, String fromName) throws CommandFactoryException;
+	public String getSuccView(String commandName, String viewName) throws CommandFactoryException;
 
 }

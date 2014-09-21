@@ -30,9 +30,18 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 	}
 
 	@Override
-	public void initializeView() {
-		// TODO Auto-generated method stub
+	public void initializeView(String nameView) {
+		this.nameView = nameView;
 		
 	}
+	private String nameView;
+	@Override
+	protected String getNameView() {
+		return this.nameView;
+	}
 
+	@Override
+	protected void setNameView(String nameView) {
+		this.nameView = nameView;
+	}
 }

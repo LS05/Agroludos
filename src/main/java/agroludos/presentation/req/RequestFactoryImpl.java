@@ -11,12 +11,12 @@ class RequestFactoryImpl implements RequestFactory{
 	}
 	
 	@Override
-	public SimpleRequest createSimpleRequest(String commandName, String fromName){
-		return new SimpleRequestImpl(commandName, fromName, this.session);
+	public SimpleRequest createSimpleRequest(String commandName, String viewName){
+		return new SimpleRequestImpl(commandName, viewName, this.session);
 	}
 	
 	@Override
-	public DataRequest createDataRequest(AgroludosTO data, String commandName, String fromName){
-		return new FrameRequest(data, commandName, fromName, this.session);
+	public DataRequest createDataRequest(AgroludosTO data, String commandName, String viewName){
+		return new FrameRequest(data, commandName, viewName, this.session);
 	}
 }

@@ -19,7 +19,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 
 public class ControllerMdcModificaCompetizione extends AgroludosController{
-	private final String fromName = "mdcModificaCompetizioneController";
+	
 	
 	private Node  source = null; 
     private Stage stage  = null;
@@ -76,7 +76,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		
 	}
 	@FXML private void btnAnnulla(MouseEvent event){
-		this.closeStageFromEvent(event);
+		this.close();
 	}
 	@FXML private void btnConferma(MouseEvent event){
 		this.cmpto.setCosto(Double.valueOf(txtCosto.getText()));
@@ -88,23 +88,17 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		
 		
 		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(cmpto, "modificaCompetizion", this.fromName);
+		this.richiesta = this.getRichiesta(cmpto, "modificaCompetizione", this.nameView);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		
-		this.closeStageFromEvent(event);
+		this.close();
 		
-	}
-
-	private void closeStageFromEvent(MouseEvent event){
-		this.source = (Node)event.getSource(); 
-		this.stage  = (Stage)this.source.getScene().getWindow();
-	    this.stage.close();
 	}
 
 	@Override
-	public void initializeView() {
-		// TODO Auto-generated method stub
-
+	public void initializeView(String nameView) {
+		this.nameView = nameView;
+		
 	}
 
 	@Override
@@ -114,5 +108,14 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		}
 
 	}
+	private String nameView;
+	@Override
+	protected String getNameView() {
+		return this.nameView;
+	}
 
+	@Override
+	protected void setNameView(String nameView) {
+		this.nameView = nameView;
+	}
 }

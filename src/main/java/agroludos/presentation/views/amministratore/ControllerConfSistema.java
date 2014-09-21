@@ -24,8 +24,8 @@ import javafx.scene.layout.GridPane;
  */
 public class ControllerConfSistema extends AgroludosController {
 
-	private final String fromName = "confSistemaController";
-	
+
+
 	@FXML private Button btnAvantiConf;
 	@FXML private Button btnIndietroConf;
 	@FXML private Button btnConfermaConfigurazione;
@@ -59,7 +59,9 @@ public class ControllerConfSistema extends AgroludosController {
 	private ObservableList<String> listaTipiDB;
 
 	@Override
-	public void initializeView() {
+	public void initializeView(String nameView) {
+		this.nameView = nameView;
+
 		this.mdsto = toFact.createMdSTO();
 		this.dbto = toFact.createDatabaseTO();
 		this.listaTipiDB = FXCollections.observableArrayList();
@@ -94,10 +96,10 @@ public class ControllerConfSistema extends AgroludosController {
 		this.dbto.setNome(this.txtNomeDB.getText());
 		this.dbto.setUsername(this.txtUsernameDB.getText());
 		this.dbto.setPassword(this.txtPasswordDB.getText());
-		this.richiesta = this.getRichiesta(this.dbto, "inserisciConfigurazione", this.fromName);
+		this.richiesta = this.getRichiesta(this.dbto, "inserisciConfigurazione", this.nameView);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		
+
 	}
 
 	/**
@@ -120,7 +122,7 @@ public class ControllerConfSistema extends AgroludosController {
 		this.mdsto.setPassword(this.txtPasswordMds.getText());
 		this.mdsto.setEmail(txtEmailMds.getText());
 		//TODO manca il telefono
-		this.richiesta = this.getRichiesta(this.mdsto, "nuovoManagerDiSistema", this.fromName);
+		this.richiesta = this.getRichiesta(this.mdsto, "nuovoManagerDiSistema", this.nameView);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
@@ -150,6 +152,17 @@ public class ControllerConfSistema extends AgroludosController {
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	private String nameView;
+	@Override
+	protected String getNameView() {
+		return this.nameView;
+	}
+
+	@Override
+	protected void setNameView(String nameView) {
+		this.nameView = nameView;
 	}
 }

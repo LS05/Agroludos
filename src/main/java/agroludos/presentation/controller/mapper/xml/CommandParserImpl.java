@@ -30,11 +30,11 @@ class CommandParserImpl extends AgroParser implements CommandParser {
 		return res;
 	}
 
-	private From getFrom(Command command, String fromName) throws CommandFactoryException{
+	private From getFrom(Command command, String viewName) throws CommandFactoryException{
 		From res = null;
 		
 		for(From f : command.getFrom()){
-			if(f.getName().equals(fromName))
+			if(f.getName().equals(viewName))
 				res = f;
 		}
 
@@ -56,22 +56,22 @@ class CommandParserImpl extends AgroParser implements CommandParser {
 	}
 
 	@Override
-	public String getFailView(String commandName, String fromName) throws CommandFactoryException {
+	public String getFailView(String commandName, String viewName) throws CommandFactoryException {
 		String res = "";
 
 		Command command = this.getCommand(commandName);
-		From f = this.getFrom(command, fromName);
+		From f = this.getFrom(command, viewName);
 		res = f.getForward().getFailure();
 
 		return res;
 	}
 
 	@Override
-	public String getSuccView(String commandName, String fromName) throws CommandFactoryException {
+	public String getSuccView(String commandName, String viewName) throws CommandFactoryException {
 		String res = "";
 
 		Command command = this.getCommand(commandName);
-		From f = this.getFrom(command, fromName);
+		From f = this.getFrom(command, viewName);
 		res = f.getForward().getSuccess();
 
 		return res;
