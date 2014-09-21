@@ -11,8 +11,9 @@ public class ControllerUtenti extends AgroludosController {
 	protected static UtenteTO utente;
 
 	@Override
-	public void initializeView() {
-		// TODO Auto-generated method stub
+	public void initializeView(String nameView) {
+		this.nameView = nameView;
+		
 	}
 
 	@Override
@@ -33,5 +34,15 @@ public class ControllerUtenti extends AgroludosController {
 	public void initializeView(AgroludosTO mainTO) {
 		// TODO Auto-generated method stub
 
+	}
+	private String nameView;
+	@Override
+	protected String getNameView() {
+		return this.nameView;
+	}
+
+	@Override
+	protected void setNameView(String nameView) {
+		this.nameView = nameView;
 	}
 }

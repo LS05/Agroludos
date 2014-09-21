@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <commands xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<!--
-	Cambiare:
-	<classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe>
-	<classe>nomeDellaClass</classe>
-	??? 
- -->
+	<!-- Cambiare: <classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe> 
+		<classe>nomeDellaClass</classe> ??? -->
 	<command name="checkConfigurazione">
 		<classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe>
 		<from name="mainController">
@@ -15,139 +11,109 @@
 	</command>
 	<command name="testConnessioneDB">
 		<classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe>
-		<from name="initController">
+		<from name="initView">
 			<forward success="initView" failure="initView" />
 		</from>
 	</command>
 	<command name="checkMds">
 		<classe>agroludos.business.as.gestoremds.LManagerDiSistema</classe>
-		<from name="initController">
+		<from name="initView">
 			<forward success="initView" failure="errorDialog" />
 		</from>
 	</command>
 	<command name="autenticazioneUtente">
 		<classe>agroludos.business.as.gestoreutente.LUtente</classe>
-		<from name="loginController">
+		<from name="login">
 			<forward success="session" failure="login" />
 		</from>
 	</command>
 	<command name="inserisciConfigurazione">
 		<classe>agroludos.business.as.gestoreconfigurazione.SConfigurazione</classe>
-		<from name="confSistemaController">
+		<from name="configurazione">
 			<forward success="configurazione" failure="configurazione" />
-		</from>
-		<from name="">
-			<forward success="initView" failure="initView" />
 		</from>
 	</command>
 	<command name="nuovoManagerDiSistema">
 		<classe>agroludos.business.as.gestoremds.SManagerDiSistema</classe>
-		<from name="confSistemaController">
+		<from name="configurazione">
 			<forward success="login" failure="configurazione" />
 		</from>
 	</command>
 	<command name="nuovoManagerDiCompetizione">
 		<classe>agroludos.business.as.gestoremds.SManagerDiCompetizione</classe>
-		<from name="managerDiSistemaController">
+		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
 	</command>
 	<command name="nuovaRegistrazione">
 		<classe>agroludos.business.as.gestoreutente.SUtente</classe>
-		<from name="loginController">
+		<from name="login">
 			<forward success="nuovaRegistrazione" failure="nuovaRegistrazione" />
 		</from>
 	</command>
-	<!-- 
-	<command name="nuovoPartecipante">
-		<classe>agroludos.business.as.gestoreutente.SUtente</classe>
-		<from name="">
-			<forward success="login" failure="nuovaRegistrazione" />
-		</from>
-		<from name="">
-			<forward success="initView" failure="initView" />
-		</from>
-	</command>
-	 -->
 	<command name="getAllManagerDiCompetizione">
 		<classe>agroludos.business.as.gestoremdc.LManagerDiCompetizione</classe>
-		<from name="managerDiSistemaController">
+		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
 	</command>
 	<command name="getCompetizioneByMdc">
 		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
-		<from name="managerDiCompetizioneController">
+		<from name="managerDiCompetizione">
 			<forward success="managerDiCompetizione" failure="managerDiCompetizione" />
 		</from>
 	</command>
-	<!-- 
-	<command name="apriModificaMdC">
-		<classe>agroludos.business.as.gestoremdc.SManagerDiCompetizione</classe>
-		<from name="">
-			<forward success="modificaMDC" failure="modificaMDC" />
-		</from>
-		<from name="">
-			<forward success="initView" failure="initView" />
-		</from>
-	</command>
-	 -->
 	<command name="modificaCompetizione">
 		<classe>agroludos.business.as.gestorecompetizione.SCompetizione</classe>
-		<from name="mdcModificaCompetizioneController">
+		<from name="mostraModificaCmp">
 			<forward success="mostraCmp" failure="mostraModificaCmp" />
 		</from>
 	</command>
 	<command name="annullaCompetizione">
 		<classe>agroludos.business.as.gestorecompetizione.SCompetizione</classe>
-		<from name="managerDiCompetizioneController">
+		<from name="mostraCmp">
 			<forward success="mostraCmp" failure="mostraCmp" />
 		</from>
 	</command>
 	<command name="modificaManagerDiCompetizione">
 		<classe>agroludos.business.as.gestoremdc.SManagerDiCompetizione</classe>
-		<from name="managerDiSistemaController">
+		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="modificaMDC" />
 		</from>
 	</command>
 	<command name="getAllOptional">
 		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
-		<from name="managerDiSistemaController">
+		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
 	</command>
 	<command name="getAllPartecipante">
 		<classe>agroludos.business.as.gestorepartecipante.LPartecipante</classe>
-		<from name="managerDiSistemaController">
+		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
 	</command>
 	<command name="getAllCompetizione">
 		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
-		<from name="managerDiSistemaController">
+		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
 	</command>
-	<!-- 
 	<command name="disattivaOptional">
 		<classe>agroludos.business.as.gestoreoptional.SOptional</classe>
-		<from name="">
+		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
-		<from name="">
-			<forward success="initView" failure="initView" />
-		</from>
 	</command>
-	 -->
 	<command name="getAllTipoOptional">
 		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
-		<from name="managerDiSistemaController">
+		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
 	</command>
 	<command name="getOptionalByTipo">
-	<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
-		<from name="managerDiSistemaController">
+		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
+		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
 	</command>

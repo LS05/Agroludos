@@ -5,13 +5,13 @@ import agroludos.to.AgroludosTO;
 class FrameRequest implements DataRequest{
 	private AgroludosTO data;
 	private String commandName;
-	private String fromName;
+	private String viewName;
 	private AgroSession session;
 
-	FrameRequest(AgroludosTO data, String commandName, String fromName, AgroSession session) {
+	FrameRequest(AgroludosTO data, String commandName, String viewName, AgroSession session) {
 		this.data = data;
 		this.commandName = commandName;
-		this.fromName = fromName;
+		this.viewName = viewName;
 		this.session = session;
 	}
 
@@ -36,7 +36,7 @@ class FrameRequest implements DataRequest{
 	}
 
 	@Override
-	public String getFromName() {
-		return this.fromName;
+	public String getviewName() {
+		return this.viewName;
 	}
 }

@@ -38,21 +38,25 @@ public abstract class AgroludosController extends Controller{
 
 	}
 
-	protected AgroRequest getRichiesta(String commandName, String fromName){
+	protected AgroRequest getRichiesta(String commandName, String viewName){
 		String richiesta = this.reqProperties.getProperty(commandName);
-		return reqFact.createSimpleRequest(richiesta, fromName);		
+		return reqFact.createSimpleRequest(richiesta, viewName);		
 	}
 
-	protected AgroRequest getRichiesta(AgroludosTO param, String commandName, String fromName){
+	protected AgroRequest getRichiesta(AgroludosTO param, String commandName, String viewName){
 		String richiesta = this.reqProperties.getProperty(commandName);
-		return reqFact.createDataRequest(param, richiesta, fromName);
+		return reqFact.createDataRequest(param, richiesta, viewName);
 	}
 
 	public abstract void forward(AgroRequest request, AgroResponse response);
 
 	public abstract void initializeView(AgroludosTO mainTO);
 
-	public abstract void initializeView();
-	//TODO da chiedere a luca F.Z
-	//public abstract void closeStageFromEvent(MouseEvent event);
+	public abstract void initializeView(String viewName);
+
+	protected abstract String getNameView();
+	protected abstract void setNameView(String nameView);
+	protected void close(){
+		nav.closeVista(getNameView());
+	}
 }

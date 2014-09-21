@@ -21,7 +21,7 @@ import javafx.scene.layout.GridPane;
 
 public class ControllerMdcMain extends ControllerUtenti{
 	
-	private final String fromName = "managerDiCompetizioneController";
+	
 
 	@FXML private GridPane paneCompetizioni;
 
@@ -49,10 +49,14 @@ public class ControllerMdcMain extends ControllerUtenti{
 	private CmpModel cmpModelRow;
 	private CompetizioneTO cmpto;
 
+	private String nameView;
+
 
 	@Override
-	public void initializeView() {
-		this.richiesta = this.getRichiesta(utente, "getCompetizioneByMdc", this.fromName);
+	public void initializeView(String nameView) {
+		this.nameView = nameView;
+		
+		this.richiesta = this.getRichiesta(utente, "getCompetizioneByMdc", this.nameView);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		this.listaTabCmp = this.getListTabellaCmp();

@@ -16,7 +16,7 @@ import agroludos.to.UtenteTO;
 
 public class ControllerLogin extends AgroludosController{
 	
-	private final String fromName = "loginController";
+	
 	
 	@FXML private Button btnLogin;
 	@FXML private Button btnPswDimenticata;
@@ -36,14 +36,12 @@ public class ControllerLogin extends AgroludosController{
 
 	@FXML protected void btnLogin(MouseEvent event) {	
 		eseguiLogin();
-		//view: non deve chiudere lo stage
-//		Node  source = (Node)  event.getSource(); 
-//		Stage stage  = (Stage) source.getScene().getWindow();
-//		stage.close();
 	}
 	
 	@Override
-	public void initializeView() {
+	public void initializeView(String nameView) {
+		this.nameView = nameView;
+
 		this.agroLogoPane.setFocusTraversable(true);
 		this.txtUsername.setText("agroludos");
 		this.txtPassword.setText("agroludos");
@@ -59,7 +57,7 @@ public class ControllerLogin extends AgroludosController{
 		uto.setUsername(this.txtUsername.getText());
 		uto.setPassword(this.txtPassword.getText());
 		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(uto, "autenticazioneUtente", this.fromName);
+		this.richiesta = this.getRichiesta(uto, "autenticazioneUtente", this.nameView);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
@@ -69,7 +67,7 @@ public class ControllerLogin extends AgroludosController{
 
 	@FXML protected void btnRegistrati(MouseEvent event) {
 		this.risposta = respFact.createResponse();		
-		this.richiesta = this.getRichiesta("nuovaRegistrazione", this.fromName);
+		this.richiesta = this.getRichiesta("nuovaRegistrazione", this.nameView);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
@@ -89,5 +87,16 @@ public class ControllerLogin extends AgroludosController{
 			System.out.println("errore nella creazione della sessione");
 			
 		}
+	}
+	
+	private String nameView;
+	@Override
+	protected String getNameView() {
+		return this.nameView;
+	}
+
+	@Override
+	protected void setNameView(String nameView) {
+		this.nameView = nameView;
 	}
 }

@@ -6,7 +6,6 @@ import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 
 public class AgroludosInitController extends AgroludosController{
-	private final String fromName = "initController";
 	
 	private AgroRequest richiesta;
 
@@ -18,7 +17,7 @@ public class AgroludosInitController extends AgroludosController{
 			boolean isConf = (Boolean)response.getRespData();
 
 			if(isConf){
-				this.richiesta = reqFact.createSimpleRequest("testConnessioneDB", this.fromName);
+				this.richiesta = reqFact.createSimpleRequest("testConnessioneDB", this.nameView);
 				this.risposta = respFact.createResponse();
 				frontController.eseguiRichiesta(richiesta, risposta);
 			}else{
@@ -27,7 +26,7 @@ public class AgroludosInitController extends AgroludosController{
 		}else if(request.getCommandName().equals("testConnessioneDB")){
 			boolean dbConn = (Boolean)response.getRespData();
 			if(dbConn){
-				this.richiesta = this.getRichiesta("checkMds", this.fromName);
+				this.richiesta = this.getRichiesta("checkMds", this.nameView);
 				this.risposta = respFact.createResponse();
 				frontController.eseguiRichiesta(richiesta, risposta);
 			} else {
@@ -45,8 +44,8 @@ public class AgroludosInitController extends AgroludosController{
 	}
 
 	@Override
-	public void initializeView() {
-		// TODO Auto-generated method stub
+	public void initializeView(String nameView) {
+		this.nameView = nameView;
 		
 	}
 
@@ -54,5 +53,16 @@ public class AgroludosInitController extends AgroludosController{
 	public void initializeView(AgroludosTO mainTO) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	private String nameView;
+	@Override
+	protected String getNameView() {
+		return this.nameView;
+	}
+
+	@Override
+	protected void setNameView(String nameView) {
+		this.nameView = nameView;
 	}
 }

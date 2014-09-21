@@ -18,14 +18,13 @@ public class ControllerSuccess  extends AgroludosController{
 	AgroludosTO mainTO;
 
 	@FXML protected void btnOkClicked(MouseEvent event) {	
-		Node  source = (Node)  event.getSource(); 
-		Stage stage  = (Stage) source.getScene().getWindow();
-		stage.close();
+		this.close();
 	}
 
 	@Override
-	public void initializeView() {
-		// TODO Auto-generated method stub
+	public void initializeView(String nameView) {
+		this.nameView = nameView;
+		
 	}
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
@@ -39,6 +38,17 @@ public class ControllerSuccess  extends AgroludosController{
 	public void forward(AgroRequest request, AgroResponse response) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	private String nameView;
+	@Override
+	protected String getNameView() {
+		return this.nameView;
+	}
+
+	@Override
+	protected void setNameView(String nameView) {
+		this.nameView = nameView;
 	}
 }
 

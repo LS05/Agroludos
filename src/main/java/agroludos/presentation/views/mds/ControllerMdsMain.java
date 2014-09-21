@@ -36,7 +36,7 @@ import agroludos.to.TipoOptionalTO;
 
 public class ControllerMdsMain extends ControllerUtenti{
 
-	private final String fromName = "managerDiSistemaController";
+	
 
 	//pane centrali
 	@FXML private GridPane paneGestioneCompetizioni;
@@ -122,11 +122,15 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 	private List<TipiAgroludosTO> listTipiOpt;
 
+	private String nameView;
+
 	
 
 	@SuppressWarnings("serial")
 	@Override
-	public void initializeView() {
+	public void initializeView(String nameView) {
+		this.nameView = nameView;
+	
 		this.paneGestioneCompetizioni.setVisible(true);
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneManagerCompetizione.setVisible(false);
@@ -153,9 +157,9 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 		ListaViewTipi listViewOpt = new ListaViewTipi(this.listTipiOpt);
 		this.paneListaTipiOpt.getChildren().add(listViewOpt);
-
+		final String viewName = this.nameView;
 		listViewOpt.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
+			
 			@Override
 			public void handle(MouseEvent event) {
 				ListView<String> source = (ListView<String>)event.getSource();
@@ -164,7 +168,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 				TipoOptionalTO tipoOpt = toFact.createTipoOptionalTO();
 				tipoOpt.setNome(nomeTipo);
 				
-				richiesta = getRichiesta(tipoOpt, "getOptionalByTipo", fromName);
+				richiesta = getRichiesta(tipoOpt, "getOptionalByTipo", viewName);
 				risposta = respFact.createResponse();
 				frontController.eseguiRichiesta(richiesta, risposta);
 				tableOptional.getItems().setAll(listOptTipo);
@@ -174,7 +178,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 	private void initRequests(){
 		for(String req : this.richieste){
-			this.richiesta = this.getRichiesta(req, this.fromName);
+			this.richiesta = this.getRichiesta(req, this.nameView);
 			this.risposta = respFact.createResponse();
 			frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		}
@@ -213,7 +217,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML protected void btnDisattivaOptionalClicked(MouseEvent event){
 		OptModel optModel = this.tableOptional.getSelectionModel().getSelectedItem();
 		OptionalTO optTO = optModel.getOptTO();
-		AgroRequest request = this.getRichiesta(optTO, "disattivaOptional", this.fromName);
+		AgroRequest request = this.getRichiesta(optTO, "disattivaOptional", this.nameView);
 		AgroResponse response = respFact.createResponse();
 		frontController.eseguiRichiesta(request, response);
 	}

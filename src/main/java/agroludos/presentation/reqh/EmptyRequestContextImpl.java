@@ -37,7 +37,7 @@ class EmptyRequestContextImpl implements AgroRequestContext{
 	}
 
 	@Override
-	public String getFromName() {
-		return this.request.getFromName();
+	public String getviewName() {
+		return this.request.getviewName();
 	}	
 }

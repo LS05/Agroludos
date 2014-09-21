@@ -17,5 +17,5 @@ public interface AgroRequestContext {
 	
 	public AgroludosTO getData();
 
-	public String getFromName();
+	public String getviewName();
 }

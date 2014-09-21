@@ -5,7 +5,6 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ManagerDiCompetizioneTO;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,7 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class ControllerMdsModificaMDC extends AgroludosController{
-	private final String fromName = "modificaMdcController";
+	
 
 	@FXML private Button annullaModifica;
 	@FXML private Button confermaModificaMDC;
@@ -35,7 +34,9 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 	private ManagerDiCompetizioneTO mdcTO;
 
 	@Override
-	public void initializeView() {
+	public void initializeView(String nameView) {
+		this.nameView = nameView;
+
 		this.lblMessaggioModifica.setVisible(false);
 	}
 
@@ -66,7 +67,7 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 		//TODO rivedere come far cambiare ;
 		this.mdcTO.getStatoUtente().setId(this.cmbStato.getSelectionModel().getSelectedIndex());
 
-		this.richiesta = this.getRichiesta(mdcTO, "modificaManagerDiCompetizione", this.fromName);
+		this.richiesta = this.getRichiesta(mdcTO, "modificaManagerDiCompetizione", this.nameView);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
@@ -84,5 +85,16 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 
+	}
+	
+	private String nameView;
+	@Override
+	protected String getNameView() {
+		return this.nameView;
+	}
+
+	@Override
+	protected void setNameView(String nameView) {
+		this.nameView = nameView;
 	}
 }

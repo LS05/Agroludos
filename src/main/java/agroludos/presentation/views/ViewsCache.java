@@ -52,7 +52,7 @@ class ViewsCache {
 			double width = 0;
 			Screen screen = Screen.getPrimary();
 			Rectangle2D bounds = screen.getVisualBounds();
-			
+
 			if(window.isDialog()){
 				height = window.getHeight();
 				width =  window.getWidth();
@@ -71,7 +71,7 @@ class ViewsCache {
 				this.currentStage.push(stage);
 				//aggiungo l'evento in chiusura dello stage
 				this.addEventOnStageClose(window);
-				
+
 			}else if(window.isMainView()){
 				height = bounds.getHeight();
 				width =  bounds.getWidth();		
@@ -105,5 +105,19 @@ class ViewsCache {
 			}
 		}); 
 	}
+
+	protected void pushStack(Stage stage) {
+		this.currentStage.push(stage);
+	}
+
+	protected void popStack() {
+		this.currentStage.pop();
+	}
+
+	protected Stage peekStack() {
+		return this.currentStage.peek();
+	}
+
+
 
 }

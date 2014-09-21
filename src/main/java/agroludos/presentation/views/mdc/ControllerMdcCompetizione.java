@@ -26,7 +26,7 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 
 public class ControllerMdcCompetizione extends AgroludosController {
-	private final String fromName = "mdcCompetizioneController";
+	
 	
 	private CompetizioneTO cmpto;
 
@@ -166,14 +166,13 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.lblAnnullaOk.setVisible(false);
 		System.out.println("Confermi? si...");
 		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(this.cmpto, "annullaCompetizione", this.fromName);
+		this.richiesta = this.getRichiesta(this.cmpto, "annullaCompetizione", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
 	@FXML protected void btnChiudi(MouseEvent event) {
-
+		this.close();
 		nav.setVista("managerDiCompetizione",this.cmpto);
-		this.closeStageFromEvent(event);
 
 	}
 
@@ -184,16 +183,11 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		nav.setVista("mostraModificaCmp", this.cmpto);
 	}
 
-	private void closeStageFromEvent(MouseEvent event){
-		this.source = (Node)event.getSource(); 
-		this.stage  = (Stage)this.source.getScene().getWindow();
-		this.stage.close();
-	}
 
 	@Override
-	public void initializeView() {
-		// TODO Auto-generated method stub
-
+	public void initializeView(String nameView) {
+		this.nameView = nameView;
+		
 	}
 
 	@Override
@@ -213,5 +207,15 @@ public class ControllerMdcCompetizione extends AgroludosController {
 				this.paneIscritti.setDisable(true);
 			}
 		}
+	}
+	private String nameView;
+	@Override
+	protected String getNameView() {
+		return this.nameView;
+	}
+
+	@Override
+	protected void setNameView(String nameView) {
+		this.nameView = nameView;
 	}
 }

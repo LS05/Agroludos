@@ -1,6 +1,6 @@
 package agroludos.presentation.req;
 
-//getFromName
+//getviewName
 public interface AgroRequest {
 	public String getCommandName();
 	
@@ -8,5 +8,5 @@ public interface AgroRequest {
 	
 	public AgroSession getSession();
 	
-	public String getFromName();
+	public String getviewName();
 }
