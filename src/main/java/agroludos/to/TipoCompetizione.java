@@ -1,10 +1,20 @@
 package agroludos.to;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 class TipoCompetizione implements TipoCompetizioneTO{
 	private static final long serialVersionUID = -5721300020452970477L;
 	private String descrizione;
 	private String nome;
 	private Integer id;
+	private Set<Competizione> competizioni;
+	
+	TipoCompetizione(){
+		this.competizioni = new HashSet<Competizione>();
+	}
 	
 	@Override
 	public String getDescrizione() {
@@ -33,6 +43,25 @@ class TipoCompetizione implements TipoCompetizioneTO{
 	
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public Set<Competizione> getCompetizioni() {
+		return competizioni;
+	}
+
+	public void setCompetizioni(Set<Competizione> competizioni) {
+		this.competizioni = competizioni;
+	}
+	
+	@Override
+	public List<CompetizioneTO> getAllCompetizioni() {
+		List<CompetizioneTO> res = new ArrayList<CompetizioneTO>();
+
+		for(Competizione item : this.competizioni){
+			res.add(item);
+		}
+
+		return res;
 	}
 	
 	@Override

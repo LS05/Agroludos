@@ -7,6 +7,7 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.StatoCompetizioneDAO;
+import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoCompetizioneTO;
@@ -52,6 +53,11 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		return dbDAOFact.getCompetizioneDAO();
 	}
 
+	private TipoCompetizioneDAO getTipoCompetizioneDAO() throws DatabaseException{
+		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		return dbDAOFact.getTipoCompetizioneDAO();
+	}
+
 	@Override
 	public boolean inserisciCompetizione(CompetizioneTO cmpto)
 			throws DatabaseException {
@@ -73,7 +79,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	@Override
 	public CompetizioneTO annullaCompetizione(CompetizioneTO cmpto)
 			throws DatabaseException {
-		
+
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		CompetizioneDAO daoCmp = dbDAOFact.getCompetizioneDAO();
 		StatoCompetizioneDAO daoScmp = dbDAOFact.getStatoCompetizioneDAO();
@@ -92,8 +98,18 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	@Override
 	public List<CompetizioneTO> getCompetizioniByTipo(TipoCompetizioneTO tcmto)
 			throws DatabaseException {
-		CompetizioneDAO daoCmp = getCompetizioneDAO();
-		return daoCmp.readByTipo(tcmto);
+		TipoCompetizioneDAO daoTipo = this.getTipoCompetizioneDAO();
+		List<TipoCompetizioneTO> listaTipi = daoTipo.getAll();
+		List<CompetizioneTO> res = null;
+
+		for(TipoCompetizioneTO item : listaTipi){
+			if(item.getNome().equals(tcmto.getNome())){
+				res = item.getAllCompetizioni();
+				break;
+			}
+		}
+
+		return res;
 	}
 
 	@Override
