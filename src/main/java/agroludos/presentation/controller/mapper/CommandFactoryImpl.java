@@ -12,10 +12,10 @@ class CommandFactoryImpl implements CommandFactory{
 	}
 
 	@Override
-	public Command getCommand(String commandName) throws CommandFactoryException {
+	public Command getCommand(String commandName, String fromName) throws CommandFactoryException {
 		String className = this.cmdParser.getClassName(commandName);
-		String succView = this.cmdParser.getSuccView(commandName);
-		String failView = this.cmdParser.getFailView(commandName);
+		String succView = this.cmdParser.getSuccView(commandName, fromName);
+		String failView = this.cmdParser.getFailView(commandName, fromName);
 		
 		this.command = new CommandImpl();
 		

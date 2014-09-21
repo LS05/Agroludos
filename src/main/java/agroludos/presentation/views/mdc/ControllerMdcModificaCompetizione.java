@@ -13,15 +13,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import agroludos.presentation.req.AgroRequest;
-import agroludos.presentation.req.DataRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 
-
-
 public class ControllerMdcModificaCompetizione extends AgroludosController{
+	private final String fromName = "mdcModificaCompetizioneController";
 	
 	private Node  source = null; 
     private Stage stage  = null;
@@ -38,7 +36,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 	@FXML private Button btnSelezioneOpt;
 	@FXML private Button btnAnnulla;
 	@FXML private Button btnConferma;
-	private DataRequest richiesta;
+	private AgroRequest richiesta;
 	private AgroResponse risposta;
 
 
@@ -90,7 +88,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		
 		
 		this.risposta = respFact.createResponse();
-		this.richiesta = reqFact.createDataRequest(this.cmpto, "modificaCompetizione");
+		this.richiesta = this.getRichiesta(cmpto, "modificaCompetizion", this.fromName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		
 		this.closeStageFromEvent(event);

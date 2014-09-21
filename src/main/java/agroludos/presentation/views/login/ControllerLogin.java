@@ -15,7 +15,9 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.UtenteTO;
 
 public class ControllerLogin extends AgroludosController{
-
+	
+	private final String fromName = "loginController";
+	
 	@FXML private Button btnLogin;
 	@FXML private Button btnPswDimenticata;
 	@FXML private Button btnRegistrati;
@@ -57,7 +59,7 @@ public class ControllerLogin extends AgroludosController{
 		uto.setUsername(this.txtUsername.getText());
 		uto.setPassword(this.txtPassword.getText());
 		this.risposta = respFact.createResponse();
-		this.richiesta = reqFact.createDataRequest(uto, "autenticazioneUtente");
+		this.richiesta = this.getRichiesta(uto, "autenticazioneUtente", this.fromName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
@@ -66,8 +68,8 @@ public class ControllerLogin extends AgroludosController{
 	}
 
 	@FXML protected void btnRegistrati(MouseEvent event) {
-		this.risposta = respFact.createResponse();
-		this.richiesta = reqFact.createSimpleRequest("nuovaRegistrazione");
+		this.risposta = respFact.createResponse();		
+		this.richiesta = this.getRichiesta("nuovaRegistrazione", this.fromName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 

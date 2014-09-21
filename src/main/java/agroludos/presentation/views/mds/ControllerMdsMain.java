@@ -19,8 +19,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.util.Callback;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.tablemodel.CmpModel;
@@ -33,9 +33,10 @@ import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.TipiAgroludosTO;
-import agroludos.to.TipoOptionalTO;
 
 public class ControllerMdsMain extends ControllerUtenti{
+
+	private final String fromName = "managerDiSistemaController";
 
 	//pane centrali
 	@FXML private GridPane paneGestioneCompetizioni;
@@ -108,7 +109,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML private Label lblMdcUsername;
 	@FXML private Label lblMdcStato;
 	@FXML private Label lblMdcEmail;
-	
+
 	@FXML private GridPane paneListaTipiOpt;
 
 	private AgroRequest richiesta;
@@ -116,7 +117,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 	private List<String> richieste;
 	private List<PartecipanteTO> listPart;
 	private int selectedPart;
-	
+
 	private List<TipiAgroludosTO> listTipiOpt;
 
 	@SuppressWarnings("serial")
@@ -126,14 +127,14 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneManagerCompetizione.setVisible(false);
 		this.paneGestionePartecipanti.setVisible(false);
-		
+
 
 		this.richieste = new ArrayList<String>(){{
 			this.add("getAllManagerDiCompetizione");
 			this.add("getAllOptional");
 			this.add("getAllPartecipante");
 			this.add("getAllCompetizione");
-			this.add("getTipoOptionalByMds");
+			this.add("getAllTipoOptional");
 		}};
 
 		initRequests();
@@ -145,10 +146,10 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.initOptTable();
 		this.initCompTable();
 		this.initPartTable();
-		
+
 		ListaViewTipi listViewOpt = new ListaViewTipi(this.listTipiOpt);
 		this.paneListaTipiOpt.getChildren().add(listViewOpt);
-		
+
 		listViewOpt.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -161,7 +162,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 	private void initRequests(){
 		for(String req : this.richieste){
-			this.richiesta = this.getRichiesta(req);
+			this.richiesta = this.getRichiesta(req, this.fromName);
 			this.risposta = respFact.createResponse();
 			frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		}
@@ -200,7 +201,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML protected void btnDisattivaOptionalClicked(MouseEvent event){
 		OptModel optModel = this.tableOptional.getSelectionModel().getSelectedItem();
 		OptionalTO optTO = optModel.getOptTO();
-		AgroRequest request = this.getRichiesta(optTO, "disattivaOptional");
+		AgroRequest request = this.getRichiesta(optTO, "disattivaOptional", this.fromName);
 		AgroResponse response = respFact.createResponse();
 		frontController.eseguiRichiesta(request, response);
 	}
@@ -250,7 +251,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 		PartecipanteTO sPart = partModel.getPart();
 		nav.setVista("visualizzaSRC", sPart);
 	}
-	
+
 	private ObservableList<MdcModel> getListTabellaMdC(){
 		ObservableList<MdcModel> res = FXCollections.observableArrayList();
 		MdcModel modelMdc = null;
@@ -487,7 +488,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 				mdc.setStato(mdcTO.getStatoUtente().getNome());
 				setDxColumn(this.selectedMDC);
 			}
-		} else if( commandName.equals( this.reqProperties.getProperty("getTipoOptionalByMds") )){
+		} else if( commandName.equals( this.reqProperties.getProperty("getAllTipoOptional") )){
 			Object res = (Object)response.getRespData();
 			if(res instanceof List<?>){
 				List<TipiAgroludosTO> tipiOptList = (List<TipiAgroludosTO>)res;

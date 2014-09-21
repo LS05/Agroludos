@@ -24,6 +24,8 @@ import javafx.scene.layout.GridPane;
  */
 public class ControllerConfSistema extends AgroludosController {
 
+	private final String fromName = "confSistemaController";
+	
 	@FXML private Button btnAvantiConf;
 	@FXML private Button btnIndietroConf;
 	@FXML private Button btnConfermaConfigurazione;
@@ -92,7 +94,7 @@ public class ControllerConfSistema extends AgroludosController {
 		this.dbto.setNome(this.txtNomeDB.getText());
 		this.dbto.setUsername(this.txtUsernameDB.getText());
 		this.dbto.setPassword(this.txtPasswordDB.getText());
-		this.richiesta = reqFact.createDataRequest(dbto, "inserisciConfigurazione");
+		this.richiesta = this.getRichiesta(this.dbto, "inserisciConfigurazione", this.fromName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		
@@ -117,10 +119,10 @@ public class ControllerConfSistema extends AgroludosController {
 		this.mdsto.setUsername(txtUsernameMds.getText());
 		this.mdsto.setPassword(this.txtPasswordMds.getText());
 		this.mdsto.setEmail(txtEmailMds.getText());
-		//manca il telefono
-		this.richiesta = reqFact.createDataRequest(mdsto, "nuovoManagerDiSistema");
+		//TODO manca il telefono
+		this.richiesta = this.getRichiesta(this.mdsto, "nuovoManagerDiSistema", this.fromName);
 		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(richiesta, this.risposta);
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
 	/**

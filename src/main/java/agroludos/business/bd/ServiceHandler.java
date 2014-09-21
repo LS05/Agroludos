@@ -41,7 +41,7 @@ public class ServiceHandler {
 			} catch (IllegalArgumentException e){
 				throw new ServiceHandlerException(e.getMessage(), e.getCause());
 			}  catch (MethodNotFoundException e) {
-				throw new ServiceNotFoundException("Servizio " + request.getCommandName() + " non presente!", e.getCause());
+				throw new ServiceNotFoundException("Servizio " + request.getCommandName() + " non presente!", e);
 			} catch (InvocationTargetException e) {
 				
 				//TODO Controllare se l'eccezione è di sistema o

@@ -21,7 +21,7 @@ import agroludos.to.AgroludosTO;
 public abstract class AgroludosController extends Controller{	
 
 	protected Properties reqProperties;
-	
+
 	protected AgroludosController(){
 		this.reqProperties = new Properties();
 		Path reqPropPath = Paths.get("src/main/resources/properties/req.properties");
@@ -37,21 +37,21 @@ public abstract class AgroludosController extends Controller{
 		}
 
 	}
-	
-	protected AgroRequest getRichiesta(String commandName){
+
+	protected AgroRequest getRichiesta(String commandName, String fromName){
 		String richiesta = this.reqProperties.getProperty(commandName);
-		return reqFact.createSimpleRequest(richiesta);		
+		return reqFact.createSimpleRequest(richiesta, fromName);		
 	}
-	
-	protected AgroRequest getRichiesta(AgroludosTO param, String commandName){
+
+	protected AgroRequest getRichiesta(AgroludosTO param, String commandName, String fromName){
 		String richiesta = this.reqProperties.getProperty(commandName);
-		return reqFact.createDataRequest(param, richiesta);
+		return reqFact.createDataRequest(param, richiesta, fromName);
 	}
 
 	public abstract void forward(AgroRequest request, AgroResponse response);
-	
+
 	public abstract void initializeView(AgroludosTO mainTO);
-	
+
 	public abstract void initializeView();
 	//TODO da chiedere a luca F.Z
 	//public abstract void closeStageFromEvent(MouseEvent event);

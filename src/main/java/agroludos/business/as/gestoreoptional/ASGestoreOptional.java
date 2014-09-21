@@ -58,9 +58,4 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 		TipoOptionalDAO daoOpt = dbDAOFact.getTipoOptionalDAO();
 		return daoOpt.getAll();
 	}
-
-	@Override
-	public List<TipoOptionalTO> getTipoOptionalByMds() throws DatabaseException {
-		return this.getAllTipoOptional();
-	}
 }

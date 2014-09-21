@@ -6,7 +6,8 @@ import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 
 public class AgroludosInitController extends AgroludosController{
-
+	private final String fromName = "initController";
+	
 	private AgroRequest richiesta;
 
 	private AgroResponse risposta;
@@ -17,7 +18,7 @@ public class AgroludosInitController extends AgroludosController{
 			boolean isConf = (Boolean)response.getRespData();
 
 			if(isConf){
-				this.richiesta = reqFact.createSimpleRequest("testConnessioneDB");
+				this.richiesta = reqFact.createSimpleRequest("testConnessioneDB", this.fromName);
 				this.risposta = respFact.createResponse();
 				frontController.eseguiRichiesta(richiesta, risposta);
 			}else{
@@ -26,7 +27,7 @@ public class AgroludosInitController extends AgroludosController{
 		}else if(request.getCommandName().equals("testConnessioneDB")){
 			boolean dbConn = (Boolean)response.getRespData();
 			if(dbConn){
-				this.richiesta = reqFact.createSimpleRequest("checkMds");
+				this.richiesta = this.getRichiesta("checkMds", this.fromName);
 				this.risposta = respFact.createResponse();
 				frontController.eseguiRichiesta(richiesta, risposta);
 			} else {

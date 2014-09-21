@@ -1,8 +1,12 @@
 package agroludos.presentation.controller;
 
+import java.io.IOException;
+
 import agroludos.exceptions.ApplicationException;
 import agroludos.exceptions.CommandFactoryException;
 import agroludos.exceptions.EnrichableException;
+import agroludos.exceptions.RequestInitializationException;
+import agroludos.exceptions.ViewNotFoundException;
 import agroludos.presentation.controller.mapper.Command;
 import agroludos.presentation.controller.mapper.CommandFactory;
 import agroludos.presentation.controller.mapper.CommandProcessor;
@@ -17,6 +21,26 @@ class ApplicationControllerImpl implements ApplicationController{
 	private CommandFactory commandFactory;
 	private CommandProcessor commandProcessor;
 	private Navigator nav;
+
+	private String getCommandName(AgroRequestContext request) throws RequestInitializationException{
+		String res = request.getCommandName();
+		
+		if(res == "" || res == null){
+			throw new RequestInitializationException();
+		}
+		
+		return res;
+	}
+	
+	private String getFromName(AgroRequestContext request) throws RequestInitializationException{
+		String res = request.getFromName();
+		
+		if(res == "" || res == null){
+			throw new RequestInitializationException();
+		}
+		
+		return res;
+	}
 	
 	@Override
 	public AgroResponseContext gestisciRichiesta(AgroRequestContext request) {
@@ -24,22 +48,30 @@ class ApplicationControllerImpl implements ApplicationController{
 		Command command = null;
 		
 		//TODO Controllare quando il commandName è null (non presente nel file delle proprietà dulle richieste)
-		String commandName = request.getCommandName();
+		String commandName = null;
+		String fromName = null; 
+		
+		try{
+			commandName = this.getCommandName(request);
+			fromName = this.getFromName(request);
+		} catch(RequestInitializationException e){
+			throw new EnrichableException("gestisciRichiesta", "E3", "Errore in ApplicationControllerImpl.gestisciRichiesta()", e);
+		}
 		
 		try {
-			command = this.commandFactory.getCommand(commandName);
+			command = this.commandFactory.getCommand(commandName, fromName);
 			response = this.commandProcessor.invoke(command, request);
 		} catch (CommandFactoryException e) {
-			
+
 			// TODO Eccezione di programmazione
 			// Il servizio richiesto (commandName) non è presente nel file CommandFactory.xml
 			throw new EnrichableException("gestisciRichiesta", "E1", "Errore in ApplicationControllerImpl.gestisciRichiesta()", e);
 		} catch (ApplicationException e) {
-			
+
 			// TODO Da controllare se è un'eccezione di programmazione
 			// In caso in cui ho una BusinessComponentNotFoundException, ServiceNotFoundException, IllegalAccess o IllegalArgument
 			// quindi da qui il programma deve chiudersi; 
-			e.printStackTrace();
+			throw new EnrichableException("gestisciRichiesta", "E2", "Errore in ApplicationControllerImpl.gestisciRichiesta()", e);
 		}
 
 		return response;
@@ -53,10 +85,16 @@ class ApplicationControllerImpl implements ApplicationController{
 
 	private void dispatch(AgroRequest request, AgroResponse response, String page) {
 		AgroludosController dispatcher = null;
+
 		try {
 			dispatcher = this.nav.getRequestDispatcher(page);
 			dispatcher.forward(request, response);
-		} catch(Exception e) {
+		} catch (ViewNotFoundException e){
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch(IOException e) {
+
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
