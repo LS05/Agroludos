@@ -88,7 +88,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		
 		
 		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(cmpto, "modificaCompetizion", this.nameView);
+		this.richiesta = this.getRichiesta(cmpto, "modificaCompetizione", this.nameView);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		
 		this.close();
