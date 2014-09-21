@@ -3,7 +3,6 @@ package agroludos.presentation.views.mdc;
 import java.util.List;
 
 import agroludos.presentation.req.AgroRequest;
-import agroludos.presentation.req.DataRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.tablemodel.CmpModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
@@ -21,6 +20,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 public class ControllerMdcMain extends ControllerUtenti{
+	
+	private final String fromName = "managerDiCompetizioneController";
 
 	@FXML private GridPane paneCompetizioni;
 
@@ -43,22 +44,19 @@ public class ControllerMdcMain extends ControllerUtenti{
 	private List<CompetizioneTO> listCmp;
 
 	private AgroResponse risposta;
-	private DataRequest richiesta;
-	
+	private AgroRequest richiesta;
+
 	private CmpModel cmpModelRow;
 	private CompetizioneTO cmpto;
 
 
 	@Override
 	public void initializeView() {
-
-		this.richiesta = reqFact.createDataRequest(utente,"getCompetizioneByMdc");
+		this.richiesta = this.getRichiesta(utente, "getCompetizioneByMdc", this.fromName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		this.listaTabCmp = this.getListTabellaCmp();
 		this.initCmpTable();
-
-
 	}
 
 
@@ -76,8 +74,6 @@ public class ControllerMdcMain extends ControllerUtenti{
 		cmpModelRow.setNome(this.cmpto.getNome());
 		cmpModelRow.setStato(this.cmpto.getStatoCompetizione().getNome());
 		cmpModelRow.setTipo(this.cmpto.getTipoCompetizione().getNome());
-
-
 	}
 
 

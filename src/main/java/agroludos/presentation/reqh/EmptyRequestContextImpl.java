@@ -35,5 +35,9 @@ class EmptyRequestContextImpl implements AgroRequestContext{
 	public AgroludosTO getData() {
 		return null;
 	}
-	
+
+	@Override
+	public String getFromName() {
+		return this.request.getFromName();
+	}	
 }

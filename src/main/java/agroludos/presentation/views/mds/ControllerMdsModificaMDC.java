@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class ControllerMdsModificaMDC extends AgroludosController{
+	private final String fromName = "modificaMdcController";
 
 	@FXML private Button annullaModifica;
 	@FXML private Button confermaModificaMDC;
@@ -40,13 +41,14 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
+		this.lblMessaggioModifica.setVisible(false);
+		
 		this.mdcTO  = (ManagerDiCompetizioneTO)mainTO;
-
 		this.txtUsername.setText(this.mdcTO.getUsername());
 		this.txtCognome.setText(this.mdcTO.getCognome());
 		this.txtNome.setText(this.mdcTO.getNome());
 		this.txtEmail.setText(this.mdcTO.getEmail());
-		
+
 		//TODO Query sugli stati
 		ObservableList<String> listStati = FXCollections.observableArrayList();
 		listStati.add("disattivo");
@@ -64,7 +66,7 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 		//TODO rivedere come far cambiare ;
 		this.mdcTO.getStatoUtente().setId(this.cmbStato.getSelectionModel().getSelectedIndex());
 
-		this.richiesta = this.getRichiesta(mdcTO, "modificaManagerDiCompetizione");
+		this.richiesta = this.getRichiesta(mdcTO, "modificaManagerDiCompetizione", this.fromName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 

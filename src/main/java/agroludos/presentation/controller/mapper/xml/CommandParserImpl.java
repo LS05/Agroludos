@@ -14,7 +14,7 @@ class CommandParserImpl extends AgroParser implements CommandParser {
 		this.parsedCommands = (Commands) this.parseRes;
 	}
 
-	private Command getCommand(String commandName){
+	private Command getCommand(String commandName) throws CommandFactoryException{
 		Command res = null;
 
 		for(Command c : this.parsedCommands.getCommand()){
@@ -22,20 +22,25 @@ class CommandParserImpl extends AgroParser implements CommandParser {
 				res = c;
 			}
 		}
+		
+		if(res == null){
+			throw new CommandFactoryException();
+		}
 
 		return res;
 	}
 
-	private boolean hasCommand(String commandName){
-		boolean res = false;
-
-		Command c = this.getCommand(commandName);
+	private From getFrom(Command command, String fromName) throws CommandFactoryException{
+		From res = null;
 		
-		if(c != null) {
-			res = true;
-		} else {
-			res = false;
+		for(From f : command.getFrom()){
+			if(f.getName().equals(fromName))
+				res = f;
 		}
+
+		if(res == null){
+			throw new CommandFactoryException("Non è possibile determinare la provenienza della richiesta. Proprietà nome non impostata o assente per l'elemento \"from\" della richiesta al servizio: " + command.getName() +  ". Controllare il file CommandFactory.xml!");
+		} 
 		
 		return res;
 	}
@@ -44,37 +49,31 @@ class CommandParserImpl extends AgroParser implements CommandParser {
 	public String getClassName(String commandName) throws CommandFactoryException{
 		String res = "";
 
-		if(this.hasCommand(commandName)){
-			Command c = this.getCommand(commandName);
-			res = c.getClasse();
-		} else {
-			throw new CommandFactoryException();
-		}
+		Command c = this.getCommand(commandName);
+		res = c.getClasse();
 
 		return res;
 	}
 
 	@Override
-	public String getFailView(String commandName) throws CommandFactoryException {
+	public String getFailView(String commandName, String fromName) throws CommandFactoryException {
 		String res = "";
-		if(this.hasCommand(commandName)){
-			Command command = this.getCommand(commandName);
-			res = command.getForward().getFailure();
-		} else {
-			throw new CommandFactoryException();
-		}
+
+		Command command = this.getCommand(commandName);
+		From f = this.getFrom(command, fromName);
+		res = f.getForward().getFailure();
+
 		return res;
 	}
 
 	@Override
-	public String getSuccView(String commandName) throws CommandFactoryException {
+	public String getSuccView(String commandName, String fromName) throws CommandFactoryException {
 		String res = "";
-		if(this.hasCommand(commandName)){
-			Command command = this.getCommand(commandName);
-			res = command.getForward().getSuccess();
-		} else {
-			throw new CommandFactoryException();
-		}
+
+		Command command = this.getCommand(commandName);
+		From f = this.getFrom(command, fromName);
+		res = f.getForward().getSuccess();
+
 		return res;
 	}
 }

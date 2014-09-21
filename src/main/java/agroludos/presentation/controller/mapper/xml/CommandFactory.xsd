@@ -6,14 +6,21 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element type="xs:string" name="classe"/>
-              <xs:element name="forward">
+              <xs:element name="from" maxOccurs="unbounded" minOccurs="0">
                 <xs:complexType>
-                  <xs:simpleContent>
-                    <xs:extension base="xs:string">
-                      <xs:attribute type="xs:string" name="success" use="optional"/>
-                      <xs:attribute type="xs:string" name="failure" use="optional"/>
-                    </xs:extension>
-                  </xs:simpleContent>
+                  <xs:sequence>
+                    <xs:element name="forward">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="success" use="optional"/>
+                            <xs:attribute type="xs:string" name="failure" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="name" use="optional"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>

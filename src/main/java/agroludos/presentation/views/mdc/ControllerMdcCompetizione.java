@@ -26,7 +26,8 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 
 public class ControllerMdcCompetizione extends AgroludosController {
-
+	private final String fromName = "mdcCompetizioneController";
+	
 	private CompetizioneTO cmpto;
 
 	@FXML private GridPane paneVisualizzaCmp;
@@ -157,7 +158,6 @@ public class ControllerMdcCompetizione extends AgroludosController {
 			}
 			
 		});
-		
 	}
 
 	@FXML protected void btnAnnullaCmp(MouseEvent event) {
@@ -166,9 +166,8 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.lblAnnullaOk.setVisible(false);
 		System.out.println("Confermi? si...");
 		this.risposta = respFact.createResponse();
-		this.richiesta = reqFact.createDataRequest(this.cmpto,"annullaCompetizione");
+		this.richiesta = this.getRichiesta(this.cmpto, "annullaCompetizione", this.fromName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-
 	}
 
 	@FXML protected void btnChiudi(MouseEvent event) {
@@ -214,6 +213,5 @@ public class ControllerMdcCompetizione extends AgroludosController {
 				this.paneIscritti.setDisable(true);
 			}
 		}
-
 	}
 }

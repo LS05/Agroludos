@@ -1,11 +1,13 @@
 package agroludos.presentation.req;
 
 class SimpleRequestImpl implements SimpleRequest{
-	String commandName;
+	private String commandName;
+	private String fromName;
 	private AgroSession session;
 	
-	SimpleRequestImpl(String commandName, AgroSession session) {
+	SimpleRequestImpl(String commandName, String fromName, AgroSession session) {
 		this.commandName = commandName;
+		this.fromName = fromName;	
 		this.session = session;
 	}
 
@@ -22,5 +24,10 @@ class SimpleRequestImpl implements SimpleRequest{
 	@Override
 	public AgroSession getSession() {
 		return this.session;
+	}
+
+	@Override
+	public String getFromName() {
+		return this.fromName;
 	}
 }

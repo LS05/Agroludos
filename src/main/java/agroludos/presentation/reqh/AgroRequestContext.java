@@ -15,5 +15,7 @@ public interface AgroRequestContext {
 	
 	public AgroRequest getRequest();
 	
-	AgroludosTO getData();
+	public AgroludosTO getData();
+
+	public String getFromName();
 }

@@ -32,7 +32,7 @@ public class CommandMap {
 		if(this.methods.containsKey(methodName)){
 			m = this.methods.get(methodName);
 		} else {
-			throw new MethodNotFoundException("Metodo: " + methodName + ". Metodo non presente.");
+			throw new MethodNotFoundException();
 		}
 		
 		return m;

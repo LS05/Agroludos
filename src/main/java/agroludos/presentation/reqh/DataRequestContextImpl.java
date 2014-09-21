@@ -6,11 +6,11 @@ import agroludos.to.AgroludosTO;
 
 class DataRequestContextImpl implements AgroRequestContext{
 	
-	protected DataRequest richiesta;
+	protected DataRequest request;
 	protected boolean param;
 	
 	public void initialize(AgroRequest request) {
-		this.richiesta = (DataRequest)request;
+		this.request = (DataRequest)request;
 		this.param = request.isParam();
 	}
 	
@@ -20,12 +20,12 @@ class DataRequestContextImpl implements AgroRequestContext{
 	
 	@Override
 	public String getCommandName() {
-		return this.richiesta.getCommandName();
+		return this.request.getCommandName();
 	}
 
 	@Override
 	public AgroludosTO getData(){
-			return this.richiesta.getData();
+			return this.request.getData();
 	}
 
 	@Override
@@ -35,6 +35,11 @@ class DataRequestContextImpl implements AgroRequestContext{
 
 	@Override
 	public AgroRequest getRequest() {
-		return this.richiesta;
+		return this.request;
+	}
+
+	@Override
+	public String getFromName() {
+		return this.request.getFromName();
 	}
 }

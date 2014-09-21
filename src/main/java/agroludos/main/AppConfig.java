@@ -15,10 +15,10 @@ import javafx.stage.Stage;
  */
 
 class AppConfig extends Controller implements App{
-
+	private final String fromName = "mainController";
 	@Override
 	public void initialize(Stage stage){
-		AgroRequest richiesta = reqFact.createSimpleRequest("checkConfigurazione");
+		AgroRequest richiesta = reqFact.createSimpleRequest("checkConfigurazione", this.fromName);
 		AgroResponse risposta = respFact.createResponse();
 		
 		Screen screen = Screen.getPrimary();
