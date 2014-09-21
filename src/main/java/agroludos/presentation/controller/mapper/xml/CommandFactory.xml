@@ -145,4 +145,10 @@
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
 	</command>
+	<command name="getOptionalByTipo">
+	<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
+		<from name="managerDiSistemaController">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+	</command>
 </commands>

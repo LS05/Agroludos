@@ -10,6 +10,6 @@ public interface OptionalDAO extends DAO<OptionalTO>{
 
 	public OptionalTO disattivaOptional(OptionalTO optTO) throws DatabaseException;
 
-	public List<OptionalTO> readByTipo(TipoOptionalTO optTO) throws DatabaseException;
+	//public List<OptionalTO> readByTipo(TipoOptionalTO optTO) throws DatabaseException;
 
 }

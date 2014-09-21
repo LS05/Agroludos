@@ -12,6 +12,10 @@
 		<property name="nome" type="string">
 			<column name="nome" not-null="true" />
 		</property>
+		<set name="optionals" cascade="all" table="tbl_optional">
+			<key column="tipoopt" />
+			<one-to-many class="agroludos.to.Optional" />
+		</set>
 	</class>
 	<query name="getAllTipoOptional">
         <![CDATA[ from agroludos.to.TipoOptional o ]]></query>

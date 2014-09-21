@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import agroludos.main.App;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -26,17 +27,17 @@ public class Agroludos extends Application{
 
 	@Override
 	public void start(Stage stage) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        this.mainApp = (App)context.getBean("mainApp");
-        this.mainApp.initialize(stage);
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		this.mainApp = (App)context.getBean("mainApp");
+		this.mainApp.initialize(stage);
 	}
-	
+
 	public void setMainApp(App mainApp) {
 		this.mainApp = mainApp;
 	}
-	
-    public static void main( String[] args )
-    {
-        launch(args);
-    }
+
+	public static void main( String[] args )
+	{
+		launch(args);
+	}
 }

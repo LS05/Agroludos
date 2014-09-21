@@ -99,18 +99,11 @@ class ViewsCache {
 				//TODO eliminare stampa
 				//se si tratta delo stage di un dialog elimino lo stage dallo stack
 				if(agView.isDialog() && currentStage.peek().equals(agView.getStage())){
-					System.out.println(agView.getName() + " is closing");
+					System.out.println("Dialog is closing");
 					currentStage.pop();
 				}
 			}
 		}); 
-	}
-
-	public void popStack(String viewName) {
-		AgroludosWindow agw = this.views.get(viewName);
-		if(agw.isDialog() && currentStage.peek().equals(agw.getStage()))
-			this.currentStage.pop();
-		
 	}
 
 }
