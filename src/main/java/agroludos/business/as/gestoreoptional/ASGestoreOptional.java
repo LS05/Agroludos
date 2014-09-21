@@ -55,6 +55,7 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 		for(TipoOptionalTO tipo : listTipi){
 			if(tipo.getNome().equals(optto.getNome())){
 				res = tipo.getAllOptionals();
+				break;
 			}
 		}
 
