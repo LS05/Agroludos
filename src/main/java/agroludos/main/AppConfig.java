@@ -3,8 +3,6 @@ package agroludos.main;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.Controller;
-import javafx.geometry.Rectangle2D;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -21,11 +19,7 @@ class AppConfig extends Controller implements App{
 		AgroRequest richiesta = reqFact.createSimpleRequest("checkConfigurazione", this.fromName);
 		AgroResponse risposta = respFact.createResponse();
 		
-		Screen screen = Screen.getPrimary();
-		Rectangle2D bounds = screen.getVisualBounds();
-		stage.setWidth(bounds.getWidth());
-		stage.setHeight(bounds.getHeight());
-		nav.setStage(stage);
+		nav.setMainStage(stage);
 		nav.setVista("initView");
 		frontController.eseguiRichiesta(richiesta, risposta);	
 	}
