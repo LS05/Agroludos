@@ -20,7 +20,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.tablemodel.CmpModel;
@@ -33,6 +32,7 @@ import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.TipiAgroludosTO;
+import agroludos.to.TipoOptionalTO;
 
 public class ControllerMdsMain extends ControllerUtenti{
 
@@ -92,8 +92,10 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML private TableColumn<OptModel, String> optColDesc;
 	@FXML private TableColumn<OptModel, String> optColPrezzo;
 	@FXML private TableColumn<OptModel, String> optColStato;
-	private List<OptionalTO> listOpt;
 
+	private List<OptionalTO> listOpt;
+	private ObservableList<OptModel> listOptTipo;
+	
 	//gestione manager di competizione
 	@FXML private TableView<MdcModel> tableManagerCompetizione;
 	@FXML private TableColumn<MdcModel, String> mdcNomeCol;
@@ -120,6 +122,8 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 	private List<TipiAgroludosTO> listTipiOpt;
 
+	
+
 	@SuppressWarnings("serial")
 	@Override
 	public void initializeView() {
@@ -138,7 +142,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 		}};
 
 		initRequests();
-
+		
 		this.listaTabMdc = this.getListTabellaMdC();
 		this.selectedMDC = 0;
 		this.selectedPart = 0;
@@ -155,7 +159,15 @@ public class ControllerMdsMain extends ControllerUtenti{
 			@Override
 			public void handle(MouseEvent event) {
 				ListView<String> source = (ListView<String>)event.getSource();
-				System.out.println("clicked on " + source.getSelectionModel().getSelectedItem());
+				String nomeTipo = source.getSelectionModel().getSelectedItem();
+				
+				TipoOptionalTO tipoOpt = toFact.createTipoOptionalTO();
+				tipoOpt.setNome(nomeTipo);
+				
+				richiesta = getRichiesta(tipoOpt, "getOptionalByTipo", fromName);
+				risposta = respFact.createResponse();
+				frontController.eseguiRichiesta(richiesta, risposta);
+				tableOptional.getItems().setAll(listOptTipo);
 			}
 		});
 	}
@@ -230,18 +242,6 @@ public class ControllerMdsMain extends ControllerUtenti{
 	}
 
 	//--------------------Gest Optional View---------------
-
-	@FXML protected void btnPranzo(MouseEvent event) {
-		//caricare optional nella tabella
-	}
-
-	@FXML protected void btnMerenda(MouseEvent event) {
-		//caricare optional nella tabella
-	}
-
-	@FXML protected void btnPernotto(MouseEvent event) {
-		//caricare optional nella tabella
-	}
 
 	@FXML protected void btnNuovoTipoOptional(MouseEvent event) {
 	}
@@ -493,6 +493,18 @@ public class ControllerMdsMain extends ControllerUtenti{
 			if(res instanceof List<?>){
 				List<TipiAgroludosTO> tipiOptList = (List<TipiAgroludosTO>)res;
 				this.listTipiOpt = tipiOptList;
+			}
+		} else if( commandName.equals( this.reqProperties.getProperty("getOptionalByTipo") )){
+			Object res = (Object)response.getRespData();
+			
+			if( res instanceof List<?>){
+				List<OptionalTO> listOpt = (List<OptionalTO>)res;
+				this.listOptTipo = FXCollections.observableArrayList();
+				
+				for(OptionalTO item : listOpt){
+					OptModel om = new OptModel(item);
+					this.listOptTipo.add(om);
+				}
 			}
 		}
 	}

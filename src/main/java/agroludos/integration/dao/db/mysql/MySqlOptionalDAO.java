@@ -17,15 +17,15 @@ class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements Optional
 		this.setClasse(OptionalTO.class);
 	}
 
-	@Override
-	public List<OptionalTO> readByTipo(TipoOptionalTO optTO) throws DatabaseException {
-		List<TipoOptionalTO> param = new ArrayList<TipoOptionalTO>();
-		param.add(optTO);
-
-		List<OptionalTO> res = super.executeParamQuery("getOptionalByTipo", param);
-
-		return res;
-	}
+//	@Override
+//	public List<OptionalTO> readByTipo(TipoOptionalTO optTO) throws DatabaseException {
+//		List<String> param = new ArrayList<String>();
+//		param.add(optTO.getNome());
+//
+//		List<OptionalTO> res = super.executeParamQuery("getOptionalByTipo", param);
+//
+//		return res;
+//	}
 
 	@Override
 	public OptionalTO disattivaOptional(OptionalTO optTO) throws DatabaseException {
