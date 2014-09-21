@@ -20,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.tablemodel.CmpModel;
@@ -35,8 +36,6 @@ import agroludos.to.TipiAgroludosTO;
 import agroludos.to.TipoOptionalTO;
 
 public class ControllerMdsMain extends ControllerUtenti{
-
-	
 
 	//pane centrali
 	@FXML private GridPane paneGestioneCompetizioni;
@@ -113,6 +112,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML private Label lblMdcEmail;
 
 	@FXML private GridPane paneListaTipiOpt;
+	@FXML private GridPane paneListaTipiComp;
 
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
@@ -123,9 +123,8 @@ public class ControllerMdsMain extends ControllerUtenti{
 	private List<TipiAgroludosTO> listTipiOpt;
 
 	private String nameView;
-
+	private List<TipiAgroludosTO> listTipiComp;
 	
-
 	@SuppressWarnings("serial")
 	@Override
 	public void initializeView(String nameView) {
@@ -139,10 +138,10 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 		this.richieste = new ArrayList<String>(){{
 			this.add("getAllManagerDiCompetizione");
-			this.add("getAllOptional");
 			this.add("getAllPartecipante");
 			this.add("getAllCompetizione");
 			this.add("getAllTipoOptional");
+			this.add("getAllTipoCompetizione");
 		}};
 
 		initRequests();
@@ -156,7 +155,12 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.initPartTable();
 
 		ListaViewTipi listViewOpt = new ListaViewTipi(this.listTipiOpt);
+		
+		ListaViewTipi listViewComp = new ListaViewTipi(this.listTipiComp);
+		
 		this.paneListaTipiOpt.getChildren().add(listViewOpt);
+		this.paneListaTipiComp.getChildren().add(listViewComp);
+		
 		final String viewName = this.nameView;
 		listViewOpt.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			
@@ -173,6 +177,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 				frontController.eseguiRichiesta(richiesta, risposta);
 				tableOptional.getItems().setAll(listOptTipo);
 			}
+
 		});
 	}
 
@@ -365,17 +370,6 @@ public class ControllerMdsMain extends ControllerUtenti{
 				};
 			}
 		});
-
-		//		this.optColIdStato.setVisible(false);
-
-		ObservableList<OptModel> res = FXCollections.observableArrayList();
-
-		for(OptionalTO opt : this.listOpt){
-			OptModel modelOpt = new OptModel(opt);
-			res.add(modelOpt);
-		}
-
-		this.tableOptional.getItems().setAll(res);
 	}
 
 	private void initCompTable(){

@@ -5,6 +5,7 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ManagerDiCompetizioneTO;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,7 +17,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class ControllerMdsModificaMDC extends AgroludosController{
-	
 
 	@FXML private Button annullaModifica;
 	@FXML private Button confermaModificaMDC;
