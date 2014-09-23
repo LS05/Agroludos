@@ -186,7 +186,7 @@ class Services {
 		
 	public AgroludosService getService(String serviceName) throws BusinessComponentNotFoundException{
 		AgroludosService service = this.services.get(serviceName);
-
+		
 		if(service == null){
 			throw new BusinessComponentNotFoundException("Gestore del servizio non trovato! Percorso errato oppure classe ASGestore non istanziata: " + serviceName);
 		}
