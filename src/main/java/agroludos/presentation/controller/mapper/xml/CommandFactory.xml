@@ -75,6 +75,12 @@
 			<forward success="mostraCmp" failure="mostraCmp" />
 		</from>
 	</command>
+	<command name="eliminaIscrizione">
+		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
+		<from name="mostraCmp">
+			<forward success="mostraCmp" failure="mostraCmp" />
+		</from>
+	</command>
 	<command name="modificaManagerDiCompetizione">
 		<classe>agroludos.business.as.gestoremdc.SManagerDiCompetizione</classe>
 		<from name="modificaMDC">
