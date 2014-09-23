@@ -62,18 +62,22 @@
     -fx-background-color:#70cff3;
 }
 
-.attivoRow{
+.attivoCell{
 	-fx-background-color:#94dc70;
 }
 
-.disattivoRow{
+.disattivoCell{
 	-fx-background-color:#ea5a53;
 }
 
-.attivoRow:selected, .disattivoRow:selected{
+.optionalRow:selected{
    -fx-background-color: steelblue; 
 }
 
-.attivoRow:selected .text, .disattivoRow:selected .text{
+.optionalRow:selected .disattivoCell{
+   -fx-background-color: red;
+}
+
+.optionalRow:selected .text{
        -fx-fill: white ;
 }
