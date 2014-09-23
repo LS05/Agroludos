@@ -226,7 +226,7 @@
                     <GridPane alignment="CENTER" GridPane.rowIndex="2">
                       <children>
                         <Button fx:id="btnModPart" mnemonicParsing="false" text="Modifica Dati" visible="false" GridPane.halignment="CENTER" />
-                        <Button id="btnModificaPartecipante" contentDisplay="CENTER" mnemonicParsing="false" text="%key120" textAlignment="LEFT" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+                        <Button id="btnModificaPartecipante" contentDisplay="CENTER" mnemonicParsing="false" text="%key122" textAlignment="LEFT" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
