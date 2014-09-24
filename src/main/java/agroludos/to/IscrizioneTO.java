@@ -18,5 +18,8 @@ public interface IscrizioneTO extends AgroludosTO, Comparable<IscrizioneTO>{
 	PartecipanteTO getPartecipante();
 
 	CompetizioneTO getCompetizione();
+
+	void setStatoIscrizione(StatoIscrizioneTO statoIscrizione);
+
 	
 }

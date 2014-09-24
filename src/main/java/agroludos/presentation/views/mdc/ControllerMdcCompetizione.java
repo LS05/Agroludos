@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -60,13 +59,12 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	//bottoni annulla e modifica competizione
 	@FXML private Button btnAnnullaCmp;
 	@FXML private Button btnModificaCmp;
-	@FXML private Button btnChiudi;
 
 	//bottoni per visualizzare e annullare un'iscrizione
 	@FXML private Button btnAnnullaIsc;
 	@FXML private Button btnVisualizzaIsc;
+	@FXML private Label lblEliminaIsc;
 	
-	private Node source;
 
 	private Stage stage;
 
@@ -75,6 +73,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	private AgroResponse risposta;
 
 	private String viewName;
+
 
 
 	@Override
@@ -97,6 +96,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.paneIscritti.setDisable(false);
 		this.lblModificaOk.setVisible(false);
 		this.lblAnnullaOk.setVisible(false);
+		this.btnAnnullaIsc.setDisable(true);
 
 		this.cmpto =(CompetizioneTO) mainTO;
 
@@ -153,13 +153,22 @@ public class ControllerMdcCompetizione extends AgroludosController {
 					iscModelRow = table.getSelectionModel().getSelectedItem();
 					nav.setVista("mostraIscrizoine", iscModelRow.getIscrizioneTO());
 				}else{
-					
+					btnAnnullaIsc.setDisable(false);
 				}
 			}
 			
 		});
 	}
 
+	@FXML protected void btnAnnullaIsc(MouseEvent event) {
+		
+		//TODO
+		System.out.println("Confermi? si...");
+		this.risposta = respFact.createResponse();
+		this.richiesta = this.getRichiesta(this.tblIscritti.getSelectionModel().getSelectedItem().getIscrizioneTO(), "eliminaIscrizione", this.viewName);
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+	}
+	
 	@FXML protected void btnAnnullaCmp(MouseEvent event) {
 		//TODO
 		this.lblModificaOk.setVisible(false);
@@ -168,12 +177,6 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.risposta = respFact.createResponse();
 		this.richiesta = this.getRichiesta(this.cmpto, "annullaCompetizione", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-	}
-
-	@FXML protected void btnChiudi(MouseEvent event) {
-		this.close();
-		nav.setVista("managerDiCompetizione",this.cmpto);
-
 	}
 
 	@FXML protected void btnModificaCmp(MouseEvent event) {
@@ -205,6 +208,15 @@ public class ControllerMdcCompetizione extends AgroludosController {
 				this.lblAnnullaOk.setVisible(true);
 				this.paneVisualizzaCmp.setDisable(true);
 				this.paneIscritti.setDisable(true);
+			}
+		}else if(request.getCommandName().equals("eliminaIscrizione")){
+			Object res = response.getRespData();
+			if(res instanceof IscrizioneTO){
+				//TODO
+				this.lblEliminaIsc.setVisible(true);
+				this.listaTabIsc.remove(this.tblIscritti.getSelectionModel().getSelectedItem());
+				this.initIscTable();
+				//TODO
 			}
 		}
 	}

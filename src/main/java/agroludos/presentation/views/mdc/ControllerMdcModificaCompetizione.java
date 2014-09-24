@@ -5,13 +5,11 @@ import java.sql.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -21,8 +19,6 @@ import agroludos.to.CompetizioneTO;
 public class ControllerMdcModificaCompetizione extends AgroludosController{
 	
 	
-	private Node  source = null; 
-    private Stage stage  = null;
 
 	@FXML private CompetizioneTO cmpto;
 	@FXML private TextField txtNome;
@@ -66,8 +62,6 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		}
 		this.cmbNmax.setItems(listNmax);
 		this.cmbNmax.setValue(this.cmpto.getNmax());
-		
-		this.stage = (Stage)this.btnConferma.getScene().getWindow();
 
 
 	}

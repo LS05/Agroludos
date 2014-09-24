@@ -14,12 +14,12 @@
       <bottom>
         <GridPane prefHeight="78.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
           <children>
-            <Button fx:id="btnAnnullaIscrizione" mnemonicParsing="false" prefHeight="40.0" prefWidth="208.0" styleClass="btnIrrOpt, mainBtn" text="%key14" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+            <Button fx:id="btnAnnullaIscrizione" mnemonicParsing="false" onMouseClicked="#btnAnnullaIscrizione" prefHeight="40.0" prefWidth="208.0" styleClass="btnIrrOpt, mainBtn" text="%key14" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0">
               <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" />
               </GridPane.margin>
             </Button>
-            <Button id="btnAnnullaIscrizione" fx:id="btnModificaOptionalIscrizione" mnemonicParsing="false" prefHeight="40.0" prefWidth="208.0" styleClass="btnIrrOpt, mainBtn" text="%key121" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+            <Button id="btnAnnullaIscrizione" fx:id="btnModificaOptionalIscrizione" mnemonicParsing="false" onMouseClicked="#btnModificaOptionalIscrizione" prefHeight="40.0" prefWidth="208.0" styleClass="btnIrrOpt, mainBtn" text="%key121" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -119,17 +119,17 @@
                       <children>
                         <GridPane prefHeight="230.0" prefWidth="510.0">
                           <children>
-                            <Label font="$x1" text="%key2">
+                            <Label id="lblNomeIsc" font="$x1" text="%key2">
                               <GridPane.margin>
                                 <Insets left="10.0" fx:id="x5" />
                               </GridPane.margin>
                             </Label>
-                            <Label font="$x1" text="Cognome" GridPane.rowIndex="1">
+                            <Label id="lblCognomeIsc" font="$x1" text="Cognome" GridPane.rowIndex="1">
                               <GridPane.margin>
                                 <Insets left="10.0" fx:id="x5" />
                               </GridPane.margin>
                             </Label>
-                            <Label font="$x1" text="%key4" GridPane.rowIndex="2">
+                            <Label id="lblEmailIsc" font="$x1" text="%key4" GridPane.rowIndex="2">
                               <GridPane.margin>
                                 <Insets left="10.0" fx:id="x5" />
                               </GridPane.margin>
@@ -175,7 +175,7 @@
                                 <Insets left="10.0" fx:id="x5" />
                               </GridPane.margin>
                             </Label>
-                            <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                            <Label fx:id="lblSessoIsc" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                               <GridPane.margin>
                                 <Insets right="10.0" fx:id="x4" />
                               </GridPane.margin>
@@ -190,14 +190,22 @@
                                 <Insets right="10.0" fx:id="x4" />
                               </GridPane.margin>
                             </Label>
-                            <Label font="$x1" text="%key9" GridPane.margin="$x5" GridPane.rowIndex="3" />
+                            <Label font="$x1" text="%key9" GridPane.rowIndex="3">
+                              <GridPane.margin>
+                                <Insets left="10.0" fx:id="x5" />
+                              </GridPane.margin>
+                            </Label>
                             <Label fx:id="lblDataSRCIsc" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                               <GridPane.margin>
                                 <Insets right="10.0" fx:id="x4" />
                               </GridPane.margin>
                             </Label>
-                            <Label font="$x1" text="%key10" GridPane.margin="$x5" GridPane.rowIndex="4" />
-                            <Button fx:id="btnVisualizzaCertificato" mnemonicParsing="false" styleClass="mainBtn, btnVisualizzaSrc" text="%key13" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                            <Label font="$x1" text="%key10" GridPane.rowIndex="4">
+                              <GridPane.margin>
+                                <Insets left="10.0" fx:id="x5" />
+                              </GridPane.margin>
+                            </Label>
+                            <Button fx:id="btnVisualizzaCertificato" mnemonicParsing="false" onMouseClicked="#btnVisualizzaCertificato" styleClass="mainBtn, btnVisualizzaSrc" text="%key13" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                               <GridPane.margin>
                                 <Insets right="10.0" fx:id="x4" />
                               </GridPane.margin>
@@ -260,9 +268,9 @@
                 <Label fx:id="lblDataIsc" font="$x2" text="Label" textFill="#29a129" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
               </children>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="559.0" minWidth="10.0" prefWidth="535.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="303.0" minWidth="10.0" prefWidth="110.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="155.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="559.0" minWidth="10.0" prefWidth="435.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="303.0" minWidth="10.0" prefWidth="235.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="130.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

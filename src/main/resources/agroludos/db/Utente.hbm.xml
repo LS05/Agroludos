@@ -3,6 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
+
 	<class name="agroludos.to.Utente" table="tbl_utenti" catalog="agroludos">
 		<id name="id" type="java.lang.Integer">
 			<column name="idutente" />
@@ -35,6 +36,9 @@
 			<property name="indirizzo" type="string">
 				<column name="indirizzo" />
 			</property>
+			<property name="telefono" type="string">
+				<column name="telefono" />
+			</property>
 		</joined-subclass>
 		<joined-subclass name="agroludos.to.ManagerDiCompetizione"
 			table="tbl_mdc" extends="agroludos.to.Utente">
@@ -42,6 +46,16 @@
 			<property name="stipendio" type="double">
 				<column name="stipendio" />
 			</property>
+
+			<set name="competizioni" table="tbl_competizione" fetch="select">
+				<key column="idmdc" />
+				<one-to-many class="agroludos.to.Competizione" />
+			</set>
+			<set name="competizioniAttive" table="tbl_competizione" fetch="select"
+				where="statocomp = 1">
+				<key column="idmdc" />
+				<one-to-many class="agroludos.to.Competizione" />
+			</set>
 		</joined-subclass>
 		<joined-subclass name="agroludos.to.Partecipante"
 			table="tbl_partecipante" extends="agroludos.to.Utente">

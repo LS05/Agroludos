@@ -40,7 +40,7 @@
                     </TableView>
                     <GridPane>
                       <children>
-                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" styleClass="btnNuovaComp" text="%key19" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                        <Button fx:id="btnNuovaCompetizione" mnemonicParsing="false" onMouseClicked="#btnNuovaCompetizione" prefHeight="26.0" prefWidth="200.0" styleClass="btnNuovaComp" text="%key19" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                         <GridPane>
                           <children>
                             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="%key18" GridPane.columnIndex="1" GridPane.valignment="CENTER">
@@ -49,16 +49,11 @@
                               </GridPane.margin>
                             </Button>
                             <TextField prefHeight="26.0" prefWidth="319.0" promptText="%key17" />
-                            <Button mnemonicParsing="false" prefHeight="26.0" text="%key50" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
-                              <GridPane.margin>
-                                <Insets left="20.0" />
-                              </GridPane.margin>
-                            </Button>
                           </children>
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="203.0" minWidth="10.0" prefWidth="203.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="152.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="83.0" minWidth="10.0" prefWidth="26.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -66,8 +61,8 @@
                         </GridPane>
                       </children>
                       <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="418.0" minWidth="10.0" prefWidth="418.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="10.0" prefWidth="244.0" />
                       </columnConstraints>
                       <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

@@ -11,7 +11,7 @@ import agroludos.to.StatoCompetizioneTO;
 public class ASGestoreStatoCompetizione extends AgroludosAS implements LStatoCompetizione, SStatoCompetizione{
 
 	@Override
-	public List<StatoCompetizioneTO> getAllStatoCompetizioneTO()
+	public List<StatoCompetizioneTO> getAllStatoCompetizione()
 			throws DatabaseException {
 		StatoCompetizioneDAO daoTcm = getStatoCompetizioneDAO();
 		return daoTcm.getAll();

@@ -45,6 +45,12 @@
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
 	</command>
+	<command name="inserisciCompetizione">
+		<classe>agroludos.business.as.gestorecompetizione.SCompetizione</classe>
+		<from name="mostraNuovaCmp">
+			<forward success="mostraNuovaCmp" failure="mostraNuovaCmp" />
+		</from>
+	</command>
 	<command name="nuovaRegistrazione">
 		<classe>agroludos.business.as.gestoreutente.SUtente</classe>
 		<from name="login">
@@ -112,7 +118,7 @@
 		</from>
 	</command>
 	<command name="getAllTipoOptional">
-		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
+		<classe>agroludos.business.as.gestoretipooptional.LTipoOptional</classe>
 		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
@@ -124,9 +130,18 @@
 		</from>
 	</command>
 	<command name="getAllTipoCompetizione">
-		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
+		<classe>agroludos.business.as.gestoretipocompetizione.LTipoCompetizione</classe>
 		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+		<from name="mostraNuovaCmp">
+			<forward success="mostraNuovaCmp" failure="mostraNuovaCmp" />
+		</from>
+	</command>
+		<command name="getAllStatoCompetizione">
+		<classe>agroludos.business.as.gestorestatocompetizione.LStatoCompetizione</classe>
+		<from name="mostraNuovaCmp">
+			<forward success="mostraNuovaCmp" failure="mostraNuovaCmp" />
 		</from>
 	</command>
 	<command name="getCompetizioneByTipo">

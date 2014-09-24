@@ -3,6 +3,8 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
+	<filter-def name="competizioniAttive">
+	</filter-def>
 	<class name="agroludos.to.Competizione" table="tbl_competizione"
 		catalog="agroludos">
 		<id name="id" type="java.lang.Integer">
@@ -27,6 +29,7 @@
 		<property name="descrizione" type="string">
 			<column name="descrizione" not-null="true" />
 		</property>
+
 		<set name="optionals" cascade="all" table="tbl_opt_comp">
 			<key column="idcompetizione" />
 			<many-to-many column="idoptional" class="agroludos.to.Optional" />
@@ -39,16 +42,19 @@
 			<key column="idcompetizione" />
 			<one-to-many class="agroludos.to.Iscrizione" />
 		</set>
-		<many-to-one name="tipoCompetizione" class="agroludos.to.TipoCompetizione">
-			<column name="tipocomp" not-null="true" />
-		</many-to-one>
-		<many-to-one name="statoCompetizione" class="agroludos.to.StatoCompetizione">
+		<many-to-one name="statoCompetizione" cascade="all" class="agroludos.to.StatoCompetizione">
 			<column name="statocomp" not-null="true" />
 		</many-to-one>
-		<many-to-one name="managerDiCompetizione" class="agroludos.to.Utente">
+		<many-to-one name="tipoCompetizione" cascade="all" class="agroludos.to.TipoCompetizione">
+			<column name="tipocomp" not-null="true" />
+		</many-to-one>
+		<many-to-one name="managerDiCompetizione" cascade="all" class="agroludos.to.Utente">
 			<column name="idmdc" not-null="true" />
 		</many-to-one>
+		<filter name="competizioniAttive" condition="statocomp = 1" />
 	</class>
+
+
 	<query name="getAllCompetizione">
         <![CDATA[ from agroludos.to.Competizione c ]]></query>
 	<query name="getCompetizioneByTipo">

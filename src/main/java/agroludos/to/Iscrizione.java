@@ -95,4 +95,10 @@ class Iscrizione implements IscrizioneTO{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public void setStatoIscrizione(StatoIscrizioneTO statoIscrizione) {
+		this.statoIscrizione = (StatoIscrizione) statoIscrizione;
+		
+	}
 }

@@ -3,6 +3,7 @@ package agroludos.to;
 class ManagerDiSistema extends Utente implements ManagerDiSistemaTO {
 	private static final long serialVersionUID = -7505581083991050221L;
 	private String indirizzo;
+	private String telefono;
 	
 	@Override
 	public String getIndirizzo() {
@@ -14,6 +15,16 @@ class ManagerDiSistema extends Utente implements ManagerDiSistemaTO {
 		this.indirizzo = indirizzo;
 	}
 
+	@Override
+	public String getTelefono() {
+		return telefono;
+	}
+
+	@Override
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+	
 	@Override
 	public String toString() {
 		return "ManagerDiSistema [indirizzo=" + indirizzo + ", id=" + id
