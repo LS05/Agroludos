@@ -1,10 +1,8 @@
 package agroludos.integration.dao.db;
 
-import java.util.List;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.to.OptionalTO;
-import agroludos.to.TipoOptionalTO;
 
 public interface OptionalDAO extends DAO<OptionalTO>{
 

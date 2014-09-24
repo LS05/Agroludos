@@ -6,6 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?scenebuilder-preview-i18n-resource ../../../../../../../Dropbox/Ingegneria del Software/interfaccia/bundles/Agroludos_it.properties?>
 
@@ -19,7 +20,7 @@
               <children>
                 <Label id="nomeCompetizione" fx:id="lblNomeCompetizione" text="Competizione" wrapText="true">
                   <font>
-                    <Font size="20.0" />
+                    <Font name="System Bold Italic" size="22.0" />
                   </font>
                   <GridPane.margin>
                     <Insets left="10.0" fx:id="x3" />
@@ -47,15 +48,15 @@
                                 <Insets left="10.0" fx:id="x3" />
                               </GridPane.margin>
                             </Label>
-                            <Label fx:id="lblData" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                            <Label fx:id="lblNmin" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                            <Label fx:id="lblNmax" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                            <Label font="$x2" text="%key32" GridPane.margin="$x3" GridPane.rowIndex="4" />
-                            <Button fx:id="btnVisualizzaOpt" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="%key58" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                            <Label fx:id="lblData" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                               <GridPane.margin>
-                                <Insets right="10.0" />
+                                <Insets right="20.0" fx:id="x7" />
                               </GridPane.margin>
-                            </Button>
+                            </Label>
+                            <Label fx:id="lblNmin" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.margin="$x7" GridPane.rowIndex="1" />
+                            <Label fx:id="lblNmax" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.margin="$x7" GridPane.rowIndex="2" />
+                            <Label font="$x2" text="%key32" GridPane.margin="$x3" GridPane.rowIndex="4" />
+                            <Button fx:id="btnVisualizzaOpt" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="%key58" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.margin="$x7" GridPane.rowIndex="4" />
                             <Label font="$x1" text="%key30" GridPane.columnIndex="0" GridPane.rowIndex="1">
                               <GridPane.margin>
                                 <Insets left="10.0" fx:id="x3" />
@@ -68,7 +69,7 @@
                             </Label>
                             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                               <children>
-                                <Label fx:id="lblCosto" font="$x2" text="€ 50" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+                                <Label fx:id="lblCosto" font="$x2" text="€ 50" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.margin="$x7" GridPane.rowIndex="0">
                                   <textFill>
                                     <Color blue="0.094" green="0.678" red="0.094" fx:id="x4" />
                                   </textFill>
@@ -121,11 +122,7 @@
                             <Insets left="10.0" fx:id="x3" />
                           </GridPane.margin>
                         </Label>
-                        <Label id="tblStato" fx:id="lblStato" font="$x1" text="Stato" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
-                          <GridPane.margin>
-                            <Insets right="10.0" />
-                          </GridPane.margin>
-                        </Label>
+                        <Label id="tblStato" fx:id="lblStato" font="$x1" text="Stato" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.margin="$x7" />
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="459.0" minWidth="10.0" prefWidth="443.0" />
@@ -137,7 +134,7 @@
                     </GridPane>
                     <TextArea fx:id="txtDescrizione" editable="false" GridPane.rowIndex="1">
                       <GridPane.margin>
-                        <Insets left="10.0" fx:id="x3" />
+                        <Insets left="10.0" right="20.0" />
                       </GridPane.margin>
                     </TextArea>
                   </children>
@@ -226,34 +223,38 @@
                     <TableColumn prefWidth="75.0" text="%key4" fx:id="iscEmailCol" />
                   </columns>
                   <GridPane.margin>
-                    <Insets bottom="10.0" left="10.0" right="10.0" />
+                    <Insets bottom="10.0" left="20.0" right="10.0" />
                   </GridPane.margin>
                 </TableView>
-                <GridPane disable="false" opacity="1.0" visible="true" GridPane.rowIndex="2">
+                <GridPane id="btnVisualizzaIscrizione" disable="false" opacity="1.0" prefWidth="505.0" visible="true" GridPane.rowIndex="2">
                   <children>
-                    <Button fx:id="btnAnnullaIsc" disable="true" mnemonicParsing="false" text="%key60" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                    <Button fx:id="btnAnnullaIsc" disable="true" mnemonicParsing="false" onMouseClicked="#btnAnnullaIsc" prefHeight="30.0" text="%key60" GridPane.columnIndex="0" GridPane.halignment="CENTER">
                       <GridPane.margin>
                         <Insets left="10.0" fx:id="x3" />
                       </GridPane.margin>
                     </Button>
-                    <Button id="lblVisiualizzaIsc" fx:id="btnVisiualizzaIsc" contentDisplay="CENTER" disable="true" mnemonicParsing="false" text="%key95" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+                    <Label id="l" fx:id="lblEliminaIsc" text="%key123" textFill="#a12929" visible="false" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                      <font>
+                        <Font name="System Italic" size="14.0" />
+                      </font>
+                    </Label>
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   </columnConstraints>
                   <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
                 <GridPane alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                   <children>
-                    <Label text="%key35" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="%key122" GridPane.columnIndex="0" GridPane.rowIndex="0">
                       <font>
                         <Font name="System Bold" size="19.0" fx:id="x5" />
                       </font>
                       <GridPane.margin>
-                        <Insets left="10.0" fx:id="x3" />
+                        <Insets left="20.0" />
                       </GridPane.margin>
                     </Label>
                     <Label fx:id="lblNiscritti" font="$x5" text="%key35" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -266,7 +267,11 @@
                     <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="13.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <Button id="btnModificaCmp" fx:id="btnChiudi" alignment="CENTER" contentDisplay="CENTER" maxWidth="200.0" mnemonicParsing="false" onMouseClicked="#btnChiudi" prefHeight="40.0" prefWidth="200.0" text="%key57" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                <Line endX="-96.12132263183594" endY="595.1343383789062" startX="-97.41421508789062" startY="46.944862365722656" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                  <GridPane.margin>
+                    <Insets right="5.0" />
+                  </GridPane.margin>
+                </Line>
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -275,7 +280,6 @@
                 <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="554.0" minHeight="463.0" prefHeight="463.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
           </children>

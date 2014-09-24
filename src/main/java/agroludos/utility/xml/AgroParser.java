@@ -8,8 +8,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import agroludos.presentation.controller.mapper.xml.Commands;
-
 public abstract class AgroParser {
 	protected File xmlFile;
 	protected Unmarshaller jaxbUnmarshaller;

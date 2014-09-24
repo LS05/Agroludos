@@ -66,4 +66,12 @@
 		class="agroludos.business.as.gestorestatoiscrizione.ASGestoreStatoIscrizione"
 		parent="agroludosAS">
 	</bean>
+		<bean id="gestoreTipoCompetizione"
+		class="agroludos.business.as.gestoretipocompetizione.ASGestoreTipoCompetizione"
+		parent="agroludosAS">
+	</bean>
+	<bean id="gestoreTipoOptional"
+		class="agroludos.business.as.gestoretipooptional.ASGestoreTipoOptional"
+		parent="agroludosAS">
+	</bean>
 </beans>

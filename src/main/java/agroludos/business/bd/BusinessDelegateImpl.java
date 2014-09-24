@@ -22,7 +22,7 @@ class BusinessDelegateImpl implements BusinessDelegate{
 	public AgroResponseContext gestisciServizio(Command command, AgroRequestContext request) throws ApplicationException {
 		AgroludosService applicationService = null;
 		AgroResponseContext res = null;
-
+		int i=0;
 		try {
 			applicationService = this.locator.lookup(command.getClassName());
 			this.handler.setService(applicationService);

@@ -26,6 +26,10 @@ import agroludos.business.as.gestorestatooptional.LStatoOptional;
 import agroludos.business.as.gestorestatooptional.SStatoOptional;
 import agroludos.business.as.gestorestatoutente.LStatoUtente;
 import agroludos.business.as.gestorestatoutente.SStatoUtente;
+import agroludos.business.as.gestoretipocompetizione.LTipoCompetizione;
+import agroludos.business.as.gestoretipocompetizione.STipoCompetizione;
+import agroludos.business.as.gestoretipooptional.LTipoOptional;
+import agroludos.business.as.gestoretipooptional.STipoOptional;
 import agroludos.business.as.gestoreutente.LUtente;
 import agroludos.business.as.gestoreutente.SUtente;
 import agroludos.exceptions.BusinessComponentNotFoundException;
@@ -53,10 +57,38 @@ class Services {
 	private SStatoOptional sstatoopt;
 	private LStatoUtente lstatoutente;
 	private SStatoUtente sstatoutente;
-
+	
+	private LTipoOptional ltipoopt;
+	private STipoOptional stipoopt;
+	private LTipoCompetizione ltipocmp;
+	private STipoCompetizione stipocmp;
+	
 	private Map<String, AgroludosService> services;
 	private LOptional lopt;
 	private SOptional sopt;
+	
+
+	public void setLtipoopt(LTipoOptional ltipoopt) {
+		this.ltipoopt = ltipoopt;
+		this.services.put(LTipoOptional.class.getName(), this.ltipoopt);
+	}
+
+
+	public void setStipoopt(STipoOptional stipoopt) {
+		this.stipoopt = stipoopt;
+		this.services.put(STipoOptional.class.getName(), this.stipoopt);
+	}
+
+	public void setLtipocmp(LTipoCompetizione ltipocmp) {
+		this.ltipocmp = ltipocmp;
+		this.services.put(LTipoCompetizione.class.getName(), this.ltipocmp);
+	}
+
+
+	public void setStipocmp(STipoCompetizione stipocmp) {
+		this.stipocmp = stipocmp;
+		this.services.put(STipoCompetizione.class.getName(), this.stipocmp);
+	}
 	
 	Services(){
 		this.services = new HashMap<String,  AgroludosService>();
@@ -186,7 +218,7 @@ class Services {
 		
 	public AgroludosService getService(String serviceName) throws BusinessComponentNotFoundException{
 		AgroludosService service = this.services.get(serviceName);
-
+		
 		if(service == null){
 			StringBuilder sb = new StringBuilder();
 			sb.append("Gestore del servizio non trovato! Percorso errato oppure classe ASGestore non istanziata: ");

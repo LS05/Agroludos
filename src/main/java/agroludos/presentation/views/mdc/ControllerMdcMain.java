@@ -6,8 +6,11 @@ import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.tablemodel.CmpModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
+import agroludos.presentation.views.xml.AgroludosWindow;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.ManagerDiCompetizioneTO;
+import agroludos.to.UtenteTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -18,6 +21,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class ControllerMdcMain extends ControllerUtenti{
 	
@@ -51,14 +56,15 @@ public class ControllerMdcMain extends ControllerUtenti{
 
 	private String nameView;
 
+	private ManagerDiCompetizioneTO mdcTO;
+
 
 	@Override
 	public void initializeView(String nameView) {
 		this.nameView = nameView;
+		this.mdcTO = (ManagerDiCompetizioneTO) utente;
 		
-		this.richiesta = this.getRichiesta(utente, "getCompetizioneByMdc", this.nameView);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.listCmp = this.mdcTO.getAllCompetizioniAttive();
 		this.listaTabCmp = this.getListTabellaCmp();
 		this.initCmpTable();
 	}
@@ -86,6 +92,9 @@ public class ControllerMdcMain extends ControllerUtenti{
 		this.paneCompetizioni.setVisible(true);
 	}
 
+	@FXML protected void btnNuovaCompetizione(MouseEvent event) {
+		nav.setVista("mostraNuovaCmp");
+	}
 
 
 	private ObservableList<CmpModel> getListTabellaCmp(){
@@ -134,14 +143,14 @@ public class ControllerMdcMain extends ControllerUtenti{
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		if(request.getCommandName().equals("getCompetizioneByMdc")){
-			Object res = (Object)response.getRespData();
-			if(res instanceof List<?>){
-				List<CompetizioneTO> cmpList = (List<CompetizioneTO>)res;
-				this.listCmp = cmpList;
-			}	
-
-		}
+//		if(request.getCommandName().equals("getCompetizioneByMdc")){
+//			Object res = (Object)response.getRespData();
+//			if(res instanceof List<?>){
+//				List<CompetizioneTO> cmpList = (List<CompetizioneTO>)res;
+//				this.listCmp = cmpList;
+//			}	
+//
+//		}
 
 	}	
 }

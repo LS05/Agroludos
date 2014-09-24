@@ -70,6 +70,12 @@
 			<height>459</height>
 		</view>
 		<view tipo="dialog">
+			<name>mostraNuovaCmp</name>
+			<url>/fxml/mdc/mdcNuovaCompetizione.fxml</url>
+			<width>800</width>
+			<height>459</height>
+		</view>
+		<view tipo="dialog">
 			<name>mostraIscrizoine</name>
 			<url>/fxml/mdc/mdcIscrizione.fxml</url>
 			<width>800</width>

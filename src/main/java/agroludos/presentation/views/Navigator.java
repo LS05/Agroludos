@@ -81,7 +81,7 @@ public class Navigator {
 		if(agw.isDialog() && this.viewsCache.peekStack().equals(agw.getStage()))
 			this.viewsCache.popStack();
 		else if(agw.isMainView()){
-			//chiama la vista per chiudere
+			System.out.println("termina programma");
 		}
 			
 		this.getStage(viewName).close();	

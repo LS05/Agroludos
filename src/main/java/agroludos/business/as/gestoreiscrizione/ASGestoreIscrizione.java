@@ -4,9 +4,14 @@ import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
 import agroludos.exceptions.DatabaseException;
+import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.IscrizioneDAO;
+import agroludos.integration.dao.db.StatoCompetizioneDAO;
+import agroludos.integration.dao.db.StatoIscrizioneDAO;
 import agroludos.to.IscrizioneTO;
+import agroludos.to.StatoCompetizioneTO;
+import agroludos.to.StatoIscrizioneTO;
 
 class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizione{
 
@@ -34,10 +39,16 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 	}
 
 	@Override
-	public boolean eliminaIscrizione(IscrizioneTO iscto)
+	public IscrizioneTO eliminaIscrizione(IscrizioneTO iscto)
 			throws DatabaseException {
-		IscrizioneDAO iscDAO = getIscrizioneDAO();
+		
 
+		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		IscrizioneDAO iscDAO = getIscrizioneDAO();
+		StatoIscrizioneDAO daoScmp = dbDAOFact.getStatoIscrizioneDAO();
+		StatoIscrizioneTO sito = daoScmp.getAll().get(0);
+		iscto.setStatoIscrizione(sito);
+		
 		return iscDAO.annullaIscrizione(iscto);
 	}
 

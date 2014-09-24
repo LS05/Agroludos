@@ -33,6 +33,8 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 	public List<CompetizioneTO> readByMdc(ManagerDiCompetizioneTO mdc) throws DatabaseException {
 		List<ManagerDiCompetizioneTO> param = new ArrayList<ManagerDiCompetizioneTO>();
 		param.add(mdc);
+		
+		this.session.enableFilter("competizioniAttive");
 
 		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioneByMdc", param);
 

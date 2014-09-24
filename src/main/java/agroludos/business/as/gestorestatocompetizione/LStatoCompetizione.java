@@ -7,6 +7,6 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.to.StatoCompetizioneTO;
 
 public interface LStatoCompetizione extends AgroludosService{
-	List<StatoCompetizioneTO> getAllStatoCompetizioneTO() throws DatabaseException;
+	List<StatoCompetizioneTO> getAllStatoCompetizione() throws DatabaseException;
 	StatoCompetizioneTO getStatoCmpAnnullata() throws DatabaseException;
 }

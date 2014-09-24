@@ -62,8 +62,9 @@ class Competizione implements CompetizioneTO{
 		return tipoCompetizione;
 	}
 
-	public void setTipoCompetizione(TipoCompetizione tipoCompetizione) {
-		this.tipoCompetizione = tipoCompetizione;
+	@Override
+	public void setTipoCompetizione(TipoCompetizioneTO tipoCompetizione) {
+		this.tipoCompetizione = (TipoCompetizione) tipoCompetizione;
 	}
 	@Override
 	public StatoCompetizione getStatoCompetizione() {
@@ -274,6 +275,12 @@ class Competizione implements CompetizioneTO{
 	}
 
 	@Override
+	public void setManagerDiCompetizione(ManagerDiCompetizioneTO managerDiCompetizione) {
+		this.managerDiCompetizione = (ManagerDiCompetizione) managerDiCompetizione;
+		
+	}
+	
+	@Override
 	public String toString() {
 		return "Competizione [id=" + id + ", nome=" + nome + ", suppData="
 				+ suppData + ", data=" + data + ", nmin=" + nmin + ", nmax="
@@ -283,6 +290,7 @@ class Competizione implements CompetizioneTO{
 				+ tipoCompetizione + ", statoCompetizione=" + statoCompetizione
 				+ ", managerDiCompetizione=" + managerDiCompetizione + "]";
 	}
+
 
 
 }

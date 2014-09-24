@@ -1,5 +1,6 @@
 package agroludos.presentation.views.login;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -42,6 +45,17 @@ public class ControllerLogin extends AgroludosController{
 	public void initializeView(String nameView) {
 		this.nameView = nameView;
 
+		final Stage stage = nav.getStage(nameView);
+		final String mainView = nameView;
+		//aggiungo l'evento close vista quando si chiude lo stage
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent we) {
+				//TODO eliminare stampa
+				nav.closeVista(mainView);
+			}
+		}); 
+		
+		
 		this.agroLogoPane.setFocusTraversable(true);
 		this.txtUsername.setText("agroludos");
 		this.txtPassword.setText("agroludos");

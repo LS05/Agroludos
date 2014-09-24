@@ -1,8 +1,15 @@
 package agroludos.to;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 class ManagerDiCompetizione extends Utente implements ManagerDiCompetizioneTO {
 	private static final long serialVersionUID = 8563751281065371435L;
 	private Double stipendio;
+	
+	private Set<Competizione> competizioni;
+	private Set<Competizione> competizioniAttive;
 
 	@Override
 	public Double getStipendio() {
@@ -13,6 +20,47 @@ class ManagerDiCompetizione extends Utente implements ManagerDiCompetizioneTO {
 	public void setStipendio(Double stipendio) {
 		this.stipendio = stipendio;
 	}
+	
+	@Override
+	public List<CompetizioneTO> getAllCompetizioni() {
+		List<CompetizioneTO> res = new ArrayList<CompetizioneTO>();
+		
+		for(Competizione item : this.competizioni){
+			res.add(item);
+		}
+		
+		return res;
+	}
+	
+	public Set<Competizione> getCompetizioni() {
+		return this.competizioni;
+	}
+	
+
+	public void setCompetizioniAttive(Set<Competizione> competizioniAttive) {
+		this.competizioniAttive = competizioniAttive;
+	}
+	
+	@Override
+	public List<CompetizioneTO> getAllCompetizioniAttive() {
+		List<CompetizioneTO> res = new ArrayList<CompetizioneTO>();
+		
+		for(Competizione item : this.competizioniAttive){
+			res.add(item);
+		}
+		
+		return res;
+	}
+	
+	public Set<Competizione> getCompetizioniAttive() {
+		return this.competizioniAttive;
+	}
+	
+
+	public void setCompetizioni(Set<Competizione> competizioni) {
+		this.competizioni = competizioni;
+	}
+	
 
 	@Override
 	public int compareTo(UtenteTO o) {

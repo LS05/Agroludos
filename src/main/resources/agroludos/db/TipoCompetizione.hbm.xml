@@ -6,7 +6,7 @@
 	<class name="agroludos.to.TipoCompetizione" table="tbl_tipocomp"
 		catalog="agroludos">
 		<id name="id" type="java.lang.Integer">
-			<column name="idtipocomp" />
+			<column name="idtipocomp"/>
 			<generator class="increment" />
 		</id>
 		<property name="nome" type="string">

@@ -165,4 +165,8 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 
 	void setIdStato(int idStato);
 
+	void setTipoCompetizione(TipoCompetizioneTO tipoCompetizione);
+
+	public void setManagerDiCompetizione(ManagerDiCompetizioneTO managerDiCompetizione);
+
 }

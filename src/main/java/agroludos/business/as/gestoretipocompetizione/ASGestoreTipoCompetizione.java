@@ -27,7 +27,7 @@ class ASGestoreTipoCompetizione extends AgroludosAS implements LTipoCompetizione
 	}
 
 	@Override
-	public List<TipoCompetizioneTO> getAllTipoCompetizioneTO()
+	public List<TipoCompetizioneTO> getAllTipoCompetizione()
 			throws DatabaseException {
 		TipoCompetizioneDAO daoTcm = getTipoCompetizioneDAO();
 		return daoTcm.getAll();
