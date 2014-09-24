@@ -97,6 +97,7 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 * 
 	 * @return
 	 */
+	//TODO Cambiare in Integer
 	void setNmin(int nmin);
 	
 	/**
@@ -113,6 +114,7 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 * 
 	 * @return
 	 */
+	//TODO Cambiare in Integer
 	void setNmax(int nmax);
 	
 
