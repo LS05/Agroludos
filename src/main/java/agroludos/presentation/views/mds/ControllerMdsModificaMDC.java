@@ -26,7 +26,9 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 	@FXML private TextField txtCognome;
 	@FXML private ComboBox<String> cmbStato;
 	@FXML private Label lblMessaggioModifica;
-
+	
+	private String nameView;
+	
 	private AgroRequest richiesta;
 
 	private AgroResponse risposta;
@@ -64,6 +66,7 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 		this.mdcTO.setCognome(this.txtCognome.getText());
 		this.mdcTO.setUsername(this.txtUsername.getText());
 		this.mdcTO.setEmail(this.txtEmail.getText());
+		
 		//TODO rivedere come far cambiare ;
 		this.mdcTO.getStatoUtente().setId(this.cmbStato.getSelectionModel().getSelectedIndex());
 
@@ -87,7 +90,6 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 
 	}
 	
-	private String nameView;
 	@Override
 	protected String getNameView() {
 		return this.nameView;

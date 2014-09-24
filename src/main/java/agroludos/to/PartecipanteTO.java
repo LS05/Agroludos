@@ -20,13 +20,17 @@ public interface PartecipanteTO extends UtenteTO {
 	public String getNumTS();
 
 	public void setNumTS(String numTS);
-
+	
+	//TODO Da rinominare CSRC
 	public Date getDataSRC();
 
+	//TODO Da rinominare CSRC
 	public void setDataSRC(Date dataSRC);
 
+	//TODO Da rinominare CSRC
 	public void setSrc(String src);
 
+	//TODO Da rinominare CSRC
 	public String getSrc();
 
 	public Date getDataNasc();

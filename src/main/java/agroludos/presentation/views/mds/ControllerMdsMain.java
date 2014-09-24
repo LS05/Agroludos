@@ -33,6 +33,7 @@ import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.TipiAgroludosTO;
+import agroludos.to.TipoCompetizioneTO;
 import agroludos.to.TipoOptionalTO;
 
 public class ControllerMdsMain extends ControllerUtenti{
@@ -113,6 +114,8 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 	@FXML private GridPane paneListaTipiOpt;
 	@FXML private GridPane paneListaTipiComp;
+	
+	@FXML private Button btnIscrPar;
 
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
@@ -124,6 +127,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 	private String nameView;
 	private List<TipiAgroludosTO> listTipiComp;
+	private ObservableList<CmpModel> listCompTipo;
 	
 	@SuppressWarnings("serial")
 	@Override
@@ -139,7 +143,6 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.richieste = new ArrayList<String>(){{
 			this.add("getAllManagerDiCompetizione");
 			this.add("getAllPartecipante");
-			this.add("getAllCompetizione");
 			this.add("getAllTipoOptional");
 			this.add("getAllTipoCompetizione");
 		}};
@@ -176,6 +179,25 @@ public class ControllerMdsMain extends ControllerUtenti{
 				risposta = respFact.createResponse();
 				frontController.eseguiRichiesta(richiesta, risposta);
 				tableOptional.getItems().setAll(listOptTipo);
+			}
+
+		});
+		
+		
+		listViewComp.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			
+			@Override
+			public void handle(MouseEvent event) {
+				ListView<String> source = (ListView<String>)event.getSource();
+				String nomeTipo = source.getSelectionModel().getSelectedItem();
+				
+				TipoCompetizioneTO tipoComp = toFact.createTipoCompetizioneTO();
+				tipoComp.setNome(nomeTipo);
+				
+				richiesta = getRichiesta(tipoComp, "getCompetizioneByTipo", viewName);
+				risposta = respFact.createResponse();
+				frontController.eseguiRichiesta(richiesta, risposta);
+				tableCompetizioni.getItems().setAll(listCompTipo);
 			}
 
 		});
@@ -238,14 +260,6 @@ public class ControllerMdsMain extends ControllerUtenti{
 	}
 
 	//--------------------Gest Competizioni View---------------
-
-	@FXML protected void btnCorsaCampestre(MouseEvent event) {
-		//caricare competizioni di corsa campestre nella tabella
-	}
-
-	@FXML protected void btnTiroConArco(MouseEvent event) {
-		//caricare competizioni di tiro con l'arco nella tabella
-	}
 
 	@FXML protected void btnNuovoTipoCompetizione(MouseEvent event) {
 	}
@@ -355,16 +369,15 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 						this.getStyleClass().remove("disattivoCell");
 						this.getStyleClass().remove("attivoCell");
-						this.getTableRow().getStyleClass().remove("disattivoRow");
-						this.getTableRow().getStyleClass().remove("attivoRow");
+						this.getTableRow().getStyleClass().remove("optionalRow");
 
 						// update the item and set a custom style if necessary
 						if (item != null) {
-							setText(item.toString());
+							setText(item);
 							int index = this.getIndex();
 							OptModel optional = this.getTableView().getItems().get(index);
 							this.getStyleClass().add(optional.getStato() == 0 ? "disattivoCell" : "attivoCell");
-							this.getTableRow().getStyleClass().add(optional.getStato() == 0 ? "disattivoRow" : "attivoRow");
+							this.getTableRow().getStyleClass().add("optionalRow");
 						}
 					}
 				};
@@ -377,15 +390,6 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.initColumn(this.cmpColDesc, "descrizione");
 		this.initColumn(this.cmpColPrezzo, "costo");
 		this.initColumn(this.cmpColStato, "stato");
-
-		ObservableList<CmpModel> res = FXCollections.observableArrayList();
-
-		for(CompetizioneTO comp : this.listComp){
-			CmpModel modelCmp = new CmpModel(comp);
-			res.add(modelCmp);
-		}
-
-		this.tableCompetizioni.getItems().setAll(res);
 	}
 
 	private void setDxPartColumn(int selected) {
@@ -410,9 +414,10 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.initColumn(this.partColUsername, "username");
 
 		ObservableList<PartModel> res = FXCollections.observableArrayList();
-
+		PartModel partModel = null;
+		
 		for(PartecipanteTO part : this.listPart){
-			PartModel partModel = new PartModel(part);
+			partModel = new PartModel(part);
 			res.add(partModel);
 		}
 
@@ -443,7 +448,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 		if(commandName.equals( this.reqProperties.getProperty("getAllManagerDiCompetizione") )){
 
-			Object res = (Object)response.getRespData();
+			Object res = response.getRespData();
 			if(res instanceof List<?>){
 				List<ManagerDiCompetizioneTO> mdcList = (List<ManagerDiCompetizioneTO>)res;
 				this.listMdc = mdcList;
@@ -451,7 +456,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 		} else if(commandName.equals( this.reqProperties.getProperty("getAllOptional") )){
 
-			Object res = (Object)response.getRespData();
+			Object res = response.getRespData();
 			if(res instanceof List<?>){
 				List<OptionalTO> optList = (List<OptionalTO>)res;
 				this.listOpt = optList;
@@ -459,23 +464,15 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 		} else if(commandName.equals( this.reqProperties.getProperty("getAllPartecipante") )){
 
-			Object res = (Object)response.getRespData();
+			Object res = response.getRespData();
 			if(res instanceof List<?>){
 				List<PartecipanteTO> mdcList = (List<PartecipanteTO>)res;
 				this.listPart = mdcList;
 			}
 
-		} else if(commandName.equals( this.reqProperties.getProperty("getAllCompetizione") )){
-
-			Object res = (Object)response.getRespData();
-			if(res instanceof List<?>){
-				List<CompetizioneTO> comList = (List<CompetizioneTO>)res;
-				this.listComp = comList;
-			}
-
 		} else if(commandName.equals( this.reqProperties.getProperty("modificaManagerDiCompetizione") )){
 
-			Object res = (Object)response.getRespData();
+			Object res = response.getRespData();
 			if(res instanceof ManagerDiCompetizioneTO){
 				ManagerDiCompetizioneTO mdcTO = (ManagerDiCompetizioneTO)res;
 				MdcModel mdc = this.tableManagerCompetizione.getItems().get(this.selectedMDC);
@@ -487,21 +484,38 @@ public class ControllerMdsMain extends ControllerUtenti{
 				setDxColumn(this.selectedMDC);
 			}
 		} else if( commandName.equals( this.reqProperties.getProperty("getAllTipoOptional") )){
-			Object res = (Object)response.getRespData();
+			Object res = response.getRespData();
 			if(res instanceof List<?>){
 				List<TipiAgroludosTO> tipiOptList = (List<TipiAgroludosTO>)res;
 				this.listTipiOpt = tipiOptList;
 			}
 		} else if( commandName.equals( this.reqProperties.getProperty("getOptionalByTipo") )){
-			Object res = (Object)response.getRespData();
+			Object res = response.getRespData();
 			
 			if( res instanceof List<?>){
 				List<OptionalTO> listOpt = (List<OptionalTO>)res;
 				this.listOptTipo = FXCollections.observableArrayList();
-				
+				OptModel om = null;
 				for(OptionalTO item : listOpt){
-					OptModel om = new OptModel(item);
+					om = new OptModel(item);
 					this.listOptTipo.add(om);
+				}
+			}
+		} else if( commandName.equals( this.reqProperties.getProperty("getAllTipoCompetizione") )){
+			Object res = response.getRespData();
+			if(res instanceof List<?>){
+				List<TipiAgroludosTO> tipiCompList = (List<TipiAgroludosTO>)res;
+				this.listTipiComp = tipiCompList;
+			}
+		} else if( commandName.equals( this.reqProperties.getProperty("getCompetizioneByTipo") )){
+			Object res = response.getRespData();
+			if(res instanceof List<?>){
+				List<CompetizioneTO> listComp = (List<CompetizioneTO>)res;
+				this.listCompTipo = FXCollections.observableArrayList();
+				CmpModel cm = null;
+				for(CompetizioneTO cmp : listComp){
+					cm = new CmpModel(cmp);
+					this.listCompTipo.add(cm);
 				}
 			}
 		}
