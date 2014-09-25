@@ -1,9 +1,9 @@
 package agroludos.business.validator.utente;
 
-import agroludos.business.validator.ValidationException;
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.business.validator.rules.utente.PasswordRule;
 import agroludos.business.validator.rules.utente.UsernameRule;
+import agroludos.exceptions.ValidationException;
 import agroludos.to.AgroludosTO;
 import agroludos.to.UtenteTO;
 

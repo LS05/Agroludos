@@ -1,7 +1,5 @@
 package agroludos.integration.dao.db.mysql;
 
-import java.util.List;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -21,8 +19,6 @@ import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.integration.dao.db.TipoOptionalDAO;
 import agroludos.integration.dao.db.TipoUtenteDAO;
 import agroludos.integration.dao.db.UtenteDAO;
-import agroludos.to.TipoUtenteTO;
-import agroludos.to.TransferObjectFactory;
 import agroludos.to.UtenteTO;
 
 public class MySqlDAOFactory implements DBDAOFactory {
@@ -119,23 +115,4 @@ public class MySqlDAOFactory implements DBDAOFactory {
 	public TipoUtenteDAO getTipoUtenteDAO() {
 		return new MySqlTipoUtenteDAO(this.session);
 	}
-
-	public static void main(String args[]){
-		TransferObjectFactory fact = new TransferObjectFactory();
-		MySqlDAOUtil daoUtil = new MySqlDAO();
-
-
-		try {
-			MySqlDAOFactory daoFact = new MySqlDAOFactory(daoUtil);
-			daoFact.testConnection();
-			TipoUtenteDAO cmpDao = daoFact.getTipoUtenteDAO();
-			List<TipoUtenteTO> tuto = cmpDao.getAll();
-			tuto.toString();
-			
-		} catch (DatabaseException e) {
-			e.printStackTrace();
-		}	
-	}
-
-
 }

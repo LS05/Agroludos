@@ -9,12 +9,11 @@ import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 
 public class PartNameRule extends AgroludosRule {
+	StringValidator strValidator;
 	
 	PartNameRule() throws IOException {
 		super();
 	}
-
-	StringValidator strValidator;
 
 	@Override
 	public void validate(AgroludosTO to, ErrorTO errorTO) {

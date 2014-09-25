@@ -25,5 +25,7 @@ public interface TOFactory {
 	UtenteTO createNullUTO();
 	
 	StatoCompetizioneTO createStatoCompetizioneTO();
+	
+	ErrorTO createErrorTO();
 
 }

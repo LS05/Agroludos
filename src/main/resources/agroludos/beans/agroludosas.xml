@@ -7,6 +7,7 @@
 	<import resource="classpath:agroludos/beans/transferobject.xml" />
 	<import resource="classpath:agroludos/beans/dao.xml" />
 	<import resource="classpath:agroludos/beans/utility.xml" />
+	<import resource="classpath:agroludos/beans/validator.xml" />
 
 	<bean id="agroludosAS" class="agroludos.business.as.AgroludosAS"
 		abstract="true">
@@ -55,8 +56,8 @@
 	<bean id="gestorePartecipante"
 		class="agroludos.business.as.gestorepartecipante.ASGestorePartecipante"
 		parent="agroludosAS">
-		<constructor-arg ref="systemConf" />
 		<constructor-arg ref="fileFactory" />
+		<constructor-arg ref="partValidator" />
 	</bean>
 	<bean id="gestoreIscrizione"
 		class="agroludos.business.as.gestoreiscrizione.ASGestoreIscrizione"

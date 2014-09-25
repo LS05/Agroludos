@@ -4,31 +4,32 @@ import java.io.IOException;
 import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
+import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.UserNotFoundException;
+import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.integration.dao.file.CertificatoSRCDAO;
 import agroludos.integration.dao.file.FileDAOFactory;
 import agroludos.integration.dao.file.FileFactory;
-import agroludos.system.SystemConf;
 import agroludos.to.PartecipanteTO;
 
 class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SPartecipante{
 
 	private FileFactory fileFactory;
-	private SystemConf sysConf;
+	private AgroludosValidator validator;
 
-	ASGestorePartecipante(SystemConf sysConf, FileFactory fileFactory){
+	ASGestorePartecipante(FileFactory fileFactory, AgroludosValidator validator){
 		this.fileFactory = fileFactory;
-		this.sysConf = sysConf;
+		this.validator = validator;
 	}
 
 	private PartecipanteDAO getPartecipanteDAO() throws DatabaseException {
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return dbDAOFact.getPartecipanteDAO();
 	}
-	
+
 	private CertificatoSRCDAO getCertificatoSRCDAO() {
 		FileDAOFactory daoFile = this.fileFactory.getDAOFactory(this.sysConf.getTipoCert());
 		return daoFile.getCertificatoSRCDAO();
@@ -36,10 +37,12 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 
 	@Override
 	public boolean inserisciPartecipante(PartecipanteTO parto)
-			throws DatabaseException {
+			throws DatabaseException, ValidationException {
 		boolean res = false;
-		//TODO Gestire scrittura percorso file del certificato
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
+
+		this.validator.validate(parto);
+
 		res = daoPar.create(parto);
 
 		return res;
@@ -47,16 +50,20 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 
 	@Override
 	public PartecipanteTO modificaPartecipante(PartecipanteTO parto)
-			throws DatabaseException {
+			throws DatabaseException, ValidationException {
+		
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
+		this.validator.validate(parto);
+		
 		PartecipanteTO part = (PartecipanteTO)daoPar.update(parto);
+		
 		return part;
 	}
 
 	private PartecipanteTO getSupp(PartecipanteTO user) 
 			throws UserNotFoundException, IOException{
 		CertificatoSRCDAO certFile = this.getCertificatoSRCDAO();
-		
+
 		if(user.getId() != -1){
 			user.setCertificato(certFile.getCertificato(user.getSrc()));
 		} else {
@@ -78,24 +85,24 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 	@Override
 	public PartecipanteTO getPartecipanteById(PartecipanteTO parto)
 			throws DatabaseException, UserNotFoundException, IOException {
-		
+
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
 		PartecipanteTO user = daoPar.getByID(parto.getId());
-		
+
 		return getSupp(user);
 	}
 
 	@Override
 	public List<PartecipanteTO> getAllPartecipante() throws DatabaseException, IOException {
-		
+
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
 		CertificatoSRCDAO certDao = this.getCertificatoSRCDAO();
 		List<PartecipanteTO> res = daoPar.getAll();
-		
+
 		for(PartecipanteTO part : res){
 			part.setCertificato(certDao.getCertificato(part.getSrc()));
 		}
-		
+
 		return res;
 	}
 }
