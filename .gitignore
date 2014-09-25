@@ -2,7 +2,6 @@
 .project
 /target/
 /.settings/
-src/main/java/agroludos/system/filesystem.xml
 api
 /doc/*
 /lib/*
