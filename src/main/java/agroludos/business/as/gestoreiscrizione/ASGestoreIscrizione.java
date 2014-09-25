@@ -4,13 +4,10 @@ import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
 import agroludos.exceptions.DatabaseException;
-import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.IscrizioneDAO;
-import agroludos.integration.dao.db.StatoCompetizioneDAO;
 import agroludos.integration.dao.db.StatoIscrizioneDAO;
 import agroludos.to.IscrizioneTO;
-import agroludos.to.StatoCompetizioneTO;
 import agroludos.to.StatoIscrizioneTO;
 
 class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizione{
