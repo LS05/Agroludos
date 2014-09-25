@@ -86,6 +86,9 @@
 		<from name="mostraCmp">
 			<forward success="mostraCmp" failure="mostraCmp" />
 		</from>
+		<from name="mostraIscrizoine">
+			<forward success="mostraIscrizoine" failure="mostraIscrizoine" />
+		</from>
 	</command>
 	<command name="modificaManagerDiCompetizione">
 		<classe>agroludos.business.as.gestoremdc.SManagerDiCompetizione</classe>
