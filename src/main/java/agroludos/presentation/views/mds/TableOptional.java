@@ -24,10 +24,21 @@ class TableOptional extends TableView<OptModel> implements AgroTable<OptModel>{
 		this.optColPrezzo = new TableColumn<OptModel, String>("costo");
 		this.optColStato = new TableColumn<OptModel, String>("nomeStato");
 
+		this.getColumns().add(this.optColNome);
+		this.getColumns().add(this.optColDesc);
+		this.getColumns().add(this.optColPrezzo);
+		this.getColumns().add(this.optColStato);
+		
+		this.setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY);
+
 		this.optColNome.setCellValueFactory(new PropertyValueFactory<OptModel, String>("nome"));
+		this.optColNome.setText("Nome");
 		this.optColDesc.setCellValueFactory(new PropertyValueFactory<OptModel, String>("descrizione"));
+		this.optColDesc.setText("Descrizione");
 		this.optColPrezzo.setCellValueFactory(new PropertyValueFactory<OptModel, String>("costo"));
+		this.optColPrezzo.setText("Costo");
 		this.optColStato.setCellValueFactory(new PropertyValueFactory<OptModel, String>("nomeStato"));
+		this.optColStato.setText("Stato");
 		this.optColStato.setCellFactory(new Callback<TableColumn<OptModel, String>, TableCell<OptModel, String>>() {
 			@Override public TableCell<OptModel, String> call(TableColumn<OptModel, String> statoColumn) {
 				return new TableCell<OptModel, String>() {

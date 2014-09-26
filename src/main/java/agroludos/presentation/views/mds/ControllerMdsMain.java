@@ -157,6 +157,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 		//		this.initPartTable();
 
 		this.tableOptional = new TableOptional();
+		this.paneTableOptional.setVisible(true);
 		this.paneTableOptional.getChildren().add(this.tableOptional);
 
 		ListaViewTipi listViewOpt = new ListaViewTipi(this.listTipiOpt);
