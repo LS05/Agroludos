@@ -23,6 +23,7 @@ import agroludos.presentation.views.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
+import agroludos.to.SuccTO;
 
 public class ControllerMdcCompetizione extends AgroludosController {
 	
@@ -86,7 +87,8 @@ public class ControllerMdcCompetizione extends AgroludosController {
 				//TODO eliminare stampa
 				//CompetizioneTO cmpto = (CompetizioneTO) mainTO;
 				System.out.println("Stage is closing");
-				nav.setVista("managerDiCompetizione", cmpto);
+				close();
+//				nav.setVista("managerDiCompetizione", cmpto);
 			}
 		}); 
 		
@@ -177,6 +179,15 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.risposta = respFact.createResponse();
 		this.richiesta = this.getRichiesta(this.cmpto, "annullaCompetizione", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		
+		Object res = this.risposta.getRespData();
+		if(res instanceof CompetizioneTO){
+			SuccTO succMessage = toFact.createSuccTO();
+			succMessage.setMessagge("Competizione annullata!");
+			this.close();
+			nav.setVista("successDialog",succMessage);
+		}
+		
 	}
 
 	@FXML protected void btnModificaCmp(MouseEvent event) {
@@ -200,14 +211,6 @@ public class ControllerMdcCompetizione extends AgroludosController {
 			if(res instanceof CompetizioneTO){
 				this.initializeView((CompetizioneTO) res);
 				this.lblModificaOk.setVisible(true);
-			}
-		}else if(request.getCommandName().equals("annullaCompetizione")){
-			Object res = response.getRespData();
-			if(res instanceof CompetizioneTO){
-				//TODO
-				this.lblAnnullaOk.setVisible(true);
-				this.paneVisualizzaCmp.setDisable(true);
-				this.paneIscritti.setDisable(true);
 			}
 		}else if(request.getCommandName().equals("eliminaIscrizione")){
 			Object res = response.getRespData();

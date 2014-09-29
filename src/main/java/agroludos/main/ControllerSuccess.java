@@ -9,11 +9,12 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.SuccTO;
 
 public class ControllerSuccess  extends AgroludosController{
 	@FXML private Label lblSuccess;
 	@FXML private Button btnOk;
-	AgroludosTO mainTO;
+	SuccTO mainTO;
 
 	@FXML protected void btnOkClicked(MouseEvent event) {	
 		this.close();
@@ -26,10 +27,9 @@ public class ControllerSuccess  extends AgroludosController{
 	}
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		this.mainTO = mainTO;
-		if(this.mainTO instanceof CompetizioneTO){
-			this.lblSuccess.setText("Competizione inserita con successo");
-		}
+		this.mainTO = (SuccTO) mainTO;
+			this.lblSuccess.setText(this.mainTO.getMessage());
+
 	}
 
 	@Override

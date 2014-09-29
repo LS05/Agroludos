@@ -72,8 +72,15 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 		this.cmbTipoCmp.setValue(listTipi.get(0));
 
 		this.lblInserimentoOk.setVisible(false);
-
-
+		this.txtDataCmp.setText("");
+		this.txtDecimali.setText("");
+		this.txtDescrizione.setText("");
+		this.txtInteri.setText("");
+		this.txtNmaxCmp.setText("");
+		this.txtNminCmp.setText("");
+		this.txtNomeCmp.setText("");
+		
+		
 	}
 
 	@FXML private void btnAnnulla(MouseEvent event){
@@ -137,8 +144,10 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 			Object res = (Object)response.getRespData();
 			if(res instanceof Boolean){
 				if((boolean) res){
-					this.lblInserimentoOk.setVisible(true);
+//					this.lblInserimentoOk.setVisible(true);
 					this.cmpto = toFact.createCompetizioneTO();
+					nav.setVista("successDialog");
+					this.initializeView(this.nameView);
 				}
 			}
 		}
