@@ -6,11 +6,9 @@ import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.tablemodel.CmpModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
-import agroludos.presentation.views.xml.AgroludosWindow;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
-import agroludos.to.UtenteTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -21,19 +19,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-
 public class ControllerMdcMain extends ControllerUtenti{
-	
-	
 
 	@FXML private GridPane paneCompetizioni;
 
 	@FXML private Button btnPaneComptizioni;
 	@FXML private Button btnNuovaCompetizione;
-
-
 
 	//tabella competizioni gestite
 	@FXML private TableView<CmpModel> tableCompetizione;
@@ -48,9 +39,6 @@ public class ControllerMdcMain extends ControllerUtenti{
 	private ObservableList<CmpModel> listaTabCmp;
 	private List<CompetizioneTO> listCmp;
 
-	private AgroResponse risposta;
-	private AgroRequest richiesta;
-
 	private CmpModel cmpModelRow;
 	private CompetizioneTO cmpto;
 
@@ -63,7 +51,7 @@ public class ControllerMdcMain extends ControllerUtenti{
 	public void initializeView(String nameView) {
 		this.nameView = nameView;
 		this.mdcTO = (ManagerDiCompetizioneTO) utente;
-		
+
 		this.listCmp = this.mdcTO.getAllCompetizioniAttive();
 		this.listaTabCmp = this.getListTabellaCmp();
 		this.initCmpTable();
@@ -73,17 +61,17 @@ public class ControllerMdcMain extends ControllerUtenti{
 	//chiamato dai set vista con parametro per aggiornare la tabella
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		this.cmpto = (CompetizioneTO)mainTO;
-		//model di competizione
-		cmpModelRow.setCompetizioneTO(this.cmpto);
-		cmpModelRow.setData(this.cmpto.getData().toString());
-		cmpModelRow.setId(Integer.toString(this.cmpto.getId()));
-		cmpModelRow.setNiscritti(Integer.toString(this.cmpto.getAllIscritti().size()));
-		cmpModelRow.setNmax(Integer.toString(this.cmpto.getNmax()));
-		cmpModelRow.setNmin(Integer.toString(this.cmpto.getNmin()));
-		cmpModelRow.setNome(this.cmpto.getNome());
-		cmpModelRow.setStato(this.cmpto.getStatoCompetizione().getNome());
-		cmpModelRow.setTipo(this.cmpto.getTipoCompetizione().getNome());
+//		this.cmpto = (CompetizioneTO)mainTO;
+//		//model di competizione
+//		cmpModelRow.setCompetizioneTO(this.cmpto);
+//		cmpModelRow.setData(this.cmpto.getData().toString());
+//		cmpModelRow.setId(Integer.toString(this.cmpto.getId()));
+//		cmpModelRow.setNiscritti(Integer.toString(this.cmpto.getAllIscritti().size()));
+//		cmpModelRow.setNmax(Integer.toString(this.cmpto.getNmax()));
+//		cmpModelRow.setNmin(Integer.toString(this.cmpto.getNmin()));
+//		cmpModelRow.setNome(this.cmpto.getNome());
+//		cmpModelRow.setStato(this.cmpto.getStatoCompetizione().getNome());
+//		cmpModelRow.setTipo(this.cmpto.getTipoCompetizione().getNome());
 	}
 
 
@@ -143,14 +131,21 @@ public class ControllerMdcMain extends ControllerUtenti{
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-//		if(request.getCommandName().equals("getCompetizioneByMdc")){
-//			Object res = (Object)response.getRespData();
-//			if(res instanceof List<?>){
-//				List<CompetizioneTO> cmpList = (List<CompetizioneTO>)res;
-//				this.listCmp = cmpList;
-//			}	
-//
-//		}
-
-	}	
+		if(request.getCommandName().equals("annullaCompetizione")){
+			Object res = response.getRespData();
+			if(res instanceof CompetizioneTO){
+				this.cmpto = (CompetizioneTO)res;
+				//model di competizione
+				cmpModelRow.setCompetizioneTO(this.cmpto);
+				cmpModelRow.setData(this.cmpto.getData().toString());
+				cmpModelRow.setId(Integer.toString(this.cmpto.getId()));
+				cmpModelRow.setNiscritti(Integer.toString(this.cmpto.getAllIscritti().size()));
+				cmpModelRow.setNmax(Integer.toString(this.cmpto.getNmax()));
+				cmpModelRow.setNmin(Integer.toString(this.cmpto.getNmin()));
+				cmpModelRow.setNome(this.cmpto.getNome());
+				cmpModelRow.setStato(this.cmpto.getStatoCompetizione().getNome());
+				cmpModelRow.setTipo(this.cmpto.getTipoCompetizione().getNome());
+			}
+		}
+	}
 }

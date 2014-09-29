@@ -45,9 +45,8 @@ public class ControllerMdcIscrizione extends AgroludosController {
 	@FXML private Label lblValuta2;
 	@FXML private Label lblValuta3;
 
-	@FXML protected void btnVisualizzaCertificato(MouseEvent event) {}
-	@FXML protected void btnAnnullaIscrizione(MouseEvent event) {}
-	@FXML protected void btnModificaOptionalIscrizione(MouseEvent event) {}
+
+
 
 	private String nameView;
 	@FXML private Label lblEliminaIscrizioneOk;
@@ -124,6 +123,10 @@ public class ControllerMdcIscrizione extends AgroludosController {
 
 	}
 
+	@FXML private void btnVisualizzaCertificato(){
+		nav.setVista("visualizzaSRC");
+	}
+	
 	@FXML protected void btnAnnullaIscrizione(){
 		//TODO
 		System.out.println("Confermi? si...");
@@ -132,11 +135,16 @@ public class ControllerMdcIscrizione extends AgroludosController {
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
+	@FXML protected void btnModificaOptionalIscrizione(MouseEvent event) {
+		//TODO
+		System.out.println("da fare");
+	}
+	
 	@Override
 	public void initializeView(String nameView) {
 		this.nameView = nameView;
 		this.lblEliminaIscrizioneOk.setVisible(false);
-		this.paneIscrizione.setDisable(true);
+		this.paneIscrizione.setDisable(false);
 
 	}
 
@@ -159,7 +167,5 @@ public class ControllerMdcIscrizione extends AgroludosController {
 				this.paneIscrizione.setDisable(false);
 			}
 		}
-
 	}
-
 }

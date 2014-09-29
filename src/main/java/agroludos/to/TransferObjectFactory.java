@@ -6,6 +6,11 @@ class TransferObjectFactory implements TOFactory {
 	public DatabaseTO createDatabaseTO(){
 		return new Database();
 	}
+	
+	@Override
+	public SuccTO createSuccTO(){
+		return new SuccImpl();
+	}
 
 	@Override
 	public ManagerDiSistemaTO createMdSTO(){

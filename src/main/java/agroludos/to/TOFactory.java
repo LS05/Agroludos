@@ -28,4 +28,6 @@ public interface TOFactory {
 	
 	ErrorTO createErrorTO();
 
+	SuccTO createSuccTO();
+
 }
