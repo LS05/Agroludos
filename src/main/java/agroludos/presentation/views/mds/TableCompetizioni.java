@@ -17,11 +17,36 @@ public class TableCompetizioni extends TableView<CmpModel> implements AgroTable<
 	private TableColumn<CmpModel, String> cmpColCosto;
 	private TableColumn<CmpModel, String> cmpColStato;
 
-	TableCompetizioni(List<CompetizioneTO> listComp){
+	TableCompetizioni(){
+		this.cmpColNome = new TableColumn<CmpModel, String>("nome");
+		this.cmpColDesc = new TableColumn<CmpModel, String>("descrizione");
+		this.cmpColCosto = new TableColumn<CmpModel, String>("costo");
+		this.cmpColStato = new TableColumn<CmpModel, String>("stato");
+
 		this.cmpColNome.setCellValueFactory(new PropertyValueFactory<CmpModel, String>("nome"));
 		this.cmpColDesc.setCellValueFactory(new PropertyValueFactory<CmpModel, String>("descrizione"));
 		this.cmpColCosto.setCellValueFactory(new PropertyValueFactory<CmpModel, String>("costo"));
 		this.cmpColStato.setCellValueFactory(new PropertyValueFactory<CmpModel, String>("stato"));
+
+		this.getColumns().add(this.cmpColNome);
+		this.getColumns().add(this.cmpColDesc);
+		this.getColumns().add(this.cmpColCosto);
+		this.getColumns().add(this.cmpColStato);
+		
+		this.setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY);
+	}
+
+	@Override
+	public int getSelectedIndex() {
+		return this.getSelectedIndex();
+	}
+
+	@Override
+	public CmpModel getSelectedItem() {
+		return this.getSelectionModel().getSelectedItem();
+	}
+
+	public void setAll(List<CompetizioneTO> listComp){
 
 		ObservableList<CmpModel> res = FXCollections.observableArrayList();
 		CmpModel partModel = null;
@@ -32,15 +57,6 @@ public class TableCompetizioni extends TableView<CmpModel> implements AgroTable<
 		}
 
 		getItems().setAll(res);
-	}
-	
-	@Override
-	public int getSelectedIndex() {
-		return this.getSelectedIndex();
-	}
 
-	@Override
-	public CmpModel getSelectedItem() {
-		return this.getSelectionModel().getSelectedItem();
 	}
 }

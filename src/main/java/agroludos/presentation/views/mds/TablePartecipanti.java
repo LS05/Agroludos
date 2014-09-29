@@ -17,10 +17,22 @@ public class TablePartecipanti extends TableView<PartModel> implements AgroTable
 	private TableColumn<PartModel, String> partColUsername;
 
 	TablePartecipanti(List<PartecipanteTO> listComp){
+		this.partColNome = new TableColumn<PartModel, String>("nome");
+		this.partColCognome = new TableColumn<PartModel, String>("cognome");
+		this.partColEmail = new TableColumn<PartModel, String>("email");
+		this.partColUsername = new TableColumn<PartModel, String>("username");
+
 		this.partColNome.setCellValueFactory(new PropertyValueFactory<PartModel, String>("nome"));
 		this.partColCognome.setCellValueFactory(new PropertyValueFactory<PartModel, String>("cognome"));
 		this.partColEmail.setCellValueFactory(new PropertyValueFactory<PartModel, String>("email"));
 		this.partColUsername.setCellValueFactory(new PropertyValueFactory<PartModel, String>("username"));
+
+		this.getColumns().add(this.partColNome);
+		this.getColumns().add(this.partColCognome);
+		this.getColumns().add(this.partColEmail);
+		this.getColumns().add(this.partColUsername);
+		
+		this.setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY);
 
 		ObservableList<PartModel> res = FXCollections.observableArrayList();
 		PartModel partModel = null;
@@ -35,7 +47,7 @@ public class TablePartecipanti extends TableView<PartModel> implements AgroTable
 
 	@Override
 	public int getSelectedIndex() {
-		return this.getSelectedIndex();
+		return this.getSelectionModel().getSelectedIndex();
 	}
 
 	@Override

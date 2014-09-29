@@ -25,6 +25,7 @@ import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.TipiAgroludosTO;
+import agroludos.to.TipoCompetizioneTO;
 import agroludos.to.TipoOptionalTO;
 
 public class ControllerMdsMain extends ControllerUtenti{
@@ -45,24 +46,19 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML private Label lblMdcStato;
 	@FXML private Label lblMdcEmail;
 	private List<ManagerDiCompetizioneTO> listMdc;
-	private int selectedMDC = 0;
-
-	//button mainView
-	@FXML private Button btnGestManComp;
-	@FXML private Button btnGestComp;
-	@FXML private Button btnGestOptional;
-	@FXML private Button btnGestPart;
+	private int selectedMdC = 0;
 
 	//button gest competizioni
-	@FXML private TableView<CmpModel> tableCompetizioni;
-
+	@FXML private GridPane paneTableCmp;
+	@FXML private TableCompetizioni tableCompetizioni;
 	@FXML private Button btnNuovoTipoCompetizione;
-
+	@FXML private GridPane paneListaTipiComp;
 	private List<CompetizioneTO> listComp;
+	private List<TipiAgroludosTO> listTipiComp;
 
 	//gestione partecipanti
-	@FXML private TableView<PartModel> tablePartecipanti;
-
+	@FXML private GridPane paneTablePart;
+	@FXML private TablePartecipanti tablePartecipanti;
 	@FXML private Button btnMostraSRC;
 	@FXML private Label lblParNome;
 	@FXML private Label lblParCognome;
@@ -75,8 +71,11 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML private Label lblParEmail;
 	@FXML private Label lblParAnnoNasc;
 	@FXML private Label lblParNumTessSan;
+	@FXML private Button btnIscrPar;
+	private List<PartecipanteTO> listPart;
+	private int selectedPart = 0;
 
-	//gestione Optionlal
+	//gestione Optional
 	@FXML private GridPane paneListaTipiOpt;
 	@FXML private Button btnNuovoTipoOptional;
 	@FXML private Button btnDisattivaOptional;
@@ -85,23 +84,9 @@ public class ControllerMdsMain extends ControllerUtenti{
 	private List<TipiAgroludosTO> listTipiOpt;
 	private List<OptionalTO> listOpt;
 
-
-	@FXML private GridPane paneListaTipiComp;
-
-	@FXML private Button btnIscrPar;
-
-	private List<PartecipanteTO> listPart;
-	private int selectedPart;
-
-
-
-	private List<TipiAgroludosTO> listTipiComp;
-
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
 	private List<String> richieste;
-
-	private int selectedMdC;
 
 	private void setDxMdCColumn(Integer selected){
 		MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
@@ -131,10 +116,9 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 		initRequests();
 
-		this.selectedMDC = 0;
 		this.tableManagerCompetizione = new TableMdC(this.listMdc);
+		this.tableManagerCompetizione.getSelectionModel().selectFirst();
 		this.paneTableMdC.getChildren().add(this.tableManagerCompetizione);
-		this.tablePartecipanti.getSelectionModel().select(0);
 		this.setDxMdCColumn(this.selectedMdC);
 		this.tableManagerCompetizione.getSelectionModel().selectedItemProperty().addListener(
 				new ChangeListener<MdcModel>(){
@@ -150,16 +134,29 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 				});
 
-		this.selectedPart = 0;
+		this.tablePartecipanti = new TablePartecipanti(this.listPart);
+		this.tablePartecipanti.getSelectionModel().selectFirst();
+		this.paneTablePart.getChildren().add(this.tablePartecipanti);
+		this.setDxPartColumn(this.selectedPart);
+		this.tablePartecipanti.getSelectionModel().selectedItemProperty().addListener(
+				new ChangeListener<PartModel>(){
 
+					@Override
+					public void changed(ObservableValue<? extends PartModel> partModel,
+							PartModel oldMod, PartModel newMod) {
 
+						selectedPart = tablePartecipanti.getSelectedIndex();
+						setDxPartColumn(selectedPart);
+
+					}
+
+				});
 
 		//		this.initPartTable();
 
 		this.tableOptional = new TableOptional();
-		this.paneTableOptional.setVisible(true);
 		this.paneTableOptional.getChildren().add(this.tableOptional);
-
+		this.paneTableOptional.setVisible(true);
 		ListaViewTipi listViewOpt = new ListaViewTipi(this.listTipiOpt);
 		this.paneListaTipiOpt.getChildren().add(listViewOpt);
 
@@ -181,28 +178,30 @@ public class ControllerMdsMain extends ControllerUtenti{
 			}
 
 		});
+		
+		this.tableCompetizioni = new TableCompetizioni();
+		this.paneTableCmp.getChildren().add(this.tableCompetizioni);
+		ListaViewTipi listViewComp = new ListaViewTipi(this.listTipiComp);
+		this.paneListaTipiComp.getChildren().add(listViewComp);
 
-		//		ListaViewTipi listViewComp = new ListaViewTipi(this.listTipiComp);
-		//		this.paneListaTipiComp.getChildren().add(listViewComp);
-		//		
-		//		
-		//		listViewComp.setOnMouseClicked(new EventHandler<MouseEvent>() {
-		//			
-		//			@Override
-		//			public void handle(MouseEvent event) {
-		//				ListView<String> source = (ListView<String>)event.getSource();
-		//				String nomeTipo = source.getSelectionModel().getSelectedItem();
-		//				
-		//				TipoCompetizioneTO tipoComp = toFact.createTipoCompetizioneTO();
-		//				tipoComp.setNome(nomeTipo);
-		//				
-		//				richiesta = getRichiesta(tipoComp, "getCompetizioneByTipo", viewName);
-		//				risposta = respFact.createResponse();
-		//				frontController.eseguiRichiesta(richiesta, risposta);
-		////				tableCompetizioni.getItems().setAll(listCompTipo);
-		//			}
-		//
-		//		});
+
+		listViewComp.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				ListView<String> source = (ListView<String>)event.getSource();
+				String nomeTipo = source.getSelectionModel().getSelectedItem();
+
+				TipoCompetizioneTO tipoComp = toFact.createTipoCompetizioneTO();
+				tipoComp.setNome(nomeTipo);
+
+				richiesta = getRichiesta(tipoComp, "getCompetizioneByTipo", viewName);
+				risposta = respFact.createResponse();
+				frontController.eseguiRichiesta(richiesta, risposta);
+				tableCompetizioni.setAll(listComp);
+			}
+
+		});
 	}
 
 	private void initRequests(){
@@ -270,7 +269,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 		MdcModel mdcMod = this.tableManagerCompetizione.getSelectedItem();
 		ManagerDiCompetizioneTO mdcto = this.getManagerDiCompetizione(mdcMod.getUsername());
-		this.selectedMDC = this.tableManagerCompetizione.getSelectionModel().getSelectedIndex();
+		this.selectedMdC = this.tableManagerCompetizione.getSelectionModel().getSelectedIndex();
 		nav.setVista("modificaMDC", mdcto);
 	}
 
@@ -296,7 +295,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.lblParCognome.setText(selModel.getCognome());
 		this.lblParEmail.setText(selModel.getEmail());
 		this.lblParUsername.setText(selModel.getUsername());
-		//		this.lblParStato.setText(selModel.getStato());
+		this.lblParStato.setText(selModel.getStato());
 		this.lblParDataSRC.setText(selModel.getDataSRC());
 		this.lblParCodFisc.setText(selModel.getCf());
 		this.lblParIndirizzo.setText(selModel.getIndirizzo());
@@ -333,6 +332,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 		if(commandName.equals( this.reqProperties.getProperty("getAllManagerDiCompetizione") )){
 
 			Object res = response.getRespData();
+
 			if(res instanceof List<?>){
 				List<ManagerDiCompetizioneTO> mdcList = (List<ManagerDiCompetizioneTO>)res;
 				this.listMdc = mdcList;
@@ -341,6 +341,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 		} else if(commandName.equals( this.reqProperties.getProperty("getAllOptional") )){
 
 			Object res = response.getRespData();
+
 			if(res instanceof List<?>){
 				List<OptionalTO> optList = (List<OptionalTO>)res;
 				this.listOpt = optList;
@@ -349,6 +350,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 		} else if(commandName.equals( this.reqProperties.getProperty("getAllPartecipante") )){
 
 			Object res = response.getRespData();
+
 			if(res instanceof List<?>){
 				List<PartecipanteTO> mdcList = (List<PartecipanteTO>)res;
 				this.listPart = mdcList;
@@ -357,49 +359,52 @@ public class ControllerMdsMain extends ControllerUtenti{
 		} else if(commandName.equals( this.reqProperties.getProperty("modificaManagerDiCompetizione") )){
 
 			Object res = response.getRespData();
+
 			if(res instanceof ManagerDiCompetizioneTO){
 				ManagerDiCompetizioneTO mdcTO = (ManagerDiCompetizioneTO)res;
-				MdcModel mdc = this.tableManagerCompetizione.getItems().get(this.selectedMDC);
+				MdcModel mdc = this.tableManagerCompetizione.getItems().get(this.selectedMdC);
 				mdc.setNome(mdcTO.getNome());
 				mdc.setCognome(mdcTO.getCognome());
 				mdc.setEmail(mdcTO.getEmail());
 				mdc.setUsername(mdcTO.getUsername());
 				mdc.setStato(mdcTO.getStatoUtente().getNome());
-				setDxMdCColumn(this.selectedMDC);
+				setDxMdCColumn(this.selectedMdC);
 			}
+
 		} else if( commandName.equals( this.reqProperties.getProperty("getAllTipoOptional") )){
+
 			Object res = response.getRespData();
+
 			if(res instanceof List<?>){
 				List<TipiAgroludosTO> tipiOptList = (List<TipiAgroludosTO>)res;
 				this.listTipiOpt = tipiOptList;
 			}
 
 		} else if( commandName.equals( this.reqProperties.getProperty("getOptionalByTipo") )){
+
 			Object res = response.getRespData();
 
 			if( res instanceof List<?>){
 				this.listOpt = (List<OptionalTO>)res;
-
-				//			}
-				//		} else if( commandName.equals( this.reqProperties.getProperty("getAllTipoCompetizione") )){
-				//			Object res = response.getRespData();
-				//			if(res instanceof List<?>){
-				//				List<TipiAgroludosTO> tipiCompList = (List<TipiAgroludosTO>)res;
-				//				this.listTipiComp = tipiCompList;
-				//			}
-				//		} else if( commandName.equals( this.reqProperties.getProperty("getCompetizioneByTipo") )){
-				//			Object res = response.getRespData();
-				//			if(res instanceof List<?>){
-				//				List<CompetizioneTO> listComp = (List<CompetizioneTO>)res;
-				//				this.listCompTipo = FXCollections.observableArrayList();
-				//				CmpModel cm = null;
-				//				for(CompetizioneTO cmp : listComp){
-				//					cm = new CmpModel(cmp);
-				//					this.listCompTipo.add(cm);
-				//				}
-				//			}
-				//		}
 			}
+
+		} else if( commandName.equals( this.reqProperties.getProperty("getAllTipoCompetizione") )){
+
+			Object res = response.getRespData();
+
+			if(res instanceof List<?>){
+				List<TipiAgroludosTO> tipiCompList = (List<TipiAgroludosTO>)res;
+				this.listTipiComp = tipiCompList;
+			}
+
+		} else if( commandName.equals( this.reqProperties.getProperty("getCompetizioneByTipo") )){
+
+			Object res = response.getRespData();
+
+			if(res instanceof List<?>){
+				this.listComp = (List<CompetizioneTO>)res;
+			}
+
 		}
 	}
 }

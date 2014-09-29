@@ -26,8 +26,7 @@ public class PartModel {
 		this.cognome = new SimpleStringProperty(part.getCognome());
 		this.email = new SimpleStringProperty(part.getEmail());
 		this.username = new SimpleStringProperty(part.getUsername());
-		//TODO Aggiungere stato		
-		//this.stato = new SimpleStringProperty(part.getNomeStatoUtente());
+		this.stato = new SimpleStringProperty(part.getStatoUtente().getNome());
 		this.dataSRC = new SimpleStringProperty(part.getDataSRC().toString());
 		this.cf = new SimpleStringProperty(part.getCf());
 		this.indirizzo = new SimpleStringProperty(part.getIndirizzo());
