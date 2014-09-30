@@ -17,10 +17,10 @@
 		<property name="costo" type="double">
 			<column name="costo" not-null="true" />
 		</property>
-		<many-to-one name="tipoOptional" class="agroludos.to.TipoOptional">
+		<many-to-one name="tipoOptional" class="agroludos.to.TipoOptional" cascade="all">
 			<column name="tipoopt" not-null="true" />
 		</many-to-one>
-		<many-to-one name="statoOptional" class="agroludos.to.StatoOptional">
+		<many-to-one name="statoOptional" class="agroludos.to.StatoOptional" cascade="all">
 			<column name="stato" not-null="true" />
 		</many-to-one>
 	</class>

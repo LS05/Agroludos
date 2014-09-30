@@ -24,10 +24,10 @@
 		<property name="email" type="string">
 			<column name="email" not-null="true" />
 		</property>
-		<many-to-one name="tipoUtente" class="agroludos.to.TipoUtente">
+		<many-to-one name="tipoUtente" class="agroludos.to.TipoUtente" cascade="all">
 			<column name="idruolo" not-null="true" />
 		</many-to-one>
-		<many-to-one name="statoUtente" class="agroludos.to.StatoUtente">
+		<many-to-one name="statoUtente" class="agroludos.to.StatoUtente" cascade="all">
 			<column name="stato" not-null="true" />
 		</many-to-one>
 		<joined-subclass name="agroludos.to.ManagerDiSistema"
@@ -47,12 +47,12 @@
 				<column name="stipendio" />
 			</property>
 
-			<set name="competizioni" table="tbl_competizione" fetch="select">
+			<set name="competizioni" table="tbl_competizione" fetch="select" cascade="all">
 				<key column="idmdc" />
 				<one-to-many class="agroludos.to.Competizione" />
 			</set>
 			<set name="competizioniAttive" table="tbl_competizione" fetch="select"
-				where="statocomp = 1">
+				where="statocomp = 1" cascade="all">
 				<key column="idmdc" />
 				<one-to-many class="agroludos.to.Competizione" />
 			</set>
@@ -81,7 +81,7 @@
 			<property name="dataSRC" type="date">
 				<column name="data_src" not-null="true" />
 			</property>
-			<set name="iscrizioni" table="tbl_iscrizione" fetch="select">
+			<set name="iscrizioni" table="tbl_iscrizione" fetch="select" cascade="all">
 				<key column="idpartecipante" />
 				<one-to-many class="agroludos.to.Iscrizione" />
 			</set>

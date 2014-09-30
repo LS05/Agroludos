@@ -13,6 +13,8 @@ public class Navigator {
 
 	private ViewsCache viewsCache;
 
+	private String mainViewName;
+
 	Navigator(ViewsCache viewsCache, ViewsLoader viewsLoader){
 		this.viewsLoader = viewsLoader;
 		this.viewsCache = viewsCache;
@@ -56,10 +58,12 @@ public class Navigator {
 				if(agw.isDialog()){
 					this.viewsCache.addEventOnStageClose(agw);
 					this.viewsCache.pushStack(agw.getStage());
-				}
+				}				
 			}else{
 				agw = this.viewsLoader.getView(viewName);
 				this.viewsCache.addView(agw);
+				if(agw.isMainView())
+					this.mainViewName = agw.getName();
 				//TODO Gestire l'eccezione di un controller null
 				agw.getController().initializeView(viewName);
 			}
@@ -83,7 +87,8 @@ public class Navigator {
 		else if(agw.isMainView()){
 			System.out.println("termina programma");
 		}
-			
+		if(this.viewsCache.peekStack().equals(this.getStage(this.mainViewName)))
+			this.viewsCache.getView(this.mainViewName).getController().initializeView(this.mainViewName);
 		this.getStage(viewName).close();	
 	}
 

@@ -84,9 +84,9 @@
 	<command name="eliminaIscrizione">
 		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
 		<from name="mostraCmp">
-			<forward success="mostraCmp" failure="mostraCmp" />
+			<forward success="managerDiCompetizione" failure="mostraCmp" />
 		</from>
-		<from name="mostraIscrizoine">
+		<from name="mostraIscrizione">
 			<forward success="mostraIscrizoine" failure="mostraIscrizoine" />
 		</from>
 	</command>

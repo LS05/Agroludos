@@ -26,8 +26,8 @@ import agroludos.to.IscrizioneTO;
 import agroludos.to.SuccTO;
 
 public class ControllerMdcCompetizione extends AgroludosController {
-	
-	
+
+
 	private CompetizioneTO cmpto;
 
 	@FXML private GridPane paneVisualizzaCmp;
@@ -65,7 +65,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	@FXML private Button btnAnnullaIsc;
 	@FXML private Button btnVisualizzaIsc;
 	@FXML private Label lblEliminaIsc;
-	
+
 
 	private Stage stage;
 
@@ -88,10 +88,10 @@ public class ControllerMdcCompetizione extends AgroludosController {
 				//CompetizioneTO cmpto = (CompetizioneTO) mainTO;
 				System.out.println("Stage is closing");
 				close();
-//				nav.setVista("managerDiCompetizione", cmpto);
+				//				nav.setVista("managerDiCompetizione", cmpto);
 			}
 		}); 
-		
+
 		//inizializzazione interfaccia
 		this.paneVisualizzaCmp.setVisible(true);
 		this.paneVisualizzaCmp.setDisable(false);
@@ -99,7 +99,9 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.lblModificaOk.setVisible(false);
 		this.lblAnnullaOk.setVisible(false);
 		this.btnAnnullaIsc.setDisable(true);
+		this.lblEliminaIsc.setVisible(false);
 
+		this.cmpto = toFact.createCompetizioneTO();
 		this.cmpto =(CompetizioneTO) mainTO;
 
 		this.lblNomeCompetizione.setText(this.cmpto.getNome());
@@ -108,12 +110,12 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.lblNmax.setText(Integer.toString(this.cmpto.getNmax()));
 		this.lblCosto.setText(Double.toString(this.cmpto.getCosto()));
 		this.lblTipo.setText(this.cmpto.getTipoCompetizione().getNome());
-		this.lblNiscritti.setText(Integer.toString(this.cmpto.getAllIscritti().size()));
+		this.lblNiscritti.setText(Integer.toString(this.cmpto.getAllIscrizioniAttive().size()));
 		this.lblStato.setText(this.cmpto.getStatoCompetizione().getNome());
 		this.txtDescrizione.setText(this.cmpto.getDescrizione());
 
 		//popolo la lista delle iscrizioni
-		this.listIsc = this.cmpto.getAllIscrizioni();
+		this.listIsc = this.cmpto.getAllIscrizioniAttive();
 
 		this.listaTabIsc = this.getListTabellaIsc();
 		this.initIscTable();
@@ -158,19 +160,30 @@ public class ControllerMdcCompetizione extends AgroludosController {
 					btnAnnullaIsc.setDisable(false);
 				}
 			}
-			
+
 		});
 	}
 
 	@FXML protected void btnAnnullaIsc(MouseEvent event) {
-		
+
 		//TODO
 		System.out.println("Confermi? si...");
 		this.risposta = respFact.createResponse();
 		this.richiesta = this.getRichiesta(this.tblIscritti.getSelectionModel().getSelectedItem().getIscrizioneTO(), "eliminaIscrizione", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+
+		Object res = this.risposta.getRespData();
+		if(res instanceof IscrizioneTO){
+			//TODO
+			this.listaTabIsc.remove(this.tblIscritti.getSelectionModel().getSelectedItem());
+			this.initIscTable();
+			SuccTO succMessage = toFact.createSuccTO();
+			succMessage.setMessagge("Iscrizione eliminata!");
+			nav.setVista("successDialog",succMessage);
+		}
+
 	}
-	
+
 	@FXML protected void btnAnnullaCmp(MouseEvent event) {
 		//TODO
 		this.lblModificaOk.setVisible(false);
@@ -179,7 +192,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.risposta = respFact.createResponse();
 		this.richiesta = this.getRichiesta(this.cmpto, "annullaCompetizione", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		
+
 		Object res = this.risposta.getRespData();
 		if(res instanceof CompetizioneTO){
 			SuccTO succMessage = toFact.createSuccTO();
@@ -187,7 +200,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 			this.close();
 			nav.setVista("successDialog",succMessage);
 		}
-		
+
 	}
 
 	@FXML protected void btnModificaCmp(MouseEvent event) {
@@ -201,7 +214,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	@Override
 	public void initializeView(String nameView) {
 		this.nameView = nameView;
-		
+
 	}
 
 	@Override
@@ -211,15 +224,6 @@ public class ControllerMdcCompetizione extends AgroludosController {
 			if(res instanceof CompetizioneTO){
 				this.initializeView((CompetizioneTO) res);
 				this.lblModificaOk.setVisible(true);
-			}
-		}else if(request.getCommandName().equals("eliminaIscrizione")){
-			Object res = response.getRespData();
-			if(res instanceof IscrizioneTO){
-				//TODO
-				this.lblEliminaIsc.setVisible(true);
-				this.listaTabIsc.remove(this.tblIscritti.getSelectionModel().getSelectedItem());
-				this.initIscTable();
-				//TODO
 			}
 		}
 	}

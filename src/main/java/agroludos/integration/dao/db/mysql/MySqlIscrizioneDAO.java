@@ -23,7 +23,9 @@ class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements Iscr
 
 	@Override
 	public IscrizioneTO annullaIscrizione(IscrizioneTO iscto) throws DatabaseException {
-		return super.update(iscto);
+		super.update(iscto);
+		this.session.refresh(iscto.getCompetizione().getManagerDiCompetizione());
+		return iscto;
 	}
 
 }

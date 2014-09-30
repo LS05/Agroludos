@@ -47,6 +47,8 @@ class Competizione implements CompetizioneTO{
 	private TipoCompetizione tipoCompetizione;
 	private StatoCompetizione statoCompetizione;
 	private ManagerDiCompetizione managerDiCompetizione;
+
+	private Set<Iscrizione> iscrizioniAttive;
 	
 	@Override
 	public ManagerDiCompetizione getManagerDiCompetizione() {
@@ -199,6 +201,25 @@ class Competizione implements CompetizioneTO{
 		this.iscritti = partecipanti;
 	}
 
+	public void setIscrizioniAttive(Set<Iscrizione> iscrizioniAttive) {
+		this.iscrizioniAttive = iscrizioniAttive;
+	}
+	
+	@Override
+	public List<IscrizioneTO> getAllIscrizioniAttive() {
+		List<IscrizioneTO> res = new ArrayList<IscrizioneTO>();
+		
+		for(Iscrizione item : this.iscrizioniAttive){
+			res.add(item);
+		}
+		
+		return res;
+	}
+	
+	public Set<Iscrizione> getIscrizioniAttive() {
+		return this.iscrizioniAttive;
+	}
+	
 	@Override
 	public List<IscrizioneTO> getAllIscrizioni() {
 		List<IscrizioneTO> res = new ArrayList<IscrizioneTO>();
@@ -290,6 +311,7 @@ class Competizione implements CompetizioneTO{
 				+ tipoCompetizione + ", statoCompetizione=" + statoCompetizione
 				+ ", managerDiCompetizione=" + managerDiCompetizione + "]";
 	}
+
 
 
 

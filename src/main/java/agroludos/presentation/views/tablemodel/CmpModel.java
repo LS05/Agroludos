@@ -21,7 +21,7 @@ public class CmpModel {
 		this.id = new SimpleStringProperty(Integer.toString(cmpto.getId()));
 		this.nome = new SimpleStringProperty(cmpto.getNome());
 		this.data = new SimpleStringProperty(cmpto.getData().toString());
-		this.niscritti = new SimpleStringProperty(Integer.toString(cmpto.getAllIscritti().size()));
+		this.niscritti = new SimpleStringProperty(Integer.toString(cmpto.getAllIscrizioniAttive().size()));
 		this.nmin = new SimpleStringProperty(Integer.toString(cmpto.getNmin()));
 		this.nmax = new SimpleStringProperty(Integer.toString(cmpto.getNmax()));
 		this.tipo = new SimpleStringProperty(cmpto.getTipoCompetizione().getNome());

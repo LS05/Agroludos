@@ -66,11 +66,8 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 	@Override
 	public CompetizioneTO annullaCompetizione(CompetizioneTO cmpto)
 			throws DatabaseException {
-//		TransferObjectFactory fact = new TransferObjectFactory();
-//		StatoCompetizioneTO scto = fact.createStatoCompetizioneTO();
-//		scto.setId(0);
-//		scto.setNome("annullata");
 		return super.update(cmpto);	
+		
 	}
 
 }
