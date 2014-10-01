@@ -141,7 +141,7 @@
 			<forward success="mostraNuovaCmp" failure="mostraNuovaCmp" />
 		</from>
 	</command>
-		<command name="getAllStatoCompetizione">
+	<command name="getAllStatoCompetizione">
 		<classe>agroludos.business.as.gestorestatocompetizione.LStatoCompetizione</classe>
 		<from name="mostraNuovaCmp">
 			<forward success="mostraNuovaCmp" failure="mostraNuovaCmp" />
@@ -151,6 +151,12 @@
 		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
 		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+	</command>
+	<command name="getAllStatoUtente">
+		<classe>agroludos.business.as.gestorestatoutente.LStatoUtente</classe>
+		<from name="modificaMDC">
+			<forward success="modificaMDC" failure="modificaMDC" />
 		</from>
 	</command>
 </commands>
