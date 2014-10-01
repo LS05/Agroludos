@@ -73,25 +73,10 @@ public class ControllerMdcCompetizione extends AgroludosController {
 
 	private AgroResponse risposta;
 
-	private String viewName;
-
 
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		final CompetizioneTO cmpto = (CompetizioneTO) mainTO;
-		this.viewName = "mostraCmp";
-		this.stage = nav.getStage(this.viewName);
-		this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			public void handle(WindowEvent we) {
-				//TODO eliminare stampa
-				//CompetizioneTO cmpto = (CompetizioneTO) mainTO;
-				System.out.println("Stage is closing");
-				close();
-				//				nav.setVista("managerDiCompetizione", cmpto);
-			}
-		}); 
-
 		//inizializzazione interfaccia
 		this.paneVisualizzaCmp.setVisible(true);
 		this.paneVisualizzaCmp.setDisable(false);
@@ -169,7 +154,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		//TODO
 		System.out.println("Confermi? si...");
 		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(this.tblIscritti.getSelectionModel().getSelectedItem().getIscrizioneTO(), "eliminaIscrizione", this.viewName);
+		this.richiesta = this.getRichiesta(this.tblIscritti.getSelectionModel().getSelectedItem().getIscrizioneTO(), "eliminaIscrizione", this.nameView);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
 		Object res = this.risposta.getRespData();
@@ -190,15 +175,16 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.lblAnnullaOk.setVisible(false);
 		System.out.println("Confermi? si...");
 		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(this.cmpto, "annullaCompetizione", this.viewName);
+		this.richiesta = this.getRichiesta(this.cmpto, "annullaCompetizione", this.nameView);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
 		Object res = this.risposta.getRespData();
 		if(res instanceof CompetizioneTO){
 			SuccTO succMessage = toFact.createSuccTO();
 			succMessage.setMessagge("Competizione annullata!");
-			this.close();
+	
 			nav.setVista("successDialog",succMessage);
+			this.close();
 		}
 
 	}

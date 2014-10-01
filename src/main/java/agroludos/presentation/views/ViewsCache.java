@@ -63,7 +63,7 @@ class ViewsCache {
 				stage.setScene(dialogScene);
 				stage.setTitle(window.getTitle());
 				stage.setResizable(false);
-				stage.initModality(Modality.WINDOW_MODAL);
+				stage.initModality(Modality.APPLICATION_MODAL);
 				stage.initOwner(this.currentStage.peek());
 				window.setStage(stage);
 				PositionHandler.centerComp(window.getStage(), window.getStage().getScene());
@@ -99,7 +99,7 @@ class ViewsCache {
 				//TODO eliminare stampa
 				//se si tratta delo stage di un dialog elimino lo stage dallo stack
 				if(agView.isDialog() && currentStage.peek().equals(agView.getStage())){
-					System.out.println("Dialog is closing");
+					System.out.println("Dialog is closing by Event");
 					currentStage.pop();
 				}
 			}

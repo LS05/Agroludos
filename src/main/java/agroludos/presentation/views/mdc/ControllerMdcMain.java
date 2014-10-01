@@ -5,6 +5,7 @@ import java.util.List;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.tablemodel.CmpModel;
+import agroludos.presentation.views.tablemodel.MdcModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
@@ -63,12 +64,27 @@ public class ControllerMdcMain extends ControllerUtenti{
 	//chiamato dai set vista con parametro per aggiornare la tabella
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		this.mdcTO = toFact.createMdCTO();
-		this.mdcTO = (ManagerDiCompetizioneTO) mainTO;
+		if(mainTO instanceof ManagerDiCompetizioneTO){
+			this.mdcTO = toFact.createMdCTO();
+			this.mdcTO = (ManagerDiCompetizioneTO) mainTO;
 
-		this.listCmp = this.mdcTO.getAllCompetizioniAttive();
-		this.listaTabCmp = this.getListTabellaCmp();
-		this.initCmpTable();
+			this.listCmp = this.mdcTO.getAllCompetizioniAttive();
+			this.listaTabCmp = this.getListTabellaCmp();
+			this.initCmpTable();
+		}else if(mainTO instanceof CompetizioneTO){
+						
+			CompetizioneTO cmpTO = (CompetizioneTO) mainTO;
+			CmpModel cmp = this.tableCompetizione.getItems().get(this.tableCompetizione.getSelectionModel().getSelectedIndex());
+			cmp.setCompetizioneTO(cmpTO);
+			cmp.setData(cmpTO.getData().toString());
+			cmp.setId(cmpTO.getId().toString());
+			cmp.setNiscritti(String.valueOf(cmpTO.getAllIscrizioniAttive().size()));
+			cmp.setNmax(String.valueOf(cmpTO.getNmax()));
+			cmp.setNmin(String.valueOf(cmpTO.getNmin()));
+			cmp.setNome(cmpTO.getNome());
+			cmp.setStato(cmpTO.getStatoCompetizione().getNome());
+			cmp.setTipo(cmpTO.getTipoCompetizione().getNome());			
+		}
 	}
 
 
@@ -143,8 +159,14 @@ public class ControllerMdcMain extends ControllerUtenti{
 		}else if(request.getCommandName().equals( this.reqProperties.getProperty("inserisciCompetizione") )){
 			Object res = (Object)response.getRespData();
 			if(res instanceof CompetizioneTO){
-				CmpModel modelCmp = new CmpModel((CompetizioneTO) res);
-				this.listaTabCmp.add(modelCmp);
+				this.listaTabCmp.clear();
+				this.initializeView(((CompetizioneTO) res).getManagerDiCompetizione());			
+			}
+		}else if(request.getCommandName().equals("modificaCompetizione")){
+			Object res = (Object)response.getRespData();
+			if(res instanceof CompetizioneTO){	
+				this.initializeView((CompetizioneTO)res);
+				nav.setVista("mostraCmp", (CompetizioneTO)res);	
 			}
 		}
 	}

@@ -58,6 +58,7 @@ public class Navigator {
 				if(agw.isDialog()){
 					this.viewsCache.addEventOnStageClose(agw);
 					this.viewsCache.pushStack(agw.getStage());
+					agw.getController().initializeView(viewName);
 				}				
 			}else{
 				agw = this.viewsLoader.getView(viewName);
@@ -70,9 +71,7 @@ public class Navigator {
 			if(agw.isDialog() || agw.isMainView()){
 				agw.getStage().show();	
 			}
-			//se si tratta di un dialog richiamo l'inizializzazione
-			if(agw.isDialog())
-				agw.getController().initializeView(viewName);
+
 		} catch (ViewNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,9 +84,11 @@ public class Navigator {
 	public void closeVista(String viewName) {
 		AgroludosWindow agw = this.viewsCache.getView(viewName);
 		//se si tratta del dialog corrente effettua un pop sullo stack delle view
-		if(agw.isDialog() && this.viewsCache.peekStack().equals(agw.getStage()))
+		if(agw.isDialog() && this.viewsCache.peekStack().equals(agw.getStage())
+				){
 			this.viewsCache.popStack();
-		else if(agw.isMainView()){
+			System.out.println("Dialog is closing by closeVista");
+		}else if(agw.isMainView()){
 			System.out.println("termina programma");
 		}
 		if(this.viewsCache.peekStack().equals(this.getStage(this.mainViewName)))

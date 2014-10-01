@@ -28,7 +28,7 @@ public class ControllerSuccess  extends AgroludosController{
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
 		this.mainTO = (SuccTO) mainTO;
-			this.lblSuccess.setText(this.mainTO.getMessage());
+		this.lblSuccess.setText(this.mainTO.getMessage());
 
 	}
 

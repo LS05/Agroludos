@@ -117,10 +117,11 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 
 		Object res = (Object)risposta.getRespData();
 		if(res instanceof CompetizioneTO){
-			this.close();
+			
 			SuccTO succMessage = toFact.createSuccTO();
 			succMessage.setMessagge("Competizione inserita con successo");
 			nav.setVista("successDialog",succMessage);
+			this.close();
 		}
 	}
 
