@@ -48,7 +48,7 @@
 	<command name="inserisciCompetizione">
 		<classe>agroludos.business.as.gestorecompetizione.SCompetizione</classe>
 		<from name="mostraNuovaCmp">
-			<forward success="mostraNuovaCmp" failure="mostraNuovaCmp" />
+			<forward success="managerDiCompetizione" failure="mostraNuovaCmp" />
 		</from>
 	</command>
 	<command name="nuovaRegistrazione">
