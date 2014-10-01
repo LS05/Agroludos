@@ -22,14 +22,14 @@ class ASGestoreManagerDiSistema extends AgroludosAS implements LManagerDiSistema
 	}
 
 	@Override
-	public boolean nuovoManagerDiSistema(ManagerDiSistemaTO mdsto) throws DatabaseException {
+	public ManagerDiSistemaTO nuovoManagerDiSistema(ManagerDiSistemaTO mdsto) throws DatabaseException {
 		// TODO Auto-generated catch block
 		// Catturare l'eccezione del DB perchè un mancato inserimento del MDS significherebbe
 		// resettare il tipo di DB nel file xml
 		String inputPassword = mdsto.getPassword();
 		mdsto.setPassword(this.pwdEnc.encryptPassword(inputPassword));
-		boolean res = this.getManagerDiSistemaDAO().create(mdsto);
-		return res;
+		return this.getManagerDiSistemaDAO().create(mdsto);
+
 	}
 
 	@Override

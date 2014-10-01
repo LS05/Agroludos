@@ -6,7 +6,7 @@ import agroludos.to.OptionalTO;
 
 public interface SOptional extends AgroludosService{
 	
-	boolean inserisciOptional(OptionalTO optto) throws DatabaseException;
+	OptionalTO inserisciOptional(OptionalTO optto) throws DatabaseException;
 	
 	OptionalTO modificaOptional(OptionalTO optto) throws DatabaseException;
 	

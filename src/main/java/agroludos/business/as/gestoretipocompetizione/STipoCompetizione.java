@@ -6,5 +6,5 @@ import agroludos.to.TipoCompetizioneTO;
 
 
 public interface STipoCompetizione extends AgroludosService{
-	boolean inserisciTipoCompetizione(TipoCompetizioneTO tcmto) throws DatabaseException;
+	TipoCompetizioneTO inserisciTipoCompetizione(TipoCompetizioneTO tcmto) throws DatabaseException;
 }

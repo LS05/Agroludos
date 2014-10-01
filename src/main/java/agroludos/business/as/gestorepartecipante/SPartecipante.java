@@ -6,6 +6,6 @@ import agroludos.exceptions.ValidationException;
 import agroludos.to.PartecipanteTO;
 
 public interface SPartecipante extends AgroludosService{
-	boolean inserisciPartecipante(PartecipanteTO parto) throws DatabaseException, ValidationException;
+	PartecipanteTO inserisciPartecipante(PartecipanteTO parto) throws DatabaseException, ValidationException;
 	PartecipanteTO modificaPartecipante (PartecipanteTO parto) throws DatabaseException, ValidationException;
 }

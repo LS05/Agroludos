@@ -16,13 +16,11 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 	}
 
 	@Override
-	public boolean inserisciManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) throws DatabaseException {
-		boolean res = false;
+	public ManagerDiCompetizioneTO inserisciManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) throws DatabaseException {
 
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
-		res = daoMan.create(mdcto);
+		return daoMan.create(mdcto);
 
-		return res;
 	}
 
 	@Override

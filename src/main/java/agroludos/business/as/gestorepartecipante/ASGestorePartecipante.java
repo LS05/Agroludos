@@ -36,16 +36,15 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 	}
 
 	@Override
-	public boolean inserisciPartecipante(PartecipanteTO parto)
+	public PartecipanteTO inserisciPartecipante(PartecipanteTO parto)
 			throws DatabaseException, ValidationException {
-		boolean res = false;
+
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
 
 		this.validator.validate(parto);
 
-		res = daoPar.create(parto);
+		return daoPar.create(parto);
 
-		return res;
 	}
 
 	@Override

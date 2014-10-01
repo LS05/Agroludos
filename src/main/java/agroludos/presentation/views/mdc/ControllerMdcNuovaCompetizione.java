@@ -21,6 +21,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoCompetizioneTO;
+import agroludos.to.SuccTO;
 import agroludos.to.TipoCompetizioneTO;
 
 public class ControllerMdcNuovaCompetizione extends AgroludosController{
@@ -79,8 +80,8 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 		this.txtNmaxCmp.setText("");
 		this.txtNminCmp.setText("");
 		this.txtNomeCmp.setText("");
-		
-		
+
+
 	}
 
 	@FXML private void btnAnnulla(MouseEvent event){
@@ -114,8 +115,13 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 		this.richiesta = this.getRichiesta(this.cmpto, "inserisciCompetizione", this.nameView);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
-
-
+		Object res = (Object)risposta.getRespData();
+		if(res instanceof CompetizioneTO){
+			this.close();
+			SuccTO succMessage = toFact.createSuccTO();
+			succMessage.setMessagge("Competizione inserita con successo");
+			nav.setVista("successDialog",succMessage);
+		}
 	}
 
 
@@ -140,16 +146,6 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 			Object res = (Object)response.getRespData();
 			if(res instanceof List<?>)
 				this.listStatiCmp = (List<StatoCompetizioneTO>)res;
-		}else if(commandName.equals( this.reqProperties.getProperty("inserisciCompetizione") )){
-			Object res = (Object)response.getRespData();
-			if(res instanceof Boolean){
-				if((boolean) res){
-//					this.lblInserimentoOk.setVisible(true);
-					this.cmpto = toFact.createCompetizioneTO();
-					nav.setVista("successDialog");
-					this.initializeView(this.nameView);
-				}
-			}
 		}
 	}
 

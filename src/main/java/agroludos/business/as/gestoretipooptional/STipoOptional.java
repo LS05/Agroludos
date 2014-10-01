@@ -6,5 +6,5 @@ import agroludos.to.TipoOptionalTO;
 
 
 public interface STipoOptional extends AgroludosService{
-	boolean inserisciTipoOptional(TipoOptionalTO topto) throws DatabaseException;
+	TipoOptionalTO inserisciTipoOptional(TipoOptionalTO topto) throws DatabaseException;
 }

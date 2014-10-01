@@ -16,14 +16,11 @@ class ASGestoreTipoOptional extends AgroludosAS implements LTipoOptional, STipoO
 	}
 
 	@Override
-	public boolean inserisciTipoOptional(TipoOptionalTO topto)
+	public TipoOptionalTO inserisciTipoOptional(TipoOptionalTO topto)
 			throws DatabaseException {
-		boolean res = false;
 
 		TipoOptionalDAO daoTop = getTipoOptionalDAO();
-		res = daoTop.create(topto);
-
-		return res;
+		return daoTop.create(topto);
 	}
 
 	@Override

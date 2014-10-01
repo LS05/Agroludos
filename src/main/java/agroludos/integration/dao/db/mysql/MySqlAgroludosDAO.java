@@ -57,23 +57,21 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 	}
 
 	@Override
-	public boolean create(final T mainTO) throws DatabaseException{
+	public T create(final T mainTO) throws DatabaseException{
 		Transaction tx = null;
-		boolean res = false;
 
 		try {
 			tx = this.session.beginTransaction();
 
 			this.session.save(mainTO);
 
-			res = true;
 			this.session.getTransaction().commit();
 		} catch (HibernateException e){
 			if (tx != null) tx.rollback();
 			throw new DatabaseException(e.getMessage(), e);
 		}
 		session.refresh(mainTO);
-		return res;
+		return mainTO;
 	}
 
 	@Override

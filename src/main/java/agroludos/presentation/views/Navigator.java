@@ -70,6 +70,9 @@ public class Navigator {
 			if(agw.isDialog() || agw.isMainView()){
 				agw.getStage().show();	
 			}
+			//se si tratta di un dialog richiamo l'inizializzazione
+			if(agw.isDialog())
+				agw.getController().initializeView(viewName);
 		} catch (ViewNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -2,8 +2,6 @@ package agroludos.presentation.views.mdc;
 
 import java.util.List;
 
-import org.hibernate.Session;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.tablemodel.CmpModel;
@@ -141,6 +139,12 @@ public class ControllerMdcMain extends ControllerUtenti{
 			if(res instanceof IscrizioneTO){
 				this.listaTabCmp.clear();
 				this.initializeView(((IscrizioneTO) res).getCompetizione().getManagerDiCompetizione());
+			}
+		}else if(request.getCommandName().equals( this.reqProperties.getProperty("inserisciCompetizione") )){
+			Object res = (Object)response.getRespData();
+			if(res instanceof CompetizioneTO){
+				CmpModel modelCmp = new CmpModel((CompetizioneTO) res);
+				this.listaTabCmp.add(modelCmp);
 			}
 		}
 	}

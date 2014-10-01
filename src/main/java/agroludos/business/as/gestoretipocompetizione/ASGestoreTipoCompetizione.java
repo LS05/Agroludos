@@ -16,14 +16,12 @@ class ASGestoreTipoCompetizione extends AgroludosAS implements LTipoCompetizione
 	}
 
 	@Override
-	public boolean inserisciTipoCompetizione(TipoCompetizioneTO tcmto)
+	public TipoCompetizioneTO inserisciTipoCompetizione(TipoCompetizioneTO tcmto)
 			throws DatabaseException {
-		boolean res = false;
 
 		TipoCompetizioneDAO daoTcm = getTipoCompetizioneDAO();
-		res = daoTcm.create(tcmto);
+		return daoTcm.create(tcmto);
 
-		return res;
 	}
 
 	@Override

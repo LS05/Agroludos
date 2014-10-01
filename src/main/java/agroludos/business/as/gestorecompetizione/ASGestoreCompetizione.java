@@ -59,14 +59,12 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	}
 
 	@Override
-	public boolean inserisciCompetizione(CompetizioneTO cmpto)
+	public CompetizioneTO inserisciCompetizione(CompetizioneTO cmpto)
 			throws DatabaseException {
-		boolean res = false;
 
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
-		res = daoCmp.create(cmpto);
+		return daoCmp.create(cmpto);
 
-		return res;
 	}
 
 	@Override

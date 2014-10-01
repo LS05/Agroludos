@@ -7,7 +7,7 @@ import agroludos.exceptions.DatabaseException;
 
 public interface DAO<T extends Serializable> {
 
-	public boolean create(final T entity) throws DatabaseException;
+	public T create(final T entity) throws DatabaseException;
 
 	public T findOne( final long id ) throws DatabaseException;
 
