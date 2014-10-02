@@ -13,7 +13,8 @@ public class EnrichableException extends RuntimeException {
         public String errorContext = null;
         public String errorCode  = null;
         public String errorText  = null;
-        public InfoItem(String contextCode, String errorCode,
+        
+        InfoItem(String contextCode, String errorCode,
                                      String errorText){
 
             this.errorContext = contextCode;

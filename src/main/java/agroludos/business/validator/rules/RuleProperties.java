@@ -22,7 +22,7 @@ public class RuleProperties {
 			StringBuilder sb = new StringBuilder();
 			sb.append("File non trovato nel percorso specificato: ");
 			sb.append(path);
-			throw new FileNotFoundException(path.toString());
+			throw new FileNotFoundException(sb.toString());
 		}
 		
 		this.prop.load(inputStream);

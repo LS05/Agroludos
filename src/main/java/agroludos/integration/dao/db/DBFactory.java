@@ -23,7 +23,7 @@ public class DBFactory{
 	public DBDAOFactory getDAOFactory(String tipo) throws DatabaseException{
 		DBDAOFactory res = null;
 
-		if(tipo.toLowerCase().equals("mysql")){
+		if(tipo.equalsIgnoreCase("mysql")){
 			if(this.mySqlFact.testConnection())
 				res = this.mySqlFact;
 		} else {

@@ -40,7 +40,7 @@ class ASGestoreManagerDiSistema extends AgroludosAS implements LManagerDiSistema
 
 	@Override
 	public boolean checkMds() throws DatabaseException, MdsNotFoundException {
-		boolean res;
+		boolean res = false;
 
 		if(this.getManagerDiSistemaDAO().checkMds()){
 			res = true;

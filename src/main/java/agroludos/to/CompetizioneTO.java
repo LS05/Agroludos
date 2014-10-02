@@ -122,7 +122,6 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 * Aggiunge un optional alla competizione. In questo modo il partecipante
 	 * può scegliere gli optional inseriti in questa competizione.
 	 * 
-	 * @return
 	 */
 	void addOptional(OptionalTO optional);
 

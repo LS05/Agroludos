@@ -13,8 +13,9 @@ public class CommandMap {
 		this.methods = new HashMap<String, Method>();
 		Method[] classMethods = c.getMethods();
 		
-		for(int i = 0; i < classMethods.length; i++)
+		for(int i = 0; i < classMethods.length; i++){
 			this.methods.put(classMethods[i].getName(), classMethods[i]);
+		}
 	}
 	
 	CommandMap(String className) throws ClassNotFoundException {
@@ -22,8 +23,9 @@ public class CommandMap {
 		this.methods = new HashMap<String, Method>();
 		Method[] classMethods = c.getMethods();
 		
-		for(int i = 0; i < classMethods.length; i++)
+		for(int i = 0; i < classMethods.length; i++){
 			this.methods.put(classMethods[i].getName(), classMethods[i]);
+		}
 	}
 	
 	public Method getMethod(String methodName) throws MethodNotFoundException{
