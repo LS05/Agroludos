@@ -48,15 +48,29 @@ public abstract class AgroludosController extends Controller{
 		return reqFact.createDataRequest(param, richiesta, viewName);
 	}
 
-	public abstract void forward(AgroRequest request, AgroResponse response);
-
-	public abstract void initializeView(AgroludosTO mainTO);
-
-	public abstract void initializeView(String viewName);
-
-	protected abstract String getNameView();
-	protected abstract void setNameView(String nameView);
+	/**
+	 * Se è un dialog con un bottone tipo "Chiudi" o "Annulla"
+	 * deve essere necessariamente chiamato questo metodo
+	 * altrimenti non è necessario
+	 */
 	protected void close(){
 		nav.closeVista(getNameView());
 	}
+
+	protected abstract void initializeView(AgroludosTO mainTO);
+
+	protected abstract void initializeView(String viewName);
+
+	protected abstract String getNameView();
+
+	protected abstract void setNameView(String nameView);
+	
+	/**
+	 * Per i dialog il forward è utile solo in caso di errore. Perchè il dato
+	 * viene gestito sempre dalla mainView.
+	 *  
+	 * @param request
+	 * @param response
+	 */
+	public abstract void forward(AgroRequest request, AgroResponse response);
 }
