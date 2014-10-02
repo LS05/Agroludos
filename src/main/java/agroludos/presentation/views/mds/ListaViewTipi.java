@@ -21,4 +21,8 @@ class ListaViewTipi extends ListView<String>{
 		this.setItems(names);
 
 	}
+	
+	void addItem(TipiAgroludosTO tipo){
+		this.names.add(tipo.getNome());
+	}
 }

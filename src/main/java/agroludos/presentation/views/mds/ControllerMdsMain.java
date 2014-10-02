@@ -12,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.tablemodel.MdcModel;
@@ -50,7 +49,6 @@ public class ControllerMdsMain extends ControllerUtenti{
 	//button gest competizioni
 	@FXML private GridPane paneTableCmp;
 	@FXML private TableCompetizioni tableCompetizioni;
-	@FXML private Button btnNuovoTipoCompetizione;
 	@FXML private GridPane paneListaTipiComp;
 	private List<CompetizioneTO> listComp;
 	private List<TipiAgroludosTO> listTipiComp;
@@ -76,7 +74,6 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 	//gestione Optional
 	@FXML private GridPane paneListaTipiOpt;
-	@FXML private Button btnNuovoTipoOptional;
 	@FXML private Button btnDisattivaOptional;
 	@FXML private GridPane paneTableOptional;
 	private TableOptional tableOptional;
@@ -86,6 +83,8 @@ public class ControllerMdsMain extends ControllerUtenti{
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
 	private List<String> richieste;
+
+	private ListaViewTipi listViewOpt;
 
 	private void setDxMdCColumn(Integer selected){
 		MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
@@ -156,7 +155,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.tableOptional = new TableOptional();
 		this.paneTableOptional.getChildren().add(this.tableOptional);
 		this.paneTableOptional.setVisible(true);
-		ListaViewTipi listViewOpt = new ListaViewTipi(this.listTipiOpt);
+		this.listViewOpt = new ListaViewTipi(this.listTipiOpt);
 		this.paneListaTipiOpt.getChildren().add(listViewOpt);
 
 		final String viewName = nameView;
@@ -272,14 +271,12 @@ public class ControllerMdsMain extends ControllerUtenti{
 		nav.setVista("modificaMDC", mdcto);
 	}
 
-	//--------------------Gest Competizioni View---------------
-
 	@FXML protected void btnNuovoTipoCompetizione(MouseEvent event) {
+		
 	}
 
-	//--------------------Gest Optional View---------------
-
-	@FXML protected void btnNuovoTipoOptional(MouseEvent event) {
+	@FXML protected void nuovoTipoOptionalClicked(MouseEvent event) {
+		nav.setVista("nuovoTipoOpt");
 	}
 
 	@FXML protected void visualizzaCertificatoSrc(MouseEvent event){
@@ -402,6 +399,14 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 			if(res instanceof List<?>){
 				this.listComp = (List<CompetizioneTO>)res;
+			}
+
+		} else if( commandName.equals( this.reqProperties.getProperty("inserisciTipoOptional") )){
+			Object res = response.getRespData();
+			
+			if(res instanceof TipoOptionalTO){
+				TipoOptionalTO tipo = (TipoOptionalTO)res;
+				this.listViewOpt.addItem(tipo);
 			}
 
 		}

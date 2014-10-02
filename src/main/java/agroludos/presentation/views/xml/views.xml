@@ -108,5 +108,12 @@
 			<height>600</height>
 			<title>Agroludos | Certificato di "Sana e Robusta Costituzione"</title>
 		</view>
+		<view tipo="dialog">
+			<name>nuovoTipoOpt</name>
+			<url>/fxml/dialogs/nuovoTipoOpt.fxml</url>
+			<width>492</width>
+			<height>263</height>
+			<title>Agroludos | Nuovo Tipo Optional</title>
+		</view>
 	</views>
 </agro-views>

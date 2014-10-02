@@ -66,9 +66,9 @@
                 <RowConstraints maxHeight="-1.0" minHeight="-1.0" prefHeight="-1.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <GridPane fx:id="paneGestioneOptional" prefHeight="-1.0" prefWidth="600.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane fx:id="paneGestioneOptional" prefHeight="-1.0" prefWidth="600.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
-                <Button fx:id="btnNuovoTipoOptional" mnemonicParsing="false" onMouseClicked="#btnNuovoTipoOptional" prefHeight="25.0" prefWidth="222.0" text="%key104" GridPane.halignment="CENTER" />
+                <Button fx:id="btnNuovoTipoOptional" mnemonicParsing="false" onMouseClicked="#nuovoTipoOptionalClicked" prefHeight="25.0" prefWidth="222.0" text="%key104" GridPane.halignment="CENTER" />
                 <GridPane GridPane.columnIndex="1">
                   <children>
                     <Button mnemonicParsing="false" text="%key100" GridPane.halignment="CENTER" />
@@ -115,7 +115,7 @@
                 <RowConstraints maxHeight="-1.0" minHeight="10.0" prefHeight="-1.0" vgrow="ALWAYS" />
               </rowConstraints>
             </GridPane>
-            <GridPane fx:id="paneGestionePartecipanti" prefHeight="118.0" prefWidth="200.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane fx:id="paneGestionePartecipanti" prefHeight="118.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <GridPane id="" visible="true">
                   <children>
