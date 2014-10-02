@@ -30,4 +30,6 @@ public interface TOFactory {
 
 	SuccTO createSuccTO();
 
+	StatoUtenteTO createStatoUtenteTO();
+
 }

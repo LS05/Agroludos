@@ -9,10 +9,10 @@ class Utente implements UtenteTO{
 	protected String username;
 	protected String password;
 	protected String email;
-	
+
 	private TipoUtente tipoUtente;
 	private StatoUtente statoUtente;
-	
+
 	@Override
 	public TipoUtente getTipoUtente() {
 		return tipoUtente;
@@ -21,10 +21,15 @@ class Utente implements UtenteTO{
 	public void setTipoUtente(TipoUtente tipoUtente) {
 		this.tipoUtente = tipoUtente;
 	}
+
+	@Override
+	public StatoUtenteTO getStatoUtente() {
+		return statoUtente;
+	}
 	
 	@Override
-	public StatoUtente getStatoUtente() {
-		return statoUtente;
+	public void setStatoUtente(StatoUtenteTO stato) {
+		this.statoUtente = (StatoUtente)stato;
 	}
 
 	public void setStatoUtente(StatoUtente statoUtente) {
@@ -35,61 +40,61 @@ class Utente implements UtenteTO{
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	@Override
 	public String getNome() {
 		return nome;
 	}
-	
+
 	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	@Override
 	public String getCognome() {
 		return cognome;
 	}
-	
+
 	@Override
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
-	
+
 	@Override
 	public String getUsername() {
 		return username;
 	}
-	
+
 	@Override
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	@Override
 	public String getPassword() {
 		return password;
 	}
-	
+
 	@Override
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	@Override
 	public String getEmail() {
 		return email;
 	}
-	
+
 	@Override
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	@Override
 	public int compareTo(UtenteTO o) {
 		// TODO Auto-generated method stub
@@ -103,6 +108,4 @@ class Utente implements UtenteTO{
 				+ ", email=" + email + ", tipoUtente=" + tipoUtente
 				+ ", statoUtente=" + statoUtente + "]";
 	}
-
-
 }

@@ -25,6 +25,8 @@ public interface UtenteTO extends AgroludosTO, Comparable<UtenteTO> {
 	void setEmail(String email);
 	
 	TipoUtenteTO getTipoUtente();
+	
 	StatoUtenteTO getStatoUtente();
-
+	
+	void setStatoUtente(StatoUtenteTO stato);
 }
