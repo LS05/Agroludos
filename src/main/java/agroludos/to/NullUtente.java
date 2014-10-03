@@ -8,6 +8,8 @@ class NullUtente implements UtenteTO{
 	private String username;
 	private String password;
 	private String email;
+	private StatoUtente stato;
+	private TipoUtente tipo;
 	
 	NullUtente(){
 		this.id = -1;
@@ -82,5 +84,10 @@ class NullUtente implements UtenteTO{
 	@Override
 	public StatoUtenteTO getStatoUtente() {
 		return new StatoUtente();
+	}
+
+	@Override
+	public void setStatoUtente(StatoUtenteTO stato) {
+		this.stato = new StatoUtente();
 	}
 }

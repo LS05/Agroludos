@@ -174,7 +174,6 @@ class Services {
 		this.services.put(SStatoUtente.class.getName(), this.sstatoutente);
 	}
 
-	
 	public void setLstatoisc(LStatoIscrizione lstatoisc) {
 		this.lstatoisc = lstatoisc;
 		this.services.put(LStatoIscrizione.class.getName(), this.lstatoisc);

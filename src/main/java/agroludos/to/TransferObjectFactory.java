@@ -66,6 +66,11 @@ class TransferObjectFactory implements TOFactory {
 	public StatoCompetizioneTO createStatoCompetizioneTO() {
 		return new StatoCompetizione();
 	}
+	
+	@Override
+	public StatoUtenteTO createStatoUtenteTO() {
+		return new StatoUtente();
+	}
 
 	@Override
 	public ErrorTO createErrorTO() {

@@ -13,10 +13,11 @@ public class FileFactory {
 	public FileDAOFactory getDAOFactory(String tipo){
 		FileDAOFactory res = null;
 		
-		if(tipo.toLowerCase().equals("xml"))
+		if(tipo.equalsIgnoreCase("xml")){
 			res = xmlFact;
-		else if(tipo.equals("txt"))
+		} else if(tipo.equals("txt")){
 			res = txtFact;
+		}
 		
 		return res;
 	}

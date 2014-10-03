@@ -1,17 +1,38 @@
 package agroludos.presentation.views.mds;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import agroludos.presentation.req.AgroRequest;
+import agroludos.presentation.resp.AgroResponse;
+import agroludos.presentation.views.AgroludosController;
+import agroludos.to.AgroludosTO;
 
-import javafx.fxml.Initializable;
+public class ControllerMdsModificaOptional extends AgroludosController{
 
-public class ControllerMdsModificaOptional implements Initializable{
+	private String viewName;
 
-	//button 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initializeView(AgroludosTO mainTO) {
 		// TODO Auto-generated method stub
-		
+	}
+
+	@Override
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
+	}
+
+	@Override
+	protected String getNameView() {
+		return this.viewName;
+	}
+
+	@Override
+	protected void setNameView(String nameView) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void forward(AgroRequest request, AgroResponse response) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

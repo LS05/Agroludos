@@ -159,4 +159,10 @@
 			<forward success="modificaMDC" failure="modificaMDC" />
 		</from>
 	</command>
+	<command name="inserisciTipoOptional">
+		<classe>agroludos.business.as.gestoretipooptional.STipoOptional</classe>
+		<from name="nuovoTipoOpt">
+			<forward success="managerDiSistema" failure="nuovoTipoOpt" />
+		</from>
+	</command>
 </commands>

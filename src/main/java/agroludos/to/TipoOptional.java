@@ -29,7 +29,8 @@ class TipoOptional implements TipoOptionalTO{
 		return id;
 	}
 	
-	public void setId(Integer id) {
+	@SuppressWarnings("unused")
+	private void setId(Integer id) {
 		this.id = id;
 	}
 	
