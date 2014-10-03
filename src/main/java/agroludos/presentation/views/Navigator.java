@@ -54,12 +54,9 @@ public class Navigator {
 		try {
 			if(this.viewsCache.checkView(viewName)){
 				agw = this.viewsCache.getView(viewName);
-				//se si tratta di un dialog imposto di nuovo l'evento in chiusura dello stage e setto il currentStage
-				if(agw.isDialog()){
-					this.viewsCache.addEventOnStageClose(agw);
-					this.viewsCache.pushStack(agw.getStage());
+				//se si tratta di un dialog richiamo l'inizializzazione
+				if(agw.isDialog())					
 					agw.getController().initializeView(viewName);
-				}				
 			}else{
 				agw = this.viewsLoader.getView(viewName);
 				this.viewsCache.addView(agw);
@@ -83,16 +80,9 @@ public class Navigator {
 
 	public void closeVista(String viewName) {
 		AgroludosWindow agw = this.viewsCache.getView(viewName);
-		//se si tratta del dialog corrente effettua un pop sullo stack delle view
-		if(agw.isDialog() && this.viewsCache.peekStack().equals(agw.getStage())
-				){
-			this.viewsCache.popStack();
-			System.out.println("Dialog is closing by closeVista");
-		}else if(agw.isMainView()){
+		if(agw.isMainView()){
 			System.out.println("termina programma");
 		}
-		if(this.viewsCache.peekStack().equals(this.getStage(this.mainViewName)))
-			this.viewsCache.getView(this.mainViewName).getController().initializeView(this.mainViewName);
 		this.getStage(viewName).close();	
 	}
 
