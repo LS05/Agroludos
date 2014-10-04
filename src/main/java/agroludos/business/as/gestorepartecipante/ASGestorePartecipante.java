@@ -104,4 +104,13 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 
 		return res;
 	}
+
+	@Override
+	public String getCertificatoSRC(PartecipanteTO parto)
+			throws DatabaseException, IOException {
+
+		CertificatoSRCDAO certDao = this.getCertificatoSRCDAO();
+		return certDao.getCertificato(parto.getSrc());
+
+	}
 }

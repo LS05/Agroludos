@@ -165,4 +165,10 @@
 			<forward success="managerDiSistema" failure="nuovoTipoOpt" />
 		</from>
 	</command>
+	<command name="getCertificatoSRC">
+		<classe>agroludos.business.as.gestorepartecipante.LPartecipante</classe>
+		<from name="visualizzaSRC">
+			<forward success="visualizzaSRC" failure="visualizzaSRC" />
+		</from>
+	</command>
 </commands>

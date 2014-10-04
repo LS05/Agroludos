@@ -7,40 +7,49 @@ import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
+import agroludos.to.CompetizioneTO;
 import agroludos.to.PartecipanteTO;
 
 public class ControllerVisualizzaCRSC extends AgroludosController {
+	private String nameView;
 
 	@FXML private Label lblNomeCognome;
 	@FXML private Label lblDataSrc;
 	@FXML private TextArea txtAreaCertificato;
-	
-	@Override
-	public void forward(AgroRequest request, AgroResponse response) {
-		// TODO Auto-generated method stub
-	}
+
+	private PartecipanteTO parTO;
+
+	private AgroResponse risposta;
+
+	private AgroRequest richiesta;
+
+
+
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		PartecipanteTO part = (PartecipanteTO)mainTO;
+		this.parTO = (PartecipanteTO)mainTO;
 		StringBuffer nomeCognome = new StringBuffer();
-		nomeCognome.append(part.getNome());
+		nomeCognome.append(parTO.getNome());
 		nomeCognome.append(" ");
-		nomeCognome.append(part.getCognome());
+		nomeCognome.append(parTO.getCognome());
 		this.lblNomeCognome.setText(nomeCognome.toString());
-		this.lblDataSrc.setText(part.getDataSRC().toString());
+		this.lblDataSrc.setText(parTO.getDataSRC().toString());
+
+		this.risposta = respFact.createResponse();
+		this.richiesta = this.getRichiesta(this.parTO, "getCertificatoSRC", this.nameView);
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		
-		//TODO richiesta per leggere il gertificato
-		this.txtAreaCertificato.setText(part.getCertificato());
+
 	}
 
 	@Override
 	public void initializeView(String nameView) {
 		this.nameView = nameView;
-		
+
 	}
-	
-	private String nameView;
+
+
 	@Override
 	protected String getNameView() {
 		return this.nameView;
@@ -49,5 +58,14 @@ public class ControllerVisualizzaCRSC extends AgroludosController {
 	@Override
 	protected void setNameView(String nameView) {
 		this.nameView = nameView;
+	}
+	
+	@Override
+	public void forward(AgroRequest request, AgroResponse response) {
+		if(request.getCommandName().equals("getCertificatoSRC")){
+			Object res = response.getRespData();
+			if(res instanceof String)
+				this.txtAreaCertificato.setText((String) res);
+		}
 	}
 }
