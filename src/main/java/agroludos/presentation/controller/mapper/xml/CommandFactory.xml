@@ -87,7 +87,7 @@
 			<forward success="managerDiCompetizione" failure="mostraCmp" />
 		</from>
 		<from name="mostraIscrizione">
-			<forward success="mostraIscrizoine" failure="mostraIscrizoine" />
+			<forward success="managerDiCompetizione" failure="mostraIscrizoine" />
 		</from>
 	</command>
 	<command name="modificaManagerDiCompetizione">

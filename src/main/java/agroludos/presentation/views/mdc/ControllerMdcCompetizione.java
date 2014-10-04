@@ -140,7 +140,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 					@SuppressWarnings("unchecked")
 					TableView<IscModel> table = (TableView<IscModel>) event.getSource();
 					iscModelRow = table.getSelectionModel().getSelectedItem();
-					nav.setVista("mostraIscrizoine", iscModelRow.getIscrizioneTO());
+					nav.setVista("mostraIscrizione", iscModelRow.getIscrizioneTO());
 				}else{
 					btnAnnullaIsc.setDisable(false);
 				}

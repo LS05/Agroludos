@@ -8,6 +8,7 @@ import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.OptionalTO;
+import agroludos.to.SuccTO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -124,22 +125,30 @@ public class ControllerMdcIscrizione extends AgroludosController {
 	}
 
 	@FXML private void btnVisualizzaCertificato(){
-		nav.setVista("visualizzaSRC");
+		nav.setVista("visualizzaSRC",this.iscto.getPartecipante());
 	}
-	
+
 	@FXML protected void btnAnnullaIscrizione(){
 		//TODO
 		System.out.println("Confermi? si...");
 		this.risposta = respFact.createResponse();
 		this.richiesta = this.getRichiesta(this.iscto, "eliminaIscrizione", this.nameView);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.close();
+		Object res = risposta.getRespData();
+		if(res instanceof IscrizioneTO){
+			nav.setVista("mostraCmp",((IscrizioneTO) res).getCompetizione());
+			SuccTO succMessage = toFact.createSuccTO();
+			succMessage.setMessagge("Iscrizione eliminata!");
+			nav.setVista("successDialog",succMessage);
+		}
 	}
 
 	@FXML protected void btnModificaOptionalIscrizione(MouseEvent event) {
 		//TODO
 		System.out.println("da fare");
 	}
-	
+
 	@Override
 	public void initializeView(String nameView) {
 		this.nameView = nameView;

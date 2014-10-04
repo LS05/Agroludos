@@ -122,11 +122,11 @@
                             <Insets left="10.0" fx:id="x3" />
                           </GridPane.margin>
                         </Label>
-                        <Label id="tblStato" fx:id="lblStato" font="$x1" text="Stato" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.margin="$x7" />
+                        <Label id="tblStato" fx:id="lblStato" font="$x1" prefWidth="159.0" text="Stato" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.margin="$x7" />
                       </children>
                       <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="459.0" minWidth="10.0" prefWidth="443.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="104.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="459.0" minWidth="10.0" prefWidth="401.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="186.0" />
                       </columnConstraints>
                       <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

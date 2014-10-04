@@ -155,6 +155,7 @@ public class ControllerMdcMain extends ControllerUtenti{
 			if(res instanceof IscrizioneTO){
 				this.listaTabCmp.clear();
 				this.initializeView(((IscrizioneTO) res).getCompetizione().getManagerDiCompetizione());
+				nav.setVista("mostraCmp",((IscrizioneTO) res).getCompetizione());
 			}
 		}else if(request.getCommandName().equals( this.reqProperties.getProperty("inserisciCompetizione") )){
 			Object res = (Object)response.getRespData();

@@ -1,4 +1,4 @@
-package agroludos.presentation.views.mds;
+package agroludos.presentation.views.partecipante;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,7 +9,7 @@ import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.PartecipanteTO;
 
-public class ControllerMdsVisualizzaCRSC extends AgroludosController {
+public class ControllerVisualizzaCRSC extends AgroludosController {
 
 	@FXML private Label lblNomeCognome;
 	@FXML private Label lblDataSrc;
@@ -29,6 +29,8 @@ public class ControllerMdsVisualizzaCRSC extends AgroludosController {
 		nomeCognome.append(part.getCognome());
 		this.lblNomeCognome.setText(nomeCognome.toString());
 		this.lblDataSrc.setText(part.getDataSRC().toString());
+		
+		//TODO richiesta per leggere il gertificato
 		this.txtAreaCertificato.setText(part.getCertificato());
 	}
 
