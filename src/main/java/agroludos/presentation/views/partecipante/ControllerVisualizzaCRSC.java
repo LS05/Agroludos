@@ -3,15 +3,15 @@ package agroludos.presentation.views.partecipante;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
-import agroludos.to.CompetizioneTO;
 import agroludos.to.PartecipanteTO;
 
 public class ControllerVisualizzaCRSC extends AgroludosController {
-	private String nameView;
+	private String viewName;
 
 	@FXML private Label lblNomeCognome;
 	@FXML private Label lblDataSrc;
@@ -22,9 +22,6 @@ public class ControllerVisualizzaCRSC extends AgroludosController {
 	private AgroResponse risposta;
 
 	private AgroRequest richiesta;
-
-
-
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
@@ -37,7 +34,7 @@ public class ControllerVisualizzaCRSC extends AgroludosController {
 		this.lblDataSrc.setText(parTO.getDataSRC().toString());
 
 		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(this.parTO, "getCertificatoSRC", this.nameView);
+		this.richiesta = this.getRichiesta(this.parTO, "getCertificatoSRC", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		
 
@@ -45,19 +42,13 @@ public class ControllerVisualizzaCRSC extends AgroludosController {
 
 	@Override
 	public void initializeView(String nameView) {
-		this.nameView = nameView;
+		this.viewName = nameView;
 
 	}
-
-
+	
 	@Override
-	protected String getNameView() {
-		return this.nameView;
-	}
-
-	@Override
-	protected void setNameView(String nameView) {
-		this.nameView = nameView;
+	protected String getViewName() {
+		return this.viewName;
 	}
 	
 	@Override
