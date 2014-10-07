@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -27,7 +28,7 @@ import agroludos.to.TipoCompetizioneTO;
 public class ControllerMdcNuovaCompetizione extends AgroludosController{
 
 
-	private String nameView;
+	private String viewName;
 	private List<TipoCompetizioneTO> listTipiCmp;
 	private List<StatoCompetizioneTO> listStatiCmp;
 	private CompetizioneTO cmpto;
@@ -59,10 +60,10 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 	@Override
 	public void initializeView(String viewName) {
 		this.cmpto = toFact.createCompetizioneTO();
-		this.nameView = viewName;
+		this.viewName = viewName;
 
 		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta("getAllTipoCompetizione", this.nameView);
+		this.richiesta = this.getRichiesta("getAllTipoCompetizione", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
 		ObservableList<String> listTipi = FXCollections.observableArrayList();
@@ -104,7 +105,7 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 		this.cmpto.setTipoCompetizione(this.listTipiCmp.get(i));
 
 		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta("getAllStatoCompetizione", this.nameView);
+		this.richiesta = this.getRichiesta("getAllStatoCompetizione", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
 		this.cmpto.setStatoCompetizione(this.listStatiCmp.get(1));
@@ -112,12 +113,12 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 		this.cmpto.setManagerDiCompetizione((ManagerDiCompetizioneTO) ControllerUtenti.getUtente());
 
 		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(this.cmpto, "inserisciCompetizione", this.nameView);
+		this.richiesta = this.getRichiesta(this.cmpto, "inserisciCompetizione", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
 		Object res = (Object)risposta.getRespData();
 		if(res instanceof CompetizioneTO){
-			
+
 			SuccTO succMessage = toFact.createSuccTO();
 			succMessage.setMessagge("Competizione inserita con successo");
 			nav.setVista("successDialog",succMessage);
@@ -125,15 +126,9 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 		}
 	}
 
-
 	@Override
-	protected String getNameView() {
-		return this.nameView;
-	}
-
-	@Override
-	protected void setNameView(String nameView) {
-		this.nameView = nameView;
+	protected String getViewName() {
+		return this.viewName;
 	}
 
 	@Override

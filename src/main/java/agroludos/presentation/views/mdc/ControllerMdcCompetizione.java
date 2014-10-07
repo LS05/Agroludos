@@ -15,7 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -27,7 +27,8 @@ import agroludos.to.SuccTO;
 
 public class ControllerMdcCompetizione extends AgroludosController {
 
-
+	private String viewName;
+	
 	private CompetizioneTO cmpto;
 
 	@FXML private GridPane paneVisualizzaCmp;
@@ -154,7 +155,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		//TODO
 		System.out.println("Confermi? si...");
 		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(this.tblIscritti.getSelectionModel().getSelectedItem().getIscrizioneTO(), "eliminaIscrizione", this.nameView);
+		this.richiesta = this.getRichiesta(this.tblIscritti.getSelectionModel().getSelectedItem().getIscrizioneTO(), "eliminaIscrizione", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
 		Object res = this.risposta.getRespData();
@@ -175,7 +176,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.lblAnnullaOk.setVisible(false);
 		System.out.println("Confermi? si...");
 		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(this.cmpto, "annullaCompetizione", this.nameView);
+		this.richiesta = this.getRichiesta(this.cmpto, "annullaCompetizione", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
 		Object res = this.risposta.getRespData();
@@ -198,8 +199,8 @@ public class ControllerMdcCompetizione extends AgroludosController {
 
 
 	@Override
-	public void initializeView(String nameView) {
-		this.nameView = nameView;
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
 
 	}
 
@@ -213,14 +214,9 @@ public class ControllerMdcCompetizione extends AgroludosController {
 			}
 		}
 	}
-	private String nameView;
+	
 	@Override
-	protected String getNameView() {
-		return this.nameView;
-	}
-
-	@Override
-	protected void setNameView(String nameView) {
-		this.nameView = nameView;
+	protected String getViewName() {
+		return this.viewName;
 	}
 }

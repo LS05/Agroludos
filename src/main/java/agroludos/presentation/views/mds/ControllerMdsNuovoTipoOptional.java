@@ -14,7 +14,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.TipoOptionalTO;
 
 public class ControllerMdsNuovoTipoOptional extends AgroludosController{
-	private String nameView;
+	private String viewName;
 	private @FXML TextField txtNomeTipo;
 	private @FXML Label lblMsgNuovoTipo;
 	private AgroRequest richiesta;
@@ -24,7 +24,7 @@ public class ControllerMdsNuovoTipoOptional extends AgroludosController{
 		TipoOptionalTO tipoOtp = toFact.createTipoOptionalTO();
 		tipoOtp.setNome(this.txtNomeTipo.getText());
 
-		this.richiesta = this.getRichiesta(tipoOtp, "inserisciTipoOptional", this.nameView);
+		this.richiesta = this.getRichiesta(tipoOtp, "inserisciTipoOptional", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
@@ -36,8 +36,8 @@ public class ControllerMdsNuovoTipoOptional extends AgroludosController{
 
 	@Override
 	protected void initializeView(String viewName) {
-		this.nameView = viewName;
-		Scene scene = nav.getStage(nameView).getScene();
+		this.viewName = viewName;
+		Scene scene = nav.getStage(viewName).getScene();
 		scene.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -48,13 +48,8 @@ public class ControllerMdsNuovoTipoOptional extends AgroludosController{
 	}
 
 	@Override
-	protected String getNameView() {
-		return this.nameView;
-	}
-
-	@Override
-	protected void setNameView(String nameView) {
-		this.nameView = nameView;
+	protected String getViewName() {
+		return this.viewName;
 	}
 
 	@Override

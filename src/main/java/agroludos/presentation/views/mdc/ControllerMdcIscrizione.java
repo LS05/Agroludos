@@ -9,6 +9,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.SuccTO;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -49,7 +50,7 @@ public class ControllerMdcIscrizione extends AgroludosController {
 
 
 
-	private String nameView;
+	private String viewName;
 	@FXML private Label lblEliminaIscrizioneOk;
 	@FXML private GridPane paneIscrizione;
 	private IscrizioneTO iscto;
@@ -132,7 +133,7 @@ public class ControllerMdcIscrizione extends AgroludosController {
 		//TODO
 		System.out.println("Confermi? si...");
 		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(this.iscto, "eliminaIscrizione", this.nameView);
+		this.richiesta = this.getRichiesta(this.iscto, "eliminaIscrizione", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		this.close();
 		Object res = risposta.getRespData();
@@ -150,21 +151,16 @@ public class ControllerMdcIscrizione extends AgroludosController {
 	}
 
 	@Override
-	public void initializeView(String nameView) {
-		this.nameView = nameView;
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
 		this.lblEliminaIscrizioneOk.setVisible(false);
 		this.paneIscrizione.setDisable(false);
 
 	}
 
 	@Override
-	protected String getNameView() {
-		return this.nameView;
-	}
-
-	@Override
-	protected void setNameView(String nameView) {
-		this.nameView = nameView;
+	protected String getViewName() {
+		return this.viewName;
 	}
 
 	@Override

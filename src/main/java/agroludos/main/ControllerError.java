@@ -10,6 +10,8 @@ import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 
 public class ControllerError  extends AgroludosController{
+	private String viewName;
+	
 	@FXML private Label lblErrore;
 	@FXML private Button btnOk;
 	
@@ -26,24 +28,17 @@ public class ControllerError  extends AgroludosController{
 	}
 	
 	@Override
-	public void initializeView(String nameView) {
-		this.nameView = nameView;
-		
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
 	}
+	
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private String nameView;
-	@Override
-	protected String getNameView() {
-		return this.nameView;
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
-	protected void setNameView(String nameView) {
-		this.nameView = nameView;
+	protected String getViewName() {
+		return this.viewName;
 	}
 }

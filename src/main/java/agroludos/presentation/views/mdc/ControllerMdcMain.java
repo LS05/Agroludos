@@ -5,12 +5,12 @@ import java.util.List;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.tablemodel.CmpModel;
-import agroludos.presentation.views.tablemodel.MdcModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -21,6 +21,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 public class ControllerMdcMain extends ControllerUtenti{
 
 	@FXML private GridPane paneCompetizioni;
@@ -44,14 +45,14 @@ public class ControllerMdcMain extends ControllerUtenti{
 	private CmpModel cmpModelRow;
 	private CompetizioneTO cmpto;
 
-	private String nameView;
+	private String viewName;
 
 	private ManagerDiCompetizioneTO mdcTO;
 
 
 	@Override
-	public void initializeView(String nameView) {
-		this.nameView = nameView;
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
 		this.mdcTO = toFact.createMdCTO();
 		this.mdcTO = (ManagerDiCompetizioneTO) utente;
 

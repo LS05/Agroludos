@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -19,7 +20,7 @@ import agroludos.to.UtenteTO;
 
 public class ControllerLogin extends AgroludosController{
 	
-	
+	private String viewName;
 	
 	@FXML private Button btnLogin;
 	@FXML private Button btnPswDimenticata;
@@ -42,11 +43,11 @@ public class ControllerLogin extends AgroludosController{
 	}
 	
 	@Override
-	public void initializeView(String nameView) {
-		this.nameView = nameView;
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
 
-		final Stage stage = nav.getStage(nameView);
-		final String mainView = nameView;
+		final Stage stage = nav.getStage(viewName);
+		final String mainView = viewName;
 		//aggiungo l'evento close vista quando si chiude lo stage
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
@@ -71,7 +72,7 @@ public class ControllerLogin extends AgroludosController{
 		uto.setUsername(this.txtUsername.getText());
 		uto.setPassword(this.txtPassword.getText());
 		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(uto, "autenticazioneUtente", this.nameView);
+		this.richiesta = this.getRichiesta(uto, "autenticazioneUtente", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
@@ -81,7 +82,7 @@ public class ControllerLogin extends AgroludosController{
 
 	@FXML protected void btnRegistrati(MouseEvent event) {
 		this.risposta = respFact.createResponse();		
-		this.richiesta = this.getRichiesta("nuovaRegistrazione", this.nameView);
+		this.richiesta = this.getRichiesta("nuovaRegistrazione", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
@@ -103,14 +104,8 @@ public class ControllerLogin extends AgroludosController{
 		}
 	}
 	
-	private String nameView;
 	@Override
-	protected String getNameView() {
-		return this.nameView;
-	}
-
-	@Override
-	protected void setNameView(String nameView) {
-		this.nameView = nameView;
+	protected String getViewName() {
+		return this.viewName;
 	}
 }

@@ -27,7 +27,7 @@ import agroludos.to.TipoCompetizioneTO;
 import agroludos.to.TipoOptionalTO;
 
 public class ControllerMdsMain extends ControllerUtenti{
-	private String nameView;
+	private String viewName;
 
 	//pane centrali
 	@FXML private GridPane paneGestioneCompetizioni;
@@ -95,8 +95,8 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 	@SuppressWarnings("serial")
 	@Override
-	public void initializeView(String nameView) {
-		this.nameView = nameView;
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
 
 		this.paneGestioneCompetizioni.setVisible(true);
 		this.paneGestioneOptional.setVisible(false);
@@ -156,7 +156,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.listViewOpt = new ListaViewTipi(this.listTipiOpt);
 		this.paneListaTipiOpt.getChildren().add(listViewOpt);
 
-		final String viewName = nameView;
+		final String viewNameSupp = this.viewName;
 		listViewOpt.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -167,7 +167,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 				TipoOptionalTO tipoOpt = toFact.createTipoOptionalTO();
 				tipoOpt.setNome(nomeTipo);
 
-				richiesta = getRichiesta(tipoOpt, "getOptionalByTipo", viewName);
+				richiesta = getRichiesta(tipoOpt, "getOptionalByTipo", viewNameSupp);
 				risposta = respFact.createResponse();
 				frontController.eseguiRichiesta(richiesta, risposta);
 				tableOptional.setAll(listOpt);
@@ -191,7 +191,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 				TipoCompetizioneTO tipoComp = toFact.createTipoCompetizioneTO();
 				tipoComp.setNome(nomeTipo);
 
-				richiesta = getRichiesta(tipoComp, "getCompetizioneByTipo", viewName);
+				richiesta = getRichiesta(tipoComp, "getCompetizioneByTipo", viewNameSupp);
 				risposta = respFact.createResponse();
 				frontController.eseguiRichiesta(richiesta, risposta);
 				tableCompetizioni.setAll(listComp);
@@ -202,7 +202,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 	private void initRequests(){
 		for(String req : this.richieste){
-			this.richiesta = this.getRichiesta(req, this.nameView);
+			this.richiesta = this.getRichiesta(req, this.viewName);
 			this.risposta = respFact.createResponse();
 			frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		}
@@ -241,7 +241,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML protected void btnDisattivaOptionalClicked(MouseEvent event){
 		OptModel optModel = this.tableOptional.getSelectionModel().getSelectedItem();
 		OptionalTO optTO = optModel.getOptTO();
-		AgroRequest request = this.getRichiesta(optTO, "disattivaOptional", this.nameView);
+		AgroRequest request = this.getRichiesta(optTO, "disattivaOptional", this.viewName);
 		AgroResponse response = respFact.createResponse();
 		frontController.eseguiRichiesta(request, response);
 	}

@@ -58,16 +58,14 @@ public abstract class AgroludosController extends Controller{
 	 * altrimenti non è necessario
 	 */
 	protected void close(){
-		nav.closeVista(getNameView());
+		nav.closeVista(getViewName());
 	}
 
 	protected abstract void initializeView(AgroludosTO mainTO);
 
 	protected abstract void initializeView(String viewName);
 
-	protected abstract String getNameView();
-
-	protected abstract void setNameView(String nameView);
+	protected abstract String getViewName();
 	
 	/**
 	 * Per i dialog il forward è utile solo in caso di errore. Perchè il dato

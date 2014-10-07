@@ -20,7 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 public class ControllerMdsModificaMDC extends AgroludosController{
-	private String nameView;
+	private String viewName;
 
 	@FXML private TextField txtUsername;
 	@FXML private TextField txtEmail;
@@ -38,10 +38,10 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 	private ManagerDiCompetizioneTO mdcTO;
 
 	@Override
-	public void initializeView(String nameView) {
-		this.nameView = nameView;
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
 		this.lblMessaggioModifica.setVisible(false);
-		Scene scene = nav.getStage(nameView).getScene();
+		Scene scene = nav.getStage(viewName).getScene();
 		scene.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -61,7 +61,7 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 		this.txtNome.setText(this.mdcTO.getNome());
 		this.txtEmail.setText(this.mdcTO.getEmail());
 
-		this.richiesta = this.getRichiesta("getAllStatoUtente", this.nameView);
+		this.richiesta = this.getRichiesta("getAllStatoUtente", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
@@ -83,7 +83,7 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 		StatoUtenteTO stato = this.listStatiUtente.get(statoSel);
 		this.mdcTO.setStatoUtente(stato);
 
-		this.richiesta = this.getRichiesta(mdcTO, "modificaManagerDiCompetizione", this.nameView);
+		this.richiesta = this.getRichiesta(mdcTO, "modificaManagerDiCompetizione", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
@@ -93,13 +93,8 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 	}
 
 	@Override
-	protected String getNameView() {
-		return this.nameView;
-	}
-
-	@Override
-	protected void setNameView(String nameView) {
-		this.nameView = nameView;
+	protected String getViewName() {
+		return this.viewName;
 	}
 
 	@SuppressWarnings("unchecked")

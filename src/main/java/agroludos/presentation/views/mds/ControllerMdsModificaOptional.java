@@ -20,13 +20,8 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 	}
 
 	@Override
-	protected String getNameView() {
+	protected String getViewName() {
 		return this.viewName;
-	}
-
-	@Override
-	protected void setNameView(String nameView) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override

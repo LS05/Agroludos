@@ -4,14 +4,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
-import agroludos.to.CompetizioneTO;
 import agroludos.to.SuccTO;
 
 public class ControllerSuccess  extends AgroludosController{
+	private String viewName;
+	
 	@FXML private Label lblSuccess;
 	@FXML private Button btnOk;
 	SuccTO mainTO;
@@ -21,8 +23,8 @@ public class ControllerSuccess  extends AgroludosController{
 	}
 
 	@Override
-	public void initializeView(String nameView) {
-		this.nameView = nameView;
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
 		
 	}
 	@Override
@@ -38,16 +40,8 @@ public class ControllerSuccess  extends AgroludosController{
 
 	}
 	
-	private String nameView;
 	@Override
-	protected String getNameView() {
-		return this.nameView;
-	}
-
-	@Override
-	protected void setNameView(String nameView) {
-		this.nameView = nameView;
+	protected String getViewName() {
+		return this.viewName;
 	}
 }
-
-

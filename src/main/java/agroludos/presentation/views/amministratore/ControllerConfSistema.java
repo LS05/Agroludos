@@ -23,9 +23,8 @@ import javafx.scene.layout.GridPane;
  *
  */
 public class ControllerConfSistema extends AgroludosController {
-
-
-
+	private String viewName;
+	
 	@FXML private Button btnAvantiConf;
 	@FXML private Button btnIndietroConf;
 	@FXML private Button btnConfermaConfigurazione;
@@ -59,8 +58,8 @@ public class ControllerConfSistema extends AgroludosController {
 	private ObservableList<String> listaTipiDB;
 
 	@Override
-	public void initializeView(String nameView) {
-		this.nameView = nameView;
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
 
 		this.mdsto = toFact.createMdSTO();
 		this.dbto = toFact.createDatabaseTO();
@@ -96,7 +95,7 @@ public class ControllerConfSistema extends AgroludosController {
 		this.dbto.setNome(this.txtNomeDB.getText());
 		this.dbto.setUsername(this.txtUsernameDB.getText());
 		this.dbto.setPassword(this.txtPasswordDB.getText());
-		this.richiesta = this.getRichiesta(this.dbto, "inserisciConfigurazione", this.nameView);
+		this.richiesta = this.getRichiesta(this.dbto, "inserisciConfigurazione", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
@@ -122,7 +121,7 @@ public class ControllerConfSistema extends AgroludosController {
 		this.mdsto.setPassword(this.txtPasswordMds.getText());
 		this.mdsto.setEmail(txtEmailMds.getText());
 		//TODO manca il telefono
-		this.richiesta = this.getRichiesta(this.mdsto, "nuovoManagerDiSistema", this.nameView);
+		this.richiesta = this.getRichiesta(this.mdsto, "nuovoManagerDiSistema", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
@@ -155,14 +154,8 @@ public class ControllerConfSistema extends AgroludosController {
 
 	}
 
-	private String nameView;
 	@Override
-	protected String getNameView() {
-		return this.nameView;
-	}
-
-	@Override
-	protected void setNameView(String nameView) {
-		this.nameView = nameView;
+	protected String getViewName() {
+		return this.viewName;
 	}
 }

@@ -20,7 +20,7 @@ import agroludos.to.StatoOptionalTO;
 import agroludos.to.TipoOptionalTO;
 
 public class ControllerMdsNuovoOptional extends AgroludosController{
-	private String nameView;
+	private String viewName;
 	private @FXML Label lblNomeTipoOpt;
 	private @FXML TextField txtNomeOptional;
 	private @FXML ComboBox<Double> cmbPrezzoOptional;
@@ -37,11 +37,11 @@ public class ControllerMdsNuovoOptional extends AgroludosController{
 		this.tipoOpt = (TipoOptionalTO)mainTO;
 		this.lblNomeTipoOpt.setText(this.tipoOpt.getNome());
 
-		this.richiesta = this.getRichiesta("getAllStatoOptional", this.nameView);
+		this.richiesta = this.getRichiesta("getAllStatoOptional", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
-		this.richiesta = this.getRichiesta("getAllTipoOptional", this.nameView);
+		this.richiesta = this.getRichiesta("getAllTipoOptional", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
@@ -54,7 +54,7 @@ public class ControllerMdsNuovoOptional extends AgroludosController{
 
 	@Override
 	protected void initializeView(String viewName) {
-		this.nameView = viewName;
+		this.viewName = viewName;
 	}
 
 	@FXML protected void confermaNuovoOptional(MouseEvent event){
@@ -76,20 +76,14 @@ public class ControllerMdsNuovoOptional extends AgroludosController{
 		StatoOptionalTO statoOpt = this.listStatiOpt.get(selectedStato);
 		optional.setStatoOptional(statoOpt);
 
-		this.richiesta = this.getRichiesta(optional, "inserisciOptional", this.nameView);
+		this.richiesta = this.getRichiesta(optional, "inserisciOptional", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
 	@Override
-	protected String getNameView() {
-		return this.nameView;
-	}
-
-	@Override
-	protected void setNameView(String nameView) {
-		// TODO Auto-generated method stub
-
+	protected String getViewName() {
+		return this.viewName;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -14,12 +14,12 @@ public class ControllerPartecipanteMain extends ControllerUtenti{
 	@FXML private GridPane paneIscrizioni;
 	@FXML private Button btnGestManComp; 
 	@FXML private Button btnGestIscrizioni;
-	private String nameView;
+	private String viewName;
 
 
 	@Override
-	public void initializeView(String nameView) {
-		this.nameView = nameView;
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
 
 		//TODO Da testare
 		this.paneCompetizioni.setVisible(true);

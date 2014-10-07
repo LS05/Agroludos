@@ -10,6 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -18,9 +19,8 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.SuccTO;
 
 public class ControllerMdcModificaCompetizione extends AgroludosController{
+	private String viewName;
 	
-	
-
 	@FXML private CompetizioneTO cmpto;
 	@FXML private TextField txtNome;
 	@FXML private TextField txtData;
@@ -83,7 +83,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		
 		
 		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(cmpto, "modificaCompetizione", this.nameView);
+		this.richiesta = this.getRichiesta(cmpto, "modificaCompetizione", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		
 		
@@ -99,8 +99,8 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 	}
 
 	@Override
-	public void initializeView(String nameView) {
-		this.nameView = nameView;
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
 		
 	}
 
@@ -111,14 +111,10 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		}
 
 	}
-	private String nameView;
+	
 	@Override
-	protected String getNameView() {
-		return this.nameView;
+	protected String getViewName() {
+		return this.viewName;
 	}
-
-	@Override
-	protected void setNameView(String nameView) {
-		this.nameView = nameView;
-	}
+	
 }
