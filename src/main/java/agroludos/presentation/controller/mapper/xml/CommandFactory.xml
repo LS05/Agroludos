@@ -186,4 +186,10 @@
 			<forward success="nuovoOpt" failure="nuovoOpt" />
 		</from>
 	</command>
+	<command name="modificaOptional">
+		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
+		<from name="modificaOpt">
+			<forward success="managerDiSistema" failure="modificaOpt" />
+		</from>
+	</command>
 </commands>

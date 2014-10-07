@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.tablemodel.MdcModel;
@@ -245,8 +246,12 @@ public class ControllerMdsMain extends ControllerUtenti{
 		AgroResponse response = respFact.createResponse();
 		frontController.eseguiRichiesta(request, response);
 	}
-
-	//--------------------Gest Man Competizione ---------------
+	
+	@FXML protected void modificaOptionalClicked(MouseEvent event){
+		OptModel optModel = this.tableOptional.getSelectionModel().getSelectedItem();
+		OptionalTO optTO = optModel.getOptTO();
+		nav.setVista("modificaOpt", optTO);
+	}
 
 	private ManagerDiCompetizioneTO getManagerDiCompetizione(String username){
 		ManagerDiCompetizioneTO res = null;
