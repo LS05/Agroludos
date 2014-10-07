@@ -56,7 +56,6 @@ public class ControllerMdsMain extends ControllerUtenti{
 	//gestione partecipanti
 	@FXML private GridPane paneTablePart;
 	@FXML private TablePartecipanti tablePartecipanti;
-	@FXML private Button btnMostraSRC;
 	@FXML private Label lblParNome;
 	@FXML private Label lblParCognome;
 	@FXML private Label lblParUsername;
@@ -68,7 +67,6 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML private Label lblParEmail;
 	@FXML private Label lblParAnnoNasc;
 	@FXML private Label lblParNumTessSan;
-	@FXML private Button btnIscrPar;
 	private List<PartecipanteTO> listPart;
 	private int selectedPart = 0;
 
@@ -278,6 +276,13 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML protected void nuovoTipoOptionalClicked(MouseEvent event) {
 		nav.setVista("nuovoTipoOpt");
 	}
+	
+	@FXML protected void nuovoOptClicked(MouseEvent event){
+		TipoOptionalTO tipoOpt = toFact.createTipoOptionalTO();
+		String nome = this.listViewOpt.getSelectionModel().getSelectedItem();
+		tipoOpt.setNome(nome);
+		nav.setVista("nuovoOpt", tipoOpt);
+	}
 
 	@FXML protected void visualizzaCertificatoSrc(MouseEvent event){
 		PartModel partModel = this.tablePartecipanti.getSelectionModel().getSelectedItem();
@@ -298,27 +303,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.lblParSesso.setText(selModel.getSesso());
 		this.lblParAnnoNasc.setText(selModel.getDataNasc());
 		this.lblParNumTessSan.setText(selModel.getNumTessera());
-	}
-
-	//	private void initPartTable(){
-	//
-	//		this.tablePartecipanti.getSelectionModel().select(0);
-	//
-	//		this.setDxPartColumn(this.selectedPart);
-	//
-	//		this.tablePartecipanti.getSelectionModel().selectedItemProperty().addListener(
-	//				new ChangeListener<PartModel>(){
-	//
-	//					@Override
-	//					public void changed(ObservableValue<? extends PartModel> partModel,
-	//							PartModel oldMod, PartModel newMod) {
-	//
-	//						selectedPart = tablePartecipanti.getSelectionModel().getSelectedIndex();
-	//						setDxPartColumn(selectedPart);
-	//					}
-	//
-	//				});
-	//	}	
+	}	
 
 	@SuppressWarnings("unchecked")
 	@Override

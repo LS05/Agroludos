@@ -32,4 +32,6 @@ public interface TOFactory {
 
 	StatoUtenteTO createStatoUtenteTO();
 
+	StatoOptionalTO createStatoOptionalTO();
+
 }

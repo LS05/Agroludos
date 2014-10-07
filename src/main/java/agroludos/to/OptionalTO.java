@@ -20,4 +20,8 @@ public interface OptionalTO extends AgroludosTO, Comparable<OptionalTO>{
 
 	StatoOptionalTO getStatoOptional();
 
+	void setTipoOptional(TipoOptionalTO tipoOptional);
+
+	void setStatoOptional(StatoOptionalTO statoOptional);
+
 }

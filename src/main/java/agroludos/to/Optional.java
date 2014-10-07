@@ -6,8 +6,6 @@ class Optional implements OptionalTO{
 	private String descrizione;
 	private Double costo;
 	private Integer id;
-
-	
 	private TipoOptional tipoOptional;
 	private StatoOptional statoOptional;
 
@@ -16,17 +14,19 @@ class Optional implements OptionalTO{
 		return tipoOptional;
 	}
 
-	public void setTipoOptional(TipoOptional tipoOptional) {
-		this.tipoOptional = tipoOptional;
+	@Override
+	public void setTipoOptional(TipoOptionalTO tipoOptional) {
+		this.tipoOptional = (TipoOptional)tipoOptional;
 	}
 
 	@Override
 	public StatoOptional getStatoOptional() {
 		return statoOptional;
 	}
-
-	public void setStatoOptional(StatoOptional statoOptional) {
-		this.statoOptional = statoOptional;
+	
+	@Override
+	public void setStatoOptional(StatoOptionalTO statoOptional) {
+		this.statoOptional = (StatoOptional)statoOptional;
 	}
 
 	@Override

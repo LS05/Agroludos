@@ -125,6 +125,9 @@
 		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
+		<from name="nuovoOpt">
+			<forward success="nuovoOpt" failure="nuovoOpt" />
+		</from>
 	</command>
 	<command name="getOptionalByTipo">
 		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
@@ -169,6 +172,18 @@
 		<classe>agroludos.business.as.gestorepartecipante.LPartecipante</classe>
 		<from name="visualizzaSRC">
 			<forward success="visualizzaSRC" failure="visualizzaSRC" />
+		</from>
+	</command>
+	<command name="inserisciOptional">
+		<classe>agroludos.business.as.gestoreoptional.SOptional</classe>
+		<from name="nuovoOpt">
+			<forward success="nuovoOpt" failure="nuovoOpt" />
+		</from>
+	</command>
+	<command name="getAllStatoOptional">
+		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
+		<from name="nuovoOpt">
+			<forward success="nuovoOpt" failure="nuovoOpt" />
 		</from>
 	</command>
 </commands>

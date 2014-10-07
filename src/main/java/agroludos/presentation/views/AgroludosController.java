@@ -47,6 +47,10 @@ public abstract class AgroludosController extends Controller{
 		String richiesta = this.reqProperties.getProperty(commandName);
 		return reqFact.createDataRequest(param, richiesta, viewName);
 	}
+	
+	protected String getCommandName(String cmdName){
+		return this.reqProperties.getProperty(cmdName);
+	}
 
 	/**
 	 * Se è un dialog con un bottone tipo "Chiudi" o "Annulla"

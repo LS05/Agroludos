@@ -71,7 +71,7 @@
                 <Button fx:id="btnNuovoTipoOptional" mnemonicParsing="false" onMouseClicked="#nuovoTipoOptionalClicked" prefHeight="25.0" prefWidth="222.0" text="%key104" GridPane.halignment="CENTER" />
                 <GridPane GridPane.columnIndex="1">
                   <children>
-                    <Button mnemonicParsing="false" text="%key100" GridPane.halignment="CENTER" />
+                    <Button mnemonicParsing="false" onMouseClicked="#nuovoOptClicked" text="%key100" GridPane.halignment="CENTER" />
                     <Button mnemonicParsing="false" text="%key101" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                     <Button mnemonicParsing="false" text="Attiva Optional" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                     <Button fx:id="btnDisattivaOptional" mnemonicParsing="false" onMouseClicked="#btnDisattivaOptionalClicked" text="%key102" GridPane.columnIndex="2" GridPane.halignment="CENTER">

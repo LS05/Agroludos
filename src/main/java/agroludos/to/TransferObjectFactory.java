@@ -71,6 +71,11 @@ class TransferObjectFactory implements TOFactory {
 	public StatoUtenteTO createStatoUtenteTO() {
 		return new StatoUtente();
 	}
+	
+	@Override
+	public StatoOptionalTO createStatoOptionalTO() {
+		return new StatoOptional();
+	}
 
 	@Override
 	public ErrorTO createErrorTO() {
