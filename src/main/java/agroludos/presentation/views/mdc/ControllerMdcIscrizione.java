@@ -8,7 +8,7 @@ import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.OptionalTO;
-import agroludos.to.SuccTO;
+import agroludos.to.SuccessTO;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -139,7 +139,7 @@ public class ControllerMdcIscrizione extends AgroludosController {
 		Object res = risposta.getRespData();
 		if(res instanceof IscrizioneTO){
 			nav.setVista("mostraCmp",((IscrizioneTO) res).getCompetizione());
-			SuccTO succMessage = toFact.createSuccTO();
+			SuccessTO succMessage = toFact.createSuccessTO();
 			succMessage.setMessagge("Iscrizione eliminata!");
 			nav.setVista("successDialog",succMessage);
 		}

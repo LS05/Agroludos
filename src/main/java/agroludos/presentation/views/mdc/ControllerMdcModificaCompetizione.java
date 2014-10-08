@@ -16,7 +16,7 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
-import agroludos.to.SuccTO;
+import agroludos.to.SuccessTO;
 
 public class ControllerMdcModificaCompetizione extends AgroludosController{
 	private String viewName;
@@ -89,7 +89,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		
 		Object res = this.risposta.getRespData();
 		if(res instanceof CompetizioneTO){			
-			SuccTO succMessage = toFact.createSuccTO();
+			SuccessTO succMessage = toFact.createSuccessTO();
 			succMessage.setMessagge("Modifica avvenuta con successo!");
 			nav.setVista("successDialog",succMessage);
 		}

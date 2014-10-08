@@ -28,7 +28,7 @@ public interface TOFactory {
 	
 	ErrorTO createErrorTO();
 
-	SuccTO createSuccTO();
+	SuccessTO createSuccessTO();
 
 	StatoUtenteTO createStatoUtenteTO();
 

@@ -22,7 +22,7 @@ import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
-import agroludos.to.SuccTO;
+import agroludos.to.SuccessTO;
 
 public class ControllerMdcCompetizione extends AgroludosController {
 
@@ -162,7 +162,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 			//TODO
 			this.listaTabIsc.remove(this.tblIscritti.getSelectionModel().getSelectedItem());
 			this.initIscTable();
-			SuccTO succMessage = toFact.createSuccTO();
+			SuccessTO succMessage = toFact.createSuccessTO();
 			succMessage.setMessagge("Iscrizione eliminata!");
 			nav.setVista("successDialog",succMessage);
 		}
@@ -180,7 +180,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 
 		Object res = this.risposta.getRespData();
 		if(res instanceof CompetizioneTO){
-			SuccTO succMessage = toFact.createSuccTO();
+			SuccessTO succMessage = toFact.createSuccessTO();
 			succMessage.setMessagge("Competizione annullata!");
 	
 			nav.setVista("successDialog",succMessage);

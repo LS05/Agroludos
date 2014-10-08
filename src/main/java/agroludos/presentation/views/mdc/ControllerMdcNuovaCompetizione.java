@@ -22,7 +22,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoCompetizioneTO;
-import agroludos.to.SuccTO;
+import agroludos.to.SuccessTO;
 import agroludos.to.TipoCompetizioneTO;
 
 public class ControllerMdcNuovaCompetizione extends AgroludosController{
@@ -119,7 +119,7 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 		Object res = (Object)risposta.getRespData();
 		if(res instanceof CompetizioneTO){
 
-			SuccTO succMessage = toFact.createSuccTO();
+			SuccessTO succMessage = toFact.createSuccessTO();
 			succMessage.setMessagge("Competizione inserita con successo");
 			nav.setVista("successDialog",succMessage);
 			this.close();

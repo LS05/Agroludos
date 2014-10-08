@@ -1,6 +1,6 @@
 package agroludos.to;
 
-public interface SuccTO extends AgroludosTO{
+public interface SuccessTO extends AgroludosTO{
 
 		void setMessagge(String message);
 
