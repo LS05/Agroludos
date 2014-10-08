@@ -7,8 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import agroludos.presentation.views.tablemodel.CmpModel;
+import agroludos.presentation.views.components.tablemodel.CmpModel;
 import agroludos.to.CompetizioneTO;
 
 public class TableCompetizioni extends TableView<CmpModel> implements AgroTable<CmpModel>{

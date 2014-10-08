@@ -4,13 +4,12 @@ import java.util.List;
 
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
-import agroludos.presentation.views.tablemodel.CmpModel;
+import agroludos.presentation.views.components.tablemodel.CmpModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;

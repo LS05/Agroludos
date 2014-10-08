@@ -31,6 +31,7 @@ public class ControllerMdsNuovoTipoOptional extends AgroludosController{
 
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
+		
 		// TODO Auto-generated method stub
 	}
 

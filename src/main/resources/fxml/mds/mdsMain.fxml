@@ -66,7 +66,7 @@
                 <RowConstraints maxHeight="-1.0" minHeight="-1.0" prefHeight="-1.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <GridPane fx:id="paneGestioneOptional" prefHeight="-1.0" prefWidth="600.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane fx:id="paneGestioneOptional" prefHeight="-1.0" prefWidth="600.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <Button fx:id="btnNuovoTipoOptional" mnemonicParsing="false" onMouseClicked="#nuovoTipoOptionalClicked" prefHeight="25.0" prefWidth="222.0" text="%key104" GridPane.halignment="CENTER" />
                 <GridPane GridPane.columnIndex="1">
@@ -246,7 +246,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <GridPane id="paneGestioneManagerCompetizione" fx:id="paneGestioneMdC" prefHeight="-1.0" prefWidth="400.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane id="paneGestioneManagerCompetizione" fx:id="paneGestioneMdC" prefHeight="-1.0" prefWidth="400.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <GridPane id="paneDettaglioManagerCompetizione" fx:id="panInfoManCpt" GridPane.columnIndex="1">
                   <children>
@@ -332,7 +332,7 @@
                   <children>
                     <GridPane maxHeight="50.0" prefHeight="50.0">
                       <children>
-                        <Button id="btnNuovoManagerCompetizione" mnemonicParsing="false" text="%key116" textAlignment="CENTER" />
+                        <Button id="btnNuovoManagerCompetizione" mnemonicParsing="false" onMouseClicked="#nuovoManagerClicked" text="%key116" textAlignment="CENTER" />
                         <GridPane GridPane.columnIndex="1">
                           <children>
                             <Button id="btnCercaManagerCompetizione" maxWidth="300.0" mnemonicParsing="false" text="%key117" GridPane.columnIndex="1" GridPane.halignment="RIGHT">

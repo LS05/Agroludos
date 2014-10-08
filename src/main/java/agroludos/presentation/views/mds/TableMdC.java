@@ -7,8 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import agroludos.presentation.views.tablemodel.MdcModel;
+import agroludos.presentation.views.components.tablemodel.MdcModel;
 import agroludos.to.ManagerDiCompetizioneTO;
 
 public class TableMdC extends TableView<MdcModel> implements AgroTable<MdcModel>{
