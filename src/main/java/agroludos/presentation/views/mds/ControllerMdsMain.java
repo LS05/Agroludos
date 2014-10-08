@@ -419,6 +419,13 @@ public class ControllerMdsMain extends ControllerUtenti{
 				optModel.setDescrizione(optTO.getDescrizione());
 				optModel.setNomeStato(optTO.getStatoOptional().getNome());
 			}
+		} else if( commandName.equals( this.reqProperties.getProperty("inserisciOptional") )){
+			Object res = response.getRespData();
+
+			if(res instanceof OptionalTO){
+				OptionalTO optTO = (OptionalTO)res;
+				this.tableOptional.addItem(optTO);
+			}
 		}
 	}
 }
