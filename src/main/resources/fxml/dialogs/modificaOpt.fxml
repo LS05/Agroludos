@@ -11,7 +11,7 @@
   <children>
     <BorderPane prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <center>
-        <GridPane>
+        <GridPane fx:id="mainPane">
           <children>
             <Label id="labelOptional" prefHeight="63.0" prefWidth="729.0" styleClass="lbltitolo" text="%key98" GridPane.columnIndex="0" GridPane.rowIndex="0">
               <font>
@@ -26,14 +26,14 @@
                 <Insets right="10.0" />
               </GridPane.margin>
             </Button>
-            <GridPane GridPane.columnIndex="0" GridPane.rowIndex="3">
+            <GridPane GridPane.columnIndex="0" GridPane.rowIndex="4">
               <children>
-                <Label text="%key53" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                <Label prefHeight="21.0" prefWidth="272.0" text="%key24" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
                   <GridPane.margin>
                     <Insets left="10.0" top="10.0" />
                   </GridPane.margin>
                 </Label>
-                <ComboBox fx:id="cmbPrezzoOptional" prefWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                <ComboBox fx:id="cmbStatoOptional" prefWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.valignment="TOP">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -51,31 +51,6 @@
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-            <GridPane GridPane.columnIndex="0" GridPane.rowIndex="4">
-              <children>
-                <Label prefHeight="21.0" prefWidth="272.0" text="%key24" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
-                  <GridPane.margin>
-                    <Insets left="10.0" top="10.0" />
-                  </GridPane.margin>
-                </Label>
-                <ComboBox fx:id="cmbStatoOptional" prefWidth="180.0" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="0" GridPane.valignment="TOP">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="Item 1" />
-                      <String fx:value="Item 2" />
-                      <String fx:value="Item 3" />
-                    </FXCollections>
-                  </items>
-                </ComboBox>
-              </children>
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
@@ -86,14 +61,14 @@
                     <Insets left="10.0" />
                   </GridPane.margin>
                 </Label>
-                <TextField id="txtNomeTipo" fx:id="txtNomeOptional" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+                <TextField id="txtNomeTipo" fx:id="txtNomeOptional" maxWidth="-1.0" prefWidth="-1.0" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.valignment="CENTER">
                   <GridPane.margin>
                     <Insets right="10.0" />
                   </GridPane.margin>
                 </TextField>
               </children>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>

@@ -185,6 +185,9 @@
 		<from name="nuovoOpt">
 			<forward success="nuovoOpt" failure="nuovoOpt" />
 		</from>
+		<from name="modificaOpt">
+			<forward success="modificaOpt" failure="modificaOpt" />
+		</from>
 	</command>
 	<command name="modificaOptional">
 		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>

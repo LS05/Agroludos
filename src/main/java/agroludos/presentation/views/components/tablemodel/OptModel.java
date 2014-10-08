@@ -1,17 +1,14 @@
-package agroludos.presentation.views.tablemodel;
+package agroludos.presentation.views.components.tablemodel;
 
 import agroludos.to.OptionalTO;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class OptModel {
 	private SimpleStringProperty id;
 	private SimpleStringProperty nome;
 	private SimpleStringProperty descrizione;
-	private SimpleIntegerProperty tipo;
 	private SimpleStringProperty nomeTipo;
-	private SimpleIntegerProperty stato;
 	private SimpleStringProperty nomeStato;
 	private SimpleDoubleProperty costo;
 	private OptionalTO optTO;
@@ -20,9 +17,7 @@ public class OptModel {
 		this.id = new SimpleStringProperty(Integer.toString(1));
 		this.nome = new SimpleStringProperty(optTO.getNome());
 		this.descrizione = new SimpleStringProperty(optTO.getDescrizione());
-		this.tipo = new SimpleIntegerProperty(optTO.getTipoOptional().getId());
 		this.nomeTipo = new SimpleStringProperty(optTO.getTipoOptional().getNome());
-		this.stato = new SimpleIntegerProperty(optTO.getStatoOptional().getId());
 		this.nomeStato = new SimpleStringProperty(optTO.getStatoOptional().getNome());
 		this.costo = new SimpleDoubleProperty(optTO.getCosto());
 		this.optTO = optTO;
@@ -52,28 +47,12 @@ public class OptModel {
 		this.descrizione.set(descrizione);
 	}
 
-	public Integer getTipo() {
-		return this.tipo.get();
-	}
-
-	public void setTipo(Integer tipo) {
-		this.tipo.set(tipo);
-	}
-
 	public String getNomeTipo() {
 		return this.nomeTipo.get();
 	}
 
 	public void setNomeTipo(String nomeTipo) {
 		this.nomeTipo.set(nomeTipo);
-	}
-
-	public Integer getStato() {
-		return stato.get();
-	}
-
-	public void setStato(Integer stato) {
-		this.stato.set(stato);
 	}
 
 	public String getNomeStato() {
@@ -104,16 +83,8 @@ public class OptModel {
 		return this.descrizione;
 	}
 
-	public SimpleIntegerProperty tipoProperty() {
-		return this.tipo;
-	}
-
 	public SimpleStringProperty nomeTipoProperty() {
 		return this.nomeTipo;
-	}
-
-	public SimpleIntegerProperty statoProperty() {
-		return this.stato;
 	}
 
 	public SimpleStringProperty nomeStatoProperty() {
@@ -127,10 +98,8 @@ public class OptModel {
 	@Override
 	public String toString() {
 		return "OptModel [id=" + id + ", nome=" + nome + ", descrizione="
-				+ descrizione + ", tipo=" + tipo + ", nomeTipo=" + nomeTipo
-				+ ", stato=" + stato + ", nomeStato=" + nomeStato + ", costo="
+				+ descrizione + ", nomeTipo=" + nomeTipo
+				+ ", nomeStato=" + nomeStato + ", costo="
 				+ costo + ", optTO=" + optTO + "]";
 	}
-
-
 }

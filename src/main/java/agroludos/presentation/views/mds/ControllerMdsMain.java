@@ -7,7 +7,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
@@ -15,9 +14,9 @@ import javafx.scene.layout.GridPane;
 
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
-import agroludos.presentation.views.tablemodel.MdcModel;
-import agroludos.presentation.views.tablemodel.OptModel;
-import agroludos.presentation.views.tablemodel.PartModel;
+import agroludos.presentation.views.components.tablemodel.MdcModel;
+import agroludos.presentation.views.components.tablemodel.OptModel;
+import agroludos.presentation.views.components.tablemodel.PartModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
@@ -73,7 +72,6 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 	//gestione Optional
 	@FXML private GridPane paneListaTipiOpt;
-	@FXML private Button btnDisattivaOptional;
 	@FXML private GridPane paneTableOptional;
 	private TableOptional tableOptional;
 	private List<TipiAgroludosTO> listTipiOpt;
@@ -175,7 +173,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 			}
 
 		});
-		
+
 		this.tableCompetizioni = new TableCompetizioni();
 		this.paneTableCmp.getChildren().add(this.tableCompetizioni);
 		ListaViewTipi listViewComp = new ListaViewTipi(this.listTipiComp);
@@ -246,7 +244,7 @@ public class ControllerMdsMain extends ControllerUtenti{
 		AgroResponse response = respFact.createResponse();
 		frontController.eseguiRichiesta(request, response);
 	}
-	
+
 	@FXML protected void modificaOptionalClicked(MouseEvent event){
 		OptModel optModel = this.tableOptional.getSelectionModel().getSelectedItem();
 		OptionalTO optTO = optModel.getOptTO();
@@ -265,9 +263,12 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 		return res;
 	}
+	
+	@FXML protected void nuovoManagerClicked(MouseEvent event){
+		nav.setVista("nuovoMDC");
+	}
 
 	@FXML protected void modificaManagerCompetizione(MouseEvent event){
-
 		MdcModel mdcMod = this.tableManagerCompetizione.getSelectedItem();
 		ManagerDiCompetizioneTO mdcto = this.getManagerDiCompetizione(mdcMod.getUsername());
 		this.selectedMdC = this.tableManagerCompetizione.getSelectionModel().getSelectedIndex();
@@ -275,13 +276,14 @@ public class ControllerMdsMain extends ControllerUtenti{
 	}
 
 	@FXML protected void btnNuovoTipoCompetizione(MouseEvent event) {
-		
+
 	}
 
 	@FXML protected void nuovoTipoOptionalClicked(MouseEvent event) {
 		nav.setVista("nuovoTipoOpt");
 	}
 	
+
 	@FXML protected void nuovoOptClicked(MouseEvent event){
 		TipoOptionalTO tipoOpt = toFact.createTipoOptionalTO();
 		String nome = this.listViewOpt.getSelectionModel().getSelectedItem();
@@ -393,12 +395,30 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 		} else if( commandName.equals( this.reqProperties.getProperty("inserisciTipoOptional") )){
 			Object res = response.getRespData();
-			
+
 			if(res instanceof TipoOptionalTO){
 				TipoOptionalTO tipo = (TipoOptionalTO)res;
 				this.listViewOpt.addItem(tipo);
 			}
+		} else if( commandName.equals( this.reqProperties.getProperty("disattivaOptional") )){
+			Object res = response.getRespData();
 
+			if(res instanceof OptionalTO){
+				OptionalTO optTO = (OptionalTO)res;
+				OptModel optModel = this.tableOptional.getSelectedItem();
+				optModel.setNomeStato(optTO.getStatoOptional().getNome());
+			}
+		} else if( commandName.equals( this.reqProperties.getProperty("modificaOptional") )){
+			Object res = response.getRespData();
+
+			if(res instanceof OptionalTO){
+				OptionalTO optTO = (OptionalTO)res;
+				OptModel optModel = this.tableOptional.getSelectedItem();
+				optModel.setNome(optTO.getNome());
+				optModel.setCosto(optTO.getCosto());
+				optModel.setDescrizione(optTO.getDescrizione());
+				optModel.setNomeStato(optTO.getStatoOptional().getNome());
+			}
 		}
 	}
 }

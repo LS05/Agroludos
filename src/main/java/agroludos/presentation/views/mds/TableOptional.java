@@ -9,7 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
-import agroludos.presentation.views.tablemodel.OptModel;
+import agroludos.presentation.views.components.tablemodel.OptModel;
 import agroludos.to.OptionalTO;
 
 class TableOptional extends TableView<OptModel> implements AgroTable<OptModel>{
@@ -39,6 +39,7 @@ class TableOptional extends TableView<OptModel> implements AgroTable<OptModel>{
 		this.optColPrezzo.setText("Costo");
 		this.optColStato.setCellValueFactory(new PropertyValueFactory<OptModel, String>("nomeStato"));
 		this.optColStato.setText("Stato");
+                
 		this.optColStato.setCellFactory(new Callback<TableColumn<OptModel, String>, TableCell<OptModel, String>>() {
 			@Override public TableCell<OptModel, String> call(TableColumn<OptModel, String> statoColumn) {
 				return new TableCell<OptModel, String>() {
@@ -56,7 +57,9 @@ class TableOptional extends TableView<OptModel> implements AgroTable<OptModel>{
 							setText(item);
 							int index = this.getIndex();
 							OptModel optional = this.getTableView().getItems().get(index);
-							this.getStyleClass().add(optional.getStato() == 0 ? "disattivoCell" : "attivoCell");
+							OptionalTO optTO = optional.getOptTO();
+							int idStato = optTO.getStatoOptional().getId();
+							this.getStyleClass().add(idStato == 0 ? "disattivoCell" : "attivoCell");
 							this.getTableRow().getStyleClass().add("optionalRow");
 						}
 					}

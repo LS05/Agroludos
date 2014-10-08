@@ -106,7 +106,7 @@
 			<url>/fxml/partecipante/visualizzaCSRC.fxml</url>
 			<width>1000</width>
 			<height>600</height>
-			<title>Agroludos | Certificato di "Sana e Robusta Costituzione"</title>
+			<title>Agroludos | Certificato di Sana e Robusta Costituzione</title>
 		</view>
 		<view tipo="dialog">
 			<name>nuovoTipoOpt</name>
@@ -128,6 +128,13 @@
 			<width>582</width>
 			<height>438</height>
 			<title>Agroludos | Modifica Optional</title>
+		</view>
+		<view tipo="dialog">
+			<name>nuovoMDC</name>
+			<url>/fxml/mds/mdsNuovoMdc.fxml</url>
+			<width>600</width>
+			<height>400</height>
+			<title>Agroludos | Nuovo Manager di Competizione</title>
 		</view>
 	</views>
 </agro-views>
