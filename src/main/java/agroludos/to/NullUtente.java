@@ -71,23 +71,24 @@ class NullUtente implements UtenteTO{
 	}
 
 	@Override
-	public int compareTo(UtenteTO o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public TipoUtenteTO getTipoUtente() {
-		return new TipoUtente();
+		return this.tipo;
 	}
 
 	@Override
 	public StatoUtenteTO getStatoUtente() {
-		return new StatoUtente();
+		return this.stato;
 	}
 
 	@Override
 	public void setStatoUtente(StatoUtenteTO stato) {
 		this.stato = new StatoUtente();
+	}
+	
+	//TODO Due null utenti sono sempre uguali
+	@Override
+	public int compareTo(UtenteTO o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
