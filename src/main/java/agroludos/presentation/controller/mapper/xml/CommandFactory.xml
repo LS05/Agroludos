@@ -177,7 +177,7 @@
 	<command name="inserisciOptional">
 		<classe>agroludos.business.as.gestoreoptional.SOptional</classe>
 		<from name="nuovoOpt">
-			<forward success="nuovoOpt" failure="nuovoOpt" />
+			<forward success="managerDiSistema" failure="nuovoOpt" />
 		</from>
 	</command>
 	<command name="getAllStatoOptional">
