@@ -1,4 +1,4 @@
-package agroludos.presentation.views.tablemodel;
+package agroludos.presentation.views.components.tablemodel;
 
 import agroludos.to.PartecipanteTO;
 
