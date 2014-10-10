@@ -19,7 +19,7 @@ public class RuleProperties {
 		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
 		
 		if (inputStream == null) {
-			StringBuilder sb = new StringBuilder();
+			StringBuilder sb = new StringBuilder(100);
 			sb.append("File non trovato nel percorso specificato: ");
 			sb.append(path);
 			throw new FileNotFoundException(sb.toString());

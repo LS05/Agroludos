@@ -132,11 +132,11 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 		if(commandName.equals( this.reqProperties.getProperty("getAllTipoCompetizione") )){
-			Object res = (Object)response.getRespData();
+			Object res = response.getRespData();
 			if(res instanceof List<?>)
 				this.listTipiCmp = (List<TipoCompetizioneTO>)res;
 		}else if(commandName.equals( this.reqProperties.getProperty("getAllStatoCompetizione") )){
-			Object res = (Object)response.getRespData();
+			Object res = response.getRespData();
 			if(res instanceof List<?>)
 				this.listStatiCmp = (List<StatoCompetizioneTO>)res;
 		}

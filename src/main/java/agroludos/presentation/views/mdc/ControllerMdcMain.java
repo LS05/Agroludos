@@ -153,13 +153,13 @@ public class ControllerMdcMain extends ControllerUtenti{
 				nav.setVista("mostraCmp",((IscrizioneTO) res).getCompetizione());
 			}
 		}else if(request.getCommandName().equals( this.reqProperties.getProperty("inserisciCompetizione") )){
-			Object res = (Object)response.getRespData();
+			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){
 				this.listaTabCmp.clear();
 				this.initializeView(((CompetizioneTO) res).getManagerDiCompetizione());			
 			}
 		}else if(request.getCommandName().equals("modificaCompetizione")){
-			Object res = (Object)response.getRespData();
+			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){	
 				this.initializeView((CompetizioneTO)res);
 				nav.setVista("mostraCmp", (CompetizioneTO)res);	

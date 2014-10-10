@@ -35,6 +35,7 @@ import agroludos.business.as.gestoreutente.SUtente;
 import agroludos.exceptions.BusinessComponentNotFoundException;
 
 class Services {
+	private final int SBSIZE = 100;
 	private LConfigurazione lconfigurazione;
 	private SConfigurazione sconfigurazione;
 	private LUtente lutente;
@@ -219,7 +220,7 @@ class Services {
 		AgroludosService service = this.services.get(serviceName);
 		
 		if(service == null){
-			StringBuilder sb = new StringBuilder();
+			StringBuilder sb = new StringBuilder(this.SBSIZE);
 			sb.append("Gestore del servizio non trovato! Percorso errato oppure classe ASGestore non istanziata: ");
 			sb.append(serviceName);
 			throw new BusinessComponentNotFoundException(sb.toString());
