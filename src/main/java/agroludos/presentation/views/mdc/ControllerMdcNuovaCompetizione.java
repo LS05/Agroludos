@@ -27,11 +27,8 @@ import agroludos.to.TipoCompetizioneTO;
 
 public class ControllerMdcNuovaCompetizione extends AgroludosController{
 
-
 	private String viewName;
-	private List<TipoCompetizioneTO> listTipiCmp;
-	private List<StatoCompetizioneTO> listStatiCmp;
-	private CompetizioneTO cmpto;
+
 	@FXML private TextField txtNomeCmp;
 	@FXML private TextField txtDataCmp;
 	@FXML private TextField txtNminCmp;
@@ -44,50 +41,17 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 	@FXML private Button btnSelezionaOptional;
 	@FXML private Button btnAnnulla;
 	@FXML private Button btnInserisciCmp;
+	
+	private List<TipoCompetizioneTO> listTipiCmp;
+	private List<StatoCompetizioneTO> listStatiCmp;
+	private CompetizioneTO cmpto;
 	private AgroResponse risposta;
 	private AgroRequest richiesta;
-
-
-
-
-
-	@Override
-	public void initializeView(AgroludosTO mainTO) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void initializeView(String viewName) {
-		this.cmpto = toFact.createCompetizioneTO();
-		this.viewName = viewName;
-
-		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta("getAllTipoCompetizione", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-
-		ObservableList<String> listTipi = FXCollections.observableArrayList();
-		for(TipoCompetizioneTO tipoCmp: listTipiCmp){
-			listTipi.add(tipoCmp.getNome());
-		}
-		this.cmbTipoCmp.setItems(listTipi);
-		this.cmbTipoCmp.setValue(listTipi.get(0));
-
-		this.lblInserimentoOk.setVisible(false);
-		this.txtDataCmp.setText("");
-		this.txtDecimali.setText("");
-		this.txtDescrizione.setText("");
-		this.txtInteri.setText("");
-		this.txtNmaxCmp.setText("");
-		this.txtNminCmp.setText("");
-		this.txtNomeCmp.setText("");
-
-
-	}
-
+	
 	@FXML private void btnAnnulla(MouseEvent event){
 		this.close();
 	}
+	
 	@FXML private void btnSelezionaOptional(MouseEvent event){
 
 	}
@@ -125,9 +89,42 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 			this.close();
 		}
 	}
+	
+	@Override
+	public void initializeView(AgroludosTO mainTO) {
+		// TODO Auto-generated method stub
+	}
 
 	@Override
-	protected String getViewName() {
+	public void initializeView(String viewName) {
+		this.cmpto = toFact.createCompetizioneTO();
+		this.viewName = viewName;
+
+		this.risposta = respFact.createResponse();
+		this.richiesta = this.getRichiesta("getAllTipoCompetizione", this.viewName);
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+
+		ObservableList<String> listTipi = FXCollections.observableArrayList();
+		for(TipoCompetizioneTO tipoCmp: listTipiCmp){
+			listTipi.add(tipoCmp.getNome());
+		}
+		this.cmbTipoCmp.setItems(listTipi);
+		this.cmbTipoCmp.setValue(listTipi.get(0));
+
+		this.lblInserimentoOk.setVisible(false);
+		this.txtDataCmp.setText("");
+		this.txtDecimali.setText("");
+		this.txtDescrizione.setText("");
+		this.txtInteri.setText("");
+		this.txtNmaxCmp.setText("");
+		this.txtNminCmp.setText("");
+		this.txtNomeCmp.setText("");
+
+
+	}
+
+	@Override
+	public String getViewName() {
 		return this.viewName;
 	}
 

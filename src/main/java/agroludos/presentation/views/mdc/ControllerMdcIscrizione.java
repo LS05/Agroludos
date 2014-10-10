@@ -17,7 +17,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 public class ControllerMdcIscrizione extends AgroludosController {
-
+	private String viewName;
+	
 	@FXML private Label lblNomeIsc;
 	@FXML private Label lblCognomeIsc;
 	@FXML private Label lblEmailIsc;
@@ -47,10 +48,6 @@ public class ControllerMdcIscrizione extends AgroludosController {
 	@FXML private Label lblValuta2;
 	@FXML private Label lblValuta3;
 
-
-
-
-	private String viewName;
 	@FXML private Label lblEliminaIscrizioneOk;
 	@FXML private GridPane paneIscrizione;
 	private IscrizioneTO iscto;
@@ -58,6 +55,30 @@ public class ControllerMdcIscrizione extends AgroludosController {
 	private AgroResponse risposta;
 	private AgroRequest richiesta;
 
+	@FXML private void btnVisualizzaCertificato(){
+		nav.setVista("visualizzaSRC",this.iscto.getPartecipante());
+	}
+
+	@FXML protected void btnAnnullaIscrizione(){
+		//TODO
+		System.out.println("Confermi? si...");
+		this.risposta = respFact.createResponse();
+		this.richiesta = this.getRichiesta(this.iscto, "eliminaIscrizione", this.viewName);
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.close();
+		Object res = risposta.getRespData();
+		if(res instanceof IscrizioneTO){
+			nav.setVista("mostraCmp",((IscrizioneTO) res).getCompetizione());
+			SuccessTO succMessage = toFact.createSuccessTO();
+			succMessage.setMessagge("Iscrizione eliminata!");
+			nav.setVista("successDialog",succMessage);
+		}
+	}
+
+	@FXML protected void btnModificaOptionalIscrizione(MouseEvent event) {
+		//TODO
+		System.out.println("da fare");
+	}
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
@@ -124,32 +145,7 @@ public class ControllerMdcIscrizione extends AgroludosController {
 		}
 
 	}
-
-	@FXML private void btnVisualizzaCertificato(){
-		nav.setVista("visualizzaSRC",this.iscto.getPartecipante());
-	}
-
-	@FXML protected void btnAnnullaIscrizione(){
-		//TODO
-		System.out.println("Confermi? si...");
-		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(this.iscto, "eliminaIscrizione", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		this.close();
-		Object res = risposta.getRespData();
-		if(res instanceof IscrizioneTO){
-			nav.setVista("mostraCmp",((IscrizioneTO) res).getCompetizione());
-			SuccessTO succMessage = toFact.createSuccessTO();
-			succMessage.setMessagge("Iscrizione eliminata!");
-			nav.setVista("successDialog",succMessage);
-		}
-	}
-
-	@FXML protected void btnModificaOptionalIscrizione(MouseEvent event) {
-		//TODO
-		System.out.println("da fare");
-	}
-
+	
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;

@@ -65,15 +65,12 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	@FXML private Button btnAnnullaIsc;
 	@FXML private Button btnVisualizzaIsc;
 	@FXML private Label lblEliminaIsc;
-
-
+	
 	private Stage stage;
 
 	private AgroRequest richiesta;
 
 	private AgroResponse risposta;
-
-
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
@@ -196,11 +193,15 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		nav.setVista("mostraModificaCmp", this.cmpto);
 	}
 
-
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
 
+	}
+	
+	@Override
+	protected String getViewName() {
+		return this.viewName;
 	}
 
 	@Override
@@ -212,10 +213,5 @@ public class ControllerMdcCompetizione extends AgroludosController {
 				this.lblModificaOk.setVisible(true);
 			}
 		}
-	}
-	
-	@Override
-	protected String getViewName() {
-		return this.viewName;
 	}
 }

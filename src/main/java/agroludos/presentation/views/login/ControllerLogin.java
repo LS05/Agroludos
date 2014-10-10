@@ -42,6 +42,25 @@ public class ControllerLogin extends AgroludosController{
 		eseguiLogin();
 	}
 	
+	private void eseguiLogin() {	
+		UtenteTO uto = toFact.createUTO();
+		uto.setUsername(this.txtUsername.getText());
+		uto.setPassword(this.txtPassword.getText());
+		this.risposta = respFact.createResponse();
+		this.richiesta = this.getRichiesta(uto, "autenticazioneUtente", this.viewName);
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+	}
+	
+	@FXML protected void btnPswDimenticata(MouseEvent event) {
+		//TODO Gestire Servizio
+	}
+
+	@FXML protected void btnRegistrati(MouseEvent event) {
+		this.risposta = respFact.createResponse();		
+		this.richiesta = this.getRichiesta("nuovaRegistrazione", this.viewName);
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+	}
+	
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
@@ -66,24 +85,10 @@ public class ControllerLogin extends AgroludosController{
 	public void initializeView(AgroludosTO mainTO) {
 		// TODO Auto-generated method stub
 	}
-
-	protected void eseguiLogin() {	
-		UtenteTO uto = toFact.createUTO();
-		uto.setUsername(this.txtUsername.getText());
-		uto.setPassword(this.txtPassword.getText());
-		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(uto, "autenticazioneUtente", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-	}
-
-	@FXML protected void btnPswDimenticata(MouseEvent event) {
-		//TODO Gestire Servizio
-	}
-
-	@FXML protected void btnRegistrati(MouseEvent event) {
-		this.risposta = respFact.createResponse();		
-		this.richiesta = this.getRichiesta("nuovaRegistrazione", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+	
+	@Override
+	protected String getViewName() {
+		return this.viewName;
 	}
 
 	@Override
@@ -102,10 +107,5 @@ public class ControllerLogin extends AgroludosController{
 			System.out.println("errore nella creazione della sessione");
 			
 		}
-	}
-	
-	@Override
-	protected String getViewName() {
-		return this.viewName;
 	}
 }
