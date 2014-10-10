@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="selezionaOptionalPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="492.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="agroludos.presentation.views.mds.ControllerMdsNuovoTipoCompetizione">
+  <children>
+    <BorderPane prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <center>
+        <GridPane>
+          <children>
+            <Label id="labelOptional" prefHeight="63.0" prefWidth="729.0" styleClass="lbltitolo" text="%key49" GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <font>
+                <Font size="22.0" />
+              </font>
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <GridPane GridPane.columnIndex="0" GridPane.rowIndex="1">
+              <children>
+                <Label text="%key2" GridPane.columnIndex="0" GridPane.margin="$x1" GridPane.rowIndex="0" />
+                <TextField fx:id="txtNomeTipo" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                  <GridPane.margin>
+                    <Insets right="10.0" fx:id="x2" />
+                  </GridPane.margin>
+                </TextField>
+                <Label text="%key48" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <GridPane.margin>
+                    <Insets left="10.0" top="10.0" />
+                  </GridPane.margin>
+                </Label>
+                <TextArea fx:id="txtAreaDesc" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <GridPane.margin>
+                    <Insets right="10.0" fx:id="x2" />
+                  </GridPane.margin>
+                </TextArea>
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="190.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.0" minWidth="10.0" prefWidth="302.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="148.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <Button mnemonicParsing="false" onMouseClicked="#confermaNuovoTipoCompetizione" text="%key68" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.margin="$x2" GridPane.rowIndex="2" />
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="141.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </center>
+    </BorderPane>
+  </children>
+</AnchorPane>

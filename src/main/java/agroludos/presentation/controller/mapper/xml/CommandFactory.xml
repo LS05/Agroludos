@@ -195,4 +195,10 @@
 			<forward success="managerDiSistema" failure="modificaOpt" />
 		</from>
 	</command>
+	<command name="inserisciTipoCompetizione">
+		<classe>agroludos.business.as.gestoretipocompetizione.STipoCompetizione</classe>
+		<from name="nuovoTipoCpt">
+			<forward success="managerDiSistema" failure="nuovoTipoCpt" />
+		</from>
+	</command>
 </commands>
