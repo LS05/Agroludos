@@ -26,7 +26,7 @@ public class ControllerVisualizzaCRSC extends AgroludosController {
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
 		this.parTO = (PartecipanteTO)mainTO;
-		StringBuffer nomeCognome = new StringBuffer();
+		StringBuffer nomeCognome = new StringBuffer(80);
 		nomeCognome.append(parTO.getNome());
 		nomeCognome.append(" ");
 		nomeCognome.append(parTO.getCognome());

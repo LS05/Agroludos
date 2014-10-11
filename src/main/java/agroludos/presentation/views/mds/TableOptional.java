@@ -79,6 +79,11 @@ class TableOptional extends TableView<OptModel> implements AgroTable<OptModel>{
 
 		getItems().setAll(res);
 	}
+	
+	public void addItem(OptionalTO opt) {
+		OptModel optModel = new OptModel(opt);
+		this.getItems().add(optModel);
+	}
 
 	@Override
 	public int getSelectedIndex() {

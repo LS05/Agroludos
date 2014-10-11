@@ -177,7 +177,7 @@
 	<command name="inserisciOptional">
 		<classe>agroludos.business.as.gestoreoptional.SOptional</classe>
 		<from name="nuovoOpt">
-			<forward success="nuovoOpt" failure="nuovoOpt" />
+			<forward success="managerDiSistema" failure="nuovoOpt" />
 		</from>
 	</command>
 	<command name="getAllStatoOptional">
@@ -193,6 +193,12 @@
 		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
 		<from name="modificaOpt">
 			<forward success="managerDiSistema" failure="modificaOpt" />
+		</from>
+	</command>
+	<command name="inserisciTipoCompetizione">
+		<classe>agroludos.business.as.gestoretipocompetizione.STipoCompetizione</classe>
+		<from name="nuovoTipoCpt">
+			<forward success="managerDiSistema" failure="nuovoTipoCpt" />
 		</from>
 	</command>
 </commands>

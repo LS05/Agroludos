@@ -22,7 +22,7 @@ import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
-import agroludos.to.SuccTO;
+import agroludos.to.SuccessTO;
 
 public class ControllerMdcCompetizione extends AgroludosController {
 
@@ -65,15 +65,12 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	@FXML private Button btnAnnullaIsc;
 	@FXML private Button btnVisualizzaIsc;
 	@FXML private Label lblEliminaIsc;
-
-
+	
 	private Stage stage;
 
 	private AgroRequest richiesta;
 
 	private AgroResponse risposta;
-
-
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
@@ -162,7 +159,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 			//TODO
 			this.listaTabIsc.remove(this.tblIscritti.getSelectionModel().getSelectedItem());
 			this.initIscTable();
-			SuccTO succMessage = toFact.createSuccTO();
+			SuccessTO succMessage = toFact.createSuccessTO();
 			succMessage.setMessagge("Iscrizione eliminata!");
 			nav.setVista("successDialog",succMessage);
 		}
@@ -180,7 +177,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 
 		Object res = this.risposta.getRespData();
 		if(res instanceof CompetizioneTO){
-			SuccTO succMessage = toFact.createSuccTO();
+			SuccessTO succMessage = toFact.createSuccessTO();
 			succMessage.setMessagge("Competizione annullata!");
 	
 			nav.setVista("successDialog",succMessage);
@@ -196,11 +193,15 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		nav.setVista("mostraModificaCmp", this.cmpto);
 	}
 
-
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
 
+	}
+	
+	@Override
+	protected String getViewName() {
+		return this.viewName;
 	}
 
 	@Override
@@ -212,10 +213,5 @@ public class ControllerMdcCompetizione extends AgroludosController {
 				this.lblModificaOk.setVisible(true);
 			}
 		}
-	}
-	
-	@Override
-	protected String getViewName() {
-		return this.viewName;
 	}
 }

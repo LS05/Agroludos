@@ -15,6 +15,8 @@ import javafx.stage.Stage;
  */
 public class PositionHandler {
 	
+	private PositionHandler(){ }
+	
 	private static Rectangle2D getVisualBounds(){
 		return Screen.getPrimary().getVisualBounds();
 	}
@@ -33,5 +35,4 @@ public class PositionHandler {
 		stage.setX((primScreenBounds.getWidth() - p.getPrefWidth()) / 2); 
 		stage.setY((primScreenBounds.getHeight() - p.getPrefHeight()) / 2);
 	}
-
 }

@@ -83,6 +83,8 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 	private ListaViewTipi listViewOpt;
 
+	private ListaViewTipi listViewComp;
+
 	private void setDxMdCColumn(Integer selected){
 		MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
 		this.lblMdcNome.setText(selModel.getNome());
@@ -176,11 +178,11 @@ public class ControllerMdsMain extends ControllerUtenti{
 
 		this.tableCompetizioni = new TableCompetizioni();
 		this.paneTableCmp.getChildren().add(this.tableCompetizioni);
-		ListaViewTipi listViewComp = new ListaViewTipi(this.listTipiComp);
-		this.paneListaTipiComp.getChildren().add(listViewComp);
+		this.listViewComp = new ListaViewTipi(this.listTipiComp);
+		this.paneListaTipiComp.getChildren().add(this.listViewComp);
 
 
-		listViewComp.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		this.listViewComp.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {
@@ -275,8 +277,8 @@ public class ControllerMdsMain extends ControllerUtenti{
 		nav.setVista("modificaMDC", mdcto);
 	}
 
-	@FXML protected void btnNuovoTipoCompetizione(MouseEvent event) {
-
+	@FXML protected void nuovoTipoCompetizioneClicked(MouseEvent event) {
+		nav.setVista("nuovoTipoCpt");
 	}
 
 	@FXML protected void nuovoTipoOptionalClicked(MouseEvent event) {
@@ -418,6 +420,20 @@ public class ControllerMdsMain extends ControllerUtenti{
 				optModel.setCosto(optTO.getCosto());
 				optModel.setDescrizione(optTO.getDescrizione());
 				optModel.setNomeStato(optTO.getStatoOptional().getNome());
+			}
+		} else if( commandName.equals( this.reqProperties.getProperty("inserisciOptional") )){
+			Object res = response.getRespData();
+
+			if(res instanceof OptionalTO){
+				OptionalTO optTO = (OptionalTO)res;
+				this.tableOptional.addItem(optTO);
+			}
+		} else if( commandName.equals( this.reqProperties.getProperty("inserisciTipoCompetizione") )){
+			Object res = response.getRespData();
+
+			if(res instanceof TipoCompetizioneTO){
+				TipoCompetizioneTO tipo = (TipoCompetizioneTO)res;
+				this.listViewComp.addItem(tipo);
 			}
 		}
 	}

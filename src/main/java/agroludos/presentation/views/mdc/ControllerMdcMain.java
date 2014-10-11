@@ -22,7 +22,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 public class ControllerMdcMain extends ControllerUtenti{
-
+	private String viewName;
+	
 	@FXML private GridPane paneCompetizioni;
 
 	@FXML private Button btnPaneComptizioni;
@@ -44,11 +45,60 @@ public class ControllerMdcMain extends ControllerUtenti{
 	private CmpModel cmpModelRow;
 	private CompetizioneTO cmpto;
 
-	private String viewName;
-
 	private ManagerDiCompetizioneTO mdcTO;
 
+	@FXML protected void btnPaneComptizioni(MouseEvent event) {
+		this.paneCompetizioni.setVisible(true);
+	}
 
+	@FXML protected void btnNuovaCompetizione(MouseEvent event) {
+		nav.setVista("mostraNuovaCmp");
+	}
+
+	private <S,T> TableColumn<S, T> initColumn(TableColumn<S, T> col, String colName){
+		col.setCellValueFactory(new PropertyValueFactory<S, T>(colName));
+		return col;
+	}
+
+	private void initCmpTable(){
+		this.initColumn(this.cmpIdCol, "id");
+		this.initColumn(this.cmpNomeCol, "nome");
+		this.initColumn(this.cmpDataCol, "data");
+		this.initColumn(this.cmpNIscrittiCol, "niscritti");
+		this.initColumn(this.cmpNminCol, "nmin");
+		this.initColumn(this.cmpNmaxCol, "nmax");
+		this.initColumn(this.cmpTipoCol, "tipo");
+		this.initColumn(this.cmpStatoCol, "stato");
+
+		this.tableCompetizione.getItems().setAll(this.listaTabCmp);
+
+		this.tableCompetizione.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				if (event.getClickCount() > 1) {
+					System.out.println("double clicked!");
+					@SuppressWarnings("unchecked")
+					TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
+					cmpModelRow = table.getSelectionModel().getSelectedItem();
+					nav.setVista("mostraCmp", cmpModelRow.getCompetizioneTO());
+				}
+			}
+		});
+	}
+	
+	private ObservableList<CmpModel> getListTabellaCmp(){
+		ObservableList<CmpModel> res = FXCollections.observableArrayList();
+		CmpModel modelCmp = null;
+
+		for(CompetizioneTO cmp : this.listCmp){
+			modelCmp = new CmpModel(cmp);
+			res.add(modelCmp);
+		}
+
+		return res;
+	}
+	
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
@@ -87,61 +137,6 @@ public class ControllerMdcMain extends ControllerUtenti{
 		}
 	}
 
-
-
-	@FXML protected void btnPaneComptizioni(MouseEvent event) {
-		this.paneCompetizioni.setVisible(true);
-	}
-
-	@FXML protected void btnNuovaCompetizione(MouseEvent event) {
-		nav.setVista("mostraNuovaCmp");
-	}
-
-
-	private ObservableList<CmpModel> getListTabellaCmp(){
-		ObservableList<CmpModel> res = FXCollections.observableArrayList();
-		CmpModel modelCmp = null;
-
-		for(CompetizioneTO cmp : this.listCmp){
-			modelCmp = new CmpModel(cmp);
-			res.add(modelCmp);
-		}
-
-		return res;
-	}
-
-	private <S,T> TableColumn<S, T> initColumn(TableColumn<S, T> col, String colName){
-		col.setCellValueFactory(new PropertyValueFactory<S, T>(colName));
-		return col;
-	}
-
-	private void initCmpTable(){
-		this.initColumn(this.cmpIdCol, "id");
-		this.initColumn(this.cmpNomeCol, "nome");
-		this.initColumn(this.cmpDataCol, "data");
-		this.initColumn(this.cmpNIscrittiCol, "niscritti");
-		this.initColumn(this.cmpNminCol, "nmin");
-		this.initColumn(this.cmpNmaxCol, "nmax");
-		this.initColumn(this.cmpTipoCol, "tipo");
-		this.initColumn(this.cmpStatoCol, "stato");
-
-		this.tableCompetizione.getItems().setAll(this.listaTabCmp);
-
-		this.tableCompetizione.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (event.getClickCount() > 1) {
-					System.out.println("double clicked!");
-					@SuppressWarnings("unchecked")
-					TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
-					cmpModelRow = table.getSelectionModel().getSelectedItem();
-					nav.setVista("mostraCmp", cmpModelRow.getCompetizioneTO());
-				}
-			}
-		});
-	}
-
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		if(request.getCommandName().equals("annullaCompetizione")){
@@ -158,13 +153,13 @@ public class ControllerMdcMain extends ControllerUtenti{
 				nav.setVista("mostraCmp",((IscrizioneTO) res).getCompetizione());
 			}
 		}else if(request.getCommandName().equals( this.reqProperties.getProperty("inserisciCompetizione") )){
-			Object res = (Object)response.getRespData();
+			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){
 				this.listaTabCmp.clear();
 				this.initializeView(((CompetizioneTO) res).getManagerDiCompetizione());			
 			}
 		}else if(request.getCommandName().equals("modificaCompetizione")){
-			Object res = (Object)response.getRespData();
+			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){	
 				this.initializeView((CompetizioneTO)res);
 				nav.setVista("mostraCmp", (CompetizioneTO)res);	

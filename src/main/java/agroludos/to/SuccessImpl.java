@@ -1,6 +1,6 @@
 package agroludos.to;
 
-public class SuccImpl implements SuccTO{
+public class SuccessImpl implements SuccessTO{
 	private static final long serialVersionUID = 1L;
 	private String message;
 

@@ -136,5 +136,12 @@
 			<height>400</height>
 			<title>Agroludos | Nuovo Manager di Competizione</title>
 		</view>
+		<view tipo="dialog">
+			<name>nuovoTipoCpt</name>
+			<url>/fxml/mds/nuovoTipoCpt.fxml</url>
+			<width>492</width>
+			<height>374</height>
+			<title>Agroludos | Nuovo Tipo Competizione</title>
+		</view>
 	</views>
 </agro-views>

@@ -9,14 +9,14 @@ import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
-import agroludos.to.SuccTO;
+import agroludos.to.SuccessTO;
 
 public class ControllerSuccess  extends AgroludosController{
 	private String viewName;
 	
 	@FXML private Label lblSuccess;
 	@FXML private Button btnOk;
-	SuccTO mainTO;
+	SuccessTO mainTO;
 
 	@FXML protected void btnOkClicked(MouseEvent event) {	
 		this.close();
@@ -29,7 +29,7 @@ public class ControllerSuccess  extends AgroludosController{
 	}
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		this.mainTO = (SuccTO) mainTO;
+		this.mainTO = (SuccessTO) mainTO;
 		this.lblSuccess.setText(this.mainTO.getMessage());
 
 	}

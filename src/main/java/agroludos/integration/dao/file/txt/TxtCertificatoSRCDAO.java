@@ -12,13 +12,14 @@ import agroludos.integration.dao.file.CertificatoSRCDAO;
 public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 
 	@Override
+	//TODO Non dovrebbe ritornare un CertificatoTO?
 	public String getCertificato(String path) throws IOException {
 		BufferedReader br = null;
 		String certificato = "";
 
 		try{
 			br = new BufferedReader(new FileReader(path));
-			StringBuilder sb = new StringBuilder();
+			StringBuilder sb = new StringBuilder(300);
 			String line = br.readLine();
 
 			while (line != null) {

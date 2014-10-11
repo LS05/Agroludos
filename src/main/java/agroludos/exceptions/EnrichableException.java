@@ -5,6 +5,7 @@ import java.util.List;
 
 public class EnrichableException extends RuntimeException {
     public static final long serialVersionUID = -1;
+    private final int SBSIZE = 100;
 
     protected List<InfoItem> infoItems =
             new ArrayList<InfoItem>();
@@ -45,7 +46,7 @@ public class EnrichableException extends RuntimeException {
     }
 
     public String getCode(){
-        StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder(this.SBSIZE);
 
         for(int i = this.infoItems.size()-1 ; i >=0; i--){
             InfoItem info =
@@ -61,7 +62,7 @@ public class EnrichableException extends RuntimeException {
     }
 
     public String toString(){
-        StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder(this.SBSIZE);
 
         builder.append(getCode());
         builder.append('\n');

@@ -7,7 +7,6 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -29,7 +28,8 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 	private @FXML ComboBox<String> cmbStatoOptional;
 	private @FXML TextArea txtAreaDescrizione;
 	private @FXML Label lblNomeTipoOpt;
-	private @FXML GridPane mainPane;
+	private @FXML GridPane paneCostoOptional;
+	private NumberSpinner costoOptional;
 	private OptionalTO optional;
 	private List<StatoOptionalTO> listStatiOpt;
 	private AgroRequest richiesta;
@@ -37,18 +37,13 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		NumberSpinner decimalFormat = new NumberSpinner(BigDecimal.ZERO, new BigDecimal("0.05"), new DecimalFormat("#,##0.00"));
-		GridPane root = new GridPane();
-		root.setHgap(10);
-		root.setVgap(10);
-		root.setPadding(new Insets(10, 10, 10, 10));
-		Label test = new Label("Prova");
-		test.maxWidth(292);
-		root.add(test, 0, 1);
-		root.add(decimalFormat, 1, 1);
-		this.mainPane.add(root, 0, 3);
-
 		this.optional = (OptionalTO)mainTO;
+		
+		this.costoOptional = new NumberSpinner(BigDecimal.ZERO, new BigDecimal("0.05"), new DecimalFormat("#,##0.00"));
+		BigDecimal costo = BigDecimal.valueOf(this.optional.getCosto());
+		this.costoOptional.setNumber(costo);
+		this.paneCostoOptional.add(this.costoOptional, 1, 0);
+		
 		this.txtNomeOptional.setText(this.optional.getNome());
 
 		this.richiesta = this.getRichiesta("getAllStatoOptional", this.viewName);
@@ -72,8 +67,8 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 	@FXML protected void confermaModificaOptional(MouseEvent event){
 		this.optional.setNome(this.txtNomeOptional.getText());
 		this.optional.setDescrizione(this.txtAreaDescrizione.getText());
-		//		this.optional.setCosto(costo);
-
+		BigDecimal costo = this.costoOptional.getNumber();
+		this.optional.setCosto(costo.doubleValue());
 		int selectedStato = this.cmbStatoOptional.getSelectionModel().getSelectedIndex();
 		StatoOptionalTO stato = this.listStatiOpt.get(selectedStato);
 		this.optional.setStatoOptional(stato);

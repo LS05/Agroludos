@@ -44,7 +44,7 @@
         </GridPane>
         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="0">
           <children>
-            <Pane id="agrologo" fx:id="agroLogoPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Pane id="agrologo" fx:id="agroLogoPane" maxHeight="70.0" prefHeight="11.0" prefWidth="407.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <Label id="lblerrore" fx:id="lblErroreLogin" alignment="CENTER" contentDisplay="LEFT" prefHeight="67.0" prefWidth="407.0" text="Errore Login" textFill="#ff3333" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1">
               <font>
                 <Font name="System Bold" size="16.0" />

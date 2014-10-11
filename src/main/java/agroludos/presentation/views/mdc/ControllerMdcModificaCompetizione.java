@@ -16,7 +16,7 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
-import agroludos.to.SuccTO;
+import agroludos.to.SuccessTO;
 
 public class ControllerMdcModificaCompetizione extends AgroludosController{
 	private String viewName;
@@ -36,8 +36,39 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
 
-
-
+	@FXML private void btnSelezioneOpt(){
+		
+	}
+	
+	@FXML private void btnAnnulla(MouseEvent event){
+		this.close();
+	}
+	
+	@FXML private void btnConferma(MouseEvent event){
+		this.cmpto.setCosto(Double.valueOf(txtCosto.getText()));
+		this.cmpto.setData(Date.valueOf(txtData.getText()));
+		this.cmpto.setDescrizione(txtDescrizione.getText());
+		this.cmpto.setNmax(cmbNmax.getSelectionModel().getSelectedItem());
+		this.cmpto.setNmin(cmbNmin.getSelectionModel().getSelectedItem());
+		this.cmpto.setNome(txtNome.getText());
+		
+		
+		this.risposta = respFact.createResponse();
+		this.richiesta = this.getRichiesta(cmpto, "modificaCompetizione", this.viewName);
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		
+		
+		Object res = this.risposta.getRespData();
+		if(res instanceof CompetizioneTO){			
+			SuccessTO succMessage = toFact.createSuccessTO();
+			succMessage.setMessagge("Modifica avvenuta con successo!");
+			nav.setVista("successDialog",succMessage);
+		}
+		
+		this.close();
+		
+	}
+	
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
 		this.cmpto=(CompetizioneTO) mainTO;
@@ -63,45 +94,16 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		}
 		this.cmbNmax.setItems(listNmax);
 		this.cmbNmax.setValue(this.cmpto.getNmax());
-
-
 	}
-
-	@FXML private void btnSelezioneOpt(){
-		
+	
+	@Override
+	protected String getViewName() {
+		return this.viewName;
 	}
-	@FXML private void btnAnnulla(MouseEvent event){
-		this.close();
-	}
-	@FXML private void btnConferma(MouseEvent event){
-		this.cmpto.setCosto(Double.valueOf(txtCosto.getText()));
-		this.cmpto.setData(Date.valueOf(txtData.getText()));
-		this.cmpto.setDescrizione(txtDescrizione.getText());
-		this.cmpto.setNmax(cmbNmax.getSelectionModel().getSelectedItem());
-		this.cmpto.setNmin(cmbNmin.getSelectionModel().getSelectedItem());
-		this.cmpto.setNome(txtNome.getText());
-		
-		
-		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(cmpto, "modificaCompetizione", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		
-		
-		Object res = this.risposta.getRespData();
-		if(res instanceof CompetizioneTO){			
-			SuccTO succMessage = toFact.createSuccTO();
-			succMessage.setMessagge("Modifica avvenuta con successo!");
-			nav.setVista("successDialog",succMessage);
-		}
-		
-		this.close();
-		
-	}
-
+	
 	@Override
 	public void initializeView(String viewName) {
-		this.viewName = viewName;
-		
+		this.viewName = viewName;	
 	}
 
 	@Override
@@ -111,10 +113,4 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		}
 
 	}
-	
-	@Override
-	protected String getViewName() {
-		return this.viewName;
-	}
-	
 }

@@ -8,8 +8,8 @@ class TransferObjectFactory implements TOFactory {
 	}
 	
 	@Override
-	public SuccTO createSuccTO(){
-		return new SuccImpl();
+	public SuccessTO createSuccessTO(){
+		return new SuccessImpl();
 	}
 
 	@Override
