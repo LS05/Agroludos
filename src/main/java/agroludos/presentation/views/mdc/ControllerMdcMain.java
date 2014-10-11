@@ -147,8 +147,8 @@ public class ControllerMdcMain extends ControllerUtenti{
 		if(request.getCommandName().equals("annullaCompetizione")){
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){			
-				this.listaTabCmp.remove(cmpModelRow);
-				this.initCmpTable();
+				this.listaTabCmp.clear();
+				this.initializeView(((CompetizioneTO) res).getManagerDiCompetizione());
 			}
 		}else if(request.getCommandName().equals("eliminaIscrizione")){
 			Object res = response.getRespData();
