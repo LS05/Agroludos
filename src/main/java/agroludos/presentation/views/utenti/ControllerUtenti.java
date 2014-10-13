@@ -7,7 +7,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.UtenteTO;
 
 public class ControllerUtenti extends AgroludosController {
-	private String viewName;
+	protected String viewName;
 	
 	protected static UtenteTO utente;
 	
@@ -18,7 +18,6 @@ public class ControllerUtenti extends AgroludosController {
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
-		
 	}
 
 	@Override

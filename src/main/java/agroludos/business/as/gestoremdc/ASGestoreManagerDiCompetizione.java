@@ -6,7 +6,9 @@ import agroludos.business.as.AgroludosAS;
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
+import agroludos.integration.dao.db.StatoUtenteDAO;
 import agroludos.to.ManagerDiCompetizioneTO;
+import agroludos.to.StatoUtenteTO;
 
 class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCompetizione, SManagerDiCompetizione{
 
@@ -47,6 +49,10 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 	public ManagerDiCompetizioneTO eliminaManagerDiCompetizione(ManagerDiCompetizioneTO mdcto)
 			throws DatabaseException {
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
+		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		StatoUtenteDAO suDAO = dbDAOFact.getStatoUtenteDAO();
+		List<StatoUtenteTO> stati = suDAO.getAll();
+		mdcto.setStatoUtente(stati.get(0));
 		return daoMan.update(mdcto);
 	}
 }

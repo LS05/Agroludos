@@ -201,4 +201,10 @@
 			<forward success="managerDiSistema" failure="nuovoTipoCpt" />
 		</from>
 	</command>
+	<command name="eliminaManagerDiCompetizione">
+		<classe>agroludos.business.as.gestoremdc.SManagerDiCompetizione</classe>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+	</command>
 </commands>

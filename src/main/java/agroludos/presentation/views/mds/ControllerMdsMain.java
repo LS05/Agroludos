@@ -1,17 +1,19 @@
 package agroludos.presentation.views.mds;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.components.tablemodel.MdcModel;
@@ -22,13 +24,12 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.PartecipanteTO;
+import agroludos.to.SuccessTO;
 import agroludos.to.TipiAgroludosTO;
 import agroludos.to.TipoCompetizioneTO;
 import agroludos.to.TipoOptionalTO;
 
-public class ControllerMdsMain extends ControllerUtenti{
-	private String viewName;
-
+public class ControllerMdsMain extends ControllerUtenti implements Initializable{
 	//pane centrali
 	@FXML private GridPane paneGestioneCompetizioni;
 	@FXML private GridPane paneGestioneOptional;
@@ -77,14 +78,21 @@ public class ControllerMdsMain extends ControllerUtenti{
 	private List<TipiAgroludosTO> listTipiOpt;
 	private List<OptionalTO> listOpt;
 
-	private AgroRequest richiesta;
-	private AgroResponse risposta;
-	private List<String> richieste;
-
 	private ListaViewTipi listViewOpt;
 
 	private ListaViewTipi listViewComp;
+	
+	private AgroRequest richiesta;
+	private AgroResponse risposta;
+	private List<String> richieste;
+	
+	private ResourceBundle resources;
 
+	@Override
+	public void initialize(URL url, ResourceBundle res) {
+		this.resources = res;
+	}
+	
 	private void setDxMdCColumn(Integer selected){
 		MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
 		this.lblMdcNome.setText(selModel.getNome());
@@ -276,6 +284,14 @@ public class ControllerMdsMain extends ControllerUtenti{
 		this.selectedMdC = this.tableManagerCompetizione.getSelectionModel().getSelectedIndex();
 		nav.setVista("modificaMDC", mdcto);
 	}
+	
+	@FXML protected void eliminaMdCClicked(MouseEvent event){
+		MdcModel mdcMod = this.tableManagerCompetizione.getSelectedItem();
+		ManagerDiCompetizioneTO mdcto = this.getManagerDiCompetizione(mdcMod.getUsername());
+		this.richiesta = this.getRichiesta(mdcto, "eliminaManagerDiCompetizione", this.viewName);
+		this.risposta = respFact.createResponse();
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+	}
 
 	@FXML protected void nuovoTipoCompetizioneClicked(MouseEvent event) {
 		nav.setVista("nuovoTipoCpt");
@@ -284,7 +300,6 @@ public class ControllerMdsMain extends ControllerUtenti{
 	@FXML protected void nuovoTipoOptionalClicked(MouseEvent event) {
 		nav.setVista("nuovoTipoOpt");
 	}
-	
 
 	@FXML protected void nuovoOptClicked(MouseEvent event){
 		TipoOptionalTO tipoOpt = toFact.createTipoOptionalTO();
@@ -434,6 +449,16 @@ public class ControllerMdsMain extends ControllerUtenti{
 			if(res instanceof TipoCompetizioneTO){
 				TipoCompetizioneTO tipo = (TipoCompetizioneTO)res;
 				this.listViewComp.addItem(tipo);
+			}
+		} else if( commandName.equals( this.reqProperties.getProperty("eliminaManagerDiCompetizione") )){
+			Object res = response.getRespData();
+
+			if(res instanceof ManagerDiCompetizioneTO){
+				ManagerDiCompetizioneTO mdc = (ManagerDiCompetizioneTO)res;
+				this.lblMdcStato.setText(mdc.getStatoUtente().getNome());
+				SuccessTO succTO = toFact.createSuccessTO();
+				succTO.setMessagge(this.resources.getString("key130"));
+				nav.setVista("successDialog", succTO);
 			}
 		}
 	}
