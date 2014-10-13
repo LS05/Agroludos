@@ -32,5 +32,6 @@
 		<property name="stipoopt" ref="gestoreTipoOptional" />
 		<property name="ltipocmp" ref="gestoreTipoCompetizione" />
 		<property name="stipocmp" ref="gestoreTipoCompetizione" />
+		<property name="ltipoUtente" ref="gestoreTipoUtente" />
 	</bean>
 </beans>

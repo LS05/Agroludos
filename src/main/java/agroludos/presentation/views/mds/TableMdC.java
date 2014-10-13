@@ -55,4 +55,9 @@ public class TableMdC extends TableView<MdcModel> implements AgroTable<MdcModel>
 	public MdcModel getSelectedItem() {
 		return this.getSelectionModel().getSelectedItem();
 	}
+	
+	public void addItem(ManagerDiCompetizioneTO mdc){
+		MdcModel mdcMod = new MdcModel(mdc);
+		this.getItems().add(mdcMod);
+	}
 }

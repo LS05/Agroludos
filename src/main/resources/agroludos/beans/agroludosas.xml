@@ -29,6 +29,7 @@
 	<bean id="gestoreManagerCompetizione"
 		class="agroludos.business.as.gestoremdc.ASGestoreManagerDiCompetizione"
 		parent="agroludosAS">
+		<constructor-arg ref="pwdEnc" />
 	</bean>
 	<bean id="gestoreCompetizione"
 		class="agroludos.business.as.gestorecompetizione.ASGestoreCompetizione"
@@ -73,6 +74,10 @@
 	</bean>
 	<bean id="gestoreTipoOptional"
 		class="agroludos.business.as.gestoretipooptional.ASGestoreTipoOptional"
+		parent="agroludosAS">
+	</bean>
+	<bean id="gestoreTipoUtente"
+		class="agroludos.business.as.gestoretipoutente.ASGestoreTipoUtente"
 		parent="agroludosAS">
 	</bean>
 </beans>

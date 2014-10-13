@@ -17,9 +17,10 @@ class Utente implements UtenteTO{
 	public TipoUtente getTipoUtente() {
 		return tipoUtente;
 	}
-
-	public void setTipoUtente(TipoUtente tipoUtente) {
-		this.tipoUtente = tipoUtente;
+	
+	@Override
+	public void setTipoUtente(TipoUtenteTO tipoUtente) {
+		this.tipoUtente = (TipoUtente)tipoUtente;
 	}
 
 	@Override

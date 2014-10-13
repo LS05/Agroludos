@@ -460,6 +460,13 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				succTO.setMessagge(this.resources.getString("key130"));
 				nav.setVista("successDialog", succTO);
 			}
+		} else if( commandName.equals( this.reqProperties.getProperty("nuovoManagerDiCompetizione") )){
+			Object res = response.getRespData();
+
+			if(res instanceof ManagerDiCompetizioneTO){
+				ManagerDiCompetizioneTO optTO = (ManagerDiCompetizioneTO)res;
+				this.tableManagerCompetizione.addItem(optTO);
+			}
 		}
 	}
 }

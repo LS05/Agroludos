@@ -74,6 +74,11 @@ class NullUtente implements UtenteTO{
 	public TipoUtenteTO getTipoUtente() {
 		return this.tipo;
 	}
+	
+	@Override
+	public void setTipoUtente(TipoUtenteTO tipoUtente) {
+		this.tipo = new TipoUtente();
+	}
 
 	@Override
 	public StatoUtenteTO getStatoUtente() {

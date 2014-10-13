@@ -51,7 +51,7 @@ public class ControllerMdsNuovoOptional extends AgroludosController implements I
 	protected void initializeView(AgroludosTO mainTO) {
 		this.tipoOpt = (TipoOptionalTO)mainTO;
 		this.costoOptional = new NumberSpinner(BigDecimal.ZERO, new BigDecimal("0.05"), new DecimalFormat("#,##0.00"));
-		this.panePrezzoOptional.add(costoOptional, 1, 0);
+		this.panePrezzoOptional.add(this.costoOptional, 1, 0);
 		this.lblNomeTipoOpt.setText(this.tipoOpt.getNome());
 
 		this.richiesta = this.getRichiesta("getAllStatoOptional", this.viewName);

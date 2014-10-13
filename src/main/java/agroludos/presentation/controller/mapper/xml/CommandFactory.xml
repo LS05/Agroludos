@@ -39,9 +39,9 @@
 			<forward success="login" failure="configurazione" />
 		</from>
 	</command>
-	<command name="nuovoManagerDiCompetizione">
-		<classe>agroludos.business.as.gestoremds.SManagerDiCompetizione</classe>
-		<from name="managerDiSistema">
+	<command name="inserisciManagerDiCompetizione">
+		<classe>agroludos.business.as.gestoremdc.SManagerDiCompetizione</classe>
+		<from name="nuovoMDC">
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
 	</command>
@@ -161,6 +161,9 @@
 		<from name="modificaMDC">
 			<forward success="modificaMDC" failure="modificaMDC" />
 		</from>
+		<from name="nuovoMDC">
+			<forward success="nuovoMDC" failure="modificaMDC" />
+		</from>
 	</command>
 	<command name="inserisciTipoOptional">
 		<classe>agroludos.business.as.gestoretipooptional.STipoOptional</classe>
@@ -205,6 +208,12 @@
 		<classe>agroludos.business.as.gestoremdc.SManagerDiCompetizione</classe>
 		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+	</command>
+	<command name="getAllTipoUtente">
+		<classe>agroludos.business.as.gestoretipoutente.LTipoUtente</classe>
+		<from name="nuovoMDC">
+			<forward success="nuovoMDC" failure="nuovoMDC" />
 		</from>
 	</command>
 </commands>

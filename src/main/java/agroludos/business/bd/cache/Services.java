@@ -30,6 +30,7 @@ import agroludos.business.as.gestoretipocompetizione.LTipoCompetizione;
 import agroludos.business.as.gestoretipocompetizione.STipoCompetizione;
 import agroludos.business.as.gestoretipooptional.LTipoOptional;
 import agroludos.business.as.gestoretipooptional.STipoOptional;
+import agroludos.business.as.gestoretipoutente.LTipoUtente;
 import agroludos.business.as.gestoreutente.LUtente;
 import agroludos.business.as.gestoreutente.SUtente;
 import agroludos.exceptions.BusinessComponentNotFoundException;
@@ -58,22 +59,24 @@ class Services {
 	private SStatoOptional sstatoopt;
 	private LStatoUtente lstatoutente;
 	private SStatoUtente sstatoutente;
-	
 	private LTipoOptional ltipoopt;
 	private STipoOptional stipoopt;
 	private LTipoCompetizione ltipocmp;
 	private STipoCompetizione stipocmp;
+	private LTipoUtente ltipoUtente;
 	
 	private Map<String, AgroludosService> services;
 	private LOptional lopt;
 	private SOptional sopt;
 	
+	Services(){
+		this.services = new HashMap<String,  AgroludosService>();
+	}
 
 	public void setLtipoopt(LTipoOptional ltipoopt) {
 		this.ltipoopt = ltipoopt;
 		this.services.put(LTipoOptional.class.getName(), this.ltipoopt);
 	}
-
 
 	public void setStipoopt(STipoOptional stipoopt) {
 		this.stipoopt = stipoopt;
@@ -85,14 +88,9 @@ class Services {
 		this.services.put(LTipoCompetizione.class.getName(), this.ltipocmp);
 	}
 
-
 	public void setStipocmp(STipoCompetizione stipocmp) {
 		this.stipocmp = stipocmp;
 		this.services.put(STipoCompetizione.class.getName(), this.stipocmp);
-	}
-	
-	Services(){
-		this.services = new HashMap<String,  AgroludosService>();
 	}
 
 	public void setLconfigurazione(LConfigurazione conf) {
@@ -214,8 +212,12 @@ class Services {
 		this.sstatocmp = sstatocmp;
 		this.services.put(SStatoCompetizione.class.getName(), this.sstatocmp);
 	}
-	
 		
+	public void setLtipoUtente(LTipoUtente ltipoUtente) {
+		this.ltipoUtente = ltipoUtente;
+		this.services.put(LTipoUtente.class.getName(), this.ltipoUtente);
+	}
+
 	public AgroludosService getService(String serviceName) throws BusinessComponentNotFoundException{
 		AgroludosService service = this.services.get(serviceName);
 		

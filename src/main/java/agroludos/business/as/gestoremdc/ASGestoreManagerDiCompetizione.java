@@ -9,9 +9,15 @@ import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
 import agroludos.integration.dao.db.StatoUtenteDAO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoUtenteTO;
+import agroludos.utility.PasswordEncryption;
 
 class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCompetizione, SManagerDiCompetizione{
-
+	private PasswordEncryption pwdEnc;
+	
+	ASGestoreManagerDiCompetizione(PasswordEncryption pwdEnc){
+		this.pwdEnc = pwdEnc;
+	}
+	
 	private ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO() throws DatabaseException{
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return dbDAOFact.getManagerDiCompetizioneDAO();
@@ -19,10 +25,10 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 
 	@Override
 	public ManagerDiCompetizioneTO inserisciManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) throws DatabaseException {
-
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
+		String inputPassword = mdcto.getPassword();
+		mdcto.setPassword(this.pwdEnc.encryptPassword(inputPassword));
 		return daoMan.create(mdcto);
-
 	}
 
 	@Override
