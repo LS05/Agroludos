@@ -14,9 +14,9 @@
   <children>
     <BorderPane prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <top>
-        <GridPane visible="true">
+        <GridPane prefHeight="400.0" prefWidth="600.0" visible="true">
           <children>
-            <GridPane GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <GridPane GridPane.columnIndex="0" GridPane.rowIndex="1">
               <children>
                 <Label text="%key74" GridPane.columnIndex="0" GridPane.rowIndex="0">
                   <GridPane.margin>
@@ -54,7 +54,7 @@
                 <Font size="22.0" />
               </font>
             </Label>
-            <GridPane GridPane.columnIndex="0" GridPane.rowIndex="3">
+            <GridPane GridPane.columnIndex="0" GridPane.rowIndex="2">
               <children>
                 <Button fx:id="confermaModificaMDC" mnemonicParsing="false" onMouseClicked="#confermaModificaManagerDiCompetizion" text="%key68" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
               </children>
@@ -67,18 +67,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <Label fx:id="lblMessaggioModifica" alignment="CENTER" prefHeight="40.0" prefWidth="600.0" text="%key99" textFill="#41cc00" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1">
-              <font>
-                <Font name="System Bold" size="13.0" />
-              </font>
-            </Label>
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           </columnConstraints>
           <rowConstraints>
             <RowConstraints maxHeight="134.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="304.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="304.0" minHeight="10.0" prefHeight="262.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="131.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
           </rowConstraints>

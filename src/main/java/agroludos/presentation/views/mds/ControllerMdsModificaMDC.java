@@ -1,6 +1,8 @@
 package agroludos.presentation.views.mds;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
@@ -8,18 +10,19 @@ import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoUtenteTO;
-
+import agroludos.to.SuccessTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class ControllerMdsModificaMDC extends AgroludosController{
+public class ControllerMdsModificaMDC extends AgroludosController implements Initializable{
 	private String viewName;
 
 	@FXML private TextField txtUsername;
@@ -27,7 +30,6 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 	@FXML private TextField txtNome;
 	@FXML private TextField txtCognome;
 	@FXML private ComboBox<String> cmbStato;
-	@FXML private Label lblMessaggioModifica;
 
 	private List<StatoUtenteTO> listStatiUtente;
 
@@ -37,23 +39,20 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 
 	private ManagerDiCompetizioneTO mdcTO;
 
+	private ResourceBundle resources;
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		this.resources = resources;	
+	}
+
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
-		this.lblMessaggioModifica.setVisible(false);
-		Scene scene = nav.getStage(viewName).getScene();
-		scene.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				if(lblMessaggioModifica.isVisible())
-					lblMessaggioModifica.setVisible(false);
-			}
-		});
 	}
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		this.lblMessaggioModifica.setVisible(false);
 
 		this.mdcTO = (ManagerDiCompetizioneTO)mainTO;
 		this.txtUsername.setText(this.mdcTO.getUsername());
@@ -86,10 +85,9 @@ public class ControllerMdsModificaMDC extends AgroludosController{
 		this.richiesta = this.getRichiesta(mdcTO, "modificaManagerDiCompetizione", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-
-		if(this.risposta.getRespData() instanceof ManagerDiCompetizioneTO){
-			this.lblMessaggioModifica.setVisible(true);
-		}
+		SuccessTO succTO = toFact.createSuccessTO();
+		succTO.setMessagge(this.resources.getString("key99"));
+		nav.setVista("successDialog", succTO);
 	}
 
 	@Override

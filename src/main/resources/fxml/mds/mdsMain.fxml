@@ -299,7 +299,7 @@
                     </GridPane>
                     <GridPane GridPane.rowIndex="2">
                       <children>
-                        <Button id="btnModificaManagerCompetizione" mnemonicParsing="false" onMouseClicked="#modificaManagerCompetizione" text="%key93" GridPane.halignment="RIGHT">
+                        <Button id="btnModificaManagerCompetizione" mnemonicParsing="false" onMouseClicked="#modificaMdCClicked" text="%key93" GridPane.halignment="RIGHT">
                           <GridPane.margin>
                             <Insets right="5.0" />
                           </GridPane.margin>
@@ -332,7 +332,7 @@
                   <children>
                     <GridPane maxHeight="50.0" prefHeight="50.0">
                       <children>
-                        <Button id="btnNuovoManagerCompetizione" mnemonicParsing="false" onMouseClicked="#nuovoManagerClicked" text="%key116" textAlignment="CENTER" />
+                        <Button id="btnNuovoManagerCompetizione" mnemonicParsing="false" onMouseClicked="#nuovoMdCClicked" text="%key116" textAlignment="CENTER" />
                         <GridPane GridPane.columnIndex="1">
                           <children>
                             <Button id="btnCercaManagerCompetizione" maxWidth="300.0" mnemonicParsing="false" text="%key117" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
