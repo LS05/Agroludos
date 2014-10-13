@@ -81,18 +81,18 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	private ListaViewTipi listViewOpt;
 
 	private ListaViewTipi listViewComp;
-	
+
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
 	private List<String> richieste;
-	
+
 	private ResourceBundle resources;
 
 	@Override
 	public void initialize(URL url, ResourceBundle res) {
 		this.resources = res;
 	}
-	
+
 	private void setDxMdCColumn(Integer selected){
 		MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
 		this.lblMdcNome.setText(selModel.getNome());
@@ -100,6 +100,21 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.lblMdcEmail.setText(selModel.getEmail());
 		this.lblMdcUsername.setText(selModel.getUsername());
 		this.lblMdcStato.setText(selModel.getStato());
+	}
+
+	private void setDxPartColumn(int selected) {
+		PartModel selModel = this.tablePartecipanti.getItems().get(selected);
+		this.lblParNome.setText(selModel.getNome());
+		this.lblParCognome.setText(selModel.getCognome());
+		this.lblParEmail.setText(selModel.getEmail());
+		this.lblParUsername.setText(selModel.getUsername());
+		this.lblParStato.setText(selModel.getStato());
+		this.lblParDataSRC.setText(selModel.getDataSRC());
+		this.lblParCodFisc.setText(selModel.getCf());
+		this.lblParIndirizzo.setText(selModel.getIndirizzo());
+		this.lblParSesso.setText(selModel.getSesso());
+		this.lblParAnnoNasc.setText(selModel.getDataNasc());
+		this.lblParNumTessSan.setText(selModel.getNumTessera());
 	}
 
 	@SuppressWarnings("serial")
@@ -273,18 +288,18 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 		return res;
 	}
-	
-	@FXML protected void nuovoManagerClicked(MouseEvent event){
+
+	@FXML protected void nuovoMdCClicked(MouseEvent event){
 		nav.setVista("nuovoMDC");
 	}
 
-	@FXML protected void modificaManagerCompetizione(MouseEvent event){
+	@FXML protected void modificaMdCClicked(MouseEvent event){
 		MdcModel mdcMod = this.tableManagerCompetizione.getSelectedItem();
 		ManagerDiCompetizioneTO mdcto = this.getManagerDiCompetizione(mdcMod.getUsername());
 		this.selectedMdC = this.tableManagerCompetizione.getSelectionModel().getSelectedIndex();
 		nav.setVista("modificaMDC", mdcto);
 	}
-	
+
 	@FXML protected void eliminaMdCClicked(MouseEvent event){
 		MdcModel mdcMod = this.tableManagerCompetizione.getSelectedItem();
 		ManagerDiCompetizioneTO mdcto = this.getManagerDiCompetizione(mdcMod.getUsername());
@@ -313,21 +328,6 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		PartecipanteTO sPart = partModel.getPart();
 		nav.setVista("visualizzaSRC", sPart);
 	}
-
-	private void setDxPartColumn(int selected) {
-		PartModel selModel = this.tablePartecipanti.getItems().get(selected);
-		this.lblParNome.setText(selModel.getNome());
-		this.lblParCognome.setText(selModel.getCognome());
-		this.lblParEmail.setText(selModel.getEmail());
-		this.lblParUsername.setText(selModel.getUsername());
-		this.lblParStato.setText(selModel.getStato());
-		this.lblParDataSRC.setText(selModel.getDataSRC());
-		this.lblParCodFisc.setText(selModel.getCf());
-		this.lblParIndirizzo.setText(selModel.getIndirizzo());
-		this.lblParSesso.setText(selModel.getSesso());
-		this.lblParAnnoNasc.setText(selModel.getDataNasc());
-		this.lblParNumTessSan.setText(selModel.getNumTessera());
-	}	
 
 	@SuppressWarnings("unchecked")
 	@Override
