@@ -16,7 +16,7 @@
 			<key column="tipoopt" />
 			<one-to-many class="agroludos.to.Optional" />
 		</set>
-		<set name="optionalattivi" cascade="all" table="tbl_optional" where="stato = 1">
+		<set name="optionalAttivi" cascade="all" table="tbl_optional" where="stato = 1">
 			<key column="tipoopt" />
 			<one-to-many class="agroludos.to.Optional" />
 		</set>
