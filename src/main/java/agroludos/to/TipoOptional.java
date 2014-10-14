@@ -10,6 +10,7 @@ class TipoOptional implements TipoOptionalTO{
 	private String nome;
 	private Integer id;
 	private Set<Optional> optionals;
+	private Set<Optional> optionalattivi;
 	
 	TipoOptional(){
 		this.optionals = new HashSet<Optional>();
@@ -51,6 +52,25 @@ class TipoOptional implements TipoOptionalTO{
 
 	public void setOptionals(Set<Optional> optionals) {
 		this.optionals = optionals;
+	}
+	
+	@Override
+	public List<OptionalTO> getAllOptionalAttivi() {
+		List<OptionalTO> res = new ArrayList<OptionalTO>();
+
+		for(Optional item : this.optionalattivi){
+			res.add(item);
+		}
+
+		return res;
+	}
+	
+	public Set<Optional> getOptionalAttivi() {
+		return optionalattivi;
+	}
+
+	public void setOptionalAttivi(Set<Optional> optionalattivi) {
+		this.optionalattivi = optionalattivi;
 	}
 	
 	@Override

@@ -11,4 +11,6 @@ public interface TipoOptionalTO extends TipiAgroludosTO, AgroludosTO, Comparable
 	Integer getId();
 
 	List<OptionalTO> getAllOptionals();
+
+	List<OptionalTO> getAllOptionalAttivi();
 }

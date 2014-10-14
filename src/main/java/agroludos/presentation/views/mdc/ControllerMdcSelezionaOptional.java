@@ -11,6 +11,7 @@ import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.components.tablemodel.OptModel;
+import agroludos.presentation.views.table.TableOptional;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.OptionalTO;
@@ -24,6 +25,7 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 	@FXML private Label lblPassi;
 
 	//Tabella Optional
+	private TableOptional tableOptional;
 	@FXML private TableView<OptModel> tableOptionals;
 	@FXML private TableColumn<OptModel, String> clmNomeOptional;
 	@FXML private TableColumn<OptModel, String> clmDescrizioneOptional;
@@ -40,11 +42,13 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 	private AgroRequest richiesta;
 	private List<TipiAgroludosTO> listTipiOpt;
 	private int passoCorrente;
+	private List<OptionalTO> listOpt;
 
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
 		this.cmpto = (CompetizioneTO) mainTO;
-
+		this.tableOptional = new TableOptional();
+		
 		this.risposta = respFact.createResponse();
 		this.richiesta = this.getRichiesta("getAllTipoOptional", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
@@ -64,7 +68,7 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 	}
 	
 	private void setTable(TipoOptionalTO tipoOpt){
-		
+		this.tableOptional.setAll(tipoOpt.getAllOptionalAttivi());
 	}
 	
 	
@@ -85,16 +89,13 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 		String commandName = request.getCommandName();
 
 		if( commandName.equals( this.reqProperties.getProperty("getAllTipoOptional") )){
-
 			Object res = response.getRespData();
-
 			if(res instanceof List<?>){
 				List<TipiAgroludosTO> tipiOptList = (List<TipiAgroludosTO>)res;
 				this.listTipiOpt = tipiOptList;
 				this.nPassi = this.listTipiOpt.size();
 				this.passoCorrente = 1;
 			}
-
 		}
 
 	}

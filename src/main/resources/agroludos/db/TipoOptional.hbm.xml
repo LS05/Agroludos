@@ -16,6 +16,10 @@
 			<key column="tipoopt" />
 			<one-to-many class="agroludos.to.Optional" />
 		</set>
+		<set name="optionalattivi" cascade="all" table="tbl_optional" where="stato = 1">
+			<key column="tipoopt" />
+			<one-to-many class="agroludos.to.Optional" />
+		</set>
 	</class>
 	<query name="getAllTipoOptional">
         <![CDATA[ from agroludos.to.TipoOptional o ]]></query>
