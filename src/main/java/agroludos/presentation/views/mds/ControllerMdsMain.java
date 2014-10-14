@@ -328,6 +328,12 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		PartecipanteTO sPart = partModel.getPart();
 		nav.setVista("visualizzaSRC", sPart);
 	}
+	
+	@FXML protected void visualizzaIscrizioniClicked(MouseEvent event){
+		PartModel partModel = this.tablePartecipanti.getSelectionModel().getSelectedItem();
+		PartecipanteTO sPart = partModel.getPart();
+		nav.setVista("visualizzaIscrizioni", sPart);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
