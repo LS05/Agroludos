@@ -53,7 +53,7 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 	}
 	
 	@FXML private void btnSelezionaOptional(MouseEvent event){
-
+		nav.setVista("selezionaOptional", this.cmpto);
 	}
 
 	@FXML private void btnInserisciCmp(MouseEvent event){

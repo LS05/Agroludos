@@ -143,5 +143,12 @@
 			<height>374</height>
 			<title>Agroludos | Nuovo Tipo Competizione</title>
 		</view>
+		<view tipo="dialog">
+			<name>selezionaOptional</name>
+			<url>/fxml/mdc/mdcSelezionaOptional.fxml</url>
+			<width>714</width>
+			<height>576</height>
+			<title>Agroludos | Optionals</title>
+		</view>
 	</views>
 </agro-views>
