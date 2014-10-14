@@ -29,6 +29,8 @@ class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements
 		if(list.size() == 1){
 			res = list.get(0);
 		} else {
+
+			//TODO toFact è null
 			res = this.toFact.createNullUTO();
 		}
 
@@ -41,6 +43,8 @@ class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements
 		List<T> list = super.executeParamQuery(queryName, params);
 
 		if(list.size() == 0){
+			
+			//TODO toFact è null
 			res = this.toFact.createNullUTO();
 		} else {
 			res = (UtenteTO)list.get(0);

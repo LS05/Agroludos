@@ -77,7 +77,7 @@ public class ControllerLogin extends AgroludosController{
 		
 		
 		this.agroLogoPane.setFocusTraversable(true);
-		this.txtUsername.setText("agroludos");
+		this.txtUsername.setText("LucaS05");
 		this.txtPassword.setText("agroludos");
 	}
 	
