@@ -149,6 +149,11 @@
 			<width>714</width>
 			<height>576</height>
 			<title>Agroludos | Optionals</title>
+			<name>visualizzaIscrizioni</name>
+			<url>/fxml/mds/visualizzaIscrizioni.fxml</url>
+			<width>1000</width>
+			<height>600</height>
+			<title>Agroludos | Iscrizioni</title>
 		</view>
 	</views>
 </agro-views>

@@ -115,7 +115,7 @@
                 <RowConstraints maxHeight="-1.0" minHeight="10.0" prefHeight="-1.0" vgrow="ALWAYS" />
               </rowConstraints>
             </GridPane>
-            <GridPane fx:id="paneGestionePartecipanti" prefHeight="118.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane fx:id="paneGestionePartecipanti" prefHeight="118.0" prefWidth="200.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <GridPane id="" visible="true">
                   <children>
@@ -189,7 +189,7 @@
                         <Button id="" fx:id="btnMostraSRC" mnemonicParsing="false" onMouseClicked="#visualizzaCertificatoSrc" text="%key58" GridPane.columnIndex="1" GridPane.rowIndex="11" />
                         <Label font="$x2" prefHeight="46.0" prefWidth="129.0" text="%key10" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="11" />
                         <Label fx:id="lblParStato" prefHeight="50.0" prefWidth="180.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label font="$x2" text="\%key24" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                        <Label font="$x2" text="%key24" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                         <Label font="$x2" prefHeight="21.0001220703125" text="%key110" GridPane.columnIndex="0" GridPane.rowIndex="10" />
                         <Label id="lblDataSRCPartecipante" fx:id="lblParDataSRC" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                       </children>
@@ -218,7 +218,7 @@
                     <GridPane alignment="CENTER" GridPane.rowIndex="2">
                       <children>
                         <Button fx:id="btnModPart" mnemonicParsing="false" text="Modifica Dati" visible="false" GridPane.halignment="CENTER" />
-                        <Button id="btnModificaPartecipante" contentDisplay="CENTER" mnemonicParsing="false" text="%key122" textAlignment="LEFT" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+                        <Button id="" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#visualizzaIscrizioniClicked" text="%key122" textAlignment="LEFT" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -246,7 +246,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <GridPane id="paneGestioneManagerCompetizione" fx:id="paneGestioneMdC" prefHeight="-1.0" prefWidth="400.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane id="paneGestioneManagerCompetizione" fx:id="paneGestioneMdC" prefHeight="-1.0" prefWidth="400.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <GridPane id="paneDettaglioManagerCompetizione" fx:id="panInfoManCpt" GridPane.columnIndex="1">
                   <children>
