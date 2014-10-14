@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<agro-views xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="views.xsd">
+<agro-views xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="views.xsd">
 	<views>
 		<view tipo="controlView">
 			<name>initView</name>
@@ -149,6 +150,8 @@
 			<width>714</width>
 			<height>576</height>
 			<title>Agroludos | Optionals</title>
+		</view>
+		<view tipo="dialog">
 			<name>visualizzaIscrizioni</name>
 			<url>/fxml/mds/visualizzaIscrizioni.fxml</url>
 			<width>1000</width>
