@@ -74,6 +74,7 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 
 		this.cmpto.setStatoCompetizione(this.listStatiCmp.get(1));
 
+		//TODO rivedere metodo statico (sostituire con richiesta?)
 		this.cmpto.setManagerDiCompetizione((ManagerDiCompetizioneTO) ControllerUtenti.getUtente());
 
 		this.risposta = respFact.createResponse();

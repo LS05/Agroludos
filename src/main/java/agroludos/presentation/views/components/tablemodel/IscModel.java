@@ -3,7 +3,9 @@ package agroludos.presentation.views.components.tablemodel;
 import java.util.Date;
 
 import javafx.beans.property.SimpleStringProperty;
+import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
+import agroludos.to.ManagerDiCompetizioneTO;
 
 public class IscModel {
 	private SimpleStringProperty id;
@@ -13,6 +15,8 @@ public class IscModel {
 	private SimpleStringProperty data;
 	private SimpleStringProperty stato;
 	private SimpleStringProperty competizione;
+	private SimpleStringProperty tipo;
+	private SimpleStringProperty manager;
 	private IscrizioneTO iscto;
 
 	public IscModel(IscrizioneTO iscto){
@@ -22,8 +26,34 @@ public class IscModel {
 		this.email =  new SimpleStringProperty(iscto.getPartecipante().getEmail());
 		this.data =  new SimpleStringProperty(iscto.getData().toString());
 		this.stato =  new SimpleStringProperty(iscto.getStatoIscrizione().getNome());
+		
+		CompetizioneTO competizione = iscto.getCompetizione();
+		this.tipo = new SimpleStringProperty(competizione.getTipoCompetizione().getNome());
 		this.competizione = new SimpleStringProperty(iscto.getCompetizione().getNome());
+		
+		ManagerDiCompetizioneTO man = iscto.getCompetizione().getManagerDiCompetizione();
+		StringBuilder sb = new StringBuilder(100);
+		sb.append(man.getNome());
+		sb.append(" ");
+		sb.append(man.getCognome());
+		this.manager = new SimpleStringProperty(sb.toString());
 		this.iscto = iscto;
+	}
+	
+	public String getTipo() {
+		return tipo.get();
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo.set(tipo);
+	}
+
+	public String getManager() {
+		return manager.get();
+	}
+
+	public void setManager(String manager) {
+		this.manager.set(manager);
 	}
 
 	public String getCompetizione() {
@@ -114,10 +144,19 @@ public class IscModel {
 		return this.data;
 	}
 	
+	public SimpleStringProperty managerProperty(){
+		return this.manager;
+	}
+	
+	public SimpleStringProperty tipoProperty(){
+		return this.tipo;
+	}
+
 	@Override
 	public String toString() {
 		return "[id=" + id + ", nome=" + nome + ", cognome=" + cognome
 				+ ", email=" + email + ", data=" + data + ", stato=" + stato
-				+ ", competizione=" + competizione + ", iscto=" + iscto + "]";
+				+ ", competizione=" + competizione + ", tipo=" + tipo
+				+ ", manager=" + manager + ", iscto=" + iscto + "]";
 	}
 }
