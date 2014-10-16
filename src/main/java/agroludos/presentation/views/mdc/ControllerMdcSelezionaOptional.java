@@ -5,12 +5,11 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
-import agroludos.presentation.views.components.tablemodel.OptModel;
 import agroludos.presentation.views.table.TableOptional;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
@@ -26,10 +25,7 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 
 	//Tabella Optional
 	private TableOptional tableOptional;
-	@FXML private TableView<OptModel> tableOptionals;
-	@FXML private TableColumn<OptModel, String> clmNomeOptional;
-	@FXML private TableColumn<OptModel, String> clmDescrizioneOptional;
-	@FXML private TableColumn<OptModel, String> clmPrezzoOptional;
+	@FXML private GridPane paneTableOptional;
 
 	@FXML private Button btnSalta;
 	@FXML private Button btnIndietro;
@@ -47,7 +43,6 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
 		this.cmpto = (CompetizioneTO) mainTO;
-		this.tableOptional = new TableOptional();
 		
 		this.risposta = respFact.createResponse();
 		this.richiesta = this.getRichiesta("getAllTipoOptional", this.viewName);
@@ -59,6 +54,11 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 		this.btnIndietro.setVisible(true);
 		this.btnIndietro.setVisible(true);
 		this.lblTipoOptional.setText(this.listTipiOpt.get(this.passoCorrente-1).getNome());
+		
+		
+		this.tableOptional = new TableOptional();
+		this.paneTableOptional.getChildren().add(this.tableOptional);
+		this.paneTableOptional.setVisible(true);		
 		
 		this.setTable((TipoOptionalTO) this.listTipiOpt.get(this.passoCorrente-1));
 	}
@@ -72,12 +72,26 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 	}
 	
 	
+	@FXML protected void btnSalta(MouseEvent event) {
+
+	}
+	@FXML protected void btnIndietro(MouseEvent event) {
+
+	}
+	@FXML protected void btnAvanti(MouseEvent event) {
+
+	}
+	@FXML protected void btnConferma(MouseEvent event) {
+
+	}
+	
+	
+	
 	@Override
 	protected void initializeView(String viewName) {
 		this.viewName = viewName;
 
 	}
-
 
 	@Override
 	public String getViewName() {
