@@ -219,4 +219,10 @@
 			<forward success="nuovoMDC" failure="nuovoMDC" />
 		</from>
 	</command>
+	<command name="getCompetizioniAttive">
+		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
+		<from name="partecipante">
+			<forward success="partecipante" failure="partecipante" />
+		</from>
+	</command>
 </commands>

@@ -49,7 +49,7 @@
 			<column name="tipocomp" not-null="true" />
 		</many-to-one>
 		<many-to-one name="managerDiCompetizione" cascade="all"
-			class="agroludos.to.Utente">
+			class="agroludos.to.ManagerDiCompetizione">
 			<column name="idmdc" not-null="true" />
 		</many-to-one>
 
@@ -71,5 +71,7 @@
         <![CDATA[ from agroludos.to.Competizione c where c.managerDiCompetizione = ?]]></query>
 	<query name="annullaCompetizione">
         <![CDATA[ update agroludos.to.Competizione set statocomp = 0]]></query>
+	<query name="getCompetizioniAttive">
+        <![CDATA[ from agroludos.to.Competizione c where statocomp = 1]]></query>
 
 </hibernate-mapping>

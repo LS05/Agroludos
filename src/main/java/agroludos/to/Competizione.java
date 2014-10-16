@@ -32,6 +32,13 @@ class Competizione implements CompetizioneTO{
 	private Double costo;
 	private int idStato;
 	
+	private Set<Optional> optionals;
+	private Set<Partecipante> iscritti;
+	private Set<Iscrizione> iscrizioni;
+	private TipoCompetizione tipoCompetizione;
+	private StatoCompetizione statoCompetizione;
+	private ManagerDiCompetizione managerDiCompetizione;
+	
 	@Override
 	public int getIdStato() {
 		return idStato;
@@ -41,13 +48,6 @@ class Competizione implements CompetizioneTO{
 		this.idStato = idStato;
 	}
 
-	private Set<Optional> optionals;
-	private Set<Partecipante> iscritti;
-	private Set<Iscrizione> iscrizioni;
-	private TipoCompetizione tipoCompetizione;
-	private StatoCompetizione statoCompetizione;
-	private ManagerDiCompetizione managerDiCompetizione;
-
 	private Set<Iscrizione> iscrizioniAttive;
 	
 	@Override
@@ -55,8 +55,8 @@ class Competizione implements CompetizioneTO{
 		return managerDiCompetizione;
 	}
 
-	public void setManagerDiCompetizione(ManagerDiCompetizione managerDiCompetizione) {
-		this.managerDiCompetizione = managerDiCompetizione;
+	public void setManagerDiCompetizione(ManagerDiCompetizione mdc) {
+		this.managerDiCompetizione = mdc;
 	}
 	
 	@Override

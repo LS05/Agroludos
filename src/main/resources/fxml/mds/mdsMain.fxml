@@ -122,7 +122,7 @@
                     <GridPane maxHeight="50.0" prefHeight="50.0">
                       <children>
                         <Button id="" mnemonicParsing="false" text="%key114" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
-                        <TextField id="txtCercaPartecipante" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <TextField id="txtCercaPartecipante" fx:id="txtCercaPart" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="74.0" prefWidth="-1.0" />

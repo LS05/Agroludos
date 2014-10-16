@@ -52,15 +52,8 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 	}
 
 	@Override
-	public List<CompetizioneTO> readCompetizioniAttive() throws DatabaseException {
-		List<Integer> param = new ArrayList<Integer>();
-		param.add(1);
-
-		List<CompetizioneTO> list = super.executeParamQuery("getCompetizioniAttive", param);
-
-
-
-		return list;
+	public List<CompetizioneTO> readCompetizioniAttive() throws DatabaseException { 
+		return super.executeQuery("getCompetizioniAttive");
 	}
 
 	@Override
