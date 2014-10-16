@@ -81,7 +81,8 @@ public class ControllerMdcMain extends ControllerUtenti{
 					@SuppressWarnings("unchecked")
 					TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
 					cmpModelRow = table.getSelectionModel().getSelectedItem();
-					nav.setVista("mostraCmp", cmpModelRow.getCompetizioneTO());
+					if(cmpModelRow != null)
+						nav.setVista("mostraCmp", cmpModelRow.getCompetizioneTO());
 				}
 			}
 		});

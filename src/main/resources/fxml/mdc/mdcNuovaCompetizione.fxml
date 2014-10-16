@@ -65,6 +65,27 @@
                     <Insets top="20.0" />
                   </GridPane.margin>
                 </GridPane>
+                <GridPane GridPane.columnIndex="0" GridPane.rowIndex="1">
+                  <children>
+                    <TextArea fx:id="txtDescrizione" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                      <GridPane.margin>
+                        <Insets right="10.0" fx:id="x3" />
+                      </GridPane.margin>
+                    </TextArea>
+                    <Label font="$x1" text="%key48" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                      <GridPane.margin>
+                        <Insets left="10.0" fx:id="x2" />
+                      </GridPane.margin>
+                    </Label>
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="200.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="601.0" minWidth="10.0" prefWidth="600.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
                 <GridPane GridPane.rowIndex="2">
                   <children>
                     <GridPane>
@@ -184,7 +205,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       </rowConstraints>
                     </GridPane>
-                    <Button id="bntSelezionaOptional" fx:id="btnSelezionaOptional" mnemonicParsing="false" onMouseClicked="#btnSelezionaOptional" prefHeight="26.0" prefWidth="362.0" text="%key67" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                    <Button fx:id="btnSelezionaOptional" mnemonicParsing="false" onMouseClicked="#btnSelezionaOptional" prefWidth="354.0" text="%key137" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
                       <GridPane.margin>
                         <Insets right="10.0" fx:id="x3" />
                       </GridPane.margin>
@@ -193,23 +214,6 @@
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                </GridPane>
-                <GridPane GridPane.columnIndex="0" GridPane.rowIndex="1">
-                  <children>
-                    <TextArea fx:id="txtDescrizione" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.margin="$x3" GridPane.rowIndex="0" />
-                    <Label font="$x1" text="%key48" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                      <GridPane.margin>
-                        <Insets left="10.0" fx:id="x2" />
-                      </GridPane.margin>
-                    </Label>
-                  </children>
-                  <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="200.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="601.0" minWidth="10.0" prefWidth="600.0" />
                   </columnConstraints>
                   <rowConstraints>
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

@@ -15,7 +15,7 @@ public class TableMdC extends TableView<MdcModel> implements AgroTable<MdcModel>
 	private TableColumn<MdcModel, String> mdcCognomeCol;
 	private TableColumn<MdcModel, String> mdcEmailCol;
 
-	TableMdC(List<ManagerDiCompetizioneTO> listComp){
+	public TableMdC(List<ManagerDiCompetizioneTO> listComp){
 
 		this.mdcNomeCol = new TableColumn<MdcModel, String>();
 		this.mdcCognomeCol = new TableColumn<MdcModel, String>();

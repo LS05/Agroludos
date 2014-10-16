@@ -133,14 +133,7 @@ class Competizione implements CompetizioneTO{
 
 	@Override
 	public void addOptional(OptionalTO optional) {
-
-		//TODO Effettuare controlli prima di aggiungere l'optional
-		Optional opt = new Optional();
-		opt.setId(optional.getId());
-		opt.setCosto(optional.getCosto());
-		opt.setDescrizione(optional.getDescrizione());
-		opt.setNome(optional.getNome());
-		this.optionals.add(opt);
+		this.optionals.add((Optional) optional);
 	}
 
 	@Override

@@ -63,10 +63,4 @@ public class TableIscrizioni extends TableView<IscModel> implements AgroTable<Is
 		getItems().setAll(res);
 
 	}
-
-	@Override
-	public void updateTable(String text) {
-		// TODO Auto-generated method stub
-		
-	}
 }

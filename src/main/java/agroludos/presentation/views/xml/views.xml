@@ -147,7 +147,7 @@
 		<view tipo="dialog">
 			<name>selezionaOptional</name>
 			<url>/fxml/mdc/mdcSelezionaOptional.fxml</url>
-			<width>714</width>
+			<width>1080</width>
 			<height>576</height>
 			<title>Agroludos | Optionals</title>
 		</view>
