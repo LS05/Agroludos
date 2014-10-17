@@ -43,32 +43,32 @@ public class TableOptional extends TableView<OptModel> implements AgroTable<OptM
 		this.optColStato.setCellValueFactory(new PropertyValueFactory<OptModel, String>("nomeStato"));
 		this.optColStato.setText("Stato");
                 
-		this.optColStato.setCellFactory(new Callback<TableColumn<OptModel, String>, TableCell<OptModel, String>>() {
-			@Override public TableCell<OptModel, String> call(TableColumn<OptModel, String> statoColumn) {
-				return new TableCell<OptModel, String>() {
-					@Override public void updateItem(final String item, final boolean empty) {
-						super.updateItem(item, empty);
-
-						// clear any custom styles
-
-						this.getStyleClass().remove("disattivoCell");
-						this.getStyleClass().remove("attivoCell");
-						this.getTableRow().getStyleClass().remove("optionalRow");
-
-						// update the item and set a custom style if necessary
-						if (item != null) {
-							setText(item);
-							int index = this.getIndex();
-							OptModel optional = this.getTableView().getItems().get(index);
-							OptionalTO optTO = optional.getOptTO();
-							int idStato = optTO.getStatoOptional().getId();
-							this.getStyleClass().add(idStato == 0 ? "disattivoCell" : "attivoCell");
-							this.getTableRow().getStyleClass().add("optionalRow");
-						}
-					}
-				};
-			}
-		});
+//		this.optColStato.setCellFactory(new Callback<TableColumn<OptModel, String>, TableCell<OptModel, String>>() {
+//			@Override public TableCell<OptModel, String> call(TableColumn<OptModel, String> statoColumn) {
+//				return new TableCell<OptModel, String>() {
+//					@Override public void updateItem(final String item, final boolean empty) {
+//						super.updateItem(item, empty);
+//
+//						// clear any custom styles
+//
+//						this.getStyleClass().remove("disattivoCell");
+//						this.getStyleClass().remove("attivoCell");
+//						this.getTableRow().getStyleClass().remove("optionalRow");
+//
+//						// update the item and set a custom style if necessary
+//						if (item != null) {
+//							setText(item);
+//							int index = this.getIndex();
+//							OptModel optional = this.getTableView().getItems().get(index);
+//							OptionalTO optTO = optional.getOptTO();
+//							int idStato = optTO.getStatoOptional().getId();
+//							this.getStyleClass().add(idStato == 0 ? "disattivoCell" : "attivoCell");
+//							this.getTableRow().getStyleClass().add("optionalRow");
+//						}
+//					}
+//				};
+//			}
+//		});
 	}
 
 	public void setAll(List<OptionalTO> listComp){
