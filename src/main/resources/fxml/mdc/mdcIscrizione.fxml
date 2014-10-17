@@ -39,61 +39,12 @@
                   <children>
                     <GridPane prefHeight="218.0" prefWidth="1000.0" GridPane.rowIndex="1">
                       <children>
-                        <GridPane prefHeight="67.0" prefWidth="1000.0" GridPane.rowIndex="1">
+                        <GridPane>
                           <children>
-                            <Label fx:id="lblCostolblOptional1" text="€ 20" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
+                            <Label contentDisplay="RIGHT" prefHeight="40.0" prefWidth="5000.0" styleClass="lbltitolo" text="%key12">
                               <font>
                                 <Font name="System Bold" size="16.0" fx:id="x2" />
                               </font>
-                              <textFill>
-                                <Color blue="0.541" green="0.533" red="0.529" fx:id="x3" />
-                              </textFill>
-                              <GridPane.margin>
-                                <Insets right="10.0" fx:id="x4" />
-                              </GridPane.margin>
-                            </Label>
-                            <Label id="lblTipoOptional" fx:id="lblTipoOptional1" text="Questo è il tipo dell'optional 1">
-                              <font>
-                                <Font name="System Bold" size="13.0" fx:id="x1" />
-                              </font>
-                              <GridPane.margin>
-                                <Insets left="10.0" fx:id="x5" />
-                              </GridPane.margin>
-                            </Label>
-                            <Label fx:id="lblTipoOptional2" font="$x1" text="Questo è il tipo dell'optional 2" GridPane.rowIndex="1">
-                              <GridPane.margin>
-                                <Insets left="10.0" fx:id="x5" />
-                              </GridPane.margin>
-                            </Label>
-                            <Label fx:id="lblCostolblOptional2" font="$x2" text="€ 20" textFill="$x3" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.margin="$x4" GridPane.rowIndex="1" />
-                            <Label fx:id="lblTipoOptional3" font="$x1" prefHeight="52.0" prefWidth="214.0" text="Questo è il tipo dell'optional 3" GridPane.rowIndex="2">
-                              <GridPane.margin>
-                                <Insets left="10.0" fx:id="x5" />
-                              </GridPane.margin>
-                            </Label>
-                            <Label fx:id="lblCostolblOptional3" font="$x2" text="€ 20" textFill="$x3" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.margin="$x4" GridPane.rowIndex="2" />
-                            <Label fx:id="lblValuta1" text="%key94" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
-                            <Label fx:id="lblValuta2" text="%key94" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                            <Label fx:id="lblValuta3" text="%key94" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                            <Label id="lblTipoOptional" fx:id="lblOptional1" font="$x1" text="Questo è il nome dell'optional 1" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                            <Label id="lblTipoOptional" fx:id="lblOptional2" font="$x1" text="Questo è il nome dell'optional 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                            <Label id="lblTipoOptional" fx:id="lblOptional3" font="$x1" text="Questo è il nome dell'optional 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                          </children>
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="635.0" minWidth="10.0" prefWidth="217.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="553.0" minWidth="10.0" prefWidth="446.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="553.0" minWidth="10.0" prefWidth="62.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="553.0" minWidth="10.0" prefWidth="75.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                        </GridPane>
-                        <GridPane>
-                          <children>
-                            <Label contentDisplay="RIGHT" font="$x2" prefHeight="40.0" prefWidth="5000.0" styleClass="lbltitolo" text="%key12">
                               <GridPane.margin>
                                 <Insets left="10.0" fx:id="x5" />
                               </GridPane.margin>
@@ -101,6 +52,14 @@
                           </children>
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                        <GridPane id="paneOptionalScelti" fx:id="paneTableOptionalScelti" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -119,7 +78,10 @@
                       <children>
                         <GridPane prefHeight="230.0" prefWidth="510.0">
                           <children>
-                            <Label id="lblNomeIsc" font="$x1" text="%key2">
+                            <Label id="lblNomeIsc" text="%key2">
+                              <font>
+                                <Font name="System Bold" size="13.0" fx:id="x1" />
+                              </font>
                               <GridPane.margin>
                                 <Insets left="10.0" fx:id="x5" />
                               </GridPane.margin>
@@ -134,7 +96,11 @@
                                 <Insets left="10.0" fx:id="x5" />
                               </GridPane.margin>
                             </Label>
-                            <Label fx:id="lblNomeIsc" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.margin="$x4" />
+                            <Label fx:id="lblNomeIsc" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                              <GridPane.margin>
+                                <Insets right="10.0" fx:id="x4" />
+                              </GridPane.margin>
+                            </Label>
                             <Label fx:id="lblCognomeIsc" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.margin="$x4" GridPane.rowIndex="1" />
                             <Label fx:id="lblEmailIsc" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.margin="$x4" GridPane.rowIndex="2" />
                             <Label font="$x1" text="%key11" GridPane.rowIndex="3">

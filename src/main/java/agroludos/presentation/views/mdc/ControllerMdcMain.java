@@ -21,6 +21,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class ControllerMdcMain extends ControllerUtenti{
 	private String viewName;
@@ -158,8 +159,11 @@ public class ControllerMdcMain extends ControllerUtenti{
 			if(res instanceof IscrizioneTO){
 				this.listaTabCmp.clear();
 				this.initializeView(((IscrizioneTO) res).getCompetizione().getManagerDiCompetizione());
-				nav.setVista("mostraCmp",((IscrizioneTO) res).getCompetizione());
 				
+				nav.closeVista("mostraIscrizione");
+				
+				nav.setVista("mostraCmp",((IscrizioneTO) res).getCompetizione());
+		
 				SuccessTO succMessage = toFact.createSuccessTO();
 				succMessage.setMessagge("Iscrizione eliminata!");
 				nav.setVista("successDialog",succMessage);

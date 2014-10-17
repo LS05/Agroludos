@@ -55,7 +55,7 @@
                             </Label>
                             <Label fx:id="lblNmin" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.margin="$x7" GridPane.rowIndex="1" />
                             <Label fx:id="lblNmax" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.margin="$x7" GridPane.rowIndex="2" />
-                            <Label font="$x2" text="%key32" GridPane.margin="$x3" GridPane.rowIndex="4" />
+                            <Label font="$x2" text="%key140" wrapText="true" GridPane.margin="$x3" GridPane.rowIndex="4" />
                             <Label font="$x1" text="%key30" GridPane.columnIndex="0" GridPane.rowIndex="1">
                               <GridPane.margin>
                                 <Insets left="10.0" fx:id="x3" />
