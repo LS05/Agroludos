@@ -59,9 +59,18 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 		this.cmpto = (CompetizioneTO) mainTO;
 
 		this.optionalScelti = FXCollections.observableArrayList();
-		this.listViewOptional.setItems(this.optionalScelti);
-
 		this.listOptScelti = new ArrayList<OptionalTO>();
+		
+		if(!this.cmpto.getAllOptionals().isEmpty()){
+			this.listOptScelti = this.cmpto.getAllOptionals();
+			for(OptionalTO opt: this.listOptScelti){
+				this.optionalScelti.add("[" + opt.getTipoOptional().getNome() +
+				" - " + opt.getCosto() + "] " + opt.getNome());
+			}
+		}
+		
+		this.listViewOptional.setItems(this.optionalScelti);
+		
 
 		this.risposta = respFact.createResponse();
 		this.richiesta = this.getRichiesta("getAllTipoOptional", this.viewName);
@@ -169,6 +178,7 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 	@FXML protected void btnConferma(MouseEvent event) {
 
 		//TODO aggiungere tutti gli optional scelti
+		this.cmpto.clearOptionals();
 		for (OptionalTO opt: this.listOptScelti)
 			this.cmpto.addOptional(opt);
 		this.close();

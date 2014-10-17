@@ -32,7 +32,8 @@ public class ControllerMdcCompetizione extends AgroludosController {
 
 	@FXML private GridPane paneVisualizzaCmp;
 	@FXML private GridPane paneIscritti;
-
+	@FXML private GridPane paneTableOptional;
+	
 	//tabella iscrizioni alla competizione
 	@FXML private TableView<IscModel> tblIscritti;
 	@FXML private TableColumn<IscModel, String> iscNomeCol;

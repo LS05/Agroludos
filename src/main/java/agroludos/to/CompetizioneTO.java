@@ -126,6 +126,12 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	void addOptional(OptionalTO optional);
 
 	/**
+	 * Rimuove tutti gli optional associati ad una competizione
+	 * 
+	 */
+	void clearOptionals();
+	
+	/**
 	 * Ritorna la lista dei partecipanti attualmente iscritti a questa competizione.
 	 * 
 	 * @return Una {@code List} di partecipanti iscritti alla competizione.

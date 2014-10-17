@@ -175,6 +175,10 @@ class Competizione implements CompetizioneTO{
 		return res;
 	}
 
+	public void clearOptionals(){
+		this.optionals.clear();
+	}
+	
 	@Override
 	public List<PartecipanteTO> getAllIscritti() {
 		List<PartecipanteTO> res = new ArrayList<PartecipanteTO>();
