@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import agroludos.presentation.req.AgroRequest;
@@ -19,6 +20,11 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.components.tablemodel.MdcModel;
 import agroludos.presentation.views.components.tablemodel.OptModel;
 import agroludos.presentation.views.components.tablemodel.PartModel;
+import agroludos.presentation.views.table.AgroTable;
+import agroludos.presentation.views.table.TableCompetizioni;
+import agroludos.presentation.views.table.TableMdC;
+import agroludos.presentation.views.table.TableOptional;
+import agroludos.presentation.views.table.TablePartecipanti;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
@@ -57,6 +63,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	//gestione partecipanti
 	@FXML private GridPane paneTablePart;
 	@FXML private TablePartecipanti tablePartecipanti;
+	@FXML private TextField txtCercaPart;
 	@FXML private Label lblParNome;
 	@FXML private Label lblParCognome;
 	@FXML private Label lblParUsername;
@@ -172,8 +179,6 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 				});
 
-		//		this.initPartTable();
-
 		this.tableOptional = new TableOptional();
 		this.paneTableOptional.getChildren().add(this.tableOptional);
 		this.paneTableOptional.setVisible(true);
@@ -222,6 +227,17 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			}
 
 		});
+	}
+	
+	private <T> void initSearch(final TextField searchField, final AgroTable<T> table){
+		searchField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable,
+                    String oldValue, String newValue) {
+
+                table.updateTable(searchField.getText());
+            }
+        });
 	}
 
 	private void initRequests(){

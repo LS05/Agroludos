@@ -16,7 +16,7 @@ public class TablePartecipanti extends TableView<PartModel> implements AgroTable
 	private TableColumn<PartModel, String> partColEmail;
 	private TableColumn<PartModel, String> partColUsername;
 
-	TablePartecipanti(List<PartecipanteTO> listComp){
+	public TablePartecipanti(List<PartecipanteTO> listComp){
 		this.partColNome = new TableColumn<PartModel, String>("nome");
 		this.partColCognome = new TableColumn<PartModel, String>("cognome");
 		this.partColEmail = new TableColumn<PartModel, String>("email");
@@ -53,5 +53,11 @@ public class TablePartecipanti extends TableView<PartModel> implements AgroTable
 	@Override
 	public PartModel getSelectedItem() {
 		return this.getSelectionModel().getSelectedItem();
+	}
+
+	@Override
+	public void updateTable(String text) {
+		// TODO Auto-generated method stub
+		
 	}
 }

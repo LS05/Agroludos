@@ -9,6 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
+
 import agroludos.presentation.views.components.tablemodel.OptModel;
 import agroludos.to.OptionalTO;
 
@@ -17,6 +18,8 @@ public class TableOptional extends TableView<OptModel> implements AgroTable<OptM
 	private TableColumn<OptModel, String> optColDesc;
 	private TableColumn<OptModel, String> optColPrezzo;
 	private TableColumn<OptModel, String> optColStato;
+	private ObservableList<OptModel> mainData;
+	private ObservableList<OptModel> filteredData;
 
 	public TableOptional(){
 		this.optColNome = new TableColumn<OptModel, String>("nome");
@@ -69,15 +72,16 @@ public class TableOptional extends TableView<OptModel> implements AgroTable<OptM
 	}
 
 	public void setAll(List<OptionalTO> listComp){
-		ObservableList<OptModel> res = FXCollections.observableArrayList();
+		this.mainData = FXCollections.observableArrayList();
+		this.filteredData = FXCollections.observableArrayList();
 		OptModel partModel = null;
 
 		for(OptionalTO optional : listComp){
 			partModel = new OptModel(optional);
-			res.add(partModel);
+			this.mainData.add(partModel);
 		}
 
-		getItems().setAll(res);
+		getItems().setAll(this.mainData);
 	}
 	
 	public void addItem(OptionalTO opt) {
@@ -93,5 +97,11 @@ public class TableOptional extends TableView<OptModel> implements AgroTable<OptM
 	@Override
 	public OptModel getSelectedItem() {
 		return this.getSelectionModel().getSelectedItem();
+	}
+
+	@Override
+	public void updateTable(String text) {
+		// TODO Auto-generated method stub
+		
 	}
 }

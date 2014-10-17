@@ -15,7 +15,7 @@ public class TableMdC extends TableView<MdcModel> implements AgroTable<MdcModel>
 	private TableColumn<MdcModel, String> mdcCognomeCol;
 	private TableColumn<MdcModel, String> mdcEmailCol;
 
-	TableMdC(List<ManagerDiCompetizioneTO> listComp){
+	public TableMdC(List<ManagerDiCompetizioneTO> listComp){
 
 		this.mdcNomeCol = new TableColumn<MdcModel, String>();
 		this.mdcCognomeCol = new TableColumn<MdcModel, String>();
@@ -59,5 +59,10 @@ public class TableMdC extends TableView<MdcModel> implements AgroTable<MdcModel>
 	public void addItem(ManagerDiCompetizioneTO mdc){
 		MdcModel mdcMod = new MdcModel(mdc);
 		this.getItems().add(mdcMod);
+	}
+
+	@Override
+	public void updateTable(String text) {
+		// TODO Auto-generated method stub
 	}
 }

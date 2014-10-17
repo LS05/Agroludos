@@ -16,7 +16,7 @@ public class TableCompetizioni extends TableView<CmpModel> implements AgroTable<
 	private TableColumn<CmpModel, String> cmpColCosto;
 	private TableColumn<CmpModel, String> cmpColStato;
 
-	TableCompetizioni(){
+	public TableCompetizioni(){
 		this.cmpColNome = new TableColumn<CmpModel, String>("nome");
 		this.cmpColDesc = new TableColumn<CmpModel, String>("descrizione");
 		this.cmpColCosto = new TableColumn<CmpModel, String>("costo");
@@ -57,5 +57,11 @@ public class TableCompetizioni extends TableView<CmpModel> implements AgroTable<
 
 		getItems().setAll(res);
 
+	}
+
+	@Override
+	public void updateTable(String text) {
+		// TODO Auto-generated method stub
+		
 	}
 }
