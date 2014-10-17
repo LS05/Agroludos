@@ -37,7 +37,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 	private AgroResponse risposta;
 
 	@FXML private void btnSelezioneOpt(){
-		
+		nav.setVista("selezionaOptional", this.cmpto);
 	}
 	
 	@FXML private void btnAnnulla(MouseEvent event){

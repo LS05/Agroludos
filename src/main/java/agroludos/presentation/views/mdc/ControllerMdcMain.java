@@ -10,6 +10,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
+import agroludos.to.SuccessTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -77,7 +78,6 @@ public class ControllerMdcMain extends ControllerUtenti{
 			@Override
 			public void handle(MouseEvent event) {
 				if (event.getClickCount() > 1) {
-					System.out.println("double clicked!");
 					@SuppressWarnings("unchecked")
 					TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
 					cmpModelRow = table.getSelectionModel().getSelectedItem();
@@ -145,6 +145,13 @@ public class ControllerMdcMain extends ControllerUtenti{
 			if(res instanceof CompetizioneTO){			
 				this.listaTabCmp.clear();
 				this.initializeView(((CompetizioneTO) res).getManagerDiCompetizione());
+				
+				nav.getStage("mostraCmp").close();
+				
+				SuccessTO succMessage = toFact.createSuccessTO();
+				succMessage.setMessagge("Competizione annullata!");
+
+				nav.setVista("successDialog",succMessage);
 			}
 		}else if(request.getCommandName().equals("eliminaIscrizione")){
 			Object res = response.getRespData();
@@ -152,6 +159,10 @@ public class ControllerMdcMain extends ControllerUtenti{
 				this.listaTabCmp.clear();
 				this.initializeView(((IscrizioneTO) res).getCompetizione().getManagerDiCompetizione());
 				nav.setVista("mostraCmp",((IscrizioneTO) res).getCompetizione());
+				
+				SuccessTO succMessage = toFact.createSuccessTO();
+				succMessage.setMessagge("Iscrizione eliminata!");
+				nav.setVista("successDialog",succMessage);
 			}
 		}else if(request.getCommandName().equals( this.reqProperties.getProperty("inserisciCompetizione") )){
 			Object res = response.getRespData();

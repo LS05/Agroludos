@@ -174,7 +174,8 @@ class Competizione implements CompetizioneTO{
 
 		return res;
 	}
-
+	
+	@Override
 	public void clearOptionals(){
 		this.optionals.clear();
 	}

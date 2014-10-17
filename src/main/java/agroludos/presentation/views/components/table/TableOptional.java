@@ -1,4 +1,4 @@
-package agroludos.presentation.views.table;
+package agroludos.presentation.views.components.table;
 
 import java.util.List;
 
@@ -9,14 +9,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
-
 import agroludos.presentation.views.components.tablemodel.OptModel;
 import agroludos.to.OptionalTO;
 
-public class TableOptional extends TableView<OptModel> implements AgroTable<OptModel>{
+public class TableOptional extends AgroTable<OptModel>{
 	private TableColumn<OptModel, String> optColNome;
 	private TableColumn<OptModel, String> optColDesc;
 	private TableColumn<OptModel, String> optColPrezzo;
+	private TableColumn<OptModel, String> optColTipo;
 	private TableColumn<OptModel, String> optColStato;
 	private ObservableList<OptModel> mainData;
 	private ObservableList<OptModel> filteredData;
@@ -25,11 +25,13 @@ public class TableOptional extends TableView<OptModel> implements AgroTable<OptM
 		this.optColNome = new TableColumn<OptModel, String>("nome");
 		this.optColDesc = new TableColumn<OptModel, String>("descrizione");
 		this.optColPrezzo = new TableColumn<OptModel, String>("costo");
+		this.optColTipo = new TableColumn<OptModel, String>("nomeTipo");
 		this.optColStato = new TableColumn<OptModel, String>("nomeStato");
-
+		
 		this.getColumns().add(this.optColNome);
 		this.getColumns().add(this.optColDesc);
 		this.getColumns().add(this.optColPrezzo);
+		this.getColumns().add(this.optColTipo);
 		this.getColumns().add(this.optColStato);
 		
 		this.setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY);
@@ -40,6 +42,8 @@ public class TableOptional extends TableView<OptModel> implements AgroTable<OptM
 		this.optColDesc.setText("Descrizione");
 		this.optColPrezzo.setCellValueFactory(new PropertyValueFactory<OptModel, String>("costo"));
 		this.optColPrezzo.setText("Costo");
+		this.optColTipo.setCellValueFactory(new PropertyValueFactory<OptModel, String>("nomeTipo"));
+		this.optColTipo.setText("Tipo");
 		this.optColStato.setCellValueFactory(new PropertyValueFactory<OptModel, String>("nomeStato"));
 		this.optColStato.setText("Stato");
                 
@@ -104,4 +108,5 @@ public class TableOptional extends TableView<OptModel> implements AgroTable<OptM
 		// TODO Auto-generated method stub
 		
 	}
+
 }
