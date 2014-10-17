@@ -54,4 +54,10 @@ public class TablePartecipanti extends TableView<PartModel> implements AgroTable
 	public PartModel getSelectedItem() {
 		return this.getSelectionModel().getSelectedItem();
 	}
+
+	@Override
+	public void updateTable(String text) {
+		// TODO Auto-generated method stub
+		
+	}
 }
