@@ -10,16 +10,37 @@ public abstract class AgroTable<T> extends TableView<T>{
 	abstract T getSelectedItem();
 
 	abstract void updateTable(String text);
-	
+
 	public void hideColumn(String name){
-		this.getTableColumnByName(name).setVisible(false);
+		TableColumn<T, ?> col = this.getTableColumnByName(name);
+		if(col != null)
+			col.setVisible(false);
 	}
-	
+
 	private TableColumn<T, ?> getTableColumnByName(String name) {
-		TableColumn<T, ?> resCol=null;
-		for (TableColumn<T, ?> col : this.getColumns())
-	        if (col.getText().equals(name)) resCol = col ;
-	    return resCol ;
+		TableColumn<T, ?> resCol = null;
+		for (TableColumn<T, ?> col : this.getColumns()){
+			if (col.getText().equals(name)) 
+				resCol = col;
+		}
+		return resCol ;
 	}
-	
+
+	public void hideColumn(Integer index){
+		TableColumn<T, ?> col = this.getTableColumnByIndex(index);
+		if(col != null)
+			col.setVisible(false);
+	}
+
+	private TableColumn<T, ?> getTableColumnByIndex(Integer index) {
+		TableColumn<T, ?> resCol = null;
+		
+		try{
+			resCol = this.getColumns().get(index);
+		} catch(IndexOutOfBoundsException e){
+			resCol = null;
+		}
+
+		return resCol;
+	}
 }
