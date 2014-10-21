@@ -89,10 +89,13 @@
                             <Insets />
                           </GridPane.margin>
                         </Button>
-                        <Label text="%key139" GridPane.margin="$x3" GridPane.rowIndex="1">
+                        <Label text="%key141" GridPane.rowIndex="1">
                           <font>
                             <Font name="System Bold" size="24.0" fx:id="x4" />
                           </font>
+                          <GridPane.margin>
+                            <Insets left="10.0" />
+                          </GridPane.margin>
                         </Label>
                         <Label fx:id="lblCostoTot" font="$x4" text="€ 0" textFill="#18ad18" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                           <GridPane.margin>
