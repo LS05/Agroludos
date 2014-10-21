@@ -4,14 +4,16 @@ import java.util.List;
 
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
+import agroludos.presentation.views.components.tablemodel.CmpModel;
 import agroludos.presentation.views.table.TableCompetizioni;
 import agroludos.presentation.views.table.TableIscrizioni;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.PartecipanteTO;
-
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
@@ -22,6 +24,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti{
 	@FXML private GridPane paneIscrizioni;
 	@FXML private Button btnGestManComp; 
 	@FXML private Button btnGestIscrizioni;
+	@FXML private Button btnSelezionaOpt;
 	private TableIscrizioni tableIscrizioni;
 	private TableCompetizioni tableCompetizioni;
 
@@ -31,6 +34,8 @@ public class ControllerPartecipanteMain extends ControllerUtenti{
 	private AgroResponse risposta;
 
 	private List<CompetizioneTO> listComp;
+	
+	private CmpModel cmpModelRow;
 
 	@Override
 	public void initializeView(String viewName) {
@@ -52,6 +57,20 @@ public class ControllerPartecipanteMain extends ControllerUtenti{
 
 		this.paneCompetizioni.setVisible(true);
 		this.paneIscrizioni.setVisible(false);
+		
+		this.tableCompetizioni.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			
+			@SuppressWarnings("unchecked")
+			@Override
+			public void handle(MouseEvent event) {
+				if (event.getClickCount() > 1) {
+					TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
+					cmpModelRow = table.getSelectionModel().getSelectedItem();
+					if(cmpModelRow != null)
+						nav.setVista("mostraCompPart", cmpModelRow.getCompetizioneTO());
+				}
+			}
+		});
 	}
 
 	@FXML protected void btnGestComp(MouseEvent event) {

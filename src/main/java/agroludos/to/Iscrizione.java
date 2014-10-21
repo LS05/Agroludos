@@ -2,6 +2,7 @@ package agroludos.to;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -15,6 +16,10 @@ class Iscrizione implements IscrizioneTO{
 	private Set<Optional> optionals;
 	private StatoIscrizione statoIscrizione;
 
+	Iscrizione(){
+		this.optionals = new HashSet<Optional>();
+	}
+	
 	@Override
 	public StatoIscrizione getStatoIscrizione() {
 		return statoIscrizione;
@@ -67,8 +72,17 @@ class Iscrizione implements IscrizioneTO{
 		return optionals;
 	}
 	
-	public void setOptionals(Set<Optional> optionals) {
-		this.optionals = optionals;
+	@Override
+	public void setOptionals(Set<OptionalTO> optionals) {
+		for(OptionalTO opt : optionals){
+			this.optionals.add((Optional)opt);
+		}
+	}
+	
+	@Override
+	public void addOptional(OptionalTO optional) {
+		Optional o = (Optional)optional;		
+		this.optionals.add(o);
 	}
 	
 	@Override
@@ -76,8 +90,9 @@ class Iscrizione implements IscrizioneTO{
 		return this.partecipante;
 	}
 	
-	public void setPartecipante(Partecipante partecipante) {
-		this.partecipante = partecipante;
+	@Override
+	public void setPartecipante(UtenteTO partecipante) {
+		this.partecipante = (Partecipante)partecipante;
 	}
 	
 	@Override
@@ -85,20 +100,24 @@ class Iscrizione implements IscrizioneTO{
 		return this.competizione;
 	}
 	
-	public void setCompetizione(Competizione competizione) {
-		this.competizione = competizione;
+	@Override
+	public void setCompetizione(CompetizioneTO competizione) {
+		this.competizione = (Competizione) competizione;
 	}
 	
-
+	@Override
+	public void clearOptionals(){
+		this.optionals.clear();
+	}
+	
+	@Override
+	public void setStatoIscrizione(StatoIscrizioneTO statoIscrizione) {
+		this.statoIscrizione = (StatoIscrizione) statoIscrizione;
+	}
+	
 	@Override
 	public int compareTo(IscrizioneTO o) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public void setStatoIscrizione(StatoIscrizioneTO statoIscrizione) {
-		this.statoIscrizione = (StatoIscrizione) statoIscrizione;
-		
 	}
 }

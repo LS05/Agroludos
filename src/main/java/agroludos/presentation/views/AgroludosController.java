@@ -11,6 +11,7 @@ import java.util.Properties;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.to.AgroludosTO;
+import agroludos.to.UtenteTO;
 
 /**
  * 
@@ -18,7 +19,13 @@ import agroludos.to.AgroludosTO;
  * @author Francesco Zagaria
  *
  */
-public abstract class AgroludosController extends Controller{	
+public abstract class AgroludosController extends Controller{
+	
+	protected static UtenteTO utente;
+	
+	public static UtenteTO getUtente(){
+		return utente;
+	}
 
 	protected Properties reqProperties;
 

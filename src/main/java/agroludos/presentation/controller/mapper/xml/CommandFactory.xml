@@ -131,6 +131,9 @@
 		<from name="selezionaOptional">
 			<forward success="selezionaOptional" failure="selezionaOptional" />
 		</from>
+		<from name="selezionaOptionalPart">
+			<forward success="selezionaOptionalPart" failure="selezionaOptionalPart" />
+		</from>
 	</command>
 	<command name="getOptionalByTipo">
 		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
@@ -223,6 +226,12 @@
 		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
 		<from name="partecipante">
 			<forward success="partecipante" failure="partecipante" />
+		</from>
+	</command>
+	<command name="inserisciIscrizione">
+		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
+		<from name="mostraCompPart">
+			<forward success="partecipante" failure="mostraCompPart" />
 		</from>
 	</command>
 </commands>

@@ -91,7 +91,7 @@ public class TableOptional extends TableView<OptModel> implements AgroTable<OptM
 
 	@Override
 	public int getSelectedIndex() {
-		return this.getSelectedIndex();
+		return this.getSelectionModel().getSelectedIndex();
 	}
 
 	@Override

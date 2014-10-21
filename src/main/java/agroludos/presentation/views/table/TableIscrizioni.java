@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.IscrizioneTO;
 
@@ -62,5 +61,11 @@ public class TableIscrizioni extends TableView<IscModel> implements AgroTable<Is
 
 		getItems().setAll(res);
 
+	}
+
+	@Override
+	public void updateTable(String text) {
+
+		// TODO Auto-generated method stub	
 	}
 }

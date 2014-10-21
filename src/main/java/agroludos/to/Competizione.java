@@ -38,17 +38,21 @@ class Competizione implements CompetizioneTO{
 	private TipoCompetizione tipoCompetizione;
 	private StatoCompetizione statoCompetizione;
 	private ManagerDiCompetizione managerDiCompetizione;
+	private Set<Iscrizione> iscrizioniAttive;
+	
+	Competizione(){
+		this.optionals = new HashSet<Optional>();
+	}
 	
 	@Override
 	public int getIdStato() {
 		return idStato;
 	}
+	
 	@Override
 	public void setIdStato(int idStato) {
 		this.idStato = idStato;
 	}
-
-	private Set<Iscrizione> iscrizioniAttive;
 	
 	@Override
 	public ManagerDiCompetizione getManagerDiCompetizione() {
@@ -68,6 +72,7 @@ class Competizione implements CompetizioneTO{
 	public void setTipoCompetizione(TipoCompetizioneTO tipoCompetizione) {
 		this.tipoCompetizione = (TipoCompetizione) tipoCompetizione;
 	}
+	
 	@Override
 	public StatoCompetizione getStatoCompetizione() {
 		return statoCompetizione;
@@ -77,12 +82,6 @@ class Competizione implements CompetizioneTO{
 	public void setStatoCompetizione(StatoCompetizioneTO statoCompetizione) {
 		this.statoCompetizione = (StatoCompetizione) statoCompetizione;
 	}
-
-	
-	Competizione(){
-		this.optionals = new HashSet<Optional>();
-	}
-
 
 	@Override
 	public String getNome() {
@@ -104,7 +103,6 @@ class Competizione implements CompetizioneTO{
 		this.suppData = new DateTime(data).withTimeAtStartOfDay();
 		this.data = data;
 	}
-
 
 	@Override
 	public String getDescrizione() {
@@ -175,6 +173,7 @@ class Competizione implements CompetizioneTO{
 		return res;
 	}
 
+	@Override
 	public void clearOptionals(){
 		this.optionals.clear();
 	}
@@ -300,16 +299,19 @@ class Competizione implements CompetizioneTO{
 	
 	@Override
 	public String toString() {
-		return "Competizione [id=" + id + ", nome=" + nome + ", suppData="
-				+ suppData + ", data=" + data + ", nmin=" + nmin + ", nmax="
-				+ nmax + ", descrizione=" + descrizione + ", costo=" + costo
-				+ ", optionals=" + optionals + ", iscritti=" + iscritti
-				+ ", iscrizioni=" + iscrizioni + ", tipoCompetizione="
-				+ tipoCompetizione + ", statoCompetizione=" + statoCompetizione
-				+ ", managerDiCompetizione=" + managerDiCompetizione + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("[id=").append(id).append(", nome=").append(nome)
+				.append(", data=").append(data).append(", nmin=").append(nmin)
+				.append(", nmax=").append(nmax).append(", descrizione=")
+				.append(descrizione).append(", costo=").append(costo)
+				.append(", optionals=").append(optionals).append(", iscritti=")
+				.append(iscritti).append(", iscrizioni=").append(iscrizioni)
+				.append(", tipoCompetizione=").append(tipoCompetizione)
+				.append(", statoCompetizione=").append(statoCompetizione)
+				.append(", managerDiCompetizione=")
+				.append(managerDiCompetizione).append(", iscrizioniAttive=")
+				.append(iscrizioniAttive).append("]");
+		return builder.toString();
 	}
-
-
-
 
 }

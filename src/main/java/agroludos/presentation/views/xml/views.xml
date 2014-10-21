@@ -158,5 +158,19 @@
 			<height>600</height>
 			<title>Agroludos | Iscrizioni</title>
 		</view>
+		<view tipo="dialog">
+			<name>mostraCompPart</name>
+			<url>/fxml/partecipante/partIscrizione.fxml</url>
+			<width>837</width>
+			<height>525</height>
+			<title>Agroludos | Iscrizione</title>
+		</view>
+		<view tipo="dialog">
+			<name>selezionaOptionalPart</name>
+			<url>/fxml/partecipante/partSelezionaOptional.fxml</url>
+			<width>1080</width>
+			<height>576</height>
+			<title>Agroludos | Optionals</title>
+		</view>
 	</views>
 </agro-views>

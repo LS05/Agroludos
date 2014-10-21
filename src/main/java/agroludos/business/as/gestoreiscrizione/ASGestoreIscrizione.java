@@ -1,5 +1,6 @@
 package agroludos.business.as.gestoreiscrizione;
 
+import java.util.Date;
 import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
@@ -12,38 +13,56 @@ import agroludos.to.StatoIscrizioneTO;
 
 class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizione{
 
+	private DBDAOFactory getDBDaoFactory() throws DatabaseException{
+		return this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+	}
+
 	private IscrizioneDAO getIscrizioneDAO() throws DatabaseException {
-		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		DBDAOFactory dbDAOFact = this.getDBDaoFactory();
 		return dbDAOFact.getIscrizioneDAO();
 	}
 
-	@Override
-	public IscrizioneTO inserisciIscrizione(IscrizioneTO iscto)
-			throws DatabaseException {
-
-		IscrizioneDAO iscDAO = getIscrizioneDAO();
-		return iscDAO.create(iscto);
+	private StatoIscrizioneDAO getStatoIscrizioneDAO() throws DatabaseException{
+		DBDAOFactory dbDAOFact = this.getDBDaoFactory();
+		return dbDAOFact.getStatoIscrizioneDAO();
 	}
 
 	@Override
-	public IscrizioneTO modificaIscrizione(IscrizioneTO iscto)
+	public IscrizioneTO inserisciIscrizione(IscrizioneTO iscTO)
 			throws DatabaseException {
+
 		IscrizioneDAO iscDAO = getIscrizioneDAO();
-		return iscDAO.update(iscto);
+
+		StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
+		StatoIscrizioneTO siTO = statoIscDAO.getAll().get(0);
+
+		iscTO.setStatoIscrizione(siTO);
+
+		Date date = new Date();
+		iscTO.setData(date);
+
+		return iscDAO.create(iscTO);
 	}
 
 	@Override
-	public IscrizioneTO eliminaIscrizione(IscrizioneTO iscto)
+	public IscrizioneTO modificaIscrizione(IscrizioneTO iscTO)
 			throws DatabaseException {
-		
-
-		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		IscrizioneDAO iscDAO = getIscrizioneDAO();
-		StatoIscrizioneDAO daoScmp = dbDAOFact.getStatoIscrizioneDAO();
-		StatoIscrizioneTO sito = daoScmp.getAll().get(0);
-		iscto.setStatoIscrizione(sito);
-		
-		return iscDAO.annullaIscrizione(iscto);
+		return iscDAO.update(iscTO);
+	}
+
+	@Override
+	public IscrizioneTO eliminaIscrizione(IscrizioneTO iscTO)
+			throws DatabaseException {
+
+		IscrizioneDAO iscDAO = getIscrizioneDAO();
+
+		StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
+		StatoIscrizioneTO siTO = statoIscDAO.getAll().get(0);
+
+		iscTO.setStatoIscrizione(siTO);
+
+		return iscDAO.annullaIscrizione(iscTO);
 	}
 
 	@Override
