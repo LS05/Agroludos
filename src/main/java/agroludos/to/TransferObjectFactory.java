@@ -81,4 +81,10 @@ class TransferObjectFactory implements TOFactory {
 	public ErrorTO createErrorTO() {
 		return new ErrorImpl();
 	}
+	
+	@Override
+	public QuestionTO createQuestionTO() {
+		return new Question();
+	}
+	
 }

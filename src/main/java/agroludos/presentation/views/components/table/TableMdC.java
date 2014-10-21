@@ -1,4 +1,4 @@
-package agroludos.presentation.views.table;
+package agroludos.presentation.views.components.table;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import agroludos.presentation.views.components.tablemodel.MdcModel;
 import agroludos.to.ManagerDiCompetizioneTO;
 
-public class TableMdC extends TableView<MdcModel> implements AgroTable<MdcModel>{
+public class TableMdC extends AgroTable<MdcModel>{
 	private TableColumn<MdcModel, String> mdcNomeCol;
 	private TableColumn<MdcModel, String> mdcCognomeCol;
 	private TableColumn<MdcModel, String> mdcEmailCol;

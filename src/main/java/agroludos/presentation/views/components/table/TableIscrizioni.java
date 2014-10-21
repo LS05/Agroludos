@@ -1,4 +1,4 @@
-package agroludos.presentation.views.table;
+package agroludos.presentation.views.components.table;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.IscrizioneTO;
 
-public class TableIscrizioni extends TableView<IscModel> implements AgroTable<IscModel>{
+public class TableIscrizioni extends AgroTable<IscModel>{
 	private TableColumn<IscModel, String> iscColNome;
 	private TableColumn<IscModel, String> iscColData;
 	private TableColumn<IscModel, String> iscColTipo;

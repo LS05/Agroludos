@@ -7,21 +7,17 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
-import agroludos.presentation.views.components.tablemodel.CmpModel;
+import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.presentation.views.components.tablemodel.OptModel;
-import agroludos.presentation.views.components.tablemodel.PartModel;
-import agroludos.presentation.views.table.TableOptional;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.OptionalTO;
@@ -112,6 +108,9 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 
 				});
 
+		this.tableOptional.hideColumn("Stato");
+		this.tableOptional.hideColumn("Tipo");
+		
 	}
 
 	private void setLabelDialog(){

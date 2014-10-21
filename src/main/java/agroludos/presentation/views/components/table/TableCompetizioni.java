@@ -1,4 +1,4 @@
-package agroludos.presentation.views.table;
+package agroludos.presentation.views.components.table;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import agroludos.presentation.views.components.tablemodel.CmpModel;
 import agroludos.to.CompetizioneTO;
 
-public class TableCompetizioni extends TableView<CmpModel> implements AgroTable<CmpModel>{
+public class TableCompetizioni extends AgroTable<CmpModel>{
 	private TableColumn<CmpModel, String> cmpColNome;
 	private TableColumn<CmpModel, String> cmpColDesc;
 	private TableColumn<CmpModel, String> cmpColCosto;

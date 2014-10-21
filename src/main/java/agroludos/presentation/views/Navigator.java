@@ -81,11 +81,12 @@ public class Navigator {
 
 	public void closeVista(String viewName) {
 		AgroludosWindow agw = this.viewsCache.getView(viewName);
-		if(agw.isMainView()){
-			System.out.println("termina programma");
+		if(agw != null){
+			if(agw.isMainView()){
+				System.out.println("termina programma");
+			}
+			this.getStage(viewName).close();	
 		}
-		this.getStage(viewName).close();	
 	}
-
 }
 

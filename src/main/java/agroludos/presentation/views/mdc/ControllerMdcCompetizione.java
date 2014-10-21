@@ -18,22 +18,28 @@ import javafx.stage.Stage;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
+import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
+import agroludos.to.OptionalTO;
+import agroludos.to.QuestionTO;
 import agroludos.to.SuccessTO;
+import agroludos.to.TipiAgroludosTO;
 
 public class ControllerMdcCompetizione extends AgroludosController {
 
 	private String viewName;
-	
+
 	private CompetizioneTO cmpto;
 
 	@FXML private GridPane paneVisualizzaCmp;
 	@FXML private GridPane paneIscritti;
 	@FXML private GridPane paneTableOptional;
-	
+	private TableOptional tableOptional;
+	private List<OptionalTO> listOpt;
+
 	//tabella iscrizioni alla competizione
 	@FXML private TableView<IscModel> tblIscritti;
 	@FXML private TableColumn<IscModel, String> iscNomeCol;
@@ -66,7 +72,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	@FXML private Button btnAnnullaIsc;
 	@FXML private Button btnVisualizzaIsc;
 	@FXML private Label lblEliminaIsc;
-	
+
 	private Stage stage;
 
 	private AgroRequest richiesta;
@@ -103,6 +109,14 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.listaTabIsc = this.getListTabellaIsc();
 		this.initIscTable();
 
+		this.tableOptional = new TableOptional();
+		this.paneTableOptional.getChildren().add(this.tableOptional);
+		this.paneTableOptional.setVisible(true);
+		this.tableOptional.setAll(this.cmpto.getAllOptionals());
+
+		this.tableOptional.hideColumn("Stato");
+		this.tableOptional.hideColumn("Descrizione");
+
 	}
 
 	private ObservableList<IscModel> getListTabellaIsc(){
@@ -133,14 +147,14 @@ public class ControllerMdcCompetizione extends AgroludosController {
 
 			@Override
 			public void handle(MouseEvent event) {
-				if (event.getClickCount() > 1) {
-					System.out.println("double clicked!");
-					@SuppressWarnings("unchecked")
-					TableView<IscModel> table = (TableView<IscModel>) event.getSource();
-					iscModelRow = table.getSelectionModel().getSelectedItem();
-					nav.setVista("mostraIscrizione", iscModelRow.getIscrizioneTO());
-				}else{
-					btnAnnullaIsc.setDisable(false);
+				@SuppressWarnings("unchecked")
+				TableView<IscModel> table = (TableView<IscModel>) event.getSource();
+				iscModelRow = table.getSelectionModel().getSelectedItem();
+				if(iscModelRow != null){
+					if (event.getClickCount() > 1) 
+						nav.setVista("mostraIscrizione", iscModelRow.getIscrizioneTO());
+					else
+						btnAnnullaIsc.setDisable(false);
 				}
 			}
 
@@ -149,41 +163,30 @@ public class ControllerMdcCompetizione extends AgroludosController {
 
 	@FXML protected void btnAnnullaIsc(MouseEvent event) {
 
-		//TODO
-		System.out.println("Confermi? si...");
-		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(this.tblIscritti.getSelectionModel().getSelectedItem().getIscrizioneTO(), "eliminaIscrizione", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		IscrizioneTO iscto = this.tblIscritti.getSelectionModel().getSelectedItem().getIscrizioneTO();
+		QuestionTO question = toFact.createQuestionTO();
+		question.setQuestion("Vuoi eliminare l'iscrizione selezionata?");
+		
+		question.setDataTO(iscto);
+		question.setRequest("eliminaIscrizione");
+		question.setViewName(this.viewName);
+		
+		nav.setVista("questionDialog", question);
 
-		Object res = this.risposta.getRespData();
-		if(res instanceof IscrizioneTO){
-			//TODO
-			this.listaTabIsc.remove(this.tblIscritti.getSelectionModel().getSelectedItem());
-			this.initIscTable();
-			SuccessTO succMessage = toFact.createSuccessTO();
-			succMessage.setMessagge("Iscrizione eliminata!");
-			nav.setVista("successDialog",succMessage);
-		}
+
 
 	}
 
 	@FXML protected void btnAnnullaCmp(MouseEvent event) {
-		//TODO
-		this.lblModificaOk.setVisible(false);
-		this.lblAnnullaOk.setVisible(false);
-		System.out.println("Confermi? si...");
-		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(this.cmpto, "annullaCompetizione", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-
-		Object res = this.risposta.getRespData();
-		if(res instanceof CompetizioneTO){
-			SuccessTO succMessage = toFact.createSuccessTO();
-			succMessage.setMessagge("Competizione annullata!");
-	
-			nav.setVista("successDialog",succMessage);
-			this.close();
-		}
+		
+		QuestionTO question = toFact.createQuestionTO();
+		question.setQuestion("Vuoi eliminare la competizione?");
+		
+		question.setDataTO(this.cmpto);
+		question.setRequest("annullaCompetizione");
+		question.setViewName(this.viewName);
+		
+		nav.setVista("questionDialog", question);
 
 	}
 
@@ -199,7 +202,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.viewName = viewName;
 
 	}
-	
+
 	@Override
 	protected String getViewName() {
 		return this.viewName;

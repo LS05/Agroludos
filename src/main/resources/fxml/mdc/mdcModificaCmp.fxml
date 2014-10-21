@@ -176,7 +176,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       </rowConstraints>
                     </GridPane>
-                    <Button fx:id="btnSelezioneOpt" mnemonicParsing="false" prefHeight="26.0" prefWidth="362.0" text="%key67" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                    <Button fx:id="btnSelezioneOpt" mnemonicParsing="false" onMouseClicked="#btnSelezioneOpt" prefHeight="26.0" prefWidth="362.0" text="%key67" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                       <GridPane.margin>
                         <Insets right="10.0" />
                       </GridPane.margin>

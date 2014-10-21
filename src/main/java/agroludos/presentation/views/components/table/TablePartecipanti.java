@@ -1,4 +1,4 @@
-package agroludos.presentation.views.table;
+package agroludos.presentation.views.components.table;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import agroludos.presentation.views.components.tablemodel.PartModel;
 import agroludos.to.PartecipanteTO;
 
-public class TablePartecipanti extends TableView<PartModel> implements AgroTable<PartModel>{
+public class TablePartecipanti extends AgroTable<PartModel>{
 	private TableColumn<PartModel, String> partColNome;
 	private TableColumn<PartModel, String> partColCognome;
 	private TableColumn<PartModel, String> partColEmail;
