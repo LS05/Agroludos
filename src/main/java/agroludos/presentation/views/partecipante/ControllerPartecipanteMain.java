@@ -4,9 +4,9 @@ import java.util.List;
 
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
+import agroludos.presentation.views.components.table.TableCompetizioni;
+import agroludos.presentation.views.components.table.TableIscrizioni;
 import agroludos.presentation.views.components.tablemodel.CmpModel;
-import agroludos.presentation.views.table.TableCompetizioni;
-import agroludos.presentation.views.table.TableIscrizioni;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.PartecipanteTO;
