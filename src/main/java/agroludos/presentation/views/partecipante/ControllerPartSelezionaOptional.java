@@ -1,14 +1,20 @@
 package agroludos.presentation.views.partecipante;
 
+import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
@@ -18,7 +24,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -30,7 +35,7 @@ import agroludos.to.IscrizioneTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.TipoOptionalTO;
 
-public class ControllerPartSelezionaOptional extends AgroludosController{
+public class ControllerPartSelezionaOptional extends AgroludosController implements Initializable{
 	private String viewName;
 
 	@FXML private Label lblTipoOptional;
@@ -40,10 +45,10 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 	@FXML private TableColumn<OptModel, String> nomeOsCol;
 	@FXML private TableColumn<OptModel, String> prezzoOsCol;
 	@FXML private TableColumn<OptModel, String> btnRemCol;
-	private ObservableList<OptModel> optSceltiData;
-
+	@FXML private Label lblTotaleOpt;
 	@FXML private GridPane paneOptionalScelti;
-	@FXML private Label lblCostoOptScelti;
+	@FXML private Label lblTotaleComp;
+	private ObservableList<OptModel> optSceltiData;
 
 	private TableOptional tableOptional;
 	@FXML private GridPane paneTableOptional;
@@ -66,6 +71,16 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 	private Integer nPassi;
 	private int passoCorrente;
 
+	private double totaleOpt;
+	private double totComp;
+
+	private ResourceBundle res;
+
+	@Override
+	public void initialize(URL url, ResourceBundle resources) {
+		this.res = resources;
+	}
+
 	@Override
 	protected void initializeView(String viewName) {
 		this.viewName = viewName;
@@ -87,7 +102,7 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 					new Callback<TableColumn<OptModel, String>, TableCell<OptModel, String>>() {
 				@Override
 				public TableCell<OptModel, String> call(TableColumn<OptModel, String> p) {
-					return new DeleteTableCell(indScelti, tableOptScelti);
+					return new DeleteTableCell();
 				}
 			};
 
@@ -111,7 +126,7 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 			if(this.paneOptionalScelti.visibleProperty().getValue()){
 				this.paneOptionalScelti.setVisible(false);
 			}
-			
+
 			this.btnAvanti.setVisible(true);
 			this.btnConferma.setVisible(false);
 			this.btnIndietro.setVisible(true);
@@ -134,46 +149,140 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 				public void handle(MouseEvent event) {
 					TipoOptionalTO tipoCorr = (TipoOptionalTO)listTipiOpt.get(passoCorrente);
 					OptModel optMod = tableOptional.getSelectedItem();
+
 					if(optMod != null){
 						OptionalTO opt = optMod.getOptTO();
 						optScelti.put(tipoCorr.getNome(), opt);
 						indScelti.put(tipoCorr.getNome(), tableOptional.getSelectedIndex());
-						addOptScelto(optMod);
+						if(addOptScelto(optMod)){
+							totaleOpt += opt.getCosto();
+							totComp = totaleOpt + mainComp.getCosto();
+						}
 					}
 				}
 
 			});
+
+			if( this.mainIscr.getAllOptionals().size() > 0 ){
+				this.passoCorrente = this.nPassi - 1;
+				this.btnAvanti.setVisible(false);
+				this.tableOptional.setVisible(false);
+				this.btnConferma.setVisible(true);
+				for(OptionalTO opt : this.mainIscr.getAllOptionals()){
+					OptModel o = new OptModel(opt);
+					this.tableOptScelti.getItems().add(o);
+					this.optScelti.put(opt.getTipoOptional().getNome(), opt);
+				}
+				showConfermaView();
+				this.btnIndietro.setDisable(false);
+			}
+
 		}
 	}
 
-	private int getOptModIndex(OptModel optMod){
-		int index = -1;
+	private class DeleteTableCell extends TableCell<OptModel, String> {
+
+		private final Button btnElimina;
+
+		public DeleteTableCell() {
+			this.btnElimina = new Button("X");
+			this.btnElimina.setStyle("-fx-base: red;");
+			this.btnElimina.setAlignment(Pos.CENTER);
+
+			setAlignment(Pos.CENTER);
+			setGraphic(this.btnElimina);
+
+			this.btnElimina.setOnAction(new EventHandler<ActionEvent> () {
+
+				@Override
+				public void handle(ActionEvent t) {
+					int index = getIndex();
+
+					OptModel optMod = tableOptScelti.getItems().get(index);
+					OptionalTO optTO = optMod.getOptTO();
+					String nomeTipo = optTO.getTipoOptional().getNome();
+					indScelti.remove(nomeTipo);
+					tableOptScelti.getItems().remove(index);
+					optScelti.remove(nomeTipo);
+
+					DecimalFormat df = new DecimalFormat("#.00");
+					totaleOpt -= optTO.getCosto();
+					lblTotaleOpt.setText(df.format(totaleOpt));
+
+					totComp = totaleOpt + mainComp.getCosto();
+					lblTotaleComp.setText(df.format(totComp));
+				}
+
+			});
+		} 
+
+		@Override 
+		public void updateItem(String item, boolean empty) {
+			super.updateItem(item, empty);
+			if (empty) {
+				setText(null);
+				setGraphic(null);
+			} else {
+				setGraphic(this.btnElimina);
+			}
+		}
+	}
+
+	private OptModel getOptMod(OptModel optMod){
+		OptModel res = null;
 		ObservableList<OptModel> mainList = this.tableOptScelti.getItems();
 
 		for(OptModel o : mainList){
 			OptionalTO eOpt = o.getOptTO();
 			OptionalTO nOpt = optMod.getOptTO();
 			if(eOpt.getTipoOptional().equals(nOpt.getTipoOptional())){
-				index = mainList.indexOf(o);
+				res = o;
 				break;
 			}
 		}
 
+		return res;
+	}
+
+	private int getOptModIndex(OptModel optMod){
+		int index = -1;
+		ObservableList<OptModel> mainList = this.tableOptScelti.getItems();
+		OptModel opt = this.getOptMod(optMod);
+		if(opt != null)
+			index = mainList.indexOf(opt);
 		return index;
 	}
 
-	private void addOptScelto(OptModel optMod){
-		int index = this.getOptModIndex(optMod);
+	private boolean isEqualMod(OptModel optMod){
+		boolean res = false;
+		OptModel testMod = this.getOptMod(optMod);
+		if(testMod != null)
+			res = optMod.getNome().equalsIgnoreCase(testMod.getNome());
+		return res;
+	}
+
+	private boolean addOptScelto(OptModel optMod){
+		boolean res = false;
 
 		ObservableList<OptModel> mainList = this.tableOptScelti.getItems(); 
+
 		if( mainList.size() == 0 ){
 			mainList.add(optMod);
-		} else if( index >= 0 ) {
-			mainList.remove(index);
-			mainList.add(index, optMod);
-		} else {
-			mainList.add(optMod);
+			res = true;
+		} else if( !this.isEqualMod(optMod) ){
+			int index = this.getOptModIndex(optMod);
+			if( index >= 0 ) {
+				this.totaleOpt -= mainList.get(index).getCosto();
+				mainList.remove(index);
+				mainList.add(index, optMod);
+				res = true;
+			} else {
+				mainList.add(optMod);
+				res = true;
+			}
 		}
+
+		return res;
 	}
 
 	private void initData(){
@@ -205,9 +314,20 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 	}
 
 	private void setLabelDialog(){
-		if(this.passoCorrente != (this.nPassi - 1))
+		if(this.passoCorrente != (this.nPassi - 1)){
 			this.lblTipoOptional.setText(this.listTipiOpt.get(this.passoCorrente).getNome());
-		this.lblPassi.setText("Passo " + (this.passoCorrente + 1) + " di " + this.nPassi);
+		} else {
+			this.lblTipoOptional.setText(this.res.getString("key144"));
+		}
+		StringBuilder sb = new StringBuilder(10);
+		sb.append(this.res.getString("key145"));
+		sb.append(" ");
+		sb.append(this.passoCorrente + 1);
+		sb.append(" ");
+		sb.append(this.res.getString("key146"));
+		sb.append(" ");
+		sb.append(this.nPassi);
+		this.lblPassi.setText(sb.toString());
 	}
 
 	private void setTable(TipoOptionalTO tipoOpt){
@@ -245,6 +365,18 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 		}
 	}
 
+	private void showConfermaView(){
+		this.paneOptionalScelti.setVisible(true);
+		if(this.optScelti.size() == 0){
+			this.tableOptScelti.setVisible(false);
+		} else {
+			this.tableOptScelti.setVisible(true);
+			DecimalFormat df = new DecimalFormat("#.00");
+			this.lblTotaleOpt.setText(df.format(this.totaleOpt));
+			this.lblTotaleComp.setText(df.format(this.totComp));
+		}
+	}
+
 	@FXML protected void btnAvanti(MouseEvent event) {
 		this.passoCorrente++;
 		this.setLabelDialog();
@@ -253,7 +385,7 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 			this.btnAvanti.setVisible(false);
 			this.tableOptional.setVisible(false);
 			this.btnConferma.setVisible(true);
-			this.paneOptionalScelti.setVisible(true);
+			showConfermaView();
 		} else {
 			this.btnIndietro.setDisable(false);
 			this.setTable((TipoOptionalTO)this.listTipiOpt.get(this.passoCorrente));
@@ -267,6 +399,7 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 	}
 
 	@FXML protected void btnConferma(MouseEvent event) {
+		this.mainIscr.clearOptionals();
 		for (OptionalTO opt : this.optScelti.values()) {
 			this.mainIscr.addOptional(opt);
 		}

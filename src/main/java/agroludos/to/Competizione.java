@@ -31,29 +31,29 @@ class Competizione implements CompetizioneTO{
 	private String descrizione;
 	private Double costo;
 	private int idStato;
-	
+
 	private Set<Optional> optionals;
 	private Set<Partecipante> iscritti;
 	private Set<Iscrizione> iscrizioni;
+	private Set<Iscrizione> iscrizioniAttive;
 	private TipoCompetizione tipoCompetizione;
 	private StatoCompetizione statoCompetizione;
 	private ManagerDiCompetizione managerDiCompetizione;
-	private Set<Iscrizione> iscrizioniAttive;
-	
+
 	Competizione(){
 		this.optionals = new HashSet<Optional>();
 	}
-	
+
 	@Override
 	public int getIdStato() {
 		return idStato;
 	}
-	
+
 	@Override
 	public void setIdStato(int idStato) {
 		this.idStato = idStato;
 	}
-	
+
 	@Override
 	public ManagerDiCompetizione getManagerDiCompetizione() {
 		return managerDiCompetizione;
@@ -62,7 +62,7 @@ class Competizione implements CompetizioneTO{
 	public void setManagerDiCompetizione(ManagerDiCompetizione mdc) {
 		this.managerDiCompetizione = mdc;
 	}
-	
+
 	@Override
 	public TipoCompetizione getTipoCompetizione() {
 		return tipoCompetizione;
@@ -72,7 +72,7 @@ class Competizione implements CompetizioneTO{
 	public void setTipoCompetizione(TipoCompetizioneTO tipoCompetizione) {
 		this.tipoCompetizione = (TipoCompetizione) tipoCompetizione;
 	}
-	
+
 	@Override
 	public StatoCompetizione getStatoCompetizione() {
 		return statoCompetizione;
@@ -129,6 +129,10 @@ class Competizione implements CompetizioneTO{
 		return id;
 	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	@Override
 	public void addOptional(OptionalTO optional) {
 		this.optionals.add((Optional) optional);
@@ -177,7 +181,15 @@ class Competizione implements CompetizioneTO{
 	public void clearOptionals(){
 		this.optionals.clear();
 	}
-	
+
+	public Set<Partecipante> getPartecipanti() {
+		return iscritti;
+	}
+
+	public void setPartecipanti(Set<Partecipante> partecipanti) {
+		this.iscritti = partecipanti;
+	}
+
 	@Override
 	public List<PartecipanteTO> getAllIscritti() {
 		List<PartecipanteTO> res = new ArrayList<PartecipanteTO>();
@@ -189,38 +201,19 @@ class Competizione implements CompetizioneTO{
 		return res;
 	}
 
-	public Set<Partecipante> getPartecipanti() {
-		return iscritti;
-	}
-
-	public void setPartecipanti(Set<Partecipante> partecipanti) {
-		this.iscritti = partecipanti;
-	}
-
 	public void setIscrizioniAttive(Set<Iscrizione> iscrizioniAttive) {
 		this.iscrizioniAttive = iscrizioniAttive;
 	}
-	
-	@Override
-	public List<IscrizioneTO> getAllIscrizioniAttive() {
-		List<IscrizioneTO> res = new ArrayList<IscrizioneTO>();
-		
-		for(Iscrizione item : this.iscrizioniAttive){
-			res.add(item);
-		}
-		
-		return res;
-	}
-	
+
 	public Set<Iscrizione> getIscrizioniAttive() {
 		return this.iscrizioniAttive;
 	}
-	
+
 	@Override
-	public List<IscrizioneTO> getAllIscrizioni() {
+	public List<IscrizioneTO> getAllIscrizioniAttive() {
 		List<IscrizioneTO> res = new ArrayList<IscrizioneTO>();
 
-		for(Iscrizione item : this.iscrizioni){
+		for(Iscrizione item : this.iscrizioniAttive){
 			res.add(item);
 		}
 
@@ -235,8 +228,15 @@ class Competizione implements CompetizioneTO{
 		this.iscrizioni = iscrizioni;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	@Override
+	public List<IscrizioneTO> getAllIscrizioni() {
+		List<IscrizioneTO> res = new ArrayList<IscrizioneTO>();
+
+		for(Iscrizione item : this.iscrizioni){
+			res.add(item);
+		}
+
+		return res;
 	}
 
 	@Override
@@ -294,24 +294,23 @@ class Competizione implements CompetizioneTO{
 	@Override
 	public void setManagerDiCompetizione(ManagerDiCompetizioneTO managerDiCompetizione) {
 		this.managerDiCompetizione = (ManagerDiCompetizione) managerDiCompetizione;
-		
+
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("[id=").append(id).append(", nome=").append(nome)
-				.append(", data=").append(data).append(", nmin=").append(nmin)
-				.append(", nmax=").append(nmax).append(", descrizione=")
-				.append(descrizione).append(", costo=").append(costo)
-				.append(", optionals=").append(optionals).append(", iscritti=")
-				.append(iscritti).append(", iscrizioni=").append(iscrizioni)
-				.append(", tipoCompetizione=").append(tipoCompetizione)
-				.append(", statoCompetizione=").append(statoCompetizione)
-				.append(", managerDiCompetizione=")
-				.append(managerDiCompetizione).append(", iscrizioniAttive=")
-				.append(iscrizioniAttive).append("]");
+		.append(", data=").append(data).append(", nmin=").append(nmin)
+		.append(", nmax=").append(nmax).append(", descrizione=")
+		.append(descrizione).append(", costo=").append(costo)
+		.append(", optionals=").append(optionals).append(", iscritti=")
+		.append(iscritti).append(", iscrizioni=").append(iscrizioni)
+		.append(", tipoCompetizione=").append(tipoCompetizione)
+		.append(", statoCompetizione=").append(statoCompetizione)
+		.append(", managerDiCompetizione=")
+		.append(managerDiCompetizione).append(", iscrizioniAttive=")
+		.append(iscrizioniAttive).append("]");
 		return builder.toString();
 	}
-
 }
