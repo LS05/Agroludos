@@ -179,5 +179,12 @@
 			<height>576</height>
 			<title>Agroludos | Optionals</title>
 		</view>
+		<view tipo="dialog">
+			<name>modificaOptionalPartecipante</name>
+			<url>/fxml/mdc/mdcOptionalPartecipante.fxml</url>
+			<width>1080</width>
+			<height>576</height>
+			<title>Agroludos | Optionals</title>
+		</view>
 	</views>
 </agro-views>

@@ -8,6 +8,7 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.to.AgroludosTO;
+import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.QuestionTO;
@@ -68,6 +69,7 @@ public class ControllerMdcIscrizione extends AgroludosController {
 	@FXML protected void btnModificaOptionalIscrizione(MouseEvent event) {
 		//TODO
 		System.out.println("da fare");
+		nav.setVista("modificaOptionalPartecipante", this.iscto);
 	}
 
 	@Override
@@ -111,5 +113,18 @@ public class ControllerMdcIscrizione extends AgroludosController {
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
+		
+		if(request.getCommandName().equals("modificaIscrizione")){
+			Object res = response.getRespData();
+			if(res instanceof IscrizioneTO){			
+				IscrizioneTO isc = (IscrizioneTO) res;
+				this.initializeView(isc);
+				
+				SuccessTO succMessage = toFact.createSuccessTO();
+				succMessage.setMessagge("Modifica avvenuta con successo!");
+
+				nav.setVista("successDialog",succMessage);
+			}
+		}
 	}
 }

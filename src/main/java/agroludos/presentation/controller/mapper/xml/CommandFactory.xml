@@ -234,4 +234,10 @@
 			<forward success="partecipante" failure="mostraCompPart" />
 		</from>
 	</command>
+	<command name="modificaIscrizione">
+		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
+		<from name="modificaOptionalPartecipante">
+			<forward success="mostraIscrizione" failure="modificaOptionalPartecipante" />
+		</from>
+	</command>
 </commands>
