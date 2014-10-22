@@ -12,6 +12,9 @@
 		<property name="data" type="date">
 			<column name="data" not-null="true" />
 		</property>
+		<property name="costo" type="double">
+			<column name="costo" not-null="true" default="0" />
+		</property>
 		<many-to-one name="statoIscrizione" class="agroludos.to.StatoIscrizione" cascade="all">
 			<column name="stato" not-null="true" />
 		</many-to-one>

@@ -134,6 +134,9 @@
 		<from name="selezionaOptionalPart">
 			<forward success="selezionaOptionalPart" failure="selezionaOptionalPart" />
 		</from>
+		<from name="modificaOptionalPartecipante">
+			<forward success="modificaOptionalPartecipante" failure="modificaOptionalPartecipante" />
+		</from>
 	</command>
 	<command name="getOptionalByTipo">
 		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
