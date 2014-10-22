@@ -1,18 +1,13 @@
 package agroludos.presentation.views.mdc;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.to.AgroludosTO;
 import agroludos.to.IscrizioneTO;
-import agroludos.to.OptionalTO;
 import agroludos.to.QuestionTO;
 import agroludos.to.SuccessTO;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -32,6 +27,8 @@ public class ControllerMdcIscrizione extends AgroludosController {
 	@FXML private Label lblIndirizzoIsc;
 	@FXML private Label lblDataSRCIsc;
 	@FXML private Label lblDataIsc;
+	
+	@FXML private Label lblCostoIsc;
 
 
 	@FXML private Button btnVisualizzaCertificato;
@@ -68,6 +65,7 @@ public class ControllerMdcIscrizione extends AgroludosController {
 	@FXML protected void btnModificaOptionalIscrizione(MouseEvent event) {
 		//TODO
 		System.out.println("da fare");
+		nav.setVista("modificaOptionalPartecipante", this.iscto);
 	}
 
 	@Override
@@ -86,6 +84,7 @@ public class ControllerMdcIscrizione extends AgroludosController {
 		this.lblIndirizzoIsc.setText(this.iscto.getPartecipante().getIndirizzo());
 		this.lblDataSRCIsc.setText(this.iscto.getPartecipante().getDataSRC().toString());
 		this.lblDataIsc.setText(this.iscto.getData().toString());
+		this.lblCostoIsc.setText(String.valueOf(this.iscto.getCosto()));
 
 		this.tableOptional = new TableOptional();
 		this.paneTableOptionalScelti.getChildren().add(this.tableOptional);
@@ -111,5 +110,18 @@ public class ControllerMdcIscrizione extends AgroludosController {
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
+		
+		if(request.getCommandName().equals("modificaIscrizione")){
+			Object res = response.getRespData();
+			if(res instanceof IscrizioneTO){			
+				IscrizioneTO isc = (IscrizioneTO) res;
+				this.initializeView(isc);
+				
+				SuccessTO succMessage = toFact.createSuccessTO();
+				succMessage.setMessagge("Modifica avvenuta con successo!");
+
+				nav.setVista("successDialog",succMessage);
+			}
+		}
 	}
 }

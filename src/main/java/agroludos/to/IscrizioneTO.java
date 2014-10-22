@@ -32,4 +32,8 @@ public interface IscrizioneTO extends AgroludosTO, Comparable<IscrizioneTO>{
 
 	void setOptionals(Set<OptionalTO> optionals);
 
+	void setCosto(Double costoIsc);
+
+	Double getCosto();
+
 }

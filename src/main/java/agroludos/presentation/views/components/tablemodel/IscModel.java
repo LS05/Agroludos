@@ -14,6 +14,7 @@ public class IscModel {
 	private SimpleStringProperty email;
 	private SimpleStringProperty data;
 	private SimpleStringProperty stato;
+	private SimpleStringProperty costoIsc;
 	private SimpleStringProperty competizione;
 	private SimpleStringProperty tipo;
 	private SimpleStringProperty manager;
@@ -26,6 +27,7 @@ public class IscModel {
 		this.email =  new SimpleStringProperty(iscto.getPartecipante().getEmail());
 		this.data =  new SimpleStringProperty(iscto.getData().toString());
 		this.stato =  new SimpleStringProperty(iscto.getStatoIscrizione().getNome());
+		this.costoIsc =  new SimpleStringProperty(String.valueOf(iscto.getCosto()));
 		
 		CompetizioneTO competizione = iscto.getCompetizione();
 		this.tipo = new SimpleStringProperty(competizione.getTipoCompetizione().getNome());
@@ -40,6 +42,14 @@ public class IscModel {
 		this.iscto = iscto;
 	}
 	
+	public String getCostoIsc() {
+		return costoIsc.get();
+	}
+
+	public void setCostoIsc(String costoIsc) {
+		this.costoIsc.set(costoIsc);
+	}
+
 	public String getTipo() {
 		return tipo.get();
 	}

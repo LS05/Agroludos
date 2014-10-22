@@ -15,11 +15,22 @@ class Iscrizione implements IscrizioneTO{
 	private Competizione competizione;
 	private Set<Optional> optionals;
 	private StatoIscrizione statoIscrizione;
+	private Double costo;
 
 	Iscrizione(){
 		this.optionals = new HashSet<Optional>();
 	}
 	
+	@Override
+	public Double getCosto() {
+		return costo;
+	}
+
+	@Override
+	public void setCosto(Double costo) {
+		this.costo = costo;
+	}
+
 	@Override
 	public StatoIscrizione getStatoIscrizione() {
 		return statoIscrizione;
