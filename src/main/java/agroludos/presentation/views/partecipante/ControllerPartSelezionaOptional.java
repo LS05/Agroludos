@@ -11,7 +11,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -37,13 +36,15 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 	@FXML private Label lblTipoOptional;
 	@FXML private Label lblPassi;
 
-	@FXML private TableView<OptModel> tblOptScelti;
+	@FXML private TableView<OptModel> tableOptScelti;
 	@FXML private TableColumn<OptModel, String> nomeOsCol;
 	@FXML private TableColumn<OptModel, String> prezzoOsCol;
 	@FXML private TableColumn<OptModel, String> btnRemCol;
 	private ObservableList<OptModel> optSceltiData;
 
+	@FXML private GridPane paneOptionalScelti;
 	@FXML private Label lblCostoOptScelti;
+
 	private TableOptional tableOptional;
 	@FXML private GridPane paneTableOptional;
 	private Map<TipoOptionalTO, List<OptionalTO>> mainData;
@@ -51,8 +52,6 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 	@FXML private Button btnIndietro;
 	@FXML private Button btnAvanti;
 	@FXML private Button btnConferma;
-	@FXML private ListView<String> listViewOptional;
-	private ObservableList<String> listViewData;
 
 	private CompetizioneTO mainComp;
 	private List<OptionalTO> optComp;
@@ -87,8 +86,8 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 			Callback<TableColumn<OptModel, String>, TableCell<OptModel, String>> cellFactory =
 					new Callback<TableColumn<OptModel, String>, TableCell<OptModel, String>>() {
 				@Override
-				public TableCell call(TableColumn p) {
-					return new DeleteTableCell();
+				public TableCell<OptModel, String> call(TableColumn<OptModel, String> p) {
+					return new DeleteTableCell(indScelti, tableOptScelti);
 				}
 			};
 
@@ -96,7 +95,7 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 
 			this.btnRemCol.setCellFactory(cellFactory);
 
-			this.tblOptScelti.getItems().setAll(this.optSceltiData);
+			this.tableOptScelti.getItems().setAll(this.optSceltiData);
 
 			this.mainComp = this.mainIscr.getCompetizione();
 
@@ -104,13 +103,15 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 
 			this.mainData = new HashMap<TipoOptionalTO, List<OptionalTO>>();
 
-			this.listViewData = FXCollections.observableArrayList();
-
 			this.optScelti = new HashMap<String, OptionalTO>();
 			this.indScelti = new HashMap<String, Integer>();
 
 			this.passoCorrente = 0;
 
+			if(this.paneOptionalScelti.visibleProperty().getValue()){
+				this.paneOptionalScelti.setVisible(false);
+			}
+			
 			this.btnAvanti.setVisible(true);
 			this.btnConferma.setVisible(false);
 			this.btnIndietro.setVisible(true);
@@ -133,20 +134,22 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 				public void handle(MouseEvent event) {
 					TipoOptionalTO tipoCorr = (TipoOptionalTO)listTipiOpt.get(passoCorrente);
 					OptModel optMod = tableOptional.getSelectedItem();
-					OptionalTO opt = optMod.getOptTO();
-					optScelti.put(tipoCorr.getNome(), opt);
-					indScelti.put(tipoCorr.getNome(), tableOptional.getSelectedIndex());
-					addOptScelto(optMod);
+					if(optMod != null){
+						OptionalTO opt = optMod.getOptTO();
+						optScelti.put(tipoCorr.getNome(), opt);
+						indScelti.put(tipoCorr.getNome(), tableOptional.getSelectedIndex());
+						addOptScelto(optMod);
+					}
 				}
 
 			});
 		}
 	}
-	
+
 	private int getOptModIndex(OptModel optMod){
 		int index = -1;
-		ObservableList<OptModel> mainList = this.tblOptScelti.getItems();
-		
+		ObservableList<OptModel> mainList = this.tableOptScelti.getItems();
+
 		for(OptModel o : mainList){
 			OptionalTO eOpt = o.getOptTO();
 			OptionalTO nOpt = optMod.getOptTO();
@@ -155,14 +158,14 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 				break;
 			}
 		}
-		
+
 		return index;
 	}
 
 	private void addOptScelto(OptModel optMod){
 		int index = this.getOptModIndex(optMod);
-		
-		ObservableList<OptModel> mainList = this.tblOptScelti.getItems(); 
+
+		ObservableList<OptModel> mainList = this.tableOptScelti.getItems(); 
 		if( mainList.size() == 0 ){
 			mainList.add(optMod);
 		} else if( index >= 0 ) {
@@ -221,8 +224,6 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 
 	@FXML protected void btnIndietro(MouseEvent event) { 
 		this.passoCorrente--;
-		this.btnAvanti.setVisible(true);
-		this.btnConferma.setVisible(false);
 
 		if(this.passoCorrente == 0)
 			this.btnIndietro.setDisable(true);
@@ -232,19 +233,15 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 		}
 
 		this.setLabelDialog();
+		this.paneOptionalScelti.setVisible(false);
+		this.btnAvanti.setVisible(true);
+		this.btnConferma.setVisible(false);
 
 		TipoOptionalTO tipoCorr = (TipoOptionalTO)this.listTipiOpt.get(this.passoCorrente);
 		this.setTable(tipoCorr);
 
 		if(this.indScelti.containsKey(tipoCorr.getNome())){
 			this.tableOptional.getSelectionModel().select(this.indScelti.get(tipoCorr.getNome()));
-		}
-	}
-
-	private void fillConfList(){
-		this.listViewData.clear();
-		for (OptionalTO opt : this.optScelti.values()) {
-			this.listViewData.add(opt.getNome());
 		}
 	}
 
@@ -256,9 +253,7 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 			this.btnAvanti.setVisible(false);
 			this.tableOptional.setVisible(false);
 			this.btnConferma.setVisible(true);
-			fillConfList();
-			this.listViewOptional.setItems(this.listViewData);
-			this.listViewOptional.setVisible(true);
+			this.paneOptionalScelti.setVisible(true);
 		} else {
 			this.btnIndietro.setDisable(false);
 			this.setTable((TipoOptionalTO)this.listTipiOpt.get(this.passoCorrente));
@@ -269,15 +264,9 @@ public class ControllerPartSelezionaOptional extends AgroludosController{
 				this.tableOptional.getSelectionModel().select(this.indScelti.get(tipoCorr.getNome()));
 			}
 		}
-
 	}
 
 	@FXML protected void btnConferma(MouseEvent event) {
-		//		Set<OptionalTO> setOpt = new HashSet<OptionalTO>();
-		//		for (OptionalTO opt : this.optScelti.values()) {
-		//			setOpt.add(opt);
-		//		}
-		//		this.mainIscr.setOptionals(setOpt);
 		for (OptionalTO opt : this.optScelti.values()) {
 			this.mainIscr.addOptional(opt);
 		}
