@@ -9,9 +9,9 @@ import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
@@ -25,6 +25,7 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 	private @FXML Label lblNMin;
 	private @FXML Label lblCosto;
 	private @FXML Label lblCostoTot;
+	private @FXML Button btnSelezionaOptional;
 	
 	private CompetizioneTO mainComp;
 	
@@ -34,6 +35,8 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 	private AgroResponse risposta;
 	
 	private ResourceBundle resources;
+
+	
 
 	@Override
 	public void initialize(URL url, ResourceBundle res) {
@@ -54,6 +57,10 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 			this.lblNMin.setText(((Integer)this.mainComp.getNmin()).toString());
 			this.lblCosto.setText(this.mainComp.getCosto().toString());
 			this.lblCostoTot.setText(this.mainComp.getCosto().toString());
+			
+
+			if(this.mainComp.getAllOptionals().isEmpty())
+				this.btnSelezionaOptional.setDisable(true);
 		}
 	}
 

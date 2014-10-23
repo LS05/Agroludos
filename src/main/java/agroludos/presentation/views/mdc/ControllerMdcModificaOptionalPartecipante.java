@@ -1,12 +1,16 @@
 package agroludos.presentation.views.mdc;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -24,7 +28,7 @@ import agroludos.to.SuccessTO;
 import agroludos.to.TipiAgroludosTO;
 import agroludos.to.TipoOptionalTO;
 
-public class ControllerMdcModificaOptionalPartecipante extends AgroludosController{
+public class ControllerMdcModificaOptionalPartecipante extends AgroludosController implements Initializable{
 
 	private String viewName;
 	@FXML private Label lblTipoOptional;
@@ -54,7 +58,16 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 	private int passoCorrente;
 	private ObservableList<OptModel> optSceltiData;
 	private double totale;
+	private ResourceBundle res;
 
+	
+
+	@Override
+	public void initialize(URL url, ResourceBundle resources) {
+		this.res = resources;
+		
+	}
+	
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
 		this.mainIsc = (IscrizioneTO) mainTO;
@@ -93,8 +106,8 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 
 				});
 
-		this.tableOptional.hideColumn("Stato");
-		this.tableOptional.hideColumn("Tipo");
+		this.tableOptional.hideColumn(3);
+		this.tableOptional.hideColumn(4);
 
 
 		//Tabella optional Scelti
@@ -115,8 +128,8 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 
 				});
 
-		this.tableOptionalScelti.hideColumn("Stato");
-		this.tableOptionalScelti.hideColumn("Descrizione");
+		this.tableOptionalScelti.hideColumn(1);
+		this.tableOptionalScelti.hideColumn(4);
 
 		this.AggiornaTotale();
 
@@ -167,7 +180,7 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 				this.tableOptionalScelti.getItems().setAll(this.optSceltiData);
 			}else{
 				SuccessTO succMessage = toFact.createSuccessTO();
-				succMessage.setMessagge("Puoi selezionare solo un Optional per ogni tipo!");
+				succMessage.setMessagge(this.res.getString("key148"));
 				nav.setVista("successDialog",succMessage);
 			}
 		}
@@ -268,5 +281,6 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 			}
 		}
 	}
+
 }
 
