@@ -86,5 +86,10 @@ class TransferObjectFactory implements TOFactory {
 	public QuestionTO createQuestionTO() {
 		return new Question();
 	}
+
+	@Override
+	public TipoUtenteTO createTipoUtenteTO() {
+		return new TipoUtente();
+	}
 	
 }

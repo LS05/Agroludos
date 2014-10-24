@@ -1,7 +1,12 @@
 package agroludos.presentation.views.login;
 
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -11,14 +16,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
+import agroludos.to.PartecipanteTO;
+import agroludos.to.SuccessTO;
+import agroludos.to.TipoUtenteTO;
 import agroludos.to.UtenteTO;
 
-public class ControllerLogin extends AgroludosController{
+public class ControllerLogin extends AgroludosController implements Initializable{
 	
 	private String viewName;
 	
@@ -29,6 +36,8 @@ public class ControllerLogin extends AgroludosController{
 	@FXML private TextField txtUsername;
 	@FXML private PasswordField txtPassword;
 	@FXML private Label lblErroreLogin;
+	
+	private ResourceBundle res;
 
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
@@ -56,9 +65,7 @@ public class ControllerLogin extends AgroludosController{
 	}
 
 	@FXML protected void btnRegistrati(MouseEvent event) {
-		this.risposta = respFact.createResponse();		
-		this.richiesta = this.getRichiesta("nuovaRegistrazione", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		nav.setVista("nuovaRegistrazione");
 	}
 	
 	@Override
@@ -93,7 +100,15 @@ public class ControllerLogin extends AgroludosController{
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		if(request.getCommandName().equals("autenticazioneUtente")){
+		String commandName = request.getCommandName();
+		if(commandName.equals( this.reqProperties.getProperty("inserisciPartecipante") )){
+			Object res = response.getRespData();
+			if(res instanceof PartecipanteTO){
+				SuccessTO succMessage = toFact.createSuccessTO();
+				succMessage.setMessagge(this.res.getString("key152"));
+				nav.setVista("successDialog",succMessage);
+			}
+		}else if(request.getCommandName().equals("autenticazioneUtente")){
 			Object res = response.getRespData();
 			if(res instanceof String){
 				String errMsg = (String)res;
@@ -107,5 +122,10 @@ public class ControllerLogin extends AgroludosController{
 			System.out.println("errore nella creazione della sessione");
 			
 		}
+	}
+
+	@Override
+	public void initialize(URL url, ResourceBundle resources) {
+		this.res = resources;		
 	}
 }

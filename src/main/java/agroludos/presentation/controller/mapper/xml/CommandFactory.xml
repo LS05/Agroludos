@@ -45,16 +45,16 @@
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
 	</command>
+	<command name="inserisciPartecipante">
+		<classe>agroludos.business.as.gestorepartecipante.SPartecipante</classe>
+		<from name="nuovaRegistrazione">
+			<forward success="login" failure="nuovaRegistrazione" />
+		</from>
+	</command>
 	<command name="inserisciCompetizione">
 		<classe>agroludos.business.as.gestorecompetizione.SCompetizione</classe>
 		<from name="mostraNuovaCmp">
 			<forward success="managerDiCompetizione" failure="mostraNuovaCmp" />
-		</from>
-	</command>
-	<command name="nuovaRegistrazione">
-		<classe>agroludos.business.as.gestoreutente.SUtente</classe>
-		<from name="login">
-			<forward success="nuovaRegistrazione" failure="nuovaRegistrazione" />
 		</from>
 	</command>
 	<command name="getAllManagerDiCompetizione">
@@ -172,6 +172,9 @@
 		</from>
 		<from name="nuovoMDC">
 			<forward success="nuovoMDC" failure="modificaMDC" />
+		</from>	
+		<from name="nuovaRegistrazione">
+			<forward success="nuovaRegistrazione" failure="nuovaRegistrazione" />
 		</from>
 	</command>
 	<command name="inserisciTipoOptional">
@@ -223,6 +226,9 @@
 		<classe>agroludos.business.as.gestoretipoutente.LTipoUtente</classe>
 		<from name="nuovoMDC">
 			<forward success="nuovoMDC" failure="nuovoMDC" />
+		</from>
+		<from name="nuovaRegistrazione">
+			<forward success="nuovaRegistrazione" failure="nuovaRegistrazione" />
 		</from>
 	</command>
 	<command name="getCompetizioniAttive">
