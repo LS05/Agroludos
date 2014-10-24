@@ -33,30 +33,30 @@
 		<view tipo="dialog">
 			<name>nuovaRegistrazione</name>
 			<url>/fxml/login/registrazione.fxml</url>
-			<width>1440</width>
-			<height>900</height>
-			<title></title>
+			<width>627</width>
+			<height>647</height>
+			<title>Agroludos | Registrazione</title>
 		</view>
 		<view tipo="mainView">
 			<name>managerDiSistema</name>
 			<url>/fxml/mds/mdsMain.fxml</url>
 			<width>1440</width>
 			<height>900</height>
-			<title></title>
+			<title>Agroludos | Manager Di Sistema</title>
 		</view>
 		<view tipo="mainView">
 			<name>partecipante</name>
 			<url>/fxml/partecipante/partecipanteMain.fxml</url>
 			<width>1240</width>
 			<height>800</height>
-			<title></title>
+			<title>Agroludos | Partecipante</title>
 		</view>
 		<view tipo="mainView">
 			<name>managerDiCompetizione</name>
 			<url>/fxml/mdc/mdcMain.fxml</url>
 			<width>882</width>
 			<height>697</height>
-			<title></title>
+			<title>Agroludos | Manager Di Competizione</title>
 		</view>
 		<view tipo="dialog">
 			<name>modificaMDC</name>

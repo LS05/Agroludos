@@ -36,5 +36,7 @@ public interface TOFactory {
 	
 	QuestionTO createQuestionTO();
 
+	TipoUtenteTO createTipoUtenteTO();
+
 
 }
