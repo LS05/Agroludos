@@ -67,7 +67,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti{
 					TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
 					cmpModelRow = table.getSelectionModel().getSelectedItem();
 					if(cmpModelRow != null)
-						nav.setVista("mostraCompPart", cmpModelRow.getCompetizioneTO());
+						nav.setVista("partMostraCompetizione", cmpModelRow.getCompetizioneTO());
 				}
 			}
 		});

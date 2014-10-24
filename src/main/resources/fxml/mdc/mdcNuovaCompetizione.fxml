@@ -6,7 +6,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?scenebuilder-preview-i18n-resource ../../../../../../../Dropbox/Ingegneria del Software/interfaccia/bundles/Agroludos_it.properties?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="459.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="agroludos.presentation.views.mdc.ControllerMdcNuovaCompetizione">
   <children>
@@ -25,7 +24,7 @@
             <GridPane prefHeight="66.0" GridPane.rowIndex="2">
               <children>
                 <Button fx:id="btnInserisciCmp" mnemonicParsing="false" onMouseClicked="#btnInserisciCmp" prefHeight="26.0" prefWidth="197.0" styleClass="btnNuovaComp" text="%key39" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                <Button fx:id="btnAnnulla" mnemonicParsing="false" onMouseClicked="#btnAnnulla" styleClass="undoBtn" text="%key40" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                <Button fx:id="btnAnnulla" mnemonicParsing="false" onMouseClicked="#btnAnnulla" prefHeight="26.0" styleClass="undoBtn" text="%key40" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="566.0" minWidth="10.0" prefWidth="507.0" />
@@ -45,12 +44,12 @@
                         <Font name="System Bold" size="13.0" fx:id="x1" />
                       </font>
                       <GridPane.margin>
-                        <Insets left="10.0" fx:id="x2" />
+                        <Insets left="10.0" />
                       </GridPane.margin>
                     </Label>
                     <TextField fx:id="txtNomeCmp" alignment="BOTTOM_LEFT" GridPane.columnIndex="1">
                       <GridPane.margin>
-                        <Insets right="10.0" fx:id="x3" />
+                        <Insets right="10.0" />
                       </GridPane.margin>
                     </TextField>
                   </children>
@@ -69,12 +68,12 @@
                   <children>
                     <TextArea fx:id="txtDescrizione" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
                       <GridPane.margin>
-                        <Insets right="10.0" fx:id="x3" />
+                        <Insets right="10.0" />
                       </GridPane.margin>
                     </TextArea>
                     <Label font="$x1" text="%key48" GridPane.columnIndex="0" GridPane.rowIndex="0">
                       <GridPane.margin>
-                        <Insets left="10.0" fx:id="x2" />
+                        <Insets left="10.0" />
                       </GridPane.margin>
                     </Label>
                   </children>
@@ -92,7 +91,7 @@
                       <children>
                         <Label font="$x1" text="%key49">
                           <GridPane.margin>
-                            <Insets left="10.0" fx:id="x2" />
+                            <Insets left="10.0" />
                           </GridPane.margin>
                         </Label>
                         <ComboBox fx:id="cmbTipoCmp" prefWidth="200.0" GridPane.columnIndex="1" />
@@ -105,18 +104,21 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       </rowConstraints>
                     </GridPane>
-                    <GridPane GridPane.columnIndex="1">
+                    <GridPane id="paneDataCompetizione" GridPane.columnIndex="1">
                       <children>
-                        <TextField fx:id="txtDataCmp" maxWidth="222.0" prefHeight="26.0" prefWidth="156.0" GridPane.columnIndex="1">
+                        <Label alignment="CENTER" font="$x1" text="%key22" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                           <GridPane.margin>
-                            <Insets right="10.0" fx:id="x3" />
-                          </GridPane.margin>
-                        </TextField>
-                        <Label font="$x1" text="%key22" GridPane.halignment="RIGHT">
-                          <GridPane.margin>
-                            <Insets right="10.0" fx:id="x3" />
+                            <Insets right="10.0" top="2.0" />
                           </GridPane.margin>
                         </Label>
+                        <Pane fx:id="paneDataCompetizione" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                          <padding>
+                            <Insets top="10.0" />
+                          </padding>
+                          <GridPane.margin>
+                            <Insets />
+                          </GridPane.margin>
+                        </Pane>
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="178.0" />
@@ -125,6 +127,9 @@
                       <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       </rowConstraints>
+                      <GridPane.margin>
+                        <Insets top="20.0" />
+                      </GridPane.margin>
                     </GridPane>
                   </children>
                   <columnConstraints>
@@ -141,7 +146,7 @@
                       <children>
                         <Label font="$x1" prefHeight="59.0" prefWidth="200.0" text="%key37" wrapText="true">
                           <GridPane.margin>
-                            <Insets left="10.0" fx:id="x2" />
+                            <Insets left="10.0" />
                           </GridPane.margin>
                         </Label>
                         <TextField fx:id="txtNminCmp" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -159,7 +164,7 @@
                         <Label font="$x1" maxWidth="150.0" text="%key38" wrapText="true" GridPane.halignment="RIGHT" />
                         <TextField fx:id="txtNmaxCmp" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                           <GridPane.margin>
-                            <Insets right="10.0" fx:id="x3" />
+                            <Insets right="10.0" />
                           </GridPane.margin>
                         </TextField>
                       </children>
@@ -182,34 +187,44 @@
                 </GridPane>
                 <GridPane GridPane.rowIndex="4">
                   <children>
-                    <GridPane>
+                    <Button fx:id="btnSelezionaOptional" mnemonicParsing="false" onMouseClicked="#btnSelezionaOptional" prefWidth="354.0" text="%key137" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+                      <GridPane.margin>
+                        <Insets right="10.0" />
+                      </GridPane.margin>
+                    </Button>
+                    <GridPane alignment="CENTER" focusTraversable="false" GridPane.columnIndex="0" GridPane.rowIndex="0">
                       <children>
-                        <Label font="$x1" text="%key31" GridPane.margin="$x2" />
-                        <Label minWidth="3.0" prefWidth="13.0" text="," GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
-                          <font>
-                            <Font name="System Bold" size="15.0" />
-                          </font>
+                        <Label font="$x1" text="%key31" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                          <GridPane.margin>
+                            <Insets left="10.0" />
+                          </GridPane.margin>
                         </Label>
-                        <Label fx:id="lblValuta" font="$x1" text="%key94" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="0" />
-                        <TextField fx:id="txtInteri" prefWidth="61.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                        <TextField fx:id="txtDecimali" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                        <Label id="lblValuta" font="$x1" text="%key94" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+                          <GridPane.margin>
+                            <Insets right="10.0" />
+                          </GridPane.margin>
+                        </Label>
+                        <GridPane fx:id="paneCostoComp" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="-1.0" />
+                          </columnConstraints>
+                          <padding>
+                            <Insets top="30.0" />
+                          </padding>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
                       </children>
                       <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="203.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="68.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="55.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="23.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="51.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.0" minWidth="10.0" prefWidth="134.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="66.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="200.0" />
                       </columnConstraints>
                       <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       </rowConstraints>
                     </GridPane>
-                    <Button fx:id="btnSelezionaOptional" mnemonicParsing="false" onMouseClicked="#btnSelezionaOptional" prefWidth="354.0" text="%key137" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
-                      <GridPane.margin>
-                        <Insets right="10.0" fx:id="x3" />
-                      </GridPane.margin>
-                    </Button>
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

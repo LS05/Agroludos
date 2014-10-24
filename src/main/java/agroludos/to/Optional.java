@@ -23,7 +23,7 @@ class Optional implements OptionalTO{
 	public StatoOptional getStatoOptional() {
 		return statoOptional;
 	}
-	
+
 	@Override
 	public void setStatoOptional(StatoOptionalTO statoOptional) {
 		this.statoOptional = (StatoOptional)statoOptional;
@@ -37,7 +37,7 @@ class Optional implements OptionalTO{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	@Override
 	public String getNome() {
 		return nome;
@@ -69,15 +69,44 @@ class Optional implements OptionalTO{
 	}
 
 	@Override
-	public String toString() {
-		return "Optional [nome=" + nome + ", descrizione=" + descrizione
-				+ ", costo=" + costo + ", id=" + id + ", tipoOptional="
-				+ tipoOptional + ", statoOptional=" + statoOptional + "]";
-	}
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+
+		Optional other = (Optional) obj;
+		if(costo == other.costo){
+			if( descrizione == other.descrizione){
+				if( nome == other.nome){
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}	
 
 	@Override
 	public int compareTo(OptionalTO o) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.nome.compareTo(o.getNome());
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("[nome=").append(nome).append(", descrizione=")
+		.append(descrizione).append(", costo=").append(costo)
+		.append(", id=").append(id).append(", tipoOptional=")
+		.append(tipoOptional).append(", statoOptional=")
+		.append(statoOptional).append("]");
+		return builder.toString();
+	}
+
 }

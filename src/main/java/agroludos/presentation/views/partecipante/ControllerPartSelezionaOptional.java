@@ -257,7 +257,7 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 		boolean res = false;
 		OptModel testMod = this.getOptMod(optMod);
 		if(testMod != null)
-			res = optMod.getNome().equalsIgnoreCase(testMod.getNome());
+			res = optMod.getOptTO().equals(testMod);
 		return res;
 	}
 

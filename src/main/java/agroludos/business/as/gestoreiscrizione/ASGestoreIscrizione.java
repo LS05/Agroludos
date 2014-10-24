@@ -34,7 +34,10 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 		IscrizioneDAO iscDAO = getIscrizioneDAO();
 
 		StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
-		StatoIscrizioneTO siTO = statoIscDAO.getAll().get(0);
+		
+		//TODO Controllo sugli stati (se il certificato è scaduto,
+		//l'iscrizione è sospesa.
+		StatoIscrizioneTO siTO = statoIscDAO.getAll().get(1);
 
 		iscTO.setStatoIscrizione(siTO);
 
