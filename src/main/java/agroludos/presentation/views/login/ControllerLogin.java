@@ -1,7 +1,6 @@
 package agroludos.presentation.views.login;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.EventHandler;
@@ -22,7 +21,6 @@ import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.SuccessTO;
-import agroludos.to.TipoUtenteTO;
 import agroludos.to.UtenteTO;
 
 public class ControllerLogin extends AgroludosController implements Initializable{
@@ -61,7 +59,7 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	}
 	
 	@FXML protected void btnPswDimenticata(MouseEvent event) {
-		//TODO Gestire Servizio
+		nav.setVista("passwordDimenticata");
 	}
 
 	@FXML protected void btnRegistrati(MouseEvent event) {

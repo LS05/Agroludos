@@ -9,7 +9,7 @@ public abstract class AgroTable<T> extends TableView<T>{
 
 	abstract T getSelectedItem();
 
-	abstract void updateTable(String text);
+	public abstract void updateTable(String text);
 
 	public void hideColumn(String name){
 		TableColumn<T, ?> col = this.getTableColumnByName(name);

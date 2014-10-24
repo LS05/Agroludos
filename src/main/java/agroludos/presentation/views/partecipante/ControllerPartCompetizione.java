@@ -14,7 +14,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
@@ -24,7 +23,6 @@ import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
-import agroludos.to.OptionalTO;
 import agroludos.to.QuestionTO;
 
 public class ControllerPartCompetizione extends AgroludosController {
@@ -37,7 +35,6 @@ public class ControllerPartCompetizione extends AgroludosController {
 	@FXML private GridPane paneIscritti;
 	@FXML private GridPane paneTableOptional;
 	private TableOptional tableOptional;
-	private List<OptionalTO> listOpt;
 
 	//tabella iscrizioni alla competizione
 	@FXML private TableView<IscModel> tblIscritti;
@@ -72,11 +69,7 @@ public class ControllerPartCompetizione extends AgroludosController {
 	@FXML private Button btnVisualizzaIsc;
 	@FXML private Label lblEliminaIsc;
 
-	private Stage stage;
 
-	private AgroRequest richiesta;
-
-	private AgroResponse risposta;
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
