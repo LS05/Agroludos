@@ -19,6 +19,12 @@
 			<forward success="initView" failure="errorDialog" />
 		</from>
 	</command>
+		<command name="getUtenteByUsername">
+		<classe>agroludos.business.as.gestoreutente.LUtente</classe>
+		<from name="passwordDimenticata">
+			<forward success="login" failure="passwordDimenticata" />
+		</from>
+	</command>
 	<command name="autenticazioneUtente">
 		<classe>agroludos.business.as.gestoreutente.LUtente</classe>
 		<from name="login">

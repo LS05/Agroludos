@@ -16,6 +16,13 @@
 			<height>462</height>
 			<title>Agroludos | Login</title>
 		</view>
+		<view tipo="dialog">
+			<name>passwordDimenticata</name>
+			<url>/fxml/login/passwordDimenticata.fxml</url>
+			<width>600</width>
+			<height>462</height>
+			<title>Agroludos | Recupero Password</title>
+		</view>
 		<view tipo="controlView">
 			<name>session</name>
 			<url>/fxml/config/session.fxml</url>

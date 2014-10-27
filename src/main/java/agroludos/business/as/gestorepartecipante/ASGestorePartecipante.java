@@ -50,12 +50,12 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 	@Override
 	public PartecipanteTO modificaPartecipante(PartecipanteTO parto)
 			throws DatabaseException, ValidationException {
-		
+
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
 		this.validator.validate(parto);
-		
+
 		PartecipanteTO part = (PartecipanteTO)daoPar.update(parto);
-		
+
 		return part;
 	}
 
@@ -114,4 +114,7 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 		return certDao.getCertificato(parto.getSrc());
 
 	}
+
+	
+
 }

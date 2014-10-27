@@ -60,7 +60,7 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	}
 	
 	@FXML protected void btnPswDimenticata(MouseEvent event) {
-		//TODO Gestire Servizio
+		nav.setVista("passwordDimenticata");
 	}
 
 	@FXML protected void btnRegistrati(MouseEvent event) {

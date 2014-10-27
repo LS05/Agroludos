@@ -1,10 +1,14 @@
 package agroludos.business.as.gestoreutente;
 
+import java.io.IOException;
+
 import agroludos.business.as.AgroludosAS;
 import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.UserNotFoundException;
 import agroludos.integration.dao.db.DBDAOFactory;
+import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.integration.dao.db.UtenteDAO;
+import agroludos.to.PartecipanteTO;
 import agroludos.to.UtenteTO;
 import agroludos.utility.PasswordEncryption;
 
@@ -35,9 +39,15 @@ class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 
 		return res;
 	}
-
+	
 	@Override
-	public boolean nuovaRegistrazione() throws DatabaseException {
-		return true;
+	public UtenteTO getUtenteByUsername(UtenteTO uto)
+			throws DatabaseException, UserNotFoundException, IOException {
+
+		UtenteDAO<UtenteTO> daoUTO = this.getUtenteDAO();
+		UtenteTO user = daoUTO.getByUsername(uto.getUsername());
+
+		return user;
 	}
+	
 }
