@@ -21,10 +21,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 public class ControllerMdcMain extends ControllerUtenti{
-	private String viewName;
 	
 	@FXML private GridPane paneCompetizioni;
 
@@ -45,7 +43,6 @@ public class ControllerMdcMain extends ControllerUtenti{
 	private List<CompetizioneTO> listCmp;
 
 	private CmpModel cmpModelRow;
-	private CompetizioneTO cmpto;
 
 	private ManagerDiCompetizioneTO mdcTO;
 
@@ -103,7 +100,6 @@ public class ControllerMdcMain extends ControllerUtenti{
 	
 	@Override
 	public void initializeView(String viewName) {
-		this.viewName = viewName;
 		this.mdcTO = toFact.createMdCTO();
 		this.mdcTO = (ManagerDiCompetizioneTO) utente;
 

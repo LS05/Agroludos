@@ -196,6 +196,7 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 		return this.viewName;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();

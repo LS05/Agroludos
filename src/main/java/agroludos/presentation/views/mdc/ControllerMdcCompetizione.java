@@ -14,7 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -23,10 +23,7 @@ import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
-import agroludos.to.OptionalTO;
 import agroludos.to.QuestionTO;
-import agroludos.to.SuccessTO;
-import agroludos.to.TipiAgroludosTO;
 
 public class ControllerMdcCompetizione extends AgroludosController {
 
@@ -38,7 +35,6 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	@FXML private GridPane paneIscritti;
 	@FXML private GridPane paneTableOptional;
 	private TableOptional tableOptional;
-	private List<OptionalTO> listOpt;
 
 	//tabella iscrizioni alla competizione
 	@FXML private TableView<IscModel> tblIscritti;
@@ -72,12 +68,6 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	@FXML private Button btnAnnullaIsc;
 	@FXML private Button btnVisualizzaIsc;
 	@FXML private Label lblEliminaIsc;
-
-	private Stage stage;
-
-	private AgroRequest richiesta;
-
-	private AgroResponse risposta;
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
@@ -166,11 +156,11 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		IscrizioneTO iscto = this.tblIscritti.getSelectionModel().getSelectedItem().getIscrizioneTO();
 		QuestionTO question = toFact.createQuestionTO();
 		question.setQuestion("Vuoi eliminare l'iscrizione selezionata?");
-		
+
 		question.setDataTO(iscto);
 		question.setRequest("eliminaIscrizione");
 		question.setViewName(this.viewName);
-		
+
 		nav.setVista("questionDialog", question);
 
 
@@ -178,14 +168,14 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	}
 
 	@FXML protected void btnAnnullaCmp(MouseEvent event) {
-		
+
 		QuestionTO question = toFact.createQuestionTO();
 		question.setQuestion("Vuoi eliminare la competizione?");
-		
+
 		question.setDataTO(this.cmpto);
 		question.setRequest("annullaCompetizione");
 		question.setViewName(this.viewName);
-		
+
 		nav.setVista("questionDialog", question);
 
 	}

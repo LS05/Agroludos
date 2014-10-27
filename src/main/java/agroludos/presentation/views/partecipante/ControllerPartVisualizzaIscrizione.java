@@ -9,7 +9,7 @@ import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.to.AgroludosTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.StatoIscrizioneTO;
-import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -47,7 +47,7 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController {
 
 	private AgroResponse risposta;
 	private AgroRequest richiesta;
-	
+
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;

@@ -188,6 +188,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		final String viewNameSupp = this.viewName;
 		listViewOpt.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public void handle(MouseEvent event) {
 				ListView<String> source = (ListView<String>)event.getSource();
@@ -212,6 +213,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 		this.listViewComp.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public void handle(MouseEvent event) {
 				ListView<String> source = (ListView<String>)event.getSource();

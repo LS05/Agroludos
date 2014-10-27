@@ -43,9 +43,6 @@ public class ControllerMdcIscrizione extends AgroludosController {
 	@FXML private GridPane paneTableOptionalScelti;
 	private TableOptional tableOptional;
 
-	private AgroResponse risposta;
-	private AgroRequest richiesta;
-
 	@FXML private void btnVisualizzaCertificato(){
 		nav.setVista("visualizzaSRC",this.iscto.getPartecipante());
 	}

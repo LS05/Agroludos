@@ -267,6 +267,7 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 		return this.viewName;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
