@@ -2,6 +2,7 @@ package agroludos.business.validator.rules.partecipante;
 
 import java.io.IOException;
 
+import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.business.validator.rules.partecipante.PartCFRule;
 import agroludos.business.validator.rules.partecipante.PartEmailRule;
 import agroludos.business.validator.rules.partecipante.PartNameRule;
@@ -15,31 +16,36 @@ class PartRulesFactoryImpl implements PRulesFactory {
 	private static PartSrcRule srcRule;
 	private static PartTesRule tesRule;
 
-	public PartEmailRule getEmailRule() throws IOException{
+	@Override
+	public AgroludosRule getEmailRule() throws IOException{
 		if(emailRule == null)
 			emailRule = new PartEmailRule();
 		return emailRule;	
 	}
 
-	public PartNameRule getNameRule() throws IOException{
+	@Override
+	public AgroludosRule getNameRule() throws IOException{
 		if(nameRule == null)
 			nameRule = new PartNameRule();
 		return nameRule;	
 	}
 
-	public PartCFRule getCfRule() throws IOException{
+	@Override
+	public AgroludosRule getCfRule() throws IOException{
 		if(cfRule == null)
 			cfRule = new PartCFRule();
 		return cfRule;	
 	}
 
-	public PartSrcRule getSrcRule() throws IOException {
+	@Override
+	public AgroludosRule getSrcRule() throws IOException {
 		if(srcRule == null)
 			srcRule = new PartSrcRule();
 		return srcRule;
 	}
 
-	public PartTesRule getTesRule() throws IOException {
+	@Override
+	public AgroludosRule getTesRule() throws IOException {
 		if(tesRule == null)
 			tesRule = new PartTesRule();
 		return tesRule;

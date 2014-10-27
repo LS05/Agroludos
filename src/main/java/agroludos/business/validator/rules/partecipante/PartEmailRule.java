@@ -8,7 +8,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 
-public class PartEmailRule extends AgroludosRule {
+class PartEmailRule extends AgroludosRule {
 	StringValidator strValidator;
 	
 	PartEmailRule() throws IOException {

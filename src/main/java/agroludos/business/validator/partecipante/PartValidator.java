@@ -3,29 +3,26 @@ package agroludos.business.validator.partecipante;
 import java.io.IOException;
 
 import agroludos.business.validator.AgroludosValidator;
+import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.business.validator.rules.partecipante.PRulesFactory;
-import agroludos.business.validator.rules.partecipante.PartCFRule;
-import agroludos.business.validator.rules.partecipante.PartEmailRule;
-import agroludos.business.validator.rules.partecipante.PartNameRule;
-import agroludos.business.validator.rules.partecipante.PartSrcRule;
-import agroludos.business.validator.rules.partecipante.PartTesRule;
 import agroludos.exceptions.ValidationException;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.TOFactory;
 
-public class PartValidator implements AgroludosValidator{
+class PartValidator implements AgroludosValidator{
 	private PRulesFactory rulesFact;
-	private PartNameRule nameRule; 
-	private PartEmailRule emailRule;
-	private PartCFRule cfRule;
-	private PartSrcRule srcRule;
-	private PartTesRule tesRule;
 	private TOFactory toFact;
-
-	public PartValidator(PRulesFactory rulesFactory) throws IOException{
+	private AgroludosRule nameRule; 
+	private AgroludosRule emailRule;
+	private AgroludosRule cfRule;
+	private AgroludosRule srcRule;
+	private AgroludosRule tesRule;
+	
+	PartValidator(PRulesFactory rulesFactory, TOFactory toFactory) throws IOException{
 		this.rulesFact = rulesFactory;
+		this.toFact = toFactory;
 		this.nameRule = this.rulesFact.getNameRule();
 		this.emailRule = this.rulesFact.getEmailRule();
 		this.cfRule = this.rulesFact.getCfRule();
@@ -44,9 +41,5 @@ public class PartValidator implements AgroludosValidator{
 		this.nameRule.validate(partecipante, errorTO);
 		if(errorTO.hasErrors())
 			throw new ValidationException(errorTO);
-	}
-
-	public void setToFact(TOFactory toFact) {
-		this.toFact = toFact;
 	}
 }

@@ -9,7 +9,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 
-public class PartSrcRule extends AgroludosRule {
+class PartSrcRule extends AgroludosRule {
 
 	protected PartSrcRule() throws IOException {
 		super();

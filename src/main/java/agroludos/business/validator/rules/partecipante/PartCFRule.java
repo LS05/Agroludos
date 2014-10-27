@@ -8,7 +8,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 
-public class PartCFRule extends AgroludosRule {
+class PartCFRule extends AgroludosRule {
 	StringValidator strValidator;
 	
 	PartCFRule() throws IOException{
