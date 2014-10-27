@@ -24,6 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -36,45 +37,44 @@ import agroludos.to.OptionalTO;
 import agroludos.to.TipoOptionalTO;
 
 public class ControllerPartSelezionaOptional extends AgroludosController implements Initializable{
+
 	private String viewName;
 
 	@FXML private Label lblTipoOptional;
 	@FXML private Label lblPassi;
-
+	@FXML private Label lblTotaleComp;
+	@FXML private Label lblTotaleOpt;
 	@FXML private TableView<OptModel> tableOptScelti;
 	@FXML private TableColumn<OptModel, String> nomeOsCol;
 	@FXML private TableColumn<OptModel, String> prezzoOsCol;
 	@FXML private TableColumn<OptModel, String> btnRemCol;
-	@FXML private Label lblTotaleOpt;
 	@FXML private GridPane paneOptionalScelti;
-	@FXML private Label lblTotaleComp;
-	private ObservableList<OptModel> optSceltiData;
-
-	private TableOptional tableOptional;
 	@FXML private GridPane paneTableOptional;
-	private Map<TipoOptionalTO, List<OptionalTO>> mainData;
-
 	@FXML private Button btnIndietro;
 	@FXML private Button btnAvanti;
 	@FXML private Button btnConferma;
 
-	private CompetizioneTO mainComp;
-	private List<OptionalTO> optComp;
-
-	private IscrizioneTO mainIscr;
-
-	private List<TipoOptionalTO> listTipiOpt;
-
+	private ObservableList<OptModel> optSceltiData;
+	private TableOptional tableOptional;
+	private Map<TipoOptionalTO, List<OptionalTO>> mainData;
 	private Map<String, OptionalTO> optScelti;
 	private Map<String, Integer> indScelti;
+	private List<OptionalTO> optComp;
+	private List<TipoOptionalTO> listTipiOpt;
+
+	private CompetizioneTO mainComp;
+	private IscrizioneTO mainIscr;
 
 	private Integer nPassi;
 	private int passoCorrente;
-
 	private double totaleOpt;
-	private double totComp;
+	private Double totComp;
 
 	private ResourceBundle res;
+
+	private AgroResponse risposta;
+
+	private AgroRequest richiesta;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resources) {
@@ -89,15 +89,13 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
 		if(mainTO instanceof IscrizioneTO){
-
 			this.mainIscr = (IscrizioneTO) mainTO;
-
+			this.lblTotaleOpt.setText("0,00");
+			this.totaleOpt = 0.0;			
+			this.totComp = 0.0;
 			this.optSceltiData = FXCollections.observableArrayList();
-
 			this.nomeOsCol.setCellValueFactory(new PropertyValueFactory<OptModel, String>("nome"));
-
 			this.prezzoOsCol.setCellValueFactory(new PropertyValueFactory<OptModel, String>("costo"));
-
 			Callback<TableColumn<OptModel, String>, TableCell<OptModel, String>> cellFactory =
 					new Callback<TableColumn<OptModel, String>, TableCell<OptModel, String>>() {
 				@Override
@@ -105,42 +103,28 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 					return new DeleteTableCell();
 				}
 			};
-
 			this.btnRemCol.setCellValueFactory(new PropertyValueFactory<OptModel, String>("nome"));
-
 			this.btnRemCol.setCellFactory(cellFactory);
-
 			this.tableOptScelti.getItems().setAll(this.optSceltiData);
-
 			this.mainComp = this.mainIscr.getCompetizione();
-
 			this.optComp = this.mainComp.getAllOptionals();
-
 			this.mainData = new HashMap<TipoOptionalTO, List<OptionalTO>>();
-
 			this.optScelti = new HashMap<String, OptionalTO>();
 			this.indScelti = new HashMap<String, Integer>();
-
 			this.passoCorrente = 0;
-
 			if(this.paneOptionalScelti.visibleProperty().getValue()){
 				this.paneOptionalScelti.setVisible(false);
 			}
-
 			this.btnAvanti.setVisible(true);
 			this.btnConferma.setVisible(false);
 			this.btnIndietro.setVisible(true);
 			this.btnIndietro.setDisable(true);
-
 			this.initData();
-
 			this.setLabelDialog();
-
 			this.tableOptional = new TableOptional();
 			this.tableOptional.hideColumn(3);
 			this.paneTableOptional.getChildren().add(this.tableOptional);
-			this.paneTableOptional.setVisible(true);		
-
+			this.paneTableOptional.setVisible(true);
 			this.setTable((TipoOptionalTO)this.listTipiOpt.get(this.passoCorrente));
 
 			this.tableOptional.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -170,6 +154,8 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 				this.btnConferma.setVisible(true);
 				for(OptionalTO opt : this.mainIscr.getAllOptionals()){
 					OptModel o = new OptModel(opt);
+					this.totaleOpt += o.getCosto();
+					this.totComp = this.mainComp.getCosto() + this.totaleOpt;
 					this.tableOptScelti.getItems().add(o);
 					this.optScelti.put(opt.getTipoOptional().getNome(), opt);
 				}
@@ -207,7 +193,11 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 
 					DecimalFormat df = new DecimalFormat("#.00");
 					totaleOpt -= optTO.getCosto();
-					lblTotaleOpt.setText(df.format(totaleOpt));
+					if(optScelti.size() == 0){
+						lblTotaleOpt.setText("0,00");
+					} else {
+						lblTotaleOpt.setText(df.format(totaleOpt));
+					}
 
 					totComp = totaleOpt + mainComp.getCosto();
 					lblTotaleComp.setText(df.format(totComp));
@@ -399,11 +389,17 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 	}
 
 	@FXML protected void btnConferma(MouseEvent event) {
+
 		this.mainIscr.clearOptionals();
 		for (OptionalTO opt : this.optScelti.values()) {
 			this.mainIscr.addOptional(opt);
 		}
+		this.mainIscr.setCosto(this.totComp);
 		this.close();
+
+		this.risposta = respFact.createResponse();
+		this.richiesta = this.getRichiesta(this.mainIscr, "modificaIscrizione", this.viewName);
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
 	@Override

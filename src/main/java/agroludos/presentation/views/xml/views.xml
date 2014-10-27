@@ -192,5 +192,11 @@
 			<width>1092</width>
 			<height>644</height>
 		</view>
+		<view tipo="dialog">
+			<name>partMostraIscrizione</name>
+			<url>/fxml/partecipante/partVisualizzaIscrizione.fxml</url>
+			<width>800</width>
+			<height>600</height>
+		</view>
 	</views>
 </agro-views>

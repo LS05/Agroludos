@@ -91,7 +91,7 @@
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               </columnConstraints>
                               <padding>
-                                <Insets left="10.0" right="10.0" />
+                                <Insets left="10.0" right="10.0" top="10.0" />
                               </padding>
                               <rowConstraints>
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -135,7 +135,11 @@
                             <Insets left="10.0" />
                           </GridPane.margin>
                         </Label>
-                        <Label id="tblStato" fx:id="lblStato" font="$x1" prefWidth="159.0" text="Stato" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.margin="$x7" />
+                        <Label id="tblStato" fx:id="lblStato" alignment="CENTER_RIGHT" font="$x1" prefWidth="159.0" text="Stato" textAlignment="LEFT" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                          <GridPane.margin>
+                            <Insets right="23.0" />
+                          </GridPane.margin>
+                        </Label>
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="459.0" minWidth="10.0" prefWidth="401.0" />
@@ -159,21 +163,14 @@
                     <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <GridPane prefHeight="66.0" prefWidth="547.0" GridPane.rowIndex="3">
-                  <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                </GridPane>
+                <Button mnemonicParsing="false" onMouseClicked="#btnIscrivitiClicked" prefHeight="47.0" prefWidth="207.0" text="%key138" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="281.0" minHeight="0.0" prefHeight="76.0" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="50.0" minHeight="47.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="281.0" minHeight="0.0" prefHeight="78.0" valignment="TOP" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="563.0" minHeight="0.0" prefHeight="381.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="610.0" minHeight="10.0" prefHeight="113.0" vgrow="SOMETIMES" />
               </rowConstraints>
@@ -201,19 +198,19 @@
                 </TableView>
                 <GridPane alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                   <children>
-                    <Label text="%key122" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="%key35" GridPane.columnIndex="0" GridPane.rowIndex="0">
                       <font>
                         <Font name="System Bold" size="19.0" fx:id="x5" />
                       </font>
                       <GridPane.margin>
-                        <Insets left="20.0" />
+                        <Insets left="10.0" />
                       </GridPane.margin>
                     </Label>
-                    <Label fx:id="lblNiscritti" font="$x5" text="%key35" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Label fx:id="lblNiscritti" font="$x5" text="0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                   </children>
                   <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" prefWidth="91.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="414.0" minWidth="10.0" prefWidth="414.0" />
                   </columnConstraints>
                   <rowConstraints>
                     <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="13.0" vgrow="SOMETIMES" />

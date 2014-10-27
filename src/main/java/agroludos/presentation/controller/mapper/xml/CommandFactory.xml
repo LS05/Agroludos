@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <commands xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<!-- Cambiare: <classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe> 
-		<classe>nomeDellaClass</classe> ??? -->
 	<command name="checkConfigurazione">
 		<classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe>
 		<from name="mainController">
@@ -239,14 +237,23 @@
 	</command>
 	<command name="inserisciIscrizione">
 		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
-		<from name="mostraCompPart">
-			<forward success="partecipante" failure="mostraCompPart" />
+		<from name="mostraIscrPart">
+			<forward success="partMostraCompetizione" failure="mostraIscrPart" />
 		</from>
 	</command>
 	<command name="modificaIscrizione">
 		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
 		<from name="modificaOptionalPartecipante">
 			<forward success="mostraIscrizione" failure="modificaOptionalPartecipante" />
+		</from>
+		<from name="selezionaOptionalPart">
+			<forward success="partMostraIscrizione" failure="partMostraIscrizione" />
+		</from>
+	</command>
+	<command name="getAllStatoIscrizione">
+		<classe>agroludos.business.as.gestorestatoiscrizione.LStatoIscrizione</classe>
+		<from name="partMostraIscrizione">
+			<forward success="partMostraIscrizione" failure="partMostraIscrizione" />
 		</from>
 	</command>
 </commands>

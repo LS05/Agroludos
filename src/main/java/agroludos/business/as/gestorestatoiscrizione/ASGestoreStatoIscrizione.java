@@ -21,5 +21,4 @@ public class ASGestoreStatoIscrizione extends AgroludosAS implements LStatoIscri
 		return dbDAOFact.getStatoIscrizioneDAO();
 	}
 
-
 }

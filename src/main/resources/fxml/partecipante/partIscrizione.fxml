@@ -25,11 +25,6 @@
             </Label>
             <GridPane GridPane.rowIndex="2">
               <children>
-                <FlowPane alignment="CENTER" prefHeight="72.0" prefWidth="569.0" GridPane.rowIndex="1">
-                  <children>
-                    <Button id="btnIscriviti" mnemonicParsing="false" onMouseClicked="#btnIscrivitiClicked" prefHeight="32.0" prefWidth="223.0" text="%key138" />
-                  </children>
-                </FlowPane>
                 <GridPane>
                   <children>
                     <GridPane prefHeight="230.0" prefWidth="510.0">
@@ -118,6 +113,24 @@
                   <rowConstraints>
                     <RowConstraints maxHeight="210.0" minHeight="10.0" prefHeight="164.0" vgrow="SOMETIMES" />
                     <RowConstraints maxHeight="179.0" minHeight="10.0" prefHeight="169.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane GridPane.columnIndex="0" GridPane.rowIndex="1">
+                  <children>
+                    <Button id="btnIscriviti" mnemonicParsing="false" onMouseClicked="#btnIscrivitiClicked" prefHeight="26.0" prefWidth="166.0" text="%key68" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+                    <Button mnemonicParsing="false" onMouseClicked="#btnAnnullaClicked" prefHeight="26.0" text="%key40" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+                      <GridPane.margin>
+                        <Insets />
+                      </GridPane.margin>
+                    </Button>
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="383.0" minWidth="10.0" prefWidth="372.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.0" minWidth="10.0" prefWidth="276.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="179.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
               </children>

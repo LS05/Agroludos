@@ -7,6 +7,7 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.components.table.TableCompetizioni;
 import agroludos.presentation.views.components.table.TableIscrizioni;
 import agroludos.presentation.views.components.tablemodel.CmpModel;
+import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.PartecipanteTO;
@@ -36,6 +37,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti{
 	private List<CompetizioneTO> listComp;
 	
 	private CmpModel cmpModelRow;
+	private IscModel iscModelRow;
 
 	@Override
 	public void initializeView(String viewName) {
@@ -47,6 +49,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti{
 		this.currUser = (PartecipanteTO)utente;
 		this.tableIscrizioni = new TableIscrizioni();
 		this.tableCompetizioni = new TableCompetizioni();
+		this.tableCompetizioni.hideColumn(3);
 		this.tableIscrizioni.setAll(this.currUser.getAllIscrizioni());
 		this.paneIscrizioni.add(this.tableIscrizioni, 0, 1);
 		this.richiesta = this.getRichiesta("getCompetizioniAttive", this.viewName);
@@ -57,6 +60,20 @@ public class ControllerPartecipanteMain extends ControllerUtenti{
 
 		this.paneCompetizioni.setVisible(true);
 		this.paneIscrizioni.setVisible(false);
+		
+		this.tableIscrizioni.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			
+			@SuppressWarnings("unchecked")
+			@Override
+			public void handle(MouseEvent event) {
+				if (event.getClickCount() > 1) {
+					TableView<IscModel> table = (TableView<IscModel>) event.getSource();
+					iscModelRow = table.getSelectionModel().getSelectedItem();
+					if(cmpModelRow != null)
+						nav.setVista("partMostraIscrizione", iscModelRow.getIscrizioneTO());
+				}
+			}
+		});
 		
 		this.tableCompetizioni.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			

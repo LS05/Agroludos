@@ -73,12 +73,12 @@ public class TableOptional extends AgroTable<OptModel>{
 //		});
 	}
 
-	public void setAll(List<OptionalTO> listComp){
+	public void setAll(List<OptionalTO> list){
 		this.mainData = FXCollections.observableArrayList();
 		this.filteredData = FXCollections.observableArrayList();
 		OptModel partModel = null;
 
-		for(OptionalTO optional : listComp){
+		for(OptionalTO optional : list){
 			partModel = new OptModel(optional);
 			this.mainData.add(partModel);
 		}
