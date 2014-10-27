@@ -36,6 +36,32 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 	
 	private UtenteTO uTO;
 
+	@Override
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
+
+		this.txtUsername.clear();
+		this.txtUsername.setPromptText(this.res.getString("key74"));
+		this.agroLogoPane.setFocusTraversable(true);
+		this.uTO = toFact.createUTO();
+
+	}
+	
+	@Override
+	public void initializeView(AgroludosTO mainTO) {
+		// TODO Auto-generated method stub
+	}
+	
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
+	
+	@Override
+	public void initialize(URL url, ResourceBundle resources) {
+		this.res = resources;		
+	}
+	
 	@FXML protected void txtKeyPressed(javafx.scene.input.KeyEvent evt) {
 		if (evt.getCode() == KeyCode.ENTER)
 			eseguiRipristino();
@@ -62,26 +88,7 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 	
 
 	
-	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
-
-		this.txtUsername.clear();
-		this.txtUsername.setPromptText(this.res.getString("key74"));
-		this.agroLogoPane.setFocusTraversable(true);
-		this.uTO = toFact.createUTO();
-
-	}
 	
-	@Override
-	public void initializeView(AgroludosTO mainTO) {
-		// TODO Auto-generated method stub
-	}
-	
-	@Override
-	protected String getViewName() {
-		return this.viewName;
-	}
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
@@ -97,8 +104,5 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 		}
 	}
 
-	@Override
-	public void initialize(URL url, ResourceBundle resources) {
-		this.res = resources;		
-	}
+
 }

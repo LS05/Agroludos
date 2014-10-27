@@ -1,6 +1,8 @@
 package agroludos.presentation.views.mdc;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
@@ -15,6 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -22,7 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
-public class ControllerMdcMain extends ControllerUtenti{
+public class ControllerMdcMain extends ControllerUtenti implements Initializable{
 	
 	@FXML private GridPane paneCompetizioni;
 
@@ -45,7 +48,52 @@ public class ControllerMdcMain extends ControllerUtenti{
 	private CmpModel cmpModelRow;
 
 	private ManagerDiCompetizioneTO mdcTO;
+	
+	private ResourceBundle res;
 
+	
+	@Override
+	public void initializeView(String viewName) {
+		this.mdcTO = toFact.createMdCTO();
+		this.mdcTO = (ManagerDiCompetizioneTO) utente;
+
+		this.listCmp = this.mdcTO.getAllCompetizioniAttive();
+		this.listaTabCmp = this.getListTabellaCmp();
+		this.initCmpTable();
+	}
+
+
+	//chiamato dai set vista con parametro per aggiornare la tabella
+	@Override
+	public void initializeView(AgroludosTO mainTO) {
+		if(mainTO instanceof ManagerDiCompetizioneTO){
+			this.mdcTO = toFact.createMdCTO();
+			this.mdcTO = (ManagerDiCompetizioneTO) mainTO;
+
+			this.listCmp = this.mdcTO.getAllCompetizioniAttive();
+			this.listaTabCmp = this.getListTabellaCmp();
+			this.initCmpTable();
+		}else if(mainTO instanceof CompetizioneTO){
+						
+			CompetizioneTO cmpTO = (CompetizioneTO) mainTO;
+			CmpModel cmp = this.tableCompetizione.getItems().get(this.tableCompetizione.getSelectionModel().getSelectedIndex());
+			cmp.setCompetizioneTO(cmpTO);
+			cmp.setData(cmpTO.getData().toString());
+			cmp.setId(cmpTO.getId().toString());
+			cmp.setNiscritti(String.valueOf(cmpTO.getAllIscrizioniAttive().size()));
+			cmp.setNmax(String.valueOf(cmpTO.getNmax()));
+			cmp.setNmin(String.valueOf(cmpTO.getNmin()));
+			cmp.setNome(cmpTO.getNome());
+			cmp.setStato(cmpTO.getStatoCompetizione().getNome());
+			cmp.setTipo(cmpTO.getTipoCompetizione().getNome());			
+		}
+	}
+	
+	@Override
+	public void initialize(URL url, ResourceBundle resources) {
+		this.res = resources;		
+	}
+	
 	@FXML protected void btnPaneComptizioni(MouseEvent event) {
 		this.paneCompetizioni.setVisible(true);
 	}
@@ -98,46 +146,12 @@ public class ControllerMdcMain extends ControllerUtenti{
 		return res;
 	}
 	
-	@Override
-	public void initializeView(String viewName) {
-		this.mdcTO = toFact.createMdCTO();
-		this.mdcTO = (ManagerDiCompetizioneTO) utente;
-
-		this.listCmp = this.mdcTO.getAllCompetizioniAttive();
-		this.listaTabCmp = this.getListTabellaCmp();
-		this.initCmpTable();
-	}
-
-
-	//chiamato dai set vista con parametro per aggiornare la tabella
-	@Override
-	public void initializeView(AgroludosTO mainTO) {
-		if(mainTO instanceof ManagerDiCompetizioneTO){
-			this.mdcTO = toFact.createMdCTO();
-			this.mdcTO = (ManagerDiCompetizioneTO) mainTO;
-
-			this.listCmp = this.mdcTO.getAllCompetizioniAttive();
-			this.listaTabCmp = this.getListTabellaCmp();
-			this.initCmpTable();
-		}else if(mainTO instanceof CompetizioneTO){
-						
-			CompetizioneTO cmpTO = (CompetizioneTO) mainTO;
-			CmpModel cmp = this.tableCompetizione.getItems().get(this.tableCompetizione.getSelectionModel().getSelectedIndex());
-			cmp.setCompetizioneTO(cmpTO);
-			cmp.setData(cmpTO.getData().toString());
-			cmp.setId(cmpTO.getId().toString());
-			cmp.setNiscritti(String.valueOf(cmpTO.getAllIscrizioniAttive().size()));
-			cmp.setNmax(String.valueOf(cmpTO.getNmax()));
-			cmp.setNmin(String.valueOf(cmpTO.getNmin()));
-			cmp.setNome(cmpTO.getNome());
-			cmp.setStato(cmpTO.getStatoCompetizione().getNome());
-			cmp.setTipo(cmpTO.getTipoCompetizione().getNome());			
-		}
-	}
+	
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		if(request.getCommandName().equals("annullaCompetizione")){
+		String commandName = request.getCommandName();
+		if(commandName.equals( this.reqProperties.getProperty("annullaCompetizione"))){
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){			
 				this.listaTabCmp.clear();
@@ -150,7 +164,7 @@ public class ControllerMdcMain extends ControllerUtenti{
 
 				nav.setVista("successDialog",succMessage);
 			}
-		}else if(request.getCommandName().equals("eliminaIscrizione")){
+		}else if(commandName.equals( this.reqProperties.getProperty("eliminaIscrizione"))){
 			Object res = response.getRespData();
 			if(res instanceof IscrizioneTO){
 				this.listaTabCmp.clear();
@@ -161,16 +175,16 @@ public class ControllerMdcMain extends ControllerUtenti{
 				nav.setVista("mostraCmp",((IscrizioneTO) res).getCompetizione());
 		
 				SuccessTO succMessage = toFact.createSuccessTO();
-				succMessage.setMessage("Iscrizione eliminata!");
+				succMessage.setMessage(this.res.getString("key123"));
 				nav.setVista("successDialog",succMessage);
 			}
-		}else if(request.getCommandName().equals( this.reqProperties.getProperty("inserisciCompetizione") )){
+		}else if(commandName.equals( this.reqProperties.getProperty("inserisciCompetizione") )){
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){
 				this.listaTabCmp.clear();
 				this.initializeView(((CompetizioneTO) res).getManagerDiCompetizione());			
 			}
-		}else if(request.getCommandName().equals("modificaCompetizione")){
+		}else if(commandName.equals(this.reqProperties.getProperty("modificaCompetizione"))){
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){	
 				this.initializeView((CompetizioneTO)res);

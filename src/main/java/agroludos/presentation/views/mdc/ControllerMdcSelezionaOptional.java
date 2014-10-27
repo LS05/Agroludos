@@ -112,6 +112,17 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 		this.tableOptional.hideColumn("Tipo");
 		
 	}
+	
+	@Override
+	protected void initializeView(String viewName) {
+		this.viewName = viewName;
+
+	}
+
+	@Override
+	public String getViewName() {
+		return this.viewName;
+	}
 
 	private void setLabelDialog(){
 		//label passi e label tipo optioal
@@ -185,16 +196,6 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 
 
 
-	@Override
-	protected void initializeView(String viewName) {
-		this.viewName = viewName;
-
-	}
-
-	@Override
-	public String getViewName() {
-		return this.viewName;
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override

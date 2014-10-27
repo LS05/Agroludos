@@ -1,11 +1,14 @@
 package agroludos.presentation.views.mdc;
 
 import java.math.BigDecimal;
+import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
@@ -23,7 +26,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.SuccessTO;
 
-public class ControllerMdcModificaCompetizione extends AgroludosController{
+public class ControllerMdcModificaCompetizione extends AgroludosController implements Initializable{
 	private String viewName;
 
 	@FXML private CompetizioneTO cmpto;
@@ -43,6 +46,8 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
+
+	private ResourceBundle res;
 
 	@Override
 	public void initializeView(String viewName) {
@@ -83,6 +88,16 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		}
 	}
 
+	@Override
+	public void initialize(URL url, ResourceBundle resources) {
+		this.res = resources;		
+	}
+	
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
+	
 	@FXML private void btnSelezioneOpt(){
 		nav.setVista("selezionaOptional", this.cmpto);
 	}
@@ -107,23 +122,20 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		Object res = this.risposta.getRespData();
 		if(res instanceof CompetizioneTO){			
 			SuccessTO succMessage = toFact.createSuccessTO();
-			succMessage.setMessage("Modifica avvenuta con successo!");
+			succMessage.setMessage(this.reqProperties.getProperty(this.res.getString("key99")));
 			nav.setVista("successDialog",succMessage);
 		}
 
 		this.close();
 	}
 
-	@Override
-	protected String getViewName() {
-		return this.viewName;
-	}
+
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if(commandName.equals("modificaCompetizione")){
+		if(commandName.equals( this.reqProperties.getProperty("modificaCompetizione"))){
 			System.out.println("errore nella modifica");
 		}
 	}

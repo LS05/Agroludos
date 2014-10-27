@@ -40,6 +40,45 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
+	
+	
+	@Override
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
+
+		final Stage stage = nav.getStage(viewName);
+		final String mainView = viewName;
+		//aggiungo l'evento close vista quando si chiude lo stage
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent we) {
+				//TODO eliminare stampa
+				nav.closeVista(mainView);
+			}
+		}); 
+		
+		
+		this.agroLogoPane.setFocusTraversable(true);
+		this.txtUsername.setText("LucaS05");
+		this.txtPassword.setText("agroludos");
+	}
+	
+	@Override
+	public void initializeView(AgroludosTO mainTO) {
+		// TODO Auto-generated method stub
+	}
+	
+
+	@Override
+	public void initialize(URL url, ResourceBundle resources) {
+		this.res = resources;		
+	}
+	
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
+
+	
 
 	@FXML protected void txtKeyPressed(javafx.scene.input.KeyEvent evt) {
 		if (evt.getCode() == KeyCode.ENTER)
@@ -67,36 +106,7 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 		nav.setVista("nuovaRegistrazione");
 	}
 	
-	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
-
-		final Stage stage = nav.getStage(viewName);
-		final String mainView = viewName;
-		//aggiungo l'evento close vista quando si chiude lo stage
-		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			public void handle(WindowEvent we) {
-				//TODO eliminare stampa
-				nav.closeVista(mainView);
-			}
-		}); 
-		
-		
-		this.agroLogoPane.setFocusTraversable(true);
-		this.txtUsername.setText("LucaS05");
-		this.txtPassword.setText("agroludos");
-	}
 	
-	@Override
-	public void initializeView(AgroludosTO mainTO) {
-		// TODO Auto-generated method stub
-	}
-	
-	@Override
-	protected String getViewName() {
-		return this.viewName;
-	}
-
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
@@ -107,24 +117,20 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 				succMessage.setMessage(this.res.getString("key152"));
 				nav.setVista("successDialog",succMessage);
 			}
-		}else if(request.getCommandName().equals("autenticazioneUtente")){
+		}else if(commandName.equals( this.reqProperties.getProperty("autenticazioneUtente") )){
 			Object res = response.getRespData();
 			if(res instanceof String){
 				String errMsg = (String)res;
 				this.lblErroreLogin.setVisible(true);
 				this.lblErroreLogin.setText(errMsg);
 			}
-		}else if(request.getCommandName().equals("sessione.managerDiSistema") ||
-				request.getCommandName().equals("sessione.managerDiCompetizione") ||
-				request.getCommandName().equals("sessione.partecipante")){
+		}else if(commandName.equals( this.reqProperties.getProperty("sessione.managerDiSistema") )||
+				commandName.equals( this.reqProperties.getProperty("sessione.managerDiCompetizione") )||
+						commandName.equals( this.reqProperties.getProperty("sessione.partecipante"))){
 			//TODO exception??
 			System.out.println("errore nella creazione della sessione");
 			
 		}
 	}
 
-	@Override
-	public void initialize(URL url, ResourceBundle resources) {
-		this.res = resources;		
-	}
 }

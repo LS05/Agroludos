@@ -68,6 +68,18 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 		
 	}
 	
+
+	@Override
+	protected void initializeView(String viewName) {
+		this.viewName = viewName;
+
+	}
+
+	@Override
+	public String getViewName() {
+		return this.viewName;
+	}
+	
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
 		this.mainIsc = (IscrizioneTO) mainTO;
@@ -256,16 +268,6 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 
 
 
-	@Override
-	protected void initializeView(String viewName) {
-		this.viewName = viewName;
-
-	}
-
-	@Override
-	public String getViewName() {
-		return this.viewName;
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override
