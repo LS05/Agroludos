@@ -191,12 +191,12 @@
                                 <Insets left="10.0" />
                               </GridPane.margin>
                             </Label>
-                            <Button fx:id="btnVisualizzaCertificato" mnemonicParsing="false" onMouseClicked="#btnVisualizzaCertificato" styleClass="mainBtn, btnVisualizzaSrc" text="%key13" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                            <Button fx:id="btnVisualizzaCertificato" mnemonicParsing="false" onMouseClicked="#btnVisualizzaCertificato" styleClass="mainBtn, btnVisualizzaSrc" text="%key13" visible="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                               <GridPane.margin>
                                 <Insets right="10.0" />
                               </GridPane.margin>
                             </Button>
-                            <Button id="btnVisualizzaCertificato" mnemonicParsing="false" onMouseClicked="#btnVisualizzaCertificato" styleClass="mainBtn, btnVisualizzaSrc" text="%key154" visible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                            <Button id="btnVisualizzaCertificato" mnemonicParsing="false" onMouseClicked="#btnVisualizzaCertificato" styleClass="mainBtn, btnVisualizzaSrc" text="%key158" visible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                               <GridPane.margin>
                                 <Insets right="10.0" />
                               </GridPane.margin>
