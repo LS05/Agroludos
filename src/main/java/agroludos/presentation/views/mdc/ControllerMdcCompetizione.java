@@ -1,11 +1,14 @@
 package agroludos.presentation.views.mdc;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -14,7 +17,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -24,8 +26,9 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.QuestionTO;
+import agroludos.to.SuccessTO;
 
-public class ControllerMdcCompetizione extends AgroludosController {
+public class ControllerMdcCompetizione extends AgroludosController implements Initializable{
 
 	private String viewName;
 
@@ -69,6 +72,8 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	@FXML private Button btnVisualizzaIsc;
 	@FXML private Label lblEliminaIsc;
 
+	private ResourceBundle res;
+
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
 		//inizializzazione interfaccia
@@ -108,6 +113,23 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		this.tableOptional.hideColumn("Descrizione");
 
 	}
+	
+	@Override
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
+
+	}
+
+	@Override
+	public void initialize(URL url, ResourceBundle resources) {
+		this.res = resources;		
+	}
+	
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
+
 
 	private ObservableList<IscModel> getListTabellaIsc(){
 		ObservableList<IscModel> res = FXCollections.observableArrayList();
@@ -155,7 +177,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 
 		IscrizioneTO iscto = this.tblIscritti.getSelectionModel().getSelectedItem().getIscrizioneTO();
 		QuestionTO question = toFact.createQuestionTO();
-		question.setQuestion("Vuoi eliminare l'iscrizione selezionata?");
+		question.setQuestion(this.res.getString("key159"));
 
 		question.setDataTO(iscto);
 		question.setRequest("eliminaIscrizione");
@@ -170,7 +192,7 @@ public class ControllerMdcCompetizione extends AgroludosController {
 	@FXML protected void btnAnnullaCmp(MouseEvent event) {
 
 		QuestionTO question = toFact.createQuestionTO();
-		question.setQuestion("Vuoi eliminare la competizione?");
+		question.setQuestion(this.res.getString("key160"));
 
 		question.setDataTO(this.cmpto);
 		question.setRequest("annullaCompetizione");
@@ -187,24 +209,18 @@ public class ControllerMdcCompetizione extends AgroludosController {
 		nav.setVista("mostraModificaCmp", this.cmpto);
 	}
 
-	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
-
-	}
-
-	@Override
-	protected String getViewName() {
-		return this.viewName;
-	}
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		if(request.getCommandName().equals("modificaCompetizione")){
+		String commandName = request.getCommandName();
+		if(commandName.equals( this.reqProperties.getProperty("modificaCompetizione"))){
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){
 				this.initializeView((CompetizioneTO) res);
-				this.lblModificaOk.setVisible(true);
+				SuccessTO succMessage = toFact.createSuccessTO();
+				succMessage.setMessage(this.res.getString("key99"));
+
+				nav.setVista("successDialog",succMessage);
 			}
 		}
 	}

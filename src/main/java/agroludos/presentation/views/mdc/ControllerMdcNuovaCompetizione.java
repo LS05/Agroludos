@@ -1,15 +1,18 @@
 package agroludos.presentation.views.mdc;
 
 import java.math.BigDecimal;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import eu.schudt.javafx.controls.calendar.DatePicker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -30,7 +33,7 @@ import agroludos.to.StatoCompetizioneTO;
 import agroludos.to.SuccessTO;
 import agroludos.to.TipoCompetizioneTO;
 
-public class ControllerMdcNuovaCompetizione extends AgroludosController{
+public class ControllerMdcNuovaCompetizione extends AgroludosController implements Initializable{
 
 	private String viewName;
 
@@ -54,6 +57,8 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 	private CompetizioneTO cmpto;
 	private AgroResponse risposta;
 	private AgroRequest richiesta;
+
+	private ResourceBundle res;
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
@@ -93,6 +98,17 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 		this.paneDataCompetizione.getChildren().add(this.dataCompPicker);
 	}
 
+	@Override
+	public void initialize(URL url, ResourceBundle resources) {
+		this.res = resources;		
+	}
+	
+	@Override
+	public String getViewName() {
+		return this.viewName;
+	}
+
+	
 	@FXML private void btnAnnulla(MouseEvent event){
 		this.close();
 	}
@@ -130,16 +146,12 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController{
 		if(res instanceof CompetizioneTO){
 
 			SuccessTO succMessage = toFact.createSuccessTO();
-			succMessage.setMessage("Competizione inserita con successo");
+			succMessage.setMessage(this.res.getString("key124"));
 			nav.setVista("successDialog",succMessage);
 			this.close();
 		}
 	}
 
-	@Override
-	public String getViewName() {
-		return this.viewName;
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override

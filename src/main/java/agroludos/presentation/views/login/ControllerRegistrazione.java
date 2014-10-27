@@ -135,7 +135,7 @@ public class ControllerRegistrazione extends AgroludosController{
 	}
 
 	@FXML protected void btnCarica(MouseEvent event) {
-
+		//TODO caricare file csrc
 	}
 
 
