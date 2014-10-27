@@ -111,7 +111,7 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		SuccessTO succTO = toFact.createSuccessTO();
-		succTO.setMessagge(this.resources.getString("key132"));
+		succTO.setMessage(this.resources.getString("key132"));
 		nav.setVista("successDialog", succTO);
 	}
 

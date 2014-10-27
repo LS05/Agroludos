@@ -113,7 +113,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController{
 		Object res = this.risposta.getRespData();
 		if(res instanceof CompetizioneTO){			
 			SuccessTO succMessage = toFact.createSuccessTO();
-			succMessage.setMessagge("Modifica avvenuta con successo!");
+			succMessage.setMessage("Modifica avvenuta con successo!");
 			nav.setVista("successDialog",succMessage);
 		}
 

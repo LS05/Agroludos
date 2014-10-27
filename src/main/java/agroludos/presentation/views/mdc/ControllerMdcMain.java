@@ -150,7 +150,7 @@ public class ControllerMdcMain extends ControllerUtenti{
 				nav.getStage("mostraCmp").close();
 				
 				SuccessTO succMessage = toFact.createSuccessTO();
-				succMessage.setMessagge("Competizione annullata!");
+				succMessage.setMessage("Competizione annullata!");
 
 				nav.setVista("successDialog",succMessage);
 			}
@@ -165,7 +165,7 @@ public class ControllerMdcMain extends ControllerUtenti{
 				nav.setVista("mostraCmp",((IscrizioneTO) res).getCompetizione());
 		
 				SuccessTO succMessage = toFact.createSuccessTO();
-				succMessage.setMessagge("Iscrizione eliminata!");
+				succMessage.setMessage("Iscrizione eliminata!");
 				nav.setVista("successDialog",succMessage);
 			}
 		}else if(request.getCommandName().equals( this.reqProperties.getProperty("inserisciCompetizione") )){

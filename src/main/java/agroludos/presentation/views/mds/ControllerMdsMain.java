@@ -235,7 +235,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
             public void changed(ObservableValue<? extends String> observable,
                     String oldValue, String newValue) {
 
-                table.updateTable(searchField.getText());
+//                table.updateTable(searchField.getText());
             }
         });
 	}
@@ -479,7 +479,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				ManagerDiCompetizioneTO mdc = (ManagerDiCompetizioneTO)res;
 				this.lblMdcStato.setText(mdc.getStatoUtente().getNome());
 				SuccessTO succTO = toFact.createSuccessTO();
-				succTO.setMessagge(this.resources.getString("key130"));
+				succTO.setMessage(this.resources.getString("key130"));
 				nav.setVista("successDialog", succTO);
 			}
 		} else if( commandName.equals( this.reqProperties.getProperty("nuovoManagerDiCompetizione") )){

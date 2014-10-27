@@ -96,7 +96,7 @@ public class ControllerMdsNuovoOptional extends AgroludosController implements I
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		SuccessTO msgNuovoOpt = toFact.createSuccessTO();
-		msgNuovoOpt.setMessagge(this.res.getString("key128"));
+		msgNuovoOpt.setMessage(this.res.getString("key128"));
 		nav.setVista("successDialog", msgNuovoOpt);
 	}
 

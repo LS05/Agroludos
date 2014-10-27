@@ -180,7 +180,7 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 				this.tableOptionalScelti.getItems().setAll(this.optSceltiData);
 			}else{
 				SuccessTO succMessage = toFact.createSuccessTO();
-				succMessage.setMessagge(this.res.getString("key148"));
+				succMessage.setMessage(this.res.getString("key148"));
 				nav.setVista("successDialog",succMessage);
 			}
 		}

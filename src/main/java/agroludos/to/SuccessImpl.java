@@ -5,7 +5,7 @@ public class SuccessImpl implements SuccessTO{
 	private String message;
 
 	@Override
-	public void setMessagge(String message) {
+	public void setMessage(String message) {
 		this.message = message;
 		
 	}

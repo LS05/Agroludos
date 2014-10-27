@@ -40,7 +40,7 @@ public class ControllerMdsNuovoTipoCompetizione extends AgroludosController impl
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		SuccessTO msgNuovoOpt = toFact.createSuccessTO();
-		msgNuovoOpt.setMessagge(this.res.getString("key129"));
+		msgNuovoOpt.setMessage(this.res.getString("key129"));
 		nav.setVista("successDialog", msgNuovoOpt);
 	}
 

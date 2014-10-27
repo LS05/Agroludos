@@ -84,7 +84,7 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		SuccessTO succTO = toFact.createSuccessTO();
-		succTO.setMessagge(this.resources.getString("key99"));
+		succTO.setMessage(this.resources.getString("key99"));
 		nav.setVista("successDialog", succTO);
 	}
 
