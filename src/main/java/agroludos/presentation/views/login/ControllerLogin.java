@@ -1,7 +1,6 @@
 package agroludos.presentation.views.login;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.EventHandler;
@@ -16,13 +15,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.SuccessTO;
-import agroludos.to.TipoUtenteTO;
 import agroludos.to.UtenteTO;
 
 public class ControllerLogin extends AgroludosController implements Initializable{
@@ -105,7 +104,7 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 			Object res = response.getRespData();
 			if(res instanceof PartecipanteTO){
 				SuccessTO succMessage = toFact.createSuccessTO();
-				succMessage.setMessagge(this.res.getString("key152"));
+				succMessage.setMessage(this.res.getString("key152"));
 				nav.setVista("successDialog",succMessage);
 			}
 		}else if(request.getCommandName().equals("autenticazioneUtente")){
