@@ -54,7 +54,7 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 		Object res = this.risposta.getRespData();
 		if(res instanceof UtenteTO){			
 			SuccessTO succMessage = toFact.createSuccessTO();
-			succMessage.setMessagge(this.res.getString("key155"));
+			succMessage.setMessage(this.res.getString("key155"));
 			nav.setVista("successDialog",succMessage);
 			this.close();
 		}
@@ -91,7 +91,7 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 			if(res instanceof ErrorTO){
 				//TODO gestire 
 				SuccessTO succMessage = toFact.createSuccessTO();
-				succMessage.setMessagge(this.res.getString("key156"));
+				succMessage.setMessage(this.res.getString("key156"));
 				nav.setVista("successDialog",succMessage);
 			}
 		}
