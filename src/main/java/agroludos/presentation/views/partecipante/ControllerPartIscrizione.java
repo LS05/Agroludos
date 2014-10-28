@@ -93,9 +93,7 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 		this.richiesta = this.getRichiesta(this.mainIscr, "inserisciIscrizione", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		SuccessTO succ = toFact.createSuccessTO();
-		succ.setMessage(this.res.getString("key157"));
-		nav.setVista("successDialog", succ);
+			
 		this.close();
 	}
 
