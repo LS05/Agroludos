@@ -100,30 +100,6 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.resources = res;
 	}
 
-	private void setDxMdCColumn(Integer selected){
-		MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
-		this.lblMdcNome.setText(selModel.getNome());
-		this.lblMdcCognome.setText(selModel.getCognome());
-		this.lblMdcEmail.setText(selModel.getEmail());
-		this.lblMdcUsername.setText(selModel.getUsername());
-		this.lblMdcStato.setText(selModel.getStato());
-	}
-
-	private void setDxPartColumn(int selected) {
-		PartModel selModel = this.tablePartecipanti.getItems().get(selected);
-		this.lblParNome.setText(selModel.getNome());
-		this.lblParCognome.setText(selModel.getCognome());
-		this.lblParEmail.setText(selModel.getEmail());
-		this.lblParUsername.setText(selModel.getUsername());
-		this.lblParStato.setText(selModel.getStato());
-		this.lblParDataSRC.setText(selModel.getDataSRC());
-		this.lblParCodFisc.setText(selModel.getCf());
-		this.lblParIndirizzo.setText(selModel.getIndirizzo());
-		this.lblParSesso.setText(selModel.getSesso());
-		this.lblParAnnoNasc.setText(selModel.getDataNasc());
-		this.lblParNumTessSan.setText(selModel.getNumTessera());
-	}
-
 	@SuppressWarnings("serial")
 	@Override
 	public void initializeView(String viewName) {
@@ -229,6 +205,30 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			}
 
 		});
+	}
+	
+	private void setDxMdCColumn(Integer selected){
+		MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
+		this.lblMdcNome.setText(selModel.getNome());
+		this.lblMdcCognome.setText(selModel.getCognome());
+		this.lblMdcEmail.setText(selModel.getEmail());
+		this.lblMdcUsername.setText(selModel.getUsername());
+		this.lblMdcStato.setText(selModel.getStato());
+	}
+
+	private void setDxPartColumn(int selected) {
+		PartModel selModel = this.tablePartecipanti.getItems().get(selected);
+		this.lblParNome.setText(selModel.getNome());
+		this.lblParCognome.setText(selModel.getCognome());
+		this.lblParEmail.setText(selModel.getEmail());
+		this.lblParUsername.setText(selModel.getUsername());
+		this.lblParStato.setText(selModel.getStato());
+		this.lblParDataSRC.setText(selModel.getDataSRC());
+		this.lblParCodFisc.setText(selModel.getCf());
+		this.lblParIndirizzo.setText(selModel.getIndirizzo());
+		this.lblParSesso.setText(selModel.getSesso());
+		this.lblParAnnoNasc.setText(selModel.getDataNasc());
+		this.lblParNumTessSan.setText(selModel.getNumTessera());
 	}
 	
 	private <T> void initSearch(final TextField searchField, final AgroTable<T> table){

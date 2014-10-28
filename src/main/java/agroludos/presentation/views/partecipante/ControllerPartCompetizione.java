@@ -90,6 +90,11 @@ public class ControllerPartCompetizione extends AgroludosController {
 			this.tableOptional.hideColumn("Descrizione");
 		}
 	}
+	
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
 
 	private ObservableList<IscModel> getListTabellaIsc(){
 		ObservableList<IscModel> res = FXCollections.observableArrayList();
@@ -121,10 +126,6 @@ public class ControllerPartCompetizione extends AgroludosController {
 		nav.setVista("mostraIscrPart", this.mainIscr);
 	}
 
-	@Override
-	protected String getViewName() {
-		return this.viewName;
-	}
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {

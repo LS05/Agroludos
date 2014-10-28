@@ -31,18 +31,7 @@ public class ControllerMdsNuovoTipoCompetizione extends AgroludosController impl
 		this.res = resources;	
 	}
 
-	@FXML protected void confermaNuovoTipoCompetizione(MouseEvent event) {
-		TipoCompetizioneTO tipoCpt = toFact.createTipoCompetizioneTO();
-		tipoCpt.setNome(this.txtNomeTipo.getText());
-		tipoCpt.setDescrizione(this.txtAreaDesc.getText());
-
-		this.richiesta = this.getRichiesta(tipoCpt, "inserisciTipoCompetizione", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		SuccessTO msgNuovoOpt = toFact.createSuccessTO();
-		msgNuovoOpt.setMessage(this.res.getString("key129"));
-		nav.setVista("successDialog", msgNuovoOpt);
-	}
+	
 
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
@@ -60,6 +49,19 @@ public class ControllerMdsNuovoTipoCompetizione extends AgroludosController impl
 		return this.viewName;
 	}
 
+	@FXML protected void confermaNuovoTipoCompetizione(MouseEvent event) {
+		TipoCompetizioneTO tipoCpt = toFact.createTipoCompetizioneTO();
+		tipoCpt.setNome(this.txtNomeTipo.getText());
+		tipoCpt.setDescrizione(this.txtAreaDesc.getText());
+
+		this.richiesta = this.getRichiesta(tipoCpt, "inserisciTipoCompetizione", this.viewName);
+		this.risposta = respFact.createResponse();
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		SuccessTO msgNuovoOpt = toFact.createSuccessTO();
+		msgNuovoOpt.setMessage(this.res.getString("key129"));
+		nav.setVista("successDialog", msgNuovoOpt);
+	}
+	
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 

@@ -76,6 +76,11 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 		this.viewName = viewName;
 	}
 	
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
+	
 	@FXML protected void btnAnnullaClicked(MouseEvent event){
 		this.close();
 	}
@@ -94,10 +99,7 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 		this.close();
 	}
 
-	@Override
-	protected String getViewName() {
-		return this.viewName;
-	}
+
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {

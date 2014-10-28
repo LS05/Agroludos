@@ -90,6 +90,11 @@ public class ControllerPartecipanteMain extends ControllerUtenti{
 		});
 	}
 
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
+	
 	@FXML protected void btnGestComp(MouseEvent event) {
 		this.paneCompetizioni.setVisible(true);
 		this.paneIscrizioni.setVisible(false);
@@ -100,10 +105,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti{
 		this.paneIscrizioni.setVisible(true);
 	}
 
-	@Override
-	protected String getViewName() {
-		return this.viewName;
-	}
+
 
 	@SuppressWarnings("unchecked")
 	@Override
