@@ -15,6 +15,11 @@ class PartRulesFactoryImpl implements PRulesFactory {
 	private static PartCFRule cfRule;
 	private static PartSrcRule srcRule;
 	private static PartTesRule tesRule;
+	private static PartCognomeRule cognomeRule;
+	private static PartUsernameRule usernameRule;
+	private static PartDataSrcRule dataSrcRule;
+	private static PartIndirizzoRule indirizzoRule;
+	private static PartPasswordRule passwordRule;
 
 	@Override
 	public AgroludosRule getEmailRule() throws IOException{
@@ -49,5 +54,40 @@ class PartRulesFactoryImpl implements PRulesFactory {
 		if(tesRule == null)
 			tesRule = new PartTesRule();
 		return tesRule;
+	}
+	
+	@Override
+	public AgroludosRule getCognomeRule() throws IOException {
+		if(cognomeRule == null)
+			cognomeRule = new PartCognomeRule();
+		return cognomeRule;
+	}
+	
+	@Override
+	public AgroludosRule getUsernameRule() throws IOException {
+		if(usernameRule == null)
+			usernameRule = new PartUsernameRule();
+		return usernameRule;
+	}
+	
+	@Override
+	public AgroludosRule getDataSrcRule() throws IOException {
+		if(dataSrcRule == null)
+			dataSrcRule = new PartDataSrcRule();
+		return dataSrcRule;
+	}
+	
+	@Override
+	public AgroludosRule getIndirizzoRule() throws IOException {
+		if(indirizzoRule == null)
+			indirizzoRule = new PartIndirizzoRule();
+		return indirizzoRule;
+	}
+
+	@Override
+	public AgroludosRule getPasswordRule() throws IOException {
+		if(passwordRule == null)
+			passwordRule = new PartPasswordRule();
+		return passwordRule;
 	}
 }

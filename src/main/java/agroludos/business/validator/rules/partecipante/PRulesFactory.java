@@ -16,4 +16,14 @@ public interface PRulesFactory {
 
 	AgroludosRule getTesRule() throws IOException;
 
+	AgroludosRule getCognomeRule() throws IOException;
+
+	AgroludosRule getUsernameRule() throws IOException;
+
+	AgroludosRule getDataSrcRule() throws IOException;
+
+	AgroludosRule getIndirizzoRule() throws IOException;
+
+	AgroludosRule getPasswordRule() throws IOException;
+
 }
