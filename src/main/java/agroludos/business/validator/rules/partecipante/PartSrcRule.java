@@ -16,16 +16,18 @@ class PartSrcRule extends AgroludosRule {
 	}
 
 	@Override
-	public void validate(AgroludosTO to, ErrorTO errorTO) {
-		PartecipanteTO partecipante = (PartecipanteTO)to;
-		String src = partecipante.getSrc();
-		String ext = FilenameUtils.getExtension(src);
+	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
+		if(mainTO instanceof PartecipanteTO){
+			PartecipanteTO partecipante = (PartecipanteTO)mainTO;
+			String src = partecipante.getSrc();
+			String ext = FilenameUtils.getExtension(src);
 
-		if(!"txt".equals(ext)){
-			errorTO.addError("src", "File non supportato. Inserire un file .txt!");
+			if(!"txt".equals(ext)){
+				errorTO.addError("src", "File non supportato. Inserire un file .txt!");
+			}
+
+			if(this.successor != null)
+				this.successor.validate(partecipante, errorTO);
 		}
-		
-		if(this.successor != null)
-			this.successor.validate(partecipante, errorTO);
 	}
 }

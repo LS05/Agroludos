@@ -11,8 +11,8 @@ public class ValidationException extends Exception {
 		this.errors = err;
 	}
 	
-	public ValidationException(String msg){
-		super(msg);
+	public ErrorTO getErrors(){
+		return this.errors;
 	}
 
 }

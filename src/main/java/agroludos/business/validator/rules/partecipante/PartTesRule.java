@@ -14,15 +14,17 @@ class PartTesRule extends AgroludosRule {
 	}
 
 	@Override
-	public void validate(AgroludosTO to, ErrorTO errorTO) {
-		PartecipanteTO partecipante = (PartecipanteTO)to;
-		String tesSan = partecipante.getNumTS();
+	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
+		if(mainTO instanceof PartecipanteTO){
+			PartecipanteTO partecipante = (PartecipanteTO)mainTO;
+			String tesSan = partecipante.getNumTS();
 
-		if(tesSan.length() != 16){
-			errorTO.addError("tess-san", "Tessera sanitaria non valida! Inserire un numero di 16 cifre");
+			if(tesSan.length() != 16){
+				errorTO.addError("tess-san", "Tessera sanitaria non valida! Inserire un numero di 16 cifre");
+			}
+
+			if(this.successor != null)
+				this.successor.validate(partecipante, errorTO);
 		}
-		
-		if(this.successor != null)
-			this.successor.validate(partecipante, errorTO);
 	}
 }

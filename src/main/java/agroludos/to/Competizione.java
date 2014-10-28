@@ -238,6 +238,9 @@ class Competizione implements CompetizioneTO{
 
 		return res;
 	}
+	
+	
+	//TODO Da inserire nel validator?
 
 	@Override
 	public boolean isTerminata(){

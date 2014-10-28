@@ -10,25 +10,27 @@ import agroludos.to.PartecipanteTO;
 
 class PartNameRule extends AgroludosRule {
 	StringValidator strValidator;
-	
+
 	PartNameRule() throws IOException {
 		super();
 	}
 
 	@Override
-	public void validate(AgroludosTO to, ErrorTO errorTO) {
-		PartecipanteTO partecipante = (PartecipanteTO)to;
-		String nome = partecipante.getNome();
-		Integer nameLength = Integer.valueOf(this.getProperty("partNameLength"));
+	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
+		if(mainTO instanceof PartecipanteTO){
+			PartecipanteTO partecipante = (PartecipanteTO)mainTO;
+			String nome = partecipante.getNome();
+			Integer nameLength = Integer.valueOf(this.getProperty("partNameLength"));
 
-		if(!this.strValidator.checkLength(nome, nameLength)){
-			errorTO.addError("nome", "Nome Errato! Inserire almeno 1 carattere");
-		} else if(!this.strValidator.isAlpha(nome)){
-			errorTO.addError("nome", "Nome Errato. Inserire solo caratteri alfabetici!");
+			if(!this.strValidator.checkLength(nome, nameLength)){
+				errorTO.addError("nome", "Nome Errato! Inserire almeno 1 carattere");
+			} else if(!this.strValidator.isAlpha(nome)){
+				errorTO.addError("nome", "Nome Errato. Inserire solo caratteri alfabetici!");
+			}
+
+			if(this.successor != null)
+				this.successor.validate(partecipante, errorTO);
 		}
-		
-		if(this.successor != null)
-			this.successor.validate(partecipante, errorTO);
 	}
 
 	public void setStrValidator(StringValidator strValidator) {

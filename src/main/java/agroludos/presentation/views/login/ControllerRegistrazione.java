@@ -19,6 +19,7 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.components.datepicker.AgroDatePicker;
 import agroludos.to.AgroludosTO;
+import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.StatoUtenteTO;
 import agroludos.to.TipoUtenteTO;
@@ -187,7 +188,7 @@ public class ControllerRegistrazione extends AgroludosController{
 			}
 		}else if(commandName.equals( this.reqProperties.getProperty("inserisciPartecipante") )){
 			Object res = response.getRespData();
-			if(res instanceof PartecipanteTO){
+			if(res instanceof ErrorTO){
 				this.parTO = toFact.createPartecipanteTO();
 			}
 		}

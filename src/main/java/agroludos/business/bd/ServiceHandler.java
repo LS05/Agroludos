@@ -7,6 +7,7 @@ import agroludos.business.as.AgroludosService;
 import agroludos.exceptions.MethodNotFoundException;
 import agroludos.exceptions.ServiceHandlerException;
 import agroludos.exceptions.ServiceNotFoundException;
+import agroludos.exceptions.ValidationException;
 import agroludos.presentation.controller.mapper.Command;
 import agroludos.presentation.controller.mapper.CommandMap;
 import agroludos.presentation.reqh.AgroRequestContext;
@@ -50,7 +51,16 @@ public class ServiceHandler {
 				//(o di un altro tipo particolare) 
 				//allora passo il TO, altrimenti il messaggio.
 				this.response.setLogicalViewName(command.getFailView());
-				this.response.setData(e.getTargetException().getMessage());
+				
+				Throwable cause = e.getCause();
+		        if(cause == null) {
+		            throw new IllegalStateException( 
+		                "Got InvocationTargetException, but the cause is null.", e);
+		        } else if(cause instanceof ValidationException) {
+		        	ValidationException vEx = (ValidationException) cause;
+		        	this.response.setData(vEx.getErrors());
+		        }
+				
 			}
 		}
 
