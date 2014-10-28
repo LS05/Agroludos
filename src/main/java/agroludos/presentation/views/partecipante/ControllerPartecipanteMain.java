@@ -90,20 +90,27 @@ public class ControllerPartecipanteMain extends ControllerUtenti{
 		});
 	}
 
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
+	
 	@FXML protected void btnGestComp(MouseEvent event) {
+		this.richiesta = this.getRichiesta("getCompetizioniAttive", this.viewName);
+		this.risposta = respFact.createResponse();
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.tableCompetizioni.setAll(this.listComp);
 		this.paneCompetizioni.setVisible(true);
 		this.paneIscrizioni.setVisible(false);
 	}
 
 	@FXML protected void btnGestIscrizioni(MouseEvent event) {
+		this.tableIscrizioni.setAll(this.currUser.getAllIscrizioni());
 		this.paneCompetizioni.setVisible(false);
 		this.paneIscrizioni.setVisible(true);
 	}
 
-	@Override
-	protected String getViewName() {
-		return this.viewName;
-	}
+
 
 	@SuppressWarnings("unchecked")
 	@Override

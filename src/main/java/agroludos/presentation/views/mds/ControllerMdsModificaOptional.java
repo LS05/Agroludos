@@ -63,6 +63,16 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 		String tipoOpt = this.optional.getTipoOptional().getNome();
 		this.lblNomeTipoOpt.setText(tipoOpt);
 	}
+	
+	@Override
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
+	}
+
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
 
 	@FXML protected void confermaModificaOptional(MouseEvent event){
 		this.optional.setNome(this.txtNomeOptional.getText());
@@ -77,15 +87,7 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 		frontController.eseguiRichiesta(request, response);
 	}
 
-	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
-	}
-
-	@Override
-	protected String getViewName() {
-		return this.viewName;
-	}
+	
 
 	@SuppressWarnings("unchecked")
 	@Override

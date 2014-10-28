@@ -166,6 +166,11 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 		}
 	}
 
+	@Override
+	public String getViewName() {
+		return this.viewName;
+	}
+	
 	private class DeleteTableCell extends TableCell<OptModel, String> {
 
 		private final Button btnElimina;
@@ -402,10 +407,6 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
-	@Override
-	public String getViewName() {
-		return this.viewName;
-	}
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {

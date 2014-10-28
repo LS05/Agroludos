@@ -92,17 +92,17 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController {
 		}
 	}
 
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
+
 	@FXML private void btnVisualizzaCertificato(){
 		nav.setVista("visualizzaSRC",this.mainIscr.getPartecipante());
 	}
 
 	@FXML protected void btnModificaOptionalIscrizione(MouseEvent event) {
 		nav.setVista("selezionaOptionalPart", this.mainIscr);
-	}
-
-	@Override
-	protected String getViewName() {
-		return this.viewName;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -97,6 +97,11 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
         });
 	}
 	
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
+	
 	@FXML protected void confermaNuovoManagerDiCompetizione(MouseEvent event){
 		UtenteTO utenteTO = toFact.createMdCTO();
 		utenteTO.setNome(this.txtNome.getText());
@@ -115,10 +120,7 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 		nav.setVista("successDialog", succTO);
 	}
 
-	@Override
-	protected String getViewName() {
-		return this.viewName;
-	}
+
 
 	@SuppressWarnings("unchecked")
 	@Override

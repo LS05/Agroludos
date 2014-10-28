@@ -1,10 +1,13 @@
 package agroludos.presentation.views.partecipante;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -12,7 +15,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -21,8 +23,9 @@ import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
+import agroludos.to.SuccessTO;
 
-public class ControllerPartCompetizione extends AgroludosController {
+public class ControllerPartCompetizione extends AgroludosController implements Initializable{
 
 	private String viewName;
 
@@ -54,9 +57,16 @@ public class ControllerPartCompetizione extends AgroludosController {
 
 	private IscrizioneTO mainIscr;
 
+	private ResourceBundle res;
+
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		this.res = resources;
 	}
 
 	@Override
@@ -90,6 +100,11 @@ public class ControllerPartCompetizione extends AgroludosController {
 			this.tableOptional.hideColumn("Descrizione");
 		}
 	}
+	
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
 
 	private ObservableList<IscModel> getListTabellaIsc(){
 		ObservableList<IscModel> res = FXCollections.observableArrayList();
@@ -121,10 +136,6 @@ public class ControllerPartCompetizione extends AgroludosController {
 		nav.setVista("mostraIscrPart", this.mainIscr);
 	}
 
-	@Override
-	protected String getViewName() {
-		return this.viewName;
-	}
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
@@ -140,6 +151,11 @@ public class ControllerPartCompetizione extends AgroludosController {
 				iscritti.add(modelIsc);
 				String totIsc = ((Integer)iscritti.size()).toString();
 				this.lblNiscritti.setText(totIsc);
+				
+				SuccessTO succ = toFact.createSuccessTO();
+				succ.setMessage(this.res.getString("key157"));
+				nav.setVista("successDialog", succ);
+				
 			}
 		}
 

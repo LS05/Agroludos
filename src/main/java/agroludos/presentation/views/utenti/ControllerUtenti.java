@@ -15,8 +15,20 @@ public class ControllerUtenti extends AgroludosController {
 	}
 
 	@Override
+	public void initializeView(AgroludosTO mainTO) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
+	
+	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		if(request.getCommandName().equals("autenticazioneUtente")){
+		String commandName = request.getCommandName();
+		if(commandName.equals( this.reqProperties.getProperty("autenticazioneUtente"))){
 			Object res = response.getRespData();
 			if(res instanceof UtenteTO){
 				UtenteTO uto = (UtenteTO)res;
@@ -28,14 +40,4 @@ public class ControllerUtenti extends AgroludosController {
 		}
 	}
 
-	@Override
-	public void initializeView(AgroludosTO mainTO) {
-		// TODO Auto-generated method stub
-
-	}
-	
-	@Override
-	protected String getViewName() {
-		return this.viewName;
-	}
 }
