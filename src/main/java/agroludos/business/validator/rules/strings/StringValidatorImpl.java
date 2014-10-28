@@ -3,7 +3,7 @@ package agroludos.business.validator.rules.strings;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 
-public class AgroStringValidator implements StringValidator{
+class StringValidatorImpl implements StringValidator{
 
 	@Override
 	public boolean containsAny(String str, char[] chars) {

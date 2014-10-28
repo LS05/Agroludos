@@ -1,4 +1,4 @@
-package agroludos.business.validator.rules;
+package agroludos.utility.properties;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,13 +7,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 
-class RuleProperties {
-	Properties prop;
+class PropertiesFileImpl implements AgroPropFile{
+
+	private Properties prop;
 	
-	RuleProperties() throws IOException{
+	PropertiesFileImpl(String pathName) throws IOException{
 		
 		this.prop = new Properties();
-		Path propFile = Paths.get("/properties/validator/rules.properties");
+		Path propFile = Paths.get(pathName);
 		String path = propFile.toString();
 		InputStream inputStream = this.getClass().getResourceAsStream(path);
 		
@@ -27,7 +28,13 @@ class RuleProperties {
 		this.prop.load(inputStream);
 	}
 	
-	String getProperty(String rule){
+	@Override
+	public Properties getPropertyFile(){
+		return this.prop;
+	}
+	
+	@Override
+	public String getProperty(String rule){
 		return this.prop.getProperty(rule);
 	}
 }

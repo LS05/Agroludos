@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="pRulesFactory"
+		class="agroludos.business.validator.rules.partecipante.PartRulesFactoryImpl" />
+		
+	<bean id="partCfRule"
+		  class="agroludos.business.validator.rules.partecipante.PartCFRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getCfRule">
+		  <property name="strValidator" ref="stringValidator" />
+	</bean>
+	<bean id="partCognomeRule"
+		  class="agroludos.business.validator.rules.partecipante.PartCognomeRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getCognomeRule"></bean>
+	<bean id="partDataSrcRule"
+		  class="agroludos.business.validator.rules.partecipante.PartDataSrcRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getDataSrcRule"></bean>		  
+	<bean id="partEmailRule"
+		  class="agroludos.business.validator.rules.partecipante.PartEmailRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getEmailRule">
+		  <property name="strValidator" ref="stringValidator" />
+	</bean>
+	<bean id="partIndirizzoRule"
+		  class="agroludos.business.validator.rules.partecipante.PartIndirizzoRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getIndirizzoRule"></bean>
+	<bean id="partNameRule"
+		  class="agroludos.business.validator.rules.partecipante.PartNameRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getNameRule">
+		  <property name="strValidator" ref="stringValidator" />
+	</bean>
+	<bean id="partPasswordRule"
+		  class="agroludos.business.validator.rules.partecipante.PartPasswordRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getPasswordRule"></bean>
+	<bean id="partSrcRule"
+		  class="agroludos.business.validator.rules.partecipante.PartSrcRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getSrcRule"></bean>
+	<bean id="partTesRule"
+		  class="agroludos.business.validator.rules.partecipante.PartTesRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getTesRule"></bean>
+	<bean id="partUsernameRule"
+		  class="agroludos.business.validator.rules.partecipante.PartUsernameRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getUsernameRule"></bean>
+</beans>

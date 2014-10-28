@@ -3,34 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	<bean id="stringValidator" class="agroludos.business.validator.rules.strings.AgroStringValidator" />
 	
-	<bean id="pRulesFactory"
-		class="agroludos.business.validator.rules.partecipante.PartRulesFactoryImpl" />
-	<bean id="partEmailRule"
-		  class="agroludos.business.validator.rules.partecipante.PartEmailRule"
-		  factory-bean="pRulesFactory"
-		  factory-method="getEmailRule">
-		  <property name="strValidator" ref="stringValidator" />
-	</bean>
-	<bean id="partNameRule"
-		  class="agroludos.business.validator.rules.partecipante.PartNameRule"
-		  factory-bean="pRulesFactory"
-		  factory-method="getNameRule">
-		  <property name="strValidator" ref="stringValidator" />
-	</bean>
-	<bean id="partCfRule"
-		  class="agroludos.business.validator.rules.partecipante.PartCFRule"
-		  factory-bean="pRulesFactory"
-		  factory-method="getCfRule">
-		  <property name="strValidator" ref="stringValidator" />
-	</bean>
-	<bean id="partSrcRule"
-		  class="agroludos.business.validator.rules.partecipante.PartSrcRule"
-		  factory-bean="pRulesFactory"
-		  factory-method="getSrcRule"></bean>
-	<bean id="partTesRule"
-		  class="agroludos.business.validator.rules.partecipante.PartTesRule"
-		  factory-bean="pRulesFactory"
-		  factory-method="getTesRule"></bean>
+	<import resource="classpath:agroludos/beans/partecipanteRules.xml" />
+           
+	<bean id="stringValidator" class="agroludos.business.validator.rules.strings.StringValidatorImpl" />
+
 </beans>

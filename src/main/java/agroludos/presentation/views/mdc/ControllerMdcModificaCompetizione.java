@@ -3,11 +3,8 @@ package agroludos.presentation.views.mdc;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
-import eu.schudt.javafx.controls.calendar.DatePicker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,9 +16,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
+import agroludos.presentation.views.components.datepicker.AgroDatePicker;
 import agroludos.presentation.views.components.numberspinner.NumberSpinner;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
@@ -41,10 +40,10 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 	@FXML private Button btnConferma;
 	@FXML private Pane paneDataCompetizione;
 	@FXML private GridPane paneCostoComp;
-	
-	private DatePicker dataCompPicker;
+
+	private AgroDatePicker dataCompPicker;
 	private NumberSpinner costoComp;
-	
+
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
 
@@ -60,16 +59,11 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 		if(mainTO instanceof CompetizioneTO){
 			this.cmpto = (CompetizioneTO) mainTO;
 			this.costoComp = new NumberSpinner(BigDecimal.ZERO, new BigDecimal("10"), new DecimalFormat("#,##0.00"));
-			
-			this.dataCompPicker = new DatePicker(Locale.ENGLISH);
-			this.dataCompPicker.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
-			this.dataCompPicker.getCalendarView().todayButtonTextProperty().set("Today");
-			this.dataCompPicker.getCalendarView().setShowWeeks(false);
-			String css = this.getClass().getResource("DatePicker.css").toExternalForm();
-			this.dataCompPicker.getStylesheets().add(css);
+
+			this.dataCompPicker = new AgroDatePicker();
 			this.dataCompPicker.setSelectedDate(this.cmpto.getData());
-			this.paneDataCompetizione.getChildren().add(this.dataCompPicker);
-			
+			this.paneDataCompetizione.getChildren().add(this.dataCompPicker.getDatePicker());
+
 			this.txtNome.setText(this.cmpto.getNome());
 			this.txtDescrizione.setText(this.cmpto.getDescrizione());
 			this.paneCostoComp.add(this.costoComp, 0, 0);
@@ -133,7 +127,6 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 		}
 
 		this.close();
-
 	}
 
 

@@ -39,9 +39,9 @@
 		</view>
 		<view tipo="dialog">
 			<name>nuovaRegistrazione</name>
-			<url>/fxml/login/registrazione.fxml</url>
+			<url>/fxml/registrazione/registrazione.fxml</url>
 			<width>627</width>
-			<height>647</height>
+			<height>593</height>
 			<title>Agroludos | Registrazione</title>
 		</view>
 		<view tipo="mainView">

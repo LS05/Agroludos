@@ -230,4 +230,8 @@ class Services {
 
 		return service;
 	}
+	
+	public static void main(String args[]){
+		System.out.println(new Services().getClass().getSimpleName());
+	}
 }

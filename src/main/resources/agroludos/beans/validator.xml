@@ -8,7 +8,7 @@
 	
 	<bean id="partValidator" class="agroludos.business.validator.partecipante.PartValidator">
 		<constructor-arg ref="pRulesFactory" />
-		<property name="toFact" ref="toFactory" />
+		<constructor-arg ref="toFactory" />
 	</bean>
 	
 </beans>
