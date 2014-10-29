@@ -274,6 +274,12 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	}
 
 	@FXML protected void btnGestPart(MouseEvent event) {
+		this.richiesta = this.getRichiesta("getAllPartecipante", this.viewName);
+		this.risposta = respFact.createResponse();
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.tablePartecipanti = new TablePartecipanti(this.listPart);
+		
+		
 		this.paneGestioneCompetizioni.setVisible(false);
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneMdC.setVisible(false);
