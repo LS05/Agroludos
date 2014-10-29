@@ -1,7 +1,5 @@
 package agroludos.presentation.views;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -20,24 +18,36 @@ import agroludos.to.UtenteTO;
  *
  */
 public abstract class AgroludosController extends Controller{
-	
+
 	protected static UtenteTO utente;
-	
+
+	protected Properties reqProperties;
+
+	protected Properties rulesProperties;
+
 	public static UtenteTO getUtente(){
 		return utente;
 	}
 
-	protected Properties reqProperties;
-
 	protected AgroludosController(){
 		this.reqProperties = new Properties();
-		Path reqPropPath = Paths.get("src/main/resources/properties/req.properties");
-		File propertiesFile = new File(reqPropPath.toString());
-		InputStream inputStream = null;
+		this.rulesProperties = new Properties();
+		Path reqPropPath = Paths.get("/properties/req.properties");
+		Path errPropPath = Paths.get("/properties/validator/rules.properties");
+		String reqPath = reqPropPath.toString();
+		String rulesPath = errPropPath.toString();
+
+		InputStream reqStream = this.getClass().getResourceAsStream(reqPath);
+		InputStream rulesStream = this.getClass().getResourceAsStream(rulesPath);
 
 		try {
-			inputStream = new FileInputStream(propertiesFile);
-			this.reqProperties.load(inputStream);
+			if(reqStream != null){
+				this.reqProperties.load(reqStream);
+			}
+
+			if(reqStream != null){
+				this.rulesProperties.load(rulesStream);
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,7 +64,7 @@ public abstract class AgroludosController extends Controller{
 		String richiesta = this.reqProperties.getProperty(commandName);
 		return reqFact.createDataRequest(param, richiesta, viewName);
 	}
-	
+
 	protected String getCommandName(String cmdName){
 		return this.reqProperties.getProperty(cmdName);
 	}
@@ -73,7 +83,7 @@ public abstract class AgroludosController extends Controller{
 	protected abstract void initializeView(String viewName);
 
 	protected abstract String getViewName();
-	
+
 	/**
 	 * Per i dialog il forward è utile solo in caso di errore. Perchè il dato
 	 * viene gestito sempre dalla mainView.

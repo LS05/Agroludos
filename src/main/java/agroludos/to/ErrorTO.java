@@ -1,11 +1,17 @@
 package agroludos.to;
 
+import java.util.Set;
+
 public interface ErrorTO extends AgroludosTO{
 
-	void addError(String name, String message);
+	void addError(String id, String message);
 
+	String getError(String id);
+	
+	Set<String> getErrors();
+	
 	boolean hasErrors();
-
-	String getError(String name);
+	
+	boolean hasError(String id);
 
 }

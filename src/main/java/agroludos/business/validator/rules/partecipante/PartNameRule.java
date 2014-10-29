@@ -23,9 +23,9 @@ class PartNameRule extends AgroludosRule {
 			Integer nameLength = Integer.valueOf(this.getProperty("partNameLength"));
 
 			if(!this.strValidator.checkLength(nome, nameLength)){
-				errorTO.addError("nome", "Nome Errato! Inserire almeno 1 carattere");
+				errorTO.addError(this.getProperty("nomeKey"), this.getProperty("nomeLenghtError"));
 			} else if(!this.strValidator.isAlpha(nome)){
-				errorTO.addError("nome", "Nome Errato. Inserire solo caratteri alfabetici!");
+				errorTO.addError(this.getProperty("nomeKey"), this.getProperty("nomeAlphaError"));
 			}
 
 			if(this.successor != null)

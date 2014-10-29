@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -35,7 +36,6 @@ public class ControllerRegistrazione extends AgroludosController{
 	@FXML private TextField txtEmail;
 	@FXML private TextField txtIndirizzo;
 	@FXML private TextField txtCF;
-	@FXML private TextField txtSesso;
 	@FXML private TextField txtNTSanitaria;
 	@FXML private TextField txtRevealPassword;
 	@FXML private PasswordField txtPassword;
@@ -44,14 +44,22 @@ public class ControllerRegistrazione extends AgroludosController{
 	@FXML private GridPane paneDataNasc;
 	@FXML private GridPane paneDataCert;
 	@FXML private CheckBox checkBoxReveal;
-
+	@FXML private Label lblNomeError;
+	@FXML private Label lblCognomeError;
+	@FXML private Label lblDataSrcError;
+	@FXML private Label lblTesSanError;
+	@FXML private Label lblUsernameError;
+	@FXML private Label lblPasswordError;
+	@FXML private Label lblIndirizzoError;
+	@FXML private Label lblCfError;
+	@FXML private Label lblSrcError;
+	
 	private FileChooser fileChooser;
-
 	private AgroDatePicker dataCertPicker;
 	private AgroDatePicker dataNascPicker;
 
 	private List<TipoUtenteTO> listTipiU;
-
+	
 	private List<StatoUtenteTO> listStatiU;
 
 	private File fileSrc;
@@ -108,12 +116,13 @@ public class ControllerRegistrazione extends AgroludosController{
 		this.txtIndirizzo.setText("via firenze 33");
 		this.txtNTSanitaria.setText("321654987987654");
 		this.txtPassword.setText("123456");
-		this.txtSesso.setText("m");
+//		this.txtSesso.setText("m");
 		this.txtUsername.setText("");
 	}
 
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
+		
 		// TODO modificare il sesso come intero (due checkbox e 1 per m e 0 per f) ?
 		if(mainTO instanceof PartecipanteTO){
 			this.parTO = (PartecipanteTO) mainTO;
@@ -123,7 +132,6 @@ public class ControllerRegistrazione extends AgroludosController{
 			this.txtPassword.setText(this.parTO.getPassword());
 			this.txtCF.setText(this.parTO.getCf());
 			this.txtIndirizzo.setText(this.parTO.getIndirizzo());
-			this.txtSesso.setText(this.parTO.getSesso());
 			this.txtEmail.setText(this.parTO.getEmail());
 			this.dataNascPicker.setSelectedDate(this.parTO.getDataNasc());
 			this.txtNTSanitaria.setText(this.parTO.getNumTS());
@@ -138,7 +146,7 @@ public class ControllerRegistrazione extends AgroludosController{
 		this.parTO.setPassword(this.txtPassword.getText());
 		this.parTO.setCf(this.txtCF.getText());
 		this.parTO.setIndirizzo(this.txtIndirizzo.getText());
-		this.parTO.setSesso(this.txtSesso.getText());
+//		this.parTO.setSesso(this.txtSesso.getText());
 		this.parTO.setEmail(this.txtEmail.getText());
 		this.parTO.setDataNasc(this.dataNascPicker.getSelectedDate());
 		this.parTO.setNumTS(this.txtNTSanitaria.getText());
@@ -180,19 +188,46 @@ public class ControllerRegistrazione extends AgroludosController{
 				this.listTipiU = (List<TipoUtenteTO>)res;
 				this.parTO.setTipoUtente(this.listTipiU.get(2));
 			}
-		}else if(commandName.equals( this.reqProperties.getProperty("getAllStatoUtente") )){
+		} else if(commandName.equals( this.reqProperties.getProperty("getAllStatoUtente") )){
 			Object res = response.getRespData();
+
 			if(res instanceof List<?>){
 				this.listStatiU = (List<StatoUtenteTO>)res;
 				this.parTO.setStatoUtente(this.listStatiU.get(1));
 			}
-		}else if(commandName.equals( this.reqProperties.getProperty("inserisciPartecipante") )){
+
+		} else if(commandName.equals( this.reqProperties.getProperty("inserisciPartecipante") )){
 			Object res = response.getRespData();
 			if(res instanceof ErrorTO){
-				this.parTO = toFact.createPartecipanteTO();
+				ErrorTO errors = (ErrorTO)res;
+				
+				if(errors.hasError(this.rulesProperties.getProperty("nomeKey"))){
+					String nomeKey = this.rulesProperties.getProperty("nomeKey");
+					this.lblNomeError.setText(errors.getError(nomeKey));
+				} 
+				
+				if(errors.hasError(this.rulesProperties.getProperty("cognKey"))){
+					String cognomeKey = this.rulesProperties.getProperty("cognKey");
+					this.lblCognomeError.setText(errors.getError(cognomeKey));
+				}
+				
+				if(errors.hasError(this.rulesProperties.getProperty("cfKey"))){
+					String codFiscKey = this.rulesProperties.getProperty("cfKey");
+					this.lblCfError.setText(errors.getError(codFiscKey));
+				}
+				
+				if(errors.hasError(this.rulesProperties.getProperty("dataSrcKey"))){
+					String dataSrcKey = this.rulesProperties.getProperty("dataSrcKey");
+					this.lblDataSrcError.setText(errors.getError(dataSrcKey));
+				}
+				
+				if(errors.hasError(this.rulesProperties.getProperty("srcKey"))){
+					String srcKey = this.rulesProperties.getProperty("srcKey");
+					this.lblSrcError.setText(errors.getError(srcKey));
+				}
+				
 			}
 		}
 
 	}
-
 }

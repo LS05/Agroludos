@@ -20,7 +20,7 @@ class PartTesRule extends AgroludosRule {
 			String tesSan = partecipante.getNumTS();
 
 			if(tesSan.length() != 16){
-				errorTO.addError("tess-san", "Tessera sanitaria non valida! Inserire un numero di 16 cifre");
+				errorTO.addError(this.getProperty("tesKey"), this.getProperty("tesSanLenError"));
 			}
 
 			if(this.successor != null)

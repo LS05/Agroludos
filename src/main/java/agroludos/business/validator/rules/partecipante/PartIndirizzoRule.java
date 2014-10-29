@@ -5,6 +5,7 @@ import java.io.IOException;
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
+import agroludos.to.PartecipanteTO;
 
 public class PartIndirizzoRule extends AgroludosRule {
 
@@ -14,8 +15,11 @@ public class PartIndirizzoRule extends AgroludosRule {
 
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
-		// TODO Auto-generated method stub
-
+		if(mainTO instanceof PartecipanteTO){
+			PartecipanteTO part = (PartecipanteTO)mainTO;
+			if(this.successor != null)
+				this.validate(part, errorTO);
+		}
 	}
 
 }

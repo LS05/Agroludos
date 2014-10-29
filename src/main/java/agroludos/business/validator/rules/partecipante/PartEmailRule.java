@@ -22,7 +22,7 @@ class PartEmailRule extends AgroludosRule {
 			String email = partecipante.getEmail();
 
 			if(!this.strValidator.isValidEmail(email)){
-				errorTO.addError("email", "Email non valida!");
+				errorTO.addError(this.getProperty("emailKey"), this.getProperty("emailError"));
 			}
 
 			if(this.successor != null)

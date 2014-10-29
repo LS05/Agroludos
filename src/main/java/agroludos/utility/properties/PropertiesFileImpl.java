@@ -10,31 +10,23 @@ import java.util.Properties;
 class PropertiesFileImpl implements AgroPropFile{
 
 	private Properties prop;
-	
-	PropertiesFileImpl(String pathName) throws IOException{
-		
+
+	PropertiesFileImpl() throws IOException{
 		this.prop = new Properties();
-		Path propFile = Paths.get(pathName);
+	}
+
+	@Override
+	public Properties getPropertyFile(String pathName) throws IOException{
+		Path propFile = Paths.get("/properties/" + pathName);
 		String path = propFile.toString();
 		InputStream inputStream = this.getClass().getResourceAsStream(path);
 		
 		if (inputStream == null) {
-			StringBuilder sb = new StringBuilder(100);
-			sb.append("File non trovato nel percorso specificato: ");
-			sb.append(path);
-			throw new FileNotFoundException(sb.toString());
+			throw new FileNotFoundException();
 		}
 		
 		this.prop.load(inputStream);
-	}
-	
-	@Override
-	public Properties getPropertyFile(){
 		return this.prop;
 	}
 	
-	@Override
-	public String getProperty(String rule){
-		return this.prop.getProperty(rule);
-	}
 }

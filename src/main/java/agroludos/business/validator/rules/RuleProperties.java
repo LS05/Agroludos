@@ -9,24 +9,21 @@ import java.util.Properties;
 
 class RuleProperties {
 	Properties prop;
-	
+
 	RuleProperties() throws IOException{
-		
+
 		this.prop = new Properties();
 		Path propFile = Paths.get("/properties/validator/rules.properties");
 		String path = propFile.toString();
 		InputStream inputStream = this.getClass().getResourceAsStream(path);
-		
+
 		if (inputStream == null) {
-			StringBuilder sb = new StringBuilder(100);
-			sb.append("File non trovato nel percorso specificato: ");
-			sb.append(path);
-			throw new FileNotFoundException(sb.toString());
+			throw new FileNotFoundException();
 		}
-		
+
 		this.prop.load(inputStream);
 	}
-	
+
 	String getProperty(String rule){
 		return this.prop.getProperty(rule);
 	}

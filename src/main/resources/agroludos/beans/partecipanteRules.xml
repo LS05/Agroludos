@@ -16,7 +16,9 @@
 	<bean id="partCognomeRule"
 		  class="agroludos.business.validator.rules.partecipante.PartCognomeRule"
 		  factory-bean="pRulesFactory"
-		  factory-method="getCognomeRule"></bean>
+		  factory-method="getCognomeRule">
+		   <property name="strValidator" ref="stringValidator" />
+	</bean>
 	<bean id="partDataSrcRule"
 		  class="agroludos.business.validator.rules.partecipante.PartDataSrcRule"
 		  factory-bean="pRulesFactory"

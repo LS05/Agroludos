@@ -5,13 +5,7 @@ import agroludos.presentation.req.RequestFactory;
 import agroludos.presentation.resp.ResponseFactory;
 import agroludos.to.TOFactory;
 
-public abstract class Controller {
-
-	//TODO Sono da nascondere ai controller.
-	//I controller devono accedere con this. e non con static
-
-	//TODO Eliminare i metodi set visibili alle sottoclassi
-	
+public abstract class Controller {	
 	protected static Navigator nav;
 	protected static FrontController frontController;
 	protected static RequestFactory reqFact;

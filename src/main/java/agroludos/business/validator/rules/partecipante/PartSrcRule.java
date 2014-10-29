@@ -21,9 +21,10 @@ class PartSrcRule extends AgroludosRule {
 			PartecipanteTO partecipante = (PartecipanteTO)mainTO;
 			String src = partecipante.getSrc();
 			String ext = FilenameUtils.getExtension(src);
-
+			
+			//TODO da rivedere
 			if(!"txt".equals(ext)){
-				errorTO.addError("src", "File non supportato. Inserire un file .txt!");
+				errorTO.addError(this.getProperty("srcKey"), this.getProperty("srcFormatError"));
 			}
 
 			if(this.successor != null)

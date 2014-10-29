@@ -20,7 +20,7 @@ class PartCognomeRule extends AgroludosRule {
 		if(mainTO instanceof PartecipanteTO){
 			PartecipanteTO partecipante = (PartecipanteTO)mainTO;
 			String cognome = partecipante.getCognome();
-			Integer cognLength = Integer.valueOf(this.getProperty("userCognomeLength"));
+			Integer cognLength = Integer.valueOf(this.getProperty("partCognomeLength"));
 
 			String cfKey = this.getProperty("cognKey");
 			if( !this.strValidator.isAlpha(cognome) ){
