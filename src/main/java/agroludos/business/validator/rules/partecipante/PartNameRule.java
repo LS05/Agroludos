@@ -9,7 +9,7 @@ import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 
 class PartNameRule extends AgroludosRule {
-	StringValidator strValidator;
+	private StringValidator strValidator;
 
 	PartNameRule() throws IOException {
 		super();
@@ -22,7 +22,7 @@ class PartNameRule extends AgroludosRule {
 			String nome = partecipante.getNome();
 			Integer nameLength = Integer.valueOf(this.getProperty("partNameLength"));
 
-			if(!this.strValidator.checkLength(nome, nameLength)){
+			if(!(nome.length() < nameLength)){
 				errorTO.addError(this.getProperty("nomeKey"), this.getProperty("nomeLenghtError"));
 			} else if(!this.strValidator.isAlpha(nome)){
 				errorTO.addError(this.getProperty("nomeKey"), this.getProperty("nomeAlphaError"));

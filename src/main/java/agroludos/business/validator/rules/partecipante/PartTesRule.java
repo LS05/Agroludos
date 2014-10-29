@@ -18,9 +18,10 @@ class PartTesRule extends AgroludosRule {
 		if(mainTO instanceof PartecipanteTO){
 			PartecipanteTO partecipante = (PartecipanteTO)mainTO;
 			String tesSan = partecipante.getNumTS();
-
+			String key = this.getProperty("tesKey");
+			
 			if(tesSan.length() != 16){
-				errorTO.addError(this.getProperty("tesKey"), this.getProperty("tesSanLenError"));
+				errorTO.addError(key, this.getProperty("tesSanLenError"));
 			}
 
 			if(this.successor != null)

@@ -8,10 +8,9 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 class RuleProperties {
-	Properties prop;
+	private Properties prop;
 
 	RuleProperties() throws IOException{
-
 		this.prop = new Properties();
 		Path propFile = Paths.get("/properties/validator/rules.properties");
 		String path = propFile.toString();

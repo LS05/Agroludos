@@ -68,6 +68,7 @@ class ViewsCache {
 				//creo la scena	e la aggiungo al mainStage
 				Scene mainViewScene = new Scene(root, width, height);
 				this.mainStage.setScene(mainViewScene);
+				this.mainStage.setTitle(window.getTitle());
 				//setto il mainStage
 				window.setStage(this.mainStage);
 			}

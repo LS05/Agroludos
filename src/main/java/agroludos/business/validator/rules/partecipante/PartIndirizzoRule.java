@@ -7,8 +7,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 
-public class PartIndirizzoRule extends AgroludosRule {
-
+class PartIndirizzoRule extends AgroludosRule {
 	protected PartIndirizzoRule() throws IOException {
 		super();
 	}
@@ -16,9 +15,17 @@ public class PartIndirizzoRule extends AgroludosRule {
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof PartecipanteTO){
-			PartecipanteTO part = (PartecipanteTO)mainTO;
-			if(this.successor != null)
-				this.validate(part, errorTO);
+			PartecipanteTO partecipante = (PartecipanteTO)mainTO;
+			String indirizzo = partecipante.getIndirizzo();
+			Integer indLength = Integer.valueOf(this.getProperty("partIndLength"));
+			
+			String key = this.getProperty("indKey");
+			if( indirizzo.length() < indLength){
+				errorTO.addError(key, this.getProperty("indirizzoError"));
+			}
+
+			if( this.successor != null)
+				this.successor.validate(mainTO, errorTO);
 		}
 	}
 

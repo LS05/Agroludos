@@ -9,7 +9,7 @@ import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 
 class PartEmailRule extends AgroludosRule {
-	StringValidator strValidator;
+	private StringValidator strValidator;
 
 	PartEmailRule() throws IOException {
 		super();
@@ -20,9 +20,10 @@ class PartEmailRule extends AgroludosRule {
 		if(mainTO instanceof PartecipanteTO){
 			PartecipanteTO partecipante = (PartecipanteTO)mainTO;
 			String email = partecipante.getEmail();
-
-			if(!this.strValidator.isValidEmail(email)){
-				errorTO.addError(this.getProperty("emailKey"), this.getProperty("emailError"));
+			String key = this.getProperty("emailKey");
+			
+			if( !(email.length() > 1) || !this.strValidator.isValidEmail(email)){
+				errorTO.addError(key , this.getProperty("emailError"));
 			}
 
 			if(this.successor != null)

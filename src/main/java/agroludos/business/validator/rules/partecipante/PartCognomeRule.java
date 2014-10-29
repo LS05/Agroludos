@@ -9,7 +9,7 @@ import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 
 class PartCognomeRule extends AgroludosRule {
-	StringValidator strValidator;
+	private StringValidator strValidator;
 
 	protected PartCognomeRule() throws IOException {
 		super();
@@ -22,14 +22,14 @@ class PartCognomeRule extends AgroludosRule {
 			String cognome = partecipante.getCognome();
 			Integer cognLength = Integer.valueOf(this.getProperty("partCognomeLength"));
 
-			String cfKey = this.getProperty("cognKey");
+			String key = this.getProperty("cognKey");
 			if( !this.strValidator.isAlpha(cognome) ){
-				errorTO.addError(cfKey, this.getProperty("cognNAlphaError"));
+				errorTO.addError(key, this.getProperty("cognNAlphaError"));
 			} else if( cognome.length() < cognLength ){
-				errorTO.addError(cfKey, this.getProperty("cfLengthError"));
+				errorTO.addError(key, this.getProperty("cognLenghtError"));
 			}
 
-			if( this.successor != null)
+			if( this.successor != null )
 				this.successor.validate(mainTO, errorTO);
 		}
 	}

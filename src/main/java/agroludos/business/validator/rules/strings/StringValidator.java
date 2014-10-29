@@ -7,8 +7,6 @@ public interface StringValidator {
 	boolean isAlpha(String str);
 	
 	boolean isAlphaNumeric(String str);
-
-	boolean checkLength(String str, int len);
 	
 	boolean isValidEmail(String email);
 

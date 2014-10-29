@@ -2,15 +2,15 @@ package agroludos.business.validator.rules.partecipante;
 
 import java.io.IOException;
 
-import org.apache.commons.io.FilenameUtils;
-
 import agroludos.business.validator.rules.AgroludosRule;
+import agroludos.business.validator.rules.file.FileValidator;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 
 class PartSrcRule extends AgroludosRule {
-
+	private FileValidator fileValidator;
+	
 	protected PartSrcRule() throws IOException {
 		super();
 	}
@@ -19,16 +19,20 @@ class PartSrcRule extends AgroludosRule {
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof PartecipanteTO){
 			PartecipanteTO partecipante = (PartecipanteTO)mainTO;
-			String src = partecipante.getSrc();
-			String ext = FilenameUtils.getExtension(src);
+			String srcFormat = this.getProperty("srcFormat");
 			
-			//TODO da rivedere
-			if(!"txt".equals(ext)){
-				errorTO.addError(this.getProperty("srcKey"), this.getProperty("srcFormatError"));
+			String src = partecipante.getSrc();
+			String key = this.getProperty("srcKey");
+			if(!this.fileValidator.isOfFormat(src, srcFormat)){
+				errorTO.addError(key, this.getProperty("srcFormatError"));
 			}
 
 			if(this.successor != null)
 				this.successor.validate(partecipante, errorTO);
 		}
+	}
+
+	public void setFileValidator(FileValidator fileValidator) {
+		this.fileValidator = fileValidator;
 	}
 }

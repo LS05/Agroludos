@@ -20,6 +20,8 @@ class PartRulesFactoryImpl implements PRulesFactory {
 	private static PartDataSrcRule dataSrcRule;
 	private static PartIndirizzoRule indirizzoRule;
 	private static PartPasswordRule passwordRule;
+	private static PartSessoRule sessoRule;
+	private static PartDataNascRule dataNascRule;
 
 	@Override
 	public AgroludosRule getEmailRule() throws IOException{
@@ -89,5 +91,19 @@ class PartRulesFactoryImpl implements PRulesFactory {
 		if(passwordRule == null)
 			passwordRule = new PartPasswordRule();
 		return passwordRule;
+	}
+
+	@Override
+	public AgroludosRule getSessoRule() throws IOException {
+		if(sessoRule == null)
+			sessoRule = new PartSessoRule();
+		return sessoRule;
+	}
+	
+	@Override
+	public AgroludosRule getDataNascRule() throws IOException {
+		if(dataNascRule == null)
+			dataNascRule = new PartDataNascRule();
+		return dataNascRule;
 	}
 }

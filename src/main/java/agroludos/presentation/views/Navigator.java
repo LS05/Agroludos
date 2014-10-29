@@ -14,8 +14,6 @@ public class Navigator {
 
 	private ViewsCache viewsCache;
 
-	private String mainViewName;
-
 	Navigator(ViewsCache viewsCache, ViewsLoader viewsLoader){
 		this.viewsLoader = viewsLoader;
 		this.viewsCache = viewsCache;
@@ -61,8 +59,8 @@ public class Navigator {
 			}else{
 				agw = this.viewsLoader.getView(viewName);
 				this.viewsCache.addView(agw);
-				if(agw.isMainView())
-					this.mainViewName = agw.getName();
+//				if(agw.isMainView())
+//					this.mainViewName = agw.getName();
 				//TODO Gestire l'eccezione di un controller null
 				agw.getController().initializeView(viewName);
 			}

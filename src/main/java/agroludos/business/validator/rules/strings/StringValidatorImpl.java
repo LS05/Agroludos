@@ -16,15 +16,6 @@ class StringValidatorImpl implements StringValidator{
 	}
 
 	@Override
-	public boolean checkLength(String str, int len) {
-		if(str.length() >= len){
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
 	public boolean isValidEmail(String email) {
 		EmailValidator val = EmailValidator.getInstance();
 		return val.isValid(email);

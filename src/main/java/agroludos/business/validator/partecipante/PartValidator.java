@@ -24,7 +24,9 @@ class PartValidator implements AgroludosValidator{
 	private AgroludosRule cfRule;
 	private AgroludosRule srcRule;
 	private AgroludosRule tesRule;
-
+	private AgroludosRule sessoRule;
+	private AgroludosRule dataNascRule;
+	
 	PartValidator(PRulesFactory rulesFactory, TOFactory toFactory) throws IOException{
 		this.rulesFact = rulesFactory;
 		this.toFact = toFactory;
@@ -39,6 +41,8 @@ class PartValidator implements AgroludosValidator{
 		this.dataSrcRule = this.rulesFact.getDataSrcRule();
 		this.tesRule = this.rulesFact.getTesRule();
 		this.passwordRule = this.rulesFact.getPasswordRule();
+		this.sessoRule = this.rulesFact.getSessoRule();
+		this.dataNascRule = this.rulesFact.getDataNascRule();
 
 		this.nomeRule.setSuccessor(this.cognomeRule);
 		this.cognomeRule.setSuccessor(this.cfRule);
@@ -49,6 +53,8 @@ class PartValidator implements AgroludosValidator{
 		this.indirizzoRule.setSuccessor(this.usernameRule);
 		this.usernameRule.setSuccessor(this.passwordRule);
 		this.passwordRule.setSuccessor(this.emailRule);
+		this.emailRule.setSuccessor(this.sessoRule);
+		this.sessoRule.setSuccessor(this.dataNascRule);
 	}
 
 	@Override
