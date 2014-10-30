@@ -5,6 +5,7 @@ import java.io.IOException;
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.business.validator.rules.partecipante.PRulesFactory;
+import agroludos.business.validator.rules.utente.UserRulesFactory;
 import agroludos.exceptions.ValidationException;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
@@ -12,7 +13,8 @@ import agroludos.to.PartecipanteTO;
 import agroludos.to.TOFactory;
 
 class PartValidator implements AgroludosValidator{
-	private PRulesFactory rulesFact;
+	private UserRulesFactory userRulesFact;
+	private PRulesFactory partRulesFact;
 	private TOFactory toFact;
 	private AgroludosRule nomeRule;
 	private AgroludosRule cognomeRule;
@@ -27,22 +29,24 @@ class PartValidator implements AgroludosValidator{
 	private AgroludosRule sessoRule;
 	private AgroludosRule dataNascRule;
 	
-	PartValidator(PRulesFactory rulesFactory, TOFactory toFactory) throws IOException{
-		this.rulesFact = rulesFactory;
+	PartValidator(UserRulesFactory userRulesFactory, PRulesFactory partRulesFactory, TOFactory toFactory) throws IOException{
+		this.userRulesFact = userRulesFactory;
+		this.partRulesFact = partRulesFactory;
 		this.toFact = toFactory;
 
-		this.nomeRule = this.rulesFact.getNameRule();
-		this.emailRule = this.rulesFact.getEmailRule();
-		this.cfRule = this.rulesFact.getCfRule();
-		this.srcRule = this.rulesFact.getSrcRule();
-		this.cognomeRule = this.rulesFact.getCognomeRule();
-		this.usernameRule = this.rulesFact.getUsernameRule();
-		this.indirizzoRule = this.rulesFact.getIndirizzoRule();
-		this.dataSrcRule = this.rulesFact.getDataSrcRule();
-		this.tesRule = this.rulesFact.getTesRule();
-		this.passwordRule = this.rulesFact.getPasswordRule();
-		this.sessoRule = this.rulesFact.getSessoRule();
-		this.dataNascRule = this.rulesFact.getDataNascRule();
+		this.nomeRule = this.userRulesFact.getNameRule();
+		this.emailRule = this.userRulesFact.getEmailRule();
+		this.passwordRule = this.userRulesFact.getPasswordRule();
+		this.cognomeRule = this.userRulesFact.getCognomeRule();
+		this.usernameRule = this.userRulesFact.getUsernameRule();
+		this.cfRule = this.partRulesFact.getCfRule();
+		this.srcRule = this.partRulesFact.getSrcRule();
+		this.indirizzoRule = this.partRulesFact.getIndirizzoRule();
+		this.dataSrcRule = this.partRulesFact.getDataSrcRule();
+		this.tesRule = this.partRulesFact.getTesRule();
+		
+		this.sessoRule = this.partRulesFact.getSessoRule();
+		this.dataNascRule = this.partRulesFact.getDataNascRule();
 
 		this.nomeRule.setSuccessor(this.cognomeRule);
 		this.cognomeRule.setSuccessor(this.cfRule);

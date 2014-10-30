@@ -6,5 +6,38 @@
 	
 	<bean id="userRulesFactory"
 		class="agroludos.business.validator.rules.utente.UserRulesFactoryImpl" />
-		
+
+	<bean id="userNomeRule"
+		  class="agroludos.business.validator.rules.utente.UserNomeRule"
+		  factory-bean="userRulesFactory"
+		  factory-method="getNameRule">
+		  <property name="strValidator" ref="stringValidator" />
+	</bean>
+	
+	<bean id="userCognomeRule"
+		  class="agroludos.business.validator.rules.utente.UserCognomeRule"
+		  factory-bean="userRulesFactory"
+		  factory-method="getCognomeRule">
+		  <property name="strValidator" ref="stringValidator" />
+	</bean>
+	
+	<bean id="userUsernameRule"
+		  class="agroludos.business.validator.rules.utente.UserUsernameRule"
+		  factory-bean="userRulesFactory"
+		  factory-method="getUsernameRule">
+	</bean>
+	
+	<bean id="userPasswordRule"
+		  class="agroludos.business.validator.rules.utente.UserPasswordRule"
+		  factory-bean="userRulesFactory"
+		  factory-method="getPasswordRule">
+	</bean>
+	
+	<bean id="userEmailRule"
+		  class="agroludos.business.validator.rules.utente.UserEmailRule"
+		  factory-bean="userRulesFactory"
+		  factory-method="getEmailRule">
+		  <property name="strValidator" ref="stringValidator" />
+	</bean>
+	
 </beans>

@@ -9,6 +9,7 @@
 	<bean id="partValidator" class="agroludos.business.validator.partecipante.PartValidator">
 		<constructor-arg ref="pRulesFactory" />
 		<constructor-arg ref="toFactory" />
+		<constructor-arg ref="userRulesFactory" />
 	</bean>
 	
 	<bean id="mdcValidator" class="agroludos.business.validator.mdc.MdcValidator">
