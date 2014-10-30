@@ -11,12 +11,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -49,13 +49,30 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 
 	private ResourceBundle res;
 
+	//label di errore
+	@FXML private Label lblNomeCmpError;
+	@FXML private Label lblTipoCmpError;
+	@FXML private Label lblDataCmpError;
+	@FXML private Label lblNminCmpError;
+	@FXML private Label lblNmaxCmpError;
+	@FXML private Label lblCostoCmpError;
+
+
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;	
+		
+		lblNomeCmpError.setVisible(false);
+		lblTipoCmpError.setVisible(false);
+		lblDataCmpError.setVisible(false);
+		lblNminCmpError.setVisible(false);
+		lblNmaxCmpError.setVisible(false);
+		lblCostoCmpError.setVisible(false);
 	}
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
+		
 		if(mainTO instanceof CompetizioneTO){
 			this.cmpto = (CompetizioneTO) mainTO;
 			this.costoComp = new NumberSpinner(BigDecimal.ZERO, new BigDecimal("10"), new DecimalFormat("#,##0.00"));
@@ -92,12 +109,13 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 	public void initialize(URL url, ResourceBundle resources) {
 		this.res = resources;		
 	}
-	
+
 	@Override
 	protected String getViewName() {
 		return this.viewName;
+		
 	}
-	
+
 	@FXML private void btnSelezioneOpt(){
 		nav.setVista("selezionaOptional", this.cmpto);
 	}

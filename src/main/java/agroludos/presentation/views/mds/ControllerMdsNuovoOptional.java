@@ -42,6 +42,11 @@ public class ControllerMdsNuovoOptional extends AgroludosController implements I
 	private List<TipoOptionalTO> listTipiOpt;
 	private ResourceBundle res;
 	
+	//label error
+	private @FXML Label lblStatoOptError;
+	private @FXML Label lblNomeOptError;
+	private @FXML Label lblCostoOptError;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.res = resources;
@@ -72,6 +77,10 @@ public class ControllerMdsNuovoOptional extends AgroludosController implements I
 	@Override
 	protected void initializeView(String viewName) {
 		this.viewName = viewName;
+		
+		lblStatoOptError.setVisible(false);
+		lblNomeOptError.setVisible(false);
+		lblCostoOptError.setVisible(false);
 	}
 
 	@FXML protected void confermaNuovoOptional(MouseEvent event){

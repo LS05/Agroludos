@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -20,6 +21,8 @@ public class ControllerMdsNuovoTipoCompetizione extends AgroludosController impl
 	
 	private @FXML TextField txtNomeTipo;
 	private @FXML TextArea txtAreaDesc;
+	
+	private @FXML Label lblNomeError;
 	
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
@@ -42,6 +45,8 @@ public class ControllerMdsNuovoTipoCompetizione extends AgroludosController impl
 	@Override
 	protected void initializeView(String viewName) {
 		this.viewName = viewName;
+		
+		lblNomeError.setVisible(false);
 	}
 
 	@Override

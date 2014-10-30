@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -30,7 +31,7 @@ import agroludos.to.UtenteTO;
 
 public class ControllerMdsNuovoMdC extends AgroludosController implements Initializable{
 	private String viewName;
-	
+
 	private @FXML TextField txtUsername;
 	private @FXML PasswordField txtPassword;
 	private @FXML TextField txtNome;
@@ -42,34 +43,52 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 	private @FXML GridPane mainNuovoMdC;
 	private List<TipoUtenteTO> listTipiUtente;
 	private List<StatoUtenteTO> listStatiUtente;
-	
+
+	//label error
+	private @FXML Label lblUsernameError;
+	private @FXML Label lblPswError;
+	private @FXML Label lblNomeError;
+	private @FXML Label lblCognomeError;
+	private @FXML Label lblEmailError;
+	private @FXML Label lblStipendioError;
+	private @FXML Label lblStatoError;
+
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
-	
+
 	private ResourceBundle resources;
 
 	private NumberSpinner stipendioMdC;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.resources = resources;
 	}
-	
+
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
-		
+
 		// TODO Auto-generated method stub
 	}
 
 	@Override
 	protected void initializeView(String viewName) {
 		this.viewName = viewName;
+		
+		lblUsernameError.setVisible(false);
+		lblPswError.setVisible(false);
+		lblNomeError.setVisible(false);
+		lblCognomeError.setVisible(false);
+		lblEmailError.setVisible(false);
+		lblStipendioError.setVisible(false);
+		lblStatoError.setVisible(false);
+		
 		this.stipendioMdC = new NumberSpinner(BigDecimal.ZERO, new BigDecimal("10"), new DecimalFormat("#,##0.00"));
 		this.mainNuovoMdC.add(this.stipendioMdC, 1, 5);
 		this.richiesta = this.getRichiesta("getAllTipoUtente", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		
+
 		this.richiesta = this.getRichiesta("getAllStatoUtente", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
@@ -81,27 +100,27 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 		this.cmbStato.setItems(listStati);
 		String nomeStato = listStati.get(0);
 		this.cmbStato.setValue(nomeStato);
-		
+
 		this.checkBoxReveal.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            public void changed(ObservableValue<? extends Boolean> ov, Boolean oldVal, Boolean newVal) {
-                if(newVal){
-                	txtPassword.setVisible(false);
-                	txtRevealPassword.setVisible(true);
-                	txtRevealPassword.setText(txtPassword.getText());
-                } else {
-                	txtPassword.setVisible(true);
-                	txtPassword.setText(txtRevealPassword.getText());
-                	txtRevealPassword.setVisible(false);
-                }
-            }
-        });
+			public void changed(ObservableValue<? extends Boolean> ov, Boolean oldVal, Boolean newVal) {
+				if(newVal){
+					txtPassword.setVisible(false);
+					txtRevealPassword.setVisible(true);
+					txtRevealPassword.setText(txtPassword.getText());
+				} else {
+					txtPassword.setVisible(true);
+					txtPassword.setText(txtRevealPassword.getText());
+					txtRevealPassword.setVisible(false);
+				}
+			}
+		});
 	}
-	
+
 	@Override
 	protected String getViewName() {
 		return this.viewName;
 	}
-	
+
 	@FXML protected void confermaNuovoManagerDiCompetizione(MouseEvent event){
 		UtenteTO utenteTO = toFact.createMdCTO();
 		utenteTO.setNome(this.txtNome.getText());
@@ -126,7 +145,7 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		
+
 		if( commandName.equals( this.reqProperties.getProperty("getAllTipoUtente") )){
 			Object res = response.getRespData();
 

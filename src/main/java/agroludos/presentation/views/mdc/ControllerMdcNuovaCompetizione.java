@@ -42,7 +42,6 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 	@FXML private TextField txtNmaxCmp;
 	@FXML private ComboBox<String> cmbTipoCmp;
 	@FXML private TextArea txtDescrizione;
-	@FXML private Label lblInserimentoOk;
 	@FXML private Button btnSelezionaOptional;
 	@FXML private Button btnAnnulla;
 	@FXML private Button btnInserisciCmp;
@@ -59,7 +58,16 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 	private AgroRequest richiesta;
 
 	private ResourceBundle res;
-
+	
+	//label di errore
+	@FXML private Label lblNomeCmpError;
+	@FXML private Label lblTipoCmpError;
+	@FXML private Label lblDataCmpError;
+	@FXML private Label lblNminCmpError;
+	@FXML private Label lblNmaxCmpError;
+	@FXML private Label lblCostoCmpError;
+	@FXML private Label lblSelezioneOptionalError;
+	
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
 		// TODO Auto-generated method stub
@@ -69,6 +77,13 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 	public void initializeView(String viewName) {
 		this.cmpto = toFact.createCompetizioneTO();
 		this.viewName = viewName;
+		
+		lblNomeCmpError.setVisible(false);
+		lblTipoCmpError.setVisible(false);
+		lblDataCmpError.setVisible(false);
+		lblNminCmpError.setVisible(false);
+		lblNmaxCmpError.setVisible(false);
+		lblCostoCmpError.setVisible(false);
 		
 		this.costoComp = new NumberSpinner(BigDecimal.ZERO, new BigDecimal("10"), new DecimalFormat("#,##0.00"));
 		this.risposta = respFact.createResponse();
@@ -82,7 +97,6 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 		this.cmbTipoCmp.setItems(listTipi);
 		this.cmbTipoCmp.setValue(listTipi.get(0));
 
-		this.lblInserimentoOk.setVisible(false);
 		this.paneCostoComp.getChildren().add(this.costoComp);
 		this.txtDescrizione.setText("");
 		this.txtNmaxCmp.setText("");

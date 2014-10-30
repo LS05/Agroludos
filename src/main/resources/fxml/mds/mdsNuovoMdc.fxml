@@ -18,30 +18,30 @@
           <children>
             <GridPane id="mainPane" fx:id="mainNuovoMdC" GridPane.columnIndex="0" GridPane.rowIndex="1">
               <children>
-                <Label text="%key3" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                <Label text="%key3" GridPane.columnIndex="0" GridPane.rowIndex="6">
                   <GridPane.margin>
                     <Insets left="10.0" fx:id="x1" />
                   </GridPane.margin>
                 </Label>
-                <Label text="%key4" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                <Label text="%key4" GridPane.columnIndex="0" GridPane.rowIndex="8">
                   <GridPane.margin>
                     <Insets left="10.0" fx:id="x1" />
                   </GridPane.margin>
                 </Label>
-                <Label text="%key24" GridPane.columnIndex="0" GridPane.margin="$x1" GridPane.rowIndex="6" />
-                <TextField fx:id="txtCognome" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <Label text="%key24" GridPane.columnIndex="0" GridPane.margin="$x1" GridPane.rowIndex="12" />
+                <TextField fx:id="txtCognome" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                   <GridPane.margin>
                     <Insets right="10.0" fx:id="x2" />
                   </GridPane.margin>
                 </TextField>
-                <TextField fx:id="txtEmail" prefWidth="370.0001220703125" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="4" />
-                <ComboBox fx:id="cmbStato" prefWidth="169.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                <Label text="%key75" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <TextField fx:id="txtEmail" prefWidth="370.0001220703125" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="8" />
+                <ComboBox fx:id="cmbStato" prefWidth="169.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                <Label text="%key75" GridPane.columnIndex="0" GridPane.rowIndex="2">
                   <GridPane.margin>
                     <Insets left="10.0" fx:id="x1" />
                   </GridPane.margin>
                 </Label>
-                <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
                   <children>
                     <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                       <children>
@@ -66,8 +66,8 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <TextField fx:id="txtNome" prefWidth="200.0" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="2" />
-                <Label text="%key2" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                <TextField fx:id="txtNome" prefWidth="200.0" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="4" />
+                <Label text="%key2" GridPane.columnIndex="0" GridPane.rowIndex="4">
                   <GridPane.margin>
                     <Insets left="10.0" fx:id="x1" />
                   </GridPane.margin>
@@ -78,24 +78,42 @@
                     <Insets left="10.0" fx:id="x1" />
                   </GridPane.margin>
                 </Label>
-                <Label text="%key133" GridPane.columnIndex="0" GridPane.rowIndex="5">
+                <Label text="%key133" GridPane.columnIndex="0" GridPane.rowIndex="10">
                   <GridPane.margin>
                     <Insets left="10.0" fx:id="x1" />
                   </GridPane.margin>
                 </Label>
+                <Label id="lbl" fx:id="lblUsernameError" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <textFill>
+                    <Color blue="0.000" green="0.384" red="0.800" fx:id="x3" />
+                  </textFill>
+                </Label>
+                <Label id="lbl" fx:id="lblPswError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label id="lbl" fx:id="lblNomeError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label id="lbl" fx:id="lblCognomeError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <Label id="lbl" fx:id="lblEmailError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <Label id="lbl" fx:id="lblStipendioError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                <Label id="lbl" fx:id="lblStatoError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="13" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="299.0" minWidth="10.0" prefWidth="220.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="430.0" minWidth="10.0" prefWidth="380.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="113.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="101.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="101.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="113.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="101.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="101.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="101.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="101.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
             <Label text="%key116" GridPane.columnIndex="0" GridPane.rowIndex="0">

@@ -34,6 +34,11 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 	private List<StatoOptionalTO> listStatiOpt;
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
+	
+	//label error
+	private @FXML Label lblStatoOptError;
+	private @FXML Label lblNomeOptError;
+	private @FXML Label lblCostoOptError;
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
@@ -67,6 +72,10 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
+		
+		lblStatoOptError.setVisible(false);
+		lblNomeOptError.setVisible(false);
+		lblCostoOptError.setVisible(false);
 	}
 
 	@Override

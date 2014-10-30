@@ -78,6 +78,19 @@ public class ControllerRegistrazione extends AgroludosController{
 	@Override
 	protected void initializeView(String viewName) {
 		this.viewName = viewName;
+		
+		lblNomeError.setVisible(false);
+		lblCognomeError.setVisible(false);
+		lblDataSrcError.setVisible(false);
+		lblTesSanError.setVisible(false);
+		lblUsernameError.setVisible(false);
+		lblPasswordError.setVisible(false);
+		lblIndirizzoError.setVisible(false);
+		lblCfError.setVisible(false);
+		lblSrcError.setVisible(false);
+		lblEmailError.setVisible(false);
+		lblDataNascError.setVisible(false);
+		lblSessoError.setVisible(false);
 
 		this.parTO = toFact.createPartecipanteTO();
 

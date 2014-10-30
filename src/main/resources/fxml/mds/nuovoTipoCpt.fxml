@@ -28,16 +28,17 @@
                     <Insets right="10.0" fx:id="x2" />
                   </GridPane.margin>
                 </TextField>
-                <Label text="%key48" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                <Label text="%key48" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.valignment="TOP">
                   <GridPane.margin>
                     <Insets left="10.0" top="10.0" />
                   </GridPane.margin>
                 </Label>
-                <TextArea fx:id="txtAreaDesc" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <TextArea fx:id="txtAreaDesc" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                   <GridPane.margin>
                     <Insets right="10.0" fx:id="x2" />
                   </GridPane.margin>
                 </TextArea>
+                <Label id="lbl" fx:id="lblNomeError" text="Label" textFill="#cc6200" GridPane.columnIndex="1" GridPane.rowIndex="1" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="190.0" />
@@ -45,7 +46,8 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="148.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="118.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
             <Button mnemonicParsing="false" onMouseClicked="#confermaNuovoTipoCompetizione" text="%key68" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.margin="$x2" GridPane.rowIndex="2" />
