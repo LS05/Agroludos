@@ -8,13 +8,18 @@
 	
 	<bean id="partValidator" class="agroludos.business.validator.partecipante.PartValidator">
 		<constructor-arg ref="pRulesFactory" />
-		<constructor-arg ref="toFactory" />
 		<constructor-arg ref="userRulesFactory" />
+		<constructor-arg ref="toFactory" />
 	</bean>
 	
 	<bean id="mdcValidator" class="agroludos.business.validator.mdc.MdcValidator">
 		<constructor-arg ref="userRulesFactory" />
 		<constructor-arg ref="mdcRulesFactory" />
+		<constructor-arg ref="toFactory" />
+	</bean>
+	
+	<bean id="tipoValidator" class="agroludos.business.validator.tipooptional.TipoValidator">
+		<constructor-arg ref="tipoRulesFactory" />
 		<constructor-arg ref="toFactory" />
 	</bean>
 	

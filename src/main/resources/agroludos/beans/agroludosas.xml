@@ -76,6 +76,7 @@
 	<bean id="gestoreTipoOptional"
 		class="agroludos.business.as.gestoretipooptional.ASGestoreTipoOptional"
 		parent="agroludosAS">
+		<constructor-arg ref="tipoValidator" />
 	</bean>
 	<bean id="gestoreTipoUtente"
 		class="agroludos.business.as.gestoretipoutente.ASGestoreTipoUtente"

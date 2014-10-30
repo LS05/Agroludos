@@ -1,5 +1,5 @@
 package agroludos.to;
 
-public interface TipiAgroludosTO {
+public interface TipiAgroludosTO extends AgroludosTO{
 	public String getNome();
 }
