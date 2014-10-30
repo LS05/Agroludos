@@ -20,13 +20,13 @@ class PropertiesFileImpl implements AgroPropFile{
 		Path propFile = Paths.get("/properties/" + pathName);
 		String path = propFile.toString();
 		InputStream inputStream = this.getClass().getResourceAsStream(path);
-		
+
 		if (inputStream == null) {
 			throw new FileNotFoundException();
 		}
-		
+
 		this.prop.load(inputStream);
 		return this.prop;
 	}
-	
+
 }

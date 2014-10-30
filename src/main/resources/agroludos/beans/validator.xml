@@ -11,4 +11,10 @@
 		<constructor-arg ref="toFactory" />
 	</bean>
 	
+	<bean id="mdcValidator" class="agroludos.business.validator.mdc.MdcValidator">
+		<constructor-arg ref="userRulesFactory" />
+		<constructor-arg ref="mdcRulesFactory" />
+		<constructor-arg ref="toFactory" />
+	</bean>
+	
 </beans>

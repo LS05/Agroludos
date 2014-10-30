@@ -98,7 +98,7 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals( this.reqProperties.getProperty("getAllStatoUtente") )){
+		if( commandName.equals( reqProperties.getProperty("getAllStatoUtente") )){
 			Object res = response.getRespData();
 
 			if(res instanceof List<?>){

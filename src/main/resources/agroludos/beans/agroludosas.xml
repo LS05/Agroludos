@@ -30,6 +30,7 @@
 		class="agroludos.business.as.gestoremdc.ASGestoreManagerDiCompetizione"
 		parent="agroludosAS">
 		<constructor-arg ref="pwdEnc" />
+		<constructor-arg ref="mdcValidator" />
 	</bean>
 	<bean id="gestoreCompetizione"
 		class="agroludos.business.as.gestorecompetizione.ASGestoreCompetizione"

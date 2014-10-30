@@ -23,32 +23,31 @@ public abstract class AgroludosController extends Controller{
 
 	protected static UtenteTO utente;
 
-	protected Properties reqProperties;
+	protected static Properties reqProperties;
 
-	protected Properties rulesProperties;
+	protected static Properties rulesProperties;
 
 	protected AgroludosController(){
-
-		this.reqProperties = new Properties();
-		this.rulesProperties = new Properties();
 
 		try {
 
 			if(reqStream == null){
+				reqProperties = new Properties();
 
 				reqStream = this.getClass().getResourceAsStream("/properties/req.properties");
 
 				if(reqStream != null){
-					this.reqProperties.load(reqStream);
+					reqProperties.load(reqStream);
 				}
 			}
 
 			if(rulesStream == null){
+				rulesProperties = new Properties();
 
 				rulesStream = this.getClass().getResourceAsStream("/properties/validator/rules.properties");
 
 				if(rulesStream != null){
-					this.rulesProperties.load(rulesStream);
+					rulesProperties.load(rulesStream);
 				}
 			}
 
@@ -64,17 +63,17 @@ public abstract class AgroludosController extends Controller{
 	}
 
 	protected AgroRequest getRichiesta(String commandName, String viewName){
-		String richiesta = this.reqProperties.getProperty(commandName);
+		String richiesta = reqProperties.getProperty(commandName);
 		return reqFact.createSimpleRequest(richiesta, viewName);		
 	}
 
 	protected AgroRequest getRichiesta(AgroludosTO param, String commandName, String viewName){
-		String richiesta = this.reqProperties.getProperty(commandName);
+		String richiesta = reqProperties.getProperty(commandName);
 		return reqFact.createDataRequest(param, richiesta, viewName);
 	}
 
 	protected String getCommandName(String cmdName){
-		return this.reqProperties.getProperty(cmdName);
+		return reqProperties.getProperty(cmdName);
 	}
 
 	/**

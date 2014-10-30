@@ -3,7 +3,9 @@ package agroludos.business.as.gestoremdc;
 import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
+import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
 import agroludos.integration.dao.db.StatoUtenteDAO;
@@ -12,22 +14,31 @@ import agroludos.to.StatoUtenteTO;
 import agroludos.utility.PasswordEncryption;
 
 class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCompetizione, SManagerDiCompetizione{
+
 	private PasswordEncryption pwdEnc;
-	
-	ASGestoreManagerDiCompetizione(PasswordEncryption pwdEnc){
+	private AgroludosValidator validator;
+
+	ASGestoreManagerDiCompetizione(PasswordEncryption pwdEnc, AgroludosValidator validator){
 		this.pwdEnc = pwdEnc;
+		this.validator = validator;
 	}
-	
+
 	private ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO() throws DatabaseException{
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return dbDAOFact.getManagerDiCompetizioneDAO();
 	}
 
 	@Override
-	public ManagerDiCompetizioneTO inserisciManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) throws DatabaseException {
+	public ManagerDiCompetizioneTO inserisciManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) 
+			throws DatabaseException, ValidationException {
+
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
+
+		this.validator.validate(mdcto);
+
 		String inputPassword = mdcto.getPassword();
 		mdcto.setPassword(this.pwdEnc.encryptPassword(inputPassword));
+
 		return daoMan.create(mdcto);
 	}
 
@@ -45,20 +56,31 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 
 	@Override
 	public ManagerDiCompetizioneTO modificaManagerDiCompetizione(ManagerDiCompetizioneTO mdcto)
-			throws DatabaseException {
+			throws DatabaseException, ValidationException {
+
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
+
+		this.validator.validate(mdcto);
+
 		ManagerDiCompetizioneTO res = (ManagerDiCompetizioneTO)daoMan.update(mdcto);
+
 		return res;
 	}
 
 	@Override
 	public ManagerDiCompetizioneTO eliminaManagerDiCompetizione(ManagerDiCompetizioneTO mdcto)
-			throws DatabaseException {
+			throws DatabaseException, ValidationException {
+
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+
+		this.validator.validate(mdcto);
+
 		StatoUtenteDAO suDAO = dbDAOFact.getStatoUtenteDAO();
 		List<StatoUtenteTO> stati = suDAO.getAll();
+
 		mdcto.setStatoUtente(stati.get(0));
+
 		return daoMan.update(mdcto);
 	}
 }
