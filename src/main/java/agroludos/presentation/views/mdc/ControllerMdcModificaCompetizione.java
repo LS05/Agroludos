@@ -140,7 +140,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 		Object res = this.risposta.getRespData();
 		if(res instanceof CompetizioneTO){			
 			SuccessTO succMessage = toFact.createSuccessTO();
-			succMessage.setMessage(this.reqProperties.getProperty(this.res.getString("key99")));
+			succMessage.setMessage(reqProperties.getProperty(this.res.getString("key99")));
 			nav.setVista("successDialog",succMessage);
 		}
 
@@ -153,7 +153,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if(commandName.equals( this.reqProperties.getProperty("modificaCompetizione"))){
+		if(commandName.equals( reqProperties.getProperty("modificaCompetizione"))){
 			System.out.println("errore nella modifica");
 		}
 	}

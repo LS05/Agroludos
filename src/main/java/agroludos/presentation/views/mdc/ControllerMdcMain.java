@@ -151,7 +151,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		if(commandName.equals( this.reqProperties.getProperty("annullaCompetizione"))){
+		if(commandName.equals( reqProperties.getProperty("annullaCompetizione"))){
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){			
 				this.listaTabCmp.clear();
@@ -164,7 +164,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 				nav.setVista("successDialog",succMessage);
 			}
-		}else if(commandName.equals( this.reqProperties.getProperty("eliminaIscrizione"))){
+		}else if(commandName.equals( reqProperties.getProperty("eliminaIscrizione"))){
 			Object res = response.getRespData();
 			if(res instanceof IscrizioneTO){
 				this.listaTabCmp.clear();
@@ -178,13 +178,13 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 				succMessage.setMessage(this.res.getString("key123"));
 				nav.setVista("successDialog",succMessage);
 			}
-		}else if(commandName.equals( this.reqProperties.getProperty("inserisciCompetizione") )){
+		}else if(commandName.equals( reqProperties.getProperty("inserisciCompetizione") )){
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){
 				this.listaTabCmp.clear();
 				this.initializeView(((CompetizioneTO) res).getManagerDiCompetizione());			
 			}
-		}else if(commandName.equals(this.reqProperties.getProperty("modificaCompetizione"))){
+		}else if(commandName.equals(reqProperties.getProperty("modificaCompetizione"))){
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){	
 				this.initializeView((CompetizioneTO)res);

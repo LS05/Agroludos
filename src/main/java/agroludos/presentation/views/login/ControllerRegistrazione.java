@@ -210,13 +210,13 @@ public class ControllerRegistrazione extends AgroludosController{
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if(commandName.equals( this.reqProperties.getProperty("getAllTipoUtente") )){
+		if(commandName.equals(reqProperties.getProperty("getAllTipoUtente") )){
 			Object res = response.getRespData();
 			if(res instanceof List<?>){
 				this.listTipiU = (List<TipoUtenteTO>)res;
 				this.parTO.setTipoUtente(this.listTipiU.get(2));
 			}
-		} else if(commandName.equals( this.reqProperties.getProperty("getAllStatoUtente") )){
+		} else if(commandName.equals(reqProperties.getProperty("getAllStatoUtente") )){
 			Object res = response.getRespData();
 
 			if(res instanceof List<?>){
@@ -224,73 +224,73 @@ public class ControllerRegistrazione extends AgroludosController{
 				this.parTO.setStatoUtente(this.listStatiU.get(1));
 			}
 
-		} else if(commandName.equals( this.reqProperties.getProperty("inserisciPartecipante") )){
+		} else if(commandName.equals(reqProperties.getProperty("inserisciPartecipante") )){
 			Object res = response.getRespData();
 			if(res instanceof ErrorTO){
 				ErrorTO errors = (ErrorTO)res;
 
-				if(errors.hasError(this.rulesProperties.getProperty("nomeKey"))){
-					String nomeKey = this.rulesProperties.getProperty("nomeKey");
+				if(errors.hasError(rulesProperties.getProperty("nomeKey"))){
+					String nomeKey = rulesProperties.getProperty("nomeKey");
 					this.lblNomeError.setVisible(true);
 					this.lblNomeError.setText(errors.getError(nomeKey));
 				} 
 
-				if(errors.hasError(this.rulesProperties.getProperty("cognKey"))){
-					String cognomeKey = this.rulesProperties.getProperty("cognKey");
+				if(errors.hasError(rulesProperties.getProperty("cognKey"))){
+					String cognomeKey = rulesProperties.getProperty("cognKey");
 					this.lblCognomeError.setVisible(true);
 					this.lblCognomeError.setText(errors.getError(cognomeKey));
 				}
 
-				if(errors.hasError(this.rulesProperties.getProperty("cfKey"))){
-					String codFiscKey = this.rulesProperties.getProperty("cfKey");
+				if(errors.hasError(rulesProperties.getProperty("cfKey"))){
+					String codFiscKey = rulesProperties.getProperty("cfKey");
 					this.lblCfError.setVisible(true);
 					this.lblCfError.setText(errors.getError(codFiscKey));
 				}
 
-				if(errors.hasError(this.rulesProperties.getProperty("dataSrcKey"))){
-					String dataSrcKey = this.rulesProperties.getProperty("dataSrcKey");
+				if(errors.hasError(rulesProperties.getProperty("dataSrcKey"))){
+					String dataSrcKey = rulesProperties.getProperty("dataSrcKey");
 					this.lblDataSrcError.setVisible(true);
 					this.lblDataSrcError.setText(errors.getError(dataSrcKey));
 				}
 
-				if(errors.hasError(this.rulesProperties.getProperty("srcKey"))){
-					String srcKey = this.rulesProperties.getProperty("srcKey");
+				if(errors.hasError(rulesProperties.getProperty("srcKey"))){
+					String srcKey = rulesProperties.getProperty("srcKey");
 					this.lblSrcError.setVisible(true);
 					this.lblSrcError.setText(errors.getError(srcKey));
 				}
 
-				if(errors.hasError(this.rulesProperties.getProperty("tesKey"))){
-					String tesKey = this.rulesProperties.getProperty("tesKey");
+				if(errors.hasError(rulesProperties.getProperty("tesKey"))){
+					String tesKey = rulesProperties.getProperty("tesKey");
 					this.lblTesSanError.setVisible(true);
 					this.lblTesSanError.setText(errors.getError(tesKey));
 				}
 
-				if(errors.hasError(this.rulesProperties.getProperty("usernameKey"))){
-					String usernameKey = this.rulesProperties.getProperty("usernameKey");
+				if(errors.hasError(rulesProperties.getProperty("usernameKey"))){
+					String usernameKey = rulesProperties.getProperty("usernameKey");
 					this.lblUsernameError.setVisible(true);
 					this.lblUsernameError.setText(errors.getError(usernameKey));
 				}
 
-				if(errors.hasError(this.rulesProperties.getProperty("passwordKey"))){
-					String passwordKey = this.rulesProperties.getProperty("passwordKey");
+				if(errors.hasError(rulesProperties.getProperty("passwordKey"))){
+					String passwordKey = rulesProperties.getProperty("passwordKey");
 					this.lblPasswordError.setVisible(true);
 					this.lblPasswordError.setText(errors.getError(passwordKey));
 				}
 
-				if(errors.hasError(this.rulesProperties.getProperty("emailKey"))){
-					String emailKey = this.rulesProperties.getProperty("emailKey");
+				if(errors.hasError(rulesProperties.getProperty("emailKey"))){
+					String emailKey = rulesProperties.getProperty("emailKey");
 					this.lblEmailError.setVisible(true);
 					this.lblEmailError.setText(errors.getError(emailKey));
 				}
 
-				if(errors.hasError(this.rulesProperties.getProperty("indrizzzoKey"))){
-					String indirizzoKey = this.rulesProperties.getProperty("indrizzzoKey");
+				if(errors.hasError(rulesProperties.getProperty("indrizzzoKey"))){
+					String indirizzoKey = rulesProperties.getProperty("indrizzzoKey");
 					this.lblIndirizzoError.setVisible(true);
 					this.lblIndirizzoError.setText(errors.getError(indirizzoKey));
 				}
 
-				if(errors.hasError(this.rulesProperties.getProperty("dataNascKey"))){
-					String dataNascKey = this.rulesProperties.getProperty("dataNascKey");
+				if(errors.hasError(rulesProperties.getProperty("dataNascKey"))){
+					String dataNascKey = rulesProperties.getProperty("dataNascKey");
 					this.lblDataNascError.setVisible(true);
 					this.lblDataNascError.setText(errors.getError(dataNascKey));
 				}

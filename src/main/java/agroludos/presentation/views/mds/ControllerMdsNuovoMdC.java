@@ -146,14 +146,14 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals( this.reqProperties.getProperty("getAllTipoUtente") )){
+		if( commandName.equals( reqProperties.getProperty("getAllTipoUtente") )){
 			Object res = response.getRespData();
 
 			if(res instanceof List<?>){
 				List<TipoUtenteTO> listTipo = (List<TipoUtenteTO>)res;
 				this.listTipiUtente = listTipo;
 			}
-		} else if( commandName.equals( this.reqProperties.getProperty("getAllStatoUtente") )){
+		} else if( commandName.equals( reqProperties.getProperty("getAllStatoUtente") )){
 			Object res = response.getRespData();
 
 			if(res instanceof List<?>){

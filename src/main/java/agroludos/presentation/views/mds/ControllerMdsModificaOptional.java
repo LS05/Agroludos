@@ -103,7 +103,7 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if(commandName.equals( this.reqProperties.getProperty("getAllStatoOptional") )){
+		if(commandName.equals( reqProperties.getProperty("getAllStatoOptional") )){
 
 			Object res = response.getRespData();
 

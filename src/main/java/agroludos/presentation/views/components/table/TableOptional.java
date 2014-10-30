@@ -17,7 +17,6 @@ public class TableOptional extends AgroTable<OptModel>{
 	private TableColumn<OptModel, String> optColTipo;
 	private TableColumn<OptModel, String> optColStato;
 	private ObservableList<OptModel> mainData;
-	private ObservableList<OptModel> filteredData;
 
 	public TableOptional(){
 		this.optColNome = new TableColumn<OptModel, String>("nome");
@@ -75,7 +74,6 @@ public class TableOptional extends AgroTable<OptModel>{
 
 	public void setAll(List<OptionalTO> list){
 		this.mainData = FXCollections.observableArrayList();
-		this.filteredData = FXCollections.observableArrayList();
 		OptModel partModel = null;
 
 		for(OptionalTO optional : list){

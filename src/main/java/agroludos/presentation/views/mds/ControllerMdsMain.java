@@ -364,7 +364,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if(commandName.equals( this.reqProperties.getProperty("getAllManagerDiCompetizione") )){
+		if(commandName.equals( reqProperties.getProperty("getAllManagerDiCompetizione") )){
 
 			Object res = response.getRespData();
 
@@ -373,7 +373,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				this.listMdc = mdcList;
 			}
 
-		} else if(commandName.equals( this.reqProperties.getProperty("getAllOptional") )){
+		} else if(commandName.equals( reqProperties.getProperty("getAllOptional") )){
 
 			Object res = response.getRespData();
 
@@ -382,7 +382,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				this.listOpt = optList;
 			}
 
-		} else if(commandName.equals( this.reqProperties.getProperty("getAllPartecipante") )){
+		} else if(commandName.equals( reqProperties.getProperty("getAllPartecipante") )){
 
 			Object res = response.getRespData();
 
@@ -391,7 +391,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				this.listPart = mdcList;
 			}
 
-		} else if(commandName.equals( this.reqProperties.getProperty("modificaManagerDiCompetizione") )){
+		} else if(commandName.equals( reqProperties.getProperty("modificaManagerDiCompetizione") )){
 
 			Object res = response.getRespData();
 
@@ -406,7 +406,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				setDxMdCColumn(this.selectedMdC);
 			}
 
-		} else if( commandName.equals( this.reqProperties.getProperty("getAllTipoOptional") )){
+		} else if( commandName.equals( reqProperties.getProperty("getAllTipoOptional") )){
 
 			Object res = response.getRespData();
 
@@ -415,7 +415,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				this.listTipiOpt = tipiOptList;
 			}
 
-		} else if( commandName.equals( this.reqProperties.getProperty("getOptionalByTipo") )){
+		} else if( commandName.equals( reqProperties.getProperty("getOptionalByTipo") )){
 
 			Object res = response.getRespData();
 
@@ -423,7 +423,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				this.listOpt = (List<OptionalTO>)res;
 			}
 
-		} else if( commandName.equals( this.reqProperties.getProperty("getAllTipoCompetizione") )){
+		} else if( commandName.equals( reqProperties.getProperty("getAllTipoCompetizione") )){
 
 			Object res = response.getRespData();
 
@@ -432,7 +432,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				this.listTipiComp = tipiCompList;
 			}
 
-		} else if( commandName.equals( this.reqProperties.getProperty("getCompetizioneByTipo") )){
+		} else if( commandName.equals( reqProperties.getProperty("getCompetizioneByTipo") )){
 
 			Object res = response.getRespData();
 
@@ -440,14 +440,14 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				this.listComp = (List<CompetizioneTO>)res;
 			}
 
-		} else if( commandName.equals( this.reqProperties.getProperty("inserisciTipoOptional") )){
+		} else if( commandName.equals( reqProperties.getProperty("inserisciTipoOptional") )){
 			Object res = response.getRespData();
 
 			if(res instanceof TipoOptionalTO){
 				TipoOptionalTO tipo = (TipoOptionalTO)res;
 				this.listViewOpt.addItem(tipo);
 			}
-		} else if( commandName.equals( this.reqProperties.getProperty("disattivaOptional") )){
+		} else if( commandName.equals( reqProperties.getProperty("disattivaOptional") )){
 			Object res = response.getRespData();
 
 			if(res instanceof OptionalTO){
@@ -455,7 +455,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				OptModel optModel = this.tableOptional.getSelectedItem();
 				optModel.setNomeStato(optTO.getStatoOptional().getNome());
 			}
-		} else if( commandName.equals( this.reqProperties.getProperty("modificaOptional") )){
+		} else if( commandName.equals( reqProperties.getProperty("modificaOptional") )){
 			Object res = response.getRespData();
 
 			if(res instanceof OptionalTO){
@@ -466,21 +466,21 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				optModel.setDescrizione(optTO.getDescrizione());
 				optModel.setNomeStato(optTO.getStatoOptional().getNome());
 			}
-		} else if( commandName.equals( this.reqProperties.getProperty("inserisciOptional") )){
+		} else if( commandName.equals( reqProperties.getProperty("inserisciOptional") )){
 			Object res = response.getRespData();
 
 			if(res instanceof OptionalTO){
 				OptionalTO optTO = (OptionalTO)res;
 				this.tableOptional.addItem(optTO);
 			}
-		} else if( commandName.equals( this.reqProperties.getProperty("inserisciTipoCompetizione") )){
+		} else if( commandName.equals( reqProperties.getProperty("inserisciTipoCompetizione") )){
 			Object res = response.getRespData();
 
 			if(res instanceof TipoCompetizioneTO){
 				TipoCompetizioneTO tipo = (TipoCompetizioneTO)res;
 				this.listViewComp.addItem(tipo);
 			}
-		} else if( commandName.equals( this.reqProperties.getProperty("eliminaManagerDiCompetizione") )){
+		} else if( commandName.equals( reqProperties.getProperty("eliminaManagerDiCompetizione") )){
 			Object res = response.getRespData();
 
 			if(res instanceof ManagerDiCompetizioneTO){
@@ -490,7 +490,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				succTO.setMessage(this.resources.getString("key130"));
 				nav.setVista("successDialog", succTO);
 			}
-		} else if( commandName.equals( this.reqProperties.getProperty("nuovoManagerDiCompetizione") )){
+		} else if( commandName.equals( reqProperties.getProperty("nuovoManagerDiCompetizione") )){
 			Object res = response.getRespData();
 
 			if(res instanceof ManagerDiCompetizioneTO){

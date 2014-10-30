@@ -213,7 +213,7 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		if(commandName.equals( this.reqProperties.getProperty("modificaCompetizione"))){
+		if(commandName.equals( reqProperties.getProperty("modificaCompetizione"))){
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){
 				this.initializeView((CompetizioneTO) res);

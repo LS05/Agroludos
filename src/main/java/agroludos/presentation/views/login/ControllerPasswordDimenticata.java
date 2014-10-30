@@ -93,7 +93,7 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		if(commandName.equals( this.reqProperties.getProperty("getUtenteByUsername") )){
+		if(commandName.equals(reqProperties.getProperty("getUtenteByUsername") )){
 			Object res = response.getRespData();
 			if(res instanceof ErrorTO){
 				//TODO gestire 

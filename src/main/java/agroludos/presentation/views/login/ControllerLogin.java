@@ -105,14 +105,14 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		if(commandName.equals( this.reqProperties.getProperty("inserisciPartecipante") )){
+		if(commandName.equals(reqProperties.getProperty("inserisciPartecipante") )){
 			Object res = response.getRespData();
 			if(res instanceof PartecipanteTO){
 				SuccessTO succMessage = toFact.createSuccessTO();
 				succMessage.setMessage(this.res.getString("key152"));
 				nav.setVista("successDialog",succMessage);
 			}
-		}else if(commandName.equals( this.reqProperties.getProperty("autenticazioneUtente") )){
+		}else if(commandName.equals(reqProperties.getProperty("autenticazioneUtente") )){
 			Object res = response.getRespData();
 			if(res instanceof String){
 				String errMsg = (String)res;

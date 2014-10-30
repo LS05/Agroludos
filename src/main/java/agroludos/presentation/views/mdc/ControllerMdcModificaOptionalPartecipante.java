@@ -274,7 +274,7 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals( this.reqProperties.getProperty("getAllTipoOptional") )){
+		if( commandName.equals( reqProperties.getProperty("getAllTipoOptional") )){
 			Object res = response.getRespData();
 			if(res instanceof List<?>){
 				List<TipiAgroludosTO> tipiOptList = (List<TipiAgroludosTO>)res;

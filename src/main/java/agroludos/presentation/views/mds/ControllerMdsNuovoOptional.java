@@ -119,12 +119,12 @@ public class ControllerMdsNuovoOptional extends AgroludosController implements I
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( this.reqProperties.getProperty("getAllStatoOptional").equals(commandName) ){
+		if( reqProperties.getProperty("getAllStatoOptional").equals(commandName) ){
 			Object res = response.getRespData();
 			if( res  instanceof List<?>){
 				this.listStatiOpt = (List<StatoOptionalTO>)res;
 			}
-		} else if( this.reqProperties.getProperty("getAllTipoOptional").equals(commandName) ){
+		} else if( reqProperties.getProperty("getAllTipoOptional").equals(commandName) ){
 			Object res = response.getRespData();
 			if( res  instanceof List<?>){
 				this.listTipiOpt = (List<TipoOptionalTO>)res;

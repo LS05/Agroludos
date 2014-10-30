@@ -105,8 +105,8 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 			this.tableOptional.hideColumn("Descrizione");
 			
 			if(getUtente() instanceof PartecipanteTO ){
-				PartecipanteTO parTO = (PartecipanteTO) this.getUtente();
-				for(IscrizioneTO isc : parTO.getAllIscrizioni()){
+				PartecipanteTO parTO = (PartecipanteTO) getUtente();
+				for(IscrizioneTO isc : parTO.getAllIscrizioniAttive()){
 					if(isc.getCompetizione().equals(this.cmpto))
 						this.btnIscriviti.setDisable(true);
 				}
@@ -154,7 +154,7 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals( this.reqProperties.getProperty("inserisciIscrizione") )){
+		if( commandName.equals( reqProperties.getProperty("inserisciIscrizione") )){
 			Object res = response.getRespData();
 
 			if(res instanceof IscrizioneTO){

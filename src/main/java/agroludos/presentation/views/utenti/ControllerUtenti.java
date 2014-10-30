@@ -28,7 +28,7 @@ public class ControllerUtenti extends AgroludosController {
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		if(commandName.equals( this.reqProperties.getProperty("autenticazioneUtente"))){
+		if(commandName.equals( reqProperties.getProperty("autenticazioneUtente"))){
 			Object res = response.getRespData();
 			if(res instanceof UtenteTO){
 				UtenteTO uto = (UtenteTO)res;

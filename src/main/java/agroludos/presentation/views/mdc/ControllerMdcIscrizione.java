@@ -121,7 +121,7 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		if(commandName.equals( this.reqProperties.getProperty("modificaIscrizione"))){
+		if(commandName.equals( reqProperties.getProperty("modificaIscrizione"))){
 			Object res = response.getRespData();
 			if(res instanceof IscrizioneTO){			
 				IscrizioneTO isc = (IscrizioneTO) res;

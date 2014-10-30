@@ -124,7 +124,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 
 
 
-	@SuppressWarnings({ "unchecked", "static-access" })
+	@SuppressWarnings({ "unchecked" })
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
