@@ -25,9 +25,9 @@ import agroludos.to.SuccessTO;
 import agroludos.to.UtenteTO;
 
 public class ControllerLogin extends AgroludosController implements Initializable{
-	
+
 	private String viewName;
-	
+
 	@FXML private Button btnLogin;
 	@FXML private Button btnPswDimenticata;
 	@FXML private Button btnRegistrati;
@@ -35,13 +35,22 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	@FXML private TextField txtUsername;
 	@FXML private PasswordField txtPassword;
 	@FXML private Label lblErroreLogin;
-	
+
 	private ResourceBundle res;
 
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
-	
-	
+
+	@Override
+	public void initialize(URL url, ResourceBundle resources) {
+		this.res = resources;		
+	}
+
+	@Override
+	public void initializeView(AgroludosTO mainTO) {
+		// TODO Auto-generated method stub
+	}
+
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
@@ -55,30 +64,12 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 				nav.closeVista(mainView);
 			}
 		}); 
-		
-		
+
+
 		this.agroLogoPane.setFocusTraversable(true);
-		this.txtUsername.setText("LucaS05");
+		this.txtUsername.setText("mds");
 		this.txtPassword.setText("agroludos");
 	}
-	
-	@Override
-	public void initializeView(AgroludosTO mainTO) {
-		// TODO Auto-generated method stub
-	}
-	
-
-	@Override
-	public void initialize(URL url, ResourceBundle resources) {
-		this.res = resources;		
-	}
-	
-	@Override
-	protected String getViewName() {
-		return this.viewName;
-	}
-
-	
 
 	@FXML protected void txtKeyPressed(javafx.scene.input.KeyEvent evt) {
 		if (evt.getCode() == KeyCode.ENTER)
@@ -88,7 +79,7 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	@FXML protected void btnLogin(MouseEvent event) {	
 		eseguiLogin();
 	}
-	
+
 	private void eseguiLogin() {	
 		UtenteTO uto = toFact.createUTO();
 		uto.setUsername(this.txtUsername.getText());
@@ -97,7 +88,7 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 		this.richiesta = this.getRichiesta(uto, "autenticazioneUtente", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 	}
-	
+
 	@FXML protected void btnPswDimenticata(MouseEvent event) {
 		nav.setVista("passwordDimenticata");
 	}
@@ -105,8 +96,12 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	@FXML protected void btnRegistrati(MouseEvent event) {
 		nav.setVista("nuovaRegistrazione");
 	}
-	
-	
+
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
+
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
@@ -124,13 +119,6 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 				this.lblErroreLogin.setVisible(true);
 				this.lblErroreLogin.setText(errMsg);
 			}
-		}else if(commandName.equals( this.reqProperties.getProperty("sessione.managerDiSistema") )||
-				commandName.equals( this.reqProperties.getProperty("sessione.managerDiCompetizione") )||
-						commandName.equals( this.reqProperties.getProperty("sessione.partecipante"))){
-			//TODO exception??
-			System.out.println("errore nella creazione della sessione");
-			
 		}
 	}
-
 }
