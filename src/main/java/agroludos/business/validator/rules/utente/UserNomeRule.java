@@ -20,7 +20,7 @@ class UserNomeRule extends AgroludosRule {
 		if(mainTO instanceof UtenteTO){
 			UtenteTO user = (UtenteTO)mainTO;
 			String nome = user.getNome();
-			Integer nameLength = Integer.valueOf(this.getProperty("partNameLength"));
+			Integer nameLength = Integer.valueOf(this.getProperty("nameLength"));
 
 			if(nome.length() < nameLength){
 				errorTO.addError(this.getProperty("nomeKey"), this.getProperty("nomeLenghtError"));

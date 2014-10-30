@@ -20,7 +20,7 @@ class UserCognomeRule extends AgroludosRule {
 		if(mainTO instanceof UtenteTO){
 			UtenteTO user = (UtenteTO)mainTO;
 			String cognome = user.getCognome();
-			Integer cognLength = Integer.valueOf(this.getProperty("partCognomeLength"));
+			Integer cognLength = Integer.valueOf(this.getProperty("cognomeLength"));
 
 			String key = this.getProperty("cognKey");
 			if( !this.strValidator.isAlpha(cognome) ){

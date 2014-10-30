@@ -18,7 +18,7 @@ class UserUsernameRule extends AgroludosRule {
 		if(mainTO instanceof UtenteTO){
 			UtenteTO user = (UtenteTO)mainTO;
 			String username = user.getUsername();
-			Integer sLen = Integer.valueOf(this.getProperty("partUsernameLength"));
+			Integer sLen = Integer.valueOf(this.getProperty("usernameLength"));
 
 			String cfKey = this.getProperty("usernameKey");
 			if( username.length() < sLen ){

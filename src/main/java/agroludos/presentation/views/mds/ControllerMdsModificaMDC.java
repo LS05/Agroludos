@@ -105,6 +105,8 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 				List<StatoUtenteTO> listStati = (List<StatoUtenteTO>)res;
 				this.listStatiUtente = listStati;
 			}
+		} else if( commandName.equals( reqProperties.getProperty("modificaManagerDiCompetizione") )){
+			System.out.println("Errori nella modifica!");
 		}
 
 	}
