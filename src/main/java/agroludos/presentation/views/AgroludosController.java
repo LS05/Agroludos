@@ -2,8 +2,6 @@ package agroludos.presentation.views;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Properties;
 
 import agroludos.presentation.req.AgroRequest;
@@ -19,40 +17,50 @@ import agroludos.to.UtenteTO;
  */
 public abstract class AgroludosController extends Controller{
 
+	private static InputStream reqStream;
+
+	private static InputStream rulesStream;
+
 	protected static UtenteTO utente;
 
 	protected Properties reqProperties;
 
 	protected Properties rulesProperties;
 
-	public static UtenteTO getUtente(){
-		return utente;
-	}
-
 	protected AgroludosController(){
+
 		this.reqProperties = new Properties();
 		this.rulesProperties = new Properties();
-		Path reqPropPath = Paths.get("/properties/req.properties");
-		Path errPropPath = Paths.get("/properties/validator/rules.properties");
-		String reqPath = reqPropPath.toString();
-		String rulesPath = errPropPath.toString();
-
-		InputStream reqStream = this.getClass().getResourceAsStream(reqPath);
-		InputStream rulesStream = this.getClass().getResourceAsStream(rulesPath);
 
 		try {
-			if(reqStream != null){
-				this.reqProperties.load(reqStream);
+
+			if(reqStream == null){
+
+				reqStream = this.getClass().getResourceAsStream("/properties/req.properties");
+
+				if(reqStream != null){
+					this.reqProperties.load(reqStream);
+				}
 			}
 
-			if(reqStream != null){
-				this.rulesProperties.load(rulesStream);
+			if(rulesStream == null){
+
+				rulesStream = this.getClass().getResourceAsStream("/properties/validator/rules.properties");
+
+				if(rulesStream != null){
+					this.rulesProperties.load(rulesStream);
+				}
 			}
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+	}
+
+	public static UtenteTO getUtente(){
+		return utente;
 	}
 
 	protected AgroRequest getRichiesta(String commandName, String viewName){
