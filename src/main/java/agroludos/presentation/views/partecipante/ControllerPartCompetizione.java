@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -23,6 +24,7 @@ import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
+import agroludos.to.PartecipanteTO;
 import agroludos.to.SuccessTO;
 
 public class ControllerPartCompetizione extends AgroludosController implements Initializable{
@@ -59,6 +61,8 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 
 	private ResourceBundle res;
 
+	@FXML private Button btnIscriviti;
+
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
@@ -84,6 +88,7 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 			this.lblNiscritti.setText(Integer.toString(this.cmpto.getAllIscrizioniAttive().size()));
 			this.lblStato.setText(this.cmpto.getStatoCompetizione().getNome());
 			this.txtDescrizione.setText(this.cmpto.getDescrizione());
+			this.btnIscriviti.setDisable(false);
 
 			//popolo la lista delle iscrizioni
 			this.listIsc = this.cmpto.getAllIscrizioniAttive();
@@ -98,6 +103,14 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 
 			this.tableOptional.hideColumn("Stato");
 			this.tableOptional.hideColumn("Descrizione");
+			
+			if(getUtente() instanceof PartecipanteTO ){
+				PartecipanteTO parTO = (PartecipanteTO) this.getUtente();
+				for(IscrizioneTO isc : parTO.getAllIscrizioni()){
+					if(isc.getCompetizione().equals(this.cmpto))
+						this.btnIscriviti.setDisable(true);
+				}
+			}
 		}
 	}
 	
@@ -151,6 +164,8 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 				iscritti.add(modelIsc);
 				String totIsc = ((Integer)iscritti.size()).toString();
 				this.lblNiscritti.setText(totIsc);
+				
+				this.btnIscriviti.setDisable(true);
 				
 				SuccessTO succ = toFact.createSuccessTO();
 				succ.setMessage(this.res.getString("key157"));

@@ -1,6 +1,8 @@
 package agroludos.presentation.views.partecipante;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
@@ -8,15 +10,16 @@ import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.to.AgroludosTO;
 import agroludos.to.IscrizioneTO;
+import agroludos.to.QuestionTO;
 import agroludos.to.StatoIscrizioneTO;
-
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
-public class ControllerPartVisualizzaIscrizione extends AgroludosController {
+public class ControllerPartVisualizzaIscrizione extends AgroludosController implements Initializable{
 
 	private String viewName;
 
@@ -48,6 +51,8 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController {
 	private AgroResponse risposta;
 	private AgroRequest richiesta;
 
+	private ResourceBundle res;
+	
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
@@ -93,6 +98,11 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController {
 	}
 
 	@Override
+	public void initialize(URL url, ResourceBundle resources) {
+		this.res = resources;		
+	}
+	
+	@Override
 	protected String getViewName() {
 		return this.viewName;
 	}
@@ -103,6 +113,17 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController {
 
 	@FXML protected void btnModificaOptionalIscrizione(MouseEvent event) {
 		nav.setVista("selezionaOptionalPart", this.mainIscr);
+	}
+	
+	@FXML protected void btnAnnullaIscrizione(MouseEvent event) {
+		QuestionTO question = toFact.createQuestionTO();
+		question.setQuestion(this.res.getString("key164"));
+
+		question.setDataTO(this.mainIscr);
+		question.setRequest("eliminaIscrizione");
+		question.setViewName(this.viewName);
+
+		nav.setVista("questionDialog", question);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -124,4 +145,5 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController {
 			}
 		}
 	}
+
 }

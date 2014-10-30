@@ -14,7 +14,7 @@ class RuleProperties {
 		this.prop = new Properties();
 		Path propFile = Paths.get("/properties/validator/rules.properties");
 		String path = propFile.toString();
-		InputStream inputStream = this.getClass().getResourceAsStream(path);
+		InputStream inputStream = this.getClass().getResourceAsStream("/properties/validator/rules.properties");
 
 		if (inputStream == null) {
 			throw new FileNotFoundException();

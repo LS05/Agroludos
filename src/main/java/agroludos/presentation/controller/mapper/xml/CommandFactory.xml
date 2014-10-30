@@ -19,7 +19,7 @@
 			<forward success="initView" failure="errorDialog" />
 		</from>
 	</command>
-		<command name="getUtenteByUsername">
+	<command name="getUtenteByUsername">
 		<classe>agroludos.business.as.gestoreutente.LUtente</classe>
 		<from name="passwordDimenticata">
 			<forward success="login" failure="passwordDimenticata" />
@@ -92,6 +92,9 @@
 		</from>
 		<from name="mostraIscrizione">
 			<forward success="managerDiCompetizione" failure="mostraIscrizoine" />
+		</from>
+		<from name="partMostraIscrizione">
+			<forward success="partecipante" failure="partMostraIscrizione" />
 		</from>
 	</command>
 	<command name="modificaManagerDiCompetizione">
@@ -176,7 +179,7 @@
 		</from>
 		<from name="nuovoMDC">
 			<forward success="nuovoMDC" failure="modificaMDC" />
-		</from>	
+		</from>
 		<from name="nuovaRegistrazione">
 			<forward success="nuovaRegistrazione" failure="nuovaRegistrazione" />
 		</from>
@@ -260,6 +263,9 @@
 		<classe>agroludos.business.as.gestorestatoiscrizione.LStatoIscrizione</classe>
 		<from name="partMostraIscrizione">
 			<forward success="partMostraIscrizione" failure="partMostraIscrizione" />
+		</from>
+		<from name="mostraIscrPart">
+			<forward success="mostraIscrPart" failure="mostraIscrPart" />
 		</from>
 	</command>
 </commands>

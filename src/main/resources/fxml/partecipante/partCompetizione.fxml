@@ -163,7 +163,7 @@
                     <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <Button mnemonicParsing="false" onMouseClicked="#btnIscrivitiClicked" prefHeight="47.0" prefWidth="207.0" text="%key138" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                <Button fx:id="btnIscriviti" mnemonicParsing="false" onMouseClicked="#btnIscrivitiClicked" prefHeight="47.0" prefWidth="207.0" text="%key138" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

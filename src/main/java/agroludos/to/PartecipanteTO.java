@@ -42,4 +42,6 @@ public interface PartecipanteTO extends UtenteTO {
 	public String getCertificato();
 	
 	public List<IscrizioneTO> getAllIscrizioni();
+	
+	public List<IscrizioneTO> getAllIscrizioniAttive();
 }

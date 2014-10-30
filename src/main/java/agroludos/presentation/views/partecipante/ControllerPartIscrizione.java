@@ -1,7 +1,12 @@
 package agroludos.presentation.views.partecipante;
 
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import agroludos.presentation.req.AgroRequest;
@@ -10,7 +15,8 @@ import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
-
+import agroludos.to.PartecipanteTO;
+import agroludos.to.StatoIscrizioneTO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -36,7 +42,7 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 	private AgroResponse risposta;
 
 	private ResourceBundle res;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.res = resources;
@@ -47,7 +53,7 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 		if(mainTO instanceof IscrizioneTO){
 			this.mainIscr = ((IscrizioneTO) mainTO);
 			this.mainComp = this.mainIscr.getCompetizione();
-			this.mainIscr.setPartecipante(getUtente());
+			this.mainIscr.setPartecipante((PartecipanteTO)getUtente());
 			this.lblNomeCompetizione.setText(this.mainComp.getNome());
 			this.lblTipoCompetizione.setText(this.mainComp.getTipoCompetizione().getNome());
 			this.lblData.setText(this.mainComp.getData().toString());
@@ -75,7 +81,7 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 	protected void initializeView(String viewName) {
 		this.viewName = viewName;
 	}
-	
+
 	@FXML protected void btnAnnullaClicked(MouseEvent event){
 		this.close();
 	}
@@ -85,20 +91,38 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 	}
 
 	@FXML protected void btnIscrivitiClicked(MouseEvent event){
+		this.mainIscr.setData(new Date());
+		this.mainIscr.setCompetizione(this.mainComp);
+		this.mainIscr.setCosto(Double.valueOf(this.lblCostoTot.getText()));
+
+		//setto lo stato dell'iscrizione a 1 cioè attiva
+		this.richiesta = this.getRichiesta("getAllStatoIscrizione", this.viewName);
+		this.risposta = respFact.createResponse();
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+
 		this.richiesta = this.getRichiesta(this.mainIscr, "inserisciIscrizione", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-			
+
 		this.close();
 	}
-	
+
 	@Override
 	protected String getViewName() {
 		return this.viewName;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
+		String commandName = request.getCommandName();
 
+		if( commandName.equals( reqProperties.getProperty("getAllStatoIscrizione") )){
+			Object res = response.getRespData();
+
+			if(res instanceof List<?>){
+				this.mainIscr.setStatoIscrizione(((List<StatoIscrizioneTO>) res).get(1));
+			}
+		}
 	}
 }

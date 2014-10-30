@@ -43,6 +43,8 @@ public class ControllerQuestion extends AgroludosController{
 		this.richiesta = this.getRichiesta(this.questTO.getDataTO(), this.questTO.getRequest(), this.questTO.getViewName());
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		
+		nav.closeVista(this.questTO.getViewName());
+		
 	}  
 	
 	@FXML private void btnNo(){

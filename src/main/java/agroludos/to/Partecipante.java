@@ -15,6 +15,7 @@ class Partecipante extends Utente implements PartecipanteTO {
 	private String src;
 	private Date dataSRC;
 	private Set<Iscrizione> iscrizioni;
+	private Set<Iscrizione> iscrizioniAttive;
 	private String certificato;
 	
 	@Override
@@ -105,6 +106,25 @@ class Partecipante extends Utente implements PartecipanteTO {
 
 	public void setIscrizioni(Set<Iscrizione> iscrizioni) {
 		this.iscrizioni = iscrizioni;
+	}
+	
+	public void setIscrizioniAttive(Set<Iscrizione> iscrizioniAttive) {
+		this.iscrizioniAttive = iscrizioniAttive;
+	}
+
+	public Set<Iscrizione> getIscrizioniAttive() {
+		return this.iscrizioniAttive;
+	}
+
+	@Override
+	public List<IscrizioneTO> getAllIscrizioniAttive() {
+		List<IscrizioneTO> res = new ArrayList<IscrizioneTO>();
+
+		for(Iscrizione item : this.iscrizioniAttive){
+			res.add(item);
+		}
+
+		return res;
 	}
 	
 	@Override

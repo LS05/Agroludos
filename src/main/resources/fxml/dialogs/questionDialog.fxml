@@ -18,7 +18,7 @@
                 <Insets />
               </GridPane.margin>
             </Button>
-            <Button id="btnOkErrLogin" fx:id="btnYes" mnemonicParsing="false" onMouseClicked="#btnYes" prefWidth="82.0" text="%key138" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+            <Button id="btnOkErrLogin" fx:id="btnYes" mnemonicParsing="false" onMouseClicked="#btnYes" prefWidth="82.0" text="%key165" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
