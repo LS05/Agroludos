@@ -3,7 +3,9 @@ package agroludos.business.as.gestorecompetizione;
 import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
+import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.StatoCompetizioneDAO;
@@ -47,6 +49,12 @@ import agroludos.to.TipoCompetizioneTO;
  */
 
 class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompetizione{
+	
+	private AgroludosValidator validator;
+
+	ASGestoreCompetizione(AgroludosValidator validator){
+		this.validator = validator;
+	}
 
 	private CompetizioneDAO getCompetizioneDAO() throws DatabaseException {
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
@@ -60,9 +68,12 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 
 	@Override
 	public CompetizioneTO inserisciCompetizione(CompetizioneTO cmpto)
-			throws DatabaseException {
+			throws DatabaseException, ValidationException {
 
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
+		
+		this.validator.validate(cmpto);
+		
 		return daoCmp.create(cmpto);
 
 	}

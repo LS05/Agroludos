@@ -28,4 +28,9 @@
 		<constructor-arg ref="toFactory" />
 	</bean>
 	
+	<bean id="compValidator" class="agroludos.business.validator.competizione.CompValidator">
+		<constructor-arg ref="compRulesFactory" />
+		<constructor-arg ref="toFactory" />
+	</bean>
+	
 </beans>
