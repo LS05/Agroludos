@@ -12,19 +12,19 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.TOFactory;
 
 class CompValidator implements AgroludosValidator{
-	private CompRulesFactory userRulesFact;
+	private CompRulesFactory compRulesFact;
 	private TOFactory toFact;
 	private AgroludosRule nomeRule;
 	private AgroludosRule nPartRule;
 	private AgroludosRule costoRule;
 	
 	CompValidator(CompRulesFactory rulesFactory, TOFactory toFactory) throws IOException{
-		this.userRulesFact = rulesFactory;
+		this.compRulesFact = rulesFactory;
 		this.toFact = toFactory;
 
-		this.nomeRule = this.userRulesFact.getNomeRule();
-		this.nPartRule = this.userRulesFact.getNumPartRule();
-		this.costoRule = this.userRulesFact.getCostoRule();
+		this.nomeRule = this.compRulesFact.getNomeRule();
+		this.nPartRule = this.compRulesFact.getNumPartRule();
+		this.costoRule = this.compRulesFact.getCostoRule();
 
 		this.nomeRule.setSuccessor(this.nPartRule);
 		this.nPartRule.setSuccessor(this.costoRule);
