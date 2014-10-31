@@ -46,7 +46,7 @@
 	<command name="inserisciManagerDiCompetizione">
 		<classe>agroludos.business.as.gestoremdc.SManagerDiCompetizione</classe>
 		<from name="nuovoMDC">
-			<forward success="managerDiSistema" failure="managerDiSistema" />
+			<forward success="managerDiSistema" failure="nuovoMDC" />
 		</from>
 	</command>
 	<command name="inserisciPartecipante">
