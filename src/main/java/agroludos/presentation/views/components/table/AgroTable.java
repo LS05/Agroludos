@@ -1,5 +1,8 @@
 package agroludos.presentation.views.components.table;
 
+import java.util.List;
+
+import agroludos.to.PartecipanteTO;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -43,4 +46,5 @@ public abstract class AgroTable<T> extends TableView<T>{
 
 		return resCol;
 	}
+
 }

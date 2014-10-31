@@ -89,11 +89,9 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 
 			if(this.mainIscr.getCompetizione().getAllOptionals().isEmpty())
 				this.btnModificaOptionalIscrizione.setDisable(true);
+			else
+				this.btnModificaOptionalIscrizione.setDisable(false);
 
-			if( this.mainIscr.getStatoIscrizione().equals(this.statiIscrizione.get(2)) ){
-				this.btnVisualizzaCertificato.setVisible(false);
-				this.btnAggiornaCertificato.setVisible(true);
-			}
 		}
 	}
 

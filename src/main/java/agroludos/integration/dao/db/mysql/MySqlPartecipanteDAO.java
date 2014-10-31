@@ -7,7 +7,6 @@ import org.hibernate.Session;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.PartecipanteDAO;
-import agroludos.to.ManagerDiSistemaTO;
 import agroludos.to.PartecipanteTO;
 
 class MySqlPartecipanteDAO extends MySqlUtenteDAO<PartecipanteTO> implements PartecipanteDAO {

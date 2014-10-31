@@ -4,12 +4,13 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+import javafx.scene.input.MouseEvent;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -28,6 +29,8 @@ public class ControllerMdsVisualizzaIscrizioni extends AgroludosController {
 	@FXML private Label lblNomeCognome;
 	
 	private List<IscrizioneTO> iscrizioni;
+
+	protected IscModel iscModelRow;
 
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
@@ -53,6 +56,21 @@ public class ControllerMdsVisualizzaIscrizioni extends AgroludosController {
 			}
 			
 			this.tableIscrizioni.getItems().setAll(res);
+			
+			this.tableIscrizioni.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent event) {
+					@SuppressWarnings("unchecked")
+					TableView<IscModel> table = (TableView<IscModel>) event.getSource();
+					iscModelRow = table.getSelectionModel().getSelectedItem();
+					if(iscModelRow != null){
+						if (event.getClickCount() > 1) 
+							nav.setVista("mostraIscrizioneMds", iscModelRow.getIscrizioneTO());
+					}
+				}
+
+			});
 		}
 	}
 

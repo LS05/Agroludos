@@ -1,7 +1,6 @@
 package agroludos.presentation.views.mds;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -94,17 +93,16 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
-	private List<String> richieste;
 	private CmpModel cmpModelRow;
 
 	private ResourceBundle resources;
+	protected PartModel partModelRow;
 
 	@Override
 	public void initialize(URL url, ResourceBundle res) {
 		this.resources = res;
 	}
 
-	@SuppressWarnings("serial")
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
@@ -114,77 +112,11 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.paneGestioneMdC.setVisible(false);
 		this.paneGestionePartecipanti.setVisible(false);
 
-		this.richieste = new ArrayList<String>(){{
-			this.add("getAllManagerDiCompetizione");
-			this.add("getAllPartecipante");
-			this.add("getAllTipoOptional");
-			this.add("getAllTipoCompetizione");
-		}};
-
-		initRequests();
-
-		this.tableManagerCompetizione = new TableMdC(this.listMdc);
-		this.tableManagerCompetizione.getSelectionModel().selectFirst();
-		this.paneTableMdC.getChildren().add(this.tableManagerCompetizione);
-		this.setDxMdCColumn(this.selectedMdC);
-		this.tableManagerCompetizione.getSelectionModel().selectedItemProperty().addListener(
-				new ChangeListener<MdcModel>(){
-
-					@Override
-					public void changed(ObservableValue<? extends MdcModel> partModel,
-							MdcModel oldMod, MdcModel newMod) {
-
-						selectedMdC = tableManagerCompetizione.getSelectedIndex();
-						setDxMdCColumn(selectedMdC);
-
-					}
-
-				});
-
-		this.tablePartecipanti = new TablePartecipanti(this.listPart);
-		this.tablePartecipanti.getSelectionModel().selectFirst();
-		this.paneTablePart.getChildren().add(this.tablePartecipanti);
-		this.setDxPartColumn(this.selectedPart);
-		this.tablePartecipanti.getSelectionModel().selectedItemProperty().addListener(
-				new ChangeListener<PartModel>(){
-
-					@Override
-					public void changed(ObservableValue<? extends PartModel> partModel,
-							PartModel oldMod, PartModel newMod) {
-
-						selectedPart = tablePartecipanti.getSelectedIndex();
-						setDxPartColumn(selectedPart);
-
-					}
-
-				});
-
-		this.tableOptional = new TableOptional();
-		this.paneTableOptional.getChildren().add(this.tableOptional);
-		this.paneTableOptional.setVisible(true);
-		this.listViewOpt = new ListaViewTipi(this.listTipiOpt);
-		this.paneListaTipiOpt.getChildren().add(listViewOpt);
-
-		final String viewNameSupp = this.viewName;
-		listViewOpt.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@SuppressWarnings("unchecked")
-			@Override
-			public void handle(MouseEvent event) {
-				ListView<String> source = (ListView<String>)event.getSource();
-				String nomeTipo = source.getSelectionModel().getSelectedItem();
-
-				TipoOptionalTO tipoOpt = toFact.createTipoOptionalTO();
-				tipoOpt.setNome(nomeTipo);
-
-				richiesta = getRichiesta(tipoOpt, "getOptionalByTipo", viewNameSupp);
-				risposta = respFact.createResponse();
-				frontController.eseguiRichiesta(richiesta, risposta);
-				tableOptional.setAll(listOpt);
-			}
-
-		});
-
+		
+		this.richiesta = this.getRichiesta("getAllTipoCompetizione", this.viewName);
+		this.risposta = respFact.createResponse();
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		
 		this.tableCompetizioni = new TableCompetizioni();
 		this.paneTableCmp.getChildren().add(this.tableCompetizioni);
 		this.listViewComp = new ListaViewTipi(this.listTipiComp);
@@ -205,6 +137,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			}
 		});
 
+		final String viewNameSupp = this.viewName;
 		this.listViewComp.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@SuppressWarnings("unchecked")
@@ -216,6 +149,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				TipoCompetizioneTO tipoComp = toFact.createTipoCompetizioneTO();
 				tipoComp.setNome(nomeTipo);
 
+				
 				richiesta = getRichiesta(tipoComp, "getCompetizioneByTipo", viewNameSupp);
 				risposta = respFact.createResponse();
 				frontController.eseguiRichiesta(richiesta, risposta);
@@ -223,6 +157,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			}
 
 		});
+		
+
+	
 	}
 	
 	private void setDxMdCColumn(Integer selected){
@@ -260,17 +197,10 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
         });
 	}
 
-	private void initRequests(){
-		for(String req : this.richieste){
-			this.richiesta = this.getRichiesta(req, this.viewName);
-			this.risposta = respFact.createResponse();
-			frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		}
-	}
-
 	//----------------Main View--------------------
 
 	@FXML protected void btnGestComp(MouseEvent event) {
+		
 		this.paneGestioneCompetizioni.setVisible(true);
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneMdC.setVisible(false);
@@ -278,6 +208,43 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	}
 
 	@FXML protected void btnGestOptional(MouseEvent event) {
+		
+		this.richiesta = this.getRichiesta("getAllTipoOptional", this.viewName);
+		this.risposta = respFact.createResponse();
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+
+		
+		this.tableOptional = new TableOptional();
+		this.paneTableOptional.getChildren().add(this.tableOptional);
+		this.paneTableOptional.setVisible(true);
+		this.listViewOpt = new ListaViewTipi(this.listTipiOpt);
+		this.paneListaTipiOpt.getChildren().add(listViewOpt);
+
+		
+		
+		final String viewNameSupp = this.viewName;
+		listViewOpt.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public void handle(MouseEvent event) {
+				ListView<String> source = (ListView<String>)event.getSource();
+				String nomeTipo = source.getSelectionModel().getSelectedItem();
+
+				TipoOptionalTO tipoOpt = toFact.createTipoOptionalTO();
+				tipoOpt.setNome(nomeTipo);
+
+				richiesta = getRichiesta(tipoOpt, "getOptionalByTipo", viewNameSupp);
+				risposta = respFact.createResponse();
+				frontController.eseguiRichiesta(richiesta, risposta);
+				tableOptional.setAll(listOpt);
+			}
+
+		});
+		
+		
+		
+		
 		this.paneGestioneCompetizioni.setVisible(false);
 		this.paneGestioneOptional.setVisible(true);
 		this.paneGestioneMdC.setVisible(false);
@@ -285,6 +252,32 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	}
 
 	@FXML protected void btnGestManComp(MouseEvent event) {
+		this.richiesta = this.getRichiesta("getAllManagerDiCompetizione", this.viewName);
+		this.risposta = respFact.createResponse();
+		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		
+		this.tableManagerCompetizione = new TableMdC(this.listMdc);
+		this.tableManagerCompetizione.getSelectionModel().selectFirst();
+		this.paneTableMdC.getChildren().add(this.tableManagerCompetizione);
+		this.setDxMdCColumn(this.selectedMdC);
+		this.tableManagerCompetizione.getSelectionModel().selectedItemProperty().addListener(
+				new ChangeListener<MdcModel>(){
+
+					@Override
+					public void changed(ObservableValue<? extends MdcModel> partModel,
+							MdcModel oldMod, MdcModel newMod) {
+
+						selectedMdC = tableManagerCompetizione.getSelectedIndex();
+						setDxMdCColumn(selectedMdC);
+
+					}
+
+				});
+
+		
+
+		
+		
 		this.paneGestioneCompetizioni.setVisible(false);
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneMdC.setVisible(true);
@@ -296,6 +289,22 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 		this.tablePartecipanti = new TablePartecipanti(this.listPart);
+		this.tablePartecipanti.getSelectionModel().selectFirst();
+		this.paneTablePart.getChildren().add(this.tablePartecipanti);
+		this.setDxPartColumn(this.selectedPart);
+		this.tablePartecipanti.getSelectionModel().selectedItemProperty().addListener(
+				new ChangeListener<PartModel>(){
+
+					@Override
+					public void changed(ObservableValue<? extends PartModel> partModel,
+							PartModel oldMod, PartModel newMod) {
+
+						selectedPart = tablePartecipanti.getSelectedIndex();
+						setDxPartColumn(selectedPart);
+
+					}
+
+				});
 		
 		
 		this.paneGestioneCompetizioni.setVisible(false);
@@ -405,8 +414,8 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			Object res = response.getRespData();
 
 			if(res instanceof List<?>){
-				List<PartecipanteTO> mdcList = (List<PartecipanteTO>)res;
-				this.listPart = mdcList;
+				List<PartecipanteTO> partList = (List<PartecipanteTO>)res;
+				this.listPart = partList;
 			}
 
 		} else if(commandName.equals( reqProperties.getProperty("modificaManagerDiCompetizione") )){
