@@ -59,6 +59,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 		this.tableCompetizioni.hideColumn(3);
 		this.tableIscrizioni.setAll(this.currUser.getAllIscrizioniAttive());
 		this.paneIscrizioni.add(this.tableIscrizioni, 0, 1);
+		this.tableIscrizioni.hideColumn(4);
 		this.richiesta = this.getRichiesta("getCompetizioniAttive", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);

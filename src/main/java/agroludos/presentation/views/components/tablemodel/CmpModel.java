@@ -8,7 +8,7 @@ public class CmpModel {
 	private SimpleStringProperty id;
 	private SimpleStringProperty nome;
 	private SimpleStringProperty data;
-	private SimpleStringProperty niscritti;
+	private SimpleStringProperty iscritti;
 	private SimpleStringProperty nmin;
 	private SimpleStringProperty nmax;
 	private SimpleStringProperty tipo;
@@ -21,7 +21,7 @@ public class CmpModel {
 		this.id = new SimpleStringProperty(Integer.toString(cmpto.getId()));
 		this.nome = new SimpleStringProperty(cmpto.getNome());
 		this.data = new SimpleStringProperty(cmpto.getData().toString());
-		this.niscritti = new SimpleStringProperty(Integer.toString(cmpto.getAllIscrizioniAttive().size()));
+		this.iscritti = new SimpleStringProperty(Integer.toString(cmpto.getAllIscrizioniAttive().size()));
 		this.nmin = new SimpleStringProperty(Integer.toString(cmpto.getNmin()));
 		this.nmax = new SimpleStringProperty(Integer.toString(cmpto.getNmax()));
 		this.tipo = new SimpleStringProperty(cmpto.getTipoCompetizione().getNome());
@@ -79,12 +79,12 @@ public class CmpModel {
 		this.stato.set(stato);
 	}
 
-	public String getNiscritti() {
-		return niscritti.get();
+	public String getIscritti() {
+		return iscritti.get();
 	}
 
-	public void setNiscritti(String niscritti) {
-		this.niscritti.set(niscritti);
+	public void setIscritti(String niscritti) {
+		this.iscritti.set(niscritti);
 	}
 
 	public String getNmin() {
@@ -124,7 +124,7 @@ public class CmpModel {
 	}
 
 	public SimpleStringProperty niscrittiProperty(){
-		return this.niscritti;
+		return this.iscritti;
 	}
 
 	public SimpleStringProperty nminProperty(){
@@ -154,7 +154,7 @@ public class CmpModel {
 	@Override
 	public String toString() {
 		return "CmpModel [id=" + id + ", nome=" + nome + ", data=" + data
-				+ ", niscritti=" + niscritti + ", nmin=" + nmin + ", nmax="
+				+ ", niscritti=" + iscritti + ", nmin=" + nmin + ", nmax="
 				+ nmax + ", tipo=" + tipo + ", stato=" + stato + "]";
 	}
 }
