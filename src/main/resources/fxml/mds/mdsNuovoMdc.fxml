@@ -83,17 +83,25 @@
                     <Insets left="10.0" fx:id="x1" />
                   </GridPane.margin>
                 </Label>
-                <Label id="lbl" fx:id="lblUsernameError" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <Label id="lbl" fx:id="lblUsernameError" styleClass="lblError" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
                   <textFill>
                     <Color blue="0.000" green="0.384" red="0.800" fx:id="x3" />
                   </textFill>
                 </Label>
-                <Label id="lbl" fx:id="lblPswError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <Label id="lbl" fx:id="lblNomeError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <Label id="lbl" fx:id="lblCognomeError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                <Label id="lbl" fx:id="lblEmailError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                <Label id="lbl" fx:id="lblStipendioError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                <Label id="lbl" fx:id="lblStatoError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                <Label id="lbl" fx:id="lblPasswordError" styleClass="lblError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                <Label id="lbl" fx:id="lblNomeError" styleClass="lblError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="TOP" />
+                <Label id="lbl" fx:id="lblCognomeError" styleClass="lblError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.valignment="TOP" />
+                <Label id="lbl" fx:id="lblEmailError" styleClass="lblError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="9" GridPane.valignment="TOP" />
+                <Label id="lbl" fx:id="lblStipendioError" styleClass="lblError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="11" GridPane.valignment="TOP" />
+                <Label id="lbl" fx:id="lblStatoError" styleClass="lblError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="13" GridPane.valignment="TOP" />
+                <GridPane fx:id="paneStipendio" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="299.0" minWidth="10.0" prefWidth="220.0" />
@@ -142,9 +150,9 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           </columnConstraints>
           <rowConstraints>
-            <RowConstraints maxHeight="134.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="304.0" minHeight="10.0" prefHeight="262.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="131.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="134.0" minHeight="10.0" prefHeight="98.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="335.0" minHeight="10.0" prefHeight="334.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="131.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
       </top>

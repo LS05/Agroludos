@@ -148,7 +148,7 @@
 			<name>nuovoMDC</name>
 			<url>/fxml/mds/mdsNuovoMdc.fxml</url>
 			<width>600</width>
-			<height>400</height>
+			<height>493</height>
 			<title>Agroludos | Nuovo Manager di Competizione</title>
 		</view>
 		<view tipo="dialog">

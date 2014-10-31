@@ -8,7 +8,6 @@ import agroludos.business.validator.rules.agrotipo.TipoRulesFactory;
 import agroludos.exceptions.ValidationException;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
-import agroludos.to.PartecipanteTO;
 import agroludos.to.TOFactory;
 import agroludos.to.TipiAgroludosTO;
 
@@ -28,8 +27,8 @@ class TipoValidator implements AgroludosValidator{
 	public void validate(AgroludosTO to) throws ValidationException {
 		if(to instanceof TipiAgroludosTO){
 			ErrorTO errorTO = this.toFact.createErrorTO();
-			PartecipanteTO partecipante = (PartecipanteTO)to;
-			this.nomeRule.validate(partecipante, errorTO);
+			TipiAgroludosTO tipo = (TipiAgroludosTO)to;
+			this.nomeRule.validate(tipo, errorTO);
 			if(errorTO.hasErrors())
 				throw new ValidationException(errorTO);
 		}

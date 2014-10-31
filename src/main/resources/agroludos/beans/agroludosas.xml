@@ -72,6 +72,7 @@
 		<bean id="gestoreTipoCompetizione"
 		class="agroludos.business.as.gestoretipocompetizione.ASGestoreTipoCompetizione"
 		parent="agroludosAS">
+		<constructor-arg ref="tipoValidator" />
 	</bean>
 	<bean id="gestoreTipoOptional"
 		class="agroludos.business.as.gestoretipooptional.ASGestoreTipoOptional"
