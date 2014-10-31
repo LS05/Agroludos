@@ -3,7 +3,6 @@ package agroludos.presentation.views.partecipante;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import agroludos.presentation.req.AgroRequest;
@@ -12,8 +11,8 @@ import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
+import agroludos.to.OptionalTO;
 import agroludos.to.PartecipanteTO;
-import agroludos.to.StatoIscrizioneTO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -90,12 +89,11 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 	@FXML protected void btnIscrivitiClicked(MouseEvent event){
 		this.mainIscr.setData(new Date());
 		this.mainIscr.setCompetizione(this.mainComp);
-		this.mainIscr.setCosto(Double.valueOf(this.lblCostoTot.getText()));
-
-		//setto lo stato dell'iscrizione a 1 cioè attiva
-		this.richiesta = this.getRichiesta("getAllStatoIscrizione", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		Double totale = (double) 0;
+		for(OptionalTO optTO: this.mainIscr.getAllOptionals())
+			totale = totale + optTO.getCosto();
+		totale = totale + this.mainComp.getCosto();
+		this.mainIscr.setCosto(totale);
 
 		this.richiesta = this.getRichiesta(this.mainIscr, "inserisciIscrizione", this.viewName);
 		this.risposta = respFact.createResponse();
@@ -109,17 +107,7 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 		return this.viewName;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		String commandName = request.getCommandName();
-
-		if( commandName.equals( reqProperties.getProperty("getAllStatoIscrizione") )){
-			Object res = response.getRespData();
-
-			if(res instanceof List<?>){
-				this.mainIscr.setStatoIscrizione(((List<StatoIscrizioneTO>) res).get(1));
-			}
-		}
 	}
 }

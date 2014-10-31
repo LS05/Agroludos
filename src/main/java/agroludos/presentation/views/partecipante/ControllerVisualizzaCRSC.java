@@ -1,9 +1,9 @@
 package agroludos.presentation.views.partecipante;
 
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -25,19 +25,20 @@ public class ControllerVisualizzaCRSC extends AgroludosController {
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		this.parTO = (PartecipanteTO)mainTO;
-		StringBuffer nomeCognome = new StringBuffer(80);
-		nomeCognome.append(parTO.getNome());
-		nomeCognome.append(" ");
-		nomeCognome.append(parTO.getCognome());
-		this.lblNomeCognome.setText(nomeCognome.toString());
-		this.lblDataSrc.setText(parTO.getDataSRC().toString());
+		if(mainTO instanceof PartecipanteTO){
+			this.parTO = (PartecipanteTO)mainTO;
+			StringBuffer nomeCognome = new StringBuffer(80);
+			nomeCognome.append(parTO.getNome());
+			nomeCognome.append(" ");
+			nomeCognome.append(parTO.getCognome());
+			this.lblNomeCognome.setText(nomeCognome.toString());
+			this.lblDataSrc.setText(parTO.getDataSRC().toString());
 
-		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta(this.parTO, "getCertificatoSRC", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		
+			this.risposta = respFact.createResponse();
+			this.richiesta = this.getRichiesta(this.parTO, "getCertificatoSRC", this.viewName);
+			frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
+		}
 	}
 
 	@Override
@@ -45,12 +46,12 @@ public class ControllerVisualizzaCRSC extends AgroludosController {
 		this.viewName = nameView;
 
 	}
-	
+
 	@Override
 	protected String getViewName() {
 		return this.viewName;
 	}
-	
+
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		if(request.getCommandName().equals("getCertificatoSRC")){

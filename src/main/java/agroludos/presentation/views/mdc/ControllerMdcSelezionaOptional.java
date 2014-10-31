@@ -52,67 +52,69 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
-		this.cmpto = (CompetizioneTO) mainTO;
+		if(mainTO instanceof CompetizioneTO){
+			this.cmpto = (CompetizioneTO) mainTO;
 
-		this.optionalScelti = FXCollections.observableArrayList();
-		this.listOptScelti = new ArrayList<OptionalTO>();
-		
-		if(!this.cmpto.getAllOptionals().isEmpty()){
-			this.listOptScelti = this.cmpto.getAllOptionals();
-			for(OptionalTO opt: this.listOptScelti){
-				this.optionalScelti.add("[" + opt.getTipoOptional().getNome() +
-				" - " + opt.getCosto() + "] " + opt.getNome());
+			this.optionalScelti = FXCollections.observableArrayList();
+			this.listOptScelti = new ArrayList<OptionalTO>();
+
+			if(!this.cmpto.getAllOptionals().isEmpty()){
+				this.listOptScelti = this.cmpto.getAllOptionals();
+				for(OptionalTO opt: this.listOptScelti){
+					this.optionalScelti.add("[" + opt.getTipoOptional().getNome() +
+							" - " + opt.getCosto() + "] " + opt.getNome());
+				}
 			}
+
+			this.listViewOptional.setItems(this.optionalScelti);
+
+
+			this.risposta = respFact.createResponse();
+			this.richiesta = this.getRichiesta("getAllTipoOptional", this.viewName);
+			frontController.eseguiRichiesta(this.richiesta, this.risposta);
+
+			this.setLabelDialog();
+			this.btnAvanti.setVisible(true);
+			this.btnConferma.setVisible(false);
+			this.btnIndietro.setVisible(true);
+			this.btnIndietro.setDisable(true);
+			this.btnAggiungi.setDisable(true);
+			this.btnRimuovi.setDisable(true);
+
+			this.tableOptional = new TableOptional();
+			this.paneTableOptional.getChildren().add(this.tableOptional);
+			this.paneTableOptional.setVisible(true);		
+
+			this.setTable((TipoOptionalTO) this.listTipiOpt.get(this.passoCorrente));
+
+			this.listViewOptional.getSelectionModel().selectedItemProperty().addListener(
+					new ChangeListener<String>(){
+
+						@Override
+						public void changed(ObservableValue<? extends String> str,
+								String oldStr, String newStr) {
+							if(listViewOptional.getSelectionModel().getSelectedItem() != null)
+								btnRimuovi.setDisable(false);
+						}
+
+					});
+			this.tableOptional.getSelectionModel().selectedItemProperty().addListener(
+					new ChangeListener<OptModel>(){
+
+						@Override
+						public void changed(ObservableValue<? extends OptModel> optMod,
+								OptModel oldMod, OptModel newMod) {
+							btnAggiungi.setDisable(false);
+						}
+
+					});
+
+			this.tableOptional.hideColumn("Stato");
+			this.tableOptional.hideColumn("Tipo");
+
 		}
-		
-		this.listViewOptional.setItems(this.optionalScelti);
-		
-
-		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta("getAllTipoOptional", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-
-		this.setLabelDialog();
-		this.btnAvanti.setVisible(true);
-		this.btnConferma.setVisible(false);
-		this.btnIndietro.setVisible(true);
-		this.btnIndietro.setDisable(true);
-		this.btnAggiungi.setDisable(true);
-		this.btnRimuovi.setDisable(true);
-
-		this.tableOptional = new TableOptional();
-		this.paneTableOptional.getChildren().add(this.tableOptional);
-		this.paneTableOptional.setVisible(true);		
-
-		this.setTable((TipoOptionalTO) this.listTipiOpt.get(this.passoCorrente));
-
-		this.listViewOptional.getSelectionModel().selectedItemProperty().addListener(
-				new ChangeListener<String>(){
-
-					@Override
-					public void changed(ObservableValue<? extends String> str,
-							String oldStr, String newStr) {
-						if(listViewOptional.getSelectionModel().getSelectedItem() != null)
-							btnRimuovi.setDisable(false);
-					}
-
-				});
-		this.tableOptional.getSelectionModel().selectedItemProperty().addListener(
-				new ChangeListener<OptModel>(){
-
-					@Override
-					public void changed(ObservableValue<? extends OptModel> optMod,
-							OptModel oldMod, OptModel newMod) {
-						btnAggiungi.setDisable(false);
-					}
-
-				});
-
-		this.tableOptional.hideColumn("Stato");
-		this.tableOptional.hideColumn("Tipo");
-		
 	}
-	
+
 	@Override
 	protected void initializeView(String viewName) {
 		this.viewName = viewName;

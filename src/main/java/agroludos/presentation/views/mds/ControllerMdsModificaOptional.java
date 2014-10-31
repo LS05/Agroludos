@@ -13,7 +13,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-
 import agroludos.presentation.views.components.numberspinner.NumberSpinner;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
@@ -34,7 +33,7 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 	private List<StatoOptionalTO> listStatiOpt;
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
-	
+
 	//label error
 	private @FXML Label lblStatoOptError;
 	private @FXML Label lblNomeOptError;
@@ -42,37 +41,39 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		this.optional = (OptionalTO)mainTO;
-		
-		this.costoOptional = new NumberSpinner(BigDecimal.ZERO, new BigDecimal("0.05"), new DecimalFormat("#,##0.00"));
-		BigDecimal costo = BigDecimal.valueOf(this.optional.getCosto());
-		this.costoOptional.setNumber(costo);
-		this.paneCostoOptional.add(this.costoOptional, 1, 0);
-		
-		this.txtNomeOptional.setText(this.optional.getNome());
+		if(mainTO instanceof OptionalTO){
+			this.optional = (OptionalTO)mainTO;
 
-		this.richiesta = this.getRichiesta("getAllStatoOptional", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+			this.costoOptional = new NumberSpinner(BigDecimal.ZERO, new BigDecimal("0.05"), new DecimalFormat("#,##0.00"));
+			BigDecimal costo = BigDecimal.valueOf(this.optional.getCosto());
+			this.costoOptional.setNumber(costo);
+			this.paneCostoOptional.add(this.costoOptional, 1, 0);
 
-		ObservableList<String> listStati = FXCollections.observableArrayList();
-		for(StatoOptionalTO stato : this.listStatiOpt){
-			listStati.add(stato.getNome());
+			this.txtNomeOptional.setText(this.optional.getNome());
+
+			this.richiesta = this.getRichiesta("getAllStatoOptional", this.viewName);
+			this.risposta = respFact.createResponse();
+			frontController.eseguiRichiesta(this.richiesta, this.risposta);
+
+			ObservableList<String> listStati = FXCollections.observableArrayList();
+			for(StatoOptionalTO stato : this.listStatiOpt){
+				listStati.add(stato.getNome());
+			}
+			this.cmbStatoOptional.setItems(listStati);
+			String nomeStato = this.optional.getStatoOptional().getNome();
+			this.cmbStatoOptional.setValue(nomeStato);
+
+			this.txtAreaDescrizione.setText(this.optional.getDescrizione());
+
+			String tipoOpt = this.optional.getTipoOptional().getNome();
+			this.lblNomeTipoOpt.setText(tipoOpt);
 		}
-		this.cmbStatoOptional.setItems(listStati);
-		String nomeStato = this.optional.getStatoOptional().getNome();
-		this.cmbStatoOptional.setValue(nomeStato);
-
-		this.txtAreaDescrizione.setText(this.optional.getDescrizione());
-
-		String tipoOpt = this.optional.getTipoOptional().getNome();
-		this.lblNomeTipoOpt.setText(tipoOpt);
 	}
-	
+
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
-		
+
 		lblStatoOptError.setVisible(false);
 		lblNomeOptError.setVisible(false);
 		lblCostoOptError.setVisible(false);
@@ -96,7 +97,7 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 		frontController.eseguiRichiesta(request, response);
 	}
 
-	
+
 
 	@SuppressWarnings("unchecked")
 	@Override

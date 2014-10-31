@@ -1,6 +1,5 @@
 package agroludos.business.as.gestoreiscrizione;
 
-import java.util.Date;
 import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
@@ -35,14 +34,12 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 
 		StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
 		
-		//TODO Controllo sugli stati (se il certificato è scaduto,
-		//l'iscrizione è sospesa.
+		//TODO se il certificato è scaduto,
+		//non fa l'iscrizione
+		//TODO partecipante già iscritto
 		StatoIscrizioneTO siTO = statoIscDAO.getAll().get(1);
 
 		iscTO.setStatoIscrizione(siTO);
-
-		Date date = new Date();
-		iscTO.setData(date);
 
 		return iscDAO.create(iscTO);
 	}

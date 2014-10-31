@@ -60,14 +60,14 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 	private double totale;
 	private ResourceBundle res;
 
-	
+
 
 	@Override
 	public void initialize(URL url, ResourceBundle resources) {
 		this.res = resources;
-		
+
 	}
-	
+
 
 	@Override
 	protected void initializeView(String viewName) {
@@ -79,72 +79,74 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 	public String getViewName() {
 		return this.viewName;
 	}
-	
+
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
-		this.mainIsc = (IscrizioneTO) mainTO;
-		this.mainCmp = this.mainIsc.getCompetizione();
+		if(mainTO instanceof IscrizioneTO){
+			this.mainIsc = (IscrizioneTO) mainTO;
+			this.mainCmp = this.mainIsc.getCompetizione();
 
-		this.optSceltiData = FXCollections.observableArrayList();
+			this.optSceltiData = FXCollections.observableArrayList();
 
-		this.risposta = respFact.createResponse();
-		this.richiesta = this.getRichiesta("getAllTipoOptional", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+			this.risposta = respFact.createResponse();
+			this.richiesta = this.getRichiesta("getAllTipoOptional", this.viewName);
+			frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
-		this.setLabelDialog();
-		this.btnAvanti.setVisible(true);
-		this.btnConferma.setVisible(false);
-		this.btnIndietro.setVisible(true);
-		this.btnIndietro.setDisable(true);
-		this.btnAggiungi.setDisable(true);
-		this.btnRimuovi.setDisable(true);
-
-
-		//Tabella optioanl
-		this.tableOptional = new TableOptional();
-		this.paneTableOptional.getChildren().add(this.tableOptional);
-		this.paneTableOptional.setVisible(true);		
-
-		this.setTableOptional((TipoOptionalTO) this.listTipiOpt.get(this.passoCorrente));
-
-		this.tableOptional.getSelectionModel().selectedItemProperty().addListener(
-				new ChangeListener<OptModel>(){
-
-					@Override
-					public void changed(ObservableValue<? extends OptModel> optMod,
-							OptModel oldMod, OptModel newMod) {
-						btnAggiungi.setDisable(false);
-					}
-
-				});
-
-		this.tableOptional.hideColumn(3);
-		this.tableOptional.hideColumn(4);
+			this.setLabelDialog();
+			this.btnAvanti.setVisible(true);
+			this.btnConferma.setVisible(false);
+			this.btnIndietro.setVisible(true);
+			this.btnIndietro.setDisable(true);
+			this.btnAggiungi.setDisable(true);
+			this.btnRimuovi.setDisable(true);
 
 
-		//Tabella optional Scelti
-		this.tableOptionalScelti = new TableOptional();
-		this.paneTableOptionalScelti.getChildren().add(this.tableOptionalScelti);
-		this.paneTableOptionalScelti.setVisible(true);		
+			//Tabella optioanl
+			this.tableOptional = new TableOptional();
+			this.paneTableOptional.getChildren().add(this.tableOptional);
+			this.paneTableOptional.setVisible(true);		
 
-		this.setTableOptionalScelti();
+			this.setTableOptional((TipoOptionalTO) this.listTipiOpt.get(this.passoCorrente));
 
-		this.tableOptionalScelti.getSelectionModel().selectedItemProperty().addListener(
-				new ChangeListener<OptModel>(){
+			this.tableOptional.getSelectionModel().selectedItemProperty().addListener(
+					new ChangeListener<OptModel>(){
 
-					@Override
-					public void changed(ObservableValue<? extends OptModel> optMod,
-							OptModel oldMod, OptModel newMod) {
-						btnRimuovi.setDisable(false);
-					}
+						@Override
+						public void changed(ObservableValue<? extends OptModel> optMod,
+								OptModel oldMod, OptModel newMod) {
+							btnAggiungi.setDisable(false);
+						}
 
-				});
+					});
 
-		this.tableOptionalScelti.hideColumn(1);
-		this.tableOptionalScelti.hideColumn(4);
+			this.tableOptional.hideColumn(3);
+			this.tableOptional.hideColumn(4);
 
-		this.AggiornaTotale();
 
+			//Tabella optional Scelti
+			this.tableOptionalScelti = new TableOptional();
+			this.paneTableOptionalScelti.getChildren().add(this.tableOptionalScelti);
+			this.paneTableOptionalScelti.setVisible(true);		
+
+			this.setTableOptionalScelti();
+
+			this.tableOptionalScelti.getSelectionModel().selectedItemProperty().addListener(
+					new ChangeListener<OptModel>(){
+
+						@Override
+						public void changed(ObservableValue<? extends OptModel> optMod,
+								OptModel oldMod, OptModel newMod) {
+							btnRimuovi.setDisable(false);
+						}
+
+					});
+
+			this.tableOptionalScelti.hideColumn(1);
+			this.tableOptionalScelti.hideColumn(4);
+
+			this.AggiornaTotale();
+
+		}
 	}
 
 	private void setLabelDialog(){
@@ -211,7 +213,7 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 		this.AggiornaTotale();
 
 	}
-	
+
 	private void AggiornaTotale() {
 		this.totale = (double) 0;
 
@@ -222,7 +224,7 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 
 	}
 
-	
+
 
 	@FXML protected void btnIndietro(MouseEvent event) {
 
