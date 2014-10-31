@@ -31,7 +31,7 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 	@FXML private Label lblIndirizzoIsc;
 	@FXML private Label lblDataSRCIsc;
 	@FXML private Label lblDataIsc;
-	
+
 	@FXML private Label lblCostoIsc;
 
 
@@ -49,7 +49,7 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 
 	private ResourceBundle res;
 
-	
+
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
@@ -58,41 +58,43 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		this.iscto =(IscrizioneTO) mainTO;
+		if(mainTO instanceof IscrizioneTO){
+			this.iscto =(IscrizioneTO) mainTO;
 
 
 
-		this.lblNomeIsc.setText(this.iscto.getPartecipante().getNome());
-		this.lblCognomeIsc.setText(this.iscto.getPartecipante().getCognome());
-		this.lblEmailIsc.setText(this.iscto.getPartecipante().getEmail());
-		this.lblCFIsc.setText(this.iscto.getPartecipante().getCf());
-		this.lblDataNascitaIsc.setText(this.iscto.getPartecipante().getDataNasc().toString());
-		this.lblSessoIsc.setText(this.iscto.getPartecipante().getSesso());
-		this.lblNTSIsc.setText(this.iscto.getPartecipante().getNumTS());
-		this.lblIndirizzoIsc.setText(this.iscto.getPartecipante().getIndirizzo());
-		this.lblDataSRCIsc.setText(this.iscto.getPartecipante().getDataSRC().toString());
-		this.lblDataIsc.setText(this.iscto.getData().toString());
-		this.lblCostoIsc.setText(String.valueOf(this.iscto.getCosto()));
+			this.lblNomeIsc.setText(this.iscto.getPartecipante().getNome());
+			this.lblCognomeIsc.setText(this.iscto.getPartecipante().getCognome());
+			this.lblEmailIsc.setText(this.iscto.getPartecipante().getEmail());
+			this.lblCFIsc.setText(this.iscto.getPartecipante().getCf());
+			this.lblDataNascitaIsc.setText(this.iscto.getPartecipante().getDataNasc().toString());
+			this.lblSessoIsc.setText(this.iscto.getPartecipante().getSesso());
+			this.lblNTSIsc.setText(this.iscto.getPartecipante().getNumTS());
+			this.lblIndirizzoIsc.setText(this.iscto.getPartecipante().getIndirizzo());
+			this.lblDataSRCIsc.setText(this.iscto.getPartecipante().getDataSRC().toString());
+			this.lblDataIsc.setText(this.iscto.getData().toString());
+			this.lblCostoIsc.setText(String.valueOf(this.iscto.getCosto()));
 
-		this.tableOptional = new TableOptional();
-		this.paneTableOptionalScelti.getChildren().add(this.tableOptional);
-		this.paneTableOptionalScelti.setVisible(true);
-		this.tableOptional.setAll(this.iscto.getAllOptionals());
+			this.tableOptional = new TableOptional();
+			this.paneTableOptionalScelti.getChildren().add(this.tableOptional);
+			this.paneTableOptionalScelti.setVisible(true);
+			this.tableOptional.setAll(this.iscto.getAllOptionals());
 
-		this.tableOptional.hideColumn("Stato");
-		this.tableOptional.hideColumn("Descrizione");
+			this.tableOptional.hideColumn("Stato");
+			this.tableOptional.hideColumn("Descrizione");
+		}
 	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle resources) {
 		this.res = resources;		
 	}
-	
+
 	@Override
 	protected String getViewName() {
 		return this.viewName;
 	}
-	
+
 	@FXML private void btnVisualizzaCertificato(){
 		nav.setVista("visualizzaSRC",this.iscto.getPartecipante());
 	}
@@ -126,7 +128,7 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 			if(res instanceof IscrizioneTO){			
 				IscrizioneTO isc = (IscrizioneTO) res;
 				this.initializeView(isc);
-				
+
 				SuccessTO succMessage = toFact.createSuccessTO();
 				succMessage.setMessage(this.res.getString("key99"));
 

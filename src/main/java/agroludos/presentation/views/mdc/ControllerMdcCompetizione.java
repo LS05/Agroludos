@@ -76,44 +76,46 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		//inizializzazione interfaccia
-		this.paneVisualizzaCmp.setVisible(true);
-		this.paneVisualizzaCmp.setDisable(false);
-		this.paneIscritti.setDisable(false);
-		this.lblModificaOk.setVisible(false);
-		this.lblAnnullaOk.setVisible(false);
-		this.btnAnnullaIsc.setDisable(true);
-		this.lblEliminaIsc.setVisible(false);
+		if(mainTO instanceof CompetizioneTO){
+			//inizializzazione interfaccia
+			this.paneVisualizzaCmp.setVisible(true);
+			this.paneVisualizzaCmp.setDisable(false);
+			this.paneIscritti.setDisable(false);
+			this.lblModificaOk.setVisible(false);
+			this.lblAnnullaOk.setVisible(false);
+			this.btnAnnullaIsc.setDisable(true);
+			this.lblEliminaIsc.setVisible(false);
 
-		this.cmpto = toFact.createCompetizioneTO();
-		this.cmpto =(CompetizioneTO) mainTO;
+			this.cmpto = toFact.createCompetizioneTO();
+			this.cmpto =(CompetizioneTO) mainTO;
 
-		this.lblNomeCompetizione.setText(this.cmpto.getNome());
-		this.lblData.setText(this.cmpto.getData().toString());
-		this.lblNmin.setText(Integer.toString(this.cmpto.getNmin()));
-		this.lblNmax.setText(Integer.toString(this.cmpto.getNmax()));
-		this.lblCosto.setText(Double.toString(this.cmpto.getCosto()));
-		this.lblTipo.setText(this.cmpto.getTipoCompetizione().getNome());
-		this.lblNiscritti.setText(Integer.toString(this.cmpto.getAllIscrizioniAttive().size()));
-		this.lblStato.setText(this.cmpto.getStatoCompetizione().getNome());
-		this.txtDescrizione.setText(this.cmpto.getDescrizione());
+			this.lblNomeCompetizione.setText(this.cmpto.getNome());
+			this.lblData.setText(this.cmpto.getData().toString());
+			this.lblNmin.setText(Integer.toString(this.cmpto.getNmin()));
+			this.lblNmax.setText(Integer.toString(this.cmpto.getNmax()));
+			this.lblCosto.setText(Double.toString(this.cmpto.getCosto()));
+			this.lblTipo.setText(this.cmpto.getTipoCompetizione().getNome());
+			this.lblNiscritti.setText(Integer.toString(this.cmpto.getAllIscrizioniAttive().size()));
+			this.lblStato.setText(this.cmpto.getStatoCompetizione().getNome());
+			this.txtDescrizione.setText(this.cmpto.getDescrizione());
 
-		//popolo la lista delle iscrizioni
-		this.listIsc = this.cmpto.getAllIscrizioniAttive();
+			//popolo la lista delle iscrizioni
+			this.listIsc = this.cmpto.getAllIscrizioniAttive();
 
-		this.listaTabIsc = this.getListTabellaIsc();
-		this.initIscTable();
+			this.listaTabIsc = this.getListTabellaIsc();
+			this.initIscTable();
 
-		this.tableOptional = new TableOptional();
-		this.paneTableOptional.getChildren().add(this.tableOptional);
-		this.paneTableOptional.setVisible(true);
-		this.tableOptional.setAll(this.cmpto.getAllOptionals());
+			this.tableOptional = new TableOptional();
+			this.paneTableOptional.getChildren().add(this.tableOptional);
+			this.paneTableOptional.setVisible(true);
+			this.tableOptional.setAll(this.cmpto.getAllOptionals());
 
-		this.tableOptional.hideColumn("Stato");
-		this.tableOptional.hideColumn("Descrizione");
+			this.tableOptional.hideColumn("Stato");
+			this.tableOptional.hideColumn("Descrizione");
+		}
 
 	}
-	
+
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
@@ -124,7 +126,7 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 	public void initialize(URL url, ResourceBundle resources) {
 		this.res = resources;		
 	}
-	
+
 	@Override
 	protected String getViewName() {
 		return this.viewName;

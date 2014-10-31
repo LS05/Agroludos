@@ -24,7 +24,6 @@ import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
-import agroludos.to.PartecipanteTO;
 import agroludos.to.SuccessTO;
 
 public class ControllerPartCompetizione extends AgroludosController implements Initializable{
@@ -103,14 +102,6 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 
 			this.tableOptional.hideColumn("Stato");
 			this.tableOptional.hideColumn("Descrizione");
-			
-			if(getUtente() instanceof PartecipanteTO ){
-				PartecipanteTO parTO = (PartecipanteTO) getUtente();
-				for(IscrizioneTO isc : parTO.getAllIscrizioniAttive()){
-					if(isc.getCompetizione().equals(this.cmpto))
-						this.btnIscriviti.setDisable(true);
-				}
-			}
 		}
 	}
 	
