@@ -19,18 +19,21 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.components.numberspinner.NumberSpinner;
 import agroludos.to.AgroludosTO;
+import agroludos.to.ErrorTO;
+import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoUtenteTO;
 import agroludos.to.SuccessTO;
 import agroludos.to.TipoUtenteTO;
-import agroludos.to.UtenteTO;
 
 public class ControllerMdsNuovoMdC extends AgroludosController implements Initializable{
 	private String viewName;
+	private boolean flagError;
 
 	private @FXML TextField txtUsername;
 	private @FXML PasswordField txtPassword;
@@ -38,20 +41,20 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 	private @FXML TextField txtCognome;
 	private @FXML TextField txtRevealPassword;
 	private @FXML TextField txtEmail;
-	private @FXML CheckBox checkBoxReveal;
-	private @FXML ComboBox<String> cmbStato;
-	private @FXML GridPane mainNuovoMdC;
-	private List<TipoUtenteTO> listTipiUtente;
-	private List<StatoUtenteTO> listStatiUtente;
-
-	//label error
 	private @FXML Label lblUsernameError;
-	private @FXML Label lblPswError;
+	private @FXML Label lblPasswordError;
 	private @FXML Label lblNomeError;
 	private @FXML Label lblCognomeError;
 	private @FXML Label lblEmailError;
 	private @FXML Label lblStipendioError;
 	private @FXML Label lblStatoError;
+	private @FXML CheckBox checkBoxReveal;
+	private @FXML ComboBox<String> cmbStato;
+	private @FXML GridPane mainNuovoMdC;
+	private @FXML GridPane paneStipendio;
+
+	private List<TipoUtenteTO> listTipiUtente;
+	private List<StatoUtenteTO> listStatiUtente;
 
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
@@ -67,24 +70,23 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
-
-		// TODO Auto-generated method stub
+		this.flagError = false;
 	}
 
 	@Override
 	protected void initializeView(String viewName) {
 		this.viewName = viewName;
-		
-		lblUsernameError.setVisible(false);
-		lblPswError.setVisible(false);
-		lblNomeError.setVisible(false);
-		lblCognomeError.setVisible(false);
-		lblEmailError.setVisible(false);
-		lblStipendioError.setVisible(false);
-		lblStatoError.setVisible(false);
-		
+		this.flagError = false;
+		this.lblUsernameError.setVisible(false);
+		this.lblPasswordError.setVisible(false);
+		this.lblNomeError.setVisible(false);
+		this.lblCognomeError.setVisible(false);
+		this.lblEmailError.setVisible(false);
+		this.lblStipendioError.setVisible(false);
+		this.lblStatoError.setVisible(false);
+
 		this.stipendioMdC = new NumberSpinner(BigDecimal.ZERO, new BigDecimal("10"), new DecimalFormat("#,##0.00"));
-		this.mainNuovoMdC.add(this.stipendioMdC, 1, 5);
+		this.paneStipendio.getChildren().add(this.stipendioMdC);
 		this.richiesta = this.getRichiesta("getAllTipoUtente", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
@@ -122,24 +124,26 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 	}
 
 	@FXML protected void confermaNuovoManagerDiCompetizione(MouseEvent event){
-		UtenteTO utenteTO = toFact.createMdCTO();
-		utenteTO.setNome(this.txtNome.getText());
-		utenteTO.setCognome(this.txtCognome.getText());
-		utenteTO.setUsername(this.txtUsername.getText());
-		utenteTO.setPassword(this.txtPassword.getText());
-		utenteTO.setEmail(this.txtEmail.getText());
-		utenteTO.setTipoUtente(this.listTipiUtente.get(1));
+		ManagerDiCompetizioneTO mdcTO = toFact.createMdCTO();
+		mdcTO.setNome(this.txtNome.getText());
+		mdcTO.setCognome(this.txtCognome.getText());
+		mdcTO.setUsername(this.txtUsername.getText());
+		mdcTO.setPassword(this.txtPassword.getText());
+		mdcTO.setEmail(this.txtEmail.getText());
+		mdcTO.setTipoUtente(this.listTipiUtente.get(1));
+		mdcTO.setStipendio(this.stipendioMdC.getNumber().doubleValue());
 		int selectedStato = this.cmbStato.getSelectionModel().getSelectedIndex();
-		utenteTO.setStatoUtente(this.listStatiUtente.get(selectedStato));
-		this.richiesta = this.getRichiesta(utenteTO, "nuovoManagerDiCompetizione", this.viewName);
+		mdcTO.setStatoUtente(this.listStatiUtente.get(selectedStato));
+
+		this.richiesta = this.getRichiesta(mdcTO, "nuovoManagerDiCompetizione", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		SuccessTO succTO = toFact.createSuccessTO();
-		succTO.setMessage(this.resources.getString("key132"));
-		nav.setVista("successDialog", succTO);
+		if(!this.flagError){
+			SuccessTO succTO = toFact.createSuccessTO();
+			succTO.setMessage(this.resources.getString("key132"));
+			nav.setVista("successDialog", succTO);
+		}
 	}
-
-
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -159,6 +163,44 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 			if(res instanceof List<?>){
 				List<StatoUtenteTO> listStati = (List<StatoUtenteTO>)res;
 				this.listStatiUtente = listStati;
+			}
+		} else if( commandName.equals( reqProperties.getProperty("nuovoManagerDiCompetizione") )){
+			Object res = response.getRespData();
+			if(res instanceof ErrorTO){
+
+				ErrorTO errors = (ErrorTO)res;
+				this.flagError = true;
+
+				if(errors.hasError(rulesProperties.getProperty("nomeKey"))){
+					String nomeKey = rulesProperties.getProperty("nomeKey");
+					this.lblNomeError.setVisible(true);
+					this.lblNomeError.setText(errors.getError(nomeKey));
+				} 
+
+				if(errors.hasError(rulesProperties.getProperty("cognKey"))){
+					String cognomeKey = rulesProperties.getProperty("cognKey");
+					this.lblCognomeError.setVisible(true);
+					this.lblCognomeError.setText(errors.getError(cognomeKey));
+				}
+
+				if(errors.hasError(rulesProperties.getProperty("usernameKey"))){
+					String usernameKey = rulesProperties.getProperty("usernameKey");
+					this.lblUsernameError.setVisible(true);
+					this.lblUsernameError.setText(errors.getError(usernameKey));
+				}
+
+				if(errors.hasError(rulesProperties.getProperty("passwordKey"))){
+					String emailKey = rulesProperties.getProperty("passwordKey");
+					this.lblPasswordError.setVisible(true);
+					this.lblPasswordError.setText(errors.getError(emailKey));
+				}
+
+				if(errors.hasError(rulesProperties.getProperty("emailKey"))){
+					String emailKey = rulesProperties.getProperty("emailKey");
+					this.lblEmailError.setVisible(true);
+					this.lblEmailError.setText(errors.getError(emailKey));
+				}
+
 			}
 		}
 	}

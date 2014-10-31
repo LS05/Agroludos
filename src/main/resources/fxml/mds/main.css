@@ -81,3 +81,8 @@
 .optionalRow:selected .text{
        -fx-fill: white ;
 }
+
+.lblError{
+	-fx-text-fill: red;
+	-fx-font-weight: bold;
+}

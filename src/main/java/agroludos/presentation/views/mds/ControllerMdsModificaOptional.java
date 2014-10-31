@@ -13,35 +13,37 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import agroludos.presentation.views.components.numberspinner.NumberSpinner;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
+import agroludos.to.ErrorTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.StatoOptionalTO;
 
 public class ControllerMdsModificaOptional extends AgroludosController{
 	private String viewName;
+	private @FXML Label lblNomeTipoOpt;
+	private @FXML Label lblStatoOptError;
+	private @FXML Label lblNomeOptError;
+	private @FXML Label lblCostoOptError;
 	private @FXML TextField txtNomeOptional;
 	private @FXML ComboBox<String> cmbStatoOptional;
 	private @FXML TextArea txtAreaDescrizione;
-	private @FXML Label lblNomeTipoOpt;
 	private @FXML GridPane paneCostoOptional;
+
 	private NumberSpinner costoOptional;
 	private OptionalTO optional;
 	private List<StatoOptionalTO> listStatiOpt;
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
 
-	//label error
-	private @FXML Label lblStatoOptError;
-	private @FXML Label lblNomeOptError;
-	private @FXML Label lblCostoOptError;
-
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
 		if(mainTO instanceof OptionalTO){
+
 			this.optional = (OptionalTO)mainTO;
 
 			this.costoOptional = new NumberSpinner(BigDecimal.ZERO, new BigDecimal("0.05"), new DecimalFormat("#,##0.00"));
@@ -67,6 +69,7 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 
 			String tipoOpt = this.optional.getTipoOptional().getNome();
 			this.lblNomeTipoOpt.setText(tipoOpt);
+
 		}
 	}
 
@@ -111,6 +114,20 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 			if(res instanceof List<?>){
 				List<StatoOptionalTO> statiList = (List<StatoOptionalTO>)res;
 				this.listStatiOpt = statiList;
+			}
+		} else if( commandName.equals( reqProperties.getProperty("modificaOptional")) ){
+			Object res = response.getRespData();
+			if(res instanceof ErrorTO){
+
+				//				ErrorTO errors = (ErrorTO)res;
+
+				//				if(errors.hasError(rulesProperties.getProperty("nomeKey"))){
+				//					String nomeKey = rulesProperties.getProperty("nomeKey");
+				//					this.lblNomeError.setVisible(true);
+				//					this.lblNomeError.setText(errors.getError(nomeKey));
+				//				} 
+
+
 			}
 		}
 

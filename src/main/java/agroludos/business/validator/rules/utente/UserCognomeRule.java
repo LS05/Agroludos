@@ -23,10 +23,10 @@ class UserCognomeRule extends AgroludosRule {
 			Integer cognLength = Integer.valueOf(this.getProperty("cognomeLength"));
 
 			String key = this.getProperty("cognKey");
-			if( !this.strValidator.isAlpha(cognome) ){
-				errorTO.addError(key, this.getProperty("cognNAlphaError"));
-			} else if( cognome.length() < cognLength ){
+			if( cognome.length() < cognLength ){
 				errorTO.addError(key, this.getProperty("cognLenghtError"));
+			}else if( !this.strValidator.isAlpha(cognome) ){
+				errorTO.addError(key, this.getProperty("cognNAlphaError"));
 			}
 
 			if( this.successor != null )

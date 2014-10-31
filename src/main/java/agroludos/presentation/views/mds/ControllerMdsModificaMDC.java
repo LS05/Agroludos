@@ -8,9 +8,11 @@ import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
+import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoUtenteTO;
 import agroludos.to.SuccessTO;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,11 +24,17 @@ import javafx.scene.input.MouseEvent;
 
 public class ControllerMdsModificaMDC extends AgroludosController implements Initializable{
 	private String viewName;
+	private boolean flagError;
 
 	@FXML private TextField txtUsername;
 	@FXML private TextField txtEmail;
 	@FXML private TextField txtNome;
 	@FXML private TextField txtCognome;
+	@FXML private Label lblUsernameError;
+	@FXML private Label lblNomeError;
+	@FXML private Label lblCognomeError;
+	@FXML private Label lblEmailError;
+	@FXML private Label lblStatoError;
 	@FXML private ComboBox<String> cmbStato;
 
 	private List<StatoUtenteTO> listStatiUtente;
@@ -38,14 +46,7 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 	private ManagerDiCompetizioneTO mdcTO;
 
 	private ResourceBundle resources;
-	
-	//label di errore
-	@FXML private Label lblUsernameError;
-	@FXML private Label lblNomeError;
-	@FXML private Label lblCognomeError;
-	@FXML private Label lblEmailError;
-	@FXML private Label lblStatoError;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.resources = resources;	
@@ -54,32 +55,35 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
-		lblUsernameError.setVisible(false);
-		lblNomeError.setVisible(false);
-		lblCognomeError.setVisible(false);
-		lblEmailError.setVisible(false);
-		lblStatoError.setVisible(false);
+		this.flagError = false;
+		this.lblUsernameError.setVisible(false);
+		this.lblNomeError.setVisible(false);
+		this.lblCognomeError.setVisible(false);
+		this.lblEmailError.setVisible(false);
+		this.lblStatoError.setVisible(false);
 	}
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
+		if(mainTO instanceof ManagerDiCompetizioneTO){
+			this.flagError = false;
+			this.mdcTO = (ManagerDiCompetizioneTO)mainTO;
+			this.txtUsername.setText(this.mdcTO.getUsername());
+			this.txtCognome.setText(this.mdcTO.getCognome());
+			this.txtNome.setText(this.mdcTO.getNome());
+			this.txtEmail.setText(this.mdcTO.getEmail());
 
-		this.mdcTO = (ManagerDiCompetizioneTO)mainTO;
-		this.txtUsername.setText(this.mdcTO.getUsername());
-		this.txtCognome.setText(this.mdcTO.getCognome());
-		this.txtNome.setText(this.mdcTO.getNome());
-		this.txtEmail.setText(this.mdcTO.getEmail());
+			this.richiesta = this.getRichiesta("getAllStatoUtente", this.viewName);
+			this.risposta = respFact.createResponse();
+			frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
-		this.richiesta = this.getRichiesta("getAllStatoUtente", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-
-		ObservableList<String> listStati = FXCollections.observableArrayList();
-		for(StatoUtenteTO stato : this.listStatiUtente){
-			listStati.add(stato.getNome());
+			ObservableList<String> listStati = FXCollections.observableArrayList();
+			for(StatoUtenteTO stato : this.listStatiUtente){
+				listStati.add(stato.getNome());
+			}
+			this.cmbStato.setItems(listStati);
+			this.cmbStato.setValue(this.mdcTO.getStatoUtente().getNome());
 		}
-		this.cmbStato.setItems(listStati);
-		this.cmbStato.setValue(this.mdcTO.getStatoUtente().getNome());
 	}
 
 	@FXML public void confermaModificaManagerDiCompetizion(MouseEvent event){
@@ -92,12 +96,14 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 		StatoUtenteTO stato = this.listStatiUtente.get(statoSel);
 		this.mdcTO.setStatoUtente(stato);
 
-		this.richiesta = this.getRichiesta(mdcTO, "modificaManagerDiCompetizione", this.viewName);
+		this.richiesta = this.getRichiesta(this.mdcTO, "modificaManagerDiCompetizione", this.viewName);
 		this.risposta = respFact.createResponse();
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		SuccessTO succTO = toFact.createSuccessTO();
-		succTO.setMessage(this.resources.getString("key99"));
-		nav.setVista("successDialog", succTO);
+		if(!this.flagError){
+			SuccessTO succTO = toFact.createSuccessTO();
+			succTO.setMessage(this.resources.getString("key99"));
+			nav.setVista("successDialog", succTO);
+		}
 	}
 
 	@Override
@@ -117,8 +123,39 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 				List<StatoUtenteTO> listStati = (List<StatoUtenteTO>)res;
 				this.listStatiUtente = listStati;
 			}
+
 		} else if( commandName.equals( reqProperties.getProperty("modificaManagerDiCompetizione") )){
-			System.out.println("Errori nella modifica!");
+			Object res = response.getRespData();
+			if(res instanceof ErrorTO){
+
+				ErrorTO errors = (ErrorTO)res;
+				this.flagError = true;
+
+				if(errors.hasError(rulesProperties.getProperty("nomeKey"))){
+					String nomeKey = rulesProperties.getProperty("nomeKey");
+					this.lblNomeError.setVisible(true);
+					this.lblNomeError.setText(errors.getError(nomeKey));
+				} 
+
+				if(errors.hasError(rulesProperties.getProperty("cognKey"))){
+					String cognomeKey = rulesProperties.getProperty("cognKey");
+					this.lblCognomeError.setVisible(true);
+					this.lblCognomeError.setText(errors.getError(cognomeKey));
+				}
+
+				if(errors.hasError(rulesProperties.getProperty("usernameKey"))){
+					String usernameKey = rulesProperties.getProperty("usernameKey");
+					this.lblUsernameError.setVisible(true);
+					this.lblUsernameError.setText(errors.getError(usernameKey));
+				}
+
+				if(errors.hasError(rulesProperties.getProperty("emailKey"))){
+					String emailKey = rulesProperties.getProperty("emailKey");
+					this.lblEmailError.setVisible(true);
+					this.lblEmailError.setText(errors.getError(emailKey));
+				}
+
+			}
 		}
 
 	}

@@ -16,6 +16,7 @@ class ASGestoreTipoOptional extends AgroludosAS implements LTipoOptional, STipoO
 	ASGestoreTipoOptional(AgroludosValidator validator){
 		this.validator = validator;
 	}
+	
 	private TipoOptionalDAO getTipoOptionalDAO() throws DatabaseException {
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return dbDAOFact.getTipoOptionalDAO();
