@@ -1,22 +1,22 @@
-package agroludos.business.validator.rules.agrotipo;
+package agroludos.business.validator.rules.optional;
 
 import java.io.IOException;
 
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
-import agroludos.to.TipiAgroludosTO;
+import agroludos.to.OptionalTO;
 
-class TipoNomeRule extends AgroludosRule {
+class OptionalNomeRule extends AgroludosRule {
 
-	protected TipoNomeRule() throws IOException {
+	protected OptionalNomeRule() throws IOException {
 		super();
 	}
 
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
-		if(mainTO instanceof TipiAgroludosTO){
-			TipiAgroludosTO tipo = (TipiAgroludosTO)mainTO;
+		if(mainTO instanceof OptionalTO){
+			OptionalTO tipo = (OptionalTO)mainTO;
 			String nome = tipo.getNome();
 			Integer nameLength = Integer.valueOf(this.getProperty("nameLength"));
 
@@ -28,4 +28,5 @@ class TipoNomeRule extends AgroludosRule {
 				this.successor.validate(tipo, errorTO);
 		}
 	}
+
 }

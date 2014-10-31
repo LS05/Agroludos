@@ -119,14 +119,25 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 			Object res = response.getRespData();
 			if(res instanceof ErrorTO){
 
-				//				ErrorTO errors = (ErrorTO)res;
+				ErrorTO errors = (ErrorTO)res;
 
-				//				if(errors.hasError(rulesProperties.getProperty("nomeKey"))){
-				//					String nomeKey = rulesProperties.getProperty("nomeKey");
-				//					this.lblNomeError.setVisible(true);
-				//					this.lblNomeError.setText(errors.getError(nomeKey));
-				//				} 
-
+				if(errors.hasError(rulesProperties.getProperty("nomeKey"))){
+					String nomeKey = rulesProperties.getProperty("nomeKey");
+					this.lblNomeOptError.setVisible(true);
+					this.lblNomeOptError.setText(errors.getError(nomeKey));
+				}
+				
+				if(errors.hasError(rulesProperties.getProperty("costoKey"))){
+					String nomeKey = rulesProperties.getProperty("costoKey");
+					this.lblCostoOptError.setVisible(true);
+					this.lblCostoOptError.setText(errors.getError(nomeKey));
+				}
+				
+				if(errors.hasError(rulesProperties.getProperty("statoKey"))){
+					String nomeKey = rulesProperties.getProperty("statoKey");
+					this.lblStatoOptError.setVisible(true);
+					this.lblStatoOptError.setText(errors.getError(nomeKey));
+				}
 
 			}
 		}

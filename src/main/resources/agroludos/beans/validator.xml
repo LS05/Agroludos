@@ -23,4 +23,9 @@
 		<constructor-arg ref="toFactory" />
 	</bean>
 	
+	<bean id="optValidator" class="agroludos.business.validator.optional.OptionalValidator">
+		<constructor-arg ref="optRulesFactory" />
+		<constructor-arg ref="toFactory" />
+	</bean>
+	
 </beans>

@@ -26,10 +26,6 @@
 	-fx-background-color: #465660;	
 }
 
-.lbltitolo{
-    -fx-border-color: #f4f4f4 #f4f4f4 #A2A4A8 #f4f4f4;
-}
-
 .mainBtn{
     -fx-text-fill: #ffffff;
     -fx-font-weight: bold;

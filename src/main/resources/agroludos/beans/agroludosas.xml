@@ -50,6 +50,7 @@
 	</bean>
 	<bean id="gestoreOptional" class="agroludos.business.as.gestoreoptional.ASGestoreOptional"
 		parent="agroludosAS">
+		<constructor-arg ref="optValidator" />
 	</bean>
 	<bean id="gestoreStatoOptional"
 		class="agroludos.business.as.gestorestatooptional.ASGestoreStatoOptional"
