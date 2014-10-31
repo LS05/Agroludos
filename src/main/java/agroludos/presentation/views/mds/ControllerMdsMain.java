@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -23,6 +24,7 @@ import agroludos.presentation.views.components.table.TableCompetizioni;
 import agroludos.presentation.views.components.table.TableMdC;
 import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.presentation.views.components.table.TablePartecipanti;
+import agroludos.presentation.views.components.tablemodel.CmpModel;
 import agroludos.presentation.views.components.tablemodel.MdcModel;
 import agroludos.presentation.views.components.tablemodel.OptModel;
 import agroludos.presentation.views.components.tablemodel.PartModel;
@@ -93,6 +95,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
 	private List<String> richieste;
+	private CmpModel cmpModelRow;
 
 	private ResourceBundle resources;
 
@@ -187,6 +190,20 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.listViewComp = new ListaViewTipi(this.listTipiComp);
 		this.paneListaTipiComp.getChildren().add(this.listViewComp);
 
+		this.tableCompetizioni.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+
+			@Override
+			public void handle(MouseEvent event) {
+				if (event.getClickCount() > 1) {
+					@SuppressWarnings("unchecked")
+					TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
+					cmpModelRow = table.getSelectionModel().getSelectedItem();
+					if(cmpModelRow != null)
+						nav.setVista("mostraCmpMds", cmpModelRow.getCompetizioneTO());
+				}
+			}
+		});
 
 		this.listViewComp.setOnMouseClicked(new EventHandler<MouseEvent>() {
 

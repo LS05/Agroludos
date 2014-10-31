@@ -90,8 +90,20 @@
 			<height>600</height>
 		</view>
 		<view tipo="dialog">
+			<name>mostraIscrizioneMds</name>
+			<url>/fxml/mds/mdsIscrizione.fxml</url>
+			<width>800</width>
+			<height>600</height>
+		</view>
+		<view tipo="dialog">
 			<name>mostraCmp</name>
 			<url>/fxml/mdc/mdcCompetizione.fxml</url>
+			<width>1092</width>
+			<height>644</height>
+		</view>
+		<view tipo="dialog">
+			<name>mostraCmpMds</name>
+			<url>/fxml/mds/mdsCompetizione.fxml</url>
 			<width>1092</width>
 			<height>644</height>
 		</view>
