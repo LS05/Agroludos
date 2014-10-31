@@ -90,6 +90,12 @@
 			<height>600</height>
 		</view>
 		<view tipo="dialog">
+			<name>mostraProfiloPartecipante</name>
+			<url>/fxml/mds/mdsProfiloPartecipante.fxml</url>
+			<width>800</width>
+			<height>600</height>
+		</view>
+		<view tipo="dialog">
 			<name>mostraIscrizioneMds</name>
 			<url>/fxml/mds/mdsIscrizione.fxml</url>
 			<width>800</width>

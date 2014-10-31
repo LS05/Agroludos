@@ -15,7 +15,7 @@ public class TablePartecipanti extends AgroTable<PartModel>{
 	private TableColumn<PartModel, String> partColEmail;
 	private TableColumn<PartModel, String> partColUsername;
 
-	public TablePartecipanti(List<PartecipanteTO> listComp){
+	public TablePartecipanti(List<PartecipanteTO> listPart){
 		this.partColNome = new TableColumn<PartModel, String>("nome");
 		this.partColCognome = new TableColumn<PartModel, String>("cognome");
 		this.partColEmail = new TableColumn<PartModel, String>("email");
@@ -36,7 +36,7 @@ public class TablePartecipanti extends AgroTable<PartModel>{
 		ObservableList<PartModel> res = FXCollections.observableArrayList();
 		PartModel partModel = null;
 
-		for(PartecipanteTO partecipante : listComp){
+		for(PartecipanteTO partecipante : listPart){
 			partModel = new PartModel(partecipante);
 			res.add(partModel);
 		}
