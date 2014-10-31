@@ -35,6 +35,7 @@
 	<bean id="gestoreCompetizione"
 		class="agroludos.business.as.gestorecompetizione.ASGestoreCompetizione"
 		parent="agroludosAS">
+		<constructor-arg ref="compValidator" />
 	</bean>
 	<bean id="gestoreStatoCompetizione"
 		class="agroludos.business.as.gestorestatocompetizione.ASGestoreStatoCompetizione"

@@ -8,6 +8,7 @@
 	<import resource="classpath:agroludos/beans/mdcRules.xml" />
 	<import resource="classpath:agroludos/beans/tipiRules.xml" />
 	<import resource="classpath:agroludos/beans/optRules.xml" />
+	<import resource="classpath:agroludos/beans/compRules.xml" />
            
 	<bean id="stringValidator" class="agroludos.business.validator.rules.strings.StringValidatorImpl" />
 	
