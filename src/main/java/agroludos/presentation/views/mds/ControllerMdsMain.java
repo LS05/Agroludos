@@ -15,6 +15,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.components.table.AgroTable;
@@ -465,6 +466,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				optModel.setCosto(optTO.getCosto());
 				optModel.setDescrizione(optTO.getDescrizione());
 				optModel.setNomeStato(optTO.getStatoOptional().getNome());
+				SuccessTO succTO = toFact.createSuccessTO();
+				succTO.setMessage(this.resources.getString("key167"));
+				nav.setVista("successDialog", succTO);
 			}
 		} else if( commandName.equals( reqProperties.getProperty("inserisciOptional") )){
 			Object res = response.getRespData();

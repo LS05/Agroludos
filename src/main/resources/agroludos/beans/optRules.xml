@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="optRulesFactory"
+		class="agroludos.business.validator.rules.optional.OptionalRulesFactoryImpl" />
+
+	<bean id="optNomeRule"
+		  class="agroludos.business.validator.rules.optional.OptionalNomeRule"
+		  factory-bean="optRulesFactory"
+		  factory-method="getNomeRule">
+	</bean>
+	
+	<bean id="optCostoRule"
+		  class="agroludos.business.validator.rules.optional.OptionalCostoRule"
+		  factory-bean="optRulesFactory"
+		  factory-method="getCostoRule">
+	</bean>
+	
+	<bean id="optStatoRule"
+		  class="agroludos.business.validator.rules.optional.OptionalStatoRule"
+		  factory-bean="optRulesFactory"
+		  factory-method="getStatoRule">
+		  <property name="strValidator" ref="stringValidator" />
+	</bean>
+	
+</beans>

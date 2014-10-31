@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -46,7 +47,7 @@
                     <Insets top="10.0" fx:id="x1" />
                   </GridPane.margin>
                 </ComboBox>
-                <Label id="lbl" fx:id="lblStatoOptError" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <Label id="lbl" fx:id="lblStatoOptError" styleClass="lblError" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
                   <textFill>
                     <Color blue="0.000" green="0.384" red="0.800" fx:id="x2" />
                   </textFill>
@@ -73,15 +74,15 @@
                     <Insets right="10.0" />
                   </GridPane.margin>
                 </TextField>
-                <Label id="lbl" fx:id="lblNomeOptError" text="Label" textFill="$x2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label id="lbl" fx:id="lblNomeOptError" styleClass="lblError" text="Label" textFill="$x2" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="17.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
             <GridPane GridPane.columnIndex="0" GridPane.rowIndex="1">
@@ -94,11 +95,11 @@
                     <Insets left="10.0" />
                   </GridPane.margin>
                 </Label>
-                <Label fx:id="lblNomeTipoOpt" font="$x5" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="TOP" />
+                <Label fx:id="lblNomeTipoOpt" font="$x5" text="Label" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="TOP" />
               </children>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.0" minWidth="10.0" prefWidth="128.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="454.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="301.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="302.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -132,7 +133,7 @@
                     <Insets left="10.0" />
                   </GridPane.margin>
                 </Label>
-                <Label id="lbl" fx:id="lblCostoOptError" text="Label" textFill="$x2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label id="lbl" fx:id="lblCostoOptError" styleClass="lblError" text="Label" textFill="$x2" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -151,16 +152,19 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           </columnConstraints>
           <rowConstraints>
-            <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="173.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="152.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="74.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="173.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
       </center>
     </BorderPane>
   </children>
+  <stylesheets>
+    <URL value="@main.css" />
+  </stylesheets>
 </AnchorPane>
