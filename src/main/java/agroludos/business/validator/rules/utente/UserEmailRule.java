@@ -10,9 +10,10 @@ import agroludos.to.UtenteTO;
 
 class UserEmailRule extends AgroludosRule {
 	private StringValidator strValidator;
-
-	UserEmailRule() throws IOException {
+	
+	UserEmailRule(StringValidator strValidator) throws IOException {
 		super();
+		this.strValidator = strValidator;
 	}
 
 	@Override
@@ -31,7 +32,4 @@ class UserEmailRule extends AgroludosRule {
 		}
 	}
 
-	public void setStrValidator(StringValidator strValidator) {
-		this.strValidator = strValidator;
-	}
 }

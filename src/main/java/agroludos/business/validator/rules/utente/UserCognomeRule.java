@@ -11,8 +11,9 @@ import agroludos.to.UtenteTO;
 class UserCognomeRule extends AgroludosRule {
 	private StringValidator strValidator;
 
-	protected UserCognomeRule() throws IOException {
+	UserCognomeRule(StringValidator strValidator) throws IOException {
 		super();
+		this.strValidator = strValidator;
 	}
 
 	@Override
@@ -33,9 +34,4 @@ class UserCognomeRule extends AgroludosRule {
 				this.successor.validate(mainTO, errorTO);
 		}
 	}
-
-	public void setStrValidator(StringValidator strValidator) {
-		this.strValidator = strValidator;
-	}
-
 }

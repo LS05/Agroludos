@@ -6,7 +6,7 @@ import agroludos.business.validator.rules.AgroludosRule;
 
 public interface UserRulesFactory {
 
-	AgroludosRule getNameRule() throws IOException;
+	AgroludosRule getNomeRule() throws IOException;
 
 	AgroludosRule getCognomeRule() throws IOException;
 

@@ -21,7 +21,7 @@ class PartSessoRule extends AgroludosRule {
 			Integer sessoLen = Integer.valueOf(this.getProperty("partSexLength"));
 			String sessoKey = this.getProperty("sessoKey");
 			
-			if((sesso.length() < sessoLen)){
+			if(sesso.length() < sessoLen){
 				errorTO.addError(sessoKey, this.getProperty("sessoError"));
 			}
 

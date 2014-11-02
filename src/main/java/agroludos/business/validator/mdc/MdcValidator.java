@@ -28,7 +28,7 @@ class MdcValidator implements AgroludosValidator{
 		this.userRulesFact = userRulesFactory;
 		this.toFact = toFactory;
 
-		this.nomeRule = this.userRulesFact.getNameRule();
+		this.nomeRule = this.userRulesFact.getNomeRule();
 		this.emailRule = this.userRulesFact.getEmailRule();
 		this.cognomeRule = this.userRulesFact.getCognomeRule();
 		this.usernameRule = this.userRulesFact.getUsernameRule();

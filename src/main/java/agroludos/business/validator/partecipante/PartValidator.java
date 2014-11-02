@@ -34,7 +34,7 @@ class PartValidator implements AgroludosValidator{
 		this.partRulesFact = partRulesFactory;
 		this.toFact = toFactory;
 
-		this.nomeRule = this.userRulesFact.getNameRule();
+		this.nomeRule = this.userRulesFact.getNomeRule();
 		this.emailRule = this.userRulesFact.getEmailRule();
 		this.passwordRule = this.userRulesFact.getPasswordRule();
 		this.cognomeRule = this.userRulesFact.getCognomeRule();

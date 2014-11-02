@@ -3,46 +3,38 @@ package agroludos.business.validator.rules.utente;
 import java.io.IOException;
 
 import agroludos.business.validator.rules.AgroludosRule;
+import agroludos.business.validator.rules.strings.StringValidator;
 
 class UserRulesFactoryImpl implements UserRulesFactory {
-	private static UserEmailRule emailRule;
-	private static UserNomeRule nameRule;
-	private static UserCognomeRule cognomeRule;
-	private static UserUsernameRule usernameRule;
-	private static UserPasswordRule passwordRule;
 
+	private StringValidator strValidator;
+
+	UserRulesFactoryImpl(StringValidator strValidator){
+		this.strValidator = strValidator;
+	}
+	
 	@Override
 	public AgroludosRule getEmailRule() throws IOException{
-		if(emailRule == null)
-			emailRule = new UserEmailRule();
-		return emailRule;	
+		return new UserEmailRule(this.strValidator);	
 	}
 
 	@Override
-	public AgroludosRule getNameRule() throws IOException{
-		if(nameRule == null)
-			nameRule = new UserNomeRule();
-		return nameRule;	
+	public AgroludosRule getNomeRule() throws IOException{
+		return new UserNomeRule(this.strValidator);	
 	}
 	
 	@Override
-	public AgroludosRule getCognomeRule() throws IOException {
-		if(cognomeRule == null)
-			cognomeRule = new UserCognomeRule();
-		return cognomeRule;
+	public AgroludosRule getCognomeRule() throws IOException { 
+		return new UserCognomeRule(this.strValidator);
 	}
 	
 	@Override
-	public AgroludosRule getUsernameRule() throws IOException {
-		if(usernameRule == null)
-			usernameRule = new UserUsernameRule();
-		return usernameRule;
+	public AgroludosRule getUsernameRule() throws IOException { 
+		return new UserUsernameRule();
 	}
 
 	@Override
-	public AgroludosRule getPasswordRule() throws IOException {
-		if(passwordRule == null)
-			passwordRule = new UserPasswordRule();
-		return passwordRule;
+	public AgroludosRule getPasswordRule() throws IOException { 
+		return new UserPasswordRule();
 	}
 }

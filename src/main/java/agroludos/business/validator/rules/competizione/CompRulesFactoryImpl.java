@@ -5,28 +5,28 @@ import java.io.IOException;
 import agroludos.business.validator.rules.AgroludosRule;
 
 class CompRulesFactoryImpl implements CompRulesFactory {
-	private static CompNomeRule nomeRule;
-	private static CompNumPartRule numPartRule;
-	private static CompCostoRule costoRule;
+	private static CompNomeRule nomeCompRule;
+	private static CompNumPartRule numPartCompRule;
+	private static CompCostoRule costoCompRule;
 	
 	@Override
 	public AgroludosRule getNomeRule() throws IOException {
-		if(nomeRule == null)
-			nomeRule = new CompNomeRule();
-		return nomeRule;
+		if(nomeCompRule == null)
+			nomeCompRule = new CompNomeRule();
+		return nomeCompRule;
 	}
 	
 	@Override
 	public AgroludosRule getNumPartRule() throws IOException {
-		if(numPartRule == null)
-			numPartRule = new CompNumPartRule();
-		return numPartRule;
+		if(numPartCompRule == null)
+			numPartCompRule = new CompNumPartRule();
+		return numPartCompRule;
 	}
 	
 	@Override
 	public AgroludosRule getCostoRule() throws IOException {
-		if(costoRule == null)
-			costoRule = new CompCostoRule();
-		return costoRule;
+		if(costoCompRule == null)
+			costoCompRule = new CompCostoRule();
+		return costoCompRule;
 	}
 }

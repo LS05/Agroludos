@@ -9,7 +9,7 @@ import agroludos.to.UtenteTO;
 
 class UserUsernameRule extends AgroludosRule {
 
-	protected UserUsernameRule() throws IOException {
+	UserUsernameRule() throws IOException {
 		super();
 	}
 

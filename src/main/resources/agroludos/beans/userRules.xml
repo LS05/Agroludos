@@ -5,39 +5,46 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
 	<bean id="userRulesFactory"
-		class="agroludos.business.validator.rules.utente.UserRulesFactoryImpl" />
+		class="agroludos.business.validator.rules.utente.UserRulesFactoryImpl">
+		<constructor-arg ref="stringValidator" />
+	</bean>
 
 	<bean id="userNomeRule"
 		  class="agroludos.business.validator.rules.utente.UserNomeRule"
 		  factory-bean="userRulesFactory"
-		  factory-method="getNameRule">
-		  <property name="strValidator" ref="stringValidator" />
+		  factory-method="getNomeRule"
+		  scope="prototype">
+		  <constructor-arg ref="stringValidator" />
 	</bean>
 	
 	<bean id="userCognomeRule"
 		  class="agroludos.business.validator.rules.utente.UserCognomeRule"
 		  factory-bean="userRulesFactory"
-		  factory-method="getCognomeRule">
-		  <property name="strValidator" ref="stringValidator" />
+		  factory-method="getCognomeRule"
+		  scope="prototype">
+		  <constructor-arg ref="stringValidator" />
 	</bean>
 	
 	<bean id="userUsernameRule"
 		  class="agroludos.business.validator.rules.utente.UserUsernameRule"
 		  factory-bean="userRulesFactory"
-		  factory-method="getUsernameRule">
+		  factory-method="getUsernameRule"
+		  scope="prototype">
 	</bean>
 	
 	<bean id="userPasswordRule"
 		  class="agroludos.business.validator.rules.utente.UserPasswordRule"
 		  factory-bean="userRulesFactory"
-		  factory-method="getPasswordRule">
+		  factory-method="getPasswordRule"
+		  scope="prototype">
 	</bean>
 	
 	<bean id="userEmailRule"
 		  class="agroludos.business.validator.rules.utente.UserEmailRule"
 		  factory-bean="userRulesFactory"
-		  factory-method="getEmailRule">
-		  <property name="strValidator" ref="stringValidator" />
+		  factory-method="getEmailRule"
+		  scope="prototype">
+		  <constructor-arg ref="stringValidator" />
 	</bean>
 	
 </beans>
