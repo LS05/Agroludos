@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -60,7 +61,7 @@ public class ControllerRegistrazione extends AgroludosController{
 	@FXML private RadioButton radioF;
 
 	private FileChooser fileChooser;
-	private AgroDatePicker dataCertPicker;
+	private AgroDatePicker dataSrcPicker;
 	private AgroDatePicker dataNascPicker;
 
 	private List<TipoUtenteTO> listTipiU;
@@ -75,22 +76,15 @@ public class ControllerRegistrazione extends AgroludosController{
 
 	private AgroRequest richiesta;
 
+	private boolean errFlag;
+
 	@Override
 	protected void initializeView(String viewName) {
 		this.viewName = viewName;
-		
-		lblNomeError.setVisible(false);
-		lblCognomeError.setVisible(false);
-		lblDataSrcError.setVisible(false);
-		lblTesSanError.setVisible(false);
-		lblUsernameError.setVisible(false);
-		lblPasswordError.setVisible(false);
-		lblIndirizzoError.setVisible(false);
-		lblCfError.setVisible(false);
-		lblSrcError.setVisible(false);
-		lblEmailError.setVisible(false);
-		lblDataNascError.setVisible(false);
-		lblSessoError.setVisible(false);
+
+		this.errFlag = false;
+
+		this.hideErrors();
 
 		this.parTO = toFact.createPartecipanteTO();
 
@@ -108,8 +102,8 @@ public class ControllerRegistrazione extends AgroludosController{
 		this.btnCarica.setDisable(false);
 
 		this.dataNascPicker = new AgroDatePicker();
-		this.dataCertPicker = new AgroDatePicker();
-		this.paneDataCert.getChildren().add(this.dataCertPicker.getDatePicker());
+		this.dataSrcPicker = new AgroDatePicker();
+		this.paneDataCert.getChildren().add(this.dataSrcPicker.getDatePicker());
 		this.paneDataNasc.getChildren().add(this.dataNascPicker.getDatePicker());
 
 		this.checkBoxReveal.selectedProperty().addListener(new ChangeListener<Boolean>() {
@@ -150,7 +144,6 @@ public class ControllerRegistrazione extends AgroludosController{
 		this.txtIndirizzo.setText("via firenze 33");
 		this.txtNTSanitaria.setText("321654987987654");
 		this.txtPassword.setText("123456");
-		//		this.txtSesso.setText("m");
 		this.txtUsername.setText("");
 	}
 
@@ -159,7 +152,31 @@ public class ControllerRegistrazione extends AgroludosController{
 
 	}
 
+	private void hideErrors(){
+		this.lblNomeError.setVisible(false);
+		this.lblCognomeError.setVisible(false);
+		this.lblDataSrcError.setVisible(false);
+		this.lblTesSanError.setVisible(false);
+		this.lblUsernameError.setVisible(false);
+		this.lblPasswordError.setVisible(false);
+		this.lblIndirizzoError.setVisible(false);
+		this.lblCfError.setVisible(false);
+		this.lblSrcError.setVisible(false);
+		this.lblEmailError.setVisible(false);
+		this.lblDataNascError.setVisible(false);
+		this.lblSessoError.setVisible(false);
+	}
+
+	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
+		if(errors.hasError(rulesProperties.getProperty(errorKey))){
+			String nomeKey = rulesProperties.getProperty(errorKey);
+			lblError.setVisible(true);
+			lblError.setText(errors.getError(nomeKey));
+		} 
+	}
+
 	@FXML protected void btnRegistrati(MouseEvent event) {
+		this.hideErrors();
 		this.parTO.setNome(this.txtNome.getText());
 		this.parTO.setCognome(this.txtCognome.getText());
 		this.parTO.setUsername(this.txtUsername.getText());
@@ -178,7 +195,8 @@ public class ControllerRegistrazione extends AgroludosController{
 		this.parTO.setEmail(this.txtEmail.getText());
 		this.parTO.setDataNasc(this.dataNascPicker.getSelectedDate());
 		this.parTO.setNumTS(this.txtNTSanitaria.getText());
-		this.parTO.setDataSRC(this.dataNascPicker.getSelectedDate());
+		this.parTO.setDataSRC(this.dataSrcPicker.getSelectedDate());
+
 		if(this.fileSrc == null){
 			this.parTO.setSrc("");
 		} else {
@@ -189,11 +207,14 @@ public class ControllerRegistrazione extends AgroludosController{
 		this.richiesta = this.getRichiesta(this.parTO,"inserisciPartecipante", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
 
-		//		this.close();
+		if( !this.errFlag ){
+			System.out.println("partecipante inserito correttamente!");
+			this.close();
+		}
 	}
 
 	@FXML protected void btnCarica(MouseEvent event) {
-		File file = fileChooser.showOpenDialog(nav.getStage(this.viewName));
+		File file = this.fileChooser.showOpenDialog(nav.getStage(this.viewName));
 		if (file != null) {
 			this.fileSrc = file;
 			this.lblSrc.setText(this.fileSrc.getName());
@@ -226,73 +247,58 @@ public class ControllerRegistrazione extends AgroludosController{
 
 		} else if(commandName.equals(reqProperties.getProperty("inserisciPartecipante") )){
 			Object res = response.getRespData();
+
 			if(res instanceof ErrorTO){
+
 				ErrorTO errors = (ErrorTO)res;
+				this.errFlag = true;
 
 				if(errors.hasError(rulesProperties.getProperty("nomeKey"))){
-					String nomeKey = rulesProperties.getProperty("nomeKey");
-					this.lblNomeError.setVisible(true);
-					this.lblNomeError.setText(errors.getError(nomeKey));
+					this.showErrors(errors, this.lblNomeError, "nomeKey");
 				} 
 
 				if(errors.hasError(rulesProperties.getProperty("cognKey"))){
-					String cognomeKey = rulesProperties.getProperty("cognKey");
-					this.lblCognomeError.setVisible(true);
-					this.lblCognomeError.setText(errors.getError(cognomeKey));
+					this.showErrors(errors, this.lblCognomeError, "cognKey");
 				}
 
 				if(errors.hasError(rulesProperties.getProperty("cfKey"))){
-					String codFiscKey = rulesProperties.getProperty("cfKey");
-					this.lblCfError.setVisible(true);
-					this.lblCfError.setText(errors.getError(codFiscKey));
+					this.showErrors(errors, this.lblCfError, "cfKey");
 				}
 
 				if(errors.hasError(rulesProperties.getProperty("dataSrcKey"))){
-					String dataSrcKey = rulesProperties.getProperty("dataSrcKey");
-					this.lblDataSrcError.setVisible(true);
-					this.lblDataSrcError.setText(errors.getError(dataSrcKey));
+					this.showErrors(errors, this.lblDataSrcError, "dataSrcKey");
 				}
 
 				if(errors.hasError(rulesProperties.getProperty("srcKey"))){
-					String srcKey = rulesProperties.getProperty("srcKey");
-					this.lblSrcError.setVisible(true);
-					this.lblSrcError.setText(errors.getError(srcKey));
+					this.showErrors(errors, this.lblSrcError, "srcKey");
 				}
 
 				if(errors.hasError(rulesProperties.getProperty("tesKey"))){
-					String tesKey = rulesProperties.getProperty("tesKey");
-					this.lblTesSanError.setVisible(true);
-					this.lblTesSanError.setText(errors.getError(tesKey));
+					this.showErrors(errors, this.lblTesSanError, "tesKey");
 				}
 
 				if(errors.hasError(rulesProperties.getProperty("usernameKey"))){
-					String usernameKey = rulesProperties.getProperty("usernameKey");
-					this.lblUsernameError.setVisible(true);
-					this.lblUsernameError.setText(errors.getError(usernameKey));
+					this.showErrors(errors, this.lblUsernameError, "usernameKey");
 				}
 
 				if(errors.hasError(rulesProperties.getProperty("passwordKey"))){
-					String passwordKey = rulesProperties.getProperty("passwordKey");
-					this.lblPasswordError.setVisible(true);
-					this.lblPasswordError.setText(errors.getError(passwordKey));
+					this.showErrors(errors, this.lblPasswordError, "passwordKey");
 				}
 
 				if(errors.hasError(rulesProperties.getProperty("emailKey"))){
-					String emailKey = rulesProperties.getProperty("emailKey");
-					this.lblEmailError.setVisible(true);
-					this.lblEmailError.setText(errors.getError(emailKey));
+					this.showErrors(errors, this.lblEmailError, "emailKey");
 				}
 
 				if(errors.hasError(rulesProperties.getProperty("indrizzzoKey"))){
-					String indirizzoKey = rulesProperties.getProperty("indrizzzoKey");
-					this.lblIndirizzoError.setVisible(true);
-					this.lblIndirizzoError.setText(errors.getError(indirizzoKey));
+					this.showErrors(errors, this.lblIndirizzoError, "indrizzzoKey");
 				}
 
 				if(errors.hasError(rulesProperties.getProperty("dataNascKey"))){
-					String dataNascKey = rulesProperties.getProperty("dataNascKey");
-					this.lblDataNascError.setVisible(true);
-					this.lblDataNascError.setText(errors.getError(dataNascKey));
+					this.showErrors(errors, this.lblDataNascError, "dataNascKey");
+				}
+
+				if(errors.hasError(rulesProperties.getProperty("sessoKey"))){
+					this.showErrors(errors, this.lblSessoError, "sessoKey");
 				}
 			}
 		}

@@ -20,28 +20,25 @@ public interface PartecipanteTO extends UtenteTO {
 	public String getNumTS();
 
 	public void setNumTS(String numTS);
-	
-	//TODO Da rinominare CSRC
+
 	public Date getDataSRC();
 
-	//TODO Da rinominare CSRC
 	public void setDataSRC(Date dataSRC);
 
-	//TODO Da rinominare CSRC
-	public void setSrc(String src);
-
-	//TODO Da rinominare CSRC
+	public CertificatoTO getCertificato();
+	
+	public void setCertificato(CertificatoTO certificato);
+	
 	public String getSrc();
+	
+	public void setSrc(String src);
 
 	public Date getDataNasc();
 
 	public void setDataNasc(Date dataNasc);
-	
-	public void setCertificato(String certificato);
-	
-	public String getCertificato();
-	
+
 	public List<IscrizioneTO> getAllIscrizioni();
-	
+
 	public List<IscrizioneTO> getAllIscrizioniAttive();
+
 }

@@ -21,7 +21,7 @@ class PartSrcRule extends AgroludosRule {
 			PartecipanteTO partecipante = (PartecipanteTO)mainTO;
 			String srcFormat = this.getProperty("srcFormat");
 			
-			String src = partecipante.getSRC();
+			String src = partecipante.getSrc();
 			String key = this.getProperty("srcKey");
 			if(!this.fileValidator.isOfFormat(src, srcFormat)){
 				errorTO.addError(key, this.getProperty("srcFormatError"));

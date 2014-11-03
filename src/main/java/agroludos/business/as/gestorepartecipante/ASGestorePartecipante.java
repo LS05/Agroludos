@@ -6,6 +6,7 @@ import java.util.List;
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.UserExistsException;
 import agroludos.exceptions.UserNotFoundException;
 import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.DBDAOFactory;
@@ -13,6 +14,7 @@ import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.integration.dao.file.CertificatoSRCDAO;
 import agroludos.integration.dao.file.FileDAOFactory;
 import agroludos.integration.dao.file.FileFactory;
+import agroludos.to.CertificatoTO;
 import agroludos.to.PartecipanteTO;
 
 class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SPartecipante{
@@ -36,14 +38,25 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 	}
 
 	@Override
-	public PartecipanteTO inserisciPartecipante(PartecipanteTO parto)
-			throws DatabaseException, ValidationException {
+	public PartecipanteTO inserisciPartecipante(PartecipanteTO partTO)
+			throws DatabaseException, ValidationException, IOException {
 
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
 
-		this.validator.validate(parto);
+		if( !(daoPar.esisteEmail(partTO)) && !(daoPar.esisteUsername(partTO)) ){ 
 
-		return daoPar.create(parto);
+			this.validator.validate(partTO);
+
+			CertificatoSRCDAO daoCert = this.getCertificatoSRCDAO();
+
+			daoCert.salvaCertificato(partTO);
+			partTO.setCertificato(daoCert.getCertificato(partTO));
+
+		} else {
+			throw new UserExistsException();
+		}
+
+		return daoPar.create(partTO);
 
 	}
 
@@ -59,62 +72,61 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 		return part;
 	}
 
-	private PartecipanteTO getSupp(PartecipanteTO user) 
+	private PartecipanteTO getSupp(PartecipanteTO partTO) 
 			throws UserNotFoundException, IOException{
 		CertificatoSRCDAO certFile = this.getCertificatoSRCDAO();
 
-		if(user.getId() != -1){
-			user.setCertificato(certFile.getCertificato(user.getSrc()));
+		if(partTO.getId() != -1){
+			partTO.setCertificato(certFile.getCertificato(partTO));
+			partTO.setCertificato(null);
 		} else {
 			throw new UserNotFoundException();
 		}
-		return user;
+		return partTO;
 	}
 
 	@Override
-	public PartecipanteTO getPartecipante(PartecipanteTO parto)
+	public PartecipanteTO getPartecipante(PartecipanteTO parTO)
 			throws DatabaseException, IOException, UserNotFoundException {
 
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
-		PartecipanteTO user = daoPar.getByUsername(parto.getUsername());
+		PartecipanteTO user = daoPar.getByUsername(parTO.getUsername());
 
 		return getSupp(user);
 	}
 
 	@Override
-	public PartecipanteTO getPartecipanteById(PartecipanteTO parto)
+	public PartecipanteTO getPartecipanteById(PartecipanteTO parTO)
 			throws DatabaseException, UserNotFoundException, IOException {
 
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
-		PartecipanteTO user = daoPar.getByID(parto.getId());
+		PartecipanteTO user = daoPar.getByID(parTO.getId());
 
 		return getSupp(user);
 	}
 
 	@Override
-	public List<PartecipanteTO> getAllPartecipante() throws DatabaseException, IOException {
+	public List<PartecipanteTO> getAllPartecipante() 
+			throws DatabaseException, IOException {
 
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
 		CertificatoSRCDAO certDao = this.getCertificatoSRCDAO();
 		List<PartecipanteTO> res = daoPar.getAll();
 
 		for(PartecipanteTO part : res){
-			part.setCertificato(certDao.getCertificato(part.getSrc()));
+			part.setCertificato(certDao.getCertificato(part));
 		}
 
 		return res;
 	}
 
-	//TODO deve ritornare un CertificatoTO
 	@Override
-	public String getCertificatoSRC(PartecipanteTO parto)
+	public CertificatoTO getCertificatoSRC(PartecipanteTO parTO)
 			throws DatabaseException, IOException {
 
 		CertificatoSRCDAO certDao = this.getCertificatoSRCDAO();
-		return certDao.getCertificato(parto.getSrc());
+
+		return certDao.getCertificato(parTO);
 
 	}
-
-	
-
 }

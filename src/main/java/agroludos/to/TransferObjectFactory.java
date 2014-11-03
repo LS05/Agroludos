@@ -6,7 +6,7 @@ class TransferObjectFactory implements TOFactory {
 	public DatabaseTO createDatabaseTO(){
 		return new Database();
 	}
-	
+
 	@Override
 	public SuccessTO createSuccessTO(){
 		return new SuccessImpl();
@@ -21,7 +21,7 @@ class TransferObjectFactory implements TOFactory {
 	public UtenteTO createUTO(){
 		return new Utente();
 	}
-	
+
 	@Override
 	public UtenteTO createNullUTO(){
 		return new NullUtente();
@@ -61,17 +61,17 @@ class TransferObjectFactory implements TOFactory {
 	public TipoOptionalTO createTipoOptionalTO() {
 		return new TipoOptional();
 	}
-	
+
 	@Override
 	public StatoCompetizioneTO createStatoCompetizioneTO() {
 		return new StatoCompetizione();
 	}
-	
+
 	@Override
 	public StatoUtenteTO createStatoUtenteTO() {
 		return new StatoUtente();
 	}
-	
+
 	@Override
 	public StatoOptionalTO createStatoOptionalTO() {
 		return new StatoOptional();
@@ -81,7 +81,7 @@ class TransferObjectFactory implements TOFactory {
 	public ErrorTO createErrorTO() {
 		return new ErrorImpl();
 	}
-	
+
 	@Override
 	public QuestionTO createQuestionTO() {
 		return new Question();
@@ -91,5 +91,14 @@ class TransferObjectFactory implements TOFactory {
 	public TipoUtenteTO createTipoUtenteTO() {
 		return new TipoUtente();
 	}
-	
+
+	@Override
+	public CertFile createCertFile() {
+		return new CertFileImpl();
+	}
+
+	@Override
+	public CertificatoTO createCertificatoTO() {
+		return new Certificato();
+	}	
 }

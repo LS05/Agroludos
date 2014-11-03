@@ -38,5 +38,8 @@ public interface TOFactory {
 
 	TipoUtenteTO createTipoUtenteTO();
 
+	CertFile createCertFile();
+	
+	CertificatoTO createCertificatoTO();
 
 }
