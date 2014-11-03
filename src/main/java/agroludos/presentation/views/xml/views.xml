@@ -9,7 +9,7 @@
 			<height>1</height>
 			<title></title>
 		</view>
-		<view tipo="mainView">
+		<view tipo="dialog">
 			<name>login</name>
 			<url>/fxml/login/login.fxml</url>
 			<width>600</width>

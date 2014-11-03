@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +16,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.components.table.AgroTable;
@@ -386,6 +386,17 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		nav.setVista("visualizzaIscrizioni", sPart);
 	}
 
+	@FXML protected void menuLogout(ActionEvent event){
+		this.close();
+		nav.setVista("login");
+	}
+	
+	@FXML protected void menuEsci(ActionEvent event){
+		this.close();
+		nav.termina();
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {

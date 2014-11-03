@@ -2,8 +2,9 @@ package agroludos.presentation.views;
 
 import java.io.IOException;
 
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
-
+import javafx.stage.WindowEvent;
 import agroludos.exceptions.ViewNotFoundException;
 import agroludos.presentation.views.xml.AgroludosWindow;
 import agroludos.to.AgroludosTO;
@@ -59,8 +60,20 @@ public class Navigator {
 			}else{
 				agw = this.viewsLoader.getView(viewName);
 				this.viewsCache.addView(agw);
-//				if(agw.isMainView())
-//					this.mainViewName = agw.getName();
+
+				if(agw.isMainView()){
+					final Stage stage = agw.getStage();
+					final String mainView = viewName;
+					//aggiungo l'evento close vista quando si chiude lo stage
+					stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+						public void handle(WindowEvent we) {
+							//TODO eliminare stampa
+							closeVista(mainView);
+							termina();
+						}
+					});
+				}
+				
 				//TODO Gestire l'eccezione di un controller null
 				agw.getController().initializeView(viewName);
 			}
@@ -80,11 +93,12 @@ public class Navigator {
 	public void closeVista(String viewName) {
 		AgroludosWindow agw = this.viewsCache.getView(viewName);
 		if(agw != null){
-			if(agw.isMainView()){
-				System.out.println("termina programma");
-			}
 			this.getStage(viewName).close();	
 		}
+	}
+
+	public void termina() {
+		System.out.println("operazioni finali");
 	}
 }
 

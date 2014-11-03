@@ -15,10 +15,12 @@ import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.SuccessTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -31,6 +33,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 	@FXML private Button btnPaneComptizioni;
 	@FXML private Button btnNuovaCompetizione;
+	@FXML private MenuItem menuLogout;
 
 	//tabella competizioni gestite
 	@FXML private TableView<CmpModel> tableCompetizione;
@@ -54,6 +57,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 	
 	@Override
 	public void initializeView(String viewName) {
+		this.viewName = viewName;
 		this.mdcTO = toFact.createMdCTO();
 		this.mdcTO = (ManagerDiCompetizioneTO) utente;
 
@@ -80,7 +84,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 			cmp.setCompetizioneTO(cmpTO);
 			cmp.setData(cmpTO.getData().toString());
 			cmp.setId(cmpTO.getId().toString());
-			cmp.setNiscritti(String.valueOf(cmpTO.getAllIscrizioniAttive().size()));
+			cmp.setIscritti(String.valueOf(cmpTO.getAllIscrizioniAttive().size()));
 			cmp.setNmax(String.valueOf(cmpTO.getNmax()));
 			cmp.setNmin(String.valueOf(cmpTO.getNmin()));
 			cmp.setNome(cmpTO.getNome());
@@ -146,7 +150,16 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 		return res;
 	}
 	
+	@FXML protected void menuLogout(ActionEvent event){
+		this.close();
+		nav.setVista("login");
+	}
 	
+	
+	@FXML protected void menuEsci(ActionEvent event){
+		this.close();
+		nav.termina();
+	}
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {

@@ -55,13 +55,14 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
 
-		final Stage stage = nav.getStage(viewName);
-		final String mainView = viewName;
+		final Stage stage = nav.getStage(this.getViewName());
+		final String view = this.viewName;
 		//aggiungo l'evento close vista quando si chiude lo stage
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
 				//TODO eliminare stampa
-				nav.closeVista(mainView);
+				nav.closeVista(view);
+				nav.termina();
 			}
 		}); 
 
@@ -87,6 +88,11 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 		this.risposta = respFact.createResponse();
 		this.richiesta = this.getRichiesta(uto, "autenticazioneUtente", this.viewName);
 		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		
+		Object res = risposta.getRespData();
+		if(res instanceof UtenteTO){
+			this.close();
+		}
 	}
 
 	@FXML protected void btnPswDimenticata(MouseEvent event) {
