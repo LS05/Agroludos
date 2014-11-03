@@ -4,7 +4,7 @@ package agroludos.exceptions;
 public class UserNotFoundException extends Exception {
 	
 	public UserNotFoundException(){
-		super("Utente Inesistente!");
+		super("Username e/o Password errati!");
 	}
 
 	public UserNotFoundException(String message){
