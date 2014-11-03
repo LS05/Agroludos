@@ -12,12 +12,12 @@ class Partecipante extends Utente implements PartecipanteTO {
 	private Date dataNasc;
 	private String sesso;
 	private String numTS;
-	private String src;
 	private Date dataSRC;
 	private Set<Iscrizione> iscrizioni;
 	private Set<Iscrizione> iscrizioniAttive;
-	private String certificato;
-	
+	private String src;
+	private CertificatoTO certificato;
+
 	@Override
 	public String getCf() {
 		return cf;
@@ -59,6 +59,15 @@ class Partecipante extends Utente implements PartecipanteTO {
 	}
 
 	@Override
+	public CertificatoTO getCertificato() {
+		return this.certificato;
+	}
+	
+	@Override
+	public void setCertificato(CertificatoTO certificato) {
+		this.certificato = certificato;
+	}
+	
 	public String getSrc() {
 		return src;
 	}
@@ -77,37 +86,37 @@ class Partecipante extends Utente implements PartecipanteTO {
 	public void setDataSRC(Date dataSRC) {
 		this.dataSRC = dataSRC;
 	}
-	
+
 	@Override
 	public Date getDataNasc() {
 		return dataNasc;
 	}
-	
+
 	@Override
 	public void setDataNasc(Date dataNasc) {
 		this.dataNasc = dataNasc;
 	}
-	
+
 	@Override
 	public List<IscrizioneTO> getAllIscrizioni() {
 		List<IscrizioneTO> res = new ArrayList<IscrizioneTO>();
-		
+
 		for(Iscrizione item : this.iscrizioni){
 			res.add(item);
 		}
-		
+
 		return res;
 	}
-	
+
 	public Set<Iscrizione> getIscrizioni() {
 		return iscrizioni;
 	}
-	
+
 
 	public void setIscrizioni(Set<Iscrizione> iscrizioni) {
 		this.iscrizioni = iscrizioni;
 	}
-	
+
 	public void setIscrizioniAttive(Set<Iscrizione> iscrizioniAttive) {
 		this.iscrizioniAttive = iscrizioniAttive;
 	}
@@ -126,25 +135,7 @@ class Partecipante extends Utente implements PartecipanteTO {
 
 		return res;
 	}
-	
-	@Override
-	public String getCertificato() {
-		return this.certificato;
-	}
 
-	@Override
-	public void setCertificato(String certificato) {
-		this.certificato = certificato;
-	}
-	
-	@Override
-	public String toString() {
-		return "Partecipante [cf=" + cf + ", indirizzo=" + indirizzo
-				+ ", dataNasc=" + dataNasc + ", sesso=" + sesso + ", numTS="
-				+ numTS + ", src=" + src + ", dataSRC=" + dataSRC
-				+ ", iscrizioni=" + iscrizioni + "]";
-	}
-	
 	@Override
 	public int compareTo(UtenteTO o) {
 		// TODO Auto-generated method stub

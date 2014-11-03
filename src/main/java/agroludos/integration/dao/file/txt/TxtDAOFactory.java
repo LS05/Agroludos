@@ -3,10 +3,16 @@ package agroludos.integration.dao.file.txt;
 import agroludos.integration.dao.file.CertificatoSRCDAO;
 import agroludos.integration.dao.file.FConfigurazioneDAO;
 import agroludos.integration.dao.file.FileDAOFactory;
-import agroludos.integration.dao.file.FileFactory;
+import agroludos.to.TOFactory;
 
-public class TxtDAOFactory extends FileFactory implements FileDAOFactory{
+public class TxtDAOFactory implements FileDAOFactory{
+	
+	private TOFactory toFact;
 
+	public TxtDAOFactory(TOFactory toFact){
+		this.toFact = toFact;
+	}
+	
 	@Override
 	public FConfigurazioneDAO getConfigurazioneDAO() {
 		return null;
@@ -14,8 +20,7 @@ public class TxtDAOFactory extends FileFactory implements FileDAOFactory{
 
 	@Override
 	public CertificatoSRCDAO getCertificatoSRCDAO() {
-		return new TxtCertificatoSRCDAO();
+		return new TxtCertificatoSRCDAO(this.toFact);
 	}
-
 
 }

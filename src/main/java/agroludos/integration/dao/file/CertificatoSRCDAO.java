@@ -2,10 +2,13 @@ package agroludos.integration.dao.file;
 
 import java.io.IOException;
 
+import agroludos.to.CertificatoTO;
+import agroludos.to.PartecipanteTO;
+
 public interface CertificatoSRCDAO {
 	
-	public String getCertificato(String path) throws IOException;
+	public CertificatoTO getCertificato(PartecipanteTO partTO) throws IOException;
 	
-	public void setCertificato(String inputPath, String outputPath) throws IOException;
+	public void salvaCertificato(PartecipanteTO partTO) throws IOException;
 	
 }
