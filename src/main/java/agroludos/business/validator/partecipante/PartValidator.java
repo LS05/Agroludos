@@ -1,7 +1,5 @@
 package agroludos.business.validator.partecipante;
 
-import java.io.IOException;
-
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.business.validator.rules.partecipante.PRulesFactory;
