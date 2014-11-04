@@ -45,8 +45,7 @@ class ASGestoreManagerDiSistema extends AgroludosAS implements LManagerDiSistema
 		if(this.getManagerDiSistemaDAO().checkMds()){
 			res = true;
 		} else {
-			throw new MdsNotFoundException("Attenzione Manager Di Sistema non trovato,"
-					+ " è necessario effettuare la configurazione iniziale");
+			throw new MdsNotFoundException();
 		}
 		
 		return res;

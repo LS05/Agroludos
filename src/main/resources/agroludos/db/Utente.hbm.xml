@@ -115,4 +115,6 @@
 		<![CDATA[ from agroludos.to.Partecipante m where m.statoUtente = 1 ]]></query>
 	<query name="getByUsername">
 		<![CDATA[ from agroludos.to.Utente m where m.statoUtente = 1 and m.username = ? ]]></query>
+	<query name="getByEmail">
+		<![CDATA[ from agroludos.to.Utente m where m.email = ? ]]></query>
 </hibernate-mapping>

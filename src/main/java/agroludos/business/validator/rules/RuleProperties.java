@@ -1,26 +1,16 @@
 package agroludos.business.validator.rules;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import agroludos.system.RulesConf;
 
 class RuleProperties {
-	private Properties prop;
 
-	RuleProperties() throws IOException{
-		this.prop = new Properties();
-
-		InputStream inputStream = this.getClass().getResourceAsStream("/properties/validator/rules.properties");
-
-		if (inputStream == null) {
-			throw new FileNotFoundException();
-		}
-
-		this.prop.load(inputStream);
+	private RulesConf ruleConf;
+	
+	RuleProperties(RulesConf ruleConf){
+		this.ruleConf = ruleConf;
 	}
 
 	String getProperty(String rule){
-		return this.prop.getProperty(rule);
+		return null;
 	}
 }

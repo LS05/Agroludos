@@ -17,11 +17,11 @@ class PartIndirizzoRule extends AgroludosRule {
 		if(mainTO instanceof PartecipanteTO){
 			PartecipanteTO partecipante = (PartecipanteTO)mainTO;
 			String indirizzo = partecipante.getIndirizzo();
-			Integer indLength = Integer.valueOf(this.getProperty("partIndLength"));
+			Integer indLength = Integer.valueOf(this.getRule("partIndLength"));
 			
-			String key = this.getProperty("indKey");
+			String key = this.getRule("indKey");
 			if( indirizzo.length() < indLength){
-				errorTO.addError(key, this.getProperty("indirizzoError"));
+				errorTO.addError(key, this.getRule("indirizzoError"));
 			}
 
 			if( this.successor != null)

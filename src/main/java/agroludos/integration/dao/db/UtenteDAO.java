@@ -4,8 +4,6 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.to.UtenteTO;
 
 public interface UtenteDAO<T extends UtenteTO> extends DAO<T>{
-
-	T deleteUtente(T uto) throws DatabaseException;
 	
 	T getUtente(UtenteTO uto) throws DatabaseException;
 

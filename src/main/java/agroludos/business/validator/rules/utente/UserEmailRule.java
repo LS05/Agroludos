@@ -21,10 +21,10 @@ class UserEmailRule extends AgroludosRule {
 		if(mainTO instanceof UtenteTO){
 			UtenteTO user = (UtenteTO)mainTO;
 			String email = user.getEmail();
-			String key = this.getProperty("emailKey");
+			String key = this.getRule("emailKey");
 			
 			if( !(email.length() > 1) || !this.strValidator.isValidEmail(email)){
-				errorTO.addError(key , this.getProperty("emailError"));
+				errorTO.addError(key , this.getRule("emailError"));
 			}
 
 			if(this.successor != null)

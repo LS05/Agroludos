@@ -1,6 +1,5 @@
 package agroludos.integration.dao.db.mysql;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import agroludos.exceptions.DatabaseException;
@@ -27,23 +26,9 @@ public class MySqlDAOFactory implements DBDAOFactory {
 
 	private Session session;
 
-	public MySqlDAOFactory(){ }
-
 	public MySqlDAOFactory(MySqlDAOUtil daoUtil) throws DatabaseException{ 
 		this.daoUtil = daoUtil;
 		this.session = this.daoUtil.buildSessionFactory().openSession();
-	}
-
-	public boolean testConnection() throws DatabaseException{
-		boolean res = false;
-
-		try{
-			res = this.session.isConnected() && this.session.isOpen();
-		}catch(HibernateException e){
-			throw new DatabaseException(e.getMessage());
-		}
-
-		return res;
 	}
 
 	@Override

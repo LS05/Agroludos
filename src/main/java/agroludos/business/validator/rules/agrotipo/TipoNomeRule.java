@@ -18,10 +18,10 @@ class TipoNomeRule extends AgroludosRule {
 		if(mainTO instanceof TipiAgroludosTO){
 			TipiAgroludosTO tipo = (TipiAgroludosTO)mainTO;
 			String nome = tipo.getNome();
-			Integer nameLength = Integer.valueOf(this.getProperty("nameLength"));
+			Integer nameLength = Integer.valueOf(this.getRule("nameLength"));
 
 			if(nome.length() < nameLength){
-				errorTO.addError(this.getProperty("nomeKey"), this.getProperty("nomeLenghtError"));
+				errorTO.addError(this.getRule("nomeKey"), this.getRule("nomeLenghtError"));
 			}
 
 			if(this.successor != null)

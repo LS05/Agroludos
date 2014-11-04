@@ -20,14 +20,14 @@ class PartDataSrcRule extends AgroludosRule {
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof PartecipanteTO){
 			PartecipanteTO parTO = (PartecipanteTO)mainTO;
-			String key = this.getProperty("dataSrcKey");
+			String key = this.getRule("dataSrcKey");
 
 			if(parTO.getDataNasc() != null){
 				if(this.dateValidator.isBefore(parTO.getDataNasc(), new Date())){
-					errorTO.addError(key, this.getProperty("dataSrcError"));
+					errorTO.addError(key, this.getRule("dataSrcError"));
 				}
 			}else{
-				errorTO.addError(key, this.getProperty("dataError"));
+				errorTO.addError(key, this.getRule("dataError"));
 			}
 
 			if( this.successor != null )

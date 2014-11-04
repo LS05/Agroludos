@@ -20,7 +20,7 @@ class OptionalCostoRule extends AgroludosRule {
 			Double costoOpt = optional.getCosto();
 
 			if(costoOpt < 0){
-				errorTO.addError(this.getProperty("costoKey"), this.getProperty("costoError"));
+				errorTO.addError(this.getRule("costoKey"), this.getRule("costoError"));
 			}
 
 			if(this.successor != null)

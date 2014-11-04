@@ -1,26 +1,26 @@
 package agroludos.business.validator.rules;
 
-import java.io.IOException;
-
+import agroludos.system.RulesConf;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 
 public abstract class AgroludosRule {
-	private static RuleProperties rulesProperties;
+	
+	private static RulesConf rulesConf;
+	
 	protected AgroludosRule successor;
-
-	protected AgroludosRule() throws IOException{
-		if(rulesProperties == null)
-			rulesProperties = new RuleProperties();
-	}
 	
 	public void setSuccessor(AgroludosRule rule){
 		this.successor = rule;
 	}
 	
-	protected String getProperty(String propName){
-		return rulesProperties.getProperty(propName);
+	protected String getRule(String propName){
+		return rulesConf.getRule(propName);
 	}
 	
 	public abstract void validate(AgroludosTO mainTO, ErrorTO errorTO);
+
+	public void setRulesConf(RulesConf rulesConfig) {
+		rulesConf = rulesConfig;
+	}
 }

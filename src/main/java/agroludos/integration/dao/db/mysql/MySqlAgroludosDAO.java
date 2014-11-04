@@ -16,7 +16,7 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 
 	protected Session session;
 
-	protected TOFactory toFact;
+	protected static TOFactory toFact;
 
 	private Class< T > classe;
 
@@ -185,7 +185,7 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 		return res.get(0);
 	}
 
-	protected void setToFact(TOFactory toFact) {
-		this.toFact = toFact;
+	public void setToFact(TOFactory toFactory) {
+		toFact = toFactory;
 	}
 }

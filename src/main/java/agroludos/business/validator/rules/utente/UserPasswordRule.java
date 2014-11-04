@@ -18,11 +18,11 @@ class UserPasswordRule extends AgroludosRule {
 		if(mainTO instanceof UtenteTO){
 			UtenteTO user = (UtenteTO)mainTO;
 			String password = user.getPassword();
-			Integer pwdLength = Integer.valueOf(this.getProperty("passwordLength"));
+			Integer pwdLength = Integer.valueOf(this.getRule("passwordLength"));
 
-			String key = this.getProperty("passwordKey");
+			String key = this.getRule("passwordKey");
 			if( password.length() < pwdLength ){
-				errorTO.addError(key, this.getProperty("passwordLenError"));
+				errorTO.addError(key, this.getRule("passwordLenError"));
 			}
 
 			if( this.successor != null)

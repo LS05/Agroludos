@@ -20,9 +20,9 @@ class CompNumPartRule extends AgroludosRule {
 			int nmax = competizione.getNmax();
 			int nmin = competizione.getNmin();
 
-			String key = this.getProperty("nPartKey");
+			String key = this.getRule("nPartKey");
 			if( nmax < 0 || nmin < 0){
-				errorTO.addError(key, this.getProperty("nPartError"));
+				errorTO.addError(key, this.getRule("nPartError"));
 			}
 
 			if( this.successor != null)
