@@ -54,6 +54,7 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
+		this.lblErroreLogin.setVisible(false);
 
 		final Stage stage = this.getStage(this.getViewName());
 
@@ -64,8 +65,9 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 			}
 		}); 
 
-
 		this.agroLogoPane.setFocusTraversable(true);
+
+		//TODO Da rimuovere
 		this.txtUsername.setText("agroludos");
 		this.txtPassword.setText("agroludos");
 	}
@@ -79,7 +81,9 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 		eseguiLogin();
 	}
 
-	private void eseguiLogin() {	
+	private void eseguiLogin() {
+		this.lblErroreLogin.setVisible(false);
+
 		UtenteTO uto = toFact.createUTO();
 		uto.setUsername(this.txtUsername.getText());
 		uto.setPassword(this.txtPassword.getText());
@@ -87,7 +91,7 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 		this.richiesta = this.getRichiesta(uto, "autenticazioneUtente", this.viewName);
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 
-		Object res = risposta.getRespData();
+		Object res = this.risposta.getRespData();
 		if(res instanceof UtenteTO){
 			this.close();
 		}
