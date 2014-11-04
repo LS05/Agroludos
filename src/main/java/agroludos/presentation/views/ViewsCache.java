@@ -79,7 +79,10 @@ class ViewsCache {
 
 	public void addMainStage(Stage mainStage) {
 		this.mainStage = mainStage;
-		
+	}
+
+	public void closeMainStage() {
+		this.mainStage.close();
 	}
 
 

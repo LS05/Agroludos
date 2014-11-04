@@ -15,6 +15,7 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.SuccessTO;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -123,8 +124,16 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 		this.paneIscrizioni.setVisible(true);
 	}
 
+	@FXML protected void menuLogout(ActionEvent event){
+		this.close();
+		nav.setVista("login");
+	}
 
-
+	@FXML protected void menuEsci(ActionEvent event){
+		this.close();
+		nav.termina();
+	}
+	
 	@SuppressWarnings({ "unchecked" })
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {

@@ -422,12 +422,8 @@
           <menus>
             <Menu mnemonicParsing="false" text="Agroludos">
               <items>
-                <MenuItem mnemonicParsing="false" text="%key15" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="%key25">
-              <items>
-                <MenuItem mnemonicParsing="false" text="%key26" />
+                <MenuItem mnemonicParsing="false" onAction="#menuLogout" text="%key168" fx:id="menuLogout" />
+                <MenuItem mnemonicParsing="false" onAction="#menuEsci" text="%key15" fx:id="menuEsci" />
               </items>
             </Menu>
           </menus>
