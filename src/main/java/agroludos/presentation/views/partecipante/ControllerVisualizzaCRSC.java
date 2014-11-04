@@ -34,9 +34,9 @@ public class ControllerVisualizzaCRSC extends AgroludosController {
 			this.lblNomeCognome.setText(nomeCognome.toString());
 			this.lblDataSrc.setText(parTO.getDataSRC().toString());
 
-			this.risposta = respFact.createResponse();
+			this.risposta = this.getRisposta();
 			this.richiesta = this.getRichiesta(this.parTO, "getCertificatoSRC", this.viewName);
-			frontController.eseguiRichiesta(this.richiesta, this.risposta);
+			this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		}
 	}

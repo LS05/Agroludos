@@ -47,7 +47,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 	private IscModel iscModelRow;
 
 	private ResourceBundle res;
-	
+
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
@@ -55,7 +55,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 		//TODO Richiesta iniziale per verificare la validità del
 		//certificato SRC.
 
-		this.currUser = (PartecipanteTO)utente;
+		this.currUser = (PartecipanteTO)this.getUtente();
 		this.tableIscrizioni = new TableIscrizioni();
 		this.tableCompetizioni = new TableCompetizioni();
 		this.tableCompetizioni.hideColumn(3);
@@ -63,8 +63,8 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 		this.paneIscrizioni.add(this.tableIscrizioni, 0, 1);
 		this.tableIscrizioni.hideColumn(4);
 		this.richiesta = this.getRichiesta("getCompetizioniAttive", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 		this.tableCompetizioni.setAll(this.listComp);
 		this.paneCompetizioni.add(this.tableCompetizioni, 0, 1);
 
@@ -80,7 +80,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 					TableView<IscModel> table = (TableView<IscModel>) event.getSource();
 					iscModelRow = table.getSelectionModel().getSelectedItem();
 					if(iscModelRow != null)
-						nav.setVista("partMostraIscrizione", iscModelRow.getIscrizioneTO());
+						setVista("partMostraIscrizione", iscModelRow.getIscrizioneTO());
 				}
 			}
 		});
@@ -94,7 +94,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 					TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
 					cmpModelRow = table.getSelectionModel().getSelectedItem();
 					if(cmpModelRow != null)
-						nav.setVista("partMostraCompetizione", cmpModelRow.getCompetizioneTO());
+						setVista("partMostraCompetizione", cmpModelRow.getCompetizioneTO());
 				}
 			}
 		});
@@ -104,7 +104,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 	public void initialize(URL url, ResourceBundle resources) {
 		this.res = resources;		
 	}
-	
+
 	@Override
 	protected String getViewName() {
 		return this.viewName;
@@ -112,8 +112,8 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 
 	@FXML protected void btnGestComp(MouseEvent event) {
 		this.richiesta = this.getRichiesta("getCompetizioniAttive", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 		this.tableCompetizioni.setAll(this.listComp);
 		this.paneCompetizioni.setVisible(true);
 		this.paneIscrizioni.setVisible(false);
@@ -127,46 +127,45 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 
 	@FXML protected void menuLogout(ActionEvent event){
 		this.close();
-		nav.setVista("login");
+		this.setVista("login");
 	}
 
 	@FXML protected void menuEsci(ActionEvent event){
 		this.close();
-		nav.termina();
 	}
-	
+
 	@SuppressWarnings({ "unchecked" })
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals( reqProperties.getProperty("getCompetizioniAttive") )){
+		if( commandName.equals( this.getCommandName("getCompetizioniAttive") )){
 			Object res = response.getRespData();
 
 			if(res instanceof List<?>){
 				this.listComp = (List<CompetizioneTO>)res;
 			}
-		}else if(commandName.equals(reqProperties.getProperty("eliminaIscrizione"))){
+		}else if(commandName.equals(this.getCommandName("eliminaIscrizione"))){
 			Object res = response.getRespData();
 			if(res instanceof IscrizioneTO){
 				this.tableIscrizioni.setAll(this.currUser.getAllIscrizioniAttive());
 
 				SuccessTO succMessage = toFact.createSuccessTO();
 				succMessage.setMessage(this.res.getString("key123"));
-				nav.setVista("successDialog",succMessage);
-				
+				this.setVista("successDialog",succMessage);
+
 				IscrizioneTO iscTO = ((IscrizioneTO) res);
 				EmailTO mail = toFact.createEmailTO();
 				mail.setOggetto("Iscrizione annullata");
 				mail.setMessage(iscTO.getPartecipante().getUsername() + " ha annullato l'iscrizione "
 						+ "alla competizione " + iscTO.getCompetizione().getNome());
-				
+
 				mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
-				
-				this.risposta = respFact.createResponse();
+
+				this.risposta = this.getRisposta();
 				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
-				frontController.eseguiRichiesta(this.richiesta, this.risposta);
-				
+				this.eseguiRichiesta(this.richiesta, this.risposta);
+
 			}
 		}
 	}

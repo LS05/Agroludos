@@ -8,17 +8,29 @@
 	<import resource="classpath:agroludos/beans/request.xml" />
 	<import resource="classpath:agroludos/beans/navigator.xml" />
 	<import resource="classpath:agroludos/beans/transferobject.xml" />
+	<import resource="classpath:agroludos/beans/system.xml" />
+	
+	<bean id="agroController" 
+	  	  class="agroludos.presentation.views.AgroludosController"
+		  abstract="true">
+		<property name="controller" ref="abstractController" />
+		<property name="toFact" ref="toFactory" />
+	</bean>
 
-	<bean id="agroController" class="agroludos.presentation.views.Controller"
-		abstract="true">
+	<bean id="abstractController" 
+		  class="agroludos.presentation.views.Controller">
 		<property name="nav" ref="navigator" />
 		<property name="frontController" ref="fc" />
 		<property name="reqFact" ref="reqFactory" />
 		<property name="respFact" ref="respFactory" />
-		<property name="toFact" ref="toFactory" />
+		<property name="reqConf" ref="systemConf"/>
+		<property name="errConf" ref="systemConf"/>
 	</bean>
+	
 	<bean id="viewsParser" class="agroludos.presentation.views.xml.ViewsParser" />
+	
 	<bean id="viewsLoader" class="agroludos.presentation.views.ViewsLoader">
 		<constructor-arg ref="viewsParser" />
 	</bean>
+	
 </beans>

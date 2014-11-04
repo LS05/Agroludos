@@ -101,7 +101,7 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 	}
 
 	@FXML private void btnVisualizzaCertificato(MouseEvent event){
-		nav.setVista("visualizzaSRC",this.iscto.getPartecipante());
+		this.setVista("visualizzaSRC",this.iscto.getPartecipante());
 	}
 
 	@FXML protected void btnAnnullaIscrizione(MouseEvent event){
@@ -112,14 +112,14 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 		question.setRequest("eliminaIscrizione");
 		question.setViewName(this.viewName);
 
-		nav.setVista("questionDialog", question);
+		this.setVista("questionDialog", question);
 
 	}
 
 	@FXML protected void btnModificaOptionalIscrizione(MouseEvent event) {
 		//TODO
 		System.out.println("da fare");
-		nav.setVista("modificaOptionalPartecipante", this.iscto);
+		this.setVista("modificaOptionalPartecipante", this.iscto);
 	}
 
 
@@ -128,7 +128,7 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		if(commandName.equals( reqProperties.getProperty("modificaIscrizione"))){
+		if(commandName.equals( this.getCommandName("modificaIscrizione"))){
 			Object res = response.getRespData();
 			if(res instanceof IscrizioneTO){			
 				IscrizioneTO isc = (IscrizioneTO) res;
@@ -137,7 +137,7 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 				SuccessTO succMessage = toFact.createSuccessTO();
 				succMessage.setMessage(this.res.getString("key99"));
 
-				nav.setVista("successDialog",succMessage);
+				this.setVista("successDialog",succMessage);
 				
 				IscrizioneTO iscTO = ((IscrizioneTO) res);
 				EmailTO mail = toFact.createEmailTO();
@@ -151,9 +151,9 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 				
 				mail.addDestinatario(iscTO.getPartecipante());
 				
-				this.risposta = respFact.createResponse();
+				this.risposta = this.getRisposta();
 				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
-				frontController.eseguiRichiesta(this.richiesta, this.risposta);
+				this.eseguiRichiesta(this.richiesta, this.risposta);
 			}
 		}
 	}

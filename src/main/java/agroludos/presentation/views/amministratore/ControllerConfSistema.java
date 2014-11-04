@@ -96,8 +96,8 @@ public class ControllerConfSistema extends AgroludosController {
 		this.dbto.setUsername(this.txtUsernameDB.getText());
 		this.dbto.setPassword(this.txtPasswordDB.getText());
 		this.richiesta = this.getRichiesta(this.dbto, "inserisciConfigurazione", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 	}
 
@@ -122,8 +122,8 @@ public class ControllerConfSistema extends AgroludosController {
 		this.mdsto.setEmail(txtEmailMds.getText());
 		//TODO manca il telefono
 		this.richiesta = this.getRichiesta(this.mdsto, "nuovoManagerDiSistema", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
 	/**
@@ -143,7 +143,7 @@ public class ControllerConfSistema extends AgroludosController {
 		if(request.getCommandName().equals("nuovoManagerDiSistema")){
 			boolean res = (Boolean)response.getRespData();
 			if(res){
-				nav.setVista("login");
+				this.setVista("login");
 			}
 		}
 	}

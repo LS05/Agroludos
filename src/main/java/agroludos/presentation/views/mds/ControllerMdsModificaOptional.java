@@ -54,8 +54,8 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 			this.txtNomeOptional.setText(this.optional.getNome());
 
 			this.richiesta = this.getRichiesta("getAllStatoOptional", this.viewName);
-			this.risposta = respFact.createResponse();
-			frontController.eseguiRichiesta(this.richiesta, this.risposta);
+			this.risposta = this.getRisposta();
+			this.eseguiRichiesta(this.richiesta, this.risposta);
 
 			ObservableList<String> listStati = FXCollections.observableArrayList();
 			for(StatoOptionalTO stato : this.listStatiOpt){
@@ -96,8 +96,8 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 		StatoOptionalTO stato = this.listStatiOpt.get(selectedStato);
 		this.optional.setStatoOptional(stato);
 		AgroRequest request = this.getRichiesta(this.optional, "modificaOptional", this.viewName);
-		AgroResponse response = respFact.createResponse();
-		frontController.eseguiRichiesta(request, response);
+		AgroResponse response = this.getRisposta();
+		this.eseguiRichiesta(request, response);
 	}
 
 
@@ -107,7 +107,7 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if(commandName.equals( reqProperties.getProperty("getAllStatoOptional") )){
+		if(commandName.equals( this.getCommandName("getAllStatoOptional") )){
 
 			Object res = response.getRespData();
 
@@ -115,26 +115,26 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 				List<StatoOptionalTO> statiList = (List<StatoOptionalTO>)res;
 				this.listStatiOpt = statiList;
 			}
-		} else if( commandName.equals( reqProperties.getProperty("modificaOptional")) ){
+		} else if( commandName.equals( this.getCommandName("modificaOptional")) ){
 			Object res = response.getRespData();
 			if(res instanceof ErrorTO){
 
 				ErrorTO errors = (ErrorTO)res;
 
-				if(errors.hasError(rulesProperties.getProperty("nomeKey"))){
-					String nomeKey = rulesProperties.getProperty("nomeKey");
+				if(errors.hasError(this.getError("nomeKey"))){
+					String nomeKey = this.getError("nomeKey");
 					this.lblNomeOptError.setVisible(true);
 					this.lblNomeOptError.setText(errors.getError(nomeKey));
 				}
 				
-				if(errors.hasError(rulesProperties.getProperty("costoKey"))){
-					String nomeKey = rulesProperties.getProperty("costoKey");
+				if(errors.hasError(this.getError("costoKey"))){
+					String nomeKey = this.getError("costoKey");
 					this.lblCostoOptError.setVisible(true);
 					this.lblCostoOptError.setText(errors.getError(nomeKey));
 				}
 				
-				if(errors.hasError(rulesProperties.getProperty("statoKey"))){
-					String nomeKey = rulesProperties.getProperty("statoKey");
+				if(errors.hasError(this.getError("statoKey"))){
+					String nomeKey = this.getError("statoKey");
 					this.lblStatoOptError.setVisible(true);
 					this.lblStatoOptError.setText(errors.getError(nomeKey));
 				}

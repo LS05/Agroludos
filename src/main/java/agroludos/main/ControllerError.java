@@ -24,7 +24,7 @@ public class ControllerError  extends AgroludosController{
 		}
 	}
 	@FXML protected void btnOkClicked(MouseEvent event) {	
-		nav.setVista("configurazione");
+		this.setVista("configurazione");
 		this.close();
 	}
 	

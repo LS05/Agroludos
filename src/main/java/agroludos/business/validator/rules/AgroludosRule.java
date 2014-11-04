@@ -1,12 +1,12 @@
 package agroludos.business.validator.rules;
 
-import agroludos.system.RulesConf;
+import agroludos.system.ErrorsConf;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 
 public abstract class AgroludosRule {
 	
-	private static RulesConf rulesConf;
+	private static ErrorsConf rulesConf;
 	
 	protected AgroludosRule successor;
 	
@@ -15,10 +15,10 @@ public abstract class AgroludosRule {
 	}
 	
 	protected String getRule(String propName){
-		return rulesConf.getRule(propName);
+		return rulesConf.getError(propName);
 	}
 	
-	public void setRulesConf(RulesConf rulesConfig) {
+	public void setRulesConf(ErrorsConf rulesConfig) {
 		rulesConf = rulesConfig;
 	}
 	

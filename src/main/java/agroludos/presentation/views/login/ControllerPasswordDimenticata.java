@@ -73,15 +73,15 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 	}
 	
 	private void eseguiRipristino() {	
-		this.risposta = respFact.createResponse();
+		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta(this.uTO, "getUtenteByUsername", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 		
 		Object res = this.risposta.getRespData();
 		if(res instanceof UtenteTO){			
 			SuccessTO succMessage = toFact.createSuccessTO();
 			succMessage.setMessage(this.res.getString("key155"));
-			nav.setVista("successDialog",succMessage);
+			this.setVista("successDialog",succMessage);
 			this.close();
 		}
 	}
@@ -93,13 +93,13 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		if(commandName.equals(reqProperties.getProperty("getUtenteByUsername") )){
+		if(commandName.equals(this.getCommandName("getUtenteByUsername") )){
 			Object res = response.getRespData();
 			if(res instanceof ErrorTO){
 				//TODO gestire 
 				SuccessTO succMessage = toFact.createSuccessTO();
 				succMessage.setMessage(this.res.getString("key156"));
-				nav.setVista("successDialog",succMessage);
+				this.setVista("successDialog",succMessage);
 			}
 		}
 	}

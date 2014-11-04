@@ -79,7 +79,7 @@ public class ControllerMdsIscrizione extends AgroludosController {
 	}
 
 	@FXML private void btnVisualizzaCertificato(MouseEvent event){
-		nav.setVista("visualizzaSRC",this.iscto.getPartecipante());
+		this.setVista("visualizzaSRC",this.iscto.getPartecipante());
 	}
 
 	@Override

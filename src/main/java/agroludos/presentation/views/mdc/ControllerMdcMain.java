@@ -13,8 +13,8 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
-import agroludos.to.PartecipanteTO;
 import agroludos.to.SuccessTO;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -65,7 +65,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
 		this.mdcTO = toFact.createMdCTO();
-		this.mdcTO = (ManagerDiCompetizioneTO) utente;
+		this.mdcTO = (ManagerDiCompetizioneTO) this.getUtente();
 
 		this.listCmp = this.mdcTO.getAllCompetizioniAttive();
 		this.listaTabCmp = this.getListTabellaCmp();
@@ -109,7 +109,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 	}
 
 	@FXML protected void btnNuovaCompetizione(MouseEvent event) {
-		nav.setVista("mostraNuovaCmp");
+		this.setVista("mostraNuovaCmp");
 	}
 
 	private <S,T> TableColumn<S, T> initColumn(TableColumn<S, T> col, String colName){
@@ -138,7 +138,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 					TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
 					cmpModelRow = table.getSelectionModel().getSelectedItem();
 					if(cmpModelRow != null)
-						nav.setVista("mostraCmp", cmpModelRow.getCompetizioneTO());
+						setVista("mostraCmp", cmpModelRow.getCompetizioneTO());
 				}
 			}
 		});
@@ -158,105 +158,104 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 	@FXML protected void menuLogout(ActionEvent event){
 		this.close();
-		nav.setVista("login");
+		this.setVista("login");
 	}
 
 
 	@FXML protected void menuEsci(ActionEvent event){
 		this.close();
-		nav.termina();
 	}
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		if(commandName.equals( reqProperties.getProperty("annullaCompetizione"))){
+		if(commandName.equals( this.getCommandName("annullaCompetizione"))){
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){			
 				this.listaTabCmp.clear();
 				CompetizioneTO cmp = (CompetizioneTO) res;
 				this.initializeView(cmp.getManagerDiCompetizione());
 
-				nav.getStage("mostraCmp").close();
+				this.getStage("mostraCmp").close();
 
 				SuccessTO succMessage = toFact.createSuccessTO();
 				succMessage.setMessage(this.resources.getString("key119"));
 
-				nav.setVista("successDialog",succMessage);
-				
+				this.setVista("successDialog",succMessage);
+
 				EmailTO mail = toFact.createEmailTO();
 				mail.setOggetto(cmp.getNome() + " annullata.");
 				mail.setMittente(cmp.getManagerDiCompetizione());
 				mail.setMessage("La competizione " + cmp.getNome() + "  è stata annullata.");
-				
+
 				for(IscrizioneTO iscTO: cmp.getAllIscrizioniAttive()){
 					mail.addDestinatario(iscTO.getPartecipante());
 				}
 
-				this.risposta = respFact.createResponse();
+				this.risposta = this.getRisposta();
 				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
-				frontController.eseguiRichiesta(this.richiesta, this.risposta);
+				this.eseguiRichiesta(this.richiesta, this.risposta);
 			}
-		}else if(commandName.equals( reqProperties.getProperty("eliminaIscrizione"))){
+		}else if(commandName.equals( this.getCommandName("eliminaIscrizione"))){
 			Object res = response.getRespData();
 			if(res instanceof IscrizioneTO){
 				this.listaTabCmp.clear();
 				this.initializeView(((IscrizioneTO) res).getCompetizione().getManagerDiCompetizione());
 
-				nav.closeVista("mostraIscrizione");
+				closeVista("mostraIscrizione");
 
-				nav.setVista("mostraCmp",((IscrizioneTO) res).getCompetizione());
+				this.setVista("mostraCmp",((IscrizioneTO) res).getCompetizione());
 
 				SuccessTO succMessage = toFact.createSuccessTO();
 				succMessage.setMessage(this.resources.getString("key123"));
-				nav.setVista("successDialog",succMessage);
-				
-			
+				this.setVista("successDialog",succMessage);
+
+
 				IscrizioneTO iscTO = ((IscrizioneTO) res);
 				EmailTO mail = toFact.createEmailTO();
 				mail.setOggetto("Iscrizione annullata");
 				mail.setMessage(iscTO.getPartecipante().getUsername() + " abbiamo annullato l'iscrizione "
 						+ "alla competizione " + iscTO.getCompetizione().getNome()
 						+ "per i seguenti motivi: ");
-				
+
 				mail.addDestinatario(iscTO.getPartecipante());
-				
-				this.risposta = respFact.createResponse();
+
+				this.risposta = this.getRisposta();
 				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
-				frontController.eseguiRichiesta(this.richiesta, this.risposta);
+				this.eseguiRichiesta(this.richiesta, this.risposta);
 			}
-		}else if(commandName.equals( reqProperties.getProperty("inserisciCompetizione") )){
+		}else if(commandName.equals( this.getCommandName("inserisciCompetizione") )){
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){
 				this.listaTabCmp.clear();
 				this.initializeView(((CompetizioneTO) res).getManagerDiCompetizione());			
 			}
-		}else if(commandName.equals(reqProperties.getProperty("modificaCompetizione"))){
+		}else if(commandName.equals(this.getCommandName("modificaCompetizione"))){
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){	
 				this.initializeView((CompetizioneTO)res);
-				nav.setVista("mostraCmp", (CompetizioneTO)res);	
-				
+				this.setVista("mostraCmp", (CompetizioneTO)res);	
+
 				CompetizioneTO cmp = (CompetizioneTO) res;
-				
+
 				SuccessTO succMessage = toFact.createSuccessTO();
 				succMessage.setMessage(this.resources.getString("key99"));
 
-				nav.setVista("successDialog",succMessage);
-				
+				this.setVista("successDialog",succMessage);
+
 				EmailTO mail = toFact.createEmailTO();
 				mail.setOggetto("Modifica competizione " + cmp.getNome());
 				mail.setMittente(cmp.getManagerDiCompetizione());
 				mail.setMessage("La competizione " + cmp.getNome() + " ha subito modifiche,"
 						+ " la invito a prendere visione.");
-				
+
 				for(IscrizioneTO iscTO: cmp.getAllIscrizioniAttive()){
 					mail.addDestinatario(iscTO.getPartecipante());
 				}
-				
-				this.risposta = respFact.createResponse();
+
+				this.risposta = this.getRisposta();
 				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
-				frontController.eseguiRichiesta(this.richiesta, this.risposta);
+				this.eseguiRichiesta(this.richiesta, this.risposta);
 
 			}
 		}

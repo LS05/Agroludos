@@ -90,13 +90,13 @@ public class ControllerRegistrazione extends AgroludosController{
 
 		this.fileChooser = new FileChooser();
 
-		this.risposta = respFact.createResponse();
+		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta("getAllTipoUtente", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 
-		this.risposta = respFact.createResponse();
+		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta("getAllStatoUtente", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		this.btnRegistrati.setDisable(false);
 		this.btnCarica.setDisable(false);
@@ -168,8 +168,8 @@ public class ControllerRegistrazione extends AgroludosController{
 	}
 
 	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
-		if(errors.hasError(rulesProperties.getProperty(errorKey))){
-			String nomeKey = rulesProperties.getProperty(errorKey);
+		if(errors.hasError(this.getError(errorKey))){
+			String nomeKey = this.getError(errorKey);
 			lblError.setVisible(true);
 			lblError.setText(errors.getError(nomeKey));
 		} 
@@ -203,9 +203,9 @@ public class ControllerRegistrazione extends AgroludosController{
 			this.parTO.setSrc(this.fileSrc.getAbsolutePath());
 		}
 
-		this.risposta = respFact.createResponse();
+		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta(this.parTO,"inserisciPartecipante", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		if( !this.errFlag ){
 			System.out.println("partecipante inserito correttamente!");
@@ -214,7 +214,7 @@ public class ControllerRegistrazione extends AgroludosController{
 	}
 
 	@FXML protected void btnCarica(MouseEvent event) {
-		File file = this.fileChooser.showOpenDialog(nav.getStage(this.viewName));
+		File file = this.fileChooser.showOpenDialog(this.getStage(this.viewName));
 		if (file != null) {
 			this.fileSrc = file;
 			this.lblSrc.setText(this.fileSrc.getName());
@@ -231,13 +231,13 @@ public class ControllerRegistrazione extends AgroludosController{
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if(commandName.equals(reqProperties.getProperty("getAllTipoUtente") )){
+		if(commandName.equals(this.getCommandName("getAllTipoUtente") )){
 			Object res = response.getRespData();
 			if(res instanceof List<?>){
 				this.listTipiU = (List<TipoUtenteTO>)res;
 				this.parTO.setTipoUtente(this.listTipiU.get(2));
 			}
-		} else if(commandName.equals(reqProperties.getProperty("getAllStatoUtente") )){
+		} else if(commandName.equals(this.getCommandName("getAllStatoUtente") )){
 			Object res = response.getRespData();
 
 			if(res instanceof List<?>){
@@ -245,7 +245,7 @@ public class ControllerRegistrazione extends AgroludosController{
 				this.parTO.setStatoUtente(this.listStatiU.get(1));
 			}
 
-		} else if(commandName.equals(reqProperties.getProperty("inserisciPartecipante") )){
+		} else if(commandName.equals(this.getCommandName("inserisciPartecipante") )){
 			Object res = response.getRespData();
 
 			if(res instanceof ErrorTO){
@@ -253,51 +253,51 @@ public class ControllerRegistrazione extends AgroludosController{
 				ErrorTO errors = (ErrorTO)res;
 				this.errFlag = true;
 
-				if(errors.hasError(rulesProperties.getProperty("nomeKey"))){
+				if(errors.hasError(this.getError("nomeKey"))){
 					this.showErrors(errors, this.lblNomeError, "nomeKey");
 				} 
 
-				if(errors.hasError(rulesProperties.getProperty("cognKey"))){
+				if(errors.hasError(this.getError("cognKey"))){
 					this.showErrors(errors, this.lblCognomeError, "cognKey");
 				}
 
-				if(errors.hasError(rulesProperties.getProperty("cfKey"))){
+				if(errors.hasError(this.getError("cfKey"))){
 					this.showErrors(errors, this.lblCfError, "cfKey");
 				}
 
-				if(errors.hasError(rulesProperties.getProperty("dataSrcKey"))){
+				if(errors.hasError(this.getError("dataSrcKey"))){
 					this.showErrors(errors, this.lblDataSrcError, "dataSrcKey");
 				}
 
-				if(errors.hasError(rulesProperties.getProperty("srcKey"))){
+				if(errors.hasError(this.getError("srcKey"))){
 					this.showErrors(errors, this.lblSrcError, "srcKey");
 				}
 
-				if(errors.hasError(rulesProperties.getProperty("tesKey"))){
+				if(errors.hasError(this.getError("tesKey"))){
 					this.showErrors(errors, this.lblTesSanError, "tesKey");
 				}
 
-				if(errors.hasError(rulesProperties.getProperty("usernameKey"))){
+				if(errors.hasError(this.getError("usernameKey"))){
 					this.showErrors(errors, this.lblUsernameError, "usernameKey");
 				}
 
-				if(errors.hasError(rulesProperties.getProperty("passwordKey"))){
+				if(errors.hasError(this.getError("passwordKey"))){
 					this.showErrors(errors, this.lblPasswordError, "passwordKey");
 				}
 
-				if(errors.hasError(rulesProperties.getProperty("emailKey"))){
+				if(errors.hasError(this.getError("emailKey"))){
 					this.showErrors(errors, this.lblEmailError, "emailKey");
 				}
 
-				if(errors.hasError(rulesProperties.getProperty("indrizzzoKey"))){
+				if(errors.hasError(this.getError("indrizzzoKey"))){
 					this.showErrors(errors, this.lblIndirizzoError, "indrizzzoKey");
 				}
 
-				if(errors.hasError(rulesProperties.getProperty("dataNascKey"))){
+				if(errors.hasError(this.getError("dataNascKey"))){
 					this.showErrors(errors, this.lblDataNascError, "dataNascKey");
 				}
 
-				if(errors.hasError(rulesProperties.getProperty("sessoKey"))){
+				if(errors.hasError(this.getError("sessoKey"))){
 					this.showErrors(errors, this.lblSessoError, "sessoKey");
 				}
 			}

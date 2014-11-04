@@ -18,18 +18,18 @@ public class AgroludosInitController extends AgroludosController{
 			boolean isConf = (Boolean)response.getRespData();
 
 			if(isConf){
-				this.richiesta = reqFact.createSimpleRequest("testConnessioneDB", this.viewName);
-				this.risposta = respFact.createResponse();
-				frontController.eseguiRichiesta(richiesta, risposta);
+				this.richiesta = this.getRichiesta("testConnessioneDB", this.viewName);
+				this.risposta = this.getRisposta();
+				this.eseguiRichiesta(richiesta, risposta);
 			}else{
-				nav.setVista("configurazione");
+				this.setVista("configurazione");
 			}
 		}else if(request.getCommandName().equals("testConnessioneDB")){
 			boolean dbConn = (Boolean)response.getRespData();
 			if(dbConn){
 				this.richiesta = this.getRichiesta("checkMds", this.viewName);
-				this.risposta = respFact.createResponse();
-				frontController.eseguiRichiesta(richiesta, risposta);
+				this.risposta = this.getRisposta();
+				this.eseguiRichiesta(richiesta, risposta);
 			} else {
 				System.out.println("Connessione Database Non Riuscita");
 			}
@@ -37,9 +37,9 @@ public class AgroludosInitController extends AgroludosController{
 			boolean mds = (Boolean)response.getRespData();
 			if(mds){
 				
-				nav.setVista("login");
+				this.setVista("login");
 			} else {
-				nav.setVista("configurazione");
+				this.setVista("configurazione");
 			}
 		}
 	}

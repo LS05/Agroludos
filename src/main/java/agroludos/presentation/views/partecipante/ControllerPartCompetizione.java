@@ -142,7 +142,7 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 
 	@FXML protected void btnIscrivitiClicked(MouseEvent event){
 		this.mainIscr.setCompetizione(this.cmpto);
-		nav.setVista("mostraIscrPart", this.mainIscr);
+		this.setVista("mostraIscrPart", this.mainIscr);
 	}
 
 
@@ -150,7 +150,7 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals( reqProperties.getProperty("inserisciIscrizione") )){
+		if( commandName.equals( this.getCommandName("inserisciIscrizione") )){
 			Object res = response.getRespData();
 
 			if(res instanceof IscrizioneTO){
@@ -165,7 +165,7 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 				
 				SuccessTO succ = toFact.createSuccessTO();
 				succ.setMessage(this.res.getString("key157"));
-				nav.setVista("successDialog", succ);
+				this.setVista("successDialog", succ);
 				
 				IscrizioneTO iscTO = ((IscrizioneTO) res);
 				EmailTO mail = toFact.createEmailTO();
@@ -180,9 +180,9 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 				
 				mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
 				
-				this.risposta = respFact.createResponse();
+				this.risposta = this.getRisposta();
 				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
-				frontController.eseguiRichiesta(this.richiesta, this.risposta);
+				this.eseguiRichiesta(this.richiesta, this.risposta);
 				
 			}
 		}

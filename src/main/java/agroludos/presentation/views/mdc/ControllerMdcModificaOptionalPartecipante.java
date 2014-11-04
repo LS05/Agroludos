@@ -88,9 +88,9 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 
 			this.optSceltiData = FXCollections.observableArrayList();
 
-			this.risposta = respFact.createResponse();
+			this.risposta = this.getRisposta();
 			this.richiesta = this.getRichiesta("getAllTipoOptional", this.viewName);
-			frontController.eseguiRichiesta(this.richiesta, this.risposta);
+			this.eseguiRichiesta(this.richiesta, this.risposta);
 
 			this.setLabelDialog();
 			this.btnAvanti.setVisible(true);
@@ -195,7 +195,7 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 			}else{
 				SuccessTO succMessage = toFact.createSuccessTO();
 				succMessage.setMessage(this.res.getString("key148"));
-				nav.setVista("successDialog",succMessage);
+				this.setVista("successDialog",succMessage);
 			}
 		}
 		this.AggiornaTotale();
@@ -261,9 +261,9 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 		for (OptModel optMod : this.tableOptionalScelti.getItems()) {
 			this.mainIsc.addOptional(optMod.getOptTO());
 		}
-		this.risposta = respFact.createResponse();
+		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta(this.mainIsc, "modificaIscrizione", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		this.close();
 	}
@@ -276,7 +276,7 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals( reqProperties.getProperty("getAllTipoOptional") )){
+		if( commandName.equals( this.getCommandName("getAllTipoOptional") )){
 			Object res = response.getRespData();
 			if(res instanceof List<?>){
 				List<TipiAgroludosTO> tipiOptList = (List<TipiAgroludosTO>)res;

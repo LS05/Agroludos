@@ -79,7 +79,7 @@ public class ControllerMdsProfiloPartecipante extends AgroludosController{
 						TableView<IscModel> table = (TableView<IscModel>) event.getSource();
 						iscModelRow = table.getSelectionModel().getSelectedItem();
 						if(iscModelRow != null)
-							nav.setVista("mostraIscrizioneMds", iscModelRow.getIscrizioneTO());
+							setVista("mostraIscrizioneMds", iscModelRow.getIscrizioneTO());
 					}
 				}
 			});
@@ -93,7 +93,7 @@ public class ControllerMdsProfiloPartecipante extends AgroludosController{
 	}
 
 	@FXML private void btnVisualizzaCertificato(MouseEvent event){
-		nav.setVista("visualizzaSRC",this.parTO);
+		this.setVista("visualizzaSRC",this.parTO);
 	}
 
 	@Override

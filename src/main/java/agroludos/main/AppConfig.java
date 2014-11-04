@@ -2,7 +2,8 @@ package agroludos.main;
 
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
-import agroludos.presentation.views.Controller;
+import agroludos.presentation.views.AgroludosController;
+import agroludos.to.AgroludosTO;
 import javafx.stage.Stage;
 
 /**
@@ -12,15 +13,38 @@ import javafx.stage.Stage;
  * @author Francesco Zagaria
  */
 
-class AppConfig extends Controller implements App{
-	
+class AppConfig extends AgroludosController implements App{
+
+	private String viewName = "mainController";
+
 	@Override
 	public void initialize(Stage stage){
-		AgroRequest richiesta = reqFact.createSimpleRequest("checkConfigurazione", "mainController");
-		AgroResponse risposta = respFact.createResponse();
-		
-		nav.setMainStage(stage);
-		nav.setVista("initView");
-		frontController.eseguiRichiesta(richiesta, risposta);	
+		AgroRequest richiesta = this.getRichiesta("checkConfigurazione", this.viewName);
+		AgroResponse risposta = this.getRisposta();
+
+		this.setMainStage(stage);
+		this.setVista("initView");
+		this.eseguiRichiesta(richiesta, risposta);	
+	}
+
+	@Override
+	protected void initializeView(AgroludosTO mainTO) {
+
+	}
+
+	@Override
+	protected void initializeView(String viewName) {
+
+	}
+
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
+
+	@Override
+	public void forward(AgroRequest request, AgroResponse response) {
+		// TODO Auto-generated method stub
+
 	}
 }

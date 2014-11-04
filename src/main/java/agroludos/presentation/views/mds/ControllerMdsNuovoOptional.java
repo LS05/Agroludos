@@ -60,12 +60,12 @@ public class ControllerMdsNuovoOptional extends AgroludosController implements I
 		this.lblNomeTipoOpt.setText(this.tipoOpt.getNome());
 
 		this.richiesta = this.getRichiesta("getAllStatoOptional", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		this.richiesta = this.getRichiesta("getAllTipoOptional", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		ObservableList<String> listStati = FXCollections.observableArrayList();
 		for(StatoOptionalTO stato : this.listStatiOpt){
@@ -102,11 +102,11 @@ public class ControllerMdsNuovoOptional extends AgroludosController implements I
 		optional.setStatoOptional(statoOpt);
 
 		this.richiesta = this.getRichiesta(optional, "inserisciOptional", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 		SuccessTO msgNuovoOpt = toFact.createSuccessTO();
 		msgNuovoOpt.setMessage(this.res.getString("key128"));
-		nav.setVista("successDialog", msgNuovoOpt);
+		this.setVista("successDialog", msgNuovoOpt);
 	}
 
 	@Override
@@ -119,12 +119,12 @@ public class ControllerMdsNuovoOptional extends AgroludosController implements I
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( reqProperties.getProperty("getAllStatoOptional").equals(commandName) ){
+		if( this.getCommandName("getAllStatoOptional").equals(commandName) ){
 			Object res = response.getRespData();
 			if( res  instanceof List<?>){
 				this.listStatiOpt = (List<StatoOptionalTO>)res;
 			}
-		} else if( reqProperties.getProperty("getAllTipoOptional").equals(commandName) ){
+		} else if( this.getCommandName("getAllTipoOptional").equals(commandName) ){
 			Object res = response.getRespData();
 			if( res  instanceof List<?>){
 				this.listTipiOpt = (List<TipoOptionalTO>)res;

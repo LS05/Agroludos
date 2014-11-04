@@ -69,9 +69,9 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 			this.listViewOptional.setItems(this.optionalScelti);
 
 
-			this.risposta = respFact.createResponse();
+			this.risposta = this.getRisposta();
 			this.richiesta = this.getRichiesta("getAllTipoOptional", this.viewName);
-			frontController.eseguiRichiesta(this.richiesta, this.risposta);
+			this.eseguiRichiesta(this.richiesta, this.risposta);
 
 			this.setLabelDialog();
 			this.btnAvanti.setVisible(true);
@@ -204,7 +204,7 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals( reqProperties.getProperty("getAllTipoOptional") )){
+		if( commandName.equals( this.getCommandName("getAllTipoOptional") )){
 			Object res = response.getRespData();
 			if(res instanceof List<?>){
 				List<TipiAgroludosTO> tipiOptList = (List<TipiAgroludosTO>)res;

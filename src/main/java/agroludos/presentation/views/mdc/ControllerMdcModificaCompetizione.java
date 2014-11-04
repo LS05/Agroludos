@@ -117,7 +117,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 	}
 
 	@FXML private void btnSelezioneOpt(){
-		nav.setVista("selezionaOptional", this.cmpto);
+		this.setVista("selezionaOptional", this.cmpto);
 	}
 
 	@FXML private void btnAnnulla(MouseEvent event){
@@ -132,16 +132,16 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 		this.cmpto.setNmin(this.cmbNmin.getSelectionModel().getSelectedItem());
 		this.cmpto.setNome(this.txtNome.getText());
 
-		this.risposta = respFact.createResponse();
+		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta(cmpto, "modificaCompetizione", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 
 		Object res = this.risposta.getRespData();
 		if(res instanceof CompetizioneTO){			
 			SuccessTO succMessage = toFact.createSuccessTO();
-			succMessage.setMessage(reqProperties.getProperty(this.res.getString("key99")));
-			nav.setVista("successDialog",succMessage);
+			succMessage.setMessage(this.getCommandName(this.res.getString("key99")));
+			this.setVista("successDialog",succMessage);
 		}
 
 		this.close();
@@ -153,7 +153,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if(commandName.equals( reqProperties.getProperty("modificaCompetizione"))){
+		if(commandName.equals( this.getCommandName("modificaCompetizione"))){
 			System.out.println("errore nella modifica");
 		}
 	}

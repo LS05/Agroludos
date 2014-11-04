@@ -12,36 +12,39 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.SuccessTO;
 
 public class ControllerSuccess  extends AgroludosController{
+
 	private String viewName;
-	
+
 	@FXML private Label lblSuccess;
 	@FXML private Button btnOk;
-	SuccessTO mainTO;
+
+	private SuccessTO mainTO;
+
+	@Override
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
+	}
+
+	@Override
+	public void initializeView(AgroludosTO mainTO) {
+		if(mainTO instanceof SuccessTO){
+			this.mainTO = (SuccessTO) mainTO;
+			this.lblSuccess.setText(this.mainTO.getMessage());
+		}
+	}
 
 	@FXML protected void btnOkClicked(MouseEvent event) {	
 		this.close();
 	}
 
 	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
-		
-	}
-	@Override
-	public void initializeView(AgroludosTO mainTO) {
-		this.mainTO = (SuccessTO) mainTO;
-		this.lblSuccess.setText(this.mainTO.getMessage());
-
+	protected String getViewName() {
+		return this.viewName;
 	}
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		// TODO Auto-generated method stub
 
-	}
-	
-	@Override
-	protected String getViewName() {
-		return this.viewName;
 	}
 }

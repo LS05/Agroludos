@@ -13,6 +13,7 @@ import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.QuestionTO;
 import agroludos.to.StatoIscrizioneTO;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -53,7 +54,7 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 	private AgroRequest richiesta;
 
 	private ResourceBundle res;
-	
+
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
@@ -65,8 +66,8 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 			this.mainIscr = (IscrizioneTO) mainTO;
 
 			this.richiesta = this.getRichiesta("getAllStatoIscrizione", this.viewName);
-			this.risposta = respFact.createResponse();
-			frontController.eseguiRichiesta(richiesta, risposta);
+			this.risposta = this.getRisposta();
+			this.eseguiRichiesta(richiesta, risposta);
 
 			this.lblNomeIsc.setText(this.mainIscr.getPartecipante().getNome());
 			this.lblCognomeIsc.setText(this.mainIscr.getPartecipante().getCognome());
@@ -100,20 +101,20 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 	public void initialize(URL url, ResourceBundle resources) {
 		this.res = resources;		
 	}
-	
+
 	@Override
 	protected String getViewName() {
 		return this.viewName;
 	}
 
 	@FXML private void btnVisualizzaCertificato(){
-		nav.setVista("visualizzaSRC",this.mainIscr.getPartecipante());
+		this.setVista("visualizzaSRC",this.mainIscr.getPartecipante());
 	}
 
 	@FXML protected void btnModificaOptionalIscrizione(MouseEvent event) {
-		nav.setVista("selezionaOptionalPart", this.mainIscr);
+		this.setVista("selezionaOptionalPart", this.mainIscr);
 	}
-	
+
 	@FXML protected void btnAnnullaIscrizione(MouseEvent event) {
 		QuestionTO question = toFact.createQuestionTO();
 		question.setQuestion(this.res.getString("key164"));
@@ -122,7 +123,7 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 		question.setRequest("eliminaIscrizione");
 		question.setViewName(this.viewName);
 
-		nav.setVista("questionDialog", question);
+		this.setVista("questionDialog", question);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -141,7 +142,7 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 				this.mainIscr = (IscrizioneTO) res;
 				this.lblCostoIsc.setText(this.mainIscr.getCosto().toString());
 				this.tableOptional.setAll(this.mainIscr.getAllOptionals());
-				
+
 				IscrizioneTO iscTO = ((IscrizioneTO) res);
 				EmailTO mail = toFact.createEmailTO();
 				mail.setOggetto("Modifca optional");
@@ -149,12 +150,12 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 						+ "alla competizione " + iscTO.getCompetizione().getNome()
 						+ " scegliendo i seguenti optional: "
 						+ iscTO.getAllOptionals().toString());
-				
+
 				mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
-				
-				this.risposta = respFact.createResponse();
+
+				this.risposta = this.getRisposta();
 				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
-				frontController.eseguiRichiesta(this.richiesta, this.risposta);
+				this.eseguiRichiesta(this.richiesta, this.risposta);
 			}
 		}
 	}

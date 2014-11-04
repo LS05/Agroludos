@@ -21,11 +21,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.components.numberspinner.NumberSpinner;
-import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
@@ -47,10 +47,10 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 	@FXML private Button btnInserisciCmp;
 	@FXML private Pane paneDataCompetizione;
 	@FXML private GridPane paneCostoComp;
-	
+
 	private DatePicker dataCompPicker;
 	private NumberSpinner costoComp;
-	
+
 	private List<TipoCompetizioneTO> listTipiCmp;
 	private List<StatoCompetizioneTO> listStatiCmp;
 	private CompetizioneTO cmpto;
@@ -58,7 +58,7 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 	private AgroRequest richiesta;
 
 	private ResourceBundle res;
-	
+
 	//label di errore
 	@FXML private Label lblNomeCmpError;
 	@FXML private Label lblTipoCmpError;
@@ -67,7 +67,7 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 	@FXML private Label lblNmaxCmpError;
 	@FXML private Label lblCostoCmpError;
 	@FXML private Label lblSelezioneOptionalError;
-	
+
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
 		// TODO Auto-generated method stub
@@ -77,18 +77,18 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 	public void initializeView(String viewName) {
 		this.cmpto = toFact.createCompetizioneTO();
 		this.viewName = viewName;
-		
+
 		lblNomeCmpError.setVisible(false);
 		lblTipoCmpError.setVisible(false);
 		lblDataCmpError.setVisible(false);
 		lblNminCmpError.setVisible(false);
 		lblNmaxCmpError.setVisible(false);
 		lblCostoCmpError.setVisible(false);
-		
+
 		this.costoComp = new NumberSpinner(BigDecimal.ZERO, new BigDecimal("10"), new DecimalFormat("#,##0.00"));
-		this.risposta = respFact.createResponse();
+		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta("getAllTipoCompetizione", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		ObservableList<String> listTipi = FXCollections.observableArrayList();
 		for(TipoCompetizioneTO tipoCmp: listTipiCmp){
@@ -116,19 +116,19 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 	public void initialize(URL url, ResourceBundle resources) {
 		this.res = resources;		
 	}
-	
+
 	@Override
 	public String getViewName() {
 		return this.viewName;
 	}
 
-	
+
 	@FXML private void btnAnnulla(MouseEvent event){
 		this.close();
 	}
 
 	@FXML private void btnSelezionaOptional(MouseEvent event){
-		nav.setVista("selezionaOptional", this.cmpto);
+		this.setVista("selezionaOptional", this.cmpto);
 	}
 
 	@FXML private void btnInserisciCmp(MouseEvent event){
@@ -143,25 +143,24 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 
 		this.cmpto.setTipoCompetizione(this.listTipiCmp.get(i));
 
-		this.risposta = respFact.createResponse();
+		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta("getAllStatoCompetizione", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		this.cmpto.setStatoCompetizione(this.listStatiCmp.get(1));
 
-		//TODO rivedere metodo statico (sostituire con richiesta?)
-		this.cmpto.setManagerDiCompetizione((ManagerDiCompetizioneTO) ControllerUtenti.getUtente());
+		this.cmpto.setManagerDiCompetizione((ManagerDiCompetizioneTO) this.getUtente());
 
-		this.risposta = respFact.createResponse();
+		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta(this.cmpto, "inserisciCompetizione", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		Object res = (Object)risposta.getRespData();
 		if(res instanceof CompetizioneTO){
 
 			SuccessTO succMessage = toFact.createSuccessTO();
 			succMessage.setMessage(this.res.getString("key124"));
-			nav.setVista("successDialog",succMessage);
+			this.setVista("successDialog",succMessage);
 			this.close();
 		}
 	}
@@ -171,11 +170,11 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		if(commandName.equals( reqProperties.getProperty("getAllTipoCompetizione") )){
+		if(commandName.equals( this.getCommandName("getAllTipoCompetizione") )){
 			Object res = response.getRespData();
 			if(res instanceof List<?>)
 				this.listTipiCmp = (List<TipoCompetizioneTO>)res;
-		}else if(commandName.equals( reqProperties.getProperty("getAllStatoCompetizione") )){
+		}else if(commandName.equals( this.getCommandName("getAllStatoCompetizione") )){
 			Object res = response.getRespData();
 			if(res instanceof List<?>)
 				this.listStatiCmp = (List<StatoCompetizioneTO>)res;

@@ -52,13 +52,13 @@ public class ControllerMdsNuovoTipoOptional extends AgroludosController implemen
 		tipoOtp.setNome(this.txtNomeTipo.getText());
 
 		this.richiesta = this.getRichiesta(tipoOtp, "inserisciTipoOptional", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		if(!this.flagError){
 			SuccessTO msgNuovoOpt = toFact.createSuccessTO();
 			msgNuovoOpt.setMessage(this.res.getString("key166"));
-			nav.setVista("successDialog", msgNuovoOpt);
+			this.setVista("successDialog", msgNuovoOpt);
 		}
 
 	}
@@ -72,14 +72,14 @@ public class ControllerMdsNuovoTipoOptional extends AgroludosController implemen
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals( reqProperties.getProperty("inserisciTipoOptional") )){
+		if( commandName.equals( this.getCommandName("inserisciTipoOptional") )){
 			Object res = response.getRespData();
 			if(res instanceof ErrorTO){
 
 				ErrorTO errors = (ErrorTO)res;
 				this.flagError = true;
-				if(errors.hasError(rulesProperties.getProperty("nomeKey"))){
-					String nomeKey = rulesProperties.getProperty("nomeKey");
+				if(errors.hasError(this.getError("nomeKey"))){
+					String nomeKey = this.getError("nomeKey");
 					this.lblNomeError.setVisible(true);
 					this.lblNomeError.setText(errors.getError(nomeKey));
 				} 

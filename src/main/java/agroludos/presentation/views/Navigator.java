@@ -69,11 +69,10 @@ public class Navigator {
 						public void handle(WindowEvent we) {
 							//TODO eliminare stampa
 							closeVista(mainView);
-							termina();
 						}
 					});
 				}
-				
+
 				//TODO Gestire l'eccezione di un controller null
 				agw.getController().initializeView(viewName);
 			}
@@ -97,8 +96,4 @@ public class Navigator {
 		}
 	}
 
-	public void termina() {
-		System.out.println("operazioni finali");
-	}
 }
-

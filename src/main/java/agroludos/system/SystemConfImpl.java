@@ -5,7 +5,7 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
 
-class SystemConfImpl implements SystemConf, HibernateConf, RulesConf{
+class SystemConfImpl implements SystemConf, HibernateConf, ErrorsConf, ReqConf{
 	private CompositeConfiguration config; 
 	private PropertiesConfiguration fileConf;
 
@@ -14,7 +14,7 @@ class SystemConfImpl implements SystemConf, HibernateConf, RulesConf{
 
 		this.config.addConfiguration(new SystemConfiguration());
 		this.config.addConfiguration(new PropertiesConfiguration("properties/main.properties"));
-		
+
 		this.fileConf = new PropertiesConfiguration("properties/filesystem.properties");
 		this.config.addConfiguration(this.fileConf);
 	}
@@ -44,12 +44,12 @@ class SystemConfImpl implements SystemConf, HibernateConf, RulesConf{
 	public String getDriver() {
 		return this.config.getString("dbDriver");
 	}
-	
+
 	@Override
 	public String getHibDriver() {
 		return this.config.getString("hibDriver");
 	}
-	
+
 	@Override
 	public String getHibDialect() {
 		return this.config.getString("hibDialect");
@@ -59,7 +59,7 @@ class SystemConfImpl implements SystemConf, HibernateConf, RulesConf{
 	public String getDialect() {
 		return this.config.getString("dbDialect");
 	}
-	
+
 	@Override
 	public String getHibUrl() {
 		return this.config.getString("hibUrl");
@@ -81,7 +81,12 @@ class SystemConfImpl implements SystemConf, HibernateConf, RulesConf{
 	}
 
 	@Override
-	public String getRule(String ruleName) {
+	public String getError(String ruleName) {
 		return this.config.getString(ruleName);
+	}
+
+	@Override
+	public String getRequest(String requestName) {
+		return this.config.getString(requestName);
 	}
 }

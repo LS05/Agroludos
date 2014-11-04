@@ -88,12 +88,12 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 		this.stipendioMdC = new NumberSpinner(BigDecimal.ZERO, new BigDecimal("10"), new DecimalFormat("#,##0.00"));
 		this.paneStipendio.getChildren().add(this.stipendioMdC);
 		this.richiesta = this.getRichiesta("getAllTipoUtente", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		this.richiesta = this.getRichiesta("getAllStatoUtente", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		ObservableList<String> listStati = FXCollections.observableArrayList();
 		for(StatoUtenteTO stato : this.listStatiUtente){
@@ -136,12 +136,12 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 		mdcTO.setStatoUtente(this.listStatiUtente.get(selectedStato));
 
 		this.richiesta = this.getRichiesta(mdcTO, "nuovoManagerDiCompetizione", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 		if(!this.flagError){
 			SuccessTO succTO = toFact.createSuccessTO();
 			succTO.setMessage(this.resources.getString("key132"));
-			nav.setVista("successDialog", succTO);
+			this.setVista("successDialog", succTO);
 		}
 	}
 
@@ -150,53 +150,53 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals( reqProperties.getProperty("getAllTipoUtente") )){
+		if( commandName.equals( this.getCommandName("getAllTipoUtente") )){
 			Object res = response.getRespData();
 
 			if(res instanceof List<?>){
 				List<TipoUtenteTO> listTipo = (List<TipoUtenteTO>)res;
 				this.listTipiUtente = listTipo;
 			}
-		} else if( commandName.equals( reqProperties.getProperty("getAllStatoUtente") )){
+		} else if( commandName.equals( this.getCommandName("getAllStatoUtente") )){
 			Object res = response.getRespData();
 
 			if(res instanceof List<?>){
 				List<StatoUtenteTO> listStati = (List<StatoUtenteTO>)res;
 				this.listStatiUtente = listStati;
 			}
-		} else if( commandName.equals( reqProperties.getProperty("nuovoManagerDiCompetizione") )){
+		} else if( commandName.equals( this.getCommandName("nuovoManagerDiCompetizione") )){
 			Object res = response.getRespData();
 			if(res instanceof ErrorTO){
 
 				ErrorTO errors = (ErrorTO)res;
 				this.flagError = true;
 
-				if(errors.hasError(rulesProperties.getProperty("nomeKey"))){
-					String nomeKey = rulesProperties.getProperty("nomeKey");
+				if(errors.hasError(this.getError("nomeKey"))){
+					String nomeKey = this.getError("nomeKey");
 					this.lblNomeError.setVisible(true);
 					this.lblNomeError.setText(errors.getError(nomeKey));
 				} 
 
-				if(errors.hasError(rulesProperties.getProperty("cognKey"))){
-					String cognomeKey = rulesProperties.getProperty("cognKey");
+				if(errors.hasError(this.getError("cognKey"))){
+					String cognomeKey = this.getError("cognKey");
 					this.lblCognomeError.setVisible(true);
 					this.lblCognomeError.setText(errors.getError(cognomeKey));
 				}
 
-				if(errors.hasError(rulesProperties.getProperty("usernameKey"))){
-					String usernameKey = rulesProperties.getProperty("usernameKey");
+				if(errors.hasError(this.getError("usernameKey"))){
+					String usernameKey = this.getError("usernameKey");
 					this.lblUsernameError.setVisible(true);
 					this.lblUsernameError.setText(errors.getError(usernameKey));
 				}
 
-				if(errors.hasError(rulesProperties.getProperty("passwordKey"))){
-					String emailKey = rulesProperties.getProperty("passwordKey");
+				if(errors.hasError(this.getError("passwordKey"))){
+					String emailKey = this.getError("passwordKey");
 					this.lblPasswordError.setVisible(true);
 					this.lblPasswordError.setText(errors.getError(emailKey));
 				}
 
-				if(errors.hasError(rulesProperties.getProperty("emailKey"))){
-					String emailKey = rulesProperties.getProperty("emailKey");
+				if(errors.hasError(this.getError("emailKey"))){
+					String emailKey = this.getError("emailKey");
 					this.lblEmailError.setVisible(true);
 					this.lblEmailError.setText(errors.getError(emailKey));
 				}

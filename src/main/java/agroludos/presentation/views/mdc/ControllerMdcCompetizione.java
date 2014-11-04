@@ -17,6 +17,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -24,10 +25,8 @@ import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
-import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.QuestionTO;
-import agroludos.to.SuccessTO;
 
 public class ControllerMdcCompetizione extends AgroludosController implements Initializable{
 
@@ -74,10 +73,6 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 	@FXML private Label lblEliminaIsc;
 
 	private ResourceBundle resources;
-
-	private AgroResponse risposta;
-
-	private AgroRequest richiesta;
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
@@ -171,7 +166,7 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 				iscModelRow = table.getSelectionModel().getSelectedItem();
 				if(iscModelRow != null){
 					if (event.getClickCount() > 1) 
-						nav.setVista("mostraIscrizione", iscModelRow.getIscrizioneTO());
+						setVista("mostraIscrizione", iscModelRow.getIscrizioneTO());
 					else
 						btnAnnullaIsc.setDisable(false);
 				}
@@ -190,9 +185,7 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 		question.setRequest("eliminaIscrizione");
 		question.setViewName(this.viewName);
 
-		nav.setVista("questionDialog", question);
-
-
+		this.setVista("questionDialog", question);
 
 	}
 
@@ -205,12 +198,12 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 		question.setRequest("annullaCompetizione");
 		question.setViewName(this.viewName);
 
-		nav.setVista("questionDialog", question);
+		this.setVista("questionDialog", question);
 
 	}
 
 	@FXML protected void btnModificaCmp(MouseEvent event) {
-		nav.setVista("mostraModificaCmp", this.cmpto);
+		this.setVista("mostraModificaCmp", this.cmpto);
 	}
 
 

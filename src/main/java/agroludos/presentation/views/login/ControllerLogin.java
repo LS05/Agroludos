@@ -55,14 +55,12 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
 
-		final Stage stage = nav.getStage(this.getViewName());
-		final String view = this.viewName;
+		final Stage stage = this.getStage(this.getViewName());
+
 		//aggiungo l'evento close vista quando si chiude lo stage
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
-				//TODO eliminare stampa
-				nav.closeVista(view);
-				nav.termina();
+				close();
 			}
 		}); 
 
@@ -85,10 +83,10 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 		UtenteTO uto = toFact.createUTO();
 		uto.setUsername(this.txtUsername.getText());
 		uto.setPassword(this.txtPassword.getText());
-		this.risposta = respFact.createResponse();
+		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta(uto, "autenticazioneUtente", this.viewName);
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
-		
+		this.eseguiRichiesta(this.richiesta, this.risposta);
+
 		Object res = risposta.getRespData();
 		if(res instanceof UtenteTO){
 			this.close();
@@ -96,11 +94,11 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	}
 
 	@FXML protected void btnPswDimenticata(MouseEvent event) {
-		nav.setVista("passwordDimenticata");
+		this.setVista("passwordDimenticata");
 	}
 
 	@FXML protected void btnRegistrati(MouseEvent event) {
-		nav.setVista("nuovaRegistrazione");
+		this.setVista("nuovaRegistrazione");
 	}
 
 	@Override
@@ -111,14 +109,14 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		if(commandName.equals(reqProperties.getProperty("inserisciPartecipante") )){
+		if(commandName.equals(this.getCommandName("inserisciPartecipante") )){
 			Object res = response.getRespData();
 			if(res instanceof PartecipanteTO){
 				SuccessTO succMessage = toFact.createSuccessTO();
 				succMessage.setMessage(this.res.getString("key152"));
-				nav.setVista("successDialog",succMessage);
+				this.setVista("successDialog", succMessage);
 			}
-		}else if(commandName.equals(reqProperties.getProperty("autenticazioneUtente") )){
+		}else if(commandName.equals(this.getCommandName("autenticazioneUtente") )){
 			Object res = response.getRespData();
 			if(res instanceof String){
 				String errMsg = (String)res;

@@ -136,7 +136,7 @@ public class ControllerMdsCompetizione extends AgroludosController{
 				iscModelRow = table.getSelectionModel().getSelectedItem();
 				if(iscModelRow != null){
 					if (event.getClickCount() > 1) 
-						nav.setVista("mostraIscrizioneMds", iscModelRow.getIscrizioneTO());
+						setVista("mostraIscrizioneMds", iscModelRow.getIscrizioneTO());
 				}
 			}
 

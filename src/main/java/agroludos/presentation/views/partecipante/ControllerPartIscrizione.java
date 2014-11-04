@@ -83,7 +83,7 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 	}
 
 	@FXML protected void btnSelezOptClicked(MouseEvent event){
-		nav.setVista("selezionaOptionalPart", this.mainIscr);
+		this.setVista("selezionaOptionalPart", this.mainIscr);
 	}
 
 	@FXML protected void btnIscrivitiClicked(MouseEvent event){
@@ -96,8 +96,8 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 		this.mainIscr.setCosto(totale);
 
 		this.richiesta = this.getRichiesta(this.mainIscr, "inserisciIscrizione", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		this.close();
 	}

@@ -74,8 +74,8 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 			this.txtEmail.setText(this.mdcTO.getEmail());
 
 			this.richiesta = this.getRichiesta("getAllStatoUtente", this.viewName);
-			this.risposta = respFact.createResponse();
-			frontController.eseguiRichiesta(this.richiesta, this.risposta);
+			this.risposta = this.getRisposta();
+			this.eseguiRichiesta(this.richiesta, this.risposta);
 
 			ObservableList<String> listStati = FXCollections.observableArrayList();
 			for(StatoUtenteTO stato : this.listStatiUtente){
@@ -97,12 +97,12 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 		this.mdcTO.setStatoUtente(stato);
 
 		this.richiesta = this.getRichiesta(this.mdcTO, "modificaManagerDiCompetizione", this.viewName);
-		this.risposta = respFact.createResponse();
-		frontController.eseguiRichiesta(this.richiesta, this.risposta);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 		if(!this.flagError){
 			SuccessTO succTO = toFact.createSuccessTO();
 			succTO.setMessage(this.resources.getString("key99"));
-			nav.setVista("successDialog", succTO);
+			this.setVista("successDialog", succTO);
 		}
 	}
 
@@ -116,7 +116,7 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals( reqProperties.getProperty("getAllStatoUtente") )){
+		if( commandName.equals( this.getCommandName("getAllStatoUtente") )){
 			Object res = response.getRespData();
 
 			if(res instanceof List<?>){
@@ -124,33 +124,33 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 				this.listStatiUtente = listStati;
 			}
 
-		} else if( commandName.equals( reqProperties.getProperty("modificaManagerDiCompetizione") )){
+		} else if( commandName.equals( this.getCommandName("modificaManagerDiCompetizione") )){
 			Object res = response.getRespData();
 			if(res instanceof ErrorTO){
 
 				ErrorTO errors = (ErrorTO)res;
 				this.flagError = true;
 
-				if(errors.hasError(rulesProperties.getProperty("nomeKey"))){
-					String nomeKey = rulesProperties.getProperty("nomeKey");
+				if(errors.hasError(this.getError("nomeKey"))){
+					String nomeKey = this.getError("nomeKey");
 					this.lblNomeError.setVisible(true);
 					this.lblNomeError.setText(errors.getError(nomeKey));
 				} 
 
-				if(errors.hasError(rulesProperties.getProperty("cognKey"))){
-					String cognomeKey = rulesProperties.getProperty("cognKey");
+				if(errors.hasError(this.getError("cognKey"))){
+					String cognomeKey = this.getError("cognKey");
 					this.lblCognomeError.setVisible(true);
 					this.lblCognomeError.setText(errors.getError(cognomeKey));
 				}
 
-				if(errors.hasError(rulesProperties.getProperty("usernameKey"))){
-					String usernameKey = rulesProperties.getProperty("usernameKey");
+				if(errors.hasError(this.getError("usernameKey"))){
+					String usernameKey = this.getError("usernameKey");
 					this.lblUsernameError.setVisible(true);
 					this.lblUsernameError.setText(errors.getError(usernameKey));
 				}
 
-				if(errors.hasError(rulesProperties.getProperty("emailKey"))){
-					String emailKey = rulesProperties.getProperty("emailKey");
+				if(errors.hasError(this.getError("emailKey"))){
+					String emailKey = this.getError("emailKey");
 					this.lblEmailError.setVisible(true);
 					this.lblEmailError.setText(errors.getError(emailKey));
 				}

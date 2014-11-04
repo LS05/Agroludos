@@ -1,79 +1,70 @@
 package agroludos.presentation.views;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
+import javafx.stage.Stage;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.to.AgroludosTO;
+import agroludos.to.TOFactory;
 import agroludos.to.UtenteTO;
 
-/**
- * 
- * @author Luca Suriano
- * @author Francesco Zagaria
- *
- */
-public abstract class AgroludosController extends Controller{
+public abstract class AgroludosController {
 
-	private static InputStream reqStream;
+	private static Controller controller;
 
-	private static InputStream rulesStream;
+	private static UtenteTO utente;
 
-	protected static UtenteTO utente;
-
-	protected static Properties reqProperties;
-
-	protected static Properties rulesProperties;
-
-	protected AgroludosController(){
-
-		try {
-
-			if(reqStream == null){
-				reqProperties = new Properties();
-
-				reqStream = this.getClass().getResourceAsStream("/properties/req.properties");
-
-				if(reqStream != null){
-					reqProperties.load(reqStream);
-				}
-			}
-
-			if(rulesStream == null){
-				rulesProperties = new Properties();
-
-				rulesStream = this.getClass().getResourceAsStream("/properties/validator/rules.properties");
-
-				if(rulesStream != null){
-					rulesProperties.load(rulesStream);
-				}
-			}
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	public static UtenteTO getUtente(){
-		return utente;
-	}
+	protected static TOFactory toFact;
 
 	protected AgroRequest getRichiesta(String commandName, String viewName){
-		String richiesta = reqProperties.getProperty(commandName);
-		return reqFact.createSimpleRequest(richiesta, viewName);		
+		return controller.getRichiesta(commandName, viewName);	
 	}
 
 	protected AgroRequest getRichiesta(AgroludosTO param, String commandName, String viewName){
-		String richiesta = reqProperties.getProperty(commandName);
-		return reqFact.createDataRequest(param, richiesta, viewName);
+		return controller.getRichiesta(param, commandName, viewName);
 	}
 
-	protected String getCommandName(String cmdName){
-		return reqProperties.getProperty(cmdName);
+	protected AgroResponse getRisposta(){
+		return controller.getRiposta();
+	}
+
+	protected String getCommandName(String commandName){
+		return controller.getCommandName(commandName);
+	}
+
+	protected String getError(String errorName){
+		return controller.getError(errorName);
+	}
+
+	protected void eseguiRichiesta(AgroRequest request, AgroResponse response){
+		controller.eseguiRichiesta(request, response);
+	}
+
+	protected void setVista(String viewName){
+		controller.setVista(viewName);
+	}
+
+	protected void setVista(String viewName, AgroludosTO to){
+		controller.setVista(viewName, to);
+	}
+
+	protected void closeVista(String viewName){
+		controller.closeVista(viewName);
+	}
+
+	protected Stage getStage(String viewName){
+		return controller.getStage(viewName);
+	}
+
+	protected void setMainStage(Stage stage){
+		controller.setMainStage(stage);
+	}
+
+	protected UtenteTO getUtente(){
+		return utente;
+	}
+
+	protected void setUtente(UtenteTO userTO){
+		utente = userTO;
 	}
 
 	/**
@@ -82,7 +73,15 @@ public abstract class AgroludosController extends Controller{
 	 * altrimenti non è necessario
 	 */
 	protected void close(){
-		nav.closeVista(getViewName());
+		controller.closeVista(getViewName());
+	}
+
+	public void setToFact(TOFactory toFactory) {
+		toFact = toFactory;
+	}
+
+	public void setController(Controller ctrl) {
+		controller = ctrl;
 	}
 
 	protected abstract void initializeView(AgroludosTO mainTO);
@@ -99,4 +98,5 @@ public abstract class AgroludosController extends Controller{
 	 * @param response
 	 */
 	public abstract void forward(AgroRequest request, AgroResponse response);
+
 }
