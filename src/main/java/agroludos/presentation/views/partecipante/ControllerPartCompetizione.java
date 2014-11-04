@@ -23,6 +23,7 @@ import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.SuccessTO;
 
@@ -61,6 +62,10 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 	private ResourceBundle res;
 
 	@FXML private Button btnIscriviti;
+
+	private AgroResponse risposta;
+
+	private AgroRequest richiesta;
 
 	@Override
 	public void initializeView(String viewName) {
@@ -161,6 +166,23 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 				SuccessTO succ = toFact.createSuccessTO();
 				succ.setMessage(this.res.getString("key157"));
 				nav.setVista("successDialog", succ);
+				
+				IscrizioneTO iscTO = ((IscrizioneTO) res);
+				EmailTO mail = toFact.createEmailTO();
+				mail.setOggetto(iscTO.getPartecipante().getUsername() + " si è iscritto "
+						+ "alla competizione " + iscTO.getCompetizione().getNome());
+				mail.setMessage("Dati iscrizione: "
+						+ iscTO.getPartecipante().toString() 
+						+ " costo "
+						+ iscTO.getCosto()
+						+ " optional scelti "
+						+ iscTO.getAllOptionals().toString());
+				
+				mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
+				
+				this.risposta = respFact.createResponse();
+				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
+				frontController.eseguiRichiesta(this.richiesta, this.risposta);
 				
 			}
 		}

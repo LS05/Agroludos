@@ -37,9 +37,16 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 		//TODO se il certificato è scaduto,
 		//non fa l'iscrizione
 		//TODO partecipante già iscritto
+		//TODO usare un validator??????
 		StatoIscrizioneTO siTO = statoIscDAO.getAll().get(1);
 
 		iscTO.setStatoIscrizione(siTO);
+		
+		for(IscrizioneTO checkIsc: iscTO.getCompetizione().getAllIscrizioniAttive()){
+			if(checkIsc.equals(iscTO)){
+				//TODO solleva eccezione utente già iscritto
+			}
+		}
 
 		return iscDAO.create(iscTO);
 	}

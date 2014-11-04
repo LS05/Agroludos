@@ -9,6 +9,7 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.to.AgroludosTO;
+import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.QuestionTO;
 import agroludos.to.StatoIscrizioneTO;
@@ -140,6 +141,20 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 				this.mainIscr = (IscrizioneTO) res;
 				this.lblCostoIsc.setText(this.mainIscr.getCosto().toString());
 				this.tableOptional.setAll(this.mainIscr.getAllOptionals());
+				
+				IscrizioneTO iscTO = ((IscrizioneTO) res);
+				EmailTO mail = toFact.createEmailTO();
+				mail.setOggetto("Modifca optional");
+				mail.setMessage(iscTO.getPartecipante().getUsername() + " ha modificato l'iscrizione "
+						+ "alla competizione " + iscTO.getCompetizione().getNome()
+						+ " scegliendo i seguenti optional: "
+						+ iscTO.getAllOptionals().toString());
+				
+				mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
+				
+				this.risposta = respFact.createResponse();
+				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
+				frontController.eseguiRichiesta(this.richiesta, this.risposta);
 			}
 		}
 	}

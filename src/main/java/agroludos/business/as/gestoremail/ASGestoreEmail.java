@@ -22,11 +22,11 @@ class ASGestoreEmail extends AgroludosAS implements LEmail, SEmail{
 		Email email = new SimpleEmail();
 		email.setHostName("smtp.googlemail.com");
 		email.setSmtpPort(465);
-		email.setAuthenticator(new DefaultAuthenticator("username", "password"));
+		email.setAuthenticator(new DefaultAuthenticator("agroludos.uniba", "ardimento2014"));
 		email.setSSLOnConnect(true);
 
 		try {
-			email.setFrom(emailTO.getMittente().getEmail());
+			email.setFrom("agroludos.uniba@gmail.com");
 			email.setSubject(emailTO.getOggetto());
 			email.setMsg(emailTO.getMessage());
 			for(UtenteTO uTO: emailTO.getDestinatari()){

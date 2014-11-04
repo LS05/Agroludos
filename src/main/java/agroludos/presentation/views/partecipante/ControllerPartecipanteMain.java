@@ -12,6 +12,7 @@ import agroludos.presentation.views.components.tablemodel.CmpModel;
 import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.SuccessTO;
@@ -153,6 +154,19 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 				SuccessTO succMessage = toFact.createSuccessTO();
 				succMessage.setMessage(this.res.getString("key123"));
 				nav.setVista("successDialog",succMessage);
+				
+				IscrizioneTO iscTO = ((IscrizioneTO) res);
+				EmailTO mail = toFact.createEmailTO();
+				mail.setOggetto("Iscrizione annullata");
+				mail.setMessage(iscTO.getPartecipante().getUsername() + " ha annullato l'iscrizione "
+						+ "alla competizione " + iscTO.getCompetizione().getNome());
+				
+				mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
+				
+				this.risposta = respFact.createResponse();
+				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
+				frontController.eseguiRichiesta(this.richiesta, this.risposta);
+				
 			}
 		}
 	}

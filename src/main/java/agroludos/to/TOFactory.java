@@ -42,4 +42,6 @@ public interface TOFactory {
 	
 	CertificatoTO createCertificatoTO();
 
+	EmailTO createEmailTO();
+
 }

@@ -6,10 +6,12 @@ import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.ValidationException;
+import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.OptionalDAO;
 import agroludos.integration.dao.db.StatoOptionalDAO;
 import agroludos.integration.dao.db.TipoOptionalDAO;
+import agroludos.to.CompetizioneTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.StatoOptionalTO;
 import agroludos.to.TipoOptionalTO;
@@ -52,6 +54,18 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 
 		OptionalDAO daoOpt = getOptionalDAO();
 		validate(optto);
+		//TODO controllare che non faccia parte di nessuna competizione attiva
+		
+		CompetizioneDAO daoCmp = this.dbFact.getDAOFactory(this.sysConf.getTipoDB()).getCompetizioneDAO();
+		for(CompetizioneTO cmpTO: daoCmp.getAll()){
+			if(cmpTO.getStatoCompetizione().getId() == 1){
+				for(OptionalTO checkOpt: cmpTO.getAllOptionals()){
+					if(checkOpt.getId() == optto.getId()){
+						//TODO eccezione optional in competizioni attive
+					}
+				}
+			}
+		}
 		return daoOpt.update(optto);
 
 	}
@@ -66,7 +80,9 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 		StatoOptionalTO stato = daoStatoOpt.getAll().get(0);
 		optto.setStatoOptional(stato);
 		validate(optto);
-
+		//TODO se fa parte di competizioni attive l'optional non sarà disponibile solo per 
+		//le nuove competizioni
+		
 		return daoOpt.disattivaOptional(optto);
 	}
 
