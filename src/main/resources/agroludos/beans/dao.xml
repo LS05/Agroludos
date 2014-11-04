@@ -6,11 +6,15 @@
     <import resource="classpath:agroludos/beans/utility.xml" />
     <import resource="classpath:agroludos/beans/transferobject.xml" />
     
-	<bean id="fileFactory" class="agroludos.integration.dao.file.FileFactory" />
+	<bean id="fileFactory" class="agroludos.integration.dao.file.FileFactoryImpl">
+		<constructor-arg ref="toFactory" />
+	</bean>
 	
 	<bean id="xmlDaoFactory" class="agroludos.integration.dao.file.xml.XmlDAOFactory" />
 	
-	<bean id="txtDaoFactory" class="agroludos.integration.dao.file.txt.TxtDAOFactory" />
+	<bean id="txtDaoFactory" class="agroludos.integration.dao.file.txt.TxtDAOFactory">
+		<constructor-arg ref="toFactory" />
+	</bean>
 	
 	<bean id="xmlConfigFile" class="agroludos.integration.dao.file.xml.XMLConfigFile">
 		<constructor-arg ref="xmlData" />
@@ -29,7 +33,7 @@
 	<bean id="mySqlDaoUtil" class="agroludos.integration.dao.db.mysql.MySqlDAO" />
 	
 	<bean id="mysqlAgroludosDAO" 
-		  class="agroludos.integration.dao.db.mysql.MySqlAgroludosDAO"
+		  class="agroludos.integration.dao.db.mysql.MySqlAgroludosDA"
 		  abstract="true">
 		  <constructor-arg ref="toFactory" />
 	</bean>
