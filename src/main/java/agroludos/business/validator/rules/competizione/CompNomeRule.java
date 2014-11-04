@@ -18,10 +18,10 @@ class CompNomeRule extends AgroludosRule {
 		if(mainTO instanceof CompetizioneTO){
 			CompetizioneTO competizione = (CompetizioneTO)mainTO;
 			String nome = competizione.getNome();
-			Integer nameLength = Integer.valueOf(this.getProperty("nameLength"));
+			Integer nameLength = Integer.valueOf(this.getRule("nameLength"));
 
 			if(nome.length() < nameLength){
-				errorTO.addError(this.getProperty("nomeKey"), this.getProperty("nomeLenghtError"));
+				errorTO.addError(this.getRule("nomeKey"), this.getRule("nomeLenghtError"));
 			}
 
 			if(this.successor != null)

@@ -19,9 +19,9 @@ class MdcStipendioRule extends AgroludosRule {
 			ManagerDiCompetizioneTO partecipante = (ManagerDiCompetizioneTO)mainTO;
 			Double stipendio = partecipante.getStipendio();
 
-			String key = this.getProperty("stipendioKey");
+			String key = this.getRule("stipendioKey");
 			if( stipendio < 0 ){
-				errorTO.addError(key, this.getProperty("stipendioError"));
+				errorTO.addError(key, this.getRule("stipendioError"));
 			}
 
 			if( this.successor != null)

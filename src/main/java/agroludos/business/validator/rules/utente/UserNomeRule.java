@@ -21,12 +21,12 @@ class UserNomeRule extends AgroludosRule {
 		if(mainTO instanceof UtenteTO){
 			UtenteTO user = (UtenteTO)mainTO;
 			String nome = user.getNome();
-			Integer nameLength = Integer.valueOf(this.getProperty("nameLength"));
+			Integer nameLength = Integer.valueOf(this.getRule("nameLength"));
 
 			if(nome.length() < nameLength){
-				errorTO.addError(this.getProperty("nomeKey"), this.getProperty("nomeLenghtError"));
+				errorTO.addError(this.getRule("nomeKey"), this.getRule("nomeLenghtError"));
 			} else if(!this.strValidator.isAlpha(nome)){
-				errorTO.addError(this.getProperty("nomeKey"), this.getProperty("nomeAlphaError"));
+				errorTO.addError(this.getRule("nomeKey"), this.getRule("nomeAlphaError"));
 			}
 
 			if(this.successor != null)

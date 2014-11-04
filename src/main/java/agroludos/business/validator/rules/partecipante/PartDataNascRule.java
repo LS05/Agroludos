@@ -17,10 +17,10 @@ class PartDataNascRule extends AgroludosRule {
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof PartecipanteTO){
 			PartecipanteTO parTO = (PartecipanteTO)mainTO;
-			String key = this.getProperty("dataNascKey");
+			String key = this.getRule("dataNascKey");
 
 			if(parTO.getDataNasc() == null){
-				errorTO.addError(key, this.getProperty("dataError"));
+				errorTO.addError(key, this.getRule("dataError"));
 			}
 
 			if( this.successor != null )

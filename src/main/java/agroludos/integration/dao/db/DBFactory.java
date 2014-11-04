@@ -2,30 +2,32 @@ package agroludos.integration.dao.db;
 
 import agroludos.exceptions.DBFactoryException;
 import agroludos.exceptions.DatabaseException;
-import agroludos.integration.dao.db.mysql.MySqlDAOFactory;
-import agroludos.integration.dao.db.mysql.MySqlDAOUtil;
+import agroludos.system.SystemConf;
 
 public class DBFactory{
-	private MySqlDAOFactory mySqlFact;
 
-	public DBDAOFactory createMySqlDAOFactory(MySqlDAOUtil daoUtil) throws DatabaseException{
-		this.mySqlFact = new MySqlDAOFactory(daoUtil);
-		return this.mySqlFact;
+	private DBDAOFactory fact;
+	private SystemConf sysConf;
+
+	public DBFactory(DBDAOFactory fact, SystemConf sysConf){
+		this.fact = fact;
+		this.sysConf = sysConf;
 	}
 
 	/**
 	 * In base al parametro di input il metodo ritorna una delle possibili
 	 * implementazioni di questo factory, basate sulla specifica
-	 * dell'interfaccia DBDAOFactory
+	 * dell'interfaccia DBDAOFactory e sul tipo di database impostato in
+	 * configurazione. Altrimenti se il tipo non è supportato solleva una
+	 * DBFactoryException
 	 * 
 	 * @throws DatabaseException 
 	 */
 	public DBDAOFactory getDAOFactory(String tipo) throws DatabaseException{
 		DBDAOFactory res = null;
 
-		if(tipo.equalsIgnoreCase("mysql")){
-			if(this.mySqlFact.testConnection())
-				res = this.mySqlFact;
+		if(tipo.equalsIgnoreCase( this.sysConf.getTipoDB() )){
+			res = this.fact;
 		} else {
 			throw new DBFactoryException();
 		}

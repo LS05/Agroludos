@@ -59,8 +59,12 @@ public interface DBDAOFactory {
 	
 	//TODO
 	public StatoCompetizioneDAO getStatoCompetizioneDAO();
+	
 	public StatoIscrizioneDAO getStatoIscrizioneDAO();
+	
 	public StatoOptionalDAO getStatoOptionalDAO();
+	
 	public StatoUtenteDAO getStatoUtenteDAO();
+	
 	public TipoUtenteDAO getTipoUtenteDAO();
 }

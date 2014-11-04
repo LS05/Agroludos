@@ -5,6 +5,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import agroludos.system.HibernateConf;
 import agroludos.to.DatabaseTO;
 
 class XMLConfigFile {
@@ -14,9 +15,9 @@ class XMLConfigFile {
 	private String portaDB;
 	private String usernameDB;
 	private String passwordDB;
-	private XmlData confData;
+	private HibernateConf confData;
 	
-	XMLConfigFile(XmlData confData){
+	XMLConfigFile(HibernateConf confData){
 		this.confData = confData;
 	}
 	
@@ -73,7 +74,7 @@ class XMLConfigFile {
 					}
 
 					if(attrValue.equals(this.confData.getHibUrl())){
-						String urlDB = this.confData.getUrl() + serverDB + ":" + portaDB + "/" + nomeDB;
+						String urlDB = this.confData.getUrl() + this.serverDB + ":" + this.portaDB + "/" + this.nomeDB;
 						node.setTextContent(urlDB);
 						res = true;
 					}

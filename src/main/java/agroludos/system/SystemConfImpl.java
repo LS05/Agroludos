@@ -5,7 +5,7 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
 
-class SystemConfImpl implements SystemConf {
+class SystemConfImpl implements SystemConf, HibernateConf, RulesConf{
 	private CompositeConfiguration config; 
 	private PropertiesConfiguration fileConf;
 
@@ -33,5 +33,55 @@ class SystemConfImpl implements SystemConf {
 
 	public String getTipoCert(){
 		return this.config.getString("certificato");
+	}
+
+	@Override
+	public String getConfPath() {
+		return this.config.getString("confPath");
+	}
+
+	@Override
+	public String getDriver() {
+		return this.config.getString("dbDriver");
+	}
+	
+	@Override
+	public String getHibDriver() {
+		return this.config.getString("hibDriver");
+	}
+	
+	@Override
+	public String getHibDialect() {
+		return this.config.getString("hibDialect");
+	}
+
+	@Override
+	public String getDialect() {
+		return this.config.getString("dbDialect");
+	}
+	
+	@Override
+	public String getHibUrl() {
+		return this.config.getString("hibUrl");
+	}
+
+	@Override
+	public String getUrl() {
+		return this.config.getString("dbUrl");
+	}
+
+	@Override
+	public String getHibUsername() {
+		return this.config.getString("hibUsername");
+	}
+
+	@Override
+	public String getHibPassword() {
+		return this.config.getString("hibPassword");
+	}
+
+	@Override
+	public String getRule(String ruleName) {
+		return this.config.getString(ruleName);
 	}
 }

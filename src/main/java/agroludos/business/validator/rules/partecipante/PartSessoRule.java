@@ -18,11 +18,11 @@ class PartSessoRule extends AgroludosRule {
 		if(mainTO instanceof PartecipanteTO){
 			PartecipanteTO parTO = (PartecipanteTO)mainTO;
 			String sesso = parTO.getSesso();
-			Integer sessoLen = Integer.valueOf(this.getProperty("partSexLength"));
-			String sessoKey = this.getProperty("sessoKey");
+			Integer sessoLen = Integer.valueOf(this.getRule("partSexLength"));
+			String sessoKey = this.getRule("sessoKey");
 			
 			if(sesso.length() < sessoLen){
-				errorTO.addError(sessoKey, this.getProperty("sessoError"));
+				errorTO.addError(sessoKey, this.getRule("sessoError"));
 			}
 
 			if( this.successor != null )

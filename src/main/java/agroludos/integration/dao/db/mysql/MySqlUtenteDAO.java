@@ -15,7 +15,7 @@ class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements
 		super(session);
 	}
 
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public T getUtente(UtenteTO uto) throws DatabaseException {
 		UtenteTO res = null;
@@ -29,14 +29,13 @@ class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements
 		if(list.size() == 1){
 			res = list.get(0);
 		} else {
-
-			//TODO toFact è null
-			res = this.toFact.createNullUTO();
+			res = toFact.createNullUTO();
 		}
 
 		return (T)res;
 	}
 
+	@SuppressWarnings("unchecked")
 	private T getUtenteBy(String queryName, List<?> params) throws DatabaseException{
 
 		UtenteTO res = null;
@@ -45,7 +44,7 @@ class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements
 		if(list.size() == 0){
 			
 			//TODO toFact è null
-			res = this.toFact.createNullUTO();
+			res = toFact.createNullUTO();
 		} else {
 			res = (UtenteTO)list.get(0);
 		}
@@ -70,6 +69,10 @@ class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements
 
 		return getUtenteBy("getByID", param);
 	}
+	
+	private boolean isNullUtente(UtenteTO user){
+		return user.getId() == -1;
+	}
 
 	@Override
 	public boolean esisteUsername(UtenteTO uto) throws DatabaseException {
@@ -80,10 +83,7 @@ class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements
 
 		UtenteTO user = this.getUtenteBy("getByUsername", param);
 
-		if(user.getUsername() == "")
-			res = false;
-		else
-			res = true;
+		res = !this.isNullUtente(user);
 
 		return res;
 	}
@@ -97,20 +97,9 @@ class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements
 
 		UtenteTO user = this.getUtenteBy("getByEmail", param);
 
-		if(user.getUsername() == "")
-			res = false;
-		else
-			res = true;
+		res = !this.isNullUtente(user);
 
 		return res;
 	}
-
-	@Override
-	public T deleteUtente(T entity) throws DatabaseException {
-
-		entity.getStatoUtente().setId(0);
-		super.update(entity);
-
-		return entity;
-	}	
+	
 }

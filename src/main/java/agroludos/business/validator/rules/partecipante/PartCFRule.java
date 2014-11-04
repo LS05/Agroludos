@@ -21,11 +21,11 @@ class PartCFRule extends AgroludosRule {
 			PartecipanteTO partecipante = (PartecipanteTO)mainTO;
 			String cf = partecipante.getCf();
 
-			String key = this.getProperty("cfKey");
+			String key = this.getRule("cfKey");
 			if(!this.strValidator.isAlphaNumeric(cf)){
-				errorTO.addError(key, this.getProperty("cfAlphaError"));
+				errorTO.addError(key, this.getRule("cfAlphaError"));
 			} else if(cf.length() != 16){
-				errorTO.addError(key, this.getProperty("cfLengthError"));
+				errorTO.addError(key, this.getRule("cfLengthError"));
 			}
 
 			if(this.successor != null)
