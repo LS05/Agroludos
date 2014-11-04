@@ -100,5 +100,10 @@ class TransferObjectFactory implements TOFactory {
 	@Override
 	public CertificatoTO createCertificatoTO() {
 		return new Certificato();
+	}
+
+	@Override
+	public EmailTO createEmailTO() {
+		return new EmailImpl();
 	}	
 }

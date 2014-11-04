@@ -24,6 +24,7 @@ import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.QuestionTO;
 import agroludos.to.SuccessTO;
@@ -72,7 +73,11 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 	@FXML private Button btnVisualizzaIsc;
 	@FXML private Label lblEliminaIsc;
 
-	private ResourceBundle res;
+	private ResourceBundle resources;
+
+	private AgroResponse risposta;
+
+	private AgroRequest richiesta;
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
@@ -123,8 +128,8 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 	}
 
 	@Override
-	public void initialize(URL url, ResourceBundle resources) {
-		this.res = resources;		
+	public void initialize(URL url, ResourceBundle res) {
+		this.resources = res;		
 	}
 
 	@Override
@@ -179,7 +184,7 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 
 		IscrizioneTO iscto = this.tblIscritti.getSelectionModel().getSelectedItem().getIscrizioneTO();
 		QuestionTO question = toFact.createQuestionTO();
-		question.setQuestion(this.res.getString("key159"));
+		question.setQuestion(this.resources.getString("key159"));
 
 		question.setDataTO(iscto);
 		question.setRequest("eliminaIscrizione");
@@ -194,7 +199,7 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 	@FXML protected void btnAnnullaCmp(MouseEvent event) {
 
 		QuestionTO question = toFact.createQuestionTO();
-		question.setQuestion(this.res.getString("key160"));
+		question.setQuestion(this.resources.getString("key160"));
 
 		question.setDataTO(this.cmpto);
 		question.setRequest("annullaCompetizione");
@@ -205,25 +210,12 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 	}
 
 	@FXML protected void btnModificaCmp(MouseEvent event) {
-
-		this.lblModificaOk.setVisible(false);
-		this.lblAnnullaOk.setVisible(false);
 		nav.setVista("mostraModificaCmp", this.cmpto);
 	}
 
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		String commandName = request.getCommandName();
-		if(commandName.equals( reqProperties.getProperty("modificaCompetizione"))){
-			Object res = response.getRespData();
-			if(res instanceof CompetizioneTO){
-				this.initializeView((CompetizioneTO) res);
-				SuccessTO succMessage = toFact.createSuccessTO();
-				succMessage.setMessage(this.res.getString("key99"));
 
-				nav.setVista("successDialog",succMessage);
-			}
-		}
 	}
 }

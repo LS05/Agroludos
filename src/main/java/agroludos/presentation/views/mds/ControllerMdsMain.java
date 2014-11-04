@@ -442,6 +442,8 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				mdc.setUsername(mdcTO.getUsername());
 				mdc.setStato(mdcTO.getStatoUtente().getNome());
 				setDxMdCColumn(this.selectedMdC);
+				
+				//TODO send email?
 			}
 
 		} else if( commandName.equals( reqProperties.getProperty("getAllTipoOptional") )){

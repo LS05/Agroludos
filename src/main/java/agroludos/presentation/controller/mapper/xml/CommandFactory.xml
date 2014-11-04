@@ -268,4 +268,10 @@
 			<forward success="mostraIscrPart" failure="mostraIscrPart" />
 		</from>
 	</command>
+	<command name="sendEmail">
+		<classe>agroludos.business.as.gestoremail.LEmail</classe>
+		<from name="managerDiCompetizione">
+			<forward success="managerDiCompetizione" failure="mostraCmp" />
+		</from>
+	</command>
 </commands>
