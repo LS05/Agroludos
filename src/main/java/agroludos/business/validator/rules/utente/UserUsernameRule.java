@@ -1,7 +1,5 @@
 package agroludos.business.validator.rules.utente;
 
-import java.io.IOException;
-
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
@@ -9,7 +7,7 @@ import agroludos.to.UtenteTO;
 
 class UserUsernameRule extends AgroludosRule {
 
-	UserUsernameRule() throws IOException {
+	UserUsernameRule() {
 		super();
 	}
 

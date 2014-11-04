@@ -1,19 +1,17 @@
 package agroludos.business.validator.rules.utente;
 
-import java.io.IOException;
-
 import agroludos.business.validator.rules.AgroludosRule;
 
 public interface UserRulesFactory {
 
-	AgroludosRule getNomeRule() throws IOException;
+	AgroludosRule getNomeRule();
 
-	AgroludosRule getCognomeRule() throws IOException;
+	AgroludosRule getCognomeRule();
 
-	AgroludosRule getUsernameRule() throws IOException;
+	AgroludosRule getUsernameRule();
 
-	AgroludosRule getPasswordRule() throws IOException;
+	AgroludosRule getPasswordRule();
 
-	AgroludosRule getEmailRule() throws IOException;
+	AgroludosRule getEmailRule();
 
 }

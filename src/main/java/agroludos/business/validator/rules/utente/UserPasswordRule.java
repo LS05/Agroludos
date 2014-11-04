@@ -1,17 +1,11 @@
 package agroludos.business.validator.rules.utente;
 
-import java.io.IOException;
-
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.UtenteTO;
 
 class UserPasswordRule extends AgroludosRule {
-
-	UserPasswordRule() throws IOException {
-		super();
-	}
 
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
