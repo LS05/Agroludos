@@ -3,7 +3,9 @@ package agroludos.business.as.gestoreiscrizione;
 import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
+import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.IscrizioneDAO;
 import agroludos.integration.dao.db.StatoIscrizioneDAO;
@@ -11,6 +13,12 @@ import agroludos.to.IscrizioneTO;
 import agroludos.to.StatoIscrizioneTO;
 
 class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizione{
+
+	private AgroludosValidator validator;
+
+	ASGestoreIscrizione(AgroludosValidator validator){
+		this.validator = validator;
+	}
 
 	private DBDAOFactory getDBDaoFactory() throws DatabaseException{
 		return this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
@@ -28,18 +36,23 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 
 	@Override
 	public IscrizioneTO inserisciIscrizione(IscrizioneTO iscTO)
-			throws DatabaseException {
+			throws DatabaseException, ValidationException {
 
 		IscrizioneDAO iscDAO = getIscrizioneDAO();
 
-		StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
-		
-		//TODO se il certificato è scaduto,
-		//non fa l'iscrizione
-		//TODO partecipante già iscritto
-		StatoIscrizioneTO siTO = statoIscDAO.getAll().get(1);
+		if(! iscDAO.esisteIscrizione(iscTO) ){
 
-		iscTO.setStatoIscrizione(siTO);
+			this.validator.validate(iscTO);
+
+			StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
+
+			//TODO se il certificato è scaduto,
+			//non fa l'iscrizione
+			//TODO partecipante già iscritto
+			StatoIscrizioneTO siTO = statoIscDAO.getAll().get(1);
+
+			iscTO.setStatoIscrizione(siTO);
+		}
 
 		return iscDAO.create(iscTO);
 	}
@@ -70,4 +83,5 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 		IscrizioneDAO daoMan = getIscrizioneDAO(); 
 		return daoMan.getAll();
 	}
+
 }

@@ -18,9 +18,9 @@ public abstract class AgroludosRule {
 		return rulesConf.getRule(propName);
 	}
 	
-	public abstract void validate(AgroludosTO mainTO, ErrorTO errorTO);
-
 	public void setRulesConf(RulesConf rulesConfig) {
 		rulesConf = rulesConfig;
 	}
+	
+	public abstract void validate(AgroludosTO mainTO, ErrorTO errorTO);
 }

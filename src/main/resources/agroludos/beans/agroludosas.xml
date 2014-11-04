@@ -66,6 +66,7 @@
 	<bean id="gestoreIscrizione"
 		class="agroludos.business.as.gestoreiscrizione.ASGestoreIscrizione"
 		parent="agroludosAS">
+		<constructor-arg ref="iscValidator" />
 	</bean>
 	<bean id="gestoreStatoIscrizione"
 		class="agroludos.business.as.gestorestatoiscrizione.ASGestoreStatoIscrizione"

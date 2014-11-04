@@ -11,6 +11,8 @@
 	<import resource="classpath:agroludos/beans/mdcRules.xml" />
 	<import resource="classpath:agroludos/beans/tipiRules.xml" />
 	<import resource="classpath:agroludos/beans/compRules.xml" />
+	<import resource="classpath:agroludos/beans/compRules.xml" />
+	<import resource="classpath:agroludos/beans/iscrizioneRules.xml" />
 	
 	<bean id="partValidator" class="agroludos.business.validator.partecipante.PartValidator">
 		<constructor-arg ref="pRulesFactory" />
@@ -36,6 +38,11 @@
 	
 	<bean id="compValidator" class="agroludos.business.validator.competizione.CompValidator">
 		<constructor-arg ref="compRulesFactory" />
+		<constructor-arg ref="toFactory" />
+	</bean>
+	
+	<bean id="iscValidator" class="agroludos.business.validator.iscrizione.IscrValidator">
+		<constructor-arg ref="iscrRulesFactory" />
 		<constructor-arg ref="toFactory" />
 	</bean>
 	
