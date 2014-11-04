@@ -29,7 +29,7 @@ class PartValidator implements AgroludosValidator{
 	private AgroludosRule sessoRule;
 	private AgroludosRule dataNascRule;
 	
-	PartValidator(UserRulesFactory userRulesFactory, PRulesFactory partRulesFactory, TOFactory toFactory) throws IOException{
+	PartValidator(UserRulesFactory userRulesFactory, PRulesFactory partRulesFactory, TOFactory toFactory){
 		this.userRulesFact = userRulesFactory;
 		this.partRulesFact = partRulesFactory;
 		this.toFact = toFactory;

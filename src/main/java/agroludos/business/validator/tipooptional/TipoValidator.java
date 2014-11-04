@@ -1,7 +1,5 @@
 package agroludos.business.validator.tipooptional;
 
-import java.io.IOException;
-
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.business.validator.rules.agrotipo.TipoRulesFactory;
@@ -16,7 +14,7 @@ class TipoValidator implements AgroludosValidator{
 	private TOFactory toFact;
 	private AgroludosRule nomeRule;
 
-	TipoValidator(TipoRulesFactory rulesFactory, TOFactory toFactory) throws IOException{
+	TipoValidator(TipoRulesFactory rulesFactory, TOFactory toFactory){
 		this.rulesFact = rulesFactory;
 		this.toFact = toFactory;
 

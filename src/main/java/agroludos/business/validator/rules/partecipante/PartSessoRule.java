@@ -1,17 +1,11 @@
 package agroludos.business.validator.rules.partecipante;
 
-import java.io.IOException;
-
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 
 class PartSessoRule extends AgroludosRule {
-	
-	protected PartSessoRule() throws IOException {
-		super();
-	}
 
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
@@ -20,7 +14,7 @@ class PartSessoRule extends AgroludosRule {
 			String sesso = parTO.getSesso();
 			Integer sessoLen = Integer.valueOf(this.getRule("partSexLength"));
 			String sessoKey = this.getRule("sessoKey");
-			
+
 			if(sesso.length() < sessoLen){
 				errorTO.addError(sessoKey, this.getRule("sessoError"));
 			}

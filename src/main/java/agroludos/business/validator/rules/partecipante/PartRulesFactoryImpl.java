@@ -1,7 +1,5 @@
 package agroludos.business.validator.rules.partecipante;
 
-import java.io.IOException;
-
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.business.validator.rules.partecipante.PartCFRule;
 import agroludos.business.validator.rules.partecipante.PartSrcRule;
@@ -17,49 +15,49 @@ class PartRulesFactoryImpl implements PRulesFactory {
 	private static PartDataNascRule dataNascRule;
 
 	@Override
-	public AgroludosRule getCfRule() throws IOException{
+	public AgroludosRule getCfRule(){
 		if(cfRule == null)
 			cfRule = new PartCFRule();
 		return cfRule;	
 	}
 
 	@Override
-	public AgroludosRule getSrcRule() throws IOException {
+	public AgroludosRule getSrcRule(){
 		if(srcRule == null)
 			srcRule = new PartSrcRule();
 		return srcRule;
 	}
 
 	@Override
-	public AgroludosRule getTesRule() throws IOException {
+	public AgroludosRule getTesRule(){
 		if(tesRule == null)
 			tesRule = new PartTesRule();
 		return tesRule;
 	}
 
 	@Override
-	public AgroludosRule getDataSrcRule() throws IOException {
+	public AgroludosRule getDataSrcRule(){
 		if(dataSrcRule == null)
 			dataSrcRule = new PartDataSrcRule();
 		return dataSrcRule;
 	}
 
 	@Override
-	public AgroludosRule getIndirizzoRule() throws IOException {
+	public AgroludosRule getIndirizzoRule(){
 		if(indirizzoRule == null)
 			indirizzoRule = new PartIndirizzoRule();
 		return indirizzoRule;
 	}
 
 	@Override
-	public AgroludosRule getSessoRule() throws IOException {
+	public AgroludosRule getSessoRule(){
 		if(sessoRule == null)
 			sessoRule = new PartSessoRule();
 		return sessoRule;
 	}
 
 	@Override
-	public AgroludosRule getDataNascRule() throws IOException {
+	public AgroludosRule getDataNascRule(){
 		if(dataNascRule == null)
 			dataNascRule = new PartDataNascRule();
 		return dataNascRule;

@@ -22,12 +22,18 @@ class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements Iscr
 	}
 
 	@Override
-	public IscrizioneTO annullaIscrizione(IscrizioneTO iscto) throws DatabaseException {
-		
-		super.update(iscto);
-		this.session.refresh(iscto.getCompetizione().getManagerDiCompetizione());
-		return iscto;
+	public IscrizioneTO annullaIscrizione(IscrizioneTO iscTO) throws DatabaseException {
 
+		super.update(iscTO);
+		this.session.refresh(iscTO.getCompetizione().getManagerDiCompetizione());
+		return iscTO;
+
+	}
+
+	@Override
+	public boolean esisteIscrizione(IscrizioneTO iscTO) throws DatabaseException {
+		IscrizioneTO test = this.findOne(iscTO.getId());
+		return test != null;
 	}
 
 }

@@ -1,7 +1,5 @@
 package agroludos.business.validator.optional;
 
-import java.io.IOException;
-
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.business.validator.rules.optional.OptRulesFactory;
@@ -18,7 +16,7 @@ class OptionalValidator implements AgroludosValidator{
 	private AgroludosRule costoRule;
 	private AgroludosRule statoRule;
 
-	OptionalValidator(OptRulesFactory rulesFactory, TOFactory toFactory) throws IOException{
+	OptionalValidator(OptRulesFactory rulesFactory, TOFactory toFactory){
 		this.rulesFact = rulesFactory;
 		this.toFact = toFactory;
 

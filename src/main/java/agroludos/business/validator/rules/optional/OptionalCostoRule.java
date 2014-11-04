@@ -1,17 +1,11 @@
 package agroludos.business.validator.rules.optional;
 
-import java.io.IOException;
-
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.OptionalTO;
 
 class OptionalCostoRule extends AgroludosRule {
-
-	protected OptionalCostoRule() throws IOException {
-		super();
-	}
 
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {

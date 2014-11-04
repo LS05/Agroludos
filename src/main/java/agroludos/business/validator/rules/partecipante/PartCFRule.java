@@ -1,7 +1,5 @@
 package agroludos.business.validator.rules.partecipante;
 
-import java.io.IOException;
-
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.business.validator.rules.strings.StringValidator;
 import agroludos.to.AgroludosTO;
@@ -10,10 +8,6 @@ import agroludos.to.PartecipanteTO;
 
 class PartCFRule extends AgroludosRule {
 	private StringValidator strValidator;
-
-	PartCFRule() throws IOException{
-		super();
-	}
 
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {

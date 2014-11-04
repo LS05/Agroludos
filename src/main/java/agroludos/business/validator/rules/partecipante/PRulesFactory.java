@@ -1,23 +1,21 @@
 package agroludos.business.validator.rules.partecipante;
 
-import java.io.IOException;
-
 import agroludos.business.validator.rules.AgroludosRule;
 
 public interface PRulesFactory {
 
-	AgroludosRule getCfRule() throws IOException;
+	AgroludosRule getCfRule();
 
-	AgroludosRule getDataSrcRule() throws IOException;
+	AgroludosRule getDataSrcRule();
 
-	AgroludosRule getIndirizzoRule() throws IOException;
+	AgroludosRule getIndirizzoRule();
 
-	AgroludosRule getSessoRule() throws IOException;
+	AgroludosRule getSessoRule();
 
-	AgroludosRule getSrcRule() throws IOException;
+	AgroludosRule getSrcRule();
 
-	AgroludosRule getTesRule() throws IOException;
+	AgroludosRule getTesRule();
 
-	AgroludosRule getDataNascRule() throws IOException;
+	AgroludosRule getDataNascRule();
 
 }

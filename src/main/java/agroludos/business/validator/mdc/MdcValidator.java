@@ -1,7 +1,5 @@
 package agroludos.business.validator.mdc;
 
-import java.io.IOException;
-
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.business.validator.rules.mdc.MdcRulesFactory;
@@ -23,7 +21,7 @@ class MdcValidator implements AgroludosValidator{
 	private AgroludosRule emailRule;
 	private AgroludosRule stipendioRule;
 
-	MdcValidator(UserRulesFactory userRulesFactory, MdcRulesFactory mdcRulesFactory, TOFactory toFactory) throws IOException{
+	MdcValidator(UserRulesFactory userRulesFactory, MdcRulesFactory mdcRulesFactory, TOFactory toFactory) {
 		this.mdcRulesFact = mdcRulesFactory;
 		this.userRulesFact = userRulesFactory;
 		this.toFact = toFactory;

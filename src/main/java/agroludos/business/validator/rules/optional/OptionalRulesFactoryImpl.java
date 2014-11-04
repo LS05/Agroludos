@@ -1,7 +1,5 @@
 package agroludos.business.validator.rules.optional;
 
-import java.io.IOException;
-
 import agroludos.business.validator.rules.AgroludosRule;
 
 class OptionalRulesFactoryImpl implements OptRulesFactory {
@@ -10,21 +8,21 @@ class OptionalRulesFactoryImpl implements OptRulesFactory {
 	private static OptionalStatoRule optStatoRule;
 	
 	@Override
-	public AgroludosRule getNomeRule() throws IOException {
+	public AgroludosRule getNomeRule() {
 		if(optNomeRule == null)
 			optNomeRule = new OptionalNomeRule();
 		return optNomeRule;
 	}
 	
 	@Override
-	public AgroludosRule getCostoRule() throws IOException {
+	public AgroludosRule getCostoRule() {
 		if(optCostoRule == null)
 			optCostoRule = new OptionalCostoRule();
 		return optCostoRule;
 	}
 	
 	@Override
-	public AgroludosRule getStatoRule() throws IOException {
+	public AgroludosRule getStatoRule() {
 		if(optStatoRule == null)
 			optStatoRule = new OptionalStatoRule();
 		return optStatoRule;
