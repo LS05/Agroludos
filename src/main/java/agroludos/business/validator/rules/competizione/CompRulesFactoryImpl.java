@@ -1,30 +1,28 @@
 package agroludos.business.validator.rules.competizione;
 
-import java.io.IOException;
-
 import agroludos.business.validator.rules.AgroludosRule;
 
 class CompRulesFactoryImpl implements CompRulesFactory {
 	private static CompNomeRule nomeCompRule;
 	private static CompNumPartRule numPartCompRule;
 	private static CompCostoRule costoCompRule;
-	
+
 	@Override
-	public AgroludosRule getNomeRule() throws IOException {
+	public AgroludosRule getNomeRule() {
 		if(nomeCompRule == null)
 			nomeCompRule = new CompNomeRule();
 		return nomeCompRule;
 	}
-	
+
 	@Override
-	public AgroludosRule getNumPartRule() throws IOException {
+	public AgroludosRule getNumPartRule() {
 		if(numPartCompRule == null)
 			numPartCompRule = new CompNumPartRule();
 		return numPartCompRule;
 	}
-	
+
 	@Override
-	public AgroludosRule getCostoRule() throws IOException {
+	public AgroludosRule getCostoRule() {
 		if(costoCompRule == null)
 			costoCompRule = new CompCostoRule();
 		return costoCompRule;

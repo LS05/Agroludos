@@ -1,15 +1,13 @@
 package agroludos.business.validator.rules.competizione;
 
-import java.io.IOException;
-
 import agroludos.business.validator.rules.AgroludosRule;
 
 public interface CompRulesFactory {
 
-	AgroludosRule getNomeRule() throws IOException;
+	AgroludosRule getNomeRule();
 
-	AgroludosRule getNumPartRule() throws IOException;
+	AgroludosRule getNumPartRule();
 
-	AgroludosRule getCostoRule() throws IOException;
+	AgroludosRule getCostoRule();
 
 }

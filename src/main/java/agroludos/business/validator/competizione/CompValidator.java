@@ -1,7 +1,5 @@
 package agroludos.business.validator.competizione;
 
-import java.io.IOException;
-
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.business.validator.rules.competizione.CompRulesFactory;
@@ -18,7 +16,7 @@ class CompValidator implements AgroludosValidator{
 	private AgroludosRule nPartRule;
 	private AgroludosRule costoRule;
 	
-	CompValidator(CompRulesFactory rulesFactory, TOFactory toFactory) throws IOException{
+	CompValidator(CompRulesFactory rulesFactory, TOFactory toFactory){
 		this.compRulesFact = rulesFactory;
 		this.toFact = toFactory;
 
