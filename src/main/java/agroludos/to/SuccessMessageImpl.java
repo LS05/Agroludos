@@ -1,13 +1,13 @@
 package agroludos.to;
 
-public class SuccessImpl implements SuccessTO{
+class SuccessMessageImpl implements SuccessMessageTO{
 	private static final long serialVersionUID = 1L;
 	private String message;
 
 	@Override
 	public void setMessage(String message) {
 		this.message = message;
-		
+
 	}
 
 	@Override

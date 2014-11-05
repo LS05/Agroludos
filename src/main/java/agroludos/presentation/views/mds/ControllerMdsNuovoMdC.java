@@ -28,7 +28,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoUtenteTO;
-import agroludos.to.SuccessTO;
+import agroludos.to.SuccessMessageTO;
 import agroludos.to.TipoUtenteTO;
 
 public class ControllerMdsNuovoMdC extends AgroludosController implements Initializable{
@@ -139,9 +139,9 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 		this.risposta = this.getRisposta();
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 		if(!this.flagError){
-			SuccessTO succTO = toFact.createSuccessTO();
+			SuccessMessageTO succTO = toFact.createSuccMessageTO();
 			succTO.setMessage(this.resources.getString("key132"));
-			this.setVista("successDialog", succTO);
+			this.setVista("messageDialog", succTO);
 		}
 	}
 

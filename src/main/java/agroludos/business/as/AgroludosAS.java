@@ -1,15 +1,15 @@
 package agroludos.business.as;
 
 import agroludos.integration.dao.db.DBFactory;
+import agroludos.system.RulesErrorsConf;
 import agroludos.system.SystemConf;
 import agroludos.to.TOFactory;
 
 public abstract class AgroludosAS {
 	protected SystemConf sysConf;
+	protected RulesErrorsConf errConf;
 	protected DBFactory dbFact;
 	protected TOFactory toFact;
-	
-	//TODO Da rendere privati
 	
 	public void setSysConf(SystemConf sysConf) {
 		this.sysConf = sysConf;
@@ -21,6 +21,10 @@ public abstract class AgroludosAS {
 	
 	public void setToFact(TOFactory toFact) {
 		this.toFact = toFact;
+	}
+
+	public void setErrConf(RulesErrorsConf errConf) {
+		this.errConf = errConf;
 	}
 	
 }

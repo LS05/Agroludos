@@ -13,7 +13,7 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
-import agroludos.to.SuccessTO;
+import agroludos.to.SuccessMessageTO;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -178,10 +178,10 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 				this.getStage("mostraCmp").close();
 
-				SuccessTO succMessage = toFact.createSuccessTO();
+				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.resources.getString("key119"));
 
-				this.setVista("successDialog",succMessage);
+				this.setVista("messageDialog",succMessage);
 
 				EmailTO mail = toFact.createEmailTO();
 				mail.setOggetto(cmp.getNome() + " annullata.");
@@ -206,9 +206,9 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 				this.setVista("mostraCmp",((IscrizioneTO) res).getCompetizione());
 
-				SuccessTO succMessage = toFact.createSuccessTO();
+				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.resources.getString("key123"));
-				this.setVista("successDialog",succMessage);
+				this.setVista("messageDialog",succMessage);
 
 
 				IscrizioneTO iscTO = ((IscrizioneTO) res);
@@ -238,10 +238,10 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 				CompetizioneTO cmp = (CompetizioneTO) res;
 
-				SuccessTO succMessage = toFact.createSuccessTO();
+				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.resources.getString("key99"));
 
-				this.setVista("successDialog",succMessage);
+				this.setVista("messageDialog",succMessage);
 
 				EmailTO mail = toFact.createEmailTO();
 				mail.setOggetto("Modifica competizione " + cmp.getNome());

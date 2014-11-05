@@ -16,7 +16,7 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
-import agroludos.to.SuccessTO;
+import agroludos.to.SuccessMessageTO;
 import agroludos.to.UtenteTO;
 
 public class ControllerPasswordDimenticata extends AgroludosController implements Initializable{
@@ -79,9 +79,9 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 		
 		Object res = this.risposta.getRespData();
 		if(res instanceof UtenteTO){			
-			SuccessTO succMessage = toFact.createSuccessTO();
+			SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 			succMessage.setMessage(this.res.getString("key155"));
-			this.setVista("successDialog",succMessage);
+			this.setVista("messageDialog",succMessage);
 			this.close();
 		}
 	}
@@ -97,9 +97,9 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 			Object res = response.getRespData();
 			if(res instanceof ErrorTO){
 				//TODO gestire 
-				SuccessTO succMessage = toFact.createSuccessTO();
+				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.res.getString("key156"));
-				this.setVista("successDialog",succMessage);
+				this.setVista("messageDialog",succMessage);
 			}
 		}
 	}

@@ -25,7 +25,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
-import agroludos.to.SuccessTO;
+import agroludos.to.SuccessMessageTO;
 
 public class ControllerPartCompetizione extends AgroludosController implements Initializable{
 
@@ -163,9 +163,9 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 				
 				this.btnIscriviti.setDisable(true);
 				
-				SuccessTO succ = toFact.createSuccessTO();
+				SuccessMessageTO succ = toFact.createSuccMessageTO();
 				succ.setMessage(this.res.getString("key157"));
-				this.setVista("successDialog", succ);
+				this.setVista("messageDialog", succ);
 				
 				IscrizioneTO iscTO = ((IscrizioneTO) res);
 				EmailTO mail = toFact.createEmailTO();

@@ -24,7 +24,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.OptionalTO;
-import agroludos.to.SuccessTO;
+import agroludos.to.SuccessMessageTO;
 import agroludos.to.TipiAgroludosTO;
 import agroludos.to.TipoOptionalTO;
 
@@ -193,9 +193,9 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 				this.tableOptionalScelti.getItems().clear();
 				this.tableOptionalScelti.getItems().setAll(this.optSceltiData);
 			}else{
-				SuccessTO succMessage = toFact.createSuccessTO();
+				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.res.getString("key148"));
-				this.setVista("successDialog",succMessage);
+				this.setVista("messageDialog",succMessage);
 			}
 		}
 		this.AggiornaTotale();

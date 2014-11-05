@@ -21,7 +21,7 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.PartecipanteTO;
-import agroludos.to.SuccessTO;
+import agroludos.to.SuccessMessageTO;
 import agroludos.to.UtenteTO;
 
 public class ControllerLogin extends AgroludosController implements Initializable{
@@ -116,9 +116,9 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 		if(commandName.equals(this.getCommandName("inserisciPartecipante") )){
 			Object res = response.getRespData();
 			if(res instanceof PartecipanteTO){
-				SuccessTO succMessage = toFact.createSuccessTO();
+				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.res.getString("key152"));
-				this.setVista("successDialog", succMessage);
+				this.setVista("messageDialog", succMessage);
 			}
 		}else if(commandName.equals(this.getCommandName("autenticazioneUtente") )){
 			Object res = response.getRespData();

@@ -1,0 +1,22 @@
+#errDialogPane{
+	-fx-background-color: #f6f6f6;
+}
+
+#successIconPane{
+	-fx-background-image: url("../../images/icons/ok.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: 40 40;
+    -fx-background-position: center center;
+}
+
+#errorIconPane{
+	-fx-background-image: url("../../images/icons/error.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: 40 40;
+    -fx-background-position: center center;	
+}
+
+#messageTitle{
+	-fx-background-color: #fafbfc;
+	-fx-border-color: #e1e1e1 #e1e1e1 #c2c2c2 #e1e1e1;	
+}

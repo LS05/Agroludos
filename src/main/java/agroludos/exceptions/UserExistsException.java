@@ -4,7 +4,7 @@ package agroludos.exceptions;
 public class UserExistsException extends ValidationException {
 	
 	public UserExistsException(){
-		super("Combinazione Username e Email già presente!");
+		super("Username e/o Email già presenti!");
 	}
 
 	public UserExistsException(String message){

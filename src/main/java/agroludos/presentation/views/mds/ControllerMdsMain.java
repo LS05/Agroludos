@@ -32,7 +32,7 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.PartecipanteTO;
-import agroludos.to.SuccessTO;
+import agroludos.to.SuccessMessageTO;
 import agroludos.to.TipiAgroludosTO;
 import agroludos.to.TipoCompetizioneTO;
 import agroludos.to.TipoOptionalTO;
@@ -503,9 +503,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				optModel.setCosto(optTO.getCosto());
 				optModel.setDescrizione(optTO.getDescrizione());
 				optModel.setNomeStato(optTO.getStatoOptional().getNome());
-				SuccessTO succTO = toFact.createSuccessTO();
+				SuccessMessageTO succTO = toFact.createSuccMessageTO();
 				succTO.setMessage(this.resources.getString("key167"));
-				this.setVista("successDialog", succTO);
+				this.setVista("messageDialog", succTO);
 			}
 		} else if( commandName.equals( this.getCommandName("inserisciOptional") )){
 			Object res = response.getRespData();
@@ -527,9 +527,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			if(res instanceof ManagerDiCompetizioneTO){
 				ManagerDiCompetizioneTO mdc = (ManagerDiCompetizioneTO)res;
 				this.lblMdcStato.setText(mdc.getStatoUtente().getNome());
-				SuccessTO succTO = toFact.createSuccessTO();
+				SuccessMessageTO succTO = toFact.createSuccMessageTO();
 				succTO.setMessage(this.resources.getString("key130"));
-				this.setVista("successDialog", succTO);
+				this.setVista("messageDialog", succTO);
 			}
 		} else if( commandName.equals( this.getCommandName("nuovoManagerDiCompetizione") )){
 			Object res = response.getRespData();

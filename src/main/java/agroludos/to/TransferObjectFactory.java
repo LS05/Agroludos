@@ -8,8 +8,13 @@ class TransferObjectFactory implements TOFactory {
 	}
 
 	@Override
-	public SuccessTO createSuccessTO(){
-		return new SuccessImpl();
+	public SuccessMessageTO createSuccMessageTO(){
+		return new SuccessMessageImpl();
+	}
+
+	@Override
+	public ErrorMessageTO createErrMessageTO(){
+		return new ErrorMessageImpl();
 	}
 
 	@Override
@@ -105,5 +110,6 @@ class TransferObjectFactory implements TOFactory {
 	@Override
 	public EmailTO createEmailTO() {
 		return new EmailImpl();
-	}	
+	}
+
 }

@@ -24,7 +24,7 @@ import agroludos.presentation.views.components.datepicker.AgroDatePicker;
 import agroludos.presentation.views.components.numberspinner.NumberSpinner;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
-import agroludos.to.SuccessTO;
+import agroludos.to.SuccessMessageTO;
 
 public class ControllerMdcModificaCompetizione extends AgroludosController implements Initializable{
 	private String viewName;
@@ -139,9 +139,9 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 
 		Object res = this.risposta.getRespData();
 		if(res instanceof CompetizioneTO){			
-			SuccessTO succMessage = toFact.createSuccessTO();
+			SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 			succMessage.setMessage(this.getCommandName(this.res.getString("key99")));
-			this.setVista("successDialog",succMessage);
+			this.setVista("messageDialog",succMessage);
 		}
 
 		this.close();

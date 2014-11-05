@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="errDialogPane" maxHeight="-1.0" maxWidth="-Infinity" minHeight="-1.0" minWidth="-Infinity" prefHeight="225.0" prefWidth="564.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="agroludos.presentation.views.message.ControllerMessage">
+  <children>
+    <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <GridPane prefHeight="43.0" prefWidth="355.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+          <children>
+            <Button id="btnOkErrLogin" mnemonicParsing="false" onMouseClicked="#btnOkClicked" prefWidth="82.0" text="OK" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+              <GridPane.margin>
+                <Insets right="15.0" />
+              </GridPane.margin>
+            </Button>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+        <GridPane GridPane.columnIndex="0" GridPane.rowIndex="1">
+          <children>
+            <Label id="" fx:id="lblMessage" alignment="TOP_LEFT" prefHeight="-1.0" prefWidth="-1.0" text="Successo" textAlignment="LEFT" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+              <font>
+                <Font name="System Bold" size="14.0" />
+              </font>
+              <textFill>
+                <Color blue="0.251" green="0.251" red="0.251" fx:id="x1" />
+              </textFill>
+              <GridPane.margin>
+                <Insets left="10.0" top="10.0" />
+              </GridPane.margin>
+            </Label>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="10.0" prefWidth="-1.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+        <GridPane id="messageTitle" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <children>
+            <Pane fx:id="errorIconPane" prefHeight="-1.0" prefWidth="-1.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Pane fx:id="successIconPane" prefHeight="-1.0" prefWidth="-1.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="482.0" minWidth="10.0" prefWidth="480.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="84.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+        <Label id="" fx:id="lblSuccTitle" alignment="TOP_LEFT" prefHeight="-1.0" prefWidth="-1.0" text="%key170" textAlignment="LEFT" textFill="$x1" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <font>
+            <Font name="System Bold" size="18.0" fx:id="x2" />
+          </font>
+          <GridPane.margin>
+            <Insets left="10.0" />
+          </GridPane.margin>
+        </Label>
+        <Label id="" fx:id="lblErrTitle" alignment="TOP_LEFT" font="$x2" prefHeight="-1.0" prefWidth="-1.0" text="%key169" textAlignment="LEFT" textFill="#ff3333" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <GridPane.margin>
+            <Insets left="10.0" />
+          </GridPane.margin>
+        </Label>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="84.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="94.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </children>
+  <stylesheets>
+    <URL value="@messageDialog.css" />
+  </stylesheets>
+</AnchorPane>

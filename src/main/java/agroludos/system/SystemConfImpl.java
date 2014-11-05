@@ -5,7 +5,7 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
 
-class SystemConfImpl implements SystemConf, HibernateConf, ErrorsConf, ReqConf{
+class SystemConfImpl implements SystemConf, HibernateConf, RulesErrorsConf, ReqConf{
 	private CompositeConfiguration config; 
 	private PropertiesConfiguration fileConf;
 
@@ -81,12 +81,22 @@ class SystemConfImpl implements SystemConf, HibernateConf, ErrorsConf, ReqConf{
 	}
 
 	@Override
-	public String getError(String ruleName) {
+	public String getErrorMessage(String ruleName) {
+		return this.config.getString(ruleName);
+	}
+
+	@Override
+	public String getErrorKey(String ruleName) {
 		return this.config.getString(ruleName);
 	}
 
 	@Override
 	public String getRequest(String requestName) {
 		return this.config.getString(requestName);
+	}
+
+	@Override
+	public String getRule(String ruleName) {
+		return this.config.getString(ruleName);
 	}
 }

@@ -43,7 +43,7 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
 
-		if( !(daoPar.esisteEmail(partTO) && daoPar.esisteUsername(partTO) ) ){ 
+		if( !daoPar.esisteEmail(partTO) && !daoPar.esisteUsername(partTO) ){ 
 
 			this.validator.validate(partTO);
 
