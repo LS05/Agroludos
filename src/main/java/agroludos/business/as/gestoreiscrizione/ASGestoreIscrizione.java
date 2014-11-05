@@ -12,7 +12,6 @@ import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.IscrizioneDAO;
 import agroludos.integration.dao.db.StatoIscrizioneDAO;
-import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.StatoIscrizioneTO;
 

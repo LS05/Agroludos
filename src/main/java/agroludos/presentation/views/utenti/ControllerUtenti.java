@@ -33,10 +33,8 @@ public class ControllerUtenti extends AgroludosController {
 				UtenteTO uto = (UtenteTO)res;
 				this.setUtente(uto);
 				request.getSession().setAttribute(uto);
-				//aggiungo la scena al mainStage
 				this.setVista(uto.getTipoUtente().getNome());
 			}
 		}
 	}
-
 }

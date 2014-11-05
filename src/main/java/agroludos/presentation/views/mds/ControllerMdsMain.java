@@ -16,6 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.components.table.AgroTable;
@@ -112,7 +113,6 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.paneGestioneMdC.setVisible(false);
 		this.paneGestionePartecipanti.setVisible(false);
 
-
 		this.richiesta = this.getRichiesta("getAllTipoCompetizione", this.viewName);
 		this.risposta = this.getRisposta();
 		this.eseguiRichiesta(this.richiesta, this.risposta);
@@ -134,6 +134,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 						setVista("mostraCmpMds", cmpModelRow.getCompetizioneTO());
 				}
 			}
+
 		});
 
 		final String viewNameSupp = this.viewName;
@@ -156,9 +157,6 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			}
 
 		});
-
-
-
 	}
 
 	private void setDxMdCColumn(Integer selected){
@@ -196,8 +194,6 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		});
 	}
 
-	//----------------Main View--------------------
-
 	@FXML protected void btnGestComp(MouseEvent event) {
 
 		this.paneGestioneCompetizioni.setVisible(true);
@@ -219,10 +215,8 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.listViewOpt = new ListaViewTipi(this.listTipiOpt);
 		this.paneListaTipiOpt.getChildren().add(listViewOpt);
 
-
-
 		final String viewNameSupp = this.viewName;
-		listViewOpt.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		this.listViewOpt.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@SuppressWarnings("unchecked")
 			@Override
@@ -240,9 +234,6 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			}
 
 		});
-
-
-
 
 		this.paneGestioneCompetizioni.setVisible(false);
 		this.paneGestioneOptional.setVisible(true);
@@ -393,7 +384,6 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	@FXML protected void menuEsci(ActionEvent event){
 		this.close();
 	}
-
 
 	@SuppressWarnings("unchecked")
 	@Override

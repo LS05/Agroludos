@@ -20,13 +20,13 @@
       <center>
         <AnchorPane visible="true">
           <children>
-            <GridPane fx:id="paneGestioneCompetizioni" prefHeight="-1.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane fx:id="paneGestioneCompetizioni" prefHeight="-1.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <Button fx:id="btnNuovoTipoCompetizione" mnemonicParsing="false" onMouseClicked="#nuovoTipoCompetizioneClicked" prefHeight="25.0" prefWidth="222.0" text="%key104" GridPane.halignment="CENTER" />
                 <GridPane GridPane.columnIndex="1">
                   <children>
                     <Button fx:id="btnCercaCompetizioni" mnemonicParsing="false" text="%key18" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                    <TextField GridPane.halignment="CENTER">
+                    <TextField fx:id="txtFilterComp" GridPane.halignment="CENTER">
                       <GridPane.margin>
                         <Insets left="10.0" />
                       </GridPane.margin>
@@ -115,7 +115,7 @@
                 <RowConstraints maxHeight="-1.0" minHeight="10.0" prefHeight="-1.0" vgrow="ALWAYS" />
               </rowConstraints>
             </GridPane>
-            <GridPane fx:id="paneGestionePartecipanti" prefHeight="118.0" prefWidth="200.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane fx:id="paneGestionePartecipanti" prefHeight="118.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <GridPane id="" visible="true">
                   <children>

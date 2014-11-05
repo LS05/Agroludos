@@ -240,6 +240,6 @@
     </BorderPane>
   </children>
   <stylesheets>
-    <URL value="@../workspace/agroludos/src/main/resources/fxml/mdc/main.css" />
+    <URL value="@main.css" />
   </stylesheets>
 </AnchorPane>
