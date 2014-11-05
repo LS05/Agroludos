@@ -273,5 +273,8 @@
 		<from name="managerDiCompetizione">
 			<forward success="managerDiCompetizione" failure="mostraCmp" />
 		</from>
+		<from name="partMostraCompetizione">
+			<forward success="partecipante" failure="partMostraCompetizione" />
+		</from>
 	</command>
 </commands>

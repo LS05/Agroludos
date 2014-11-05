@@ -86,4 +86,8 @@
 		class="agroludos.business.as.gestoretipoutente.ASGestoreTipoUtente"
 		parent="agroludosAS">
 	</bean>
+	<bean id="gestoreEmail"
+		class="agroludos.business.as.gestoremail.ASGestoreEmail"
+		parent="agroludosAS">
+	</bean>
 </beans>

@@ -1,5 +1,7 @@
 package agroludos.business.as.gestoremail;
 
-public interface SEmail {
+import agroludos.business.as.AgroludosService;
+
+public interface SEmail extends AgroludosService{
 
 }
