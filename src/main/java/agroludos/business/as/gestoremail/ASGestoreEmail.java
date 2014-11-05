@@ -2,7 +2,6 @@ package agroludos.business.as.gestoremail;
 
 import java.util.Properties;
 
-import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -17,7 +16,6 @@ import agroludos.to.EmailTO;
 import agroludos.to.UtenteTO;
 
 class ASGestoreEmail extends AgroludosAS implements LEmail, SEmail{
-
 
 	@Override
 	public boolean sendEmail(EmailTO emailTO) throws DatabaseException {
@@ -44,14 +42,14 @@ class ASGestoreEmail extends AgroludosAS implements LEmail, SEmail{
 
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("jackeb@hotmail.it"));
-			
+
 			message.setSubject(emailTO.getOggetto());
 			message.setText(emailTO.getMessage());
 			// To get the array of addresses
 			for(UtenteTO uTO: emailTO.getDestinatari()){;
-				message.setRecipients(Message.RecipientType.TO,
-						InternetAddress.parse(uTO.getEmail()));
-				Transport.send(message);
+			message.setRecipients(Message.RecipientType.TO,
+					InternetAddress.parse(uTO.getEmail()));
+			Transport.send(message);
 			}
 			res = true;
 			System.out.println("Done");
