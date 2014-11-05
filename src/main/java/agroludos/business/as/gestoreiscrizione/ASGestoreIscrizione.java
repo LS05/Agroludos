@@ -9,6 +9,7 @@ import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.IscrizioneDAO;
 import agroludos.integration.dao.db.StatoIscrizioneDAO;
+import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.StatoIscrizioneTO;
 
@@ -39,21 +40,26 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 			throws DatabaseException, ValidationException {
 
 		IscrizioneDAO iscDAO = getIscrizioneDAO();
+		boolean checkPart=false;
 
-		if(! iscDAO.esisteIscrizione(iscTO) ){
-
+		for(IscrizioneTO isc : iscTO.getCompetizione().getAllIscrizioniAttive()){
+			if(isc.getPartecipante().getId() == iscTO.getPartecipante().getId())
+				checkPart = true;
+		}
+		if(checkPart){
+			//TODO eccezione partecipante già iscritto
+		}else if(iscTO.getPartecipante().getDataSRC().after(iscTO.getCompetizione().getData())){
 			this.validator.validate(iscTO);
 
 			StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
 
-			//TODO se il certificato è scaduto,
-			//non fa l'iscrizione
-			//TODO partecipante già iscritto
 			StatoIscrizioneTO siTO = statoIscDAO.getAll().get(1);
-
-			iscTO.setStatoIscrizione(siTO);
+			List<StatoIscrizioneTO> listSI = statoIscDAO.getAll();
+			
+			iscTO.setStatoIscrizione(listSI.get(1));
+		}else{
+			//TODO eccezione la data di scadenza è antecedente l'inizio della competizione
 		}
-
 		return iscDAO.create(iscTO);
 	}
 

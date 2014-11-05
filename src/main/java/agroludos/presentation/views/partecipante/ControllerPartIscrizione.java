@@ -70,6 +70,8 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 
 			if(this.mainComp.getAllOptionals().isEmpty())
 				this.btnSelezionaOptional.setDisable(true);
+			else
+				this.btnSelezionaOptional.setDisable(false);
 		}
 	}
 
