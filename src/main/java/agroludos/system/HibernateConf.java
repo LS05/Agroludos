@@ -1,6 +1,6 @@
 package agroludos.system;
 
-public interface HibernateConf {
+public interface HibernateConf extends Conf{
 
 	public String getConfPath();
 

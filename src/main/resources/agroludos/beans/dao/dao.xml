@@ -10,10 +10,12 @@
     
 	<bean id="fileFactory" class="agroludos.integration.dao.file.FileFactoryImpl">
 		<constructor-arg ref="toFactory" />
+		<constructor-arg ref="systemConf" />
 	</bean>
 	
 	<bean id="txtDaoFactory" class="agroludos.integration.dao.file.txt.TxtDAOFactory">
 		<constructor-arg ref="toFactory" />
+		<constructor-arg ref="systemConf" />
 	</bean>
 	
 	<bean id="dbFactory" class="agroludos.integration.dao.db.DBFactory">

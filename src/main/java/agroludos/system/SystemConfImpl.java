@@ -99,4 +99,9 @@ class SystemConfImpl implements SystemConf, HibernateConf, RulesErrorsConf, ReqC
 	public String getRule(String ruleName) {
 		return this.config.getString(ruleName);
 	}
+
+	@Override
+	public String getString(String key) {
+		return this.config.getString(key);
+	}
 }

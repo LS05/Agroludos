@@ -1,6 +1,6 @@
 package agroludos.system;
 
-public interface SystemConf {
+public interface SystemConf extends Conf{
 
 	void setTipoDB(String tipoDB);
 

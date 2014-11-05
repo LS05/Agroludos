@@ -8,6 +8,7 @@ import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
+import agroludos.to.CertificatoTO;
 import agroludos.to.PartecipanteTO;
 
 public class ControllerVisualizzaCRSC extends AgroludosController {
@@ -37,14 +38,12 @@ public class ControllerVisualizzaCRSC extends AgroludosController {
 			this.risposta = this.getRisposta();
 			this.richiesta = this.getRichiesta(this.parTO, "getCertificatoSRC", this.viewName);
 			this.eseguiRichiesta(this.richiesta, this.risposta);
-
 		}
 	}
 
 	@Override
 	public void initializeView(String nameView) {
 		this.viewName = nameView;
-
 	}
 
 	@Override
@@ -54,10 +53,14 @@ public class ControllerVisualizzaCRSC extends AgroludosController {
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		if(request.getCommandName().equals("getCertificatoSRC")){
+		String commandName = request.getCommandName();
+
+		if( commandName.equals("getCertificatoSRC") ){
 			Object res = response.getRespData();
-			if(res instanceof String)
-				this.txtAreaCertificato.setText((String) res);
+			if(res instanceof CertificatoTO){
+				CertificatoTO certificato = (CertificatoTO)res;
+				this.txtAreaCertificato.setText(certificato.getCertificatoCont());
+			}
 		}
 	}
 }

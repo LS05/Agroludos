@@ -9,6 +9,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import agroludos.integration.dao.file.CertificatoSRCDAO;
+import agroludos.system.Conf;
 import agroludos.to.CertFile;
 import agroludos.to.CertificatoTO;
 import agroludos.to.PartecipanteTO;
@@ -17,21 +18,28 @@ import agroludos.to.TOFactory;
 public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 
 	private TOFactory toFact;
+	private Conf sysConf;
 
-	TxtCertificatoSRCDAO(TOFactory toFact){
+	TxtCertificatoSRCDAO(TOFactory toFact, Conf sysConf){
 		this.toFact = toFact;
+		this.sysConf = sysConf;
+	}
+
+	private String getCertPath(PartecipanteTO partTO){
+		StringBuilder certPath = new StringBuilder(100);
+		certPath.append(this.sysConf.getString("certPath"));
+		certPath.append(partTO.getUsername());
+		certPath.append(this.sysConf.getString("certFile"));
+		return certPath.toString();
 	}
 
 	@Override
-	public CertificatoTO getCertificato(PartecipanteTO partTO) 
-			throws IOException {
+	public CertificatoTO getCertificato(PartecipanteTO partTO) {
+		CertFile certFile = this.toFact.createCertFile();
+		CertificatoTO certTO = this.toFact.createCertificatoTO();
 		StringBuilder certCont = new StringBuilder();
-		StringBuilder certPath = new StringBuilder(100);
 
-		certPath.append("utenti/certificati/");
-		certPath.append(partTO.getUsername());
-		certPath.append("/");
-		certPath.append("certificato.txt");
+		String certPath = this.getCertPath(partTO); 
 
 		BufferedReader br = null;
 		String certificato = "";
@@ -48,34 +56,37 @@ public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 			}
 
 			certificato = certCont.toString();
+
+			certFile.setFile(new File(certPath.toString()));
+			certTO.setCertificatoFile(certFile);
+			certTO.setCertificatoCont(certificato);
+
 		} catch(IOException e){
-			throw e;
+			//TODO loggare l'ioException
+			certificato = this.sysConf.getString("srcContError");
+			certTO.setCertificatoCont(certificato);
 		} finally{
-			br.close();
+			if( br != null )
+				try {
+					br.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
-
-		CertFile certFile = this.toFact.createCertFile();
-		CertificatoTO certTO = this.toFact.createCertificatoTO();
-
-		certFile.setFile(new File(certPath.toString()));
-		certTO.setCertificatoFile(certFile);
-		certTO.setCertificatoCont(certificato);
 
 		return certTO;
 	}
 
 	@Override
 	public void salvaCertificato(PartecipanteTO partTO) throws IOException {
-		StringBuilder sb = new StringBuilder(100);
-		sb.append("utenti/certificati/");
-		sb.append(partTO.getUsername());
-		sb.append("/");
+		String certPath = this.getCertPath(partTO);
 
 		File in = new File(partTO.getSrc());
 
 		String inFileName = FilenameUtils.getName(in.toString());
 
-		File out = new File(sb.toString());
+		File out = new File(certPath.toString());
 		try{
 			FileUtils.deleteDirectory(out);
 			FileUtils.forceMkdir(out);
@@ -85,11 +96,11 @@ public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 		}
 
 		File outFileName = FileUtils.getFile(out.toString() + "/" + inFileName);
-		String certPath = FilenameUtils.getFullPath(outFileName.getAbsolutePath());
-		
-		String renamePath = certPath + "certificato.txt";
+		String absCertPath = FilenameUtils.getFullPath(outFileName.getAbsolutePath());
+
+		String renamePath = absCertPath + "certificato.txt";
 		outFileName.renameTo(new File(renamePath));
-		
+
 		partTO.setSrc(out.toString() + "/certificato.txt");
 	}
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.DatabaseException;
-import agroludos.exceptions.UserExistsException;
+import agroludos.exceptions.UtenteEsistenteException;
 import agroludos.exceptions.UserNotFoundException;
 import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.DBDAOFactory;
@@ -53,7 +53,7 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 			partTO.setCertificato(daoCert.getCertificato(partTO));
 
 		} else {
-			throw new UserExistsException();
+			throw new UtenteEsistenteException();
 		}
 
 		return daoPar.create(partTO);
@@ -65,6 +65,7 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 			throws DatabaseException, ValidationException {
 
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
+
 		this.validator.validate(parto);
 
 		PartecipanteTO part = (PartecipanteTO)daoPar.update(parto);
@@ -107,7 +108,7 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 
 	@Override
 	public List<PartecipanteTO> getAllPartecipante() 
-			throws DatabaseException, IOException {
+			throws DatabaseException {
 
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
 		CertificatoSRCDAO certDao = this.getCertificatoSRCDAO();

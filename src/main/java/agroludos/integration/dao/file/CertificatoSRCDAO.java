@@ -7,7 +7,7 @@ import agroludos.to.PartecipanteTO;
 
 public interface CertificatoSRCDAO {
 	
-	public CertificatoTO getCertificato(PartecipanteTO partTO) throws IOException;
+	public CertificatoTO getCertificato(PartecipanteTO partTO);
 	
 	public void salvaCertificato(PartecipanteTO partTO) throws IOException;
 	
