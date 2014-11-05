@@ -43,36 +43,34 @@ public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 
 		BufferedReader br = null;
 		String certificato = "";
-
+		
 		try{
-			br = new BufferedReader(new FileReader(certPath.toString()));
-			certCont = new StringBuilder(300);
-			String line = br.readLine();
+			try{
+				br = new BufferedReader(new FileReader(certPath.toString()));
+				certCont = new StringBuilder(300);
+				String line = br.readLine();
 
-			while (line != null) {
-				certCont.append(line);
-				certCont.append(System.lineSeparator());
-				line = br.readLine();
-			}
-
-			certificato = certCont.toString();
-
-			certFile.setFile(new File(certPath.toString()));
-			certTO.setCertificatoFile(certFile);
-			certTO.setCertificatoCont(certificato);
-
-		} catch(IOException e){
-			//TODO loggare l'ioException
-			certificato = this.sysConf.getString("srcContError");
-			certTO.setCertificatoCont(certificato);
-		} finally{
-			if( br != null )
-				try {
-					br.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				while (line != null) {
+					certCont.append(line);
+					certCont.append(System.lineSeparator());
+					line = br.readLine();
 				}
+
+				certificato = certCont.toString();
+
+				certFile.setFile(new File(certPath.toString()));
+				certTO.setCertificatoFile(certFile);
+				certTO.setCertificatoCont(certificato);
+
+			} catch(IOException e){
+				//TODO loggare l'ioException
+				certificato = this.sysConf.getString("srcContError");
+				certTO.setCertificatoCont(certificato);
+			} finally{
+				br.close();
+			}
+		} catch(Exception e){
+			e.printStackTrace();
 		}
 
 		return certTO;
