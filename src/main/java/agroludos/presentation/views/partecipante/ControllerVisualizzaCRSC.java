@@ -55,7 +55,7 @@ public class ControllerVisualizzaCRSC extends AgroludosController {
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals("getCertificatoSRC") ){
+		if( commandName.equals(this.getCommandName("getCertificatoSRC") )){
 			Object res = response.getRespData();
 			if(res instanceof CertificatoTO){
 				CertificatoTO certificato = (CertificatoTO)res;

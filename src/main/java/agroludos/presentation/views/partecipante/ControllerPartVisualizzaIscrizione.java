@@ -132,12 +132,12 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals("getAllStatoIscrizione") ){
+		if( commandName.equals(this.getCommandName("getAllStatoIscrizione") )){
 			Object res = response.getRespData();
 			if(res instanceof List<?>){			
 				this.statiIscrizione = (List<StatoIscrizioneTO>) res;
 			}
-		} else if( commandName.equals("modificaIscrizione") ){
+		} else if( commandName.equals(this.getCommandName("modificaIscrizione") )){
 			Object res = response.getRespData();
 			if(res instanceof IscrizioneTO){			
 				this.mainIscr = (IscrizioneTO) res;

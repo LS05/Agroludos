@@ -42,7 +42,7 @@ class Utente implements UtenteTO{
 		return id;
 	}
 
-	public void setId(Integer id) {
+	void setId(Integer id) {
 		this.id = id;
 	}
 

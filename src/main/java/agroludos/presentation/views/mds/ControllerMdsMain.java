@@ -59,6 +59,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	//button gest competizioni
 	@FXML private GridPane paneTableCmp;
 	@FXML private TableCompetizioni tableCompetizioni;
+	@FXML private TextField txtFilterComp;
 	@FXML private GridPane paneListaTipiComp;
 	private List<CompetizioneTO> listComp;
 	private List<TipiAgroludosTO> listTipiComp;
@@ -136,6 +137,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			}
 
 		});
+
 
 		final String viewNameSupp = this.viewName;
 		this.listViewComp.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -264,10 +266,6 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 				});
 
-
-
-
-
 		this.paneGestioneCompetizioni.setVisible(false);
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneMdC.setVisible(true);
@@ -295,7 +293,6 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 					}
 
 				});
-
 
 		this.paneGestioneCompetizioni.setVisible(false);
 		this.paneGestioneOptional.setVisible(false);

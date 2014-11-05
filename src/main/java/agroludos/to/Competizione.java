@@ -129,7 +129,7 @@ class Competizione implements CompetizioneTO{
 		return id;
 	}
 
-	public void setId(Integer id) {
+	void setId(Integer id) {
 		this.id = id;
 	}
 

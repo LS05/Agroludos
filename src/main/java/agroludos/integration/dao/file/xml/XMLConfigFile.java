@@ -16,11 +16,11 @@ class XMLConfigFile {
 	private String usernameDB;
 	private String passwordDB;
 	private HibernateConf confData;
-	
+
 	XMLConfigFile(HibernateConf confData){
 		this.confData = confData;
 	}
-	
+
 	String getConfPath(){
 		return this.confData.getConfPath();
 	}
@@ -74,7 +74,14 @@ class XMLConfigFile {
 					}
 
 					if(attrValue.equals(this.confData.getHibUrl())){
-						String urlDB = this.confData.getUrl() + this.serverDB + ":" + this.portaDB + "/" + this.nomeDB;
+						StringBuilder sb = new StringBuilder(100);
+						sb.append(this.confData.getUrl());
+						sb.append(this.serverDB);
+						sb.append(":");
+						sb.append(this.portaDB);
+						sb.append("/");
+						sb.append(this.nomeDB);
+						String urlDB = sb.toString();
 						node.setTextContent(urlDB);
 						res = true;
 					}

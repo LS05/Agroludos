@@ -14,7 +14,9 @@ public class AgroludosInitController extends AgroludosController{
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		if(request.getCommandName().equals("checkConfigurazione")){
+		String commandName = request.getCommandName();
+		
+		if(commandName.equals(this.getCommandName("checkConfigurazione") )){
 			boolean isConf = (Boolean)response.getRespData();
 
 			if(isConf){
@@ -24,7 +26,7 @@ public class AgroludosInitController extends AgroludosController{
 			}else{
 				this.setVista("configurazione");
 			}
-		}else if(request.getCommandName().equals("testConnessioneDB")){
+		}else if(commandName.equals(this.getCommandName("testConnessioneDB") )){
 			boolean dbConn = (Boolean)response.getRespData();
 			if(dbConn){
 				this.richiesta = this.getRichiesta("checkMds", this.viewName);
@@ -33,7 +35,7 @@ public class AgroludosInitController extends AgroludosController{
 			} else {
 				System.out.println("Connessione Database Non Riuscita");
 			}
-		}else if(request.getCommandName().equals("checkMds")){
+		}else if(commandName.equals(this.getCommandName("checkMds") )){
 			boolean mds = (Boolean)response.getRespData();
 			if(mds){
 				this.setVista("login");

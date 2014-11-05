@@ -287,7 +287,7 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 			TipoOptionalTO tipo = optional.getTipoOptional();
 			if(!this.mainData.containsKey(tipo)){
 				this.listTipiOpt.add(tipo);
-				ArrayList<OptionalTO> nList = new ArrayList<OptionalTO>();
+				List<OptionalTO> nList = new ArrayList<OptionalTO>();
 				nList.add(optional);
 				this.mainData.put(tipo, nList);
 			} else {

@@ -43,10 +43,10 @@ public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 
 		BufferedReader br = null;
 		String certificato = "";
-		
+
 		try{
 			try{
-				br = new BufferedReader(new FileReader(certPath.toString()));
+				br = new BufferedReader(new FileReader(certPath));
 				certCont = new StringBuilder(300);
 				String line = br.readLine();
 
@@ -58,7 +58,7 @@ public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 
 				certificato = certCont.toString();
 
-				certFile.setFile(new File(certPath.toString()));
+				certFile.setFile(new File(certPath));
 				certTO.setCertificatoFile(certFile);
 				certTO.setCertificatoCont(certificato);
 
@@ -67,7 +67,8 @@ public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 				certificato = this.sysConf.getString("srcContError");
 				certTO.setCertificatoCont(certificato);
 			} finally{
-				br.close();
+				if( br != null )
+					br.close();
 			}
 		} catch(Exception e){
 			e.printStackTrace();
@@ -84,7 +85,7 @@ public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 
 		String inFileName = FilenameUtils.getName(in.toString());
 
-		File out = new File(certPath.toString());
+		File out = new File(certPath);
 		try{
 			FileUtils.deleteDirectory(out);
 			FileUtils.forceMkdir(out);

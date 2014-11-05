@@ -3,28 +3,22 @@ package agroludos.business.validator.rules.competizione;
 import agroludos.business.validator.rules.AgroludosRule;
 
 class CompRulesFactoryImpl implements CompRulesFactory {
-	private static CompNomeRule nomeCompRule;
-	private static CompNumPartRule numPartCompRule;
-	private static CompCostoRule costoCompRule;
+	private final static CompNomeRule nomeCompRule = new CompNomeRule();
+	private final static CompNumPartRule numPartCompRule = new CompNumPartRule();;
+	private final static CompCostoRule costoCompRule = new CompCostoRule();
 
 	@Override
 	public AgroludosRule getNomeRule() {
-		if(nomeCompRule == null)
-			nomeCompRule = new CompNomeRule();
 		return nomeCompRule;
 	}
 
 	@Override
 	public AgroludosRule getNumPartRule() {
-		if(numPartCompRule == null)
-			numPartCompRule = new CompNumPartRule();
 		return numPartCompRule;
 	}
 
 	@Override
 	public AgroludosRule getCostoRule() {
-		if(costoCompRule == null)
-			costoCompRule = new CompCostoRule();
 		return costoCompRule;
 	}
 }

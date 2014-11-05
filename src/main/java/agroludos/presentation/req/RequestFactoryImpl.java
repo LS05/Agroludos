@@ -6,7 +6,7 @@ class RequestFactoryImpl implements RequestFactory{
 	
 	private AgroSession session;
 	
-	public RequestFactoryImpl(AgroSession session) {
+	RequestFactoryImpl(AgroSession session) {
 		this.session = session;
 	}
 	

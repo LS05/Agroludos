@@ -6,7 +6,7 @@ import agroludos.integration.dao.file.FileDAOFactory;
 
 public class XmlDAOFactory implements FileDAOFactory{
 	
-	private static XmlConfigurazioneDAO xmlConf = new XmlConfigurazioneDAO();
+	private final static XmlConfigurazioneDAO xmlConf = new XmlConfigurazioneDAO();
 	
 	@Override
 	public FConfigurazioneDAO getConfigurazioneDAO() {

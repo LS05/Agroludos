@@ -6,12 +6,12 @@ import agroludos.system.Conf;
 import agroludos.to.TOFactory;
 
 class FileFactoryImpl implements FileFactory{
-	
+
 	private static XmlDAOFactory xmlFact;
 	private static TxtDAOFactory txtFact;
 	private TOFactory toFact;
 	private Conf sysConf;
-	
+
 	FileFactoryImpl(TOFactory toFact, Conf sysConf){
 		this.toFact = toFact;
 		this.sysConf = sysConf;
@@ -23,9 +23,9 @@ class FileFactoryImpl implements FileFactory{
 	public FileDAOFactory getDAOFactory(String tipo){
 		FileDAOFactory res = null;
 
-		if(tipo.equalsIgnoreCase("xml")){
+		if( "xml".equalsIgnoreCase(tipo) ){
 			res = xmlFact;
-		} else if(tipo.equals("txt")){
+		} else if( "txt".equals(tipo) ){
 			res = txtFact;
 		}
 

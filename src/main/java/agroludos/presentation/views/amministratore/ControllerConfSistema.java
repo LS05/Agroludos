@@ -24,7 +24,7 @@ import javafx.scene.layout.GridPane;
  */
 public class ControllerConfSistema extends AgroludosController {
 	private String viewName;
-	
+
 	@FXML private Button btnAvantiConf;
 	@FXML private Button btnIndietroConf;
 	@FXML private Button btnConfermaConfigurazione;
@@ -133,14 +133,16 @@ public class ControllerConfSistema extends AgroludosController {
 	 */
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		if(request.getCommandName().equals("inserisciConfigurazione")){
+		String commandName = request.getCommandName();
+
+		if( commandName.equals(this.getCommandName("inserisciConfigurazione") )){
 			boolean res = (Boolean)response.getRespData();
 			if(res){
 				this.databasePane.setVisible(false);
 				this.managerSistemaPane.setVisible(true);
 			}
 		}
-		if(request.getCommandName().equals("nuovoManagerDiSistema")){
+		if( commandName.equals(this.getCommandName("nuovoManagerDiSistema") )){
 			boolean res = (Boolean)response.getRespData();
 			if(res){
 				this.setVista("login");

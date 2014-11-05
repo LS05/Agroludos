@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 class AppConfig extends AgroludosController implements App{
 
-	private String viewName = "mainController";
+	private final String viewName = "mainController";
 
 	@Override
 	public void initialize(Stage stage){

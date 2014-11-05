@@ -155,9 +155,8 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 		this.richiesta = this.getRichiesta(this.cmpto, "inserisciCompetizione", this.viewName);
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 
-		Object res = (Object)risposta.getRespData();
+		Object res = this.risposta.getRespData();
 		if(res instanceof CompetizioneTO){
-
 			SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 			succMessage.setMessage(this.res.getString("key124"));
 			this.setVista("messageDialog",succMessage);
