@@ -30,7 +30,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoCompetizioneTO;
-import agroludos.to.SuccessTO;
+import agroludos.to.SuccessMessageTO;
 import agroludos.to.TipoCompetizioneTO;
 
 public class ControllerMdcNuovaCompetizione extends AgroludosController implements Initializable{
@@ -158,9 +158,9 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 		Object res = (Object)risposta.getRespData();
 		if(res instanceof CompetizioneTO){
 
-			SuccessTO succMessage = toFact.createSuccessTO();
+			SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 			succMessage.setMessage(this.res.getString("key124"));
-			this.setVista("successDialog",succMessage);
+			this.setVista("messageDialog",succMessage);
 			this.close();
 		}
 	}

@@ -28,7 +28,7 @@ public interface TOFactory {
 	
 	ErrorTO createErrorTO();
 
-	SuccessTO createSuccessTO();
+	SuccessMessageTO createSuccMessageTO();
 
 	StatoUtenteTO createStatoUtenteTO();
 
@@ -43,5 +43,7 @@ public interface TOFactory {
 	CertificatoTO createCertificatoTO();
 
 	EmailTO createEmailTO();
+
+	ErrorMessageTO createErrMessageTO();
 
 }

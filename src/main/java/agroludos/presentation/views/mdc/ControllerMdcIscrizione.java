@@ -11,7 +11,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.QuestionTO;
-import agroludos.to.SuccessTO;
+import agroludos.to.SuccessMessageTO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -134,10 +134,10 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 				IscrizioneTO isc = (IscrizioneTO) res;
 				this.initializeView(isc);
 
-				SuccessTO succMessage = toFact.createSuccessTO();
+				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.res.getString("key99"));
 
-				this.setVista("successDialog",succMessage);
+				this.setVista("messageDialog",succMessage);
 				
 				IscrizioneTO iscTO = ((IscrizioneTO) res);
 				EmailTO mail = toFact.createEmailTO();

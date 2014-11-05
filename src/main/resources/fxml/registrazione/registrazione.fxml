@@ -164,7 +164,7 @@
                     <GridPane GridPane.columnIndex="0" GridPane.rowIndex="0">
                       <children>
                         <Label font="$x1" text="%key2" GridPane.columnIndex="0" GridPane.margin="$x3" GridPane.rowIndex="0" GridPane.valignment="TOP" />
-                        <Label font="$x1" text="%key3" GridPane.columnIndex="0" GridPane.margin="$x3" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                        <Label font="$x1" text="%key3" wrapText="true" GridPane.columnIndex="0" GridPane.margin="$x3" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                         <GridPane prefHeight="92.0" prefWidth="333.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                           <children>
                             <TextField id="txtShowPassword" prefWidth="-1.0" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="0">
@@ -284,7 +284,7 @@
                           </rowConstraints>
                         </GridPane>
                         <Label font="$x1" text="%key74" wrapText="true" GridPane.columnIndex="0" GridPane.margin="$x3" GridPane.rowIndex="4" GridPane.valignment="TOP" />
-                        <Label fx:id="lblCfError" font="$x1" text="%key111" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                        <Label id="lblCfError" font="$x1" text="%key111" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.valignment="TOP">
                           <GridPane.margin>
                             <Insets left="10.0" top="8.0" fx:id="x3" />
                           </GridPane.margin>
@@ -296,7 +296,7 @@
                                 <Insets right="30.0" fx:id="x5" />
                               </GridPane.margin>
                             </TextField>
-                            <Label styleClass="lblError" text="Label" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                            <Label fx:id="lblCfError" styleClass="lblError" text="Label" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
                               <GridPane.margin>
                                 <Insets right="30.0" fx:id="x5" />
                               </GridPane.margin>

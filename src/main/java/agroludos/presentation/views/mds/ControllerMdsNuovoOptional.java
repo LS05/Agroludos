@@ -24,7 +24,7 @@ import agroludos.presentation.views.components.numberspinner.NumberSpinner;
 import agroludos.to.AgroludosTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.StatoOptionalTO;
-import agroludos.to.SuccessTO;
+import agroludos.to.SuccessMessageTO;
 import agroludos.to.TipoOptionalTO;
 
 public class ControllerMdsNuovoOptional extends AgroludosController implements Initializable{
@@ -104,9 +104,9 @@ public class ControllerMdsNuovoOptional extends AgroludosController implements I
 		this.richiesta = this.getRichiesta(optional, "inserisciOptional", this.viewName);
 		this.risposta = this.getRisposta();
 		this.eseguiRichiesta(this.richiesta, this.risposta);
-		SuccessTO msgNuovoOpt = toFact.createSuccessTO();
+		SuccessMessageTO msgNuovoOpt = toFact.createSuccMessageTO();
 		msgNuovoOpt.setMessage(this.res.getString("key128"));
-		this.setVista("successDialog", msgNuovoOpt);
+		this.setVista("messageDialog", msgNuovoOpt);
 	}
 
 	@Override

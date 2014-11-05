@@ -15,7 +15,7 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;
-import agroludos.to.SuccessTO;
+import agroludos.to.SuccessMessageTO;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -150,9 +150,9 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 			if(res instanceof IscrizioneTO){
 				this.tableIscrizioni.setAll(this.currUser.getAllIscrizioniAttive());
 
-				SuccessTO succMessage = toFact.createSuccessTO();
+				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.res.getString("key123"));
-				this.setVista("successDialog",succMessage);
+				this.setVista("messageDialog",succMessage);
 
 				IscrizioneTO iscTO = ((IscrizioneTO) res);
 				EmailTO mail = toFact.createEmailTO();

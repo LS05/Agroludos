@@ -13,7 +13,7 @@ class PartSrcRule extends AgroludosRule {
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof PartecipanteTO){
 			PartecipanteTO partecipante = (PartecipanteTO)mainTO;
-			String srcFormat = this.getRule("srcFormat");
+			String srcFormat = this.getTipoSrc();
 
 			String src = partecipante.getSrc();
 			String key = this.getRule("srcKey");

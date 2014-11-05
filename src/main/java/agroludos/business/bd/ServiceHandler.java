@@ -58,8 +58,13 @@ public class ServiceHandler {
 					throw new IllegalStateException( 
 							"Got InvocationTargetException, but the cause is null.", e);
 				} else if(cause instanceof ValidationException) {
-					ValidationException vEx = (ValidationException) cause;
-					this.response.setData(vEx.getErrors());
+					ValidationException exception = (ValidationException) cause;
+					if( exception.getErrors() != null ) {
+						this.response.setData(exception.getErrors());
+					} else {
+						this.response.setData(exception.getMessage());
+					}
+					
 				} else{
 					this.response.setData(e.getTargetException().getMessage());
 				}

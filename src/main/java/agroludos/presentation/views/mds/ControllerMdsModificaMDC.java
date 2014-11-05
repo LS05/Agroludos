@@ -11,7 +11,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoUtenteTO;
-import agroludos.to.SuccessTO;
+import agroludos.to.SuccessMessageTO;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -100,9 +100,9 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 		this.risposta = this.getRisposta();
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 		if(!this.flagError){
-			SuccessTO succTO = toFact.createSuccessTO();
+			SuccessMessageTO succTO = toFact.createSuccMessageTO();
 			succTO.setMessage(this.resources.getString("key99"));
-			this.setVista("successDialog", succTO);
+			this.setVista("messageDialog", succTO);
 		}
 	}
 

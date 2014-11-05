@@ -15,12 +15,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.components.datepicker.AgroDatePicker;
 import agroludos.to.AgroludosTO;
+import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.StatoUtenteTO;
@@ -142,7 +142,7 @@ public class ControllerRegistrazione extends AgroludosController{
 		this.txtNome.setText("francesco");
 		this.txtEmail.setText("francesco@fra.it");
 		this.txtIndirizzo.setText("via firenze 33");
-		this.txtNTSanitaria.setText("321654987987654");
+		this.txtNTSanitaria.setText("3216549879876542");
 		this.txtPassword.setText("123456");
 		this.txtUsername.setText("");
 	}
@@ -300,6 +300,12 @@ public class ControllerRegistrazione extends AgroludosController{
 				if(errors.hasError(this.getError("sessoKey"))){
 					this.showErrors(errors, this.lblSessoError, "sessoKey");
 				}
+			} else if( res instanceof String ){
+				this.errFlag = true;
+				ErrorMessageTO errorMessage = toFact.createErrMessageTO();
+				String msg = (String)res;
+				errorMessage.setMessage(msg);
+				this.setVista("messageDialog", errorMessage);
 			}
 		}
 

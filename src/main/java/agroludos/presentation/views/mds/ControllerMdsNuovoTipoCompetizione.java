@@ -15,7 +15,7 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
-import agroludos.to.SuccessTO;
+import agroludos.to.SuccessMessageTO;
 import agroludos.to.TipoCompetizioneTO;
 
 public class ControllerMdsNuovoTipoCompetizione extends AgroludosController implements Initializable{
@@ -64,9 +64,9 @@ public class ControllerMdsNuovoTipoCompetizione extends AgroludosController impl
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		if(!this.flagError){
-			SuccessTO msgNuovoOpt = toFact.createSuccessTO();
+			SuccessMessageTO msgNuovoOpt = toFact.createSuccMessageTO();
 			msgNuovoOpt.setMessage(this.res.getString("key129"));
-			this.setVista("successDialog", msgNuovoOpt);
+			this.setVista("messageDialog", msgNuovoOpt);
 		}
 
 	}

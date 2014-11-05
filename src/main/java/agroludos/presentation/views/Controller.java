@@ -7,7 +7,7 @@ import agroludos.presentation.req.RequestFactory;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.resp.ResponseFactory;
 import agroludos.system.ReqConf;
-import agroludos.system.ErrorsConf;
+import agroludos.system.RulesErrorsConf;
 import agroludos.to.AgroludosTO;
 
 class Controller {	
@@ -16,7 +16,7 @@ class Controller {
 	private static RequestFactory reqFact;
 	private static ResponseFactory respFact;
 	private static ReqConf reqConf;
-	private static ErrorsConf errConf;
+	private static RulesErrorsConf errConf;
 
 	AgroResponse getRiposta(){
 		return respFact.createResponse();
@@ -41,7 +41,7 @@ class Controller {
 	}
 
 	String getError(String errorName) {
-		return errConf.getError(errorName);
+		return errConf.getErrorMessage(errorName);
 	}
 
 	void setVista(String viewName){
@@ -84,7 +84,7 @@ class Controller {
 		reqConf = reqConfig;
 	}
 
-	public void setErrConf(ErrorsConf rulesConfig) {
+	public void setErrConf(RulesErrorsConf rulesConfig) {
 		errConf = rulesConfig;
 	}
 }

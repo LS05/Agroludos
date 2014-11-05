@@ -13,6 +13,7 @@
 		abstract="true">
 		<property name="dbFact" ref="dbFactory" />
 		<property name="sysConf" ref="systemConf" />
+		<property name="errConf" ref="systemConf" />
 		<property name="toFact" ref="toFactory" />
 	</bean>
 	<bean id="gestoreConfigurazione"

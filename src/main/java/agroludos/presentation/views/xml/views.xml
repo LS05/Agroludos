@@ -114,18 +114,11 @@
 			<height>644</height>
 		</view>
 		<view tipo="dialog">
-			<name>errorDialog</name>
-			<url>/fxml/dialogs/errorDialog.fxml</url>
-			<width>516</width>
-			<height>127</height>
-			<title>Agroludos | Errore</title>
-		</view>
-		<view tipo="dialog">
-			<name>successDialog</name>
-			<url>/fxml/dialogs/successDialog.fxml</url>
-			<width>516</width>
-			<height>127</height>
-			<title>Agroludos | Successo</title>
+			<name>messageDialog</name>
+			<url>/fxml/dialogs/messageDialog.fxml</url>
+			<width>564</width>
+			<height>225</height>
+			<title>Agroludos</title>
 		</view>
 		<view tipo="dialog">
 			<name>questionDialog</name>

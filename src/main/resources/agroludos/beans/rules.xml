@@ -3,16 +3,21 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	
+
 	<import resource="classpath:agroludos/beans/system.xml" />
-           
-	<bean id="stringValidator" class="agroludos.business.validator.rules.strings.StringValidatorImpl" />
-	
-	<bean id="dateValidator" class="agroludos.business.validator.rules.date.DateValidatorImpl" />
-	
-	<bean id="fileValidator" class="agroludos.business.validator.rules.file.FileValidatorImpl" />
-	
-	<bean id="agroRule" abstract="true" class="agroludos.business.validator.rules.AgroludosRule">
+
+	<bean id="stringValidator"
+		class="agroludos.business.validator.rules.strings.StringValidatorImpl" />
+
+	<bean id="dateValidator"
+		class="agroludos.business.validator.rules.date.DateValidatorImpl" />
+
+	<bean id="fileValidator"
+		class="agroludos.business.validator.rules.file.FileValidatorImpl" />
+
+	<bean id="agroRule" abstract="true"
+		class="agroludos.business.validator.rules.AgroludosRule">
+		<property name="sysConf" ref="systemConf" />
 		<property name="rulesConf" ref="systemConf" />
 	</bean>
 
