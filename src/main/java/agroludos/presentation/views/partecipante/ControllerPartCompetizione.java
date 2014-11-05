@@ -24,6 +24,7 @@ import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.EmailTO;
+import agroludos.to.ErrorMessageTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.SuccessMessageTO;
 
@@ -71,7 +72,7 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
 	}
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.res = resources;
@@ -109,7 +110,7 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 			this.tableOptional.hideColumn("Descrizione");
 		}
 	}
-	
+
 	@Override
 	protected String getViewName() {
 		return this.viewName;
@@ -152,40 +153,12 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 
 		if( commandName.equals( this.getCommandName("inserisciIscrizione") )){
 			Object res = response.getRespData();
+			if(res instanceof String){
+				ErrorMessageTO msg = toFact.createErrMessageTO();
+				msg.setMessage((String) res);
+				this.setVista("messageDialog", msg);
 
-			if(res instanceof IscrizioneTO){
-				this.mainIscr = (IscrizioneTO)res;
-				IscModel modelIsc = new IscModel(this.mainIscr);
-				ObservableList<IscModel> iscritti = this.tblIscritti.getItems();
-				iscritti.add(modelIsc);
-				String totIsc = ((Integer)iscritti.size()).toString();
-				this.lblNiscritti.setText(totIsc);
-				
-				this.btnIscriviti.setDisable(true);
-				
-				SuccessMessageTO succ = toFact.createSuccMessageTO();
-				succ.setMessage(this.res.getString("key157"));
-				this.setVista("messageDialog", succ);
-				
-				IscrizioneTO iscTO = ((IscrizioneTO) res);
-				EmailTO mail = toFact.createEmailTO();
-				mail.setOggetto(iscTO.getPartecipante().getUsername() + " si è iscritto "
-						+ "alla competizione " + iscTO.getCompetizione().getNome());
-				mail.setMessage("Dati iscrizione: "
-						+ iscTO.getPartecipante().toString() 
-						+ " costo "
-						+ iscTO.getCosto()
-						+ " optional scelti "
-						+ iscTO.getAllOptionals().toString());
-				
-				mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
-				
-				this.risposta = this.getRisposta();
-				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
-				this.eseguiRichiesta(this.richiesta, this.risposta);
-				
 			}
 		}
-
 	}
 }

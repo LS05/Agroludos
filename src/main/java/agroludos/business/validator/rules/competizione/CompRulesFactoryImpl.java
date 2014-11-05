@@ -6,6 +6,7 @@ class CompRulesFactoryImpl implements CompRulesFactory {
 	private static CompNomeRule nomeCompRule;
 	private static CompNumPartRule numPartCompRule;
 	private static CompCostoRule costoCompRule;
+	private static CompDataRule dataCompRule;
 
 	@Override
 	public AgroludosRule getNomeRule() {
@@ -26,5 +27,12 @@ class CompRulesFactoryImpl implements CompRulesFactory {
 		if(costoCompRule == null)
 			costoCompRule = new CompCostoRule();
 		return costoCompRule;
+	}
+
+	@Override
+	public AgroludosRule getDataRule() {
+		if(dataCompRule == null)
+			dataCompRule = new CompDataRule();
+		return dataCompRule;
 	}
 }

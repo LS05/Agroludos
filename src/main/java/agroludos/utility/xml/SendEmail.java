@@ -16,6 +16,7 @@ public class SendEmail {
 		Properties props = new Properties();
 		props.setProperty("mail.transport.protocol", "smtp");
 		props.setProperty("mail.host", "smtp.live.com");
+		props.put("mail.smtp.ssl.trust", "smtp.live.com");
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.auth", "true");
  

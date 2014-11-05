@@ -21,13 +21,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
+import agroludos.presentation.views.components.datepicker.AgroDatePicker;
 import agroludos.presentation.views.components.numberspinner.NumberSpinner;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.ErrorMessageTO;
+import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoCompetizioneTO;
 import agroludos.to.SuccessMessageTO;
@@ -48,7 +50,7 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 	@FXML private Pane paneDataCompetizione;
 	@FXML private GridPane paneCostoComp;
 
-	private DatePicker dataCompPicker;
+	private AgroDatePicker dataCompPicker;
 	private NumberSpinner costoComp;
 
 	private List<TipoCompetizioneTO> listTipiCmp;
@@ -84,6 +86,7 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 		lblNminCmpError.setVisible(false);
 		lblNmaxCmpError.setVisible(false);
 		lblCostoCmpError.setVisible(false);
+		lblSelezioneOptionalError.setVisible(false);
 
 		this.costoComp = new NumberSpinner(BigDecimal.ZERO, new BigDecimal("10"), new DecimalFormat("#,##0.00"));
 		this.risposta = this.getRisposta();
@@ -99,17 +102,12 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 
 		this.paneCostoComp.getChildren().add(this.costoComp);
 		this.txtDescrizione.setText("");
-		this.txtNmaxCmp.setText("");
-		this.txtNminCmp.setText("");
+		this.txtNmaxCmp.setText("0");
+		this.txtNminCmp.setText("0");
 		this.txtNomeCmp.setText("");
 
-		this.dataCompPicker = new DatePicker(Locale.ENGLISH);
-		this.dataCompPicker.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
-		this.dataCompPicker.getCalendarView().todayButtonTextProperty().set("Today");
-		this.dataCompPicker.getCalendarView().setShowWeeks(false);
-		String css = this.getClass().getResource("DatePicker.css").toExternalForm();
-		this.dataCompPicker.getStylesheets().add(css);
-		this.paneDataCompetizione.getChildren().add(this.dataCompPicker);
+		this.dataCompPicker = new AgroDatePicker();
+		this.paneDataCompetizione.getChildren().add(this.dataCompPicker.getDatePicker());
 	}
 
 	@Override
@@ -132,6 +130,15 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 	}
 
 	@FXML private void btnInserisciCmp(MouseEvent event){
+		
+		this.lblCostoCmpError.setVisible(false);
+		this.lblDataCmpError.setVisible(false);
+		this.lblNmaxCmpError.setVisible(false);
+		this.lblNminCmpError.setVisible(false);
+		this.lblNomeCmpError.setVisible(false);
+		this.lblSelezioneOptionalError.setVisible(false);
+		this.lblTipoCmpError.setVisible(false);
+		
 		this.cmpto.setCosto(this.costoComp.getNumber().doubleValue());
 		this.cmpto.setData(this.dataCompPicker.getSelectedDate());
 		this.cmpto.setDescrizione(this.txtDescrizione.getText());
@@ -165,6 +172,13 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 		}
 	}
 
+	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
+		if(errors.hasError(this.getError(errorKey))){
+			String nomeKey = this.getError(errorKey);
+			lblError.setVisible(true);
+			lblError.setText(errors.getError(nomeKey));
+		} 
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -178,7 +192,31 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 			Object res = response.getRespData();
 			if(res instanceof List<?>)
 				this.listStatiCmp = (List<StatoCompetizioneTO>)res;
+		}if(commandName.equals( this.getCommandName("inserisciCompetizione") )){
+			Object res = response.getRespData();
+			if(res instanceof ErrorTO){
+
+				ErrorTO errors = (ErrorTO)res;
+
+				if(errors.hasError(this.getError("nomeKey"))){
+					this.showErrors(errors, this.lblNomeCmpError, "nomeKey");
+				} 
+				if(errors.hasError(this.getError("costoKey"))){
+					this.showErrors(errors, this.lblCostoCmpError, "costoKey");
+				}
+				if(errors.hasError(this.getError("dataCmpKey"))){
+					this.showErrors(errors, this.lblDataCmpError, "dataCmpKey");
+				}
+				if(errors.hasError(this.getError("nPartKey"))){
+					this.showErrors(errors, this.lblNminCmpError, "nPartKey");
+				}
+				
+			} else if( res instanceof String ){
+				ErrorMessageTO errorMessage = toFact.createErrMessageTO();
+				String msg = (String)res;
+				errorMessage.setMessage(msg);
+				this.setVista("messageDialog", errorMessage);
+			}
 		}
 	}
-
 }
