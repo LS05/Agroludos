@@ -19,7 +19,6 @@ import javafx.scene.layout.GridPane;
 
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
-import agroludos.presentation.views.components.table.AgroTable;
 import agroludos.presentation.views.components.table.TableCompetizioni;
 import agroludos.presentation.views.components.table.TableMdC;
 import agroludos.presentation.views.components.table.TableOptional;
@@ -183,17 +182,6 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.lblParSesso.setText(selModel.getSesso());
 		this.lblParAnnoNasc.setText(selModel.getDataNasc());
 		this.lblParNumTessSan.setText(selModel.getNumTessera());
-	}
-
-	private <T> void initSearch(final TextField searchField, final AgroTable<T> table){
-		searchField.textProperty().addListener(new ChangeListener<String>() {
-			@Override
-			public void changed(ObservableValue<? extends String> observable,
-					String oldValue, String newValue) {
-
-				//                table.updateTable(searchField.getText());
-			}
-		});
 	}
 
 	@FXML protected void btnGestComp(MouseEvent event) {

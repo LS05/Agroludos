@@ -1,13 +1,10 @@
 package agroludos.presentation.views.partecipante;
 
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -16,6 +13,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -23,12 +21,10 @@ import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
-import agroludos.to.EmailTO;
 import agroludos.to.ErrorMessageTO;
 import agroludos.to.IscrizioneTO;
-import agroludos.to.SuccessMessageTO;
 
-public class ControllerPartCompetizione extends AgroludosController implements Initializable{
+public class ControllerPartCompetizione extends AgroludosController{
 
 	private String viewName;
 
@@ -57,25 +53,13 @@ public class ControllerPartCompetizione extends AgroludosController implements I
 	@FXML private Label lblNiscritti;
 	@FXML private Label lblStato;
 	@FXML private TextArea txtDescrizione;
-
-	private IscrizioneTO mainIscr;
-
-	private ResourceBundle res;
-
 	@FXML private Button btnIscriviti;
-
-	private AgroResponse risposta;
-
-	private AgroRequest richiesta;
+	
+	private IscrizioneTO mainIscr;
 
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		this.res = resources;
 	}
 
 	@Override

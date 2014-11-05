@@ -3,14 +3,11 @@ package agroludos.business.validator.rules.competizione;
 import java.util.Date;
 
 import agroludos.business.validator.rules.AgroludosRule;
-import agroludos.business.validator.rules.date.DateValidator;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.ErrorTO;
 
 public class CompDataRule extends AgroludosRule {
-
-	private DateValidator dateValidator;
 
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
