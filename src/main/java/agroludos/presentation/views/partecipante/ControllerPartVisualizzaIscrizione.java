@@ -124,6 +124,7 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 		question.setViewName(this.viewName);
 
 		this.setVista("questionDialog", question);
+		
 	}
 
 	@SuppressWarnings("unchecked")

@@ -2,11 +2,12 @@ package agroludos.business.as.gestoremail;
 
 import java.util.Properties;
 
+import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -17,58 +18,50 @@ import agroludos.to.UtenteTO;
 
 class ASGestoreEmail extends AgroludosAS implements LEmail, SEmail{
 
+
 	@Override
 	public boolean sendEmail(EmailTO emailTO) throws DatabaseException {
 		boolean res = false;
-		String username = "agroludos.uniba";  
-		String password = "ardimento2014";
-		String recipient = "agroludos.uniba@gmail.com";
 
-		Properties props = System.getProperties();
-		String host = "smtp.gmail.com";
-		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		final String username = "jackeb@hotmail.it";
+		final String password = "270588";
+
+
+		Properties props = new Properties();
+		props.setProperty("mail.transport.protocol", "smtp");
+		props.setProperty("mail.host", "smtp.live.com");
 		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.user", username);
-		props.put("mail.smtp.password", password);
-		props.put("mail.smtp.port", "587");
 		props.put("mail.smtp.auth", "true");
 
-		Session session = Session.getInstance(props, new GMailAuthenticator(username, password));
-		MimeMessage message = new MimeMessage(session);
-
-		
+		Session session = Session.getInstance(props,
+				new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
 
 		try {
-			message.setFrom(new InternetAddress(recipient));
-			InternetAddress[] toAddress = new InternetAddress[emailTO.getDestinatari().size()];
 
-			// To get the array of addresses
-			int i = 0;
-			for(UtenteTO uTO: emailTO.getDestinatari()){
-				toAddress[i] = new InternetAddress(uTO.getEmail());
-				i++;
-			}
-			 for(i = 0; i < toAddress.length; i++) {
-				message.addRecipient(Message.RecipientType.TO, toAddress[i]);
-			}
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("jackeb@hotmail.it"));
 			
 			message.setSubject(emailTO.getOggetto());
 			message.setText(emailTO.getMessage());
-			Transport transport = session.getTransport("smtp");
-			transport.connect(host, username, password);
-			transport.sendMessage(message, message.getAllRecipients());
-			transport.close();
+			// To get the array of addresses
+			for(UtenteTO uTO: emailTO.getDestinatari()){;
+				message.setRecipients(Message.RecipientType.TO,
+						InternetAddress.parse(uTO.getEmail()));
+				Transport.send(message);
+			}
 			res = true;
-		}
-		catch (AddressException ae) {
-			ae.printStackTrace();
-		}
-		catch (MessagingException me) {
-			me.printStackTrace();
+			System.out.println("Done");
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}catch (Exception e) {
+			System.out.println(e.toString());
 		}
 		return res;
 
 	}
-	
+
 }
