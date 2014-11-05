@@ -13,6 +13,7 @@ import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.EmailTO;
+import agroludos.to.ErrorMessageTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.SuccessMessageTO;
@@ -166,6 +167,41 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
 				this.eseguiRichiesta(this.richiesta, this.risposta);
 
+			}
+		}else if( commandName.equals( this.getCommandName("inserisciIscrizione") )){
+			Object res = response.getRespData();
+
+			if(res instanceof IscrizioneTO){
+				IscrizioneTO iscTO = ((IscrizioneTO) res);
+				
+				this.richiesta = this.getRichiesta("getCompetizioniAttive", this.viewName);
+				this.risposta = this.getRisposta();
+				this.eseguiRichiesta(this.richiesta, this.risposta);
+				this.tableCompetizioni.setAll(this.listComp);
+				
+				setVista("partMostraCompetizione", iscTO.getCompetizione());
+				
+				SuccessMessageTO succ = toFact.createSuccMessageTO();
+				succ.setMessage(this.res.getString("key157"));
+				this.setVista("messageDialog", succ);
+				
+				
+				EmailTO mail = toFact.createEmailTO();
+				mail.setOggetto(iscTO.getPartecipante().getUsername() + " si è iscritto "
+						+ "alla competizione " + iscTO.getCompetizione().getNome());
+				mail.setMessage("Dati iscrizione: "
+						+ iscTO.getPartecipante().toString() 
+						+ " costo "
+						+ iscTO.getCosto()
+						+ " optional scelti "
+						+ iscTO.getAllOptionals().toString());
+				
+				mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
+				
+				this.risposta = this.getRisposta();
+				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
+				this.eseguiRichiesta(this.richiesta, this.risposta);
+				
 			}
 		}
 	}

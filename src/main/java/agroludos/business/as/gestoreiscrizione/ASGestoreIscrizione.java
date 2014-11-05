@@ -4,7 +4,10 @@ import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
+import agroludos.exceptions.CSRSScadutoException;
 import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.IscrizioneEsistenteException;
+import agroludos.exceptions.NmaxRaggiuntoException;
 import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.IscrizioneDAO;
@@ -40,26 +43,33 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 
 		IscrizioneDAO iscDAO = getIscrizioneDAO();
 		boolean checkPart=false;
+		CompetizioneTO cmp = iscTO.getCompetizione();
+		
+		if(cmp.getAllIscrizioniAttive().size() <= cmp.getNmax()){
+			for(IscrizioneTO isc : iscTO.getCompetizione().getAllIscrizioniAttive()){
+				if(isc.getPartecipante().getId() == iscTO.getPartecipante().getId())
+					checkPart = true;
+			}
+			if(checkPart){
+				throw new IscrizioneEsistenteException();
+			}else if(iscTO.getPartecipante().getDataSRC().after(iscTO.getCompetizione().getData())){
+				this.validator.validate(iscTO);
 
-		for(IscrizioneTO isc : iscTO.getCompetizione().getAllIscrizioniAttive()){
-			if(isc.getPartecipante().getId() == iscTO.getPartecipante().getId())
-				checkPart = true;
+				StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
+
+				List<StatoIscrizioneTO> listSI = statoIscDAO.getAll();
+
+				iscTO.setStatoIscrizione(listSI.get(1));
+				
+				iscTO = iscDAO.create(iscTO);
+			}else{
+				throw new CSRSScadutoException();
+			}
+		}else
+		{
+			throw new NmaxRaggiuntoException();
 		}
-		if(checkPart){
-			//TODO eccezione partecipante già iscritto
-		}else if(iscTO.getPartecipante().getDataSRC().after(iscTO.getCompetizione().getData())){
-			this.validator.validate(iscTO);
-
-			StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
-
-			StatoIscrizioneTO siTO = statoIscDAO.getAll().get(1);
-			List<StatoIscrizioneTO> listSI = statoIscDAO.getAll();
-			
-			iscTO.setStatoIscrizione(listSI.get(1));
-		}else{
-			//TODO eccezione la data di scadenza è antecedente l'inizio della competizione
-		}
-		return iscDAO.create(iscTO);
+		return iscTO;
 	}
 
 	@Override

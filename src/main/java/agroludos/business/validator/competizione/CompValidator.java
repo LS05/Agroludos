@@ -15,6 +15,8 @@ class CompValidator implements AgroludosValidator{
 	private AgroludosRule nomeRule;
 	private AgroludosRule nPartRule;
 	private AgroludosRule costoRule;
+	private AgroludosRule dataRule;
+	
 	
 	CompValidator(CompRulesFactory rulesFactory, TOFactory toFactory){
 		this.compRulesFact = rulesFactory;
@@ -23,9 +25,11 @@ class CompValidator implements AgroludosValidator{
 		this.nomeRule = this.compRulesFact.getNomeRule();
 		this.nPartRule = this.compRulesFact.getNumPartRule();
 		this.costoRule = this.compRulesFact.getCostoRule();
+		this.dataRule = this.compRulesFact.getDataRule();
 
 		this.nomeRule.setSuccessor(this.nPartRule);
 		this.nPartRule.setSuccessor(this.costoRule);
+		this.costoRule.setSuccessor(this.dataRule);
 	}
 
 	@Override

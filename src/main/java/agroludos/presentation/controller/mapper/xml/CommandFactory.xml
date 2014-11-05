@@ -247,7 +247,7 @@
 	<command name="inserisciIscrizione">
 		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
 		<from name="mostraIscrPart">
-			<forward success="partMostraCompetizione" failure="mostraIscrPart" />
+			<forward success="partecipante" failure="partMostraCompetizione" />
 		</from>
 	</command>
 	<command name="modificaIscrizione">
@@ -275,6 +275,9 @@
 		</from>
 		<from name="partMostraCompetizione">
 			<forward success="partecipante" failure="partMostraCompetizione" />
+		</from>
+		<from name="partecipante">
+			<forward success="partecipante" failure="partecipante" />
 		</from>
 	</command>
 </commands>

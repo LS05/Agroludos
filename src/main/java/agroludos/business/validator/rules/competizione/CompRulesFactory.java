@@ -10,4 +10,6 @@ public interface CompRulesFactory {
 
 	AgroludosRule getCostoRule();
 
+	AgroludosRule getDataRule();
+
 }

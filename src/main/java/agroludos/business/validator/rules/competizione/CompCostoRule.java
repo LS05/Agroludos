@@ -14,7 +14,7 @@ class CompCostoRule extends AgroludosRule {
 			Double costo = competizione.getCosto();
 
 			String key = this.getRule("costoKey");
-			if( costo < 0 ){
+			if( costo <= 0 ){
 				errorTO.addError(key, this.getRule("costoError"));
 			}
 

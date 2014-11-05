@@ -4,6 +4,7 @@ import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
+import agroludos.exceptions.CompetizioneDataExistException;
 import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.CompetizioneDAO;
@@ -49,7 +50,7 @@ import agroludos.to.TipoCompetizioneTO;
  */
 
 class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompetizione{
-	
+
 	private AgroludosValidator validator;
 
 	ASGestoreCompetizione(AgroludosValidator validator){
@@ -70,11 +71,22 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	public CompetizioneTO inserisciCompetizione(CompetizioneTO cmpto)
 			throws DatabaseException, ValidationException {
 
+		boolean checkData = false;
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
+		List<CompetizioneTO> cmpList = daoCmp.readCompetizioniAttive();
 		
 		this.validator.validate(cmpto);
 		
-		return daoCmp.create(cmpto);
+		for(CompetizioneTO compet : cmpList){
+			if(compet.getData().compareTo(cmpto.getData()) == 0)
+				checkData = true;
+		}
+		if(!checkData){
+			cmpto = daoCmp.create(cmpto);
+		}else
+			throw new CompetizioneDataExistException();
+		
+		return cmpto;
 
 	}
 
@@ -154,14 +166,14 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		TipoCompetizioneDAO tcDao = this.getTipoCompetizioneDAO();
 		List<TipoCompetizioneTO> tipiComp = tcDao.getAll();
 		List<CompetizioneTO> res = null;
-		
+
 		for(TipoCompetizioneTO tipo : tipiComp){
 			if(tipo.getNome().equals(tcmto.getNome())){
 				res = tipo.getAllCompetizioni();
 				break;
 			}
 		}
-		
+
 		return res;
 	}
 }
