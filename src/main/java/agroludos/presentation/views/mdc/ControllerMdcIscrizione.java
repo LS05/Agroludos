@@ -87,6 +87,11 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 
 			this.tableOptional.hideColumn("Stato");
 			this.tableOptional.hideColumn("Descrizione");
+			
+			if(this.iscto.getCompetizione().getAllOptionals().isEmpty())
+				this.btnModificaOptionalIscrizione.setDisable(true);
+			else
+				this.btnModificaOptionalIscrizione.setDisable(false);
 		}
 	}
 
@@ -117,8 +122,6 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 	}
 
 	@FXML protected void btnModificaOptionalIscrizione(MouseEvent event) {
-		//TODO
-		System.out.println("da fare");
 		this.setVista("modificaOptionalPartecipante", this.iscto);
 	}
 

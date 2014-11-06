@@ -24,7 +24,9 @@ import agroludos.presentation.views.components.datepicker.AgroDatePicker;
 import agroludos.presentation.views.components.numberspinner.NumberSpinner;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
-import agroludos.to.SuccessMessageTO;
+import agroludos.to.ErrorMessageTO;
+import agroludos.to.ErrorTO;
+import agroludos.to.QuestionTO;
 
 public class ControllerMdcModificaCompetizione extends AgroludosController implements Initializable{
 	private String viewName;
@@ -61,7 +63,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;	
-		
+
 		lblNomeCmpError.setVisible(false);
 		lblTipoCmpError.setVisible(false);
 		lblDataCmpError.setVisible(false);
@@ -72,7 +74,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		
+
 		if(mainTO instanceof CompetizioneTO){
 			this.cmpto = (CompetizioneTO) mainTO;
 			this.costoComp = new NumberSpinner(BigDecimal.ZERO, new BigDecimal("10"), new DecimalFormat("#,##0.00"));
@@ -113,7 +115,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 	@Override
 	protected String getViewName() {
 		return this.viewName;
-		
+
 	}
 
 	@FXML private void btnSelezioneOpt(){
@@ -125,6 +127,14 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 	}
 
 	@FXML private void btnConferma(MouseEvent event){
+
+		lblNomeCmpError.setVisible(false);
+		lblTipoCmpError.setVisible(false);
+		lblDataCmpError.setVisible(false);
+		lblNminCmpError.setVisible(false);
+		lblNmaxCmpError.setVisible(false);
+		lblCostoCmpError.setVisible(false);
+
 		this.cmpto.setCosto(this.costoComp.getNumber().doubleValue());
 		this.cmpto.setData(this.dataCompPicker.getSelectedDate());
 		this.cmpto.setDescrizione(txtDescrizione.getText());
@@ -132,29 +142,60 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 		this.cmpto.setNmin(this.cmbNmin.getSelectionModel().getSelectedItem());
 		this.cmpto.setNome(this.txtNome.getText());
 
-		this.risposta = this.getRisposta();
-		this.richiesta = this.getRichiesta(cmpto, "modificaCompetizione", this.viewName);
-		this.eseguiRichiesta(this.richiesta, this.risposta);
+		if(this.cmpto.getAllOptionals().isEmpty()){
+			QuestionTO question = toFact.createQuestionTO();
+			question.setQuestion(this.res.getString("key171"));
 
+			question.setDataTO(this.cmpto);
+			question.setRequest("modificaCompetizione");
+			question.setViewName(this.viewName);
 
-		Object res = this.risposta.getRespData();
-		if(res instanceof CompetizioneTO){			
-			SuccessMessageTO succMessage = toFact.createSuccMessageTO();
-			succMessage.setMessage(this.getCommandName(this.res.getString("key99")));
-			this.setVista("messageDialog",succMessage);
+			this.setVista("questionDialog", question);
+		}else{	
+			this.risposta = this.getRisposta();
+			this.richiesta = this.getRichiesta(cmpto, "modificaCompetizione", this.viewName);
+			this.eseguiRichiesta(this.richiesta, this.risposta);
 		}
-
 		this.close();
 	}
 
-
+	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
+		if(errors.hasError(this.getError(errorKey))){
+			String nomeKey = this.getError(errorKey);
+			lblError.setVisible(true);
+			lblError.setText(errors.getError(nomeKey));
+		} 
+	}
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
+		if(commandName.equals( this.getCommandName("modificaCompetizione") )){
+			this.show();
+			Object res = response.getRespData();
+			if(res instanceof ErrorTO){
 
-		if(commandName.equals( this.getCommandName("modificaCompetizione"))){
-			System.out.println("errore nella modifica");
+				ErrorTO errors = (ErrorTO)res;
+
+				if(errors.hasError(this.getError("nomeKey"))){
+					this.showErrors(errors, this.lblNomeCmpError, "nomeKey");
+				} 
+				if(errors.hasError(this.getError("costoKey"))){
+					this.showErrors(errors, this.lblCostoCmpError, "costoKey");
+				}
+				if(errors.hasError(this.getError("dataCmpKey"))){
+					this.showErrors(errors, this.lblDataCmpError, "dataCmpKey");
+				}
+				if(errors.hasError(this.getError("nPartKey"))){
+					this.showErrors(errors, this.lblNminCmpError, "nPartKey");
+				}
+
+			} else if( res instanceof String ){
+				ErrorMessageTO errorMessage = toFact.createErrMessageTO();
+				String msg = (String)res;
+				errorMessage.setMessage(msg);
+				this.setVista("messageDialog", errorMessage);
+			}
 		}
 	}
 }

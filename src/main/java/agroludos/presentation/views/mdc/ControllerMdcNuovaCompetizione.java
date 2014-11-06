@@ -18,7 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -29,8 +28,8 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiCompetizioneTO;
+import agroludos.to.QuestionTO;
 import agroludos.to.StatoCompetizioneTO;
-import agroludos.to.SuccessMessageTO;
 import agroludos.to.TipoCompetizioneTO;
 
 public class ControllerMdcNuovaCompetizione extends AgroludosController implements Initializable{
@@ -128,7 +127,7 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 	}
 
 	@FXML private void btnInserisciCmp(MouseEvent event){
-		
+
 		this.lblCostoCmpError.setVisible(false);
 		this.lblDataCmpError.setVisible(false);
 		this.lblNmaxCmpError.setVisible(false);
@@ -136,7 +135,7 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 		this.lblNomeCmpError.setVisible(false);
 		this.lblSelezioneOptionalError.setVisible(false);
 		this.lblTipoCmpError.setVisible(false);
-		
+
 		this.cmpto.setCosto(this.costoComp.getNumber().doubleValue());
 		this.cmpto.setData(this.dataCompPicker.getSelectedDate());
 		this.cmpto.setDescrizione(this.txtDescrizione.getText());
@@ -156,17 +155,23 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 
 		this.cmpto.setManagerDiCompetizione((ManagerDiCompetizioneTO) this.getUtente());
 
-		this.risposta = this.getRisposta();
-		this.richiesta = this.getRichiesta(this.cmpto, "inserisciCompetizione", this.viewName);
-		this.eseguiRichiesta(this.richiesta, this.risposta);
+		if(this.cmpto.getAllOptionals().isEmpty()){
 
-		Object res = this.risposta.getRespData();
-		if(res instanceof CompetizioneTO){
-			SuccessMessageTO succMessage = toFact.createSuccMessageTO();
-			succMessage.setMessage(this.res.getString("key124"));
-			this.setVista("messageDialog",succMessage);
-			this.close();
+			QuestionTO question = toFact.createQuestionTO();
+			question.setQuestion(this.res.getString("key171"));
+
+			question.setDataTO(this.cmpto);
+			question.setRequest("inserisciCompetizione");
+			question.setViewName(this.viewName);
+
+			this.setVista("questionDialog", question);
+		}else{
+
+			this.risposta = this.getRisposta();
+			this.richiesta = this.getRichiesta(this.cmpto, "inserisciCompetizione", this.viewName);
+			this.eseguiRichiesta(this.richiesta, this.risposta);
 		}
+		this.close();
 	}
 
 	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
@@ -190,6 +195,7 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 			if(res instanceof List<?>)
 				this.listStatiCmp = (List<StatoCompetizioneTO>)res;
 		}if(commandName.equals( this.getCommandName("inserisciCompetizione") )){
+			this.show();
 			Object res = response.getRespData();
 			if(res instanceof ErrorTO){
 
@@ -207,7 +213,7 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 				if(errors.hasError(this.getError("nPartKey"))){
 					this.showErrors(errors, this.lblNminCmpError, "nPartKey");
 				}
-				
+
 			} else if( res instanceof String ){
 				ErrorMessageTO errorMessage = toFact.createErrMessageTO();
 				String msg = (String)res;

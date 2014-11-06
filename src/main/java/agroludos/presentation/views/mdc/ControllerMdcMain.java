@@ -61,6 +61,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 	private AgroRequest richiesta;
 
 
+
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
@@ -228,7 +229,13 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 			Object res = response.getRespData();
 			if(res instanceof CompetizioneTO){
 				this.listaTabCmp.clear();
-				this.initializeView(((CompetizioneTO) res).getManagerDiCompetizione());			
+				this.initializeView(((CompetizioneTO) res).getManagerDiCompetizione());	
+				
+				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
+				succMessage.setMessage(this.resources.getString("key124"));
+				this.setVista("messageDialog",succMessage);
+				
+				
 			}
 		}else if(commandName.equals(this.getCommandName("modificaCompetizione"))){
 			Object res = response.getRespData();
