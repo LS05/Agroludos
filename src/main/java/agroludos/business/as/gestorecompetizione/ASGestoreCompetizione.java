@@ -12,9 +12,13 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
+import agroludos.integration.dao.db.IscrizioneDAO;
 import agroludos.integration.dao.db.StatoCompetizioneDAO;
+import agroludos.integration.dao.db.StatoIscrizioneDAO;
 import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.EmailTO;
+import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.TipoCompetizioneTO;
 
@@ -117,11 +121,58 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 					checkData = true;
 		}
 		if(!checkData){
+			if(cmpto.getAllIscrizioniAttive().size() > cmpto.getNmax())
+				eliminaIscrizioniInEsubero(cmpto.getAllIscrizioniAttive());
 			cmpto = daoCmp.update(checkCmp(cmpto));
 		}else
 			throw new CompetizioneDataExistException();
 
 		return checkCmp(cmpto);
+	}
+
+	private List<IscrizioneTO> eliminaIscrizioniInEsubero(
+			List<IscrizioneTO> listIsc) throws DatabaseException {
+		CompetizioneTO cmp = listIsc.get(0).getCompetizione();
+		
+		//TODO testare 
+		
+		//ordinare la lista per data
+		int lenght = listIsc.size()-1;
+		while(lenght > 0){
+			for(int i = 0; i < lenght; i++){
+				if(listIsc.get(i).getData().after(listIsc.get(i+1).getData())){
+					IscrizioneTO isc1 = listIsc.get(i);
+					IscrizioneTO isc2 = listIsc.get(i+1);
+					listIsc.set(i, isc2);
+					listIsc.set(i+1, isc1);
+				}
+				lenght = lenght - 1;
+			}	
+		}
+		
+		StatoIscrizioneDAO statoIscDao = this.dbFact.getDAOFactory(this.sysConf.getTipoDB()).getStatoIscrizioneDAO();
+		IscrizioneDAO iscDao = this.dbFact.getDAOFactory(this.sysConf.getTipoDB()).getIscrizioneDAO();
+		
+		//elimino gli ultimi registrati e li avviso via mail
+		while(listIsc.size() > cmp.getNmax()){
+			IscrizioneTO iscTO = listIsc.get(listIsc.size()-1);
+			
+			listIsc.remove(listIsc.size()-1);
+			
+			iscTO.setStatoIscrizione(statoIscDao.getAll().get(0));
+			iscDao.annullaIscrizione(iscTO);
+			
+			EmailTO mail = toFact.createEmailTO();
+			mail.setOggetto("Iscrizione annullata");
+			mail.setMessage(iscTO.getPartecipante().getUsername() + " abbiamo annullato l'iscrizione "
+					+ "alla competizione " + iscTO.getCompetizione().getNome()
+					+ " in quanto il numero massimo di partecipanti si è ridotto"
+					+ " e stiamo annullando le iscrizioni a partire dall'ultimo iscritto"
+					+ " fino al raggiungimento del numero massimo.");
+
+			mail.addDestinatario(iscTO.getPartecipante());
+		}
+		return listIsc;
 	}
 
 	@Override
@@ -141,7 +192,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
 		return checkCmp(daoCmp.readByMdc(mdcto));
 	}
-	
+
 	@Override
 	public List<CompetizioneTO> getCompetizioneAttiveByMdc(ManagerDiCompetizioneTO mdcto)
 			throws DatabaseException {
@@ -176,7 +227,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	public CompetizioneTO getCompetizioneById(CompetizioneTO cmpto)
 			throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
-		
+
 		return checkCmp(daoCmp.readById(cmpto.getId()));
 	}
 
@@ -222,8 +273,8 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 			throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
 		List<CompetizioneTO> listCmpAttive = daoCmp.readCompetizioniAttive();
-		
-		
+
+
 		return checkCmp(listCmpAttive);
 	}
 
@@ -249,7 +300,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		}
 		return listCmp;
 	}
-	
+
 	private CompetizioneTO checkCmp(CompetizioneTO Cmp) throws DatabaseException{
 
 		List<CompetizioneTO> listCmp = new ArrayList<CompetizioneTO>();
