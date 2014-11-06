@@ -73,6 +73,12 @@
 			<forward success="managerDiCompetizione" failure="managerDiCompetizione" />
 		</from>
 	</command>
+	<command name="getCompetizioneAttiveByMdc">
+		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
+		<from name="managerDiCompetizione">
+			<forward success="managerDiCompetizione" failure="managerDiCompetizione" />
+		</from>
+	</command>
 	<command name="modificaCompetizione">
 		<classe>agroludos.business.as.gestorecompetizione.SCompetizione</classe>
 		<from name="mostraModificaCmp">
@@ -238,7 +244,7 @@
 			<forward success="nuovaRegistrazione" failure="nuovaRegistrazione" />
 		</from>
 	</command>
-	<command name="getCompetizioniAttive">
+	<command name="getCompetizioniAperte">
 		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
 		<from name="partecipante">
 			<forward success="partecipante" failure="partecipante" />

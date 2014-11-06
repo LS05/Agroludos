@@ -63,7 +63,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 		this.tableIscrizioni.setAll(this.currUser.getAllIscrizioniAttive());
 		this.paneIscrizioni.add(this.tableIscrizioni, 0, 1);
 		this.tableIscrizioni.hideColumn(4);
-		this.richiesta = this.getRichiesta("getCompetizioniAttive", this.viewName);
+		this.richiesta = this.getRichiesta("getCompetizioniAperte", this.viewName);
 		this.risposta = this.getRisposta();
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 		this.tableCompetizioni.setAll(this.listComp);
@@ -112,7 +112,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 	}
 
 	@FXML protected void btnGestComp(MouseEvent event) {
-		this.richiesta = this.getRichiesta("getCompetizioniAttive", this.viewName);
+		this.richiesta = this.getRichiesta("getCompetizioniAperte", this.viewName);
 		this.risposta = this.getRisposta();
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 		this.tableCompetizioni.setAll(this.listComp);
@@ -140,7 +140,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals( this.getCommandName("getCompetizioniAttive") )){
+		if( commandName.equals( this.getCommandName("getCompetizioniAperte") )){
 			Object res = response.getRespData();
 
 			if(res instanceof List<?>){
@@ -174,7 +174,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 			if(res instanceof IscrizioneTO){
 				IscrizioneTO iscTO = ((IscrizioneTO) res);
 				
-				this.richiesta = this.getRichiesta("getCompetizioniAttive", this.viewName);
+				this.richiesta = this.getRichiesta("getCompetizioniAperte", this.viewName);
 				this.risposta = this.getRisposta();
 				this.eseguiRichiesta(this.richiesta, this.risposta);
 				this.tableCompetizioni.setAll(this.listComp);

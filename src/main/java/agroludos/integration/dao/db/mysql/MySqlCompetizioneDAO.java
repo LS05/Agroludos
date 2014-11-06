@@ -29,19 +29,6 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 		return res;
 	}
 
-	@Override
-	public List<CompetizioneTO> readByMdc(ManagerDiCompetizioneTO mdc) throws DatabaseException {
-		List<ManagerDiCompetizioneTO> param = new ArrayList<ManagerDiCompetizioneTO>();
-		param.add(mdc);
-		
-		this.session.enableFilter("competizioniAttive");
-
-		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioneByMdc", param);
-
-
-		return res;
-
-	}
 
 	@Override
 	public CompetizioneTO readById(Integer id) throws DatabaseException{
@@ -55,12 +42,43 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 	public List<CompetizioneTO> readCompetizioniAttive() throws DatabaseException { 
 		return super.executeQuery("getCompetizioniAttive");
 	}
-
+	@Override
+	public List<CompetizioneTO> readCompetizioniAperte()
+			throws DatabaseException {
+		return super.executeQuery("getCompetizioniAperte");
+	}
+	
 	@Override
 	public CompetizioneTO annullaCompetizione(CompetizioneTO cmpto)
 			throws DatabaseException {
 		return super.update(cmpto);	
 		
 	}
+
+	@Override
+	public List<CompetizioneTO> readByMdc(ManagerDiCompetizioneTO mdc) throws DatabaseException {
+		List<ManagerDiCompetizioneTO> param = new ArrayList<ManagerDiCompetizioneTO>();
+		param.add(mdc);
+
+		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioneByMdc", param);
+
+
+		return res;
+
+	}
+	
+	@Override
+	public List<CompetizioneTO> readAttiveByMdc(ManagerDiCompetizioneTO mdc)
+			throws DatabaseException {
+		List<ManagerDiCompetizioneTO> param = new ArrayList<ManagerDiCompetizioneTO>();
+		param.add(mdc);
+
+		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioneAttiveByMdc", param);
+
+
+		return res;
+	}
+
+
 
 }

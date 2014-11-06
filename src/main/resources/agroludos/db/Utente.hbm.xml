@@ -55,7 +55,7 @@
 				<one-to-many class="agroludos.to.Competizione" />
 			</set>
 			<set name="competizioniAttive" table="tbl_competizione" fetch="select"
-				where="statocomp = 1  or statocomp = 2" cascade="all">
+				where="statocomp = 1  or statocomp = 2 or statocomp = 3" cascade="all">
 				<key column="idmdc" />
 				<one-to-many class="agroludos.to.Competizione" />
 			</set>
