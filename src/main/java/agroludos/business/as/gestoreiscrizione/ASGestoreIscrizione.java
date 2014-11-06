@@ -43,8 +43,9 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 			throws DatabaseException, ValidationException {
 
 		IscrizioneDAO iscDAO = getIscrizioneDAO();
+		CompetizioneTO cmp = iscTO.getCompetizione();	
+		
 		boolean checkPart=false;
-		CompetizioneTO cmp = iscTO.getCompetizione();
 		
 		if(cmp.getAllIscrizioniAttive().size() <= cmp.getNmax()){
 			for(IscrizioneTO isc : iscTO.getCompetizione().getAllIscrizioniAttive()){
@@ -68,6 +69,7 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 			}
 		}else
 		{
+			cmp.setStatoCompetizione(this.getDBDaoFactory().getStatoCompetizioneDAO().getStatoCmpChiusa());
 			throw new NmaxRaggiuntoException();
 		}
 		return iscTO;

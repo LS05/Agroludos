@@ -83,7 +83,10 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 			this.mdcTO = toFact.createMdCTO();
 			this.mdcTO = (ManagerDiCompetizioneTO) mainTO;
 
-			this.listCmp = this.mdcTO.getAllCompetizioniAttive();
+			this.risposta = this.getRisposta();
+			this.richiesta = this.getRichiesta(this.mdcTO, "getCompetizioneAttiveByMdc", this.viewName);
+			this.eseguiRichiesta(this.richiesta, this.risposta);
+			
 			this.listaTabCmp = this.getListTabellaCmp();
 			this.initCmpTable();
 		}else if(mainTO instanceof CompetizioneTO){
@@ -259,6 +262,9 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 				this.setVista("messageDialog",succMessage);
 
+				//controllo se il numero massimo di partecipanti ha raggiunto il limite
+				
+				//invio email agli iscritti
 				EmailTO mail = toFact.createEmailTO();
 				mail.setOggetto("Modifica competizione " + cmp.getNome());
 				mail.setMittente(cmp.getManagerDiCompetizione());

@@ -54,11 +54,6 @@
 				<key column="idmdc" />
 				<one-to-many class="agroludos.to.Competizione" />
 			</set>
-			<set name="competizioniAttive" table="tbl_competizione" fetch="select"
-				where="statocomp = 1  or statocomp = 2 or statocomp = 3" cascade="all">
-				<key column="idmdc" />
-				<one-to-many class="agroludos.to.Competizione" />
-			</set>
 		</joined-subclass>
 		<joined-subclass name="agroludos.to.Partecipante"
 			table="tbl_partecipante" extends="agroludos.to.Utente">

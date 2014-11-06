@@ -288,5 +288,8 @@
 		<from name="mostraIscrizione">
 			<forward success="mostraIscrizione" failure="modificaOptionalPartecipante" />
 		</from>
+		<from name="partMostraIscrizione">
+			<forward success="partMostraIscrizione" failure="partMostraIscrizione" />
+		</from>
 	</command>
 </commands>

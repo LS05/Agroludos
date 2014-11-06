@@ -150,7 +150,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 			Object res = response.getRespData();
 			if(res instanceof IscrizioneTO){
 				this.tableIscrizioni.setAll(this.currUser.getAllIscrizioniAttive());
-
+				this.closeVista("partMostraIscrizione");
 				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.res.getString("key123"));
 				this.setVista("messageDialog",succMessage);

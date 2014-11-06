@@ -16,7 +16,6 @@ import agroludos.integration.dao.db.StatoCompetizioneDAO;
 import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
-import agroludos.to.StatoCompetizioneTO;
 import agroludos.to.TipoCompetizioneTO;
 
 /**

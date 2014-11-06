@@ -11,7 +11,5 @@ public interface ManagerDiCompetizioneTO extends UtenteTO{
 	public void setStipendio(Double stipendio);
 
 	List<CompetizioneTO> getAllCompetizioni();
-
-	List<CompetizioneTO> getAllCompetizioniAttive();
 	
 }
