@@ -1,6 +1,6 @@
 package agroludos.business.validator.rules.competizione;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.to.AgroludosTO;
@@ -13,14 +13,20 @@ public class CompDataRule extends AgroludosRule {
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof CompetizioneTO){
 			CompetizioneTO competizione = (CompetizioneTO)mainTO;
-			Date data = competizione.getData();
+
+			DateTime dataCmp = new DateTime(competizione.getData());
+			DateTime today = new DateTime().withTimeAtStartOfDay();
 
 			String key = this.getRule("dataCmpKey");
 
-			if(data == null){
+
+			if(competizione.getData() == null){
 				errorTO.addError(key, this.getRule("dataError"));
-			}else if(data.before(new Date())){
+			}else if(dataCmp.isBeforeNow()){
 				errorTO.addError(key, this.getRule("dataCmpError"));
+			}else if(today.plusDays(1).isEqual(dataCmp) 
+					|| today.plusDays(2).isEqual(dataCmp)){
+				errorTO.addError(key, this.getRule("data2Error"));
 			}
 
 			if(this.successor != null)
