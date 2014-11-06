@@ -279,5 +279,8 @@
 		<from name="partecipante">
 			<forward success="partecipante" failure="partecipante" />
 		</from>
+		<from name="mostraIscrizione">
+			<forward success="mostraIscrizione" failure="modificaOptionalPartecipante" />
+		</from>
 	</command>
 </commands>

@@ -73,10 +73,12 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 
 		boolean checkData = false;
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
-		List<CompetizioneTO> cmpList = daoCmp.readCompetizioniAttive();
-		
+
+
 		this.validator.validate(cmpto);
-		
+
+		//controllo se esiste una competizione attiva nella data inserita
+		List<CompetizioneTO> cmpList = daoCmp.readCompetizioniAttive();
 		for(CompetizioneTO compet : cmpList){
 			if(compet.getData().compareTo(cmpto.getData()) == 0)
 				checkData = true;
@@ -85,16 +87,33 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 			cmpto = daoCmp.create(cmpto);
 		}else
 			throw new CompetizioneDataExistException();
-		
+
 		return cmpto;
 
 	}
 
 	@Override
 	public CompetizioneTO modificaCompetizione(CompetizioneTO cmpto)
-			throws DatabaseException {
+			throws DatabaseException, ValidationException {
+		boolean checkData = false;
+		
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
-		return daoCmp.update(cmpto);
+
+		this.validator.validate(cmpto);
+
+		//controllo se esiste una competizione attiva nella data inserita
+		List<CompetizioneTO> cmpList = daoCmp.readCompetizioniAttive();
+		for(CompetizioneTO compet : cmpList){
+			if(!compet.equals(cmpto))
+				if(compet.getData().compareTo(cmpto.getData()) == 0)
+					checkData = true;
+		}
+		if(!checkData){
+			cmpto = daoCmp.update(cmpto);
+		}else
+			throw new CompetizioneDataExistException();
+
+		return cmpto;
 	}
 
 	@Override

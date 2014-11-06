@@ -76,6 +76,9 @@ public abstract class AgroludosController {
 		controller.closeVista(getViewName());
 	}
 
+	protected void show(){
+		controller.getStage(getViewName()).show();
+	}
 	public void setToFact(TOFactory toFactory) {
 		toFact = toFactory;
 	}

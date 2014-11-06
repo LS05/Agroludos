@@ -58,7 +58,7 @@
                       </GridPane.margin>
                     </Label>
                     <TextArea fx:id="txtDescrizione" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                    <Label id="lbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label id="lbl" fx:id="lblNomeCmpError" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
                       <textFill>
                         <Color blue="0.000" green="0.384" red="0.800" fx:id="x3" />
                       </textFill>
@@ -140,7 +140,6 @@
                             <Insets left="10.0" fx:id="x2" />
                           </GridPane.margin>
                         </Label>
-                        <Label id="lbl" fx:id="lblNminCmpError" text="Label" textFill="$x3" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -175,12 +174,12 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <GridPane GridPane.rowIndex="3">
+                <GridPane GridPane.rowIndex="4">
                   <children>
                     <GridPane>
                       <children>
                         <Label font="$x1" text="%key31" GridPane.margin="$x2" />
-                        <GridPane fx:id="paneCostoComp" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <GridPane fx:id="paneCostoComp" prefHeight="26.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
@@ -198,8 +197,8 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       </columnConstraints>
                       <rowConstraints>
-                        <RowConstraints maxHeight="28.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="24.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="33.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
                       </rowConstraints>
                     </GridPane>
                     <Button fx:id="btnSelezioneOpt" mnemonicParsing="false" onMouseClicked="#btnSelezioneOpt" prefHeight="26.0" prefWidth="362.0" text="%key67" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
@@ -216,16 +215,22 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
+                <Label id="lbl" fx:id="lblNminCmpError" text="Label" textFill="$x3" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                  <GridPane.margin>
+                    <Insets left="200.0" />
+                  </GridPane.margin>
+                </Label>
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="118.0" minHeight="0.0" prefHeight="110.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="242.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="263.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="263.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="263.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="118.0" minHeight="0.0" prefHeight="114.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="242.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="263.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="263.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="263.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="263.0" minHeight="10.0" prefHeight="17.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
           </children>

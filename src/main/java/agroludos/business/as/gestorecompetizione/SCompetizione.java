@@ -21,8 +21,9 @@ public interface SCompetizione extends AgroludosService {
 	 * @param cmpto
 	 * @return
 	 * @throws DatabaseException
+	 * @throws ValidationException 
 	 */
-	CompetizioneTO modificaCompetizione(CompetizioneTO cmpto) throws DatabaseException;
+	CompetizioneTO modificaCompetizione(CompetizioneTO cmpto) throws DatabaseException, ValidationException;
 	
 	/**
 	 * 

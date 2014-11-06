@@ -1,7 +1,6 @@
 package agroludos.presentation.views.partecipante;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import agroludos.presentation.req.AgroRequest;
@@ -12,7 +11,6 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.QuestionTO;
-import agroludos.to.StatoIscrizioneTO;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,8 +46,6 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 
 	private TableOptional tableOptional;
 
-	private List<StatoIscrizioneTO> statiIscrizione;
-
 	private AgroResponse risposta;
 	private AgroRequest richiesta;
 
@@ -64,10 +60,6 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 	public void initializeView(AgroludosTO mainTO) {
 		if(mainTO instanceof IscrizioneTO){
 			this.mainIscr = (IscrizioneTO) mainTO;
-
-			this.richiesta = this.getRichiesta("getAllStatoIscrizione", this.viewName);
-			this.risposta = this.getRisposta();
-			this.eseguiRichiesta(richiesta, risposta);
 
 			this.lblNomeIsc.setText(this.mainIscr.getPartecipante().getNome());
 			this.lblCognomeIsc.setText(this.mainIscr.getPartecipante().getCognome());
@@ -127,17 +119,10 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-
-		if( commandName.equals(this.getCommandName("getAllStatoIscrizione") )){
-			Object res = response.getRespData();
-			if(res instanceof List<?>){			
-				this.statiIscrizione = (List<StatoIscrizioneTO>) res;
-			}
-		} else if( commandName.equals(this.getCommandName("modificaIscrizione") )){
+		if( commandName.equals(this.getCommandName("modificaIscrizione") )){
 			Object res = response.getRespData();
 			if(res instanceof IscrizioneTO){			
 				this.mainIscr = (IscrizioneTO) res;

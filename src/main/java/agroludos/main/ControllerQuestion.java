@@ -38,7 +38,6 @@ public class ControllerQuestion extends AgroludosController{
 		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta(this.questTO.getDataTO(), this.questTO.getRequest(), this.questTO.getViewName());
 		this.eseguiRichiesta(this.richiesta, this.risposta);
-		this.closeVista(this.questTO.getViewName());
 	}  
 
 	@FXML private void btnNo(){
