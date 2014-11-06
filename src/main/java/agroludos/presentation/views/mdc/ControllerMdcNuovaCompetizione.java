@@ -51,7 +51,6 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 	private NumberSpinner costoComp;
 
 	private List<TipoCompetizioneTO> listTipiCmp;
-	private List<StatoCompetizioneTO> listStatiCmp;
 	private CompetizioneTO cmpto;
 	private AgroResponse risposta;
 	private AgroRequest richiesta;
@@ -147,12 +146,6 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 
 		this.cmpto.setTipoCompetizione(this.listTipiCmp.get(i));
 
-		this.risposta = this.getRisposta();
-		this.richiesta = this.getRichiesta("getAllStatoCompetizione", this.viewName);
-		this.eseguiRichiesta(this.richiesta, this.risposta);
-
-		this.cmpto.setStatoCompetizione(this.listStatiCmp.get(1));
-
 		this.cmpto.setManagerDiCompetizione((ManagerDiCompetizioneTO) this.getUtente());
 
 		if(this.cmpto.getAllOptionals().isEmpty()){
@@ -171,7 +164,6 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 			this.richiesta = this.getRichiesta(this.cmpto, "inserisciCompetizione", this.viewName);
 			this.eseguiRichiesta(this.richiesta, this.risposta);
 		}
-		this.close();
 	}
 
 	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
@@ -190,12 +182,7 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 			Object res = response.getRespData();
 			if(res instanceof List<?>)
 				this.listTipiCmp = (List<TipoCompetizioneTO>)res;
-		}else if(commandName.equals( this.getCommandName("getAllStatoCompetizione") )){
-			Object res = response.getRespData();
-			if(res instanceof List<?>)
-				this.listStatiCmp = (List<StatoCompetizioneTO>)res;
-		}if(commandName.equals( this.getCommandName("inserisciCompetizione") )){
-			this.show();
+		}else if(commandName.equals( this.getCommandName("inserisciCompetizione") )){
 			Object res = response.getRespData();
 			if(res instanceof ErrorTO){
 

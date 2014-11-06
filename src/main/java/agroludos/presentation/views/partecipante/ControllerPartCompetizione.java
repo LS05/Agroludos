@@ -138,6 +138,7 @@ public class ControllerPartCompetizione extends AgroludosController{
 		if( commandName.equals( this.getCommandName("inserisciIscrizione") )){
 			Object res = response.getRespData();
 			if(res instanceof String){
+				initializeView(this.cmpto);
 				ErrorMessageTO msg = toFact.createErrMessageTO();
 				msg.setMessage((String) res);
 				this.setVista("messageDialog", msg);

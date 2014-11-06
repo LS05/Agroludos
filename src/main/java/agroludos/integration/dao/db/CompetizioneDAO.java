@@ -13,10 +13,13 @@ public interface CompetizioneDAO extends DAO<CompetizioneTO>{
 
 	List<CompetizioneTO> readByTipo(TipoCompetizioneTO tipo) throws DatabaseException;
 
-	List<CompetizioneTO> readByMdc(ManagerDiCompetizioneTO mdc) throws DatabaseException;
+	List<CompetizioneTO> readAttiveByMdc(ManagerDiCompetizioneTO mdc) throws DatabaseException;
 
 	CompetizioneTO readById(Integer id) throws DatabaseException;
 
 	List<CompetizioneTO> readCompetizioniAttive() throws DatabaseException;
 
+	List<CompetizioneTO> readCompetizioniAperte() throws DatabaseException;
+
+	List<CompetizioneTO> readByMdc(ManagerDiCompetizioneTO mdcto)throws DatabaseException;
 }

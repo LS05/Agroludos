@@ -53,7 +53,12 @@ public interface LCompetizione extends AgroludosService {
 	 */
 	List<CompetizioneTO> getCompetizioniAttive() throws DatabaseException;
 	
+	List<CompetizioneTO> getCompetizioniAperte() throws DatabaseException;
+	
 	List<TipoCompetizioneTO> getAllTipoCompetizione() throws DatabaseException;
 	
 	List<CompetizioneTO> getCompetizioneByTipo(TipoCompetizioneTO tcmto) throws DatabaseException;
+
+	List<CompetizioneTO> getCompetizioneAttiveByMdc(
+			ManagerDiCompetizioneTO mdcto) throws DatabaseException;
 }

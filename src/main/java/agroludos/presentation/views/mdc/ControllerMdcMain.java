@@ -14,7 +14,6 @@ import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.SuccessMessageTO;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -67,8 +66,11 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 		this.viewName = viewName;
 		this.mdcTO = toFact.createMdCTO();
 		this.mdcTO = (ManagerDiCompetizioneTO) this.getUtente();
-
-		this.listCmp = this.mdcTO.getAllCompetizioniAttive();
+		
+		this.risposta = this.getRisposta();
+		this.richiesta = this.getRichiesta(this.mdcTO, "getCompetizioneAttiveByMdc", this.viewName);
+		this.eseguiRichiesta(this.richiesta, this.risposta);
+		
 		this.listaTabCmp = this.getListTabellaCmp();
 		this.initCmpTable();
 	}
@@ -81,7 +83,10 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 			this.mdcTO = toFact.createMdCTO();
 			this.mdcTO = (ManagerDiCompetizioneTO) mainTO;
 
-			this.listCmp = this.mdcTO.getAllCompetizioniAttive();
+			this.risposta = this.getRisposta();
+			this.richiesta = this.getRichiesta(this.mdcTO, "getCompetizioneAttiveByMdc", this.viewName);
+			this.eseguiRichiesta(this.richiesta, this.risposta);
+			
 			this.listaTabCmp = this.getListTabellaCmp();
 			this.initCmpTable();
 		}else if(mainTO instanceof CompetizioneTO){
@@ -167,6 +172,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 		this.close();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
@@ -178,7 +184,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 				this.initializeView(cmp.getManagerDiCompetizione());
 
 				this.getStage("mostraCmp").close();
-
+			
 				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.resources.getString("key119"));
 
@@ -196,6 +202,11 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 				this.risposta = this.getRisposta();
 				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
 				this.eseguiRichiesta(this.richiesta, this.risposta);
+			}
+		}else if(commandName.equals( this.getCommandName("getCompetizioneAttiveByMdc"))){
+			Object res = response.getRespData();
+			if(res instanceof List<?>){
+				this.listCmp = (List<CompetizioneTO>) res;
 			}
 		}else if(commandName.equals( this.getCommandName("eliminaIscrizione"))){
 			Object res = response.getRespData();
@@ -231,6 +242,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 				this.listaTabCmp.clear();
 				this.initializeView(((CompetizioneTO) res).getManagerDiCompetizione());	
 				
+				this.closeVista("mostraNuovaCmp");
 				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.resources.getString("key124"));
 				this.setVista("messageDialog",succMessage);
@@ -250,6 +262,9 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 				this.setVista("messageDialog",succMessage);
 
+				//controllo se il numero massimo di partecipanti ha raggiunto il limite
+				
+				//invio email agli iscritti
 				EmailTO mail = toFact.createEmailTO();
 				mail.setOggetto("Modifica competizione " + cmp.getNome());
 				mail.setMittente(cmp.getManagerDiCompetizione());

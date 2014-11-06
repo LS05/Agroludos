@@ -9,7 +9,6 @@ class ManagerDiCompetizione extends Utente implements ManagerDiCompetizioneTO {
 	private Double stipendio;
 	
 	private Set<Competizione> competizioni;
-	private Set<Competizione> competizioniAttive;
 
 	@Override
 	public Double getStipendio() {
@@ -36,27 +35,6 @@ class ManagerDiCompetizione extends Utente implements ManagerDiCompetizioneTO {
 		return this.competizioni;
 	}
 	
-
-	public void setCompetizioniAttive(Set<Competizione> competizioniAttive) {
-		this.competizioniAttive = competizioniAttive;
-	}
-	
-	@Override
-	public List<CompetizioneTO> getAllCompetizioniAttive() {
-		List<CompetizioneTO> res = new ArrayList<CompetizioneTO>();
-		
-		for(Competizione item : this.competizioniAttive){
-			res.add(item);
-		}
-		
-		return res;
-	}
-	
-	public Set<Competizione> getCompetizioniAttive() {
-		return this.competizioniAttive;
-	}
-	
-
 	public void setCompetizioni(Set<Competizione> competizioni) {
 		this.competizioni = competizioni;
 	}

@@ -21,5 +21,29 @@ public class MySqlStatoCompetizioneDAO extends MySqlAgroludosDAO<StatoCompetizio
 
 		return stato0.get(0);
 	}
+	@Override
+	public StatoCompetizioneTO getStatoCmpAperta() throws DatabaseException {
+		List<StatoCompetizioneTO> stato1 = super.executeQuery("getStatoCmpAperta");
 
+		return stato1.get(0);
+	}
+
+	@Override
+	public StatoCompetizioneTO getStatoCmpInCorso() throws DatabaseException {
+		List<StatoCompetizioneTO> stato2 = super.executeQuery("getStatoCmpInCorso");
+
+		return stato2.get(0);
+	}
+	@Override
+	public StatoCompetizioneTO getStatoCmpChiusa() throws DatabaseException {
+		List<StatoCompetizioneTO> stato3 = super.executeQuery("getStatoCmpChiusa");
+
+		return stato3.get(0);
+	}
+	@Override
+	public StatoCompetizioneTO getStatoCmpTerminata() throws DatabaseException {
+		List<StatoCompetizioneTO> stato4 = super.executeQuery("getStatoCmpTerminata");
+
+		return stato4.get(0);
+	}
 }
