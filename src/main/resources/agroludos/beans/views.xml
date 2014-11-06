@@ -27,7 +27,9 @@
 		<property name="errConf" ref="systemConf"/>
 	</bean>
 	
-	<bean id="viewsParser" class="agroludos.presentation.views.xml.ViewsParser" />
+	<bean id="viewsParser" class="agroludos.presentation.views.xml.ViewsParser">
+		<constructor-arg ref="systemConf" />
+	</bean>
 	
 	<bean id="viewsLoader" class="agroludos.presentation.views.ViewsLoader">
 		<constructor-arg ref="viewsParser" />

@@ -1,12 +1,13 @@
 package agroludos.presentation.views.xml;
 
+import agroludos.system.SystemConf;
 import javafx.fxml.FXMLLoader;
 
 class AgroludosControlView extends AgroludosWindow{
 	private View view;
 	
-	AgroludosControlView(View view){
-		super(view);
+	AgroludosControlView(View view, SystemConf conf){
+		super(view, conf);
 		this.view = view;
 	}
 	

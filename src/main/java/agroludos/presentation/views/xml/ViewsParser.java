@@ -7,13 +7,14 @@ import java.util.Map;
 import javax.xml.bind.JAXBException;
 
 import agroludos.exceptions.ViewNotFoundException;
+import agroludos.system.SystemConf;
 import agroludos.utility.xml.AgroParser;
 
 class ViewsParser extends AgroParser implements AgroViewsParser{
 	private Map<String, AgroludosWindow> views;
 	private AgroViews parsedViews = null;
 
-	ViewsParser() throws JAXBException{
+	ViewsParser(SystemConf conf) throws JAXBException{
 		super(AgroViews.class, "src/main/java/agroludos/presentation/views/xml/views.xml");
 		this.parsedViews = (AgroViews) this.parseRes;
 		this.views = new HashMap<String, AgroludosWindow>();
@@ -23,11 +24,11 @@ class ViewsParser extends AgroParser implements AgroViewsParser{
 		for(View e : listView){
 
 			if("controlView".equals(e.getTipo())){
-				this.views.put(e.getName(), new AgroludosControlView(e));
+				this.views.put(e.getName(), new AgroludosControlView(e, conf));
 			} else if("dialog".equals(e.getTipo())){
-				this.views.put(e.getName(), new AgroludosDialog(e));
+				this.views.put(e.getName(), new AgroludosDialog(e, conf));
 			}else if("mainView".equals(e.getTipo())){
-				this.views.put(e.getName(), new AgroludosMainView(e));
+				this.views.put(e.getName(), new AgroludosMainView(e, conf));
 			}
 		}
 	}

@@ -101,4 +101,9 @@ class SystemConfImpl implements SystemConf, HibernateConf, RulesErrorsConf, ReqC
 	public String getString(String key) {
 		return this.config.getString(key);
 	}
+
+	@Override
+	public String getLang() {
+		return this.config.getString("lang");
+	}
 }

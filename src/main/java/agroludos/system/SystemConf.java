@@ -9,5 +9,7 @@ public interface SystemConf extends Conf{
 	String getTipoConf();
 
 	String getTipoCert();
+	
+	String getLang();
 
 }
