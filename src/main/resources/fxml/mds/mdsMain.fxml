@@ -25,7 +25,12 @@
                 <Button fx:id="btnNuovoTipoCompetizione" mnemonicParsing="false" onMouseClicked="#nuovoTipoCompetizioneClicked" prefHeight="25.0" prefWidth="222.0" text="%key104" GridPane.halignment="CENTER" />
                 <GridPane GridPane.columnIndex="1">
                   <children>
-                    <Button fx:id="btnCercaCompetizioni" mnemonicParsing="false" text="%key18" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                    <Button id="btnAnnullaRicercaComp" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#annullaRicercaCompClicked" styleClass="btnAnnullaCerca" text="x" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                      <font>
+                        <Font name="System Bold" size="13.0" fx:id="x1" />
+                      </font>
+                    </Button>
+                    <Button fx:id="btnCercaCompetizioni" mnemonicParsing="false" onMouseClicked="#btnCercaCompetizioniClicked" text="%key18" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                     <TextField fx:id="txtFilterComp" GridPane.halignment="CENTER">
                       <GridPane.margin>
                         <Insets left="10.0" />
@@ -34,6 +39,7 @@
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="-1.0" />
+                    <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" />
                   </columnConstraints>
                   <rowConstraints>
@@ -164,22 +170,18 @@
                     </Label>
                     <GridPane GridPane.rowIndex="1">
                       <children>
-                        <Label text="%key2">
-                          <font>
-                            <Font name="System Bold" size="13.0" fx:id="x2" />
-                          </font>
-                        </Label>
+                        <Label font="$x1" text="%key2" />
                         <Label id="lblNomePartecipante" fx:id="lblParNome" text="Label" GridPane.columnIndex="1" />
-                        <Label font="$x2" text="%key3" GridPane.rowIndex="1" />
+                        <Label font="$x1" text="%key3" GridPane.rowIndex="1" />
                         <Label id="lblCognomePartecipante" fx:id="lblParCognome" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label font="$x2" text="%key74" GridPane.rowIndex="2" />
+                        <Label font="$x1" text="%key74" GridPane.rowIndex="2" />
                         <Label id="lblUsernamePartecipante" fx:id="lblParUsername" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label font="$x2" text="%key111" GridPane.rowIndex="4" />
-                        <Label font="$x2" text="%key8" GridPane.rowIndex="5" />
-                        <Label font="$x2" text="%key6" GridPane.rowIndex="6" />
-                        <Label font="$x2" text="%key4" GridPane.rowIndex="7" />
-                        <Label font="$x2" text="%key5" GridPane.rowIndex="8" />
-                        <Label font="$x2" prefHeight="46.0" prefWidth="129.0" text="%key7" wrapText="true" GridPane.rowIndex="9" />
+                        <Label font="$x1" text="%key111" GridPane.rowIndex="4" />
+                        <Label font="$x1" text="%key8" GridPane.rowIndex="5" />
+                        <Label font="$x1" text="%key6" GridPane.rowIndex="6" />
+                        <Label font="$x1" text="%key4" GridPane.rowIndex="7" />
+                        <Label font="$x1" text="%key5" GridPane.rowIndex="8" />
+                        <Label font="$x1" prefHeight="46.0" prefWidth="129.0" text="%key7" wrapText="true" GridPane.rowIndex="9" />
                         <Label id="lblCFPartecipante" fx:id="lblParCodFisc" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label id="lblIndirizzoPartecipante" fx:id="lblParIndirizzo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Label id="lblSessoPartecipante" fx:id="lblParSesso" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
@@ -187,10 +189,10 @@
                         <Label id="lblDataNascitaPartecipante" fx:id="lblParAnnoNasc" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                         <Label id="lblNumeroTSPartecipante" fx:id="lblParNumTessSan" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                         <Button id="" fx:id="btnMostraSRC" mnemonicParsing="false" onMouseClicked="#visualizzaCertificatoSrc" text="%key58" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                        <Label font="$x2" prefHeight="46.0" prefWidth="129.0" text="%key10" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="11" />
+                        <Label font="$x1" prefHeight="46.0" prefWidth="129.0" text="%key10" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="11" />
                         <Label fx:id="lblParStato" prefHeight="50.0" prefWidth="180.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label font="$x2" text="%key24" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                        <Label font="$x2" prefHeight="21.0001220703125" text="%key110" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+                        <Label font="$x1" text="%key24" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                        <Label font="$x1" prefHeight="21.0001220703125" text="%key110" GridPane.columnIndex="0" GridPane.rowIndex="10" />
                         <Label id="lblDataSRCPartecipante" fx:id="lblParDataSRC" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                       </children>
                       <columnConstraints>
@@ -257,14 +259,14 @@
                     </Label>
                     <GridPane GridPane.rowIndex="1">
                       <children>
-                        <Label font="$x2" text="%key2" />
+                        <Label font="$x1" text="%key2" />
                         <Label fx:id="lblMdcNome" text="Label" GridPane.columnIndex="1" />
-                        <Label font="$x2" text="%key3" GridPane.rowIndex="1" />
+                        <Label font="$x1" text="%key3" GridPane.rowIndex="1" />
                         <Label id="lblCognomeManagerCompetizione" fx:id="lblMdcCognome" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label font="$x2" text="%key4" GridPane.rowIndex="2" />
+                        <Label font="$x1" text="%key4" GridPane.rowIndex="2" />
                         <Label fx:id="lblMdcEmail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label font="$x2" text="%key74" GridPane.rowIndex="3" />
-                        <Label font="$x2" text="%key24" GridPane.rowIndex="4" />
+                        <Label font="$x1" text="%key74" GridPane.rowIndex="3" />
+                        <Label font="$x1" text="%key24" GridPane.rowIndex="4" />
                         <Label id="lblStatoManagerCompetizione" fx:id="lblMdcStato" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label id="lblUsernameManagerCompetizione" fx:id="lblMdcUsername" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                       </children>

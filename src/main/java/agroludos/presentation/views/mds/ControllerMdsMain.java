@@ -10,19 +10,20 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.components.table.TableCompetizioni;
 import agroludos.presentation.views.components.table.TableMdC;
 import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.presentation.views.components.table.TablePartecipanti;
+import agroludos.presentation.views.components.table.filter.TableCompetizioniFilter;
 import agroludos.presentation.views.components.tablemodel.CmpModel;
 import agroludos.presentation.views.components.tablemodel.MdcModel;
 import agroludos.presentation.views.components.tablemodel.OptModel;
@@ -78,6 +79,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	@FXML private Label lblParEmail;
 	@FXML private Label lblParAnnoNasc;
 	@FXML private Label lblParNumTessSan;
+	@FXML private Button btnCercaCompetizioni;
 	private List<PartecipanteTO> listPart;
 	private int selectedPart = 0;
 
@@ -98,6 +100,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 	private ResourceBundle resources;
 	protected PartModel partModelRow;
+	private TableCompetizioniFilter filter;
 
 	@Override
 	public void initialize(URL url, ResourceBundle res) {
@@ -137,6 +140,8 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 		});
 
+		this.filter = new TableCompetizioniFilter();
+		
 
 		final String viewNameSupp = this.viewName;
 		this.listViewComp.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -155,6 +160,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				eseguiRichiesta(richiesta, risposta);
 
 				tableCompetizioni.setAll(listComp);
+				filter.setData(tableCompetizioni);
 			}
 
 		});
@@ -182,6 +188,15 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.lblParSesso.setText(selModel.getSesso());
 		this.lblParAnnoNasc.setText(selModel.getDataNasc());
 		this.lblParNumTessSan.setText(selModel.getNumTessera());
+	}
+	
+	
+	@FXML protected void btnCercaCompetizioniClicked(MouseEvent event) {
+		this.filter.updateFilteredData(this.tableCompetizioni, this.txtFilterComp);
+	}
+	
+	@FXML protected void annullaRicercaCompClicked(MouseEvent event) {
+		this.filter.resetResearch(this.tableCompetizioni, this.txtFilterComp);
 	}
 
 	@FXML protected void btnGestComp(MouseEvent event) {

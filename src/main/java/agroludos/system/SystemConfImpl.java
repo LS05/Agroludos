@@ -6,8 +6,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
 
 class SystemConfImpl implements SystemConf, HibernateConf, RulesErrorsConf, ReqConf{
-	private CompositeConfiguration config; 
-	private PropertiesConfiguration fileConf;
+	private CompositeConfiguration config;
 
 	SystemConfImpl() throws ConfigurationException{
 		this.config = new CompositeConfiguration();
@@ -15,8 +14,6 @@ class SystemConfImpl implements SystemConf, HibernateConf, RulesErrorsConf, ReqC
 		this.config.addConfiguration(new SystemConfiguration());
 		this.config.addConfiguration(new PropertiesConfiguration("properties/main.properties"));
 
-		this.fileConf = new PropertiesConfiguration("properties/filesystem.properties");
-		this.config.addConfiguration(this.fileConf);
 	}
 
 	public void setTipoDB(String tipoDB){
