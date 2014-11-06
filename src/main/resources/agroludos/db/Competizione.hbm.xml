@@ -71,7 +71,9 @@
         <![CDATA[ from agroludos.to.Competizione c where c.managerDiCompetizione = ?]]></query>
 	<query name="annullaCompetizione">
         <![CDATA[ update agroludos.to.Competizione set statocomp = 0]]></query>
-	<query name="getCompetizioniAttive">
+	<query name="getCompetizioniAperte">
         <![CDATA[ from agroludos.to.Competizione c where statocomp = 1]]></query>
+	<query name="getCompetizioniAttive">
+        <![CDATA[ from agroludos.to.Competizione c where statocomp = 1 or statocmp = 2 or statocomp = 3]]></query>
 
 </hibernate-mapping>
