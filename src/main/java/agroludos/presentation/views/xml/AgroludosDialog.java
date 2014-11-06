@@ -1,11 +1,12 @@
 package agroludos.presentation.views.xml;
 
+import agroludos.system.SystemConf;
 import javafx.fxml.FXMLLoader;
 class AgroludosDialog extends AgroludosWindow{
 	private View dialog;
 	
-	AgroludosDialog(View dialog){
-		super(dialog);
+	AgroludosDialog(View dialog, SystemConf conf){
+		super(dialog, conf);
 		this.dialog = dialog;
 	}
 	

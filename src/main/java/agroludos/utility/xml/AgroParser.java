@@ -8,6 +8,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+
+//TODO Da cambiare package
 public abstract class AgroParser {
 	protected File xmlFile;
 	protected Unmarshaller jaxbUnmarshaller;
