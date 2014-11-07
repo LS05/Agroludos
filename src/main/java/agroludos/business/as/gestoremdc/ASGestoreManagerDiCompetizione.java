@@ -46,15 +46,21 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 	}
 
 	@Override
-	public ManagerDiCompetizioneTO getManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) throws DatabaseException {
+	public ManagerDiCompetizioneTO getManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) 
+			throws DatabaseException {
+
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
 		return daoMan.getByUsername(mdcto.getUsername());
+
 	}
 
 	@Override
-	public List<ManagerDiCompetizioneTO> getAllManagerDiCompetizione() throws DatabaseException {
+	public List<ManagerDiCompetizioneTO> getAllManagerDiCompetizione() 
+			throws DatabaseException {
+
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO(); 
 		return daoMan.getAll();
+
 	}
 
 	@Override
@@ -62,7 +68,7 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 			throws DatabaseException, ValidationException {
 
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
-		
+
 		this.validator.validate(mdcto);
 		ManagerDiCompetizioneTO res = (ManagerDiCompetizioneTO)daoMan.update(mdcto);
 
@@ -77,7 +83,7 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 
 		this.validator.validate(mdcto);
-		
+
 		StatoUtenteDAO suDAO = dbDAOFact.getStatoUtenteDAO();
 		List<StatoUtenteTO> stati = suDAO.getAll();
 
@@ -89,14 +95,15 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 	@Override
 	public ManagerDiCompetizioneTO checkMdcCmpAttive(ManagerDiCompetizioneTO mdcTO) 
 			throws DatabaseException, MdcCmpAttiveException{
-		
+
 		CompetizioneDAO daoCmp = this.dbFact.getDAOFactory(this.sysConf.getTipoDB()).getCompetizioneDAO();
-		
+
 		for(CompetizioneTO cmpTO: daoCmp.readCompetizioniAttive()){
 			if(cmpTO.getManagerDiCompetizione().getId() == mdcTO.getId()){
 				throw new MdcCmpAttiveException();
 			}
 		}
+
 		return mdcTO;
 	}
 }

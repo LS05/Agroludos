@@ -157,7 +157,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 			iscTO.setStatoIscrizione(statoIscDao.getAll().get(0));
 			iscDao.annullaIscrizione(iscTO);
 
-			asdasda;
+			//TODO GestoreCompetizione - Invio mail 
 			EmailTO mail = toFact.createEmailTO();
 			mail.setOggetto("Iscrizione annullata");
 			mail.setMessage(iscTO.getPartecipante().getUsername() + " abbiamo annullato l'iscrizione "
@@ -305,16 +305,18 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	}
 
 	@Override
-	public CompetizioneTO checkCmpData(CompetizioneTO cmp) throws DatabaseException{
+	public CompetizioneTO checkCmpData(CompetizioneTO cmp) 
+			throws DatabaseException, CmpDataAttiveException{
 
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
-		
+
 		//controllo se esiste una competizione attiva nella data inserita
 		List<CompetizioneTO> cmpList = daoCmp.readCompetizioniAttive();
 		for(CompetizioneTO compet : cmpList){
-				if(compet.getData().compareTo(cmp.getData()) == 0)
-					throw new CmpDataAttiveException();
+			if(compet.getData().compareTo(cmp.getData()) == 0)
+				throw new CmpDataAttiveException();
 		}
+
 		return cmp;
 	}
 }
