@@ -101,6 +101,6 @@ public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 		String renamePath = absCertPath + "certificato.txt";
 		outFileName.renameTo(new File(renamePath));
 
-		partTO.setSrc(out.toString() + "/certificato.txt");
+		partTO.setSrc(out.toString());
 	}
 }
