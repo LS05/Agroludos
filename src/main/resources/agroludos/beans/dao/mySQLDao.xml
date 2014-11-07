@@ -3,16 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-
-	<bean id="mySqlDaoUtil" class="agroludos.integration.dao.db.mysql.MySqlDAO" />
 	
 	<bean id="mySqlDaoFactory" 
 		  class="agroludos.integration.dao.db.mysql.MySqlDAOFactory">
-		  <constructor-arg ref="mySqlDaoUtil" />
 	</bean>
 	
 	<bean id="mysqlAgroludosDAO" 
-		  class="agroludos.integration.dao.db.mysql.MySqlAgroludosDA"
+		  class="agroludos.integration.dao.db.mysql.MySqlAgroludosDAO"
 		  abstract="true">
 		  <property name="toFact" ref="toFactory" />
 	</bean>

@@ -172,7 +172,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 
 				IscrizioneTO iscTO = ((IscrizioneTO) res);
 				
-				adssd;
+				//TODO ControllerPartecipanteMain Invio Mail
 				EmailTO mail = toFact.createEmailTO();
 				mail.setOggetto("Iscrizione annullata");
 				mail.setMessage(iscTO.getPartecipante().getUsername() + " ha annullato l'iscrizione "
