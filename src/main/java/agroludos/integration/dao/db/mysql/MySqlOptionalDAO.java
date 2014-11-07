@@ -1,15 +1,12 @@
 package agroludos.integration.dao.db.mysql;
 
-import org.hibernate.Session;
-
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.OptionalDAO;
 import agroludos.to.OptionalTO;
 
 class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements OptionalDAO {
 
-	MySqlOptionalDAO(Session session){
-		super(session);
+	MySqlOptionalDAO(){
 		this.setClasse(OptionalTO.class);
 	}
 

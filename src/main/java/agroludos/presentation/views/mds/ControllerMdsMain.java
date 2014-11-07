@@ -129,7 +129,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
-
+		
 		this.paneGestioneCompetizioni.setVisible(true);
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneMdC.setVisible(false);
@@ -196,8 +196,8 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	}
 
 	private void setDxMdCColumn(Integer selected){
-		MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
 		if( selected != -1){
+			MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
 			selModel = tableManagerCompetizione.getItems().get(selected);
 			this.lblMdcNome.setText(selModel.getNome());
 			this.lblMdcCognome.setText(selModel.getCognome());
@@ -208,8 +208,8 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	}
 
 	private void setDxPartColumn(int selected) {
-		PartModel selModel = this.tablePartecipanti.getItems().get(selected);
 		if( selected != -1 ){
+			PartModel selModel = this.tablePartecipanti.getItems().get(selected);
 			selModel = this.tablePartecipanti.getItems().get(selected);
 			this.lblParNome.setText(selModel.getNome());
 			this.lblParCognome.setText(selModel.getCognome());

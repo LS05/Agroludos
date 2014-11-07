@@ -30,7 +30,7 @@
 		<property name="dataSRC" type="date">
 			<column name="data_src" not-null="true" />
 		</property>
-		<set name="iscrizioni" table="tbl_iscrizione" fetch="select" cascade="all">
+		<set name="iscrizioni" table="tbl_iscrizione" fetch="select" cascade="all" lazy="false">
 			<key column="idpartecipante" />
 			<one-to-many class="agroludos.to.Iscrizione" />
 		</set>

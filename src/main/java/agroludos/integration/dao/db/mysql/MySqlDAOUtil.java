@@ -10,7 +10,7 @@ import agroludos.exceptions.DatabaseException;
 class MySqlDAOUtil{
 
 	private static SessionFactory sessionFactory;
-	
+
 	public static SessionFactory buildSessionFactory() throws DatabaseException{
 		SessionFactory res = null;
 
@@ -31,7 +31,7 @@ class MySqlDAOUtil{
 
 		return res;
 	}
-	
+
 	public static SessionFactory getSessionFactory(){
 		return sessionFactory;		
 	}

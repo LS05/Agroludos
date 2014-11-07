@@ -2,16 +2,13 @@ package agroludos.integration.dao.db.mysql;
 
 import java.util.List;
 
-import org.hibernate.Session;
-
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.IscrizioneDAO;
 import agroludos.to.IscrizioneTO;
 
 class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements IscrizioneDAO{
 
-	MySqlIscrizioneDAO(Session session) {
-		super(session);
+	MySqlIscrizioneDAO() {
 		this.setClasse(IscrizioneTO.class);
 	}
 
@@ -25,15 +22,15 @@ class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements Iscr
 	public IscrizioneTO annullaIscrizione(IscrizioneTO iscTO) throws DatabaseException {
 
 		super.update(iscTO);
-		this.session.refresh(iscTO.getCompetizione().getManagerDiCompetizione());
 		return iscTO;
 
 	}
 
+	//TODO Da rivedere il confronto con null
 	@Override
 	public boolean esisteIscrizione(IscrizioneTO iscTO) throws DatabaseException {
-		IscrizioneTO test = this.findOne(iscTO.getId());
-		return test != null;
+		IscrizioneTO iscrizione = this.findOne(iscTO.getId());
+		return iscrizione != null;
 	}
 
 }

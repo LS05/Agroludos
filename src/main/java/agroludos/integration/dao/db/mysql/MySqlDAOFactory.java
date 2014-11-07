@@ -1,7 +1,5 @@
 package agroludos.integration.dao.db.mysql;
 
-import org.hibernate.Session;
-
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
