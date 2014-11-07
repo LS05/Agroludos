@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -39,7 +40,7 @@ public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 		CertificatoTO certTO = this.toFact.createCertificatoTO();
 		StringBuilder certCont = new StringBuilder();
 
-		String certPath = this.getCertPath(partTO); 
+		String certPath = Paths.get(this.getCertPath(partTO)).toString();
 
 		BufferedReader br = null;
 		String certificato = "";
@@ -79,7 +80,7 @@ public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 
 	@Override
 	public void salvaCertificato(PartecipanteTO partTO) throws IOException {
-		String certPath = this.getCertPath(partTO);
+		String certPath = Paths.get(this.getCertPath(partTO)).toString();
 
 		File in = new File(partTO.getSrc());
 
