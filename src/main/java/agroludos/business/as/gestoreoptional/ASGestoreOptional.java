@@ -5,6 +5,7 @@ import java.util.List;
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.OptionalCmpAttiveException;
 import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
@@ -54,18 +55,7 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 
 		OptionalDAO daoOpt = getOptionalDAO();
 		validate(optto);
-		//TODO controllare che non faccia parte di nessuna competizione attiva
 		
-		CompetizioneDAO daoCmp = this.dbFact.getDAOFactory(this.sysConf.getTipoDB()).getCompetizioneDAO();
-		for(CompetizioneTO cmpTO: daoCmp.getAll()){
-			if(cmpTO.getStatoCompetizione().getId() == 1){
-				for(OptionalTO checkOpt: cmpTO.getAllOptionals()){
-					if(checkOpt.getId() == optto.getId()){
-						//TODO eccezione optional in competizioni attive
-					}
-				}
-			}
-		}
 		return daoOpt.update(optto);
 
 	}
@@ -80,13 +70,23 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 		StatoOptionalTO stato = daoStatoOpt.getAll().get(0);
 		optto.setStatoOptional(stato);
 		validate(optto);
-		//TODO se fa parte di competizioni attive l'optional non sarà disponibile solo per 
-		//le nuove competizioni
-		
+
 		return daoOpt.disattivaOptional(optto);
 	}
 
-	//TODO Da rivedere
+	@Override
+	public OptionalTO checkOptCmpAttive(OptionalTO optto) throws DatabaseException, OptionalCmpAttiveException{
+		CompetizioneDAO daoCmp = this.dbFact.getDAOFactory(this.sysConf.getTipoDB()).getCompetizioneDAO();
+		for(CompetizioneTO cmpTO: daoCmp.readCompetizioniAttive()){
+			for(OptionalTO checkOpt: cmpTO.getAllOptionals()){
+				if(checkOpt.getId() == optto.getId()){
+					throw new OptionalCmpAttiveException();
+				}
+			}
+		}
+		return optto;
+	}
+	
 	@Override
 	public List<OptionalTO> getOptionalByTipo(TipoOptionalTO optto)
 			throws DatabaseException {

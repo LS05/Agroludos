@@ -26,7 +26,7 @@
 		<constructor-arg ref="toFactory" />
 	</bean>
 	
-	<bean id="tipoValidator" class="agroludos.business.validator.tipooptional.TipoValidator">
+	<bean id="tipoValidator" class="agroludos.business.validator.agrotipo.TipoValidator">
 		<constructor-arg ref="tipoRulesFactory" />
 		<constructor-arg ref="toFactory" />
 	</bean>

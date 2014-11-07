@@ -11,11 +11,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
-import agroludos.to.ErrorTO;
+import agroludos.to.MessageTO;
 import agroludos.to.SuccessMessageTO;
 import agroludos.to.UtenteTO;
 
@@ -26,6 +27,7 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 	@FXML private Button btnRichiedi;
 	@FXML private Pane agroLogoPane;
 	@FXML private TextField txtUsername;
+	@FXML private TextField txtEmail;
 
 	@FXML private Label lblErroreLogin;
 	
@@ -42,6 +44,8 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 
 		this.txtUsername.clear();
 		this.txtUsername.setPromptText(this.res.getString("key74"));
+		this.txtEmail.clear();
+		this.txtEmail.setPromptText(this.res.getString("key4"));
 		this.agroLogoPane.setFocusTraversable(true);
 		this.uTO = toFact.createUTO();
 
@@ -49,7 +53,6 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 	
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		// TODO Auto-generated method stub
 	}
 	
 	@Override
@@ -69,37 +72,30 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 
 	@FXML protected void btnRichiedi(MouseEvent event) {	
 		this.uTO.setUsername(this.txtUsername.getText());
+		this.uTO.setEmail(this.txtEmail.getText());
 		eseguiRipristino();
 	}
 	
 	private void eseguiRipristino() {	
 		this.risposta = this.getRisposta();
-		this.richiesta = this.getRichiesta(this.uTO, "getUtenteByUsername", this.viewName);
+		this.richiesta = this.getRichiesta(this.uTO, "passwordDimenticata", this.viewName);
 		this.eseguiRichiesta(this.richiesta, this.risposta);
-		
-		Object res = this.risposta.getRespData();
-		if(res instanceof UtenteTO){			
-			SuccessMessageTO succMessage = toFact.createSuccMessageTO();
-			succMessage.setMessage(this.res.getString("key155"));
-			this.setVista("messageDialog",succMessage);
-			this.close();
-		}
 	}
-	
-
-	
-	
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		if(commandName.equals(this.getCommandName("getUtenteByUsername") )){
+		if(commandName.equals(this.getCommandName("passwordDimenticata") )){
 			Object res = response.getRespData();
-			if(res instanceof ErrorTO){
-				//TODO gestire 
+			if(res instanceof UtenteTO){
 				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
-				succMessage.setMessage(this.res.getString("key156"));
-				this.setVista("messageDialog",succMessage);
+				succMessage.setMessage(this.res.getString("key155"));
+				this.setVista("messageDialog",succMessage);	
+				this.close();
+			}else if(res instanceof String){
+				MessageTO errMessage = toFact.createErrMessageTO();
+				errMessage.setMessage((String) res);
+				this.setVista("messageDialog",errMessage);
 			}
 		}
 	}

@@ -22,7 +22,7 @@ class MySqlPartecipanteDAO extends MySqlUtenteDAO<PartecipanteTO> implements Par
 		List<String> param = new ArrayList<String>();
 		param.add(cf);
 
-		List<PartecipanteTO> list = super.executeParamQuery("getPartecipanteByCF", param);
+		List<PartecipanteTO> list = super.executeParamQuery("getUtenteByCF", param);
 		PartecipanteTO res = (PartecipanteTO)list.get(0);
 
 		return res;
@@ -34,7 +34,7 @@ class MySqlPartecipanteDAO extends MySqlUtenteDAO<PartecipanteTO> implements Par
 		List<String> param = new ArrayList<String>();
 		param.add(username);
 
-		List<PartecipanteTO> list = super.executeParamQuery("getPartecipanteByUsername", param);
+		List<PartecipanteTO> list = super.executeParamQuery("getUtenteByUsername", param);
 		PartecipanteTO res = (PartecipanteTO)list.get(0);
 
 		return res;

@@ -8,11 +8,11 @@ import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
+import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoUtenteTO;
 import agroludos.to.SuccessMessageTO;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -87,6 +87,13 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 	}
 
 	@FXML public void confermaModificaManagerDiCompetizion(MouseEvent event){
+		this.lblCognomeError.setVisible(false);
+		this.lblEmailError.setVisible(false);
+		this.lblNomeError.setVisible(false);
+		this.lblStatoError.setVisible(false);
+		this.lblUsernameError.setVisible(false);
+		this.flagError=false;
+		
 		this.mdcTO.setNome(this.txtNome.getText());
 		this.mdcTO.setCognome(this.txtCognome.getText());
 		this.mdcTO.setUsername(this.txtUsername.getText());
@@ -100,6 +107,7 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 		this.risposta = this.getRisposta();
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 		if(!this.flagError){
+			this.close();
 			SuccessMessageTO succTO = toFact.createSuccMessageTO();
 			succTO.setMessage(this.resources.getString("key99"));
 			this.setVista("messageDialog", succTO);
@@ -126,10 +134,11 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 
 		} else if( commandName.equals( this.getCommandName("modificaManagerDiCompetizione") )){
 			Object res = response.getRespData();
+			this.flagError = true;
 			if(res instanceof ErrorTO){
 
 				ErrorTO errors = (ErrorTO)res;
-				this.flagError = true;
+				
 
 				if(errors.hasError(this.getError("nomeKey"))){
 					String nomeKey = this.getError("nomeKey");
@@ -154,7 +163,11 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 					this.lblEmailError.setVisible(true);
 					this.lblEmailError.setText(errors.getError(emailKey));
 				}
-
+			}if(res instanceof String){
+				ErrorMessageTO errorMessage = toFact.createErrMessageTO();
+				String msg = (String)res;
+				errorMessage.setMessage(msg);
+				this.setVista("messageDialog", errorMessage);
 			}
 		}
 
