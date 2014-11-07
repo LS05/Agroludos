@@ -315,5 +315,17 @@
 		<from name="mostraModificaCmp">
 			<forward success="mostraModificaCmp" failure="mostraModificaCmp" />
 		</from>
-	</command>checkCmpData
+	</command>
+	<command name="isCertificatoValido">
+		<classe>agroludos.business.as.gestorepartecipante.LPartecipante</classe>
+		<from name="partecipante">
+			<forward success="partecipante" failure="partecipante" />
+		</from>
+	</command>
+	<command name="modificaPartecipante">
+		<classe>agroludos.business.as.gestorepartecipante.SPartecipante</classe>
+		<from name="aggiornaSRC">
+			<forward success="partecipante" failure="aggiornaSRC" />
+		</from>
+	</command>
 </commands>

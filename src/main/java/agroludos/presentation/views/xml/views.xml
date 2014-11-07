@@ -216,5 +216,12 @@
 			<width>800</width>
 			<height>600</height>
 		</view>
+		<view tipo="dialog">
+			<name>aggiornaSRC</name>
+			<url>/fxml/partecipante/aggiornaCSRC.fxml</url>
+			<width>552</width>
+			<height>355</height>
+			<title>Agroludos | Aggiorna Certificato SRC</title>
+		</view>
 	</views>
 </agro-views>

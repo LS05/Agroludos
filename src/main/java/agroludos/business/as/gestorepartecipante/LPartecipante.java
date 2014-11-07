@@ -19,4 +19,6 @@ public interface LPartecipante extends AgroludosService {
 
 	CertificatoTO getCertificatoSRC(PartecipanteTO parto)throws DatabaseException, IOException;
 
+	boolean isCertificatoValido(PartecipanteTO parTO);
+
 }

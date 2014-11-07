@@ -56,3 +56,7 @@
 .btnAvanti:hover{
     -fx-background-color:#70cff3;
 }
+
+.lblError{
+	-fx-text-fill: #f00;
+}
