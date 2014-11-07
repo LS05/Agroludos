@@ -2,11 +2,14 @@ package agroludos.business.as.gestoreutente;
 
 import java.io.IOException;
 
+import org.apache.commons.lang.RandomStringUtils;
+
 import agroludos.business.as.AgroludosAS;
 import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.UserNotFoundException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.UtenteDAO;
+import agroludos.to.EmailTO;
 import agroludos.to.UtenteTO;
 import agroludos.utility.PasswordEncryption;
 
@@ -42,9 +45,52 @@ class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 			throws DatabaseException, UserNotFoundException, IOException {
 
 		UtenteDAO<UtenteTO> daoUtente = this.getUtenteDAO();
+		checkUtente(uTO);
 		UtenteTO user = daoUtente.getByUsername(uTO.getUsername());
 
 		return user;
 	}
 
+	@Override
+	public UtenteTO checkUtente(UtenteTO uTO)
+			throws DatabaseException, UserNotFoundException, IOException {
+
+		UtenteDAO<UtenteTO> daoUtente = this.getUtenteDAO();
+
+		if(daoUtente.esisteUsername(uTO))
+			uTO = daoUtente.getByUsername(uTO.getUsername());
+		else if(daoUtente.esisteEmail(uTO))
+			uTO = daoUtente.getByEmail(uTO.getEmail());
+		else
+			throw new UserNotFoundException("Utente inesistente!");
+
+		return uTO;
+	}
+
+
+	@Override
+	public UtenteTO passwordDimenticata(UtenteTO uTO)
+			throws DatabaseException, UserNotFoundException, IOException {
+
+		UtenteDAO<UtenteTO> daoUtente = this.getUtenteDAO();
+
+		//se non esiste viene sollevata un'eccezione UserNotFoundException
+		uTO = checkUtente(uTO);
+
+		String psw = RandomStringUtils.randomAlphanumeric(8);
+
+		uTO.setPassword(this.pwdEnc.encryptPassword(psw));
+		daoUtente.update(uTO);
+		
+		asdadas;
+		EmailTO mail = toFact.createEmailTO();
+		mail.setOggetto("Password dimenticata");
+		mail.setMessage("I dati di accesso sono : \n"
+				+ "Username: " + uTO.getUsername() + "\n"
+				+ "Nuova Password: " + psw);
+
+		mail.addDestinatario(uTO);
+		
+		return uTO;
+	}
 }

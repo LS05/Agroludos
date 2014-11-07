@@ -292,4 +292,22 @@
 			<forward success="partMostraIscrizione" failure="partMostraIscrizione" />
 		</from>
 	</command>
+	<command name="passwordDimenticata">
+		<classe>agroludos.business.as.gestoreutente.LUtente</classe>
+		<from name="passwordDimenticata">
+			<forward success="passwordDimenticata" failure="passwordDimenticata" />
+		</from>
+	</command>
+	<command name="checkMdcCmpAttive">
+		<classe>agroludos.business.as.gestoremdc.LManagerDiCompetizione</classe>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+	</command>
+	<command name="checkOptCmpAttive">
+		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+	</command>
 </commands>

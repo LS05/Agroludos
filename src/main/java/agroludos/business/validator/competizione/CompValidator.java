@@ -16,8 +16,8 @@ class CompValidator implements AgroludosValidator{
 	private AgroludosRule nPartRule;
 	private AgroludosRule costoRule;
 	private AgroludosRule dataRule;
-	
-	
+
+
 	CompValidator(CompRulesFactory rulesFactory, TOFactory toFactory){
 		this.compRulesFact = rulesFactory;
 		this.toFact = toFactory;
@@ -34,10 +34,12 @@ class CompValidator implements AgroludosValidator{
 
 	@Override
 	public void validate(AgroludosTO to) throws ValidationException {
-		ErrorTO errorTO = this.toFact.createErrorTO();
-		CompetizioneTO competizione = (CompetizioneTO)to;
-		this.nomeRule.validate(competizione, errorTO);
-		if(errorTO.hasErrors())
-			throw new ValidationException(errorTO);
+		if(to instanceof CompetizioneTO){
+			ErrorTO errorTO = this.toFact.createErrorTO();
+			CompetizioneTO competizione = (CompetizioneTO)to;
+			this.nomeRule.validate(competizione, errorTO);
+			if(errorTO.hasErrors())
+				throw new ValidationException(errorTO);
+		}
 	}
 }

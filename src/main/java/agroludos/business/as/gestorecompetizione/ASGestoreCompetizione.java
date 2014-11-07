@@ -162,6 +162,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 			iscTO.setStatoIscrizione(statoIscDao.getAll().get(0));
 			iscDao.annullaIscrizione(iscTO);
 			
+			asdasda;
 			EmailTO mail = toFact.createEmailTO();
 			mail.setOggetto("Iscrizione annullata");
 			mail.setMessage(iscTO.getPartecipante().getUsername() + " abbiamo annullato l'iscrizione "

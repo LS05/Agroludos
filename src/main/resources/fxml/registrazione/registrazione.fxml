@@ -52,7 +52,7 @@
                         <Label font="$x1" text="%key9" GridPane.columnIndex="0" GridPane.margin="$x3" GridPane.rowIndex="4" GridPane.valignment="TOP" />
                         <GridPane fx:id="paneDataCert" GridPane.columnIndex="1" GridPane.margin="$x5" GridPane.rowIndex="4">
                           <children>
-                            <Label id="lblDataSrc" fx:id="lblDataSrcError" styleClass="lblError" text="Label" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                            <Label id="lblDataSrc" fx:id="lblDataSrcError" prefHeight="35.0" prefWidth="246.0" styleClass="lblError" text="Label" visible="false" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                           </children>
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

@@ -185,7 +185,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 				succ.setMessage(this.res.getString("key157"));
 				this.setVista("messageDialog", succ);
 				
-				
+				asdads;
 				EmailTO mail = toFact.createEmailTO();
 				mail.setOggetto(iscTO.getPartecipante().getUsername() + " si è iscritto "
 						+ "alla competizione " + iscTO.getCompetizione().getNome());

@@ -1,4 +1,4 @@
-package agroludos.business.validator.tipooptional;
+package agroludos.business.validator.agrotipo;
 
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.business.validator.rules.AgroludosRule;

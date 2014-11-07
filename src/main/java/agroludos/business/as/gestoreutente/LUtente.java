@@ -12,4 +12,10 @@ public interface LUtente extends AgroludosService {
 
 	UtenteTO getUtenteByUsername(UtenteTO uto) throws DatabaseException,
 			UserNotFoundException, IOException;
+
+	UtenteTO checkUtente(UtenteTO uTO) throws DatabaseException,
+			UserNotFoundException, IOException;
+
+	UtenteTO passwordDimenticata(UtenteTO uTO) throws DatabaseException,
+			UserNotFoundException, IOException;
 }

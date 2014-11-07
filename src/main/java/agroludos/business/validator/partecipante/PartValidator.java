@@ -26,7 +26,7 @@ class PartValidator implements AgroludosValidator{
 	private AgroludosRule tesRule;
 	private AgroludosRule sessoRule;
 	private AgroludosRule dataNascRule;
-	
+
 	PartValidator(UserRulesFactory userRulesFactory, PRulesFactory partRulesFactory, TOFactory toFactory){
 		this.userRulesFact = userRulesFactory;
 		this.partRulesFact = partRulesFactory;
@@ -42,7 +42,7 @@ class PartValidator implements AgroludosValidator{
 		this.indirizzoRule = this.partRulesFact.getIndirizzoRule();
 		this.dataSrcRule = this.partRulesFact.getDataSrcRule();
 		this.tesRule = this.partRulesFact.getTesRule();
-		
+
 		this.sessoRule = this.partRulesFact.getSessoRule();
 		this.dataNascRule = this.partRulesFact.getDataNascRule();
 
@@ -61,10 +61,12 @@ class PartValidator implements AgroludosValidator{
 
 	@Override
 	public void validate(AgroludosTO to) throws ValidationException {
-		ErrorTO errorTO = this.toFact.createErrorTO();
-		PartecipanteTO partecipante = (PartecipanteTO)to;
-		this.nomeRule.validate(partecipante, errorTO);
-		if(errorTO.hasErrors())
-			throw new ValidationException(errorTO);
+		if(to instanceof PartecipanteTO){
+			ErrorTO errorTO = this.toFact.createErrorTO();
+			PartecipanteTO partecipante = (PartecipanteTO)to;
+			this.nomeRule.validate(partecipante, errorTO);
+			if(errorTO.hasErrors())
+				throw new ValidationException(errorTO);
+		}
 	}
 }
