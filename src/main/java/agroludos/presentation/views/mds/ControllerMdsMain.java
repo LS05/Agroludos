@@ -117,7 +117,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 	private ResourceBundle resources;
 	protected PartModel partModelRow;
-	private TableCompetizioniFilter filter;
+
 	private boolean checkMdc;
 	private boolean checkOpt;
 
@@ -159,8 +159,6 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 		});
 
-		this.filter = new TableCompetizioniFilter();
-
 		this.filterCmp = new TableCompetizioniFilter();
 		this.btnResetRicComp.setVisible(false);
 
@@ -182,7 +180,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 					eseguiRichiesta(richiesta, risposta);
 
 					tableCompetizioni.setAll(listComp);
-					filter.setData(tableCompetizioni);
+					filterCmp.setData(tableCompetizioni);
 				}
 			}
 		});

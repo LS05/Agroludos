@@ -87,10 +87,11 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 	}
 
 	@Override
-	public ManagerDiCompetizioneTO checkMdcCmpAttive(ManagerDiCompetizioneTO mdcTO) throws DatabaseException, MdcCmpAttiveException{
+	public ManagerDiCompetizioneTO checkMdcCmpAttive(ManagerDiCompetizioneTO mdcTO) 
+			throws DatabaseException, MdcCmpAttiveException{
+		
 		CompetizioneDAO daoCmp = this.dbFact.getDAOFactory(this.sysConf.getTipoDB()).getCompetizioneDAO();
 		
-
 		for(CompetizioneTO cmpTO: daoCmp.readCompetizioniAttive()){
 			if(cmpTO.getManagerDiCompetizione().getId() == mdcTO.getId()){
 				throw new MdcCmpAttiveException();
