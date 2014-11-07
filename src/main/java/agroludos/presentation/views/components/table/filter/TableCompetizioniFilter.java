@@ -24,6 +24,6 @@ public final class TableCompetizioniFilter extends TableFilter<CmpModel> {
 			return true;
 		}
 
-		return false; // Does not match
+		return false;
 	}
 }

@@ -11,11 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -72,7 +72,7 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 		this.txtPassword.setText("agroludos");
 	}
 
-	@FXML protected void txtKeyPressed(javafx.scene.input.KeyEvent evt) {
+	@FXML protected void txtKeyPressed(KeyEvent evt) {
 		if (evt.getCode() == KeyCode.ENTER)
 			eseguiLogin();
 	}

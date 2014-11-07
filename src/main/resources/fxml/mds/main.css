@@ -84,11 +84,12 @@
 }
 
 .btnAnnullaCerca{
-	-fx-background-color: #eaeaea;
+	-fx-background-color: #ffffff;
     -fx-background-radius: 0;
     -fx-background-insets: 0;
     -fx-border-insets: 0, 0 1 0 1;
     -fx-font-weight: bold;
-    -fx-padding: 0 80 0 0;
+    -fx-padding: 0 0 0 0;
     -fx-cursor: hand;
+    -fx-text-fill: #9a9999;
 }

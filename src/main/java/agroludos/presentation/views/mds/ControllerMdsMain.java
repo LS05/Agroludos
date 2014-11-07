@@ -15,6 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import agroludos.presentation.req.AgroRequest;
@@ -24,6 +26,8 @@ import agroludos.presentation.views.components.table.TableMdC;
 import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.presentation.views.components.table.TablePartecipanti;
 import agroludos.presentation.views.components.table.filter.TableCompetizioniFilter;
+import agroludos.presentation.views.components.table.filter.TableMdcFilter;
+import agroludos.presentation.views.components.table.filter.TablePartecipantiFilter;
 import agroludos.presentation.views.components.tablemodel.CmpModel;
 import agroludos.presentation.views.components.tablemodel.MdcModel;
 import agroludos.presentation.views.components.tablemodel.OptModel;
@@ -53,6 +57,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	@FXML private Label lblMdcUsername;
 	@FXML private Label lblMdcStato;
 	@FXML private Label lblMdcEmail;
+	@FXML private Button btnResetCercaMdc;
+	@FXML private TextField txtFilterMdc;
+	private TableMdcFilter filterMdc;
 	private List<ManagerDiCompetizioneTO> listMdc;
 	private int selectedMdC = 0;
 
@@ -61,8 +68,10 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	@FXML private TableCompetizioni tableCompetizioni;
 	@FXML private TextField txtFilterComp;
 	@FXML private GridPane paneListaTipiComp;
+	@FXML private Button btnResetRicComp;
 	private List<CompetizioneTO> listComp;
 	private List<TipiAgroludosTO> listTipiComp;
+	private TableCompetizioniFilter filterCmp;
 
 	//gestione partecipanti
 	@FXML private GridPane paneTablePart;
@@ -80,8 +89,11 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	@FXML private Label lblParAnnoNasc;
 	@FXML private Label lblParNumTessSan;
 	@FXML private Button btnCercaCompetizioni;
+	@FXML private TextField txtFilterPart;
+	@FXML private Button btnResetRicPart;
 	private List<PartecipanteTO> listPart;
 	private int selectedPart = 0;
+	private TablePartecipantiFilter filterPart;
 
 	//gestione Optional
 	@FXML private GridPane paneListaTipiOpt;
@@ -100,7 +112,8 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 	private ResourceBundle resources;
 	protected PartModel partModelRow;
-	private TableCompetizioniFilter filter;
+	
+
 
 	@Override
 	public void initialize(URL url, ResourceBundle res) {
@@ -140,8 +153,8 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 		});
 
-		this.filter = new TableCompetizioniFilter();
-		
+		this.filterCmp = new TableCompetizioniFilter();
+		this.btnResetRicComp.setVisible(false);
 
 		final String viewNameSupp = this.viewName;
 		this.listViewComp.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -160,59 +173,120 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				eseguiRichiesta(richiesta, risposta);
 
 				tableCompetizioni.setAll(listComp);
-				filter.setData(tableCompetizioni);
+				filterCmp.setData(tableCompetizioni);
 			}
 
 		});
+
+		this.filterPart = new TablePartecipantiFilter();
+		this.btnResetRicPart.setVisible(false);
+		this.filterMdc = new TableMdcFilter();
+		this.btnResetCercaMdc.setVisible(false);
 	}
 
 	private void setDxMdCColumn(Integer selected){
-		MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
-		this.lblMdcNome.setText(selModel.getNome());
-		this.lblMdcCognome.setText(selModel.getCognome());
-		this.lblMdcEmail.setText(selModel.getEmail());
-		this.lblMdcUsername.setText(selModel.getUsername());
-		this.lblMdcStato.setText(selModel.getStato());
+		if( selected != -1){
+			MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
+			this.lblMdcNome.setText(selModel.getNome());
+			this.lblMdcCognome.setText(selModel.getCognome());
+			this.lblMdcEmail.setText(selModel.getEmail());
+			this.lblMdcUsername.setText(selModel.getUsername());
+			this.lblMdcStato.setText(selModel.getStato());
+		}
 	}
 
 	private void setDxPartColumn(int selected) {
-		PartModel selModel = this.tablePartecipanti.getItems().get(selected);
-		this.lblParNome.setText(selModel.getNome());
-		this.lblParCognome.setText(selModel.getCognome());
-		this.lblParEmail.setText(selModel.getEmail());
-		this.lblParUsername.setText(selModel.getUsername());
-		this.lblParStato.setText(selModel.getStato());
-		this.lblParDataSRC.setText(selModel.getDataSRC());
-		this.lblParCodFisc.setText(selModel.getCf());
-		this.lblParIndirizzo.setText(selModel.getIndirizzo());
-		this.lblParSesso.setText(selModel.getSesso());
-		this.lblParAnnoNasc.setText(selModel.getDataNasc());
-		this.lblParNumTessSan.setText(selModel.getNumTessera());
+		if( selected != -1 ){
+			PartModel selModel = this.tablePartecipanti.getItems().get(selected);
+			this.lblParNome.setText(selModel.getNome());
+			this.lblParCognome.setText(selModel.getCognome());
+			this.lblParEmail.setText(selModel.getEmail());
+			this.lblParUsername.setText(selModel.getUsername());
+			this.lblParStato.setText(selModel.getStato());
+			this.lblParDataSRC.setText(selModel.getDataSRC());
+			this.lblParCodFisc.setText(selModel.getCf());
+			this.lblParIndirizzo.setText(selModel.getIndirizzo());
+			this.lblParSesso.setText(selModel.getSesso());
+			this.lblParAnnoNasc.setText(selModel.getDataNasc());
+			this.lblParNumTessSan.setText(selModel.getNumTessera());
+		}
 	}
-	
-	
+
 	@FXML protected void btnCercaCompetizioniClicked(MouseEvent event) {
-		this.filter.updateFilteredData(this.tableCompetizioni, this.txtFilterComp);
+		this.filterCmp.updateFilteredData(this.tableCompetizioni, this.txtFilterComp);
+		this.btnResetRicComp.setVisible(true);
+	}
+
+	@FXML protected void annullaRicercaCompClicked(MouseEvent event) {
+		this.filterCmp.resetResearch(this.tableCompetizioni, this.txtFilterComp);
+		this.btnResetRicComp.setVisible(false);
+	}
+
+	@FXML protected void annullaRicercaPartClicked(MouseEvent event){
+		this.filterPart.resetResearch(this.tablePartecipanti, this.txtFilterPart);
+		this.btnResetRicPart.setVisible(false);
+	}
+
+	@FXML protected void btnCercaPartClicked(MouseEvent event){
+		this.filterPart.updateFilteredData(this.tablePartecipanti, this.txtFilterPart);
+		this.btnResetRicPart.setVisible(true);
 	}
 	
-	@FXML protected void annullaRicercaCompClicked(MouseEvent event) {
-		this.filter.resetResearch(this.tableCompetizioni, this.txtFilterComp);
+	@FXML protected void cercaMdcClicked(MouseEvent event){
+		this.filterMdc.updateFilteredData(this.tableManagerCompetizione, this.txtFilterMdc);
+		this.btnResetCercaMdc.setVisible(true);
+	}
+	
+	@FXML protected void annullaRicercaMdcClicked(MouseEvent event){
+		this.filterMdc.resetResearch(this.tableManagerCompetizione, this.txtFilterMdc);
+		this.btnResetCercaMdc.setVisible(false);
+	}
+
+	private void startSearch(String textFieldID){
+		switch(textFieldID){
+			case "txtFilterComp":
+				this.filterCmp.updateFilteredData(this.tableCompetizioni, this.txtFilterComp);
+				this.btnResetRicComp.setVisible(true);
+				break;
+			case "txtFilterPart":
+				this.filterPart.updateFilteredData(this.tablePartecipanti, this.txtFilterPart);
+				this.btnResetRicPart.setVisible(true);
+				break;
+			case "txtFilterMdC":
+				this.filterMdc.updateFilteredData(this.tableManagerCompetizione, this.txtFilterMdc);
+				this.btnResetCercaMdc.setVisible(true);
+				break;
+		};
+	}
+
+	@FXML protected void cercaKeyPressed(KeyEvent event){
+		String textFieldID = ((TextField)event.getSource()).getId();
+
+		if (event.getCode() == KeyCode.ENTER){
+			this.startSearch(textFieldID);
+		}
+	}
+
+	private void resetRicerche(){
+		this.filterCmp.resetResearch(this.tableCompetizioni, this.txtFilterComp);
+		this.btnResetRicComp.setVisible(false);
+		this.filterPart.resetResearch(this.tablePartecipanti, this.txtFilterPart);
+		this.btnResetRicPart.setVisible(false);
 	}
 
 	@FXML protected void btnGestComp(MouseEvent event) {
-
 		this.paneGestioneCompetizioni.setVisible(true);
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneMdC.setVisible(false);
 		this.paneGestionePartecipanti.setVisible(false);
+		this.resetRicerche();
 	}
 
 	@FXML protected void btnGestOptional(MouseEvent event) {
-
+		this.resetRicerche();
 		this.richiesta = this.getRichiesta("getAllTipoOptional", this.viewName);
 		this.risposta = this.getRisposta();
 		this.eseguiRichiesta(this.richiesta, this.risposta);
-
 
 		this.tableOptional = new TableOptional();
 		this.paneTableOptional.getChildren().add(this.tableOptional);
@@ -247,11 +321,13 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	}
 
 	@FXML protected void btnGestManComp(MouseEvent event) {
+		this.resetRicerche();
 		this.richiesta = this.getRichiesta("getAllManagerDiCompetizione", this.viewName);
 		this.risposta = this.getRisposta();
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		this.tableManagerCompetizione = new TableMdC(this.listMdc);
+		this.filterMdc.setData(this.tableManagerCompetizione);
 		this.tableManagerCompetizione.getSelectionModel().selectFirst();
 		this.paneTableMdC.getChildren().add(this.tableManagerCompetizione);
 		this.setDxMdCColumn(this.selectedMdC);
@@ -276,10 +352,12 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	}
 
 	@FXML protected void btnGestPart(MouseEvent event) {
+		this.resetRicerche();
 		this.richiesta = this.getRichiesta("getAllPartecipante", this.viewName);
 		this.risposta = this.getRisposta();
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 		this.tablePartecipanti = new TablePartecipanti(this.listPart);
+		this.filterPart.setData(this.tablePartecipanti);
 		this.tablePartecipanti.getSelectionModel().selectFirst();
 		this.paneTablePart.getChildren().add(this.tablePartecipanti);
 		this.setDxPartColumn(this.selectedPart);
@@ -291,7 +369,8 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 							PartModel oldMod, PartModel newMod) {
 
 						selectedPart = tablePartecipanti.getSelectedIndex();
-						setDxPartColumn(selectedPart);
+						if( selectedPart != -1 )
+							setDxPartColumn(selectedPart);
 
 					}
 
