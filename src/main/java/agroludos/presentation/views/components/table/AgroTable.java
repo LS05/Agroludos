@@ -11,6 +11,8 @@ public abstract class AgroTable<T> extends TableView<T>{
 
 	public abstract void updateTable(String text);
 
+	
+	//TODO Da eliminare
 	public void hideColumn(String name){
 		TableColumn<T, ?> col = this.getTableColumnByName(name);
 		if(col != null)
