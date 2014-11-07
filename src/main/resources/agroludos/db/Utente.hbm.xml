@@ -29,7 +29,7 @@
 			<column name="idruolo" not-null="true" />
 		</many-to-one>
 		<many-to-one name="statoUtente" class="agroludos.to.StatoUtente"
-			cascade="all">
+			cascade="all" lazy="false">
 			<column name="stato" not-null="true" />
 		</many-to-one>
 		<joined-subclass name="agroludos.to.ManagerDiSistema"
@@ -50,7 +50,7 @@
 			</property>
 
 			<set name="competizioni" table="tbl_competizione" fetch="select"
-				cascade="all">
+				cascade="all" lazy="false">
 				<key column="idmdc" />
 				<one-to-many class="agroludos.to.Competizione" />
 			</set>
@@ -80,12 +80,12 @@
 				<column name="data_src" not-null="true" />
 			</property>
 			<set name="iscrizioni" table="tbl_iscrizione" fetch="select"
-				cascade="all">
+				cascade="all" lazy="false">
 				<key column="idpartecipante" />
 				<one-to-many class="agroludos.to.Iscrizione" />
 			</set>
 			<set name="iscrizioniAttive" table="tbl_iscrizione" fetch="select"
-				where="stato = 1" cascade="all">
+				where="stato = 1" cascade="all" lazy="false">
 				<key column="idpartecipante" />
 				<one-to-many class="agroludos.to.Iscrizione" />
 			</set>

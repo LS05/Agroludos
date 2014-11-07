@@ -28,33 +28,33 @@
 			<column name="descrizione" not-null="true" />
 		</property>
 
-		<set name="optionals" cascade="all" table="tbl_opt_comp">
+		<set name="optionals" cascade="all" table="tbl_opt_comp" lazy="false">
 			<key column="idcompetizione" />
 			<many-to-many column="idoptional" class="agroludos.to.Optional" />
 		</set>
-		<set name="partecipanti" cascade="all" table="tbl_iscrizione">
+		<set name="partecipanti" cascade="all" table="tbl_iscrizione" lazy="false">
 			<key column="idcompetizione" />
 			<many-to-many column="idpartecipante" class="agroludos.to.Partecipante" />
 		</set>
-		<set name="iscrizioni" cascade="all" table="tbl_iscrizione">
+		<set name="iscrizioni" cascade="all" table="tbl_iscrizione" lazy="false">
 			<key column="idcompetizione" />
 			<one-to-many class="agroludos.to.Iscrizione" />
 		</set>
 		<many-to-one name="statoCompetizione" cascade="all"
-			class="agroludos.to.StatoCompetizione">
+			class="agroludos.to.StatoCompetizione" lazy="false">
 			<column name="statocomp" not-null="true" />
 		</many-to-one>
 		<many-to-one name="tipoCompetizione" cascade="all"
-			class="agroludos.to.TipoCompetizione">
+			class="agroludos.to.TipoCompetizione" lazy="false">
 			<column name="tipocomp" not-null="true" />
 		</many-to-one>
 		<many-to-one name="managerDiCompetizione" cascade="all"
-			class="agroludos.to.ManagerDiCompetizione">
+			class="agroludos.to.ManagerDiCompetizione" lazy="false">
 			<column name="idmdc" not-null="true" />
 		</many-to-one>
 
 		<set name="iscrizioniAttive" table="tbl_iscrizione" fetch="select"
-			where="stato = 1" cascade="all">
+			where="stato = 1" cascade="all" lazy="false">
 			<key column="idcompetizione" />
 			<one-to-many class="agroludos.to.Iscrizione" />
 		</set>
