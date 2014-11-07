@@ -117,12 +117,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 	private ResourceBundle resources;
 	protected PartModel partModelRow;
-<<<<<<< HEAD
 	private TableCompetizioniFilter filter;
 	private boolean checkMdc;
 	private boolean checkOpt;
-=======
->>>>>>> 76aa53b894aaec2aed9b27786a62854f91585992
 
 	@Override
 	public void initialize(URL url, ResourceBundle res) {
@@ -162,13 +159,10 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 		});
 
-<<<<<<< HEAD
 		this.filter = new TableCompetizioniFilter();
 
-=======
 		this.filterCmp = new TableCompetizioniFilter();
 		this.btnResetRicComp.setVisible(false);
->>>>>>> 76aa53b894aaec2aed9b27786a62854f91585992
 
 		final String viewNameSupp = this.viewName;
 		this.listViewComp.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -187,14 +181,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 					risposta = getRisposta();
 					eseguiRichiesta(richiesta, risposta);
 
-<<<<<<< HEAD
 					tableCompetizioni.setAll(listComp);
 					filter.setData(tableCompetizioni);
 				}
-=======
-				tableCompetizioni.setAll(listComp);
-				filterCmp.setData(tableCompetizioni);
->>>>>>> 76aa53b894aaec2aed9b27786a62854f91585992
 			}
 		});
 
@@ -208,13 +197,8 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 	private void setDxMdCColumn(Integer selected){
 		MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
-		this.lblMdcNome.setText(selModel.getNome());
-		this.lblMdcCognome.setText(selModel.getCognome());
-		this.lblMdcEmail.setText(selModel.getEmail());
-		this.lblMdcUsername.setText(selModel.getUsername());
-		this.lblMdcStato.setText(selModel.getStato());
 		if( selected != -1){
-			MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
+			selModel = tableManagerCompetizione.getItems().get(selected);
 			this.lblMdcNome.setText(selModel.getNome());
 			this.lblMdcCognome.setText(selModel.getCognome());
 			this.lblMdcEmail.setText(selModel.getEmail());
@@ -225,19 +209,8 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 	private void setDxPartColumn(int selected) {
 		PartModel selModel = this.tablePartecipanti.getItems().get(selected);
-		this.lblParNome.setText(selModel.getNome());
-		this.lblParCognome.setText(selModel.getCognome());
-		this.lblParEmail.setText(selModel.getEmail());
-		this.lblParUsername.setText(selModel.getUsername());
-		this.lblParStato.setText(selModel.getStato());
-		this.lblParDataSRC.setText(selModel.getDataSRC());
-		this.lblParCodFisc.setText(selModel.getCf());
-		this.lblParIndirizzo.setText(selModel.getIndirizzo());
-		this.lblParSesso.setText(selModel.getSesso());
-		this.lblParAnnoNasc.setText(selModel.getDataNasc());
-		this.lblParNumTessSan.setText(selModel.getNumTessera());
 		if( selected != -1 ){
-			PartModel selModel = this.tablePartecipanti.getItems().get(selected);
+			selModel = this.tablePartecipanti.getItems().get(selected);
 			this.lblParNome.setText(selModel.getNome());
 			this.lblParCognome.setText(selModel.getCognome());
 			this.lblParEmail.setText(selModel.getEmail());
@@ -272,54 +245,43 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.btnResetRicPart.setVisible(true);
 	}
 
-
-	@FXML protected void btnCercaCompetizioniClicked(MouseEvent event) {
-		this.filter.updateFilteredData(this.tableCompetizioni, this.txtFilterComp);
-	}
-
-	@FXML protected void annullaRicercaCompClicked(MouseEvent event) {
-		this.filter.resetResearch(this.tableCompetizioni, this.txtFilterComp);
-=======
-	
 	@FXML protected void cercaMdcClicked(MouseEvent event){
 		this.filterMdc.updateFilteredData(this.tableManagerCompetizione, this.txtFilterMdc);
 		this.btnResetCercaMdc.setVisible(true);
 	}
-	
+
 	@FXML protected void annullaRicercaMdcClicked(MouseEvent event){
 		this.filterMdc.resetResearch(this.tableManagerCompetizione, this.txtFilterMdc);
 		this.btnResetCercaMdc.setVisible(false);
 	}
-	
+
 	@FXML protected void btnCercaOptClicked(MouseEvent event){
 		this.filterOpt.updateFilteredData(this.tableOptional, this.txtFilterOpt);
 		this.btnResetRicOpt.setVisible(true);
 	}
-	
+
 	@FXML protected void annullaRicercaOptClicked(MouseEvent event){
 		this.filterOpt.resetResearch(this.tableOptional, this.txtFilterOpt);
 		this.btnResetRicOpt.setVisible(false);
 	}
-	
+
 	private void startSearch(String textFieldID){
 		switch(textFieldID){
-			case "txtFilterComp":
-				this.filterCmp.updateFilteredData(this.tableCompetizioni, this.txtFilterComp);
-				this.btnResetRicComp.setVisible(true);
-				break;
-			case "txtFilterPart":
-				this.filterPart.updateFilteredData(this.tablePartecipanti, this.txtFilterPart);
-				this.btnResetRicPart.setVisible(true);
-				break;
-			case "txtFilterMdC":
-				this.filterMdc.updateFilteredData(this.tableManagerCompetizione, this.txtFilterMdc);
-				this.btnResetCercaMdc.setVisible(true);
-				break;
+		case "txtFilterComp":
+			this.filterCmp.updateFilteredData(this.tableCompetizioni, this.txtFilterComp);
+			this.btnResetRicComp.setVisible(true);
+			break;
+		case "txtFilterPart":
+			this.filterPart.updateFilteredData(this.tablePartecipanti, this.txtFilterPart);
+			this.btnResetRicPart.setVisible(true);
+			break;
+		case "txtFilterMdC":
+			this.filterMdc.updateFilteredData(this.tableManagerCompetizione, this.txtFilterMdc);
+			this.btnResetCercaMdc.setVisible(true);
+			break;
 		};
->>>>>>> 76aa53b894aaec2aed9b27786a62854f91585992
 	}
 
-	@FXML protected void btnGestComp(MouseEvent event) {
 	@FXML protected void cercaKeyPressed(KeyEvent event){
 		String textFieldID = ((TextField)event.getSource()).getId();
 
@@ -365,24 +327,15 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			public void handle(MouseEvent event) {
 				ListView<String> source = (ListView<String>)event.getSource();
 				String nomeTipo = source.getSelectionModel().getSelectedItem();
-
+				TipoOptionalTO tipoOpt = toFact.createTipoOptionalTO();
+				tipoOpt.setNome(nomeTipo);
 				if(nomeTipo != null){
-					TipoOptionalTO tipoOpt = toFact.createTipoOptionalTO();
-					tipoOpt.setNome(nomeTipo);
-
-<<<<<<< HEAD
 					richiesta = getRichiesta(tipoOpt, "getOptionalByTipo", viewNameSupp);
 					risposta = getRisposta();
 					eseguiRichiesta(richiesta, risposta);
 					tableOptional.setAll(listOpt);
+					filterOpt.setData(tableOptional);
 				}
-=======
-				richiesta = getRichiesta(tipoOpt, "getOptionalByTipo", viewNameSupp);
-				risposta = getRisposta();
-				eseguiRichiesta(richiesta, risposta);
-				tableOptional.setAll(listOpt);
-				filterOpt.setData(tableOptional);
->>>>>>> 76aa53b894aaec2aed9b27786a62854f91585992
 			}
 
 		});
