@@ -86,7 +86,6 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 			throw new DatabaseException(e.getMessage(), e);
 		}
 
-		session.refresh(mainTO);
 		return mainTO;
 	}
 
@@ -108,7 +107,6 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 			throw new DatabaseException(e.getMessage(), e);
 		}
 
-		session.refresh(entity);
 		return entity;		
 	}
 
