@@ -1,6 +1,7 @@
 package agroludos.presentation.views.components.table.filter;
 
 import agroludos.presentation.views.components.table.AgroTable;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
@@ -43,8 +44,10 @@ abstract class TableFilter<T> {
 	}
 
 	public void resetResearch(AgroTable<T> mainTable, TextField filterField){
-		filterField.setText("");
-		mainTable.getItems().setAll(this.masterData);
+		if(mainTable != null && filterField != null){
+			filterField.setText("");
+			mainTable.getItems().setAll(this.masterData);
+		}
 	}
 
 	/**
