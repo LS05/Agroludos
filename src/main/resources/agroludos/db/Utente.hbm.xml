@@ -25,7 +25,7 @@
 			<column name="email" not-null="true" />
 		</property>
 		<many-to-one name="tipoUtente" class="agroludos.to.TipoUtente"
-			cascade="all">
+			cascade="all" lazy="false">
 			<column name="idruolo" not-null="true" />
 		</many-to-one>
 		<many-to-one name="statoUtente" class="agroludos.to.StatoUtente"

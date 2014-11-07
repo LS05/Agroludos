@@ -33,9 +33,15 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 	@Override
 	public List< T > getAll() throws DatabaseException {
 		List<T> res = null;
+		Transaction tx = null;
 
 		try{
+			this.session = this.session.getSessionFactory().openSession();
+			tx = this.session.beginTransaction();
+			
 			res = this.session.createQuery( "from " + this.classe.getName() ).list();
+			
+			this.session.close();
 		}catch (HibernateException e){
 			throw new DatabaseException(e.getMessage(), e);
 		}
@@ -96,6 +102,7 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 		List<T> res = null;
 
 		try {
+			this.session.getSessionFactory().openSession();
 			tx = this.session.beginTransaction();
 
 			Query query = this.session.getNamedQuery(queryName);
@@ -109,6 +116,7 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 			res = query.list();
 
 			this.session.getTransaction().commit();
+			this.session.close();
 		} catch (Exception e){
 			if (tx != null) tx.rollback();
 			throw new DatabaseException(e.getMessage(), e);

@@ -31,7 +31,6 @@ class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements
 		} else {
 			res = toFact.createNullUTO();
 		}
-
 		return (T)res;
 	}
 

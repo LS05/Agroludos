@@ -7,6 +7,7 @@ import org.joda.time.DateTime;
 
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
+import agroludos.exceptions.CmpDataAttiveException;
 import agroludos.exceptions.CompetizioneDataExistException;
 import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.ValidationException;
@@ -113,13 +114,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 
 		this.validator.validate(cmpto);
 
-		//controllo se esiste una competizione attiva nella data inserita
-		List<CompetizioneTO> cmpList = daoCmp.readCompetizioniAttive();
-		for(CompetizioneTO compet : cmpList){
-			if(!compet.equals(cmpto))
-				if(compet.getData().compareTo(cmpto.getData()) == 0)
-					checkData = true;
-		}
+
 		if(!checkData){
 			if(cmpto.getAllIscrizioniAttive().size() > cmpto.getNmax())
 				eliminaIscrizioniInEsubero(cmpto.getAllIscrizioniAttive());
@@ -133,9 +128,9 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	private List<IscrizioneTO> eliminaIscrizioniInEsubero(
 			List<IscrizioneTO> listIsc) throws DatabaseException {
 		CompetizioneTO cmp = listIsc.get(0).getCompetizione();
-		
+
 		//TODO testare 
-		
+
 		//ordinare la lista per data
 		int lenght = listIsc.size()-1;
 		while(lenght > 0){
@@ -149,19 +144,19 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 				lenght = lenght - 1;
 			}	
 		}
-		
+
 		StatoIscrizioneDAO statoIscDao = this.dbFact.getDAOFactory(this.sysConf.getTipoDB()).getStatoIscrizioneDAO();
 		IscrizioneDAO iscDao = this.dbFact.getDAOFactory(this.sysConf.getTipoDB()).getIscrizioneDAO();
-		
+
 		//elimino gli ultimi registrati e li avviso via mail
 		while(listIsc.size() > cmp.getNmax()){
 			IscrizioneTO iscTO = listIsc.get(listIsc.size()-1);
-			
+
 			listIsc.remove(listIsc.size()-1);
-			
+
 			iscTO.setStatoIscrizione(statoIscDao.getAll().get(0));
 			iscDao.annullaIscrizione(iscTO);
-			
+
 			asdasda;
 			EmailTO mail = toFact.createEmailTO();
 			mail.setOggetto("Iscrizione annullata");
@@ -309,4 +304,17 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		return checkCmp(listCmp).get(0);
 	}
 
+	@Override
+	public CompetizioneTO checkCmpData(CompetizioneTO cmp) throws DatabaseException{
+
+		CompetizioneDAO daoCmp = getCompetizioneDAO();
+		
+		//controllo se esiste una competizione attiva nella data inserita
+		List<CompetizioneTO> cmpList = daoCmp.readCompetizioniAttive();
+		for(CompetizioneTO compet : cmpList){
+				if(compet.getData().compareTo(cmp.getData()) == 0)
+					throw new CmpDataAttiveException();
+		}
+		return cmp;
+	}
 }

@@ -310,4 +310,10 @@
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
 	</command>
+	<command name="checkCmpData">
+		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
+		<from name="mostraModificaCmp">
+			<forward success="mostraModificaCmp" failure="mostraModificaCmp" />
+		</from>
+	</command>checkCmpData
 </commands>

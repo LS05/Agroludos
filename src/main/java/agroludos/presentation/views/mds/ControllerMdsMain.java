@@ -129,7 +129,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
-
+		
 		this.paneGestioneCompetizioni.setVisible(true);
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneMdC.setVisible(false);
@@ -411,6 +411,20 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 	@FXML protected void btnDisattivaOptionalClicked(MouseEvent event){
 		OptModel optModel = this.tableOptional.getSelectionModel().getSelectedItem();
+		
+		OptionalTO provaOpt = optModel.getOptTO();
+		OptionalTO cloneProvaOpt = null;
+		try {
+			cloneProvaOpt = provaOpt.creaClone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		cloneProvaOpt.setDescrizione("prova clonazione");
+		System.out.println("descrizione originale: " + provaOpt.getDescrizione());
+		System.out.println("\ndescrizione clone: " + cloneProvaOpt.getDescrizione());
+		
 		if(optModel != null){
 			OptionalTO optTO = optModel.getOptTO();
 			this.richiesta = this.getRichiesta(optTO, "checkOptCmpAttive", this.viewName);
