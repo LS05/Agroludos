@@ -27,6 +27,7 @@ import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.presentation.views.components.table.TablePartecipanti;
 import agroludos.presentation.views.components.table.filter.TableCompetizioniFilter;
 import agroludos.presentation.views.components.table.filter.TableMdcFilter;
+import agroludos.presentation.views.components.table.filter.TableOptionalFilter;
 import agroludos.presentation.views.components.table.filter.TablePartecipantiFilter;
 import agroludos.presentation.views.components.tablemodel.CmpModel;
 import agroludos.presentation.views.components.tablemodel.MdcModel;
@@ -98,7 +99,10 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	//gestione Optional
 	@FXML private GridPane paneListaTipiOpt;
 	@FXML private GridPane paneTableOptional;
+	@FXML private TextField txtFilterOpt;
+	@FXML private Button btnResetRicOpt;
 	private TableOptional tableOptional;
+	private TableOptionalFilter filterOpt;
 	private List<TipiAgroludosTO> listTipiOpt;
 	private List<OptionalTO> listOpt;
 
@@ -112,8 +116,6 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 	private ResourceBundle resources;
 	protected PartModel partModelRow;
-	
-
 
 	@Override
 	public void initialize(URL url, ResourceBundle res) {
@@ -182,6 +184,8 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.btnResetRicPart.setVisible(false);
 		this.filterMdc = new TableMdcFilter();
 		this.btnResetCercaMdc.setVisible(false);
+		this.filterOpt = new TableOptionalFilter();
+		this.btnResetRicOpt.setVisible(false);
 	}
 
 	private void setDxMdCColumn(Integer selected){
@@ -241,7 +245,17 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.filterMdc.resetResearch(this.tableManagerCompetizione, this.txtFilterMdc);
 		this.btnResetCercaMdc.setVisible(false);
 	}
-
+	
+	@FXML protected void btnCercaOptClicked(MouseEvent event){
+		this.filterOpt.updateFilteredData(this.tableOptional, this.txtFilterOpt);
+		this.btnResetRicOpt.setVisible(true);
+	}
+	
+	@FXML protected void annullaRicercaOptClicked(MouseEvent event){
+		this.filterOpt.resetResearch(this.tableOptional, this.txtFilterOpt);
+		this.btnResetRicOpt.setVisible(false);
+	}
+	
 	private void startSearch(String textFieldID){
 		switch(textFieldID){
 			case "txtFilterComp":
@@ -289,7 +303,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		this.tableOptional = new TableOptional();
-		this.paneTableOptional.getChildren().add(this.tableOptional);
+		this.paneTableOptional.add(this.tableOptional, 0, 1);
 		this.paneTableOptional.setVisible(true);
 		this.listViewOpt = new ListaViewTipi(this.listTipiOpt);
 		this.paneListaTipiOpt.getChildren().add(listViewOpt);
@@ -310,6 +324,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				risposta = getRisposta();
 				eseguiRichiesta(richiesta, risposta);
 				tableOptional.setAll(listOpt);
+				filterOpt.setData(tableOptional);
 			}
 
 		});
