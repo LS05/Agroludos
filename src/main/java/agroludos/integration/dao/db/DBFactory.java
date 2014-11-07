@@ -8,7 +8,8 @@ public class DBFactory{
 
 	private DBDAOFactory fact;
 	private SystemConf sysConf;
-
+	
+	//TODO da rivedere
 	public DBFactory(DBDAOFactory fact, SystemConf sysConf){
 		this.fact = fact;
 		this.sysConf = sysConf;

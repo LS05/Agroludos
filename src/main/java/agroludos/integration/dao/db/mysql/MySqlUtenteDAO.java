@@ -3,17 +3,11 @@ package agroludos.integration.dao.db.mysql;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Session;
-
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.UtenteDAO;
 import agroludos.to.UtenteTO;
 
 class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements UtenteDAO<T>{
-	
-	MySqlUtenteDAO(Session session){
-		super(session);
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override

@@ -2,16 +2,13 @@ package agroludos.integration.dao.db.mysql;
 
 import java.util.List;
 
-import org.hibernate.Session;
-
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
 import agroludos.to.ManagerDiCompetizioneTO;
 
 class MySqlManagerDiCompetizioneDAO extends MySqlUtenteDAO<ManagerDiCompetizioneTO> implements ManagerDiCompetizioneDAO{
 	
-	MySqlManagerDiCompetizioneDAO(Session session){
-		super(session);
+	MySqlManagerDiCompetizioneDAO(){
 		this.setClasse(ManagerDiCompetizioneTO.class);
 	}
 	

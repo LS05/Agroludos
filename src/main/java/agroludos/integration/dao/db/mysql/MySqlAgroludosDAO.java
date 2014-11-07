@@ -20,12 +20,6 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 
 	private Class< T > classe;
 
-	MySqlAgroludosDAO(){ }
-
-	MySqlAgroludosDAO(Session session){
-		this.session = session;
-	}
-
 	protected void setClasse( final Class< T > classToSet ){
 		classe = classToSet;
 	}
@@ -96,6 +90,7 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 		List<T> res = null;
 
 		try {
+			
 			tx = this.session.beginTransaction();
 
 			Query query = this.session.getNamedQuery(queryName);

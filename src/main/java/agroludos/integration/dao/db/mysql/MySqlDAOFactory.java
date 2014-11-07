@@ -22,82 +22,78 @@ import agroludos.to.UtenteTO;
 
 public class MySqlDAOFactory implements DBDAOFactory {
 
-	private MySqlDAOUtil daoUtil;
-
-	private Session session;
-
-	public MySqlDAOFactory(MySqlDAOUtil daoUtil) throws DatabaseException{ 
-		this.daoUtil = daoUtil;
-		this.session = this.daoUtil.buildSessionFactory().openSession();
+	
+	MySqlDAOFactory() throws DatabaseException{
+		MySqlDAOUtil.buildSessionFactory();
 	}
-
+	
 	@Override
 	public ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO() {
-		return new MySqlManagerDiCompetizioneDAO(this.session);
+		return new MySqlManagerDiCompetizioneDAO();
 	}
 
 	@Override
 	public ManagerDiSistemaDAO getManagerDiSistemaDAO() {
-		return new MySqlManagerDiSistemaDAO(this.session);
+		return new MySqlManagerDiSistemaDAO();
 	}
 
 	@Override
 	public CompetizioneDAO getCompetizioneDAO() {
-		return new MySqlCompetizioneDAO(this.session);
+		return new MySqlCompetizioneDAO();
 	}
 
 	@Override
 	public PartecipanteDAO getPartecipanteDAO() {
-		return new MySqlPartecipanteDAO(this.session);
+		return new MySqlPartecipanteDAO();
 	}
 
 	@Override
 	public TipoCompetizioneDAO getTipoCompetizioneDAO() {
-		return new MySqlTipoCompetizioneDAO(this.session);
+		return new MySqlTipoCompetizioneDAO();
 	}
 
 	@Override
 	public TipoOptionalDAO getTipoOptionalDAO() {
-		return new MySqlTipoOptionalDAO(this.session);
+		return new MySqlTipoOptionalDAO();
 	}
 
 	@Override
 	public OptionalDAO getOptionalDAO() {
-		return new MySqlOptionalDAO(this.session);
+		return new MySqlOptionalDAO();
 	}
 
 	@Override
 	public UtenteDAO<UtenteTO> getUtenteDAO() {
-		return new MySqlUtenteDAO<UtenteTO>(this.session);
+		return new MySqlUtenteDAO<UtenteTO>();
 	}
 
 	@Override
 	public IscrizioneDAO getIscrizioneDAO() {
-		return new MySqlIscrizioneDAO(this.session);
+		return new MySqlIscrizioneDAO();
 	}
 
 	@Override
 	public StatoCompetizioneDAO getStatoCompetizioneDAO() {
-		return new MySqlStatoCompetizioneDAO(this.session);
+		return new MySqlStatoCompetizioneDAO();
 	}
 
 	@Override
 	public StatoIscrizioneDAO getStatoIscrizioneDAO() {
-		return new MySqlStatoIscrizioneDAO(this.session);
+		return new MySqlStatoIscrizioneDAO();
 	}
 
 	@Override
 	public StatoOptionalDAO getStatoOptionalDAO() {
-		return new MySqlStatoOptionalDAO(this.session);
+		return new MySqlStatoOptionalDAO();
 	}
 
 	@Override
 	public StatoUtenteDAO getStatoUtenteDAO() {
-		return new MySqlStatoUtenteDAO(this.session);
+		return new MySqlStatoUtenteDAO();
 	}
 
 	@Override
 	public TipoUtenteDAO getTipoUtenteDAO() {
-		return new MySqlTipoUtenteDAO(this.session);
+		return new MySqlTipoUtenteDAO();
 	}
 }
