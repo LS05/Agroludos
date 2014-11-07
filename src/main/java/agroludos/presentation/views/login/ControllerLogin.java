@@ -68,7 +68,7 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 		this.agroLogoPane.setFocusTraversable(true);
 
 		//TODO Da rimuovere
-		this.txtUsername.setText("agroludos");
+		this.txtUsername.setText("LucaS05");
 		this.txtPassword.setText("agroludos");
 	}
 

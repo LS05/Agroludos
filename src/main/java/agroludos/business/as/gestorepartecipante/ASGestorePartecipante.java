@@ -3,6 +3,8 @@ package agroludos.business.as.gestorepartecipante;
 import java.io.IOException;
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.DatabaseException;
@@ -123,11 +125,23 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 
 	@Override
 	public CertificatoTO getCertificatoSRC(PartecipanteTO parTO)
-			throws DatabaseException, IOException {
+			throws DatabaseException {
 
 		CertificatoSRCDAO certDao = this.getCertificatoSRCDAO();
 
 		return certDao.getCertificato(parTO);
 
 	}
+
+	@Override
+	public boolean isCertificatoValido(PartecipanteTO parTO){
+		DateTime dataSrc = new DateTime(parTO.getDataSRC());
+		DateTime today = new DateTime().withTimeAtStartOfDay();
+		if( dataSrc.getYear() < today.getYear() ){
+			return false;
+		} else{
+			return true;
+		}
+	}
+
 }
