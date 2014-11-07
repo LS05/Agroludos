@@ -196,8 +196,8 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	}
 
 	private void setDxMdCColumn(Integer selected){
-		MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
 		if( selected != -1){
+			MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
 			selModel = tableManagerCompetizione.getItems().get(selected);
 			this.lblMdcNome.setText(selModel.getNome());
 			this.lblMdcCognome.setText(selModel.getCognome());
@@ -208,8 +208,8 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	}
 
 	private void setDxPartColumn(int selected) {
-		PartModel selModel = this.tablePartecipanti.getItems().get(selected);
 		if( selected != -1 ){
+			PartModel selModel = this.tablePartecipanti.getItems().get(selected);
 			selModel = this.tablePartecipanti.getItems().get(selected);
 			this.lblParNome.setText(selModel.getNome());
 			this.lblParCognome.setText(selModel.getCognome());
@@ -411,20 +411,6 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 	@FXML protected void btnDisattivaOptionalClicked(MouseEvent event){
 		OptModel optModel = this.tableOptional.getSelectionModel().getSelectedItem();
-		
-		OptionalTO provaOpt = optModel.getOptTO();
-		OptionalTO cloneProvaOpt = null;
-		try {
-			cloneProvaOpt = provaOpt.creaClone();
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		cloneProvaOpt.setDescrizione("prova clonazione");
-		System.out.println("descrizione originale: " + provaOpt.getDescrizione());
-		System.out.println("\ndescrizione clone: " + cloneProvaOpt.getDescrizione());
-		
 		if(optModel != null){
 			OptionalTO optTO = optModel.getOptTO();
 			this.richiesta = this.getRichiesta(optTO, "checkOptCmpAttive", this.viewName);
