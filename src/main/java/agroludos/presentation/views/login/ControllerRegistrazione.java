@@ -302,6 +302,7 @@ public class ControllerRegistrazione extends AgroludosController{
 					this.showErrors(errors, this.lblSessoError, "sessoKey");
 				}
 			} else if( res instanceof String ){
+				this.close();
 				this.errFlag = true;
 				ErrorMessageTO errorMessage = toFact.createErrMessageTO();
 				String msg = (String)res;
