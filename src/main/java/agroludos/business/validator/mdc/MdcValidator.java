@@ -42,8 +42,8 @@ class MdcValidator implements AgroludosValidator{
 
 	@Override
 	public void validate(AgroludosTO to) throws ValidationException {
-		ErrorTO errorTO = this.toFact.createErrorTO();
 		if(to instanceof ManagerDiCompetizioneTO){
+			ErrorTO errorTO = this.toFact.createErrorTO();
 			ManagerDiCompetizioneTO mdc = (ManagerDiCompetizioneTO)to;
 			this.nomeRule.validate(mdc, errorTO);
 			if(errorTO.hasErrors())

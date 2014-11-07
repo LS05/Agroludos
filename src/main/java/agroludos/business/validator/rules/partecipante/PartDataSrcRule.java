@@ -17,14 +17,11 @@ class PartDataSrcRule extends AgroludosRule {
 			PartecipanteTO parTO = (PartecipanteTO)mainTO;
 			String key = this.getRule("dataSrcKey");
 
-			if(parTO.getDataNasc() != null){
-				if(this.dateValidator.isBefore(parTO.getDataNasc(), new Date())){
+			if(parTO.getDataSRC() != null){
+				if(this.dateValidator.isBefore(parTO.getDataSRC(), new Date()))
 					errorTO.addError(key, this.getRule("dataSrcError"));
-				}
-			}else{
+			}else
 				errorTO.addError(key, this.getRule("dataError"));
-			}
-
 			if( this.successor != null )
 				this.successor.validate(mainTO, errorTO);
 		}

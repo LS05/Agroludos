@@ -15,4 +15,6 @@ public interface UtenteDAO<T extends UtenteTO> extends DAO<T>{
 
 	T getByID(Integer id) throws DatabaseException;
 
+	T getByEmail(String email) throws DatabaseException;
+
 }

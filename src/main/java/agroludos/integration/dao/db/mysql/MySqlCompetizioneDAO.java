@@ -47,12 +47,12 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 			throws DatabaseException {
 		return super.executeQuery("getCompetizioniAperte");
 	}
-	
+
 	@Override
 	public CompetizioneTO annullaCompetizione(CompetizioneTO cmpto)
 			throws DatabaseException {
 		return super.update(cmpto);	
-		
+
 	}
 
 	@Override
@@ -66,7 +66,7 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 		return res;
 
 	}
-	
+
 	@Override
 	public List<CompetizioneTO> readAttiveByMdc(ManagerDiCompetizioneTO mdc)
 			throws DatabaseException {
@@ -78,7 +78,5 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 
 		return res;
 	}
-
-
 
 }

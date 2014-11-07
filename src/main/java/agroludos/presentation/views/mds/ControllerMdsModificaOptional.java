@@ -13,12 +13,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-
 import agroludos.presentation.views.components.numberspinner.NumberSpinner;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
+import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.StatoOptionalTO;
@@ -98,6 +98,10 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 		AgroRequest request = this.getRichiesta(this.optional, "modificaOptional", this.viewName);
 		AgroResponse response = this.getRisposta();
 		this.eseguiRichiesta(request, response);
+		
+		Object res = response.getRespData();
+		if(res instanceof OptionalTO)
+			this.close();
 	}
 
 
@@ -126,19 +130,24 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 					this.lblNomeOptError.setVisible(true);
 					this.lblNomeOptError.setText(errors.getError(nomeKey));
 				}
-				
+
 				if(errors.hasError(this.getError("costoKey"))){
 					String nomeKey = this.getError("costoKey");
 					this.lblCostoOptError.setVisible(true);
 					this.lblCostoOptError.setText(errors.getError(nomeKey));
 				}
-				
+
 				if(errors.hasError(this.getError("statoKey"))){
 					String nomeKey = this.getError("statoKey");
 					this.lblStatoOptError.setVisible(true);
 					this.lblStatoOptError.setText(errors.getError(nomeKey));
 				}
 
+			}else if(res instanceof String){
+				ErrorMessageTO errorMessage = toFact.createErrMessageTO();
+				String msg = (String)res;
+				errorMessage.setMessage(msg);
+				this.setVista("messageDialog", errorMessage);
 			}
 		}
 

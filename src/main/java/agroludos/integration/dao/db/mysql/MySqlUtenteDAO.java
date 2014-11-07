@@ -62,6 +62,15 @@ class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements
 	}
 
 	@Override
+	public T getByEmail(String email) throws DatabaseException {
+
+		List<String> param = new ArrayList<String>();
+		param.add(email);
+
+		return this.getUtenteBy("getByEmail", param);
+	}
+	
+	@Override
 	public T getByID(Integer id) throws DatabaseException {
 
 		List<Integer> param = new ArrayList<Integer>();
