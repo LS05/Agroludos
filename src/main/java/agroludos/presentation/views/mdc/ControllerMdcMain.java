@@ -164,6 +164,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 	@FXML protected void menuLogout(ActionEvent event){
 		this.close();
+		//TODO richiesta di logout
 		this.setVista("login");
 	}
 
