@@ -20,3 +20,10 @@
 	-fx-background-color: #fafbfc;
 	-fx-border-color: #e1e1e1 #e1e1e1 #c2c2c2 #e1e1e1;	
 }
+
+#paneQuestIcon{
+	-fx-background-image: url("../../images/icons/warning.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: 40 40;
+    -fx-background-position: center center;
+}

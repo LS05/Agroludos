@@ -78,6 +78,7 @@ public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 		return certTO;
 	}
 
+	//TODO rivedere IOException
 	@Override
 	public void salvaCertificato(PartecipanteTO partTO) throws IOException {
 		String certPath = Paths.get(this.getCertPath(partTO)).toString();
@@ -101,6 +102,6 @@ public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 		String renamePath = absCertPath + "certificato.txt";
 		outFileName.renameTo(new File(renamePath));
 
-		partTO.setSrc(out.toString() + "/certificato.txt");
+		partTO.setSrc(out.toString());
 	}
 }
