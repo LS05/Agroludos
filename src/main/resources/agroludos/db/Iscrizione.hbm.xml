@@ -15,13 +15,13 @@
 		<property name="costo" type="double">
 			<column name="costo" not-null="true" default="0" />
 		</property>
-		<many-to-one name="statoIscrizione" class="agroludos.to.StatoIscrizione" cascade="all" lazy="false">
+		<many-to-one name="statoIscrizione" class="agroludos.to.StatoIscrizione" cascade="save-update" lazy="false">
 			<column name="stato" not-null="true" />
 		</many-to-one>
 		<many-to-one name="competizione" class="agroludos.to.Competizione" cascade="all" lazy="false">
 			<column name="idcompetizione" not-null="true" />
 		</many-to-one>
-		<many-to-one name="partecipante" class="agroludos.to.Partecipante" cascade="all" lazy="false">
+		<many-to-one name="partecipante" class="agroludos.to.Partecipante" cascade="merge" lazy="false">
 			<column name="idpartecipante" not-null="true" />
 		</many-to-one>
 		<set name="optionals" cascade="all" table="tbl_opt_iscr"  lazy="false">

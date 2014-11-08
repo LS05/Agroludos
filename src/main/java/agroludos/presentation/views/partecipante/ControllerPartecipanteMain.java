@@ -136,7 +136,6 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 
 	@FXML protected void menuLogout(ActionEvent event){
 		this.close();
-		//TODO richiesta di logout
 		this.setVista("login");
 	}
 
@@ -196,6 +195,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 				this.eseguiRichiesta(this.richiesta, this.risposta);
 				this.tableCompetizioni.setAll(this.listComp);
 
+				
 				setVista("partMostraCompetizione", iscTO.getCompetizione());
 
 				SuccessMessageTO succ = toFact.createSuccMessageTO();

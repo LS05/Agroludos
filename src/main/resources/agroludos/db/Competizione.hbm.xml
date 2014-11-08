@@ -40,11 +40,11 @@
 			<key column="idcompetizione" />
 			<one-to-many class="agroludos.to.Iscrizione" />
 		</set>
-		<many-to-one name="statoCompetizione" cascade="all"
+		<many-to-one name="statoCompetizione" cascade="persist,merge,refresh"
 			class="agroludos.to.StatoCompetizione" lazy="false">
 			<column name="statocomp" not-null="true" />
 		</many-to-one>
-		<many-to-one name="tipoCompetizione" cascade="all"
+		<many-to-one name="tipoCompetizione" cascade="persist,merge,refresh"
 			class="agroludos.to.TipoCompetizione" lazy="false">
 			<column name="tipocomp" not-null="true" />
 		</many-to-one>

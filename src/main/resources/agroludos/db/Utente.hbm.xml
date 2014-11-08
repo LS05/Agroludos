@@ -25,11 +25,11 @@
 			<column name="email" not-null="true" />
 		</property>
 		<many-to-one name="tipoUtente" class="agroludos.to.TipoUtente"
-			cascade="all" lazy="false">
+			cascade="persist,merge,refresh" lazy="false">
 			<column name="idruolo" not-null="true" />
 		</many-to-one>
 		<many-to-one name="statoUtente" class="agroludos.to.StatoUtente"
-			cascade="all" lazy="false">
+			 cascade="persist,merge,refresh" lazy="false">
 			<column name="stato" not-null="true" />
 		</many-to-one>
 		<joined-subclass name="agroludos.to.ManagerDiSistema"
