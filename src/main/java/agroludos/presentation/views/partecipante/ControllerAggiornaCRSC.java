@@ -1,25 +1,33 @@
 package agroludos.presentation.views.partecipante;
 
 import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.components.datepicker.AgroDatePicker;
 import agroludos.to.AgroludosTO;
+import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
+import agroludos.to.QuestionTO;
 
-public class ControllerAggiornaCRSC extends AgroludosController {
+public class ControllerAggiornaCRSC extends AgroludosController implements Initializable {
 	private String viewName;
 
 	@FXML private Label lblSrc;
-	@FXML private GridPane paneAggiornaSrc;
+	@FXML private Label lblSrcError;
+	@FXML private Label lblDataSrcError;
 	@FXML private Pane paneDataSrc;
 	private AgroDatePicker dataSrcPicker;
 
@@ -27,15 +35,24 @@ public class ControllerAggiornaCRSC extends AgroludosController {
 	private FileChooser fileChooser;
 	private PartecipanteTO parTO;
 
+	private ResourceBundle res;
+
 	private AgroResponse risposta;
 
 	private AgroRequest richiesta;
+
+	@Override
+	public void initialize(URL url, ResourceBundle res) {
+		this.res = res;
+	}
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
 		if(mainTO instanceof PartecipanteTO){
 			this.parTO = (PartecipanteTO)mainTO;
 			this.fileChooser = new FileChooser();
+			this.lblDataSrcError.setVisible(false);
+			this.lblSrcError.setVisible(false);
 		}
 	}
 
@@ -44,6 +61,22 @@ public class ControllerAggiornaCRSC extends AgroludosController {
 		this.viewName = nameView;
 		this.dataSrcPicker = new AgroDatePicker();
 		this.paneDataSrc.getChildren().add(this.dataSrcPicker.getDatePicker());
+		Stage aggiornaStage = this.getStage(this.viewName);
+
+		aggiornaStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+			public void handle(WindowEvent we) {
+				QuestionTO question = toFact.createQuestionTO();
+				question.setQuestion(res.getString("key177"));
+
+				question.setDataTO(parTO);
+				question.setRequest("eliminaIscrizione");
+				question.setViewName(viewName);
+
+				setVista("questionDialog", question);
+			}
+
+		});
 	}
 
 	@FXML protected void btnAggiornaClicked(MouseEvent event){
@@ -65,14 +98,30 @@ public class ControllerAggiornaCRSC extends AgroludosController {
 		return this.viewName;
 	}
 
+	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
+		if(errors.hasError(this.getError(errorKey))){
+			String nomeKey = this.getError(errorKey);
+			lblError.setVisible(true);
+			lblError.setText(errors.getError(nomeKey));
+		} 
+	}
+
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 		Object res = response.getRespData();
 
 		if( commandName.equals(this.getCommandName("modificaPartecipante") )){
-			if(res instanceof String){
+			if(res instanceof ErrorTO){
+				ErrorTO errors = (ErrorTO)res;
 
+				if(errors.hasError(this.getError("srcKey"))){
+					this.showErrors(errors, this.lblSrcError, "srcKey");
+				}
+
+				if(errors.hasError(this.getError("dataSrcKey"))){
+					this.showErrors(errors, this.lblDataSrcError, "dataSrcKey");
+				}
 			}
 		}
 	}

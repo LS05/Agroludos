@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="errDialogPane" maxHeight="-1.0" maxWidth="-Infinity" minHeight="-1.0" minWidth="-Infinity" prefHeight="143.0" prefWidth="516.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="agroludos.main.ControllerQuestion">
+<AnchorPane id="errDialogPane" maxHeight="-1.0" maxWidth="-Infinity" minHeight="-1.0" minWidth="-Infinity" prefHeight="280.0" prefWidth="650.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="agroludos.main.ControllerQuestion">
   <children>
     <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
-        <GridPane prefHeight="43.0" prefWidth="355.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <GridPane prefHeight="43.0" prefWidth="355.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
           <children>
             <Button id="btnOkErrLogin" fx:id="btnNo" mnemonicParsing="false" onMouseClicked="#btnNo" prefWidth="82.0" text="%key139" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0">
               <GridPane.margin>
@@ -28,37 +28,43 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <GridPane id="messageTitle" prefHeight="125.0" prefWidth="564.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
           <children>
-            <Pane id="successIconPane" prefHeight="291.0" prefWidth="141.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <Label id="" fx:id="lblQuestion" alignment="TOP_LEFT" prefHeight="-1.0" prefWidth="-1.0" text="Question" textAlignment="LEFT" textFill="#404040" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
-              <font>
-                <Font name="System Bold" size="15.0" />
-              </font>
-              <GridPane.margin>
-                <Insets right="15.0" />
-              </GridPane.margin>
-            </Label>
+            <Pane id="paneQuestIcon" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
           </children>
           <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0" minWidth="10.0" prefWidth="141.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="396.0" minWidth="10.0" prefWidth="375.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="437.0" minWidth="10.0" prefWidth="437.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="396.0" minWidth="10.0" prefWidth="127.0" />
           </columnConstraints>
           <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
+        <Label id="" alignment="TOP_LEFT" prefHeight="-1.0" prefWidth="-1.0" text="%key178" textAlignment="LEFT" textFill="#ffb800" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <font>
+            <Font name="System Bold" size="15.0" fx:id="x1" />
+          </font>
+          <GridPane.margin>
+            <Insets left="10.0" />
+          </GridPane.margin>
+        </Label>
+        <Label fx:id="lblQuestion" font="$x1" text="Label" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
+          <GridPane.margin>
+            <Insets left="10.0" top="10.0" />
+          </GridPane.margin>
+        </Label>
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       </columnConstraints>
       <rowConstraints>
-        <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="91.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="107.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="112.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
   </children>
   <stylesheets>
-    <URL value="@successDialog.css" />
+    <URL value="@messageDialog.css" />
   </stylesheets>
 </AnchorPane>

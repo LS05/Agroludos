@@ -123,8 +123,8 @@
 		<view tipo="dialog">
 			<name>questionDialog</name>
 			<url>/fxml/dialogs/questionDialog.fxml</url>
-			<width>516</width>
-			<height>127</height>
+			<width>650</width>
+			<height>280</height>
 			<title>Agroludos | Question</title>
 		</view>
 		<view tipo="dialog">

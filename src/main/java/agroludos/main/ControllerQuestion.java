@@ -24,8 +24,10 @@ public class ControllerQuestion extends AgroludosController{
 
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
-		this.questTO = (QuestionTO) mainTO;
-		this.lblQuestion.setText(this.questTO.getQuestion());
+		if(mainTO instanceof QuestionTO){
+			this.questTO = (QuestionTO) mainTO;
+			this.lblQuestion.setText(this.questTO.getQuestion());
+		}
 	}
 
 	@Override
