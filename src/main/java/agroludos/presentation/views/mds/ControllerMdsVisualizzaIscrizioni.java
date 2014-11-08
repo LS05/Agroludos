@@ -21,13 +21,13 @@ import agroludos.to.PartecipanteTO;
 
 public class ControllerMdsVisualizzaIscrizioni extends AgroludosController {
 	private String viewName;
-	
+
 	@FXML private TableView<IscModel> tableIscrizioni;
 	@FXML private TableColumn<IscModel, String> iscComCol;
 	@FXML private TableColumn<IscModel, String> iscDataCol;
 	@FXML private TableColumn<IscModel, String> iscStatoCol;
 	@FXML private Label lblNomeCognome;
-	
+
 	private List<IscrizioneTO> iscrizioni;
 
 	protected IscModel iscModelRow;
@@ -42,11 +42,11 @@ public class ControllerMdsVisualizzaIscrizioni extends AgroludosController {
 			sb.append(part.getCognome());
 			this.lblNomeCognome.setText(sb.toString());
 			this.iscrizioni = part.getAllIscrizioni();
-			
+
 			this.iscComCol.setCellValueFactory(new PropertyValueFactory<IscModel, String>("competizione"));
 			this.iscDataCol.setCellValueFactory(new PropertyValueFactory<IscModel, String>("data"));
 			this.iscStatoCol.setCellValueFactory(new PropertyValueFactory<IscModel, String>("stato"));
-			
+
 			ObservableList<IscModel> res = FXCollections.observableArrayList();
 			IscModel iscModel = null;
 
@@ -54,9 +54,9 @@ public class ControllerMdsVisualizzaIscrizioni extends AgroludosController {
 				iscModel = new IscModel(iscrizione);
 				res.add(iscModel);
 			}
-			
+
 			this.tableIscrizioni.getItems().setAll(res);
-			
+
 			this.tableIscrizioni.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
 				@Override
@@ -76,8 +76,7 @@ public class ControllerMdsVisualizzaIscrizioni extends AgroludosController {
 
 	@Override
 	protected void initializeView(String viewName) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -87,8 +86,6 @@ public class ControllerMdsVisualizzaIscrizioni extends AgroludosController {
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		// TODO Auto-generated method stub
-		
-	}
 
+	}
 }

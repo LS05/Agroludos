@@ -29,29 +29,38 @@ import agroludos.to.TipoOptionalTO;
 
 public class ControllerMdsNuovoOptional extends AgroludosController implements Initializable{
 	private String viewName;
+
+	private @FXML Label lblStatoOptError;
+	private @FXML Label lblNomeOptError;
+	private @FXML Label lblCostoOptError;
 	private @FXML Label lblNomeTipoOpt;
 	private @FXML TextField txtNomeOptional;
 	private @FXML ComboBox<String> cmbStatoOptional;
 	private @FXML TextArea txtAreaDescrizione;
 	private @FXML GridPane panePrezzoOptional;
+
 	private NumberSpinner costoOptional;
-	private AgroRequest richiesta;
-	private AgroResponse risposta;
 	private TipoOptionalTO tipoOpt;
 	private List<StatoOptionalTO> listStatiOpt;
 	private List<TipoOptionalTO> listTipiOpt;
+
+	private AgroRequest richiesta;
+	private AgroResponse risposta;
 	private ResourceBundle res;
-	
-	//label error
-	private @FXML Label lblStatoOptError;
-	private @FXML Label lblNomeOptError;
-	private @FXML Label lblCostoOptError;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.res = resources;
 	}
 	
+	@Override
+	protected void initializeView(String viewName) {
+		this.viewName = viewName;
+		this.lblStatoOptError.setVisible(false);
+		this.lblNomeOptError.setVisible(false);
+		this.lblCostoOptError.setVisible(false);
+	}
+
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
 		this.tipoOpt = (TipoOptionalTO)mainTO;
@@ -74,29 +83,20 @@ public class ControllerMdsNuovoOptional extends AgroludosController implements I
 		this.cmbStatoOptional.setItems(listStati);
 	}
 
-	@Override
-	protected void initializeView(String viewName) {
-		this.viewName = viewName;
-		
-		lblStatoOptError.setVisible(false);
-		lblNomeOptError.setVisible(false);
-		lblCostoOptError.setVisible(false);
-	}
-
 	@FXML protected void confermaNuovoOptional(MouseEvent event){
 		OptionalTO optional = toFact.createOptionalTO();
 		double costo = this.costoOptional.getNumber().doubleValue();
 		optional.setCosto(costo);
 		optional.setDescrizione(this.txtAreaDescrizione.getText());
 		optional.setNome(this.txtNomeOptional.getText());
-		
+
 		TipoOptionalTO tipoOpt = null;
 		for(TipoOptionalTO tipo : this.listTipiOpt){
 			if(tipo.getNome().equalsIgnoreCase(this.tipoOpt.getNome()))
 				tipoOpt = tipo;
 		}
 		optional.setTipoOptional(tipoOpt);
-		
+
 		int selectedStato = this.cmbStatoOptional.getSelectionModel().getSelectedIndex();
 		StatoOptionalTO statoOpt = this.listStatiOpt.get(selectedStato);
 		optional.setStatoOptional(statoOpt);

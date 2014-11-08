@@ -13,6 +13,7 @@ import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoUtenteTO;
 import agroludos.to.SuccessMessageTO;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -40,7 +41,6 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 	private List<StatoUtenteTO> listStatiUtente;
 
 	private AgroRequest richiesta;
-
 	private AgroResponse risposta;
 
 	private ManagerDiCompetizioneTO mdcTO;
@@ -93,7 +93,7 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 		this.lblStatoError.setVisible(false);
 		this.lblUsernameError.setVisible(false);
 		this.flagError=false;
-		
+
 		this.mdcTO.setNome(this.txtNome.getText());
 		this.mdcTO.setCognome(this.txtCognome.getText());
 		this.mdcTO.setUsername(this.txtUsername.getText());
@@ -138,7 +138,7 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 			if(res instanceof ErrorTO){
 
 				ErrorTO errors = (ErrorTO)res;
-				
+
 
 				if(errors.hasError(this.getError("nomeKey"))){
 					String nomeKey = this.getError("nomeKey");

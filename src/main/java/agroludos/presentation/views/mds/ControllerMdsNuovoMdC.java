@@ -69,11 +69,6 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 	}
 
 	@Override
-	protected void initializeView(AgroludosTO mainTO) {
-		this.flagError = false;
-	}
-
-	@Override
 	protected void initializeView(String viewName) {
 		this.viewName = viewName;
 		this.flagError = false;
@@ -119,8 +114,8 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 	}
 
 	@Override
-	protected String getViewName() {
-		return this.viewName;
+	protected void initializeView(AgroludosTO mainTO) {
+		this.flagError = false;
 	}
 
 	@FXML protected void confermaNuovoManagerDiCompetizione(MouseEvent event){
@@ -143,6 +138,11 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 			succTO.setMessage(this.resources.getString("key132"));
 			this.setVista("messageDialog", succTO);
 		}
+	}
+
+	@Override
+	protected String getViewName() {
+		return this.viewName;
 	}
 
 	@SuppressWarnings("unchecked")

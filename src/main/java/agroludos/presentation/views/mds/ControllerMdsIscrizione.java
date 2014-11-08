@@ -1,12 +1,12 @@
 package agroludos.presentation.views.mds;
 
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.to.AgroludosTO;
 import agroludos.to.IscrizioneTO;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,30 +26,23 @@ public class ControllerMdsIscrizione extends AgroludosController {
 	@FXML private Label lblIndirizzoIsc;
 	@FXML private Label lblDataSRCIsc;
 	@FXML private Label lblDataIsc;
-
 	@FXML private Label lblCostoIsc;
-
-
 	@FXML private Button btnVisualizzaCertificato;
-
 	@FXML private GridPane paneIscrizione;
-	private IscrizioneTO iscto;
-
 	@FXML private GridPane paneTableOptionalScelti;
+
 	private TableOptional tableOptional;
+	private IscrizioneTO iscto;
 
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
-
 	}
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
 		if(mainTO instanceof IscrizioneTO){
-			this.iscto =(IscrizioneTO) mainTO;
-
-
+			this.iscto = (IscrizioneTO)mainTO;
 
 			this.lblNomeIsc.setText(this.iscto.getPartecipante().getNome());
 			this.lblCognomeIsc.setText(this.iscto.getPartecipante().getCognome());
@@ -73,13 +66,13 @@ public class ControllerMdsIscrizione extends AgroludosController {
 		}
 	}
 
+	@FXML private void btnVisualizzaCertificato(MouseEvent event){
+		this.setVista("visualizzaSRC",this.iscto.getPartecipante());
+	}
+
 	@Override
 	protected String getViewName() {
 		return this.viewName;
-	}
-
-	@FXML private void btnVisualizzaCertificato(MouseEvent event){
-		this.setVista("visualizzaSRC",this.iscto.getPartecipante());
 	}
 
 	@Override
