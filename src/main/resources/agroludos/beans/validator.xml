@@ -13,6 +13,12 @@
 	<import resource="classpath:agroludos/beans/compRules.xml" />
 	<import resource="classpath:agroludos/beans/compRules.xml" />
 	<import resource="classpath:agroludos/beans/iscrizioneRules.xml" />
+	<import resource="classpath:agroludos/beans/dbRules.xml" />
+	
+	<bean id="dbValidator" class="agroludos.business.validator.database.DatabaseValidator">
+		<constructor-arg ref="dbRulesFactory" />
+		<constructor-arg ref="toFactory" />
+	</bean>
 	
 	<bean id="partValidator" class="agroludos.business.validator.partecipante.PartValidator">
 		<constructor-arg ref="pRulesFactory" />

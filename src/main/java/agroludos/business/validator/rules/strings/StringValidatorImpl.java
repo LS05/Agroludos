@@ -1,6 +1,7 @@
 package agroludos.business.validator.rules.strings;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.validator.routines.UrlValidator;
 import org.apache.commons.validator.routines.EmailValidator;
 
 class StringValidatorImpl implements StringValidator{
@@ -29,5 +30,11 @@ class StringValidatorImpl implements StringValidator{
 	@Override
 	public boolean isAlphaNumeric(String str) {
 		return StringUtils.isAlphanumeric(str);
+	}
+	
+	@Override
+	public boolean isValidUrl(String url){
+		UrlValidator urlValidator = new UrlValidator();
+		return urlValidator.isValid(url);
 	}
 }

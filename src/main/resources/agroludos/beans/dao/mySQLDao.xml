@@ -19,5 +19,5 @@
 		factory-bean="mySqlDaoFactory"
 		factory-method="getUtenteDAO">
 	</bean>
-	
+
 </beans>

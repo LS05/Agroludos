@@ -11,4 +11,6 @@ public interface StringValidator {
 	boolean isValidEmail(String email);
 
 	boolean isNumeric(String number);
+
+	boolean isValidUrl(String url);
 }

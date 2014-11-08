@@ -6,12 +6,12 @@ import agroludos.integration.dao.file.FileDAOFactory;
 import agroludos.system.Conf;
 import agroludos.to.TOFactory;
 
-public class TxtDAOFactory implements FileDAOFactory{
+class TxtDAOFactoryImpl implements TxtDAOFactory, FileDAOFactory{
 	
 	private TOFactory toFact;
 	private Conf sysConf;
 
-	public TxtDAOFactory(TOFactory toFact, Conf sysConf){
+	public TxtDAOFactoryImpl(TOFactory toFact, Conf sysConf){
 		this.toFact = toFact;
 		this.sysConf = sysConf;
 	}

@@ -3,10 +3,16 @@ package agroludos.integration.dao.file.xml;
 import agroludos.integration.dao.file.CertificatoSRCDAO;
 import agroludos.integration.dao.file.FConfigurazioneDAO;
 import agroludos.integration.dao.file.FileDAOFactory;
+import agroludos.system.HibernateConf;
+import agroludos.utility.xml.XmlUtil;
 
-public class XmlDAOFactory implements FileDAOFactory{
+class XmlDAOFactoryImpl implements XmlDAOFactory, FileDAOFactory{
 	
-	private final static XmlConfigurazioneDAO xmlConf = new XmlConfigurazioneDAO();
+	private static XmlConfigurazioneDAO xmlConf;
+	
+	public XmlDAOFactoryImpl(HibernateConf sysConf, XmlUtil utXml){
+		xmlConf = new XmlConfigurazioneDAO(sysConf, utXml);
+	}
 	
 	@Override
 	public FConfigurazioneDAO getConfigurazioneDAO() {
