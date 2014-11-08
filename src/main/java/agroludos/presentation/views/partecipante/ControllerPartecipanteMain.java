@@ -136,6 +136,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 
 	@FXML protected void menuLogout(ActionEvent event){
 		this.close();
+		//TODO richiesta di logout
 		this.setVista("login");
 	}
 

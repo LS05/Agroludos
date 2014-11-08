@@ -95,21 +95,21 @@
 
 	</class>
 	<query name="checkMds">
-		<![CDATA[ from agroludos.to.Utente m where m.statoUtente = 1 and m.tipoUtente = 0 ]]></query>
+		<![CDATA[ from agroludos.to.Utente m where m.statoUtente.id = 1 and m.tipoUtente.id = 0 ]]></query>
 	<query name="getUtente">
-        <![CDATA[ from agroludos.to.Utente u where u.statoUtente = 1 and u.username = ? and u.password = ? and u.statoUtente = 1 ]]></query>
+        <![CDATA[ from agroludos.to.Utente u where u.statoUtente.id = 1 and u.username = ? and u.password = ?]]></query>
 	<query name="getByID">
-        <![CDATA[ from agroludos.to.Utente u where u.statoUtente = 1 and u.id = ? and u.tipoUtente = ? ]]></query>
+        <![CDATA[ from agroludos.to.Utente u where u.statoUtente.id = 1 and u.id = ? and u.tipoUtente = ? ]]></query>
 	<query name="getPartecipante">
-        <![CDATA[ from agroludos.to.Partecipante p where p.statoUtente = 1 and p.id = ? ]]></query>
+        <![CDATA[ from agroludos.to.Partecipante p where p.statoUtente.id = 1 and p.id = ? ]]></query>
 	<query name="getPartecipanteByCF">
-        <![CDATA[ from agroludos.to.Partecipante p where p.statoUtente = 1 and p.cf = ? ]]></query>
+        <![CDATA[ from agroludos.to.Partecipante p where p.statoUtente.id = 1 and p.cf = ? ]]></query>
 	<query name="getAllManagerDiCompetizione">
-		<![CDATA[ from agroludos.to.ManagerDiCompetizione m where m.statoUtente = 1]]></query>
+		<![CDATA[ from agroludos.to.ManagerDiCompetizione m where m.statoUtente.id = 1]]></query>
 	<query name="getAllPartecipanti">
-		<![CDATA[ from agroludos.to.Partecipante m where m.statoUtente = 1 ]]></query>
+		<![CDATA[ from agroludos.to.Partecipante m where m.statoUtente.id = 1 ]]></query>
 	<query name="getByUsername">
-		<![CDATA[ from agroludos.to.Utente m where m.statoUtente = 1 and m.username = ? ]]></query>
+		<![CDATA[ from agroludos.to.Utente m where m.statoUtente.id = 1 and m.username = ? ]]></query>
 	<query name="getByEmail">
 		<![CDATA[ from agroludos.to.Utente m where m.email = ? ]]></query>
 </hibernate-mapping>

@@ -13,7 +13,6 @@ public class AgroSessionImpl implements AgroSession{
 		this.utenti = new HashMap<String, UtenteTO>();
 	}
 	
-	//TODO mettere un Exception se c'è già una sessione?
 	@Override
 	public void setAttribute(UtenteTO uto) {
 		if(this.utenti.isEmpty())
