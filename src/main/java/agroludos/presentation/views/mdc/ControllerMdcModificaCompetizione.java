@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -26,7 +27,6 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
-import agroludos.to.OptionalTO;
 import agroludos.to.QuestionTO;
 
 public class ControllerMdcModificaCompetizione extends AgroludosController implements Initializable{
