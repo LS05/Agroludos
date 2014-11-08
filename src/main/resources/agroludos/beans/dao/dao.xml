@@ -18,7 +18,7 @@
 		<constructor-arg ref="xmlDaoFactory" />
 	</bean>
 	
-	<bean id="dbFactory" class="agroludos.integration.dao.db.DBFactory">
+	<bean id="dbFactory" class="agroludos.integration.dao.db.DBFactoryImpl">
 		<constructor-arg ref="mySqlDaoFactory" />
 		<constructor-arg ref="systemConf" />
 	</bean>
