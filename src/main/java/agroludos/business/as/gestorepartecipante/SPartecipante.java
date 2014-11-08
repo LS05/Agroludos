@@ -11,6 +11,6 @@ public interface SPartecipante extends AgroludosService{
 
 	PartecipanteTO inserisciPartecipante(PartecipanteTO parto) throws DatabaseException, ValidationException, IOException;
 
-	PartecipanteTO modificaPartecipante (PartecipanteTO parto) throws DatabaseException, ValidationException;
+	PartecipanteTO modificaPartecipante (PartecipanteTO parto) throws DatabaseException, ValidationException, IOException;
 
 }

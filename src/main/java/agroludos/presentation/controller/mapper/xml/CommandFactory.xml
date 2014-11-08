@@ -325,7 +325,7 @@
 	<command name="modificaPartecipante">
 		<classe>agroludos.business.as.gestorepartecipante.SPartecipante</classe>
 		<from name="aggiornaSRC">
-			<forward success="partecipante" failure="aggiornaSRC" />
+			<forward success="aggiornaSRC" failure="aggiornaSRC" />
 		</from>
 	</command>
 </commands>

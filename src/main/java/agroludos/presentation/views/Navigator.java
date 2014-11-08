@@ -54,9 +54,9 @@ public class Navigator {
 		try {
 			if(this.viewsCache.checkView(viewName)){
 				agw = this.viewsCache.getView(viewName);
+
 				//se si tratta di un dialog richiamo l'inizializzazione
-				if(agw.isDialog())					
-					agw.getController().initializeView(viewName);
+				agw.getController().initializeView(viewName);
 			}else{
 				agw = this.viewsLoader.getView(viewName);
 				this.viewsCache.addView(agw);

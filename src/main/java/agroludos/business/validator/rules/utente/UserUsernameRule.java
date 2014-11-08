@@ -18,9 +18,9 @@ class UserUsernameRule extends AgroludosRule {
 			String username = user.getUsername();
 			Integer sLen = Integer.valueOf(this.getRule("usernameLength"));
 
-			String cfKey = this.getRule("usernameKey");
+			String key = this.getRule("usernameKey");
 			if( username.length() < sLen ){
-				errorTO.addError(cfKey, this.getRule("usernameLenError"));
+				errorTO.addError(key, this.getRule("usernameLenError"));
 			}
 
 			if( this.successor != null)
