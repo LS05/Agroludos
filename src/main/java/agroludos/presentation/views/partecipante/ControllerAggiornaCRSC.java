@@ -71,7 +71,6 @@ public class ControllerAggiornaCRSC extends AgroludosController implements Initi
 			public void handle(WindowEvent we) {
 				QuestionTO question = toFact.createQuestionTO();
 				question.setQuestion(res.getString("key177"));
-
 				question.setDataTO(parTO);
 				question.setRequest("eliminaIscrizione");
 				question.setViewName(viewName);
