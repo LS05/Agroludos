@@ -15,4 +15,8 @@
 	</class>
 	<query name="getAllStatoIscrizione">
         <![CDATA[ from agroludos.to.StatoIscrizione o ]]></query>
+	<query name="getStatoIscrizioneDisattivato">
+        <![CDATA[ from agroludos.to.StatoIscrizione o where id = 0 ]]></query>
+	<query name="getStatoIscrizioneTerminato">
+        <![CDATA[ from agroludos.to.StatoIscrizione o where id = 2 ]]></query>
 </hibernate-mapping>

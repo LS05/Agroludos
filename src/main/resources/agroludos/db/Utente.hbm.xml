@@ -49,8 +49,8 @@
 				<column name="stipendio" />
 			</property>
 
-			<set name="competizioni" table="tbl_competizione" fetch="select"
-				cascade="all" lazy="false">
+			<set name="competizioni" table="tbl_competizione"
+				cascade="persist,merge,refresh" lazy="false">
 				<key column="idmdc" />
 				<one-to-many class="agroludos.to.Competizione" />
 			</set>
@@ -79,13 +79,8 @@
 			<property name="dataSRC" type="date">
 				<column name="data_src" not-null="true" />
 			</property>
-			<set name="iscrizioni" table="tbl_iscrizione" fetch="select"
-				cascade="all" lazy="false">
-				<key column="idpartecipante" />
-				<one-to-many class="agroludos.to.Iscrizione" />
-			</set>
-			<set name="iscrizioniAttive" table="tbl_iscrizione" fetch="select"
-				where="stato = 1" cascade="all" lazy="false">
+			<set name="iscrizioni" table="tbl_iscrizione"
+				cascade="persist,merge,refresh" lazy="false">
 				<key column="idpartecipante" />
 				<one-to-many class="agroludos.to.Iscrizione" />
 			</set>

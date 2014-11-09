@@ -26,7 +26,6 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
-import agroludos.to.OptionalTO;
 import agroludos.to.QuestionTO;
 
 public class ControllerMdcModificaCompetizione extends AgroludosController implements Initializable{
@@ -59,8 +58,6 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 	@FXML private Label lblNminCmpError;
 	@FXML private Label lblNmaxCmpError;
 	@FXML private Label lblCostoCmpError;
-
-	private boolean checkCmpData;
 
 
 	@Override
@@ -138,37 +135,28 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 		lblNmaxCmpError.setVisible(false);
 		lblCostoCmpError.setVisible(false);
 
-		//richiesta per vedere se nel giorno stabilito c'è già una competizione
-		CompetizioneTO checkCMP = toFact.createCompetizioneTO();
-		checkCMP.setData(this.dataCompPicker.getSelectedDate());
-		this.risposta = this.getRisposta();
-		this.richiesta = this.getRichiesta(checkCMP, "checkCmpData", this.viewName);
-		this.eseguiRichiesta(this.richiesta, this.risposta);
+		this.cmpto.setCosto(this.costoComp.getNumber().doubleValue());
+		this.cmpto.setData(this.dataCompPicker.getSelectedDate());
+		this.cmpto.setDescrizione(txtDescrizione.getText());
+		this.cmpto.setNmax(this.cmbNmax.getSelectionModel().getSelectedItem());
+		this.cmpto.setNmin(this.cmbNmin.getSelectionModel().getSelectedItem());
+		this.cmpto.setNome(this.txtNome.getText());
 
-		if(!this.checkCmpData){
-			this.cmpto.setCosto(this.costoComp.getNumber().doubleValue());
-			this.cmpto.setData(this.dataCompPicker.getSelectedDate());
-			this.cmpto.setDescrizione(txtDescrizione.getText());
-			this.cmpto.setNmax(this.cmbNmax.getSelectionModel().getSelectedItem());
-			this.cmpto.setNmin(this.cmbNmin.getSelectionModel().getSelectedItem());
-			this.cmpto.setNome(this.txtNome.getText());
+		if(this.cmpto.getAllOptionals().isEmpty()){
+			QuestionTO question = toFact.createQuestionTO();
+			question.setQuestion(this.res.getString("key171"));
 
-			if(this.cmpto.getAllOptionals().isEmpty()){
-				QuestionTO question = toFact.createQuestionTO();
-				question.setQuestion(this.res.getString("key171"));
+			question.setDataTO(this.cmpto);
+			question.setRequest("modificaCompetizione");
+			question.setViewName(this.viewName);
 
-				question.setDataTO(this.cmpto);
-				question.setRequest("modificaCompetizione");
-				question.setViewName(this.viewName);
-
-				this.setVista("questionDialog", question);
-			}else{	
-				this.risposta = this.getRisposta();
-				this.richiesta = this.getRichiesta(cmpto, "modificaCompetizione", this.viewName);
-				this.eseguiRichiesta(this.richiesta, this.risposta);
-			}
-			this.close();
+			this.setVista("questionDialog", question);
+		}else{	
+			this.risposta = this.getRisposta();
+			this.richiesta = this.getRichiesta(cmpto, "modificaCompetizione", this.viewName);
+			this.eseguiRichiesta(this.richiesta, this.risposta);
 		}
+		this.close();
 	}
 
 	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
@@ -203,17 +191,6 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 				}
 
 			} else if( res instanceof String ){
-				ErrorMessageTO errorMessage = toFact.createErrMessageTO();
-				String msg = (String)res;
-				errorMessage.setMessage(msg);
-				this.setVista("messageDialog", errorMessage);
-			}
-		}else if( commandName.equals( this.getCommandName("checkCmpData") )){
-			Object res = response.getRespData();
-			if(res instanceof CompetizioneTO){
-				this.checkCmpData=false;
-			}else if(res instanceof String){
-				this.checkCmpData=true;
 				ErrorMessageTO errorMessage = toFact.createErrMessageTO();
 				String msg = (String)res;
 				errorMessage.setMessage(msg);

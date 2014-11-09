@@ -46,4 +46,6 @@ public interface TOFactory {
 
 	ErrorMessageTO createErrMessageTO();
 
+	StatoIscrizioneTO createStatoIscrizioneTO();
+
 }

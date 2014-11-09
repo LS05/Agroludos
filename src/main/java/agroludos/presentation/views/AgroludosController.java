@@ -50,7 +50,7 @@ public abstract class AgroludosController {
 	protected void closeVista(String viewName){
 		controller.closeVista(viewName);
 	}
-
+	
 	protected Stage getStage(String viewName){
 		return controller.getStage(viewName);
 	}

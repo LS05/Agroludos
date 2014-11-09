@@ -4,16 +4,18 @@ import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
-import agroludos.exceptions.CSRSScadutoException;
+import agroludos.exceptions.ChiuseIscrizioniException;
 import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.IscrizioneEsistenteException;
 import agroludos.exceptions.NmaxRaggiuntoException;
 import agroludos.exceptions.ValidationException;
+import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.IscrizioneDAO;
 import agroludos.integration.dao.db.StatoIscrizioneDAO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
+import agroludos.to.PartecipanteTO;
 import agroludos.to.StatoIscrizioneTO;
 
 class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizione{
@@ -38,39 +40,45 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 		return dbDAOFact.getStatoIscrizioneDAO();
 	}
 
+	private CompetizioneDAO getCompetizioneDAO() throws DatabaseException {
+		DBDAOFactory dbDAOFact = this.getDBDaoFactory();
+		return dbDAOFact.getCompetizioneDAO();
+	}
+
 	@Override
 	public IscrizioneTO inserisciIscrizione(IscrizioneTO iscTO)
 			throws DatabaseException, ValidationException {
 
 		IscrizioneDAO iscDAO = getIscrizioneDAO();
-		CompetizioneTO cmp = iscTO.getCompetizione();	
-		
-		boolean checkPart=false;
-		
-		if(cmp.getAllIscrizioniAttive().size() <= cmp.getNmax()){
-			for(IscrizioneTO isc : iscTO.getCompetizione().getAllIscrizioniAttive()){
-				if(isc.getPartecipante().getId() == iscTO.getPartecipante().getId())
-					checkPart = true;
+		CompetizioneDAO cmpDAO = getCompetizioneDAO();
+
+		CompetizioneTO cmp = cmpDAO.readById(iscTO.getCompetizione().getId());	
+
+		//pseudocodice
+		//getCompetizioneById() dal dao
+		// 1.competizione aperta alle iscrizioni 
+		//private boolean isCompetizioneAperta(CompetizioneTO cmp) throw new ChiuseIscrizioniException();
+		// 2.iscrizione esistente 
+		//private boolean iscrizioneEsistente(IscrizioneTO isc) throw new IscrizioneEsistenteException();
+		// 3.numero massimo raggiunto
+		//private boolean numeroMaxRaggiunto(CompetizioneTO cmp) throw new NumeroMaxRaggiuntoException();
+		//validator ?
+		//setStatoIscrizione a 1
+		//crea
+		if(isCompetizioneAperta(cmp)){
+			if(!iscrizioneEsistente(iscTO)){
+				if(!numeroMaxRaggiunto(cmp)){
+					this.validator.validate(iscTO);
+					
+					StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
+
+					List<StatoIscrizioneTO> listSI = statoIscDAO.getAll();
+
+					iscTO.setStatoIscrizione(listSI.get(1));
+
+					iscTO = iscDAO.create(iscTO);
+				}
 			}
-			if(checkPart){
-				throw new IscrizioneEsistenteException();
-			}else if(iscTO.getPartecipante().getDataSRC().after(iscTO.getCompetizione().getData())){
-				this.validator.validate(iscTO);
-
-				StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
-
-				List<StatoIscrizioneTO> listSI = statoIscDAO.getAll();
-
-				iscTO.setStatoIscrizione(listSI.get(1));
-				
-				iscTO = iscDAO.create(iscTO);
-			}else{
-				throw new CSRSScadutoException();
-			}
-		}else
-		{
-			cmp.setStatoCompetizione(this.getDBDaoFactory().getStatoCompetizioneDAO().getStatoCmpChiusa());
-			throw new NmaxRaggiuntoException();
 		}
 		return iscTO;
 	}
@@ -102,4 +110,38 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 		return daoMan.getAll();
 	}
 
+	@Override
+	public List<IscrizioneTO> getAllIscrizioniAttive(PartecipanteTO parTO) throws DatabaseException {
+		IscrizioneDAO daoMan = getIscrizioneDAO(); 
+		return daoMan.getAllIscrizioniAttive(parTO);
+	}
+
+	private boolean isCompetizioneAperta(CompetizioneTO cmp) throws ChiuseIscrizioniException {
+		boolean res = true;
+		if(cmp.getStatoCompetizione().getId()!=1)
+			throw new ChiuseIscrizioniException();
+
+		return res;
+	}
+
+	private boolean iscrizioneEsistente(IscrizioneTO isc) throws DatabaseException, IscrizioneEsistenteException {
+		boolean res = false;
+		List<IscrizioneTO> listIscCmp = getIscrizioneDAO().getIscrizioniAttiveCmp(isc.getCompetizione());
+		
+		for(IscrizioneTO tempIsc: listIscCmp){
+			if(tempIsc.getPartecipante().getId()==isc.getPartecipante().getId())
+				throw new IscrizioneEsistenteException();
+		}
+		return res;
+	}
+	
+	private boolean numeroMaxRaggiunto(CompetizioneTO cmp) throws DatabaseException, NmaxRaggiuntoException {
+		boolean res = false;
+		List<IscrizioneTO> listIscCmp = getIscrizioneDAO().getIscrizioniAttiveCmp(cmp);
+		
+		if(listIscCmp.size()==cmp.getNmax())
+			throw new NmaxRaggiuntoException();
+
+		return res;
+	}
 }

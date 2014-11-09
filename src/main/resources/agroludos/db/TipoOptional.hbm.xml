@@ -12,11 +12,11 @@
 		<property name="nome" type="string">
 			<column name="nome" not-null="true" />
 		</property>
-		<set name="optionals" cascade="all" table="tbl_optional" lazy="false">
+		<set name="optionals" cascade="persist,merge,refresh" table="tbl_optional" lazy="false">
 			<key column="tipoopt" />
 			<one-to-many class="agroludos.to.Optional" />
 		</set>
-		<set name="optionalAttivi" cascade="all" table="tbl_optional" where="stato = 1" lazy="false">
+		<set name="optionalAttivi" cascade="persist,merge,refresh" table="tbl_optional" where="stato = 1" lazy="false">
 			<key column="tipoopt" />
 			<one-to-many class="agroludos.to.Optional" />
 		</set>

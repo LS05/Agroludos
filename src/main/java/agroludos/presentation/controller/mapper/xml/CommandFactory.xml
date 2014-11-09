@@ -250,6 +250,12 @@
 			<forward success="partecipante" failure="partecipante" />
 		</from>
 	</command>
+	<command name="getAllIscrizioniAttive">
+		<classe>agroludos.business.as.gestoreiscrizione.LIscrizione</classe>
+		<from name="partecipante">
+			<forward success="partecipante" failure="partecipante" />
+		</from>
+	</command>
 	<command name="inserisciIscrizione">
 		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
 		<from name="mostraIscrPart">
@@ -308,12 +314,6 @@
 		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
 		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="managerDiSistema" />
-		</from>
-	</command>
-	<command name="checkCmpData">
-		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
-		<from name="mostraModificaCmp">
-			<forward success="mostraModificaCmp" failure="mostraModificaCmp" />
 		</from>
 	</command>
 	<command name="isCertificatoValido">

@@ -15,7 +15,7 @@
 		<property name="descrizione" type="string">
 			<column name="descrizione" not-null="true" />
 		</property>
-		<set name="competizioni" cascade="all" table="tbl_competizione" lazy="false">
+		<set name="competizioni" cascade="persist,merge,refresh" table="tbl_competizione" lazy="false">
 			<key column="tipocomp" />
 			<one-to-many class="agroludos.to.Competizione" />
 		</set>

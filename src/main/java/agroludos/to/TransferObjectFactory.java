@@ -112,4 +112,9 @@ class TransferObjectFactory implements TOFactory {
 		return new EmailImpl();
 	}
 
+	@Override
+	public StatoIscrizioneTO createStatoIscrizioneTO() {
+		return new StatoIscrizione();
+	}
+
 }

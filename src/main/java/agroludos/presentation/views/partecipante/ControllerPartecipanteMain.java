@@ -52,6 +52,8 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 
 	private ResourceBundle res;
 
+	private List<IscrizioneTO> listIscAttive;
+
 	@Override
 	public void initialize(URL url, ResourceBundle resources) {
 		this.res = resources;		
@@ -72,7 +74,11 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 			this.tableIscrizioni = new TableIscrizioni();
 			this.tableCompetizioni = new TableCompetizioni();
 			this.tableCompetizioni.hideColumn(3);
-			this.tableIscrizioni.setAll(this.currUser.getAllIscrizioniAttive());
+			
+			this.richiesta = this.getRichiesta(this.currUser,"getAllIscrizioniAttive", this.viewName);
+			this.risposta = this.getRisposta();
+			this.eseguiRichiesta(this.richiesta, this.risposta);
+			
 			this.paneIscrizioni.add(this.tableIscrizioni, 0, 1);
 			this.tableIscrizioni.hideColumn(4);
 			this.richiesta = this.getRichiesta("getCompetizioniAperte", this.viewName);
@@ -129,7 +135,9 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 	}
 
 	@FXML protected void btnGestIscrizioni(MouseEvent event) {
-		this.tableIscrizioni.setAll(this.currUser.getAllIscrizioniAttive());
+		this.richiesta = this.getRichiesta(this.currUser,"getAllIscrizioniAttive", this.viewName);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 		this.paneCompetizioni.setVisible(false);
 		this.paneIscrizioni.setVisible(true);
 	}
@@ -161,10 +169,21 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 				this.listComp = (List<CompetizioneTO>)res;
 			}
 
+		}else if( commandName.equals( this.getCommandName("getAllIscrizioniAttive") )){
+
+			if(res instanceof List<?>){
+				this.listIscAttive = (List<IscrizioneTO>)res;
+				this.tableIscrizioni.setAll(this.listIscAttive);
+			}
+
 		}else if(commandName.equals(this.getCommandName("eliminaIscrizione"))){
 
 			if(res instanceof IscrizioneTO){
-				this.tableIscrizioni.setAll(this.currUser.getAllIscrizioniAttive());
+				//richiesta per le iscrizioni attive
+				this.richiesta = this.getRichiesta(this.currUser,"getAllIscrizioniAttive", this.viewName);
+				this.risposta = this.getRisposta();
+				this.eseguiRichiesta(this.richiesta, this.risposta);
+				
 				this.closeVista("partMostraIscrizione");
 				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.res.getString("key123"));
@@ -196,7 +215,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 				this.tableCompetizioni.setAll(this.listComp);
 
 				
-				setVista("partMostraCompetizione", iscTO.getCompetizione());
+				this.closeVista("partMostraCompetizione");
 
 				SuccessMessageTO succ = toFact.createSuccMessageTO();
 				succ.setMessage(this.res.getString("key157"));

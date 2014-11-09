@@ -39,6 +39,4 @@ public interface PartecipanteTO extends UtenteTO {
 
 	public List<IscrizioneTO> getAllIscrizioni();
 
-	public List<IscrizioneTO> getAllIscrizioniAttive();
-
 }
