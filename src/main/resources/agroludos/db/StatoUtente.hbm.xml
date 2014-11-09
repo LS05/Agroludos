@@ -15,4 +15,6 @@
 	</class>
 	<query name="getAllStatoUtente">
         <![CDATA[ from agroludos.to.StatoUtente o ]]></query>
+	<query name="getStatoAttivo">
+        <![CDATA[ from agroludos.to.StatoUtente o where o.id = 1]]></query>
 </hibernate-mapping>

@@ -30,11 +30,11 @@
 			<height>400</height>
 			<title></title>
 		</view>
-		<view tipo="mainView">
+		<view tipo="dialog">
 			<name>configurazione</name>
 			<url>/fxml/config/conf_sistema.fxml</url>
-			<width>800</width>
-			<height>463</height>
+			<width>933</width>
+			<height>543</height>
 			<title>Agroludos | Configurazione</title>
 		</view>
 		<view tipo="dialog">

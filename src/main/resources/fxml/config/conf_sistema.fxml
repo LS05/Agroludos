@@ -34,15 +34,14 @@
                     <Label font="$x1" text="%key74" GridPane.margin="$x2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
                     <GridPane GridPane.columnIndex="1" GridPane.rowIndex="6">
                       <children>
-                        <Button fx:id="btnConfermaConfigurazione" mnemonicParsing="false" onMouseClicked="#btnConfermaConfClicked" prefHeight="31.0" prefWidth="162.0" styleClass="btnConferma, mainBtn" text="%key82" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                        <Button fx:id="btnConfermaConfigurazione" mnemonicParsing="false" onMouseClicked="#btnConfermaConfClicked" prefHeight="31.0" prefWidth="-1.0" styleClass="btnConferma, mainBtn" text="%key82" GridPane.columnIndex="0" GridPane.halignment="RIGHT">
                           <GridPane.margin>
                             <Insets right="20.0" fx:id="x3" />
                           </GridPane.margin>
                         </Button>
                       </children>
                       <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="414.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="297.0" minWidth="10.0" prefWidth="205.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="10.0" prefWidth="205.0" />
                       </columnConstraints>
                       <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -101,8 +100,8 @@
                             </CheckBox>
                           </children>
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="438.0" minWidth="10.0" prefWidth="438.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.0" minWidth="10.0" prefWidth="219.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="10.0" prefWidth="-1.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -145,8 +144,8 @@
                     </GridPane>
                   </children>
                   <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="395.0" minWidth="10.0" prefWidth="181.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="657.0" minWidth="10.0" prefWidth="619.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="300.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="10.0" prefWidth="-1.0" />
                   </columnConstraints>
                   <rowConstraints>
                     <RowConstraints maxHeight="55.0" minHeight="2.0" prefHeight="55.0" vgrow="SOMETIMES" />
@@ -168,7 +167,7 @@
                 </Label>
               </children>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="-1.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="67.0" minHeight="0.0" prefHeight="24.0" vgrow="SOMETIMES" />

@@ -15,4 +15,10 @@
 	</class>
 	<query name="getAllTipoUtente">
         <![CDATA[ from agroludos.to.TipoUtente o ]]></query>
+	<query name="getTipoUtenteMds">
+		<![CDATA[ from agroludos.to.TipoUtente m where m.id = 0 ]]></query>
+	<query name="getTipoUtenteMdc">
+		<![CDATA[ from agroludos.to.TipoUtente m where m.id = 1 ]]></query>
+	<query name="getTipoUtentePart">
+		<![CDATA[ from agroludos.to.TipoUtente m where m.id = 2 ]]></query>
 </hibernate-mapping>

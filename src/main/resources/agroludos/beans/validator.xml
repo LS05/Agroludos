@@ -5,10 +5,12 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 	<import resource="classpath:agroludos/beans/transferobject.xml" />
+	<import resource="classpath:agroludos/beans/rules.xml" />
 	<import resource="classpath:agroludos/beans/partecipanteRules.xml" />
 	<import resource="classpath:agroludos/beans/userRules.xml" />
 	<import resource="classpath:agroludos/beans/optRules.xml" />
 	<import resource="classpath:agroludos/beans/mdcRules.xml" />
+	<import resource="classpath:agroludos/beans/mdsRules.xml" />
 	<import resource="classpath:agroludos/beans/tipiRules.xml" />
 	<import resource="classpath:agroludos/beans/compRules.xml" />
 	<import resource="classpath:agroludos/beans/compRules.xml" />
@@ -23,6 +25,12 @@
 	<bean id="mdcValidator" class="agroludos.business.validator.mdc.MdcValidator">
 		<constructor-arg ref="userRulesFactory" />
 		<constructor-arg ref="mdcRulesFactory" />
+		<constructor-arg ref="toFactory" />
+	</bean>
+	
+	<bean id="mdsValidator" class="agroludos.business.validator.mds.MdsValidator">
+		<constructor-arg ref="userRulesFactory" />
+		<constructor-arg ref="mdsRulesFactory" />
 		<constructor-arg ref="toFactory" />
 	</bean>
 	
