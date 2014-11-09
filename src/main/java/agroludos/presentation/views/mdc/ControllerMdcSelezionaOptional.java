@@ -49,6 +49,7 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 	private int passoCorrente;
 	private List<OptionalTO> listOptScelti;
 	private ObservableList<String> optionalScelti;
+	private List<OptionalTO> listOptAttivi;
 
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
@@ -133,7 +134,10 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 	}
 
 	private void setTable(TipoOptionalTO tipoOpt){
-		this.tableOptional.setAll(tipoOpt.getAllOptionalAttivi());
+		this.risposta = this.getRisposta();
+		this.richiesta = this.getRichiesta(tipoOpt,"getOptionalAttiviByTipo", this.viewName);
+		this.eseguiRichiesta(this.richiesta, this.risposta);
+		this.tableOptional.setAll(listOptAttivi);
 	}
 
 	@FXML protected void btnAggiungi(MouseEvent event) {
@@ -189,21 +193,18 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 	}
 	@FXML protected void btnConferma(MouseEvent event) {
 
-		//TODO aggiungere tutti gli optional scelti
+		//aggiunge tutti gli optional scelti
 		this.cmpto.clearOptionals();
 		for (OptionalTO opt: this.listOptScelti)
 			this.cmpto.addOptional(opt);
 		this.close();
 	}
 
-
-
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-
+		
 		if( commandName.equals( this.getCommandName("getAllTipoOptional") )){
 			Object res = response.getRespData();
 			if(res instanceof List<?>){
@@ -211,6 +212,12 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 				this.listTipiOpt = tipiOptList;
 				this.nPassi = this.listTipiOpt.size();
 				this.passoCorrente = 0;
+			}
+		}else if( commandName.equals( this.getCommandName("getOptionalAttiviByTipo") )){
+			Object res = response.getRespData();
+			if(res instanceof List<?>){
+				List<OptionalTO> optAttivi = (List<OptionalTO>)res;
+				this.listOptAttivi = optAttivi;
 			}
 		}
 
