@@ -16,15 +16,18 @@
 		<property name="errConf" ref="systemConf" />
 		<property name="toFact" ref="toFactory" />
 	</bean>
+	
 	<bean id="gestoreConfigurazione"
 		class="agroludos.business.as.gestoreconfigurazione.ASGestoreConfigurazione"
 		parent="agroludosAS">
 		<constructor-arg ref="systemConf" />
 		<constructor-arg ref="fileFactory" />
 	</bean>
+	
 	<bean id="gestoreManagerSistema"
 		class="agroludos.business.as.gestoremds.ASGestoreManagerDiSistema"
 		parent="agroludosAS">
+		<constructor-arg ref="mdsValidator" />
 		<constructor-arg ref="pwdEnc" />
 	</bean>
 	<bean id="gestoreManagerCompetizione"

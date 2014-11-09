@@ -46,8 +46,8 @@ public class AgroludosInitController extends AgroludosController{
 				ErrorMessageTO errorMessage = toFact.createErrMessageTO();
 				String msg = (String)res;
 				errorMessage.setMessage(msg);
-				this.setVista("messageDialog", errorMessage);
 				this.setVista("configurazione");
+				this.setVista("messageDialog", errorMessage);
 			}
 		}
 	}

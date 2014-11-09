@@ -4,9 +4,9 @@ import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
+import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiSistemaTO;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -66,6 +66,7 @@ public class ControllerConfSistema extends AgroludosController {
 		this.lblUsernameError.setVisible(false);
 		this.lblPasswordError.setVisible(false);
 		this.lblEmailError.setVisible(false);
+		this.lblTelefonoError.setVisible(false);
 	}
 
 	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
@@ -119,6 +120,11 @@ public class ControllerConfSistema extends AgroludosController {
 					this.showErrors(errors, this.lblTelefonoError, "telefonoKey");
 				}
 
+			} else if(res instanceof String){
+				String msg = (String)res;
+				ErrorMessageTO errorMessage = toFact.createErrMessageTO();
+				errorMessage.setMessage(msg);
+				this.setVista("messageDialog", errorMessage);
 			}
 		}
 	}
