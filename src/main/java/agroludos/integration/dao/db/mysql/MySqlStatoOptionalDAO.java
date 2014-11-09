@@ -6,7 +6,7 @@ import agroludos.to.StatoOptionalTO;
 public class MySqlStatoOptionalDAO extends MySqlAgroludosDAO<StatoOptionalTO> implements StatoOptionalDAO {
 
 	public MySqlStatoOptionalDAO() {
-		this.setClasse(StatoOptionalTO.class);
+		this.setClasse(toFact.createStatoOptionalTO());
 	}
 
 }

@@ -10,7 +10,7 @@ import agroludos.to.PartecipanteTO;
 class MySqlPartecipanteDAO extends MySqlUtenteDAO<PartecipanteTO> implements PartecipanteDAO {
 
 	MySqlPartecipanteDAO() {
-		this.setClasse(PartecipanteTO.class);
+		this.setClasse(toFact.createPartecipanteTO());
 	}
 
 	@Override

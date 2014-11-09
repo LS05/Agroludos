@@ -7,7 +7,7 @@ import agroludos.to.OptionalTO;
 class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements OptionalDAO {
 
 	MySqlOptionalDAO(){
-		this.setClasse(OptionalTO.class);
+		this.setClasse(toFact.createOptionalTO());
 	}
 
 	@Override

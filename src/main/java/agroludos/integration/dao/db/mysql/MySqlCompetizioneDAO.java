@@ -12,7 +12,7 @@ import agroludos.to.TipoCompetizioneTO;
 class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements CompetizioneDAO {
 
 	MySqlCompetizioneDAO() {
-		this.setClasse(CompetizioneTO.class);
+		this.setClasse(toFact.createCompetizioneTO());
 	}
 
 	@Override

@@ -9,7 +9,7 @@ public interface DAO<T extends Serializable> {
 
 	public T create(final T entity) throws DatabaseException;
 
-	public T findOne( final long id ) throws DatabaseException;
+	public T findOne( final Integer id ) throws DatabaseException;
 
 	public List< T > getAll() throws DatabaseException;
 

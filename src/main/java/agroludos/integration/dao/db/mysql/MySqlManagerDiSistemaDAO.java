@@ -9,7 +9,7 @@ import agroludos.to.ManagerDiSistemaTO;
 class MySqlManagerDiSistemaDAO extends MySqlUtenteDAO<ManagerDiSistemaTO> implements ManagerDiSistemaDAO{
 
 	MySqlManagerDiSistemaDAO(){
-		this.setClasse(ManagerDiSistemaTO.class);
+		this.setClasse(toFact.createMdSTO());
 	}
 
 	@Override

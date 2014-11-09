@@ -16,10 +16,10 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 
 	protected static TOFactory toFact;
 
-	private Class< T > classe;
+	private AgroludosTO classe;
 
-	protected void setClasse( final Class< T > classToSet ){
-		classe = classToSet;
+	protected void setClasse( final AgroludosTO agroTO ){
+		classe = agroTO;
 	}
 
 	private Session getSession(){
@@ -36,19 +36,20 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 			session = this.getSession();
 			tx = session.beginTransaction();
 
-			res = session.createQuery( "from " + this.classe.getName() ).list();
+			res = session.createQuery( "from " + this.classe.getClass().getName() ).list();
 
 			tx.commit();
-			session.close();
 		}catch (HibernateException e){
 			throw new DatabaseException(e.getMessage(), e);
+		}finally{
+			session.close();
 		}
 
 		return res; 
 	}
 
 	@Override
-	public T findOne(long id) throws DatabaseException {
+	public T findOne(Integer id) throws DatabaseException {
 		T entity = null;
 		Transaction tx = null;
 		Session session = null;
@@ -57,12 +58,13 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 			session = this.getSession();
 			tx = session.beginTransaction();
 
-			entity = (T) session.get( this.classe, id );
+			entity = (T) session.get( this.classe.getClass().getName(), id );
 
 			tx.commit();
-			session.close();
 		} catch (HibernateException e){
 			throw new DatabaseException(e.getMessage(), e);
+		}finally{
+			session.close();
 		}
 
 		return entity; 
@@ -77,13 +79,14 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 			session = this.getSession();
 			tx = session.beginTransaction();
 
-			session.save(mainTO);
+			session.saveOrUpdate(mainTO);
 
 			tx.commit();
-			session.close();
 		} catch (HibernateException e){
 			if (tx != null) tx.rollback();
 			throw new DatabaseException(e.getMessage(), e);
+		}finally{
+			session.close();
 		}
 
 		return mainTO;
@@ -101,10 +104,11 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 			session.update(entity);
 
 			tx.commit();
-			session.close();
 		} catch (HibernateException e){
 			if (tx != null) tx.rollback();
 			throw new DatabaseException(e.getMessage(), e);
+		}finally{
+			session.close();
 		}
 
 		return entity;		
@@ -131,10 +135,11 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 			res = query.list();
 
 			tx.commit();
-			session.close();
 		} catch (Exception e){
 			if (tx != null) tx.rollback();
 			throw new DatabaseException(e.getMessage(), e);
+		}finally{
+			session.close();
 		}
 
 		return res;
@@ -161,10 +166,11 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 			res = query.list();
 
 			tx.commit();
-			session.close();
 		} catch (Exception e){
 			if (tx != null) tx.rollback();
 			throw new DatabaseException(e.getMessage(), e);
+		}finally{
+			session.close();
 		}
 
 		return res.get(0);
@@ -185,10 +191,11 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 			res = query.list();
 
 			tx.commit();
-			session.close();
 		} catch (Exception e){
 			if (tx != null) tx.rollback();
 			throw new DatabaseException(e.getMessage(), e);
+		}finally{
+			session.close();
 		}
 
 		return res;
@@ -208,10 +215,11 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 			res = query.list();
 
 			tx.commit();
-			session.close();
 		} catch (Exception e){
 			if (tx != null) tx.rollback();
 			throw new DatabaseException(e.getMessage(), e);
+		}finally{
+			session.close();
 		}
 
 		return res.get(0);
