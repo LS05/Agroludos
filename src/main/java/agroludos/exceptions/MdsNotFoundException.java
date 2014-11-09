@@ -5,7 +5,7 @@ public class MdsNotFoundException extends Exception {
 
 	public MdsNotFoundException(){
 		super("Attenzione Manager Di Sistema non trovato,"
-				+ " è necessario effettuare la configurazione iniziale");
+				+ " è necessario inserirlo nuovamente!");
 	}
 
 	public MdsNotFoundException(String message){

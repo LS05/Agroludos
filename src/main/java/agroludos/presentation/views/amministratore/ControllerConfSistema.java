@@ -4,130 +4,76 @@ import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
-import agroludos.to.DatabaseTO;
+import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiSistemaTO;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 
-/**
- * 
- * @author Luca Suriano
- * @author Francesco Zagaria
- *
- */
 public class ControllerConfSistema extends AgroludosController {
 	private String viewName;
 
-	@FXML private Button btnAvantiConf;
-	@FXML private Button btnIndietroConf;
-	@FXML private Button btnConfermaConfigurazione;
-	@FXML private GridPane databasePane;
-	@FXML private GridPane managerSistemaPane;
-
-	//texfield DataBase
-	@FXML private ComboBox<String> cmbTipoDB;
-	@FXML private TextField txtServerDB;
-	@FXML private TextField txtPortaDB;
-	@FXML private TextField txtNomeDB;
-	@FXML private TextField txtUsernameDB;
-	@FXML private PasswordField txtPasswordDB;
-
-	//texfield Manager Di Sistema
+	@FXML private Label lblNomeError;
+	@FXML private Label lblCognomeError;
+	@FXML private Label lblUsernameError;
+	@FXML private Label lblPasswordError;
+	@FXML private Label lblEmailError;
+	@FXML private Label lblTelefonoError;
 	@FXML private TextField txtNomeMds;
 	@FXML private TextField txtCognomeMds;
-	@FXML private TextField txtUsernameMds;
-	@FXML private PasswordField txtPasswordMds;
+	@FXML private TextField txtUsernameMds;	
 	@FXML private TextField txtEmailMds;
 	@FXML private TextField txtTelefonoMds;
+	@FXML private PasswordField txtPasswordMds;
 
-	DatabaseTO dbto = null;
-
-	ManagerDiSistemaTO mdsto = null;
+	private ManagerDiSistemaTO mdsto;
 
 	private AgroRequest richiesta;
 
 	private AgroResponse risposta;
 
-	private ObservableList<String> listaTipiDB;
-
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
-
 		this.mdsto = toFact.createMdSTO();
-		this.dbto = toFact.createDatabaseTO();
-		this.listaTipiDB = FXCollections.observableArrayList();
-		//aggiungo i tipi di db alla combobox
-		this.listaTipiDB.add("mysql");
-		this.listaTipiDB.add("oracle");
-		this.listaTipiDB.add("postgress");
-		this.cmbTipoDB.setItems(this.listaTipiDB);
-		this.cmbTipoDB.setValue("mysql");
-
-		this.databasePane.setVisible(true);
-		this.managerSistemaPane.setVisible(false);
-
-		//DA ELIMINARE
-		this.txtServerDB.setText("localhost"); 
-		this.txtPortaDB.setText("3306"); 
-		this.txtNomeDB.setText("agroludos");
-		this.txtUsernameDB.setText("root");
-		this.txtPasswordDB.setText("root");  
+		this.hideErrors();
 	}
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		// TODO Auto-generated method stub
 
 	}
 
-	/**
-	 * 
-	 * @param event
-	 */
-	@FXML protected void btnAvantiClicked(MouseEvent event) {	
-		this.dbto.setTipo(this.cmbTipoDB.getValue());
-		this.dbto.setServer(this.txtServerDB.getText());
-		this.dbto.setPorta(this.txtPortaDB.getText());
-		this.dbto.setNome(this.txtNomeDB.getText());
-		this.dbto.setUsername(this.txtUsernameDB.getText());
-		this.dbto.setPassword(this.txtPasswordDB.getText());
-		this.richiesta = this.getRichiesta(this.dbto, "inserisciConfigurazione", this.viewName);
-		this.risposta = this.getRisposta();
-		this.eseguiRichiesta(this.richiesta, this.risposta);
-
-	}
-
-	/**
-	 * 
-	 * @param event
-	 */
-	@FXML protected void btnIndietroClicked(MouseEvent event) {
-		this.databasePane.setVisible(true);
-		this.managerSistemaPane.setVisible(false);
-	}
-
-	/**
-	 * 
-	 * @param event
-	 */
-	@FXML protected void btnConfermaConfigurazione(MouseEvent event) {
-		this.mdsto.setNome(txtNomeMds.getText());
-		this.mdsto.setCognome(txtCognomeMds.getText());
-		this.mdsto.setUsername(txtUsernameMds.getText());
+	@FXML protected void btnConfermaConfClicked(MouseEvent event){
+		this.hideErrors();
+		this.mdsto.setNome(this.txtNomeMds.getText());
+		this.mdsto.setCognome(this.txtCognomeMds.getText());
+		this.mdsto.setUsername(this.txtUsernameMds.getText());
 		this.mdsto.setPassword(this.txtPasswordMds.getText());
-		this.mdsto.setEmail(txtEmailMds.getText());
-		//TODO manca il telefono
+		this.mdsto.setEmail(this.txtEmailMds.getText());
+		this.mdsto.setTelefono(this.txtTelefonoMds.getText());
 		this.richiesta = this.getRichiesta(this.mdsto, "nuovoManagerDiSistema", this.viewName);
 		this.risposta = this.getRisposta();
 		this.eseguiRichiesta(this.richiesta, this.risposta);
+	}
+
+	private void hideErrors(){
+		this.lblNomeError.setVisible(false);
+		this.lblCognomeError.setVisible(false);
+		this.lblUsernameError.setVisible(false);
+		this.lblPasswordError.setVisible(false);
+		this.lblEmailError.setVisible(false);
+	}
+
+	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
+		if(errors.hasError(this.getError(errorKey))){
+			String nomeKey = this.getError(errorKey);
+			lblError.setVisible(true);
+			lblError.setText(errors.getError(nomeKey));
+		}
 	}
 
 	@Override
@@ -135,26 +81,44 @@ public class ControllerConfSistema extends AgroludosController {
 		return this.viewName;
 	}
 
-	/**
-	 * 
-	 * @param request
-	 * @param response
-	 */
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals(this.getCommandName("inserisciConfigurazione") )){
-			boolean res = (Boolean)response.getRespData();
-			if(res){
-				this.databasePane.setVisible(false);
-				this.managerSistemaPane.setVisible(true);
-			}
-		}
 		if( commandName.equals(this.getCommandName("nuovoManagerDiSistema") )){
-			boolean res = (Boolean)response.getRespData();
-			if(res){
-				this.setVista("login");
+			Object res = response.getRespData();
+			if(res instanceof Boolean){
+				boolean nuovoMds = (Boolean)res;
+				if(nuovoMds)
+					this.setVista("login");
+			} else if(res instanceof ErrorTO){
+
+				ErrorTO errors = (ErrorTO)res;
+
+				if(errors.hasError(this.getError("nomeKey"))){
+					this.showErrors(errors, this.lblNomeError, "nomeKey");
+				} 
+
+				if(errors.hasError(this.getError("cognKey"))){
+					this.showErrors(errors, this.lblCognomeError, "cognKey");
+				}
+
+				if(errors.hasError(this.getError("usernameKey"))){
+					this.showErrors(errors, this.lblUsernameError, "usernameKey");
+				}
+
+				if(errors.hasError(this.getError("passwordKey"))){
+					this.showErrors(errors, this.lblPasswordError, "passwordKey");
+				}
+
+				if(errors.hasError(this.getError("emailKey"))){
+					this.showErrors(errors, this.lblEmailError, "emailKey");
+				}
+
+				if(errors.hasError(this.getError("telefonoKey"))){
+					this.showErrors(errors, this.lblTelefonoError, "telefonoKey");
+				}
+
 			}
 		}
 	}

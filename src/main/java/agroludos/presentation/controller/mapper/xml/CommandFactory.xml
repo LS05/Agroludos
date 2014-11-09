@@ -16,7 +16,7 @@
 	<command name="checkMds">
 		<classe>agroludos.business.as.gestoremds.LManagerDiSistema</classe>
 		<from name="initView">
-			<forward success="initView" failure="errorDialog" />
+			<forward success="initView" failure="initView" />
 		</from>
 	</command>
 	<command name="getUtenteByUsername">

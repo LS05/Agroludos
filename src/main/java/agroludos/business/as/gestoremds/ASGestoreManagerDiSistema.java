@@ -1,8 +1,10 @@
 package agroludos.business.as.gestoremds;
 
 import agroludos.business.as.AgroludosAS;
+import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.MdsNotFoundException;
+import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.ManagerDiSistemaDAO;
 import agroludos.to.ManagerDiSistemaTO;
@@ -11,9 +13,11 @@ import agroludos.utility.PasswordEncryption;
 
 class ASGestoreManagerDiSistema extends AgroludosAS implements LManagerDiSistema, SManagerDiSistema{
 	private PasswordEncryption pwdEnc;
+	private AgroludosValidator validator;
 
-	ASGestoreManagerDiSistema(PasswordEncryption pwdEnc){
+	ASGestoreManagerDiSistema(PasswordEncryption pwdEnc, AgroludosValidator validator){
 		this.pwdEnc = pwdEnc;
+		this.validator = validator;
 	}
 
 	private ManagerDiSistemaDAO getManagerDiSistemaDAO() throws DatabaseException{
@@ -22,14 +26,14 @@ class ASGestoreManagerDiSistema extends AgroludosAS implements LManagerDiSistema
 	}
 
 	@Override
-	public ManagerDiSistemaTO nuovoManagerDiSistema(ManagerDiSistemaTO mdsto) throws DatabaseException {
-		// TODO Auto-generated catch block
-		// Catturare l'eccezione del DB perchè un mancato inserimento del MDS significherebbe
-		// resettare il tipo di DB nel file xml
+	public ManagerDiSistemaTO nuovoManagerDiSistema(ManagerDiSistemaTO mdsto) throws DatabaseException, ValidationException {
+		
+		this.validator.validate(mdsto);
+		
 		String inputPassword = mdsto.getPassword();
 		mdsto.setPassword(this.pwdEnc.encryptPassword(inputPassword));
+		
 		return this.getManagerDiSistemaDAO().create(mdsto);
-
 	}
 
 	@Override
