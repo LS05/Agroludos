@@ -152,6 +152,4 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 
 	public void setManagerDiCompetizione(ManagerDiCompetizioneTO managerDiCompetizione);
 
-	public List<IscrizioneTO> getAllIscrizioniAttive();
-
 }

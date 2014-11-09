@@ -57,6 +57,10 @@ public class ControllerPartCompetizione extends AgroludosController{
 	
 	private IscrizioneTO mainIscr;
 
+	private AgroResponse risposta;
+
+	private AgroRequest richiesta;
+
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
@@ -74,13 +78,18 @@ public class ControllerPartCompetizione extends AgroludosController{
 			this.lblNmax.setText(Integer.toString(this.cmpto.getNmax()));
 			this.lblCosto.setText(Double.toString(this.cmpto.getCosto()));
 			this.lblTipo.setText(this.cmpto.getTipoCompetizione().getNome());
-			this.lblNiscritti.setText(Integer.toString(this.cmpto.getAllIscrizioniAttive().size()));
+			
+			//richiesta per ottenere le iscrizioni attive di questa competizione
+			this.richiesta = this.getRichiesta(this.cmpto, "getAllIscrizioniAttiveByCmp", this.viewName);
+			this.risposta = this.getRisposta();
+			this.eseguiRichiesta(this.richiesta, this.risposta);
+			
+			this.lblNiscritti.setText(Integer.toString(this.listIsc.size()));
 			this.lblStato.setText(this.cmpto.getStatoCompetizione().getNome());
 			this.txtDescrizione.setText(this.cmpto.getDescrizione());
 			this.btnIscriviti.setDisable(false);
 
-			//popolo la lista delle iscrizioni
-			this.listIsc = this.cmpto.getAllIscrizioniAttive();
+			
 
 			this.listaTabIsc = this.getListTabellaIsc();
 			this.initIscTable();
@@ -134,7 +143,7 @@ public class ControllerPartCompetizione extends AgroludosController{
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-
+		
 		if( commandName.equals( this.getCommandName("inserisciIscrizione") )){
 			Object res = response.getRespData();
 			if(res instanceof String){
@@ -143,6 +152,12 @@ public class ControllerPartCompetizione extends AgroludosController{
 				msg.setMessage((String) res);
 				this.setVista("messageDialog", msg);
 
+			}
+		}else if( commandName.equals( this.getCommandName("getAllIscrizioniAttiveByCmp") )){
+			Object res = response.getRespData();
+			if(res instanceof List<?>){
+				//popolo la lista delle iscrizioni
+				this.listIsc = (List<IscrizioneTO>) res;
 			}
 		}
 	}

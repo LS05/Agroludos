@@ -45,12 +45,6 @@
 			class="agroludos.to.ManagerDiCompetizione" lazy="false">
 			<column name="idmdc" not-null="true" />
 		</many-to-one>
-
-		<set name="iscrizioniAttive" table="tbl_iscrizione" where="stato = 1"
-			cascade="persist,merge,refresh" lazy="false">
-			<key column="idcompetizione" />
-			<one-to-many class="agroludos.to.Iscrizione" />
-		</set>
 	</class>
 
 

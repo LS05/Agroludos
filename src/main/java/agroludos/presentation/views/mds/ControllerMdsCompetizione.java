@@ -20,6 +20,7 @@ import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.ErrorMessageTO;
 import agroludos.to.IscrizioneTO;
 
 public class ControllerMdsCompetizione extends AgroludosController{
@@ -53,6 +54,10 @@ public class ControllerMdsCompetizione extends AgroludosController{
 	@FXML private Label lblStato;
 	@FXML private TextArea txtDescrizione;
 
+	private AgroRequest richiesta;
+
+	private AgroResponse risposta;
+
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
@@ -71,12 +76,15 @@ public class ControllerMdsCompetizione extends AgroludosController{
 			this.lblNmax.setText(Integer.toString(this.cmpto.getNmax()));
 			this.lblCosto.setText(Double.toString(this.cmpto.getCosto()));
 			this.lblTipo.setText(this.cmpto.getTipoCompetizione().getNome());
-			this.lblNiscritti.setText(Integer.toString(this.cmpto.getAllIscrizioniAttive().size()));
+
+			//richiesta per ottenere le iscrizioni attive di questa competizione
+			this.richiesta = this.getRichiesta(this.cmpto, "getAllIscrizioniAttiveByCmp", this.viewName);
+			this.risposta = this.getRisposta();
+			this.eseguiRichiesta(this.richiesta, this.risposta);
+
+			this.lblNiscritti.setText(Integer.toString(this.listIsc.size()));
 			this.lblStato.setText(this.cmpto.getStatoCompetizione().getNome());
 			this.txtDescrizione.setText(this.cmpto.getDescrizione());
-
-			//popolo la lista delle iscrizioni
-			this.listIsc = this.cmpto.getAllIscrizioniAttive();
 
 			this.listaTabIsc = this.getListTabellaIsc();
 			this.initIscTable();
@@ -143,8 +151,17 @@ public class ControllerMdsCompetizione extends AgroludosController{
 		});
 	}
 
-	
+
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
+		String commandName = request.getCommandName();
+
+		if( commandName.equals( this.getCommandName("getAllIscrizioniAttiveByCmp") )){
+			Object res = response.getRespData();
+			if(res instanceof List<?>){
+				//popolo la lista delle iscrizioni
+				this.listIsc = (List<IscrizioneTO>) res;
+			}
+		}
 	}
 }

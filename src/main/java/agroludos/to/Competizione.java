@@ -32,7 +32,6 @@ class Competizione implements CompetizioneTO{
 	private int idStato;
 
 	private Set<Optional> optionals;
-	private Set<Iscrizione> iscrizioniAttive;
 	private TipoCompetizione tipoCompetizione;
 	private StatoCompetizione statoCompetizione;
 	private ManagerDiCompetizione managerDiCompetizione;
@@ -179,25 +178,6 @@ class Competizione implements CompetizioneTO{
 		this.optionals.clear();
 	}
 
-	public void setIscrizioniAttive(Set<Iscrizione> iscrizioniAttive) {
-		this.iscrizioniAttive = iscrizioniAttive;
-	}
-
-	public Set<Iscrizione> getIscrizioniAttive() {
-		return this.iscrizioniAttive;
-	}
-
-	@Override
-	public List<IscrizioneTO> getAllIscrizioniAttive() {
-		List<IscrizioneTO> res = new ArrayList<IscrizioneTO>();
-
-		for(Iscrizione item : this.iscrizioniAttive){
-			res.add(item);
-		}
-
-		return res;
-	}
-
 	@Override
 	public boolean equals(Object competizione){
 		if (competizione == null) return false;
@@ -242,8 +222,7 @@ class Competizione implements CompetizioneTO{
 		.append(", tipoCompetizione=").append(tipoCompetizione)
 		.append(", statoCompetizione=").append(statoCompetizione)
 		.append(", managerDiCompetizione=")
-		.append(managerDiCompetizione).append(", iscrizioniAttive=")
-		.append(iscrizioniAttive).append("]");
+		.append(managerDiCompetizione).append("]");
 		return builder.toString();
 	}
 }

@@ -59,6 +59,8 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 	private AgroRequest richiesta;
 
+	private List<IscrizioneTO> listIsc;
+
 
 
 	@Override
@@ -96,7 +98,13 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 			cmp.setCompetizioneTO(cmpTO);
 			cmp.setData(cmpTO.getData().toString());
 			cmp.setId(cmpTO.getId().toString());
-			cmp.setIscritti(String.valueOf(cmpTO.getAllIscrizioniAttive().size()));
+			
+			//richiesta per ottenere le iscrizioni attive di questa competizione
+			this.richiesta = this.getRichiesta(cmpTO, "getAllIscrizioniAttiveByCmp", this.viewName);
+			this.risposta = this.getRisposta();
+			this.eseguiRichiesta(this.richiesta, this.risposta);
+			
+			cmp.setIscritti(String.valueOf(this.listIsc.size()));
 			cmp.setNmax(String.valueOf(cmpTO.getNmax()));
 			cmp.setNmin(String.valueOf(cmpTO.getNmin()));
 			cmp.setNome(cmpTO.getNome());
@@ -195,7 +203,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 				mail.setMittente(cmp.getManagerDiCompetizione());
 				mail.setMessage("La competizione " + cmp.getNome() + "  è stata annullata.");
 
-				for(IscrizioneTO iscTO: cmp.getAllIscrizioniAttive()){
+				for(IscrizioneTO iscTO: this.listIsc){
 					mail.addDestinatario(iscTO.getPartecipante());
 				}
 
@@ -271,7 +279,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 				mail.setMessage("La competizione " + cmp.getNome() + " ha subito modifiche,"
 						+ " la invito a prendere visione.");
 
-				for(IscrizioneTO iscTO: cmp.getAllIscrizioniAttive()){
+				for(IscrizioneTO iscTO: this.listIsc){
 					mail.addDestinatario(iscTO.getPartecipante());
 				}
 
@@ -279,6 +287,12 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
 				this.eseguiRichiesta(this.richiesta, this.risposta);
 
+			}
+		}else if( commandName.equals( this.getCommandName("getAllIscrizioniAttiveByCmp") )){
+			Object res = response.getRespData();
+			if(res instanceof List<?>){
+				//popolo la lista delle iscrizioni
+				this.listIsc = (List<IscrizioneTO>) res;
 			}
 		}
 	}

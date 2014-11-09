@@ -17,7 +17,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -74,6 +73,10 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 
 	private ResourceBundle resources;
 
+	private AgroRequest richiesta;
+
+	private AgroResponse risposta;
+
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
 		if(mainTO instanceof CompetizioneTO){
@@ -95,12 +98,15 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 			this.lblNmax.setText(Integer.toString(this.cmpto.getNmax()));
 			this.lblCosto.setText(Double.toString(this.cmpto.getCosto()));
 			this.lblTipo.setText(this.cmpto.getTipoCompetizione().getNome());
-			this.lblNiscritti.setText(Integer.toString(this.cmpto.getAllIscrizioniAttive().size()));
+			
+			//richiesta per ottenere le iscrizioni attive di questa competizione
+			this.richiesta = this.getRichiesta(this.cmpto, "getAllIscrizioniAttiveByCmp", this.viewName);
+			this.risposta = this.getRisposta();
+			this.eseguiRichiesta(this.richiesta, this.risposta);
+			
+			this.lblNiscritti.setText(Integer.toString(this.listIsc.size()));
 			this.lblStato.setText(this.cmpto.getStatoCompetizione().getNome());
 			this.txtDescrizione.setText(this.cmpto.getDescrizione());
-
-			//popolo la lista delle iscrizioni
-			this.listIsc = this.cmpto.getAllIscrizioniAttive();
 
 			this.listaTabIsc = this.getListTabellaIsc();
 			this.initIscTable();
@@ -209,6 +215,14 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
+		String commandName = request.getCommandName();
 
+		if( commandName.equals( this.getCommandName("getAllIscrizioniAttiveByCmp") )){
+			Object res = response.getRespData();
+			if(res instanceof List<?>){
+				//popolo la lista delle iscrizioni
+				this.listIsc = (List<IscrizioneTO>) res;
+			}
+		}
 	}
 }
