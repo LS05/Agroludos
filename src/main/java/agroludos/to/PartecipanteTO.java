@@ -1,7 +1,6 @@
 package agroludos.to;
 
 import java.util.Date;
-import java.util.List;
 
 public interface PartecipanteTO extends UtenteTO {
 
