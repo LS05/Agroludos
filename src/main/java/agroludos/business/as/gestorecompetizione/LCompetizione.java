@@ -22,7 +22,7 @@ public interface LCompetizione extends AgroludosService {
 	 * @throws DatabaseException
 	 */
 	List<CompetizioneTO> getCompetizioneByMdc(ManagerDiCompetizioneTO mdcto) throws DatabaseException;
-	
+
 	/**
 	 * 
 	 * @param cmpto
@@ -30,14 +30,14 @@ public interface LCompetizione extends AgroludosService {
 	 * @throws DatabaseException
 	 */
 	List<CompetizioneTO> getCompetizioniByTipo(TipoCompetizioneTO tcmto) throws DatabaseException;
-	
+
 	/**
 	 * 
 	 * @return
 	 * @throws DatabaseException
 	 */
 	List<CompetizioneTO> getAllCompetizione() throws DatabaseException;
-	
+
 	/**
 	 * 
 	 * @param cmpto
@@ -45,16 +45,27 @@ public interface LCompetizione extends AgroludosService {
 	 * @throws DatabaseException
 	 */
 	CompetizioneTO getCompetizioneById(CompetizioneTO cmpto) throws DatabaseException;
-	
+
 	/**
 	 * 
 	 * @return
 	 * @throws DatabaseException
 	 */
 	List<CompetizioneTO> getCompetizioniAttive() throws DatabaseException;
-	
+
+	/**
+	 * 
+	 * @return
+	 * @throws DatabaseException
+	 */
 	List<CompetizioneTO> getCompetizioniAperte() throws DatabaseException;
-	
+
+	/**
+	 * 
+	 * @param mdcto
+	 * @return
+	 * @throws DatabaseException
+	 */
 	List<CompetizioneTO> getCompetizioneAttiveByMdc(
 			ManagerDiCompetizioneTO mdcto) throws DatabaseException;
 
