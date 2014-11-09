@@ -15,10 +15,6 @@
 		<property name="descrizione" type="string">
 			<column name="descrizione" not-null="true" />
 		</property>
-		<set name="competizioni" cascade="persist,merge,refresh" table="tbl_competizione" lazy="false">
-			<key column="tipocomp" />
-			<one-to-many class="agroludos.to.Competizione" />
-		</set>
 	</class>
 	<query name="getAllTipoCompetizione">
         <![CDATA[ from agroludos.to.TipoCompetizione c ]]></query>

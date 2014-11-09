@@ -33,16 +33,6 @@
 			<key column="idcompetizione" />
 			<many-to-many column="idoptional" class="agroludos.to.Optional" />
 		</set>
-		<set name="partecipanti" cascade="persist,merge,refresh" table="tbl_iscrizione"
-			lazy="false">
-			<key column="idcompetizione" />
-			<many-to-many column="idpartecipante" class="agroludos.to.Partecipante" />
-		</set>
-		<set name="iscrizioni" cascade="persist,merge,refresh" table="tbl_iscrizione"
-			lazy="false">
-			<key column="idcompetizione" />
-			<one-to-many class="agroludos.to.Iscrizione" />
-		</set>
 		<many-to-one name="statoCompetizione" cascade="persist,merge,refresh"
 			class="agroludos.to.StatoCompetizione" lazy="false">
 			<column name="statocomp" not-null="true" />
@@ -66,7 +56,7 @@
 
 	<query name="getAllCompetizione">
         <![CDATA[ from agroludos.to.Competizione c ]]></query>
-	<query name="getCompetizioneByTipo">
+	<query name="getCompetizioniByTipo">
         <![CDATA[ from agroludos.to.Competizione c where c.tipoCompetizione = ?]]></query>
 	<query name="getCompetizioneById">
         <![CDATA[ from agroludos.to.Competizione c where c.id = ?]]></query>
