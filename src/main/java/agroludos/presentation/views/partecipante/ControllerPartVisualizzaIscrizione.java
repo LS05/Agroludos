@@ -8,7 +8,6 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.to.AgroludosTO;
-import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.QuestionTO;
 
@@ -45,9 +44,6 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 	private IscrizioneTO mainIscr;
 
 	private TableOptional tableOptional;
-
-	private AgroResponse risposta;
-	private AgroRequest richiesta;
 
 	private ResourceBundle res;
 
@@ -112,7 +108,7 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 		question.setQuestion(this.res.getString("key164"));
 
 		question.setDataTO(this.mainIscr);
-		question.setRequest("eliminaIscrizione");
+		question.setRequest("eliminaIscrizioneByPartecipante");
 		question.setViewName(this.viewName);
 
 		this.setVista("questionDialog", question);
@@ -122,26 +118,12 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		if( commandName.equals(this.getCommandName("modificaIscrizione") )){
+		if( commandName.equals(this.getCommandName("modificaIscrizioneByPartecipante") )){
 			Object res = response.getRespData();
 			if(res instanceof IscrizioneTO){			
 				this.mainIscr = (IscrizioneTO) res;
 				this.lblCostoIsc.setText(this.mainIscr.getCosto().toString());
 				this.tableOptional.setAll(this.mainIscr.getAllOptionals());
-
-				IscrizioneTO iscTO = ((IscrizioneTO) res);
-				EmailTO mail = toFact.createEmailTO();
-				mail.setOggetto("Modifca optional");
-				mail.setMessage(iscTO.getPartecipante().getUsername() + " ha modificato l'iscrizione "
-						+ "alla competizione " + iscTO.getCompetizione().getNome()
-						+ " scegliendo i seguenti optional: "
-						+ iscTO.getAllOptionals().toString());
-
-				mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
-
-				this.risposta = this.getRisposta();
-				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
-				this.eseguiRichiesta(this.richiesta, this.risposta);
 			}
 		}
 	}

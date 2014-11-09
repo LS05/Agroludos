@@ -7,6 +7,9 @@ import agroludos.to.IscrizioneTO;
 
 public interface SIscrizione extends AgroludosService {
 	IscrizioneTO inserisciIscrizione(IscrizioneTO iscto) throws DatabaseException, ValidationException;
-	IscrizioneTO modificaIscrizione(IscrizioneTO iscto) throws DatabaseException;
-	IscrizioneTO eliminaIscrizione(IscrizioneTO iscto) throws DatabaseException;
+	IscrizioneTO modificaIscrizioneByPartecipante(IscrizioneTO iscto) throws DatabaseException;
+	IscrizioneTO eliminaIscrizioneByPartecipante(IscrizioneTO iscto) throws DatabaseException;
+	IscrizioneTO eliminaIscrizioneByMdc(IscrizioneTO iscTO) throws DatabaseException;
+	IscrizioneTO modificaIscrizioneByMdc(IscrizioneTO iscTO)
+			throws DatabaseException;
 }

@@ -12,11 +12,11 @@ import agroludos.presentation.views.components.tablemodel.CmpModel;
 import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.CompetizioneTO;
-import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.QuestionTO;
 import agroludos.to.SuccessMessageTO;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -196,7 +196,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 				this.tableIscrizioni.setAll(this.listIscAttive);
 			}
 
-		}else if(commandName.equals(this.getCommandName("eliminaIscrizione"))){
+		}else if(commandName.equals(this.getCommandName("eliminaIscrizioneByPartecipante"))){
 
 			if(res instanceof IscrizioneTO){
 				//richiesta per le iscrizioni attive
@@ -209,26 +209,11 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 				succMessage.setMessage(this.res.getString("key123"));
 				this.setVista("messageDialog",succMessage);
 
-				IscrizioneTO iscTO = ((IscrizioneTO) res);
-
-				//TODO ControllerPartecipanteMain Invio Mail
-				EmailTO mail = toFact.createEmailTO();
-				mail.setOggetto("Iscrizione annullata");
-				mail.setMessage(iscTO.getPartecipante().getUsername() + " ha annullato l'iscrizione "
-						+ "alla competizione " + iscTO.getCompetizione().getNome());
-
-				mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
-
-				this.risposta = this.getRisposta();
-				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
-				this.eseguiRichiesta(this.richiesta, this.risposta);
 			}
 
 		}else if( commandName.equals( this.getCommandName("inserisciIscrizione") )){
 
 			if(res instanceof IscrizioneTO){
-				IscrizioneTO iscTO = ((IscrizioneTO) res);
-
 				this.richiesta = this.getRichiesta("getCompetizioniAperte", this.viewName);
 				this.risposta = this.getRisposta();
 				this.eseguiRichiesta(this.richiesta, this.risposta);
@@ -240,27 +225,6 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 				SuccessMessageTO succ = toFact.createSuccMessageTO();
 				succ.setMessage(this.res.getString("key157"));
 				this.setVista("messageDialog", succ);
-
-				/*
-				 * TODO PartecipanteMain - Email
-				 */
-
-
-				EmailTO mail = toFact.createEmailTO();
-				mail.setOggetto(iscTO.getPartecipante().getUsername() + " si è iscritto "
-						+ "alla competizione " + iscTO.getCompetizione().getNome());
-				mail.setMessage("Dati iscrizione: "
-						+ iscTO.getPartecipante().toString() 
-						+ " costo "
-						+ iscTO.getCosto()
-						+ " optional scelti "
-						+ iscTO.getAllOptionals().toString());
-
-				mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
-
-				this.risposta = this.getRisposta();
-				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
-				this.eseguiRichiesta(this.richiesta, this.risposta);
 
 			}
 

@@ -1,7 +1,7 @@
 package agroludos.presentation.views.components.tablemodel;
 
 import agroludos.to.CompetizioneTO;
-
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class CmpModel {
@@ -14,6 +14,7 @@ public class CmpModel {
 	private SimpleStringProperty stato;
 	private SimpleStringProperty descrizione;
 	private SimpleStringProperty costo;
+	private SimpleIntegerProperty iscritti;
 	private CompetizioneTO cmpto;
 
 	public CmpModel(CompetizioneTO cmpto){
@@ -26,6 +27,7 @@ public class CmpModel {
 		this.stato = new SimpleStringProperty(cmpto.getStatoCompetizione().getNome());
 		this.descrizione = new SimpleStringProperty(cmpto.getDescrizione());
 		this.costo = new SimpleStringProperty(Double.toString(cmpto.getCosto()));
+		this.iscritti =  new SimpleIntegerProperty();
 		this.cmpto = cmpto;
 	}
 
@@ -101,6 +103,19 @@ public class CmpModel {
 		return costo.get();
 	}
 
+	public Integer getNiscritti() {
+		return iscritti.get();
+	}
+
+
+	public void setNiscritti(Integer niscritti) {
+		this.iscritti.set(niscritti);
+	}
+
+	public SimpleIntegerProperty niscrittiProperty(){
+		return this.iscritti;
+	}
+	
 	public SimpleStringProperty idProperty(){
 		return this.id;
 	}
@@ -140,7 +155,7 @@ public class CmpModel {
 	@Override
 	public String toString() {
 		return "CmpModel [id=" + id + ", nome=" + nome + ", data=" + data
-				+ ", niscritti=" + ", nmin=" + nmin + ", nmax="
+				+ ", niscritti=" + iscritti + ", nmin=" + nmin + ", nmax="
 				+ nmax + ", tipo=" + tipo + ", stato=" + stato + "]";
 	}
 }

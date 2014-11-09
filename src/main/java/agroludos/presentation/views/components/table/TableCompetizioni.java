@@ -15,20 +15,20 @@ public class TableCompetizioni extends AgroTable<CmpModel>{
 	private TableColumn<CmpModel, String> cmpColDesc;
 	private TableColumn<CmpModel, String> cmpColCosto;
 	private TableColumn<CmpModel, String> cmpColStato;
-	private TableColumn<CmpModel, String> cmpColIscritti;
+	private TableColumn<CmpModel, Integer> cmpColIscritti;
 
 	public TableCompetizioni(){
 		this.cmpColNome = new TableColumn<CmpModel, String>("Nome");
 		this.cmpColDesc = new TableColumn<CmpModel, String>("Descrizione");
 		this.cmpColCosto = new TableColumn<CmpModel, String>("Costo");
 		this.cmpColStato = new TableColumn<CmpModel, String>("Stato");
-		this.cmpColIscritti = new TableColumn<CmpModel, String>("N.iscritti");
+		this.cmpColIscritti = new TableColumn<CmpModel, Integer>("N.iscritti");
 
 		this.cmpColNome.setCellValueFactory(new PropertyValueFactory<CmpModel, String>("nome"));
 		this.cmpColDesc.setCellValueFactory(new PropertyValueFactory<CmpModel, String>("descrizione"));
 		this.cmpColCosto.setCellValueFactory(new PropertyValueFactory<CmpModel, String>("costo"));
 		this.cmpColStato.setCellValueFactory(new PropertyValueFactory<CmpModel, String>("stato"));
-		this.cmpColIscritti.setCellValueFactory(new PropertyValueFactory<CmpModel, String>("iscritti"));
+		this.cmpColIscritti.setCellValueFactory(new PropertyValueFactory<CmpModel, Integer>("iscritti"));
 		
 		this.getColumns().add(this.cmpColNome);
 		this.getColumns().add(this.cmpColDesc);

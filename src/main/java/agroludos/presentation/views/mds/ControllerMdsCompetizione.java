@@ -20,7 +20,6 @@ import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
-import agroludos.to.ErrorMessageTO;
 import agroludos.to.IscrizioneTO;
 
 public class ControllerMdsCompetizione extends AgroludosController{
@@ -152,6 +151,7 @@ public class ControllerMdsCompetizione extends AgroludosController{
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
