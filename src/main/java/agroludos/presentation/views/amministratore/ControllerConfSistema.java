@@ -7,7 +7,10 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiSistemaTO;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -28,6 +31,8 @@ public class ControllerConfSistema extends AgroludosController {
 	@FXML private TextField txtEmailMds;
 	@FXML private TextField txtTelefonoMds;
 	@FXML private PasswordField txtPasswordMds;
+	@FXML private TextField txtRevealPassword;
+	@FXML private CheckBox checkBoxReveal;
 
 	private ManagerDiSistemaTO mdsto;
 
@@ -40,6 +45,19 @@ public class ControllerConfSistema extends AgroludosController {
 		this.viewName = nameView;
 		this.mdsto = toFact.createMdSTO();
 		this.hideErrors();
+		this.checkBoxReveal.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			public void changed(ObservableValue<? extends Boolean> ov, Boolean oldVal, Boolean newVal) {
+				if(newVal){
+					txtPasswordMds.setVisible(false);
+					txtRevealPassword.setVisible(true);
+					txtRevealPassword.setText(txtPasswordMds.getText());
+				} else {
+					txtPasswordMds.setVisible(true);
+					txtPasswordMds.setText(txtRevealPassword.getText());
+					txtRevealPassword.setVisible(false);
+				}
+			}
+		});
 	}
 
 	@Override
