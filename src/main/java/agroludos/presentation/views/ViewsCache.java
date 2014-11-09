@@ -67,10 +67,11 @@ class ViewsCache {
 				width =  bounds.getWidth();		
 				//creo la scena	e la aggiungo al mainStage
 				Scene mainViewScene = new Scene(root, width, height);
-				this.mainStage.setScene(mainViewScene);
-				this.mainStage.setTitle(window.getTitle());
+				Stage stage = new Stage(StageStyle.TRANSPARENT);
+				stage.setScene(mainViewScene);
+				stage.setTitle(window.getTitle());
 				//setto il mainStage
-				window.setStage(this.mainStage);
+				window.setStage(stage);
 			}
 		}
 		this.views.put(window.getName(), window);
@@ -84,6 +85,4 @@ class ViewsCache {
 	public void closeMainStage() {
 		this.mainStage.close();
 	}
-
-
 }

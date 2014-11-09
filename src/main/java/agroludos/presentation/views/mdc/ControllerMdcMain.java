@@ -59,6 +59,8 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 	private AgroRequest richiesta;
 
+	private List<IscrizioneTO> listIsc;
+
 
 
 	@Override
@@ -92,16 +94,22 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 		}else if(mainTO instanceof CompetizioneTO){
 
 			CompetizioneTO cmpTO = (CompetizioneTO) mainTO;
-			CmpModel cmp = this.tableCompetizione.getItems().get(this.tableCompetizione.getSelectionModel().getSelectedIndex());
-			cmp.setCompetizioneTO(cmpTO);
-			cmp.setData(cmpTO.getData().toString());
-			cmp.setId(cmpTO.getId().toString());
-			cmp.setIscritti(String.valueOf(cmpTO.getAllIscrizioniAttive().size()));
-			cmp.setNmax(String.valueOf(cmpTO.getNmax()));
-			cmp.setNmin(String.valueOf(cmpTO.getNmin()));
-			cmp.setNome(cmpTO.getNome());
-			cmp.setStato(cmpTO.getStatoCompetizione().getNome());
-			cmp.setTipo(cmpTO.getTipoCompetizione().getNome());			
+			CmpModel cmpModel = this.tableCompetizione.getItems().get(this.tableCompetizione.getSelectionModel().getSelectedIndex());
+			cmpModel.setCompetizioneTO(cmpTO);
+			cmpModel.setData(cmpTO.getData().toString());
+			cmpModel.setId(cmpTO.getId().toString());
+			
+			//richiesta per ottenere le iscrizioni attive di questa competizione
+			this.richiesta = this.getRichiesta(cmpTO, "getAllIscrizioniAttiveByCmp", this.viewName);
+			this.risposta = this.getRisposta();
+			this.eseguiRichiesta(this.richiesta, this.risposta);
+			
+			//cmpModel.setIscritti(String.valueOf(this.listIsc.size()));
+			cmpModel.setNmax(String.valueOf(cmpTO.getNmax()));
+			cmpModel.setNmin(String.valueOf(cmpTO.getNmin()));
+			cmpModel.setNome(cmpTO.getNome());
+			cmpModel.setStato(cmpTO.getStatoCompetizione().getNome());
+			cmpModel.setTipo(cmpTO.getTipoCompetizione().getNome());			
 		}
 	}
 
@@ -164,7 +172,6 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 	@FXML protected void menuLogout(ActionEvent event){
 		this.close();
-		//TODO richiesta di logout
 		this.setVista("login");
 	}
 
@@ -196,7 +203,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 				mail.setMittente(cmp.getManagerDiCompetizione());
 				mail.setMessage("La competizione " + cmp.getNome() + "  è stata annullata.");
 
-				for(IscrizioneTO iscTO: cmp.getAllIscrizioniAttive()){
+				for(IscrizioneTO iscTO: this.listIsc){
 					mail.addDestinatario(iscTO.getPartecipante());
 				}
 
@@ -272,7 +279,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 				mail.setMessage("La competizione " + cmp.getNome() + " ha subito modifiche,"
 						+ " la invito a prendere visione.");
 
-				for(IscrizioneTO iscTO: cmp.getAllIscrizioniAttive()){
+				for(IscrizioneTO iscTO: this.listIsc){
 					mail.addDestinatario(iscTO.getPartecipante());
 				}
 
@@ -280,6 +287,12 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
 				this.eseguiRichiesta(this.richiesta, this.risposta);
 
+			}
+		}else if( commandName.equals( this.getCommandName("getAllIscrizioniAttiveByCmp") )){
+			Object res = response.getRespData();
+			if(res instanceof List<?>){
+				//popolo la lista delle iscrizioni
+				this.listIsc = (List<IscrizioneTO>) res;
 			}
 		}
 	}

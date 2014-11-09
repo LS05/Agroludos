@@ -53,9 +53,7 @@ public class Navigator {
 
 		try {
 			if(this.viewsCache.checkView(viewName)){
-				agw = this.viewsCache.getView(viewName);
-
-				//se si tratta di un dialog richiamo l'inizializzazione
+				agw = this.viewsCache.getView(viewName);					
 				agw.getController().initializeView(viewName);
 			}else{
 				agw = this.viewsLoader.getView(viewName);
@@ -67,7 +65,6 @@ public class Navigator {
 					//aggiungo l'evento close vista quando si chiude lo stage
 					stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 						public void handle(WindowEvent we) {
-							//TODO eliminare stampa
 							closeVista(mainView);
 						}
 					});
@@ -95,5 +92,4 @@ public class Navigator {
 			this.getStage(viewName).close();	
 		}
 	}
-
 }

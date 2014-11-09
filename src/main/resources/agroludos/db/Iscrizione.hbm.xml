@@ -15,20 +15,30 @@
 		<property name="costo" type="double">
 			<column name="costo" not-null="true" default="0" />
 		</property>
-		<many-to-one name="statoIscrizione" class="agroludos.to.StatoIscrizione" cascade="all" lazy="false">
+		<many-to-one name="statoIscrizione" class="agroludos.to.StatoIscrizione"
+			cascade="persist,merge,refresh" lazy="false">
 			<column name="stato" not-null="true" />
 		</many-to-one>
-		<many-to-one name="competizione" class="agroludos.to.Competizione" cascade="all" lazy="false">
+		<many-to-one name="competizione" class="agroludos.to.Competizione"
+			cascade="persist,merge,refresh" lazy="false">
 			<column name="idcompetizione" not-null="true" />
 		</many-to-one>
-		<many-to-one name="partecipante" class="agroludos.to.Partecipante" cascade="all" lazy="false">
+		<many-to-one name="partecipante" class="agroludos.to.Partecipante"
+			cascade="persist,merge,refresh" lazy="false">
 			<column name="idpartecipante" not-null="true" />
 		</many-to-one>
-		<set name="optionals" cascade="all" table="tbl_opt_iscr"  lazy="false">
+		<set name="optionals" cascade="persist,merge,refresh" table="tbl_opt_iscr"
+			lazy="false">
 			<key column="idiscrizione" />
 			<many-to-many column="idoptional" class="agroludos.to.Optional" />
 		</set>
 	</class>
 	<query name="getAllIscrizioni">
         <![CDATA[ from agroludos.to.Iscrizione i where i.statoIscrizione = 1 ]]></query>
+	<query name="getAllIscrizioniAttive">
+        <![CDATA[ from agroludos.to.Iscrizione i where i.partecipante = ? and stato = 1 ]]></query>
+	<query name="getIscrizioniAttiveCmp">
+        <![CDATA[ from agroludos.to.Iscrizione i where i.competizione = ? and stato = 1 ]]></query>
+	<query name="getAllIscrizioniPartecipante">
+        <![CDATA[ from agroludos.to.Iscrizione i where i.partecipante = ? ]]></query>
 </hibernate-mapping>

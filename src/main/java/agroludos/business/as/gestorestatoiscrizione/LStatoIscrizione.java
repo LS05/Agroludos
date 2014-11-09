@@ -8,4 +8,5 @@ import agroludos.to.StatoIscrizioneTO;
 
 public interface LStatoIscrizione extends AgroludosService{
 	List<StatoIscrizioneTO> getAllStatoIscrizione() throws DatabaseException;
+	StatoIscrizioneTO getStatoAttivo() throws DatabaseException;
 }

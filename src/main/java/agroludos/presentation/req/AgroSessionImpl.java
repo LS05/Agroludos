@@ -17,7 +17,10 @@ public class AgroSessionImpl implements AgroSession{
 	public void setAttribute(UtenteTO uto) {
 		if(this.utenti.isEmpty())
 			this.utenti.put("session", uto);
-		
+		else{
+			this.utenti.clear();
+			this.utenti.put("session", uto);
+		}
 	}
 
 	@Override

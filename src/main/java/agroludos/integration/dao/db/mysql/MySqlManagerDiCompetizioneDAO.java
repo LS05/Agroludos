@@ -9,7 +9,7 @@ import agroludos.to.ManagerDiCompetizioneTO;
 class MySqlManagerDiCompetizioneDAO extends MySqlUtenteDAO<ManagerDiCompetizioneTO> implements ManagerDiCompetizioneDAO{
 	
 	MySqlManagerDiCompetizioneDAO(){
-		this.setClasse(ManagerDiCompetizioneTO.class);
+		this.setClasse(toFact.createMdCTO());
 	}
 	
 	@Override

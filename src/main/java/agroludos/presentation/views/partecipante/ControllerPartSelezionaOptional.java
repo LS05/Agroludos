@@ -379,6 +379,7 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 		if(this.passoCorrente == (this.nPassi - 1)){
 			this.btnAvanti.setVisible(false);
 			this.tableOptional.setVisible(false);
+			this.paneTableOptional.setVisible(false);
 			this.btnConferma.setVisible(true);
 			showConfermaView();
 		} else {

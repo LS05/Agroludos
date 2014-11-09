@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -32,16 +33,26 @@ public class ControllerMdsVisualizzaIscrizioni extends AgroludosController {
 
 	protected IscModel iscModelRow;
 
+	private PartecipanteTO part;
+
+	private AgroResponse risposta;
+
+	private AgroRequest richiesta;
+
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
 		if(mainTO instanceof PartecipanteTO){
-			PartecipanteTO part = (PartecipanteTO)mainTO;
+			this.part = (PartecipanteTO)mainTO;
 			StringBuilder sb = new StringBuilder();
 			sb.append(part.getNome());
 			sb.append(" ");
 			sb.append(part.getCognome());
 			this.lblNomeCognome.setText(sb.toString());
-			this.iscrizioni = part.getAllIscrizioni();
+			
+			//richiesta per ottenere tutte le iscrizioni da un partecipante
+			this.richiesta = this.getRichiesta(this.part,"getAllIscrizioniPartecipante", this.viewName);
+			this.risposta = this.getRisposta();
+			this.eseguiRichiesta(this.richiesta, this.risposta);
 
 			this.iscComCol.setCellValueFactory(new PropertyValueFactory<IscModel, String>("competizione"));
 			this.iscDataCol.setCellValueFactory(new PropertyValueFactory<IscModel, String>("data"));
@@ -76,7 +87,7 @@ public class ControllerMdsVisualizzaIscrizioni extends AgroludosController {
 
 	@Override
 	protected void initializeView(String viewName) {
-
+		this.viewName=viewName;
 	}
 
 	@Override
@@ -86,6 +97,14 @@ public class ControllerMdsVisualizzaIscrizioni extends AgroludosController {
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
+		String commandName = request.getCommandName();
 
+		if(commandName.equals( this.getCommandName("getAllIscrizioniPartecipante") )){
+			Object res = response.getRespData();
+			if(res instanceof List<?>){
+				List<IscrizioneTO> iscPartecipante = (List<IscrizioneTO>)res;
+				this.iscrizioni = iscPartecipante;
+			}
+		}
 	}
 }

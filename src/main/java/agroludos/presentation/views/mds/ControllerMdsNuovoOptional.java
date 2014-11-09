@@ -81,6 +81,7 @@ public class ControllerMdsNuovoOptional extends AgroludosController implements I
 			listStati.add(stato.getNome());
 		}
 		this.cmbStatoOptional.setItems(listStati);
+		this.cmbStatoOptional.setValue(listStati.get(0));
 	}
 
 	@FXML protected void confermaNuovoOptional(MouseEvent event){

@@ -21,4 +21,10 @@ public class ASGestoreStatoIscrizione extends AgroludosAS implements LStatoIscri
 		return dbDAOFact.getStatoIscrizioneDAO();
 	}
 
+	@Override
+	public StatoIscrizioneTO getStatoAttivo() throws DatabaseException {
+		StatoIscrizioneDAO iscDao = getStatoIscrizioneDAO();
+		return iscDao.getStatoAttivo();
+	}
+
 }

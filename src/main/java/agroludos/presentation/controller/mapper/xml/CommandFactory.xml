@@ -172,7 +172,7 @@
 			<forward success="mostraNuovaCmp" failure="mostraNuovaCmp" />
 		</from>
 	</command>
-	<command name="getCompetizioneByTipo">
+	<command name="getCompetizioniByTipo">
 		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
 		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="managerDiSistema" />
@@ -250,6 +250,12 @@
 			<forward success="partecipante" failure="partecipante" />
 		</from>
 	</command>
+	<command name="getAllIscrizioniAttive">
+		<classe>agroludos.business.as.gestoreiscrizione.LIscrizione</classe>
+		<from name="partecipante">
+			<forward success="partecipante" failure="partecipante" />
+		</from>
+	</command>
 	<command name="inserisciIscrizione">
 		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
 		<from name="mostraIscrPart">
@@ -310,12 +316,6 @@
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
 	</command>
-	<command name="checkCmpData">
-		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
-		<from name="mostraModificaCmp">
-			<forward success="mostraModificaCmp" failure="mostraModificaCmp" />
-		</from>
-	</command>
 	<command name="isCertificatoValido">
 		<classe>agroludos.business.as.gestorepartecipante.LPartecipante</classe>
 		<from name="partecipante">
@@ -326,6 +326,33 @@
 		<classe>agroludos.business.as.gestorepartecipante.SPartecipante</classe>
 		<from name="aggiornaSRC">
 			<forward success="aggiornaSRC" failure="aggiornaSRC" />
+		</from>
+	</command>
+	<command name="getOptionalAttiviByTipo">
+		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
+		<from name="selezionaOptional">
+			<forward success="selezionaOptional" failure="selezionaOptional" />
+		</from>
+	</command>
+	<command name="getAllIscrizioniAttiveByCmp">
+		<classe>agroludos.business.as.gestoreiscrizione.LIscrizione</classe>
+		<from name="partMostraCompetizione">
+			<forward success="partMostraCompetizione" failure="partMostraCompetizione" />
+		</from>
+		<from name="mostraCmpMds">
+			<forward success="mostraCmpMds" failure="mostraCmpMds" />
+		</from>
+		<from name="mostraCmp">
+			<forward success="mostraCmp" failure="mostraCmp" />
+		</from>
+		<from name="managerDiCompetizione">
+			<forward success="managerDiCompetizione" failure="managerDiCompetizione" />
+		</from>
+	</command>
+	<command name="getAllIscrizioniPartecipante">
+		<classe>agroludos.business.as.gestoreiscrizione.LIscrizione</classe>
+		<from name="visualizzaIscrizioni">
+			<forward success="visualizzaIscrizioni" failure="visualizzaIscrizioni" />
 		</from>
 	</command>
 </commands>

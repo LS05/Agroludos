@@ -3,7 +3,6 @@ package agroludos.business.as.gestorecompetizione;
 import java.util.List;
 
 import agroludos.business.as.AgroludosService;
-import agroludos.exceptions.CmpDataAttiveException;
 import agroludos.exceptions.DatabaseException;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
@@ -56,12 +55,7 @@ public interface LCompetizione extends AgroludosService {
 	
 	List<CompetizioneTO> getCompetizioniAperte() throws DatabaseException;
 	
-	List<TipoCompetizioneTO> getAllTipoCompetizione() throws DatabaseException;
-	
-	List<CompetizioneTO> getCompetizioneByTipo(TipoCompetizioneTO tcmto) throws DatabaseException;
-
 	List<CompetizioneTO> getCompetizioneAttiveByMdc(
 			ManagerDiCompetizioneTO mdcto) throws DatabaseException;
 
-	CompetizioneTO checkCmpData(CompetizioneTO Cmp) throws DatabaseException, CmpDataAttiveException;
 }

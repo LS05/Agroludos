@@ -11,7 +11,7 @@ import agroludos.to.TipoOptionalTO;
 
 public interface LOptional extends AgroludosService{
 	
-	List<OptionalTO> getOptionalByTipo(TipoOptionalTO optto) throws DatabaseException;
+	List<OptionalTO> getOptionalByTipo(TipoOptionalTO toptTO) throws DatabaseException;
 	
 	List<OptionalTO> getAllOptional() throws DatabaseException;
 	
@@ -21,5 +21,7 @@ public interface LOptional extends AgroludosService{
 
 	OptionalTO checkOptCmpAttive(OptionalTO optto) throws DatabaseException,
 			OptionalCmpAttiveException;
+
+	List<OptionalTO> getOptionalAttiviByTipo(TipoOptionalTO toptTO) throws DatabaseException;
 	
 }

@@ -1,11 +1,14 @@
 package agroludos.presentation.views.mds;
 
+import java.util.List;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.components.table.TableIscrizioni;
 import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
+import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;
 
 import javafx.event.EventHandler;
@@ -42,6 +45,12 @@ public class ControllerMdsProfiloPartecipante extends AgroludosController{
 
 	protected IscModel iscModelRow;
 
+	private AgroRequest richiesta;
+
+	private AgroResponse risposta;
+
+	private List<IscrizioneTO> listIscPart;
+
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
@@ -65,7 +74,13 @@ public class ControllerMdsProfiloPartecipante extends AgroludosController{
 			this.tableIscrizioni = new TableIscrizioni();
 			this.paneIscrizione.getChildren().add(this.tableIscrizioni);
 			this.paneIscrizione.setVisible(true);
-			this.tableIscrizioni.setAll(this.parTO.getAllIscrizioni());
+			
+			//richiesta per ottenere tutte le iscrizioni da un partecipante
+			this.richiesta = this.getRichiesta(this.parTO,"getAllIscrizioniPartecipante", this.viewName);
+			this.risposta = this.getRisposta();
+			this.eseguiRichiesta(this.richiesta, this.risposta);
+			
+			this.tableIscrizioni.setAll(this.listIscPart);
 
 			this.tableIscrizioni.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
@@ -94,6 +109,14 @@ public class ControllerMdsProfiloPartecipante extends AgroludosController{
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
+		String commandName = request.getCommandName();
 
+		if(commandName.equals( this.getCommandName("getAllIscrizioniPartecipante") )){
+			Object res = response.getRespData();
+			if(res instanceof List<?>){
+				List<IscrizioneTO> iscPartecipante = (List<IscrizioneTO>)res;
+				this.listIscPart = iscPartecipante;
+			}
+		}
 	}
 }

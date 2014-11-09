@@ -12,7 +12,7 @@ import agroludos.to.TipoCompetizioneTO;
 class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements CompetizioneDAO {
 
 	MySqlCompetizioneDAO() {
-		this.setClasse(CompetizioneTO.class);
+		this.setClasse(toFact.createCompetizioneTO());
 	}
 
 	@Override
@@ -71,6 +71,17 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 		param.add(mdc);
 
 		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioneAttiveByMdc", param);
+
+
+		return res;
+	}
+
+	@Override
+	public List<CompetizioneTO> getCompetizioniByTipo(TipoCompetizioneTO tcmto) throws DatabaseException {
+		List<TipoCompetizioneTO> param = new ArrayList<TipoCompetizioneTO>();
+		param.add(tcmto);
+
+		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioniByTipo", param);
 
 
 		return res;

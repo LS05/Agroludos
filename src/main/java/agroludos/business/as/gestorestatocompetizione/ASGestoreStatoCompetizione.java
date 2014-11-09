@@ -27,5 +27,4 @@ public class ASGestoreStatoCompetizione extends AgroludosAS implements LStatoCom
 		StatoCompetizioneDAO daoTcm = getStatoCompetizioneDAO();
 		return daoTcm.getStatoCmpAnnullata();
 	}
-
 }

@@ -1,7 +1,6 @@
 package agroludos.to;
 
 import java.util.Date;
-import java.util.List;
 
 public interface PartecipanteTO extends UtenteTO {
 
@@ -36,9 +35,5 @@ public interface PartecipanteTO extends UtenteTO {
 	public Date getDataNasc();
 
 	public void setDataNasc(Date dataNasc);
-
-	public List<IscrizioneTO> getAllIscrizioni();
-
-	public List<IscrizioneTO> getAllIscrizioniAttive();
 
 }

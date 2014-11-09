@@ -6,7 +6,7 @@ import agroludos.to.TipoOptionalTO;
 class MySqlTipoOptionalDAO extends MySqlAgroludosDAO<TipoOptionalTO> implements TipoOptionalDAO {
 
 	MySqlTipoOptionalDAO(){
-		this.setClasse(TipoOptionalTO.class);
+		this.setClasse(toFact.createTipoOptionalTO());
 	}
 
 }

@@ -55,7 +55,7 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 
 		OptionalDAO daoOpt = getOptionalDAO();
 		validate(optto);
-		
+
 		return daoOpt.update(optto);
 
 	}
@@ -86,21 +86,20 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 		}
 		return optto;
 	}
-	
+
 	@Override
-	public List<OptionalTO> getOptionalByTipo(TipoOptionalTO optto)
+	public List<OptionalTO> getOptionalAttiviByTipo(TipoOptionalTO toptTO) throws DatabaseException{
+
+		List<OptionalTO> res = getOptionalDAO().getOptionalAttiviByTipo(toptTO);
+
+		return res;
+	}
+
+	@Override
+	public List<OptionalTO> getOptionalByTipo(TipoOptionalTO toptTO)
 			throws DatabaseException {
 
-		TipoOptionalDAO daoTipo = this.getTipoOptionalDAO();
-		List<TipoOptionalTO> listTipi = daoTipo.getAll();
-		List<OptionalTO> res = null;
-
-		for(TipoOptionalTO tipo : listTipi){
-			if(tipo.getNome().equals(optto.getNome())){
-				res = tipo.getAllOptionals();
-				break;
-			}
-		}
+		List<OptionalTO> res = getOptionalDAO().getOptionalByTipo(toptTO);
 
 		return res;
 	}

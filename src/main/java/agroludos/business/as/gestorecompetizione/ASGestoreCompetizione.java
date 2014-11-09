@@ -8,7 +8,6 @@ import org.joda.time.DateTime;
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.CmpDataAttiveException;
-import agroludos.exceptions.CompetizioneDataExistException;
 import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.CompetizioneDAO;
@@ -16,11 +15,11 @@ import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.IscrizioneDAO;
 import agroludos.integration.dao.db.StatoCompetizioneDAO;
 import agroludos.integration.dao.db.StatoIscrizioneDAO;
-import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
+import agroludos.to.StatoCompetizioneTO;
 import agroludos.to.TipoCompetizioneTO;
 
 /**
@@ -64,42 +63,39 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		this.validator = validator;
 	}
 
+
+	private DBDAOFactory getDBDaoFactory() throws DatabaseException{
+		return this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+	}
+
 	private CompetizioneDAO getCompetizioneDAO() throws DatabaseException {
-		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		DBDAOFactory dbDAOFact = this.getDBDaoFactory();
 		return dbDAOFact.getCompetizioneDAO();
 	}
 
-	private TipoCompetizioneDAO getTipoCompetizioneDAO() throws DatabaseException{
-		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-		return dbDAOFact.getTipoCompetizioneDAO();
+	private StatoCompetizioneDAO getStatoCompetizioneDAO() throws DatabaseException{
+		DBDAOFactory dbDAOFact = this.getDBDaoFactory();
+		return dbDAOFact.getStatoCompetizioneDAO();
 	}
 
-	private StatoCompetizioneDAO getStatoCompetizioneDAO() throws DatabaseException{
-		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-		return dbDAOFact.getStatoCompetizioneDAO();
+	private IscrizioneDAO getIscrizioneDAO() throws DatabaseException {
+		DBDAOFactory dbDAOFact = this.getDBDaoFactory();
+		return dbDAOFact.getIscrizioneDAO();
 	}
 
 	@Override
 	public CompetizioneTO inserisciCompetizione(CompetizioneTO cmpto)
 			throws DatabaseException, ValidationException {
 
-		boolean checkData = false;
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
 		StatoCompetizioneDAO daoStatoCmp = getStatoCompetizioneDAO();
 		cmpto.setStatoCompetizione(daoStatoCmp.getStatoCmpAperta());
 
 		this.validator.validate(cmpto);
 
-		//controllo se esiste una competizione attiva nella data inserita
-		List<CompetizioneTO> cmpList = daoCmp.readCompetizioniAttive();
-		for(CompetizioneTO compet : cmpList){
-			if(compet.getData().compareTo(cmpto.getData()) == 0)
-				checkData = true;
-		}
-		if(!checkData){
-			cmpto = daoCmp.create(checkCmp(cmpto));
-		}else
-			throw new CompetizioneDataExistException();
+		this.checkCmpData(cmpto);
+
+		cmpto = daoCmp.create(checkCmp(cmpto));
 
 		return checkCmp(cmpto);
 
@@ -108,19 +104,16 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	@Override
 	public CompetizioneTO modificaCompetizione(CompetizioneTO cmpto)
 			throws DatabaseException, ValidationException {
-		boolean checkData = false;
 
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
 
 		this.validator.validate(cmpto);
+		this.checkCmpData(cmpto);
 
-
-		if(!checkData){
-			if(cmpto.getAllIscrizioniAttive().size() > cmpto.getNmax())
-				eliminaIscrizioniInEsubero(cmpto.getAllIscrizioniAttive());
-			cmpto = daoCmp.update(checkCmp(cmpto));
-		}else
-			throw new CompetizioneDataExistException();
+		List<IscrizioneTO> listIscAttive = getIscrizioneDAO().getIscrizioniAttiveCmp(cmpto);
+		if(listIscAttive.size() > cmpto.getNmax())
+			eliminaIscrizioniInEsubero(listIscAttive);
+		cmpto = daoCmp.update(checkCmp(cmpto));
 
 		return checkCmp(cmpto);
 	}
@@ -146,7 +139,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		}
 
 		StatoIscrizioneDAO statoIscDao = this.dbFact.getDAOFactory(this.sysConf.getTipoDB()).getStatoIscrizioneDAO();
-		IscrizioneDAO iscDao = this.dbFact.getDAOFactory(this.sysConf.getTipoDB()).getIscrizioneDAO();
+		IscrizioneDAO iscDao = getIscrizioneDAO();
 
 		//elimino gli ultimi registrati e li avviso via mail
 		while(listIsc.size() > cmp.getNmax()){
@@ -179,7 +172,12 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		CompetizioneDAO daoCmp = dbDAOFact.getCompetizioneDAO();
 		StatoCompetizioneDAO daoScmp = dbDAOFact.getStatoCompetizioneDAO();
 		cmpto.setStatoCompetizione(daoScmp.getStatoCmpAnnullata());
-		return daoCmp.annullaCompetizione(cmpto);
+		daoCmp.annullaCompetizione(cmpto);
+
+		IscrizioneDAO iscDao = getIscrizioneDAO();
+		iscDao.terminaIscrizioni(cmpto);
+
+		return cmpto;
 	}
 
 	@Override
@@ -193,22 +191,15 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	public List<CompetizioneTO> getCompetizioneAttiveByMdc(ManagerDiCompetizioneTO mdcto)
 			throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
-		return checkCmp(daoCmp.readAttiveByMdc(mdcto));
+		checkCmp(daoCmp.readAttiveByMdc(mdcto));
+		return daoCmp.readAttiveByMdc(mdcto);
 	}
 
 	@Override
 	public List<CompetizioneTO> getCompetizioniByTipo(TipoCompetizioneTO tcmto)
 			throws DatabaseException {
-		TipoCompetizioneDAO daoTipo = this.getTipoCompetizioneDAO();
-		List<TipoCompetizioneTO> listaTipi = daoTipo.getAll();
-		List<CompetizioneTO> res = null;
-
-		for(TipoCompetizioneTO item : listaTipi){
-			if(item.getNome().equals(tcmto.getNome())){
-				res = item.getAllCompetizioni();
-				break;
-			}
-		}
+		
+		List<CompetizioneTO> res = getCompetizioneDAO().getCompetizioniByTipo(tcmto);
 
 		return checkCmp(res);
 	}
@@ -227,41 +218,14 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		return checkCmp(daoCmp.readById(cmpto.getId()));
 	}
 
-
-
-	@Override
-	public List<TipoCompetizioneTO> getAllTipoCompetizione()
-			throws DatabaseException {
-		TipoCompetizioneDAO daoTipo = this.getTipoCompetizioneDAO();
-		return daoTipo.getAll();
-	}
-
-	@Override
-	public List<CompetizioneTO> getCompetizioneByTipo(TipoCompetizioneTO tcmto)
-			throws DatabaseException {
-		TipoCompetizioneDAO tcDao = this.getTipoCompetizioneDAO();
-		List<TipoCompetizioneTO> tipiComp = tcDao.getAll();
-		List<CompetizioneTO> res = null;
-
-		for(TipoCompetizioneTO tipo : tipiComp){
-			if(tipo.getNome().equals(tcmto.getNome())){
-				res = tipo.getAllCompetizioni();
-				break;
-			}
-		}
-
-		return checkCmp(res);
-	}
-
-
 	@Override
 	public List<CompetizioneTO> getCompetizioniAperte()
 			throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
 		List<CompetizioneTO> listCmpAperte = daoCmp.readCompetizioniAperte();
+		checkCmp(listCmpAperte);
 
-
-		return checkCmp(listCmpAperte);
+		return daoCmp.readCompetizioniAperte();
 	}
 
 	@Override
@@ -269,9 +233,9 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 			throws DatabaseException {
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
 		List<CompetizioneTO> listCmpAttive = daoCmp.readCompetizioniAttive();
+		checkCmp(listCmpAttive);
 
-
-		return checkCmp(listCmpAttive);
+		return daoCmp.readCompetizioniAttive();
 	}
 
 	private List<CompetizioneTO> checkCmp(List<CompetizioneTO> listCmp) throws DatabaseException{
@@ -280,18 +244,29 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 
 		DateTime today = new DateTime();
 		today = DateTime.now();
+		CompetizioneDAO cmpDao = getCompetizioneDAO();
 
 		for(CompetizioneTO cmp: listCmp){
-			if(!(cmp.getStatoCompetizione().getId() == 0)){
+			if(!(cmp.getStatoCompetizione().getId() == 0)
+					|| !(cmp.getStatoCompetizione().getId() == 4)){
 				DateTime dataCmp = new DateTime(cmp.getData());
-				if(dataCmp.isEqualNow())
+				if(dataCmp.isEqualNow() 
+						&& !(cmp.getStatoCompetizione().getId() == 2)){
 					cmp.setStatoCompetizione(daoStatoCmp.getStatoCmpInCorso());
-				else if(dataCmp.isAfter(today) && dataCmp.isBefore(today.plusDays(2)))
+					cmpDao.update(cmp);
+				}
+				else if(dataCmp.isAfter(today) && dataCmp.isBefore(today.plusDays(2))
+						&& !(cmp.getStatoCompetizione().getId() == 3)){
 					cmp.setStatoCompetizione(daoStatoCmp.getStatoCmpChiusa());
-				else if (today.isAfter(dataCmp))
+					cmpDao.update(cmp);
+				}
+				else if (today.isAfter(dataCmp)
+						&& !(cmp.getStatoCompetizione().getId() == 4)){
 					cmp.setStatoCompetizione(daoStatoCmp.getStatoCmpTerminata());
-				else 
-					cmp.setStatoCompetizione(daoStatoCmp.getStatoCmpAperta());
+					IscrizioneDAO iscDao = getIscrizioneDAO();
+					iscDao.terminaIscrizioni(cmp);
+					cmpDao.update(cmp);
+				}
 			}
 		}
 		return listCmp;
@@ -304,8 +279,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		return checkCmp(listCmp).get(0);
 	}
 
-	@Override
-	public CompetizioneTO checkCmpData(CompetizioneTO cmp) 
+	private CompetizioneTO checkCmpData(CompetizioneTO cmp) 
 			throws DatabaseException, CmpDataAttiveException{
 
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
@@ -313,10 +287,18 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		//controllo se esiste una competizione attiva nella data inserita
 		List<CompetizioneTO> cmpList = daoCmp.readCompetizioniAttive();
 		for(CompetizioneTO compet : cmpList){
-			if(compet.getData().compareTo(cmp.getData()) == 0)
-				throw new CmpDataAttiveException();
+			if(compet.getId()!=cmp.getId())
+				if(compet.getData().compareTo(cmp.getData()) == 0)
+					throw new CmpDataAttiveException();
 		}
 
 		return cmp;
+	}
+
+
+
+	public StatoCompetizioneTO getStatoCmp(CompetizioneTO cmp)
+			throws DatabaseException {
+		return getCompetizioneById(cmp).getStatoCompetizione();
 	}
 }

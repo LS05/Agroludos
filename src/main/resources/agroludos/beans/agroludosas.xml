@@ -19,7 +19,6 @@
 	<bean id="gestoreConfigurazione"
 		class="agroludos.business.as.gestoreconfigurazione.ASGestoreConfigurazione"
 		parent="agroludosAS">
-		<constructor-arg ref="dbValidator" />
 		<constructor-arg ref="systemConf" />
 		<constructor-arg ref="fileFactory" />
 	</bean>

@@ -28,48 +28,35 @@
 			<column name="descrizione" not-null="true" />
 		</property>
 
-		<set name="optionals" cascade="all" table="tbl_opt_comp" lazy="false">
+		<set name="optionals" cascade="persist,merge,refresh" table="tbl_opt_comp"
+			lazy="false">
 			<key column="idcompetizione" />
 			<many-to-many column="idoptional" class="agroludos.to.Optional" />
 		</set>
-		<set name="partecipanti" cascade="all" table="tbl_iscrizione" lazy="false">
-			<key column="idcompetizione" />
-			<many-to-many column="idpartecipante" class="agroludos.to.Partecipante" />
-		</set>
-		<set name="iscrizioni" cascade="all" table="tbl_iscrizione" lazy="false">
-			<key column="idcompetizione" />
-			<one-to-many class="agroludos.to.Iscrizione" />
-		</set>
-		<many-to-one name="statoCompetizione" cascade="all"
+		<many-to-one name="statoCompetizione" cascade="persist,merge,refresh"
 			class="agroludos.to.StatoCompetizione" lazy="false">
 			<column name="statocomp" not-null="true" />
 		</many-to-one>
-		<many-to-one name="tipoCompetizione" cascade="all"
+		<many-to-one name="tipoCompetizione" cascade="persist,merge,refresh"
 			class="agroludos.to.TipoCompetizione" lazy="false">
 			<column name="tipocomp" not-null="true" />
 		</many-to-one>
-		<many-to-one name="managerDiCompetizione" cascade="all"
+		<many-to-one name="managerDiCompetizione" cascade="persist,merge,refresh"
 			class="agroludos.to.ManagerDiCompetizione" lazy="false">
 			<column name="idmdc" not-null="true" />
 		</many-to-one>
-
-		<set name="iscrizioniAttive" table="tbl_iscrizione" fetch="select"
-			where="stato = 1" cascade="all" lazy="false">
-			<key column="idcompetizione" />
-			<one-to-many class="agroludos.to.Iscrizione" />
-		</set>
 	</class>
 
 
 	<query name="getAllCompetizione">
         <![CDATA[ from agroludos.to.Competizione c ]]></query>
-	<query name="getCompetizioneByTipo">
+	<query name="getCompetizioniByTipo">
         <![CDATA[ from agroludos.to.Competizione c where c.tipoCompetizione = ?]]></query>
 	<query name="getCompetizioneById">
         <![CDATA[ from agroludos.to.Competizione c where c.id = ?]]></query>
 	<query name="getCompetizioneByMdc">
         <![CDATA[ from agroludos.to.Competizione c where c.managerDiCompetizione = ?]]></query>
-       <query name="getCompetizioneAttiveByMdc">
+	<query name="getCompetizioneAttiveByMdc">
         <![CDATA[ from agroludos.to.Competizione c where c.managerDiCompetizione = ? and (statocomp = 1 or statocomp = 2 or statocomp = 3)]]></query>
 	<query name="annullaCompetizione">
         <![CDATA[ update agroludos.to.Competizione set statocomp = 0]]></query>

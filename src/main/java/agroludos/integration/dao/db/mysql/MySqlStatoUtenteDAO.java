@@ -6,7 +6,7 @@ import agroludos.to.StatoUtenteTO;
 public class MySqlStatoUtenteDAO extends MySqlAgroludosDAO<StatoUtenteTO> implements StatoUtenteDAO {
 
 	public MySqlStatoUtenteDAO() {
-		this.setClasse(StatoUtenteTO.class);
+		this.setClasse(toFact.createStatoUtenteTO());
 	}
 
 }
