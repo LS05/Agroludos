@@ -56,14 +56,15 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 		this.viewName = nameView;
 		this.lblErroreLogin.setVisible(false);
 
-		final Stage stage = this.getStage(this.getViewName());
-
-		//aggiungo l'evento close vista quando si chiude lo stage
+		final Stage stage = this.getStage(this.viewName);
+		//aggiungo per chiudere il programma
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
-				close();
+				risposta = getRisposta();
+				richiesta = getRichiesta("chiusura", viewName);
+				eseguiRichiesta(richiesta, risposta);
 			}
-		}); 
+		});
 
 		this.agroLogoPane.setFocusTraversable(true);
 

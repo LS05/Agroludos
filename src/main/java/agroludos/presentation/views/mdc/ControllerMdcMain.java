@@ -73,6 +73,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
 				chiusura();
+				we.consume();
 			}
 		});
 		

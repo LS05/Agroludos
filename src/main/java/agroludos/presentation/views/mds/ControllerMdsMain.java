@@ -138,6 +138,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
 				chiusura();
+				we.consume();
 			}
 		});
 
@@ -151,6 +152,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		this.tableCompetizioni = new TableCompetizioni();
+		this.tableCompetizioni.hideColumn(4);
 		this.paneTableCmp.getChildren().add(this.tableCompetizioni);
 		this.listViewComp = new ListaViewTipi(this.listTipiComp);
 		this.paneListaTipiComp.getChildren().add(this.listViewComp);
