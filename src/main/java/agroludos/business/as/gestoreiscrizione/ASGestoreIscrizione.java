@@ -152,4 +152,11 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 		List<IscrizioneTO> listIscCmp = getIscrizioneDAO().getIscrizioniAttiveCmp(cmpTO);
 		return listIscCmp;
 	}
+
+	@Override
+	public List<IscrizioneTO> getAllIscrizioniPartecipante(PartecipanteTO parTO)
+			throws DatabaseException {
+		List<IscrizioneTO> listIscCmp = getIscrizioneDAO().getAllIscrizioniPartecipante(parTO);
+		return listIscCmp;
+	}
 }

@@ -172,7 +172,7 @@
 			<forward success="mostraNuovaCmp" failure="mostraNuovaCmp" />
 		</from>
 	</command>
-	<command name="getCompetizioneByTipo">
+	<command name="getCompetizioniByTipo">
 		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
 		<from name="managerDiSistema">
 			<forward success="managerDiSistema" failure="managerDiSistema" />

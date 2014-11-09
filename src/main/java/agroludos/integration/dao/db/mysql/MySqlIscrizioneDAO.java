@@ -83,4 +83,14 @@ class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements Iscr
 		return res;
 	}
 
+	@Override
+	public List<IscrizioneTO> getAllIscrizioniPartecipante(PartecipanteTO parTO) throws DatabaseException {
+		List<PartecipanteTO> param = new ArrayList<PartecipanteTO>();
+		param.add(parTO);
+
+		List<IscrizioneTO> res = super.executeParamQuery("getAllIscrizioniPartecipante", param);
+
+		return res;
+	}
+
 }

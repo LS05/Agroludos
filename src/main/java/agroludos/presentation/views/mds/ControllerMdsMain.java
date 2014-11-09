@@ -164,19 +164,19 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.btnResetRicComp.setVisible(false);
 
 		final String viewNameSupp = this.viewName;
+		final List<TipiAgroludosTO> suppListTipiCompetizione = this.listTipiComp;
 		this.listViewComp.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
+		
 			@SuppressWarnings("unchecked")
 			@Override
 			public void handle(MouseEvent event) {
 				ListView<String> source = (ListView<String>)event.getSource();
 				String nomeTipo = source.getSelectionModel().getSelectedItem();
-
+				Integer idSelected = source.getSelectionModel().getSelectedIndex();
 				if(nomeTipo != null){
-					TipoCompetizioneTO tipoComp = toFact.createTipoCompetizioneTO();
-					tipoComp.setNome(nomeTipo);
+					TipoCompetizioneTO tipoComp = (TipoCompetizioneTO) suppListTipiCompetizione.get(idSelected);
 
-					richiesta = getRichiesta(tipoComp, "getCompetizioneByTipo", viewNameSupp);
+					richiesta = getRichiesta(tipoComp, "getCompetizioniByTipo", viewNameSupp);
 					risposta = getRisposta();
 					eseguiRichiesta(richiesta, risposta);
 
@@ -319,6 +319,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.paneListaTipiOpt.getChildren().add(listViewOpt);
 
 		final String viewNameSupp = this.viewName;
+		final List<TipiAgroludosTO> suppListTipiOptional = this.listTipiOpt;
 		this.listViewOpt.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@SuppressWarnings("unchecked")
@@ -326,9 +327,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			public void handle(MouseEvent event) {
 				ListView<String> source = (ListView<String>)event.getSource();
 				String nomeTipo = source.getSelectionModel().getSelectedItem();
-				TipoOptionalTO tipoOpt = toFact.createTipoOptionalTO();
-				tipoOpt.setNome(nomeTipo);
+				Integer idSelected = source.getSelectionModel().getSelectedIndex();
 				if(nomeTipo != null){
+					TipoOptionalTO tipoOpt = (TipoOptionalTO) suppListTipiOptional.get(idSelected);
 					richiesta = getRichiesta(tipoOpt, "getOptionalByTipo", viewNameSupp);
 					risposta = getRisposta();
 					eseguiRichiesta(richiesta, risposta);
@@ -585,7 +586,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				this.listTipiComp = tipiCompList;
 			}
 
-		} else if( commandName.equals( this.getCommandName("getCompetizioneByTipo") )){
+		} else if( commandName.equals( this.getCommandName("getCompetizioniByTipo") )){
 
 			Object res = response.getRespData();
 

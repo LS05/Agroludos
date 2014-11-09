@@ -15,4 +15,6 @@ public interface LIscrizione extends AgroludosService {
 			throws DatabaseException;
 	List<IscrizioneTO> getAllIscrizioniAttiveByCmp(CompetizioneTO cmpTO)
 			throws DatabaseException;
+	List<IscrizioneTO> getAllIscrizioniPartecipante(PartecipanteTO parTO)
+			throws DatabaseException;
 }
