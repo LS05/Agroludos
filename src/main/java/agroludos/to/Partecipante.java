@@ -1,9 +1,6 @@
 package agroludos.to;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 class Partecipante extends Utente implements PartecipanteTO {
 	private static final long serialVersionUID = -4787024687328022378L;
@@ -13,7 +10,6 @@ class Partecipante extends Utente implements PartecipanteTO {
 	private String sesso;
 	private String numTS;
 	private Date dataSRC;
-	private Set<Iscrizione> iscrizioni;
 	private String src;
 	private CertificatoTO certificato;
 
@@ -94,26 +90,6 @@ class Partecipante extends Utente implements PartecipanteTO {
 	@Override
 	public void setDataNasc(Date dataNasc) {
 		this.dataNasc = dataNasc;
-	}
-
-	@Override
-	public List<IscrizioneTO> getAllIscrizioni() {
-		List<IscrizioneTO> res = new ArrayList<IscrizioneTO>();
-
-		for(Iscrizione item : this.iscrizioni){
-			res.add(item);
-		}
-
-		return res;
-	}
-
-	public Set<Iscrizione> getIscrizioni() {
-		return iscrizioni;
-	}
-
-
-	public void setIscrizioni(Set<Iscrizione> iscrizioni) {
-		this.iscrizioni = iscrizioni;
 	}
 
 	@Override

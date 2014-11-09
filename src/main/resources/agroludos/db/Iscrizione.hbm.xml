@@ -39,4 +39,6 @@
         <![CDATA[ from agroludos.to.Iscrizione i where i.partecipante = ? and stato = 1 ]]></query>
 	<query name="getIscrizioniAttiveCmp">
         <![CDATA[ from agroludos.to.Iscrizione i where i.competizione = ? and stato = 1 ]]></query>
+	<query name="getAllIscrizioniPartecipante">
+        <![CDATA[ from agroludos.to.Iscrizione i where i.partecipante = ? ]]></query>
 </hibernate-mapping>

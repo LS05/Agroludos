@@ -48,12 +48,6 @@
 			<property name="stipendio" type="double">
 				<column name="stipendio" />
 			</property>
-
-			<set name="competizioni" table="tbl_competizione"
-				cascade="persist,merge,refresh" lazy="false">
-				<key column="idmdc" />
-				<one-to-many class="agroludos.to.Competizione" />
-			</set>
 		</joined-subclass>
 		<joined-subclass name="agroludos.to.Partecipante"
 			table="tbl_partecipante" extends="agroludos.to.Utente">
@@ -79,12 +73,6 @@
 			<property name="dataSRC" type="date">
 				<column name="data_src" not-null="true" />
 			</property>
-			<set name="iscrizioni" table="tbl_iscrizione"
-				cascade="persist,merge,refresh" lazy="false">
-				<key column="idpartecipante" />
-				<one-to-many class="agroludos.to.Iscrizione" />
-			</set>
-
 		</joined-subclass>
 
 

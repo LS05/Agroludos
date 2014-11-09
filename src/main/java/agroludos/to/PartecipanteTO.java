@@ -37,6 +37,4 @@ public interface PartecipanteTO extends UtenteTO {
 
 	public void setDataNasc(Date dataNasc);
 
-	public List<IscrizioneTO> getAllIscrizioni();
-
 }

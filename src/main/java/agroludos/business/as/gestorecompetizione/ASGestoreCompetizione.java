@@ -15,7 +15,6 @@ import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.IscrizioneDAO;
 import agroludos.integration.dao.db.StatoCompetizioneDAO;
 import agroludos.integration.dao.db.StatoIscrizioneDAO;
-import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
@@ -74,11 +73,6 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		return dbDAOFact.getCompetizioneDAO();
 	}
 
-	private TipoCompetizioneDAO getTipoCompetizioneDAO() throws DatabaseException{
-		DBDAOFactory dbDAOFact = this.getDBDaoFactory();
-		return dbDAOFact.getTipoCompetizioneDAO();
-	}
-
 	private StatoCompetizioneDAO getStatoCompetizioneDAO() throws DatabaseException{
 		DBDAOFactory dbDAOFact = this.getDBDaoFactory();
 		return dbDAOFact.getStatoCompetizioneDAO();
@@ -116,8 +110,9 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		this.validator.validate(cmpto);
 		this.checkCmpData(cmpto);
 
-		if(cmpto.getAllIscrizioniAttive().size() > cmpto.getNmax())
-			eliminaIscrizioniInEsubero(cmpto.getAllIscrizioniAttive());
+		List<IscrizioneTO> listIscAttive = getIscrizioneDAO().getIscrizioniAttiveCmp(cmpto);
+		if(listIscAttive.size() > cmpto.getNmax())
+			eliminaIscrizioniInEsubero(listIscAttive);
 		cmpto = daoCmp.update(checkCmp(cmpto));
 
 		return checkCmp(cmpto);
@@ -144,7 +139,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		}
 
 		StatoIscrizioneDAO statoIscDao = this.dbFact.getDAOFactory(this.sysConf.getTipoDB()).getStatoIscrizioneDAO();
-		IscrizioneDAO iscDao = this.dbFact.getDAOFactory(this.sysConf.getTipoDB()).getIscrizioneDAO();
+		IscrizioneDAO iscDao = getIscrizioneDAO();
 
 		//elimino gli ultimi registrati e li avviso via mail
 		while(listIsc.size() > cmp.getNmax()){
