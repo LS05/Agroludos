@@ -45,15 +45,12 @@ public class ControllerMdsProfiloPartecipante extends AgroludosController{
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
-
 	}
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
 		if(mainTO instanceof PartecipanteTO){
-			this.parTO =(PartecipanteTO) mainTO;
-
-
+			this.parTO = (PartecipanteTO)mainTO;
 
 			this.lblNomeIsc.setText(this.parTO.getNome());
 			this.lblCognomeIsc.setText(this.parTO.getCognome());
@@ -69,7 +66,7 @@ public class ControllerMdsProfiloPartecipante extends AgroludosController{
 			this.paneIscrizione.getChildren().add(this.tableIscrizioni);
 			this.paneIscrizione.setVisible(true);
 			this.tableIscrizioni.setAll(this.parTO.getAllIscrizioni());
-			
+
 			this.tableIscrizioni.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
 				@SuppressWarnings("unchecked")
@@ -83,13 +80,7 @@ public class ControllerMdsProfiloPartecipante extends AgroludosController{
 					}
 				}
 			});
-
 		}
-	}
-
-	@Override
-	protected String getViewName() {
-		return this.viewName;
 	}
 
 	@FXML private void btnVisualizzaCertificato(MouseEvent event){
@@ -97,7 +88,12 @@ public class ControllerMdsProfiloPartecipante extends AgroludosController{
 	}
 
 	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
+
+	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
+
 	}
 }
-

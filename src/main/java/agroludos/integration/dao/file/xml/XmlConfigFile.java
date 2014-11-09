@@ -8,32 +8,23 @@ import org.w3c.dom.NodeList;
 import agroludos.system.HibernateConf;
 import agroludos.to.DatabaseTO;
 
-class XMLConfigFile {
+class XmlConfigFile {
 
-	private String nomeDB;
-	private String serverDB;
-	private String portaDB;
-	private String usernameDB;
-	private String passwordDB;
-	private HibernateConf confData;
+	private static String nomeDB;
+	private static String serverDB;
+	private static String portaDB;
+	private static String usernameDB;
+	private static String passwordDB;
 
-	XMLConfigFile(HibernateConf confData){
-		this.confData = confData;
-	}
-
-	String getConfPath(){
-		return this.confData.getConfPath();
-	}
-
-	boolean setHibernateDocument(Document doc, DatabaseTO dbto){
+	static boolean setHibernateDocument(Document doc, HibernateConf confData, DatabaseTO dbto){
 
 		boolean res = false;
 
-		this.nomeDB = dbto.getNome();
-		this.serverDB = dbto.getServer();
-		this.portaDB = dbto.getPorta();
-		this.usernameDB = dbto.getUsername();
-		this.passwordDB = dbto.getPassword();	
+		nomeDB = dbto.getNome();
+		serverDB = dbto.getServer();
+		portaDB = dbto.getPorta();
+		usernameDB = dbto.getUsername();
+		passwordDB = dbto.getPassword();	
 
 		// Get the database element by tag name directly
 		Node database = doc.getElementsByTagName("session-factory").item(0);
@@ -53,34 +44,34 @@ class XMLConfigFile {
 					Node attr = attributes.item(a);
 					String attrValue = attr.getNodeValue();
 
-					if(attrValue.equals(this.confData.getHibDriver())){
-						node.setTextContent(this.confData.getDriver());
+					if(attrValue.equals(confData.getHibDriver())){
+						node.setTextContent(confData.getDriver());
 						res = true;
 					}
 
-					if(attrValue.equals(this.confData.getHibDialect())){
-						node.setTextContent(this.confData.getDialect());
+					if(attrValue.equals(confData.getHibDialect())){
+						node.setTextContent(confData.getDialect());
 						res = true;
 					}
 
-					if(attrValue.equals(this.confData.getHibUsername())){
+					if(attrValue.equals(confData.getHibUsername())){
 						node.setTextContent(usernameDB);
 						res = true;
 					}
 
-					if(attrValue.equals(this.confData.getHibPassword())){
+					if(attrValue.equals(confData.getHibPassword())){
 						node.setTextContent(passwordDB);
 						res = true;
 					}
 
-					if(attrValue.equals(this.confData.getHibUrl())){
+					if(attrValue.equals(confData.getHibUrl())){
 						StringBuilder sb = new StringBuilder(100);
-						sb.append(this.confData.getUrl());
-						sb.append(this.serverDB);
+						sb.append(confData.getUrl());
+						sb.append(serverDB);
 						sb.append(":");
-						sb.append(this.portaDB);
+						sb.append(portaDB);
 						sb.append("/");
-						sb.append(this.nomeDB);
+						sb.append(nomeDB);
 						String urlDB = sb.toString();
 						node.setTextContent(urlDB);
 						res = true;

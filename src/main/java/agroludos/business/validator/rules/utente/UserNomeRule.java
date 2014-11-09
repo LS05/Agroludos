@@ -1,18 +1,11 @@
 package agroludos.business.validator.rules.utente;
 
 import agroludos.business.validator.rules.AgroludosRule;
-import agroludos.business.validator.rules.strings.StringValidator;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.UtenteTO;
 
 class UserNomeRule extends AgroludosRule {
-	private StringValidator strValidator;
-
-	UserNomeRule(StringValidator strValidator) {
-		super();
-		this.strValidator = strValidator;
-	}
 
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
@@ -28,4 +21,5 @@ class UserNomeRule extends AgroludosRule {
 				this.successor.validate(user, errorTO);
 		}
 	}
+
 }

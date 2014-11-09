@@ -37,8 +37,17 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 	private NumberSpinner costoOptional;
 	private OptionalTO optional;
 	private List<StatoOptionalTO> listStatiOpt;
+
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
+
+	@Override
+	public void initializeView(String viewName) {
+		this.viewName = viewName;
+		this.lblStatoOptError.setVisible(false);
+		this.lblNomeOptError.setVisible(false);
+		this.lblCostoOptError.setVisible(false);
+	}
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
@@ -73,20 +82,6 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 		}
 	}
 
-	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
-
-		lblStatoOptError.setVisible(false);
-		lblNomeOptError.setVisible(false);
-		lblCostoOptError.setVisible(false);
-	}
-
-	@Override
-	protected String getViewName() {
-		return this.viewName;
-	}
-
 	@FXML protected void confermaModificaOptional(MouseEvent event){
 		this.optional.setNome(this.txtNomeOptional.getText());
 		this.optional.setDescrizione(this.txtAreaDescrizione.getText());
@@ -98,13 +93,16 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 		AgroRequest request = this.getRichiesta(this.optional, "modificaOptional", this.viewName);
 		AgroResponse response = this.getRisposta();
 		this.eseguiRichiesta(request, response);
-		
+
 		Object res = response.getRespData();
 		if(res instanceof OptionalTO)
 			this.close();
 	}
 
-
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override

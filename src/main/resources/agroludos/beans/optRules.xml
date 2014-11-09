@@ -23,7 +23,6 @@
 		  class="agroludos.business.validator.rules.optional.OptionalStatoRule"
 		  factory-bean="optRulesFactory"
 		  factory-method="getStatoRule">
-		  <property name="strValidator" ref="stringValidator" />
 	</bean>
 	
 </beans>

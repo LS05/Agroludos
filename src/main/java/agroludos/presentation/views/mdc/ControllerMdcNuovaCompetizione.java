@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -29,7 +30,6 @@ import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.QuestionTO;
-import agroludos.to.StatoCompetizioneTO;
 import agroludos.to.TipoCompetizioneTO;
 
 public class ControllerMdcNuovaCompetizione extends AgroludosController implements Initializable{

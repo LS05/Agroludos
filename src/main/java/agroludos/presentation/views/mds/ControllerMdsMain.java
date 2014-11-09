@@ -19,6 +19,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.components.table.TableCompetizioni;
@@ -129,7 +130,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	@Override
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
-		
+
 		this.paneGestioneCompetizioni.setVisible(true);
 		this.paneGestioneOptional.setVisible(false);
 		this.paneGestioneMdC.setVisible(false);

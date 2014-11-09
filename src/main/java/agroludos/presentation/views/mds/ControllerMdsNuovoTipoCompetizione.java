@@ -37,11 +37,6 @@ public class ControllerMdsNuovoTipoCompetizione extends AgroludosController impl
 	}
 
 	@Override
-	protected void initializeView(AgroludosTO mainTO) {
-		this.flagError = false;
-	}
-
-	@Override
 	protected void initializeView(String viewName) {
 		this.viewName = viewName;
 		this.flagError = false;
@@ -50,8 +45,8 @@ public class ControllerMdsNuovoTipoCompetizione extends AgroludosController impl
 	}
 
 	@Override
-	protected String getViewName() {
-		return this.viewName;
+	protected void initializeView(AgroludosTO mainTO) {
+		this.flagError = false;
 	}
 
 	@FXML protected void confermaNuovoTipoCompetizione(MouseEvent event) {
@@ -68,7 +63,11 @@ public class ControllerMdsNuovoTipoCompetizione extends AgroludosController impl
 			msgNuovoOpt.setMessage(this.res.getString("key129"));
 			this.setVista("messageDialog", msgNuovoOpt);
 		}
+	}
 
+	@Override
+	protected String getViewName() {
+		return this.viewName;
 	}
 
 	@Override
@@ -88,6 +87,5 @@ public class ControllerMdsNuovoTipoCompetizione extends AgroludosController impl
 				} 
 			}
 		}
-
 	}
 }

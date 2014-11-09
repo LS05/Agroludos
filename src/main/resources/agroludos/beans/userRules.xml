@@ -14,7 +14,6 @@
 		  factory-bean="userRulesFactory"
 		  factory-method="getNomeRule"
 		  scope="prototype">
-		  <constructor-arg ref="stringValidator" />
 	</bean>
 	
 	<bean id="userCognomeRule"
@@ -22,7 +21,6 @@
 		  factory-bean="userRulesFactory"
 		  factory-method="getCognomeRule"
 		  scope="prototype">
-		  <constructor-arg ref="stringValidator" />
 	</bean>
 	
 	<bean id="userUsernameRule"

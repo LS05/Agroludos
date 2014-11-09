@@ -13,7 +13,7 @@ class ListaViewTipi extends ListView<String>{
 	private ObservableList<String> names = FXCollections.observableArrayList();
 
 	ListaViewTipi(List<TipiAgroludosTO> mainList){
-		
+
 		for(TipiAgroludosTO item : mainList){
 			this.names.add(item.getNome());
 		}
@@ -21,7 +21,7 @@ class ListaViewTipi extends ListView<String>{
 		this.setItems(names);
 
 	}
-	
+
 	void addItem(TipiAgroludosTO tipo){
 		this.names.add(tipo.getNome());
 	}

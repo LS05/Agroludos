@@ -45,7 +45,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 	private CmpModel cmpModelRow;
 	private IscModel iscModelRow;
 
-	private boolean isCertValido = true;
+	private boolean isCertValido;
 
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
@@ -63,6 +63,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 	public void initializeView(String viewName) {
 		this.viewName = viewName;
 		this.currUser = (PartecipanteTO)this.getUtente();
+		this.isCertValido = true;
 
 		this.richiesta = this.getRichiesta(this.currUser, "isCertificatoValido", this.viewName);
 		this.risposta = this.getRisposta();

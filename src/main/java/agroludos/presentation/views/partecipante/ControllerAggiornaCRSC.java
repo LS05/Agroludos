@@ -21,6 +21,7 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.QuestionTO;
+import agroludos.to.SuccessMessageTO;
 
 public class ControllerAggiornaCRSC extends AgroludosController implements Initializable {
 	private String viewName;
@@ -34,6 +35,8 @@ public class ControllerAggiornaCRSC extends AgroludosController implements Initi
 	private File fileSrc;
 	private FileChooser fileChooser;
 	private PartecipanteTO parTO;
+
+	boolean flagError = false;
 
 	private ResourceBundle res;
 
@@ -80,9 +83,16 @@ public class ControllerAggiornaCRSC extends AgroludosController implements Initi
 	}
 
 	@FXML protected void btnAggiornaClicked(MouseEvent event){
+		this.hideErrors();
+		this.parTO.setDataSRC(this.dataSrcPicker.getSelectedDate());
+		this.parTO.setSrc(this.fileSrc.getAbsolutePath());
 		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta(this.parTO, "modificaPartecipante", this.viewName);
 		this.eseguiRichiesta(this.richiesta, this.risposta);
+		if( !this.flagError ){
+			this.close();
+			this.setVista("partecipante");
+		}
 	}
 
 	@FXML protected void btnCaricaClicked(MouseEvent event){
@@ -93,9 +103,9 @@ public class ControllerAggiornaCRSC extends AgroludosController implements Initi
 		}
 	}
 
-	@Override
-	protected String getViewName() {
-		return this.viewName;
+	private void hideErrors(){
+		this.lblDataSrcError.setVisible(false);
+		this.lblSrcError.setVisible(false);
 	}
 
 	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
@@ -107,6 +117,11 @@ public class ControllerAggiornaCRSC extends AgroludosController implements Initi
 	}
 
 	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
+
+	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 		Object res = response.getRespData();
@@ -114,7 +129,7 @@ public class ControllerAggiornaCRSC extends AgroludosController implements Initi
 		if( commandName.equals(this.getCommandName("modificaPartecipante") )){
 			if(res instanceof ErrorTO){
 				ErrorTO errors = (ErrorTO)res;
-
+				this.flagError = true;
 				if(errors.hasError(this.getError("srcKey"))){
 					this.showErrors(errors, this.lblSrcError, "srcKey");
 				}
@@ -122,6 +137,10 @@ public class ControllerAggiornaCRSC extends AgroludosController implements Initi
 				if(errors.hasError(this.getError("dataSrcKey"))){
 					this.showErrors(errors, this.lblDataSrcError, "dataSrcKey");
 				}
+			} else if(res instanceof PartecipanteTO){
+				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
+				succMessage.setMessage(this.res.getString("key179"));
+				this.setVista("messageDialog", succMessage);
 			}
 		}
 	}

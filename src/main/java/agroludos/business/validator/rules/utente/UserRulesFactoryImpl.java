@@ -18,12 +18,12 @@ class UserRulesFactoryImpl implements UserRulesFactory {
 
 	@Override
 	public AgroludosRule getNomeRule(){
-		return new UserNomeRule(this.strValidator);	
+		return new UserNomeRule();	
 	}
 
 	@Override
 	public AgroludosRule getCognomeRule(){ 
-		return new UserCognomeRule(this.strValidator);
+		return new UserCognomeRule();
 	}
 
 	@Override

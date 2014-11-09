@@ -39,6 +39,19 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 		return daoFile.getCertificatoSRCDAO();
 	}
 
+	private void setDatiPartecipante(PartecipanteTO partTO)
+			throws DatabaseException, ValidationException, IOException{
+
+		this.validator.validate(partTO);
+
+		CertificatoSRCDAO daoCert = this.getCertificatoSRCDAO();
+
+		daoCert.salvaCertificato(partTO);
+		partTO.setCertificato(daoCert.getCertificato(partTO));
+
+		return;
+	}
+
 	@Override
 	public PartecipanteTO inserisciPartecipante(PartecipanteTO partTO)
 			throws DatabaseException, ValidationException, IOException {
@@ -46,14 +59,7 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
 
 		if( !daoPar.esisteEmail(partTO) && !daoPar.esisteUsername(partTO) ){ 
-
-			this.validator.validate(partTO);
-
-			CertificatoSRCDAO daoCert = this.getCertificatoSRCDAO();
-
-			daoCert.salvaCertificato(partTO);
-			partTO.setCertificato(daoCert.getCertificato(partTO));
-
+			this.setDatiPartecipante(partTO);
 		} else {
 			throw new UtenteEsistenteException();
 		}
@@ -63,14 +69,14 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 	}
 
 	@Override
-	public PartecipanteTO modificaPartecipante(PartecipanteTO parto)
-			throws DatabaseException, ValidationException {
+	public PartecipanteTO modificaPartecipante(PartecipanteTO partTO)
+			throws DatabaseException, ValidationException, IOException {
 
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
 
-		this.validator.validate(parto);
+		this.setDatiPartecipante(partTO);
 
-		PartecipanteTO part = (PartecipanteTO)daoPar.update(parto);
+		PartecipanteTO part = (PartecipanteTO)daoPar.update(partTO);
 
 		return part;
 	}

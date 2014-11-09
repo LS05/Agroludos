@@ -8,7 +8,6 @@ import agroludos.to.TOFactory;
 public abstract class AgroludosAS {
 	protected SystemConf sysConf;
 	protected RulesErrorsConf errConf;
-	//TODO Da modificare in interfaccia
 	protected DBFactory dbFact;
 	protected TOFactory toFact;
 	

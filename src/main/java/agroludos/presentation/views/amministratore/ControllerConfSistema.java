@@ -82,13 +82,17 @@ public class ControllerConfSistema extends AgroludosController {
 		this.txtPasswordDB.setText("root");  
 	}
 
+	@Override
+	public void initializeView(AgroludosTO mainTO) {
+		// TODO Auto-generated method stub
+
+	}
+
 	/**
 	 * 
 	 * @param event
 	 */
 	@FXML protected void btnAvantiClicked(MouseEvent event) {	
-		System.out.println("INSERISCI CONF");
-		//copio il contenuto delle textfield nell'hashmap parametri
 		this.dbto.setTipo(this.cmbTipoDB.getValue());
 		this.dbto.setServer(this.txtServerDB.getText());
 		this.dbto.setPorta(this.txtPortaDB.getText());
@@ -126,6 +130,11 @@ public class ControllerConfSistema extends AgroludosController {
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
+
 	/**
 	 * 
 	 * @param request
@@ -148,16 +157,5 @@ public class ControllerConfSistema extends AgroludosController {
 				this.setVista("login");
 			}
 		}
-	}
-
-	@Override
-	public void initializeView(AgroludosTO mainTO) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected String getViewName() {
-		return this.viewName;
 	}
 }
