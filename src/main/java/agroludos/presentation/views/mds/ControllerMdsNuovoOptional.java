@@ -54,8 +54,8 @@ public class ControllerMdsNuovoOptional extends AgroludosController implements I
 	}
 	
 	@Override
-	protected void initializeView(String viewName) {
-		this.viewName = viewName;
+	protected void initializeView(String nameView) {
+		this.viewName = nameView;
 		this.lblStatoOptError.setVisible(false);
 		this.lblNomeOptError.setVisible(false);
 		this.lblCostoOptError.setVisible(false);

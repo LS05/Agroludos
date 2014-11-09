@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import agroludos.business.as.AgroludosService;
+import agroludos.business.as.gestorechiusura.LChiusura;
 import agroludos.business.as.gestorecompetizione.LCompetizione;
 import agroludos.business.as.gestorecompetizione.SCompetizione;
 import agroludos.business.as.gestoreconfigurazione.LConfigurazione;
@@ -68,7 +69,7 @@ class Services {
 	private LTipoUtente ltipoUtente;
 	private LEmail lemail;
 	private SEmail semail;
-
+	private LChiusura lchiusura;
 
 	private Map<String, AgroludosService> services;
 	private LOptional lopt;
@@ -76,6 +77,10 @@ class Services {
 	
 	Services(){
 		this.services = new HashMap<String,  AgroludosService>();
+	}
+	public void setLchiusura(LChiusura lchiusura) {
+		this.lchiusura = lchiusura;
+		this.services.put(LChiusura.class.getName(), this.lchiusura);
 	}
 
 	public void setLtipoopt(LTipoOptional ltipoopt) {

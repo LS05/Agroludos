@@ -86,8 +86,8 @@ public class ControllerMdsVisualizzaIscrizioni extends AgroludosController {
 	}
 
 	@Override
-	protected void initializeView(String viewName) {
-		this.viewName=viewName;
+	protected void initializeView(String nameView) {
+		this.viewName = nameView;
 	}
 
 	@Override

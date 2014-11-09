@@ -355,4 +355,10 @@
 			<forward success="visualizzaIscrizioni" failure="visualizzaIscrizioni" />
 		</from>
 	</command>
+		<command name="chiusura">
+		<classe>agroludos.business.as.gestorechiusura.LChiusura</classe>
+		<from name="aggiornaSRC">
+			<forward success="aggiornaSRC" failure="aggiornaSRC" />
+		</from>
+	</command>
 </commands>

@@ -39,8 +39,8 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 	private UtenteTO uTO;
 
 	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
+	public void initializeView(String nameView) {
+		this.viewName = nameView;
 
 		this.txtUsername.clear();
 		this.txtUsername.setPromptText(this.res.getString("key74"));

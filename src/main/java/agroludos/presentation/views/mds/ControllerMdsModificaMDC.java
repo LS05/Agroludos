@@ -53,8 +53,8 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 	}
 
 	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
+	public void initializeView(String nameView) {
+		this.viewName = nameView;
 		this.flagError = false;
 		this.lblUsernameError.setVisible(false);
 		this.lblNomeError.setVisible(false);

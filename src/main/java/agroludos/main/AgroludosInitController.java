@@ -53,8 +53,8 @@ public class AgroludosInitController extends AgroludosController{
 	}
 
 	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
+	public void initializeView(String nameView) {
+		this.viewName = nameView;
 
 	}
 

@@ -37,8 +37,8 @@ public class ControllerMdsNuovoTipoCompetizione extends AgroludosController impl
 	}
 
 	@Override
-	protected void initializeView(String viewName) {
-		this.viewName = viewName;
+	protected void initializeView(String nameView) {
+		this.viewName = nameView;
 		this.flagError = false;
 		this.txtNomeTipo.setText("");
 		this.lblNomeError.setVisible(false);

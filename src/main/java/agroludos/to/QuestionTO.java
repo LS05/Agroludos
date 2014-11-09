@@ -4,7 +4,7 @@ public interface QuestionTO extends AgroludosTO, Comparable<OptionalTO>{
 
 	public abstract String getViewName();
 
-	public abstract void setViewName(String viewName);
+	public abstract void setViewName(String nameView);
 
 	public abstract String getRequest();
 

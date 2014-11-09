@@ -82,8 +82,8 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 	}
 
 	@Override
-	protected void initializeView(String viewName) {
-		this.viewName = viewName;
+	protected void initializeView(String nameView) {
+		this.viewName = nameView;
 	}
 
 	@Override

@@ -29,8 +29,8 @@ public class ControllerError  extends AgroludosController{
 	}
 	
 	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
+	public void initializeView(String nameView) {
+		this.viewName = nameView;
 	}
 	
 	@Override

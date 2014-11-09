@@ -43,8 +43,8 @@ public class ControllerConfSistema extends AgroludosController {
 	
 
 	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
+	public void initializeView(String nameView) {
+		this.viewName = nameView;
 		this.mdsto = toFact.createMdSTO();
 		this.hideErrors();
 		this.checkBoxReveal.selectedProperty().addListener(new ChangeListener<Boolean>() {

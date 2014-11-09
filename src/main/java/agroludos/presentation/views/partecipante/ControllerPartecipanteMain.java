@@ -15,8 +15,8 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;
+import agroludos.to.QuestionTO;
 import agroludos.to.SuccessMessageTO;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,6 +25,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class ControllerPartecipanteMain extends ControllerUtenti implements Initializable{
 	private String viewName;
@@ -60,8 +62,17 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 	}
 
 	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
+	public void initializeView(String nameView) {
+		this.viewName = nameView;
+
+		final Stage stage = this.getStage(this.viewName);
+		//aggiungo l'evento close vista quando si chiude lo stage
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent we) {
+				chiusura();
+			}
+		});
+
 		this.currUser = (PartecipanteTO)this.getUtente();
 		this.isCertValido = true;
 
@@ -75,11 +86,11 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 			this.tableIscrizioni = new TableIscrizioni();
 			this.tableCompetizioni = new TableCompetizioni();
 			this.tableCompetizioni.hideColumn(3);
-			
+
 			this.richiesta = this.getRichiesta(this.currUser,"getAllIscrizioniAttive", this.viewName);
 			this.risposta = this.getRisposta();
 			this.eseguiRichiesta(this.richiesta, this.risposta);
-			
+
 			this.paneIscrizioni.add(this.tableIscrizioni, 0, 1);
 			this.tableIscrizioni.hideColumn(4);
 			this.richiesta = this.getRichiesta("getCompetizioniAperte", this.viewName);
@@ -149,7 +160,15 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 	}
 
 	@FXML protected void menuEsci(ActionEvent event){
-		this.close();
+		chiusura();
+	}
+
+	private void chiusura(){
+		QuestionTO question = toFact.createQuestionTO();
+		question.setQuestion(res.getString("key180"));
+		question.setRequest("chiusura");
+		question.setViewName(viewName);
+		setVista("questionDialog", question);
 	}
 
 	@SuppressWarnings({ "unchecked" })
@@ -184,14 +203,14 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 				this.richiesta = this.getRichiesta(this.currUser,"getAllIscrizioniAttive", this.viewName);
 				this.risposta = this.getRisposta();
 				this.eseguiRichiesta(this.richiesta, this.risposta);
-				
+
 				this.closeVista("partMostraIscrizione");
 				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.res.getString("key123"));
 				this.setVista("messageDialog",succMessage);
 
 				IscrizioneTO iscTO = ((IscrizioneTO) res);
-				
+
 				//TODO ControllerPartecipanteMain Invio Mail
 				EmailTO mail = toFact.createEmailTO();
 				mail.setOggetto("Iscrizione annullata");
@@ -215,7 +234,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 				this.eseguiRichiesta(this.richiesta, this.risposta);
 				this.tableCompetizioni.setAll(this.listComp);
 
-				
+
 				this.closeVista("partMostraCompetizione");
 
 				SuccessMessageTO succ = toFact.createSuccMessageTO();
@@ -225,8 +244,8 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 				/*
 				 * TODO PartecipanteMain - Email
 				 */
-				
-				
+
+
 				EmailTO mail = toFact.createEmailTO();
 				mail.setOggetto(iscTO.getPartecipante().getUsername() + " si è iscritto "
 						+ "alla competizione " + iscTO.getCompetizione().getNome());

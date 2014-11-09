@@ -23,7 +23,7 @@ import agroludos.to.PartecipanteTO;
 import agroludos.to.QuestionTO;
 import agroludos.to.SuccessMessageTO;
 
-public class ControllerAggiornaCRSC extends AgroludosController implements Initializable {
+public class ControllerAggiornaCSRC extends AgroludosController implements Initializable {
 	private String viewName;
 
 	@FXML private Label lblSrc;
@@ -69,15 +69,13 @@ public class ControllerAggiornaCRSC extends AgroludosController implements Initi
 		aggiornaStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
 			public void handle(WindowEvent we) {
+				//TODO
 				QuestionTO question = toFact.createQuestionTO();
 				question.setQuestion(res.getString("key177"));
-				question.setDataTO(parTO);
-				question.setRequest("eliminaIscrizione");
+				question.setRequest("chiusura");
 				question.setViewName(viewName);
-
 				setVista("questionDialog", question);
 			}
-
 		});
 	}
 

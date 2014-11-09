@@ -67,7 +67,7 @@ class ViewsCache {
 				width =  bounds.getWidth();		
 				//creo la scena	e la aggiungo al mainStage
 				Scene mainViewScene = new Scene(root, width, height);
-				Stage stage = new Stage(StageStyle.TRANSPARENT);
+				Stage stage = new Stage(StageStyle.DECORATED);
 				stage.setScene(mainViewScene);
 				stage.setTitle(window.getTitle());
 				//setto il mainStage

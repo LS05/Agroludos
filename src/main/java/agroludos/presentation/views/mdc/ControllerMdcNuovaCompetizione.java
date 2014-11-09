@@ -72,9 +72,9 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 	}
 
 	@Override
-	public void initializeView(String viewName) {
+	public void initializeView(String nameView) {
 		this.cmpto = toFact.createCompetizioneTO();
-		this.viewName = viewName;
+		this.viewName = nameView;
 
 		lblNomeCmpError.setVisible(false);
 		lblTipoCmpError.setVisible(false);
