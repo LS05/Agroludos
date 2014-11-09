@@ -173,10 +173,23 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		StatoCompetizioneDAO daoScmp = dbDAOFact.getStatoCompetizioneDAO();
 		cmpto.setStatoCompetizione(daoScmp.getStatoCmpAnnullata());
 		daoCmp.annullaCompetizione(cmpto);
-
 		IscrizioneDAO iscDao = getIscrizioneDAO();
-		iscDao.terminaIscrizioni(cmpto);
+		
 
+		//TODO invia mail
+		EmailTO mail = toFact.createEmailTO();
+		mail.setOggetto(cmpto.getNome() + " annullata.");
+		mail.setMittente(cmpto.getManagerDiCompetizione());
+		mail.setMessage("La competizione " + cmpto.getNome() + "  è stata annullata.");
+
+		List<IscrizioneTO> listIsc = iscDao.getIscrizioniAttiveCmp(cmpto);
+		for(IscrizioneTO iscTO: listIsc){
+			mail.addDestinatario(iscTO.getPartecipante());
+		}
+
+		
+		iscDao.terminaIscrizioni(cmpto);
+		
 		return cmpto;
 	}
 

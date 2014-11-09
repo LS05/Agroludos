@@ -10,7 +10,6 @@ import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;
-
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -107,6 +106,7 @@ public class ControllerMdsProfiloPartecipante extends AgroludosController{
 		return this.viewName;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();

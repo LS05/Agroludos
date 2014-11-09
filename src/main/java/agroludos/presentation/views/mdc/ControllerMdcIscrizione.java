@@ -8,10 +8,10 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.components.table.TableOptional;
 import agroludos.to.AgroludosTO;
-import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.QuestionTO;
 import agroludos.to.SuccessMessageTO;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -49,11 +49,6 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 	private TableOptional tableOptional;
 
 	private ResourceBundle res;
-
-	private AgroResponse risposta;
-
-	private AgroRequest richiesta;
-
 
 	@Override
 	public void initializeView(String nameView) {
@@ -114,7 +109,7 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 		question.setQuestion(this.res.getString("key159"));
 
 		question.setDataTO(this.iscto);
-		question.setRequest("eliminaIscrizione");
+		question.setRequest("eliminaIscrizioneByMdc");
 		question.setViewName(this.viewName);
 
 		this.setVista("questionDialog", question);
@@ -131,7 +126,7 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		if(commandName.equals( this.getCommandName("modificaIscrizione"))){
+		if(commandName.equals( this.getCommandName("modificaIscrizioneByMdc"))){
 			Object res = response.getRespData();
 			if(res instanceof IscrizioneTO){			
 				IscrizioneTO isc = (IscrizioneTO) res;
@@ -142,21 +137,6 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 
 				this.setVista("messageDialog",succMessage);
 				
-				IscrizioneTO iscTO = ((IscrizioneTO) res);
-				EmailTO mail = toFact.createEmailTO();
-				mail.setOggetto("Modifica iscrizione");
-				mail.setMessage(iscTO.getPartecipante().getUsername() + " abbiamo modificato l'iscrizione"
-						+ " alla competizione " + iscTO.getCompetizione().getNome()
-						+ " cambiando gli optional. I nuovi optional sono i seguenti: "
-						+ iscTO.getAllOptionals().toString()
-						+ " e il costo totale dell'iscrizione ora è: "
-						+ iscTO.getCosto());
-				
-				mail.addDestinatario(iscTO.getPartecipante());
-				
-				this.risposta = this.getRisposta();
-				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
-				this.eseguiRichiesta(this.richiesta, this.risposta);
 			}
 		}
 	}

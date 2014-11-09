@@ -91,7 +91,7 @@
 			<forward success="managerDiCompetizione" failure="mostraCmp" />
 		</from>
 	</command>
-	<command name="eliminaIscrizione">
+	<command name="eliminaIscrizioneByMdc">
 		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
 		<from name="mostraCmp">
 			<forward success="managerDiCompetizione" failure="mostraCmp" />
@@ -99,6 +99,12 @@
 		<from name="mostraIscrizione">
 			<forward success="managerDiCompetizione" failure="mostraIscrizoine" />
 		</from>
+		<from name="partMostraIscrizione">
+			<forward success="partecipante" failure="partMostraIscrizione" />
+		</from>
+	</command>
+		<command name="eliminaIscrizioneByPartecipante">
+		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
 		<from name="partMostraIscrizione">
 			<forward success="partecipante" failure="partMostraIscrizione" />
 		</from>
@@ -262,13 +268,16 @@
 			<forward success="partecipante" failure="partMostraCompetizione" />
 		</from>
 	</command>
-	<command name="modificaIscrizione">
+	<command name="modificaIscrizioneByPartecipante">
+		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
+		<from name="selezionaOptionalPart">
+			<forward success="partMostraIscrizione" failure="partMostraIscrizione" />
+		</from>
+	</command>
+		<command name="modificaIscrizioneByMdc">
 		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
 		<from name="modificaOptionalPartecipante">
 			<forward success="mostraIscrizione" failure="modificaOptionalPartecipante" />
-		</from>
-		<from name="selezionaOptionalPart">
-			<forward success="partMostraIscrizione" failure="partMostraIscrizione" />
 		</from>
 	</command>
 	<command name="getAllStatoIscrizione">
@@ -359,6 +368,15 @@
 		<classe>agroludos.business.as.gestorechiusura.LChiusura</classe>
 		<from name="aggiornaSRC">
 			<forward success="aggiornaSRC" failure="aggiornaSRC" />
+		</from>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+		<from name="managerDiCompetizione">
+			<forward success="managerDiCompetizione" failure="managerDiCompetizione" />
+		</from>
+		<from name="partecipante">
+			<forward success="partecipante" failure="partecipante" />
 		</from>
 	</command>
 </commands>

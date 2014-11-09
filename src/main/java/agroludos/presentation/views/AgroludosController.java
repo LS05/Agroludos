@@ -86,7 +86,7 @@ public abstract class AgroludosController {
 	public void setController(Controller ctrl) {
 		controller = ctrl;
 	}
-
+	
 	protected abstract void initializeView(AgroludosTO mainTO);
 
 	protected abstract void initializeView(String viewName);

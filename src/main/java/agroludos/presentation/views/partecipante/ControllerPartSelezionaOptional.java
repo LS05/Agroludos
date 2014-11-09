@@ -404,7 +404,7 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 		this.close();
 
 		this.risposta = this.getRisposta();
-		this.richiesta = this.getRichiesta(this.mainIscr, "modificaIscrizione", this.viewName);
+		this.richiesta = this.getRichiesta(this.mainIscr, "modificaIscrizioneByPartecipante", this.viewName);
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 

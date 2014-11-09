@@ -14,6 +14,7 @@ import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.IscrizioneDAO;
 import agroludos.integration.dao.db.StatoIscrizioneDAO;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.StatoIscrizioneTO;
@@ -69,7 +70,7 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 			if(!iscrizioneEsistente(iscTO)){
 				if(!numeroMaxRaggiunto(cmp)){
 					this.validator.validate(iscTO);
-					
+
 					StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
 
 					List<StatoIscrizioneTO> listSI = statoIscDAO.getAll();
@@ -77,21 +78,102 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 					iscTO.setStatoIscrizione(listSI.get(1));
 
 					iscTO = iscDAO.create(iscTO);
+					
+					//TODO invia email
+					EmailTO mail = toFact.createEmailTO();
+					mail.setOggetto(iscTO.getPartecipante().getUsername() + " si è iscritto "
+							+ "alla competizione " + iscTO.getCompetizione().getNome());
+					mail.setMessage("Dati iscrizione: "
+							+ iscTO.getPartecipante().toString() 
+							+ " costo "
+							+ iscTO.getCosto()
+							+ " optional scelti "
+							+ iscTO.getAllOptionals().toString());
+
+					mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
 				}
 			}
 		}
 		return iscTO;
 	}
 
+
 	@Override
-	public IscrizioneTO modificaIscrizione(IscrizioneTO iscTO)
+	public IscrizioneTO modificaIscrizioneByMdc(IscrizioneTO iscTO)
+			throws DatabaseException {
+		iscTO = modificaIscrizione(iscTO);
+
+		//TODO invia email
+		EmailTO mail = toFact.createEmailTO();
+		mail.setOggetto("Modifica iscrizione");
+		mail.setMessage(iscTO.getPartecipante().getUsername() + " abbiamo modificato l'iscrizione"
+				+ " alla competizione " + iscTO.getCompetizione().getNome()
+				+ " cambiando gli optional. I nuovi optional sono i seguenti: "
+				+ iscTO.getAllOptionals().toString()
+				+ " e il costo totale dell'iscrizione ora è: "
+				+ iscTO.getCosto());
+		
+		mail.addDestinatario(iscTO.getPartecipante());
+
+		return iscTO;
+	}
+
+	@Override
+	public IscrizioneTO modificaIscrizioneByPartecipante(IscrizioneTO iscTO)
+			throws DatabaseException {
+		iscTO = modificaIscrizione(iscTO);
+
+		//TODO invia email
+		EmailTO mail = toFact.createEmailTO();
+		mail.setOggetto("Modifca optional");
+		mail.setMessage(iscTO.getPartecipante().getUsername() + " ha modificato l'iscrizione "
+				+ "alla competizione " + iscTO.getCompetizione().getNome()
+				+ " scegliendo i seguenti optional: "
+				+ iscTO.getAllOptionals().toString());
+
+		mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
+
+		return iscTO;
+	}
+
+	private IscrizioneTO modificaIscrizione(IscrizioneTO iscTO)
 			throws DatabaseException {
 		IscrizioneDAO iscDAO = getIscrizioneDAO();
 		return iscDAO.update(iscTO);
 	}
+	
+	@Override
+	public IscrizioneTO eliminaIscrizioneByMdc(IscrizioneTO iscTO) throws DatabaseException{
+		iscTO = eliminaIscrizione(iscTO);
+
+		//TODO invia email
+		EmailTO mail = toFact.createEmailTO();
+		mail.setOggetto("Iscrizione annullata");
+		mail.setMessage(iscTO.getPartecipante().getUsername() + " abbiamo annullato l'iscrizione "
+				+ "alla competizione " + iscTO.getCompetizione().getNome()
+				+ "per i seguenti motivi: ");
+
+		mail.addDestinatario(iscTO.getPartecipante());
+
+		return iscTO;
+	}
 
 	@Override
-	public IscrizioneTO eliminaIscrizione(IscrizioneTO iscTO)
+	public IscrizioneTO eliminaIscrizioneByPartecipante(IscrizioneTO iscTO) throws DatabaseException{
+		iscTO = eliminaIscrizione(iscTO);
+
+		//TODO invia email
+		EmailTO mail = toFact.createEmailTO();
+		mail.setOggetto("Iscrizione annullata");
+		mail.setMessage(iscTO.getPartecipante().getUsername() + " ha annullato l'iscrizione "
+				+ "alla competizione " + iscTO.getCompetizione().getNome());
+
+		mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
+
+		return iscTO;
+	}
+
+	private IscrizioneTO eliminaIscrizione(IscrizioneTO iscTO)
 			throws DatabaseException {
 
 		IscrizioneDAO iscDAO = getIscrizioneDAO();
@@ -103,6 +185,7 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 
 		return iscDAO.annullaIscrizione(iscTO);
 	}
+
 
 	@Override
 	public List<IscrizioneTO> getAllIscrizione() throws DatabaseException {
@@ -127,18 +210,18 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 	private boolean iscrizioneEsistente(IscrizioneTO isc) throws DatabaseException, IscrizioneEsistenteException {
 		boolean res = false;
 		List<IscrizioneTO> listIscCmp = getIscrizioneDAO().getIscrizioniAttiveCmp(isc.getCompetizione());
-		
+
 		for(IscrizioneTO tempIsc: listIscCmp){
 			if(tempIsc.getPartecipante().getId()==isc.getPartecipante().getId())
 				throw new IscrizioneEsistenteException();
 		}
 		return res;
 	}
-	
+
 	private boolean numeroMaxRaggiunto(CompetizioneTO cmp) throws DatabaseException, NmaxRaggiuntoException {
 		boolean res = false;
 		List<IscrizioneTO> listIscCmp = getIscrizioneDAO().getIscrizioniAttiveCmp(cmp);
-		
+
 		if(listIscCmp.size()==cmp.getNmax())
 			throw new NmaxRaggiuntoException();
 
@@ -148,7 +231,7 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 	@Override
 	public List<IscrizioneTO> getAllIscrizioniAttiveByCmp(CompetizioneTO cmpTO)
 			throws DatabaseException {
-		
+
 		List<IscrizioneTO> listIscCmp = getIscrizioneDAO().getIscrizioniAttiveCmp(cmpTO);
 		return listIscCmp;
 	}

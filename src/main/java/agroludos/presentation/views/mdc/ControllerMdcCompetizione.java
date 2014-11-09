@@ -188,7 +188,7 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 		question.setQuestion(this.resources.getString("key159"));
 
 		question.setDataTO(iscto);
-		question.setRequest("eliminaIscrizione");
+		question.setRequest("eliminaIscrizioneByMdc");
 		question.setViewName(this.viewName);
 
 		this.setVista("questionDialog", question);
@@ -213,6 +213,7 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();

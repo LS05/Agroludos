@@ -75,6 +75,7 @@ public class ControllerAggiornaCSRC extends AgroludosController implements Initi
 				question.setRequest("chiusura");
 				question.setViewName(viewName);
 				setVista("questionDialog", question);
+				getStage(viewName).show();
 			}
 		});
 	}

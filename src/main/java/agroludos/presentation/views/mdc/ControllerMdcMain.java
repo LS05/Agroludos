@@ -10,11 +10,11 @@ import agroludos.presentation.views.components.tablemodel.CmpModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
-import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.QuestionTO;
 import agroludos.to.SuccessMessageTO;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -63,8 +63,6 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 	private AgroRequest richiesta;
 
 	private List<IscrizioneTO> listIsc;
-
-
 
 	@Override
 	public void initializeView(String nameView) {
@@ -116,7 +114,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 			this.risposta = this.getRisposta();
 			this.eseguiRichiesta(this.richiesta, this.risposta);
 			
-			//cmpModel.setIscritti(String.valueOf(this.listIsc.size()));
+			cmpModel.setNiscritti(this.listIsc.size());
 			cmpModel.setNmax(String.valueOf(cmpTO.getNmax()));
 			cmpModel.setNmin(String.valueOf(cmpTO.getNmin()));
 			cmpModel.setNome(cmpTO.getNome());
@@ -177,6 +175,13 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 		for(CompetizioneTO cmp : this.listCmp){
 			modelCmp = new CmpModel(cmp);
 			res.add(modelCmp);
+			
+			//richiesta per ottenere le iscrizioni attive di questa competizione
+			this.richiesta = this.getRichiesta(cmp, "getAllIscrizioniAttiveByCmp", this.viewName);
+			this.risposta = this.getRisposta();
+			this.eseguiRichiesta(this.richiesta, this.risposta);
+			
+			modelCmp.setNiscritti(this.listIsc.size());
 		}
 
 		return res;
@@ -218,25 +223,14 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 				this.setVista("messageDialog",succMessage);
 
-				EmailTO mail = toFact.createEmailTO();
-				mail.setOggetto(cmp.getNome() + " annullata.");
-				mail.setMittente(cmp.getManagerDiCompetizione());
-				mail.setMessage("La competizione " + cmp.getNome() + "  è stata annullata.");
 
-				for(IscrizioneTO iscTO: this.listIsc){
-					mail.addDestinatario(iscTO.getPartecipante());
-				}
-
-				this.risposta = this.getRisposta();
-				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
-				this.eseguiRichiesta(this.richiesta, this.risposta);
 			}
 		}else if(commandName.equals( this.getCommandName("getCompetizioneAttiveByMdc"))){
 			Object res = response.getRespData();
 			if(res instanceof List<?>){
 				this.listCmp = (List<CompetizioneTO>) res;
 			}
-		}else if(commandName.equals( this.getCommandName("eliminaIscrizione"))){
+		}else if(commandName.equals( this.getCommandName("eliminaIscrizioneByMdc"))){
 			Object res = response.getRespData();
 			if(res instanceof IscrizioneTO){
 				this.listaTabCmp.clear();
@@ -250,19 +244,6 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 				succMessage.setMessage(this.resources.getString("key123"));
 				this.setVista("messageDialog",succMessage);
 
-
-				IscrizioneTO iscTO = ((IscrizioneTO) res);
-				EmailTO mail = toFact.createEmailTO();
-				mail.setOggetto("Iscrizione annullata");
-				mail.setMessage(iscTO.getPartecipante().getUsername() + " abbiamo annullato l'iscrizione "
-						+ "alla competizione " + iscTO.getCompetizione().getNome()
-						+ "per i seguenti motivi: ");
-
-				mail.addDestinatario(iscTO.getPartecipante());
-
-				this.risposta = this.getRisposta();
-				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
-				this.eseguiRichiesta(this.richiesta, this.risposta);
 			}
 		}else if(commandName.equals( this.getCommandName("inserisciCompetizione") )){
 			Object res = response.getRespData();
@@ -283,29 +264,10 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 				this.initializeView((CompetizioneTO)res);
 				this.setVista("mostraCmp", (CompetizioneTO)res);	
 
-				CompetizioneTO cmp = (CompetizioneTO) res;
-
 				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.resources.getString("key99"));
 
 				this.setVista("messageDialog",succMessage);
-
-				//controllo se il numero massimo di partecipanti ha raggiunto il limite
-				
-				//invio email agli iscritti
-				EmailTO mail = toFact.createEmailTO();
-				mail.setOggetto("Modifica competizione " + cmp.getNome());
-				mail.setMittente(cmp.getManagerDiCompetizione());
-				mail.setMessage("La competizione " + cmp.getNome() + " ha subito modifiche,"
-						+ " la invito a prendere visione.");
-
-				for(IscrizioneTO iscTO: this.listIsc){
-					mail.addDestinatario(iscTO.getPartecipante());
-				}
-
-				this.risposta = this.getRisposta();
-				this.richiesta = this.getRichiesta(mail, "sendEmail", this.viewName);
-				this.eseguiRichiesta(this.richiesta, this.risposta);
 
 			}
 		}else if( commandName.equals( this.getCommandName("getAllIscrizioniAttiveByCmp") )){

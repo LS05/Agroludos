@@ -262,7 +262,7 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 			this.mainIsc.addOptional(optMod.getOptTO());
 		}
 		this.risposta = this.getRisposta();
-		this.richiesta = this.getRichiesta(this.mainIsc, "modificaIscrizione", this.viewName);
+		this.richiesta = this.getRichiesta(this.mainIsc, "modificaIscrizioneByMdc", this.viewName);
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		this.close();
