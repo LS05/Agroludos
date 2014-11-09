@@ -76,4 +76,15 @@ class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements 
 		return res;
 	}
 
+	@Override
+	public List<CompetizioneTO> getCompetizioniByTipo(TipoCompetizioneTO tcmto) throws DatabaseException {
+		List<TipoCompetizioneTO> param = new ArrayList<TipoCompetizioneTO>();
+		param.add(tcmto);
+
+		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioniByTipo", param);
+
+
+		return res;
+	}
+
 }

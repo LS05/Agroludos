@@ -130,13 +130,6 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 * 
 	 */
 	void clearOptionals();
-	
-	/**
-	 * Ritorna la lista dei partecipanti attualmente iscritti a questa competizione.
-	 * 
-	 * @return Una {@code List} di partecipanti iscritti alla competizione.
-	 */
-	List<PartecipanteTO> getAllIscritti();
 
 	/**
 	 * Ritorna la lista degli optional scelti per questa competizione.
@@ -145,21 +138,6 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 */
 	List<OptionalTO> getAllOptionals();
 
-	/**
-	 * Ritorna la lista delle iscrizioni alla competizione.
-	 * Diversamente da {@link getAllIscritti} grazie a questo metodo è possibile
-	 * ottenere informazioni riguardanti gli optional scelti per l'iscrizione o altre
-	 * informazioni riguardanti specificatamente un'iscrizione.
-	 * 
-	 * @return
-	 */
-	List<IscrizioneTO> getAllIscrizioni();
-
-	boolean isTerminata();
-
-	boolean isChiusa();
-
-	//TODO
 	TipoCompetizioneTO getTipoCompetizione();
 	StatoCompetizioneTO getStatoCompetizione();
 	ManagerDiCompetizioneTO getManagerDiCompetizione();

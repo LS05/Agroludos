@@ -203,16 +203,8 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	@Override
 	public List<CompetizioneTO> getCompetizioniByTipo(TipoCompetizioneTO tcmto)
 			throws DatabaseException {
-		TipoCompetizioneDAO daoTipo = this.getTipoCompetizioneDAO();
-		List<TipoCompetizioneTO> listaTipi = daoTipo.getAll();
-		List<CompetizioneTO> res = null;
-
-		for(TipoCompetizioneTO item : listaTipi){
-			if(item.getNome().equals(tcmto.getNome())){
-				res = item.getAllCompetizioni();
-				break;
-			}
-		}
+		
+		List<CompetizioneTO> res = getCompetizioneDAO().getCompetizioniByTipo(tcmto);
 
 		return checkCmp(res);
 	}
@@ -230,24 +222,6 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 
 		return checkCmp(daoCmp.readById(cmpto.getId()));
 	}
-
-	@Override
-	public List<CompetizioneTO> getCompetizioneByTipo(TipoCompetizioneTO tcmto)
-			throws DatabaseException {
-		TipoCompetizioneDAO tcDao = this.getTipoCompetizioneDAO();
-		List<TipoCompetizioneTO> tipiComp = tcDao.getAll();
-		List<CompetizioneTO> res = null;
-
-		for(TipoCompetizioneTO tipo : tipiComp){
-			if(tipo.getNome().equals(tcmto.getNome())){
-				res = tipo.getAllCompetizioni();
-				break;
-			}
-		}
-
-		return checkCmp(res);
-	}
-
 
 	@Override
 	public List<CompetizioneTO> getCompetizioniAperte()

@@ -1,6 +1,5 @@
 package agroludos.to;
 
-import java.util.List;
 
 public interface TipoCompetizioneTO extends TipiAgroludosTO, AgroludosTO, Comparable<TipoCompetizioneTO>{
 	
@@ -13,6 +12,4 @@ public interface TipoCompetizioneTO extends TipiAgroludosTO, AgroludosTO, Compar
 	public void setDescrizione(String descrizione);
 	
 	public Integer getId();
-
-	List<CompetizioneTO> getAllCompetizioni();
 }

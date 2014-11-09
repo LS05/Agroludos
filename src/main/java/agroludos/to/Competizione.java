@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 
 /**
  * Implementazione dell'interfaccia CompetizioneTO. L'implementazione sull'assunzione
@@ -33,8 +32,6 @@ class Competizione implements CompetizioneTO{
 	private int idStato;
 
 	private Set<Optional> optionals;
-	private Set<Partecipante> iscritti;
-	private Set<Iscrizione> iscrizioni;
 	private Set<Iscrizione> iscrizioniAttive;
 	private TipoCompetizione tipoCompetizione;
 	private StatoCompetizione statoCompetizione;
@@ -182,25 +179,6 @@ class Competizione implements CompetizioneTO{
 		this.optionals.clear();
 	}
 
-	public Set<Partecipante> getPartecipanti() {
-		return iscritti;
-	}
-
-	public void setPartecipanti(Set<Partecipante> partecipanti) {
-		this.iscritti = partecipanti;
-	}
-
-	@Override
-	public List<PartecipanteTO> getAllIscritti() {
-		List<PartecipanteTO> res = new ArrayList<PartecipanteTO>();
-
-		for(Partecipante item : this.iscritti){
-			res.add(item);
-		}
-
-		return res;
-	}
-
 	public void setIscrizioniAttive(Set<Iscrizione> iscrizioniAttive) {
 		this.iscrizioniAttive = iscrizioniAttive;
 	}
@@ -215,53 +193,6 @@ class Competizione implements CompetizioneTO{
 
 		for(Iscrizione item : this.iscrizioniAttive){
 			res.add(item);
-		}
-
-		return res;
-	}
-
-	public Set<Iscrizione> getIscrizioni() {
-		return iscrizioni;
-	}
-
-	public void setIscrizioni(Set<Iscrizione> iscrizioni) {
-		this.iscrizioni = iscrizioni;
-	}
-
-	@Override
-	public List<IscrizioneTO> getAllIscrizioni() {
-		List<IscrizioneTO> res = new ArrayList<IscrizioneTO>();
-
-		for(Iscrizione item : this.iscrizioni){
-			res.add(item);
-		}
-
-		return res;
-	}
-	
-	
-	//TODO Da inserire nel validator?
-
-	@Override
-	public boolean isTerminata(){
-		LocalDate date = new DateTime(this.getData()).toLocalDate();
-		LocalDate today = new DateTime().toLocalDate();
-		boolean res = false;
-
-		if(date.isBefore(today)){
-			res = true;
-		}
-
-		return res;
-	}
-
-	@Override
-	public boolean isChiusa(){
-		DateTime date = new DateTime().withTimeAtStartOfDay();
-		boolean res = false;
-
-		if(date.plusDays(2).isEqual(this.suppData)){
-			res = true;
 		}
 
 		return res;
@@ -308,7 +239,6 @@ class Competizione implements CompetizioneTO{
 		.append(", nmax=").append(nmax).append(", descrizione=")
 		.append(descrizione).append(", costo=").append(costo)
 		.append(", optionals=").append(optionals).append(", iscritti=")
-		.append(iscritti).append(", iscrizioni=").append(iscrizioni)
 		.append(", tipoCompetizione=").append(tipoCompetizione)
 		.append(", statoCompetizione=").append(statoCompetizione)
 		.append(", managerDiCompetizione=")

@@ -22,5 +22,7 @@ public interface CompetizioneDAO extends DAO<CompetizioneTO>{
 	List<CompetizioneTO> readCompetizioniAperte() throws DatabaseException;
 
 	List<CompetizioneTO> readByMdc(ManagerDiCompetizioneTO mdcto)throws DatabaseException;
+
+	List<CompetizioneTO> getCompetizioniByTipo(TipoCompetizioneTO tcmto) throws DatabaseException;
 	
 }

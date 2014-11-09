@@ -328,4 +328,10 @@
 			<forward success="aggiornaSRC" failure="aggiornaSRC" />
 		</from>
 	</command>
+	<command name="getOptionalAttiviByTipo">
+		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
+		<from name="selezionaOptional">
+			<forward success="selezionaOptional" failure="selezionaOptional" />
+		</from>
+	</command>
 </commands>
