@@ -1,9 +1,7 @@
 package agroludos.business.as.gestoreconfigurazione;
 
 import agroludos.business.as.AgroludosAS;
-import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.DatabaseException;
-import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.file.FConfigurazioneDAO;
 import agroludos.integration.dao.file.FileDAOFactory;
 import agroludos.integration.dao.file.FileFactory;
@@ -27,20 +25,15 @@ class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SC
 
 	private SystemConf sysConf;
 
-	private AgroludosValidator validator;
-
-	ASGestoreConfigurazione(SystemConf sysConf, FileFactory filefact, AgroludosValidator validator){
+	ASGestoreConfigurazione(SystemConf sysConf, FileFactory filefact){
 		this.sysConf = sysConf;
-		this.validator = validator;
 		this.fileDaoFact = filefact.getDAOFactory(this.sysConf.getTipoConf());
 		this.fileConf = this.fileDaoFact.getConfigurazioneDAO();
 	}
 
 	@Override
-	public boolean inserisciConfigurazione(DatabaseTO dbto) throws DatabaseException, ValidationException {
+	public boolean inserisciConfigurazione(DatabaseTO dbto) throws DatabaseException {
 		boolean res = false;
-
-		this.validator.validate(dbto);
 
 		if(this.fileConf.creaConfigurazione(dbto)){
 			res = true;
