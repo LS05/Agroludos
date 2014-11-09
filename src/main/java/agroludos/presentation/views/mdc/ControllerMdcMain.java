@@ -94,22 +94,22 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 		}else if(mainTO instanceof CompetizioneTO){
 
 			CompetizioneTO cmpTO = (CompetizioneTO) mainTO;
-			CmpModel cmp = this.tableCompetizione.getItems().get(this.tableCompetizione.getSelectionModel().getSelectedIndex());
-			cmp.setCompetizioneTO(cmpTO);
-			cmp.setData(cmpTO.getData().toString());
-			cmp.setId(cmpTO.getId().toString());
+			CmpModel cmpModel = this.tableCompetizione.getItems().get(this.tableCompetizione.getSelectionModel().getSelectedIndex());
+			cmpModel.setCompetizioneTO(cmpTO);
+			cmpModel.setData(cmpTO.getData().toString());
+			cmpModel.setId(cmpTO.getId().toString());
 			
 			//richiesta per ottenere le iscrizioni attive di questa competizione
 			this.richiesta = this.getRichiesta(cmpTO, "getAllIscrizioniAttiveByCmp", this.viewName);
 			this.risposta = this.getRisposta();
 			this.eseguiRichiesta(this.richiesta, this.risposta);
 			
-			cmp.setIscritti(String.valueOf(this.listIsc.size()));
-			cmp.setNmax(String.valueOf(cmpTO.getNmax()));
-			cmp.setNmin(String.valueOf(cmpTO.getNmin()));
-			cmp.setNome(cmpTO.getNome());
-			cmp.setStato(cmpTO.getStatoCompetizione().getNome());
-			cmp.setTipo(cmpTO.getTipoCompetizione().getNome());			
+			//cmpModel.setIscritti(String.valueOf(this.listIsc.size()));
+			cmpModel.setNmax(String.valueOf(cmpTO.getNmax()));
+			cmpModel.setNmin(String.valueOf(cmpTO.getNmin()));
+			cmpModel.setNome(cmpTO.getNome());
+			cmpModel.setStato(cmpTO.getStatoCompetizione().getNome());
+			cmpModel.setTipo(cmpTO.getTipoCompetizione().getNome());			
 		}
 	}
 

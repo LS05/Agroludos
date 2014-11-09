@@ -8,7 +8,6 @@ public class CmpModel {
 	private SimpleStringProperty id;
 	private SimpleStringProperty nome;
 	private SimpleStringProperty data;
-	private SimpleStringProperty iscritti;
 	private SimpleStringProperty nmin;
 	private SimpleStringProperty nmax;
 	private SimpleStringProperty tipo;
@@ -78,14 +77,6 @@ public class CmpModel {
 		this.stato.set(stato);
 	}
 
-	public String getIscritti() {
-		return iscritti.get();
-	}
-
-	public void setIscritti(String niscritti) {
-		this.iscritti.set(niscritti);
-	}
-
 	public String getNmin() {
 		return nmin.get();
 	}
@@ -122,10 +113,6 @@ public class CmpModel {
 		return this.data;
 	}
 
-	public SimpleStringProperty niscrittiProperty(){
-		return this.iscritti;
-	}
-
 	public SimpleStringProperty nminProperty(){
 		return this.nmin;
 	}
@@ -153,7 +140,7 @@ public class CmpModel {
 	@Override
 	public String toString() {
 		return "CmpModel [id=" + id + ", nome=" + nome + ", data=" + data
-				+ ", niscritti=" + iscritti + ", nmin=" + nmin + ", nmax="
+				+ ", niscritti=" + ", nmin=" + nmin + ", nmax="
 				+ nmax + ", tipo=" + tipo + ", stato=" + stato + "]";
 	}
 }
