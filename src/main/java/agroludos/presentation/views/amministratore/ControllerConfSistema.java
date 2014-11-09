@@ -40,8 +40,6 @@ public class ControllerConfSistema extends AgroludosController {
 
 	private AgroResponse risposta;
 
-	
-
 	@Override
 	public void initializeView(String nameView) {
 		this.viewName = nameView;
