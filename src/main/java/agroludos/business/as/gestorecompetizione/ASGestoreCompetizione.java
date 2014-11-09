@@ -37,17 +37,17 @@ import agroludos.to.TipoCompetizioneTO;
  * La classe espone i seguenti servizi:</br>
  * <b><i>Lettura</i></b></br>
  * <ul>
- * <li>{@link LCompetizione.getCompetizioneByMdc}</li>
- * <li>{@link LCompetizione.getCompetizioniByTipo}</li>
- * <li>{@link LCompetizione.getCompetizioneAllCompetizione}</li>
- * <li>{@link LCompetizione.getCompetizioneById}</li>
- * <li>{@link LCompetizione.getCompetizioniAttive}</li>
+ * <li>{@link LChiusura.getCompetizioneByMdc}</li>
+ * <li>{@link LChiusura.getCompetizioniByTipo}</li>
+ * <li>{@link LChiusura.getCompetizioneAllCompetizione}</li>
+ * <li>{@link LChiusura.getCompetizioneById}</li>
+ * <li>{@link LChiusura.getCompetizioniAttive}</li>
  * </ul>
  * <b><i>Scrittura</i></b></br>
  * <ul>
  * <li>{@link SCompetizione.inserisciCompetizione}</li>
- * <li>{@link LCompetizione.modificaCompetizione}</li>
- * <li>{@link LCompetizione.annullaCompetizione}</li>
+ * <li>{@link LChiusura.modificaCompetizione}</li>
+ * <li>{@link LChiusura.annullaCompetizione}</li>
  * </ul></br>
  * 
  * @author Luca Suriano

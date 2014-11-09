@@ -35,8 +35,8 @@ public class ControllerMdsIscrizione extends AgroludosController {
 	private IscrizioneTO iscto;
 
 	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
+	public void initializeView(String nameView) {
+		this.viewName = nameView;
 	}
 
 	@Override

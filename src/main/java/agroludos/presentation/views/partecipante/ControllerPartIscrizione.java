@@ -76,8 +76,8 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 	}
 
 	@Override
-	protected void initializeView(String viewName) {
-		this.viewName = viewName;
+	protected void initializeView(String nameView) {
+		this.viewName = nameView;
 	}
 
 	@FXML protected void btnAnnullaClicked(MouseEvent event){

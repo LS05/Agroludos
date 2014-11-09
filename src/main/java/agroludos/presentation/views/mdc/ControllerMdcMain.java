@@ -13,6 +13,7 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
+import agroludos.to.QuestionTO;
 import agroludos.to.SuccessMessageTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +28,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class ControllerMdcMain extends ControllerUtenti implements Initializable{
 
@@ -64,8 +67,17 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 
 	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
+	public void initializeView(String nameView) {
+		this.viewName = nameView;
+		
+		final Stage stage = this.getStage(this.viewName);
+		//aggiungo l'evento close vista quando si chiude lo stage
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent we) {
+				chiusura();
+			}
+		});
+		
 		this.mdcTO = toFact.createMdCTO();
 		this.mdcTO = (ManagerDiCompetizioneTO) this.getUtente();
 		
@@ -177,9 +189,17 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 
 	@FXML protected void menuEsci(ActionEvent event){
-		this.close();
+		chiusura();
 	}
 
+	private void chiusura(){
+		QuestionTO question = toFact.createQuestionTO();
+		question.setQuestion(resources.getString("key180"));
+		question.setRequest("chiusura");
+		question.setViewName(viewName);
+		setVista("questionDialog", question);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {

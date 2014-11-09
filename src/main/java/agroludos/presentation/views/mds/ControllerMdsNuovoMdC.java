@@ -69,8 +69,8 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 	}
 
 	@Override
-	protected void initializeView(String viewName) {
-		this.viewName = viewName;
+	protected void initializeView(String nameView) {
+		this.viewName = nameView;
 		this.flagError = false;
 		this.lblUsernameError.setVisible(false);
 		this.lblPasswordError.setVisible(false);

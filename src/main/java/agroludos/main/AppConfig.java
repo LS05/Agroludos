@@ -33,7 +33,7 @@ class AppConfig extends AgroludosController implements App{
 	}
 
 	@Override
-	protected void initializeView(String viewName) {
+	protected void initializeView(String nameView) {
 
 	}
 

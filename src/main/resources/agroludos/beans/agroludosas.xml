@@ -9,12 +9,16 @@
 	<import resource="classpath:agroludos/beans/validator.xml" />
 	<import resource="classpath:agroludos/beans/dao/dao.xml" />
 
+
 	<bean id="agroludosAS" class="agroludos.business.as.AgroludosAS"
 		abstract="true">
 		<property name="dbFact" ref="dbFactory" />
 		<property name="sysConf" ref="systemConf" />
 		<property name="errConf" ref="systemConf" />
 		<property name="toFact" ref="toFactory" />
+	</bean>
+	<bean id="gestoreChiusura" class="agroludos.business.as.gestorecihusura.ASGestoreChiusura"
+		abstract="true">
 	</bean>
 	<bean id="gestoreConfigurazione"
 		class="agroludos.business.as.gestoreconfigurazione.ASGestoreConfigurazione"
@@ -73,7 +77,7 @@
 		class="agroludos.business.as.gestorestatoiscrizione.ASGestoreStatoIscrizione"
 		parent="agroludosAS">
 	</bean>
-		<bean id="gestoreTipoCompetizione"
+	<bean id="gestoreTipoCompetizione"
 		class="agroludos.business.as.gestoretipocompetizione.ASGestoreTipoCompetizione"
 		parent="agroludosAS">
 		<constructor-arg ref="tipoValidator" />
@@ -87,8 +91,7 @@
 		class="agroludos.business.as.gestoretipoutente.ASGestoreTipoUtente"
 		parent="agroludosAS">
 	</bean>
-	<bean id="gestoreEmail"
-		class="agroludos.business.as.gestoremail.ASGestoreEmail"
+	<bean id="gestoreEmail" class="agroludos.business.as.gestoremail.ASGestoreEmail"
 		parent="agroludosAS">
 	</bean>
 </beans>

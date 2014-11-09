@@ -52,8 +52,8 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	}
 
 	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
+	public void initializeView(String nameView) {
+		this.viewName = nameView;
 		this.lblErroreLogin.setVisible(false);
 
 		final Stage stage = this.getStage(this.getViewName());

@@ -19,7 +19,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.components.table.TableCompetizioni;
@@ -40,6 +41,7 @@ import agroludos.to.ErrorMessageTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.PartecipanteTO;
+import agroludos.to.QuestionTO;
 import agroludos.to.SuccessMessageTO;
 import agroludos.to.TipiAgroludosTO;
 import agroludos.to.TipoCompetizioneTO;
@@ -128,8 +130,16 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 	}
 
 	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
+	public void initializeView(String nameView) {
+		this.viewName = nameView;
+
+		final Stage stage = this.getStage(this.viewName);
+		//aggiungo l'evento close vista quando si chiude lo stage
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent we) {
+				chiusura();
+			}
+		});
 
 		this.paneGestioneCompetizioni.setVisible(true);
 		this.paneGestioneOptional.setVisible(false);
@@ -166,7 +176,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		final String viewNameSupp = this.viewName;
 		final List<TipiAgroludosTO> suppListTipiCompetizione = this.listTipiComp;
 		this.listViewComp.setOnMouseClicked(new EventHandler<MouseEvent>() {
-		
+
 			@SuppressWarnings("unchecked")
 			@Override
 			public void handle(MouseEvent event) {
@@ -508,7 +518,15 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 
 	@FXML protected void menuEsci(ActionEvent event){
-		this.close();
+		chiusura();
+	}
+
+	private void chiusura(){
+		QuestionTO question = toFact.createQuestionTO();
+		question.setQuestion(resources.getString("key180"));
+		question.setRequest("chiusura");
+		question.setViewName(viewName);
+		setVista("questionDialog", question);
 	}
 
 	@SuppressWarnings("unchecked")

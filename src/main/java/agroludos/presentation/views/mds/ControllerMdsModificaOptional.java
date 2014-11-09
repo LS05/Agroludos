@@ -42,8 +42,8 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 	private AgroResponse risposta;
 
 	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
+	public void initializeView(String nameView) {
+		this.viewName = nameView;
 		this.lblStatoOptError.setVisible(false);
 		this.lblNomeOptError.setVisible(false);
 		this.lblCostoOptError.setVisible(false);

@@ -8,8 +8,8 @@ class AgroResponseContextImpl implements AgroResponseContext{
 	private Object mainData;
 	
 	@Override
-	public void setLogicalViewName(String viewName){
-		this.viewName = viewName;
+	public void setLogicalViewName(String nameView){
+		this.viewName = nameView;
 	}
 	
 	@Override

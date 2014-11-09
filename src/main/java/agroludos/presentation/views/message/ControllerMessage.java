@@ -25,8 +25,8 @@ public class ControllerMessage extends AgroludosController{
 	private MessageTO message;
 
 	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
+	public void initializeView(String nameView) {
+		this.viewName = nameView;
 		this.successIconPane.setVisible(false);
 		this.errorIconPane.setVisible(false);
 		this.lblSuccTitle.setVisible(false);

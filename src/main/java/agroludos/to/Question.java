@@ -17,8 +17,8 @@ public class Question implements QuestionTO{
 	
 
 	@Override
-	public void setViewName(String viewName) {
-		this.viewName = viewName;
+	public void setViewName(String nameView) {
+		this.viewName = nameView;
 	}
 	
 

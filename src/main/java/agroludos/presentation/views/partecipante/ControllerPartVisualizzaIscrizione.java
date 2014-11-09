@@ -52,8 +52,8 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 	private ResourceBundle res;
 
 	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;
+	public void initializeView(String nameView) {
+		this.viewName = nameView;
 	}
 
 	@Override

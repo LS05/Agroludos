@@ -62,8 +62,8 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 
 
 	@Override
-	public void initializeView(String viewName) {
-		this.viewName = viewName;	
+	public void initializeView(String nameView) {
+		this.viewName = nameView;	
 
 		lblNomeCmpError.setVisible(false);
 		lblTipoCmpError.setVisible(false);

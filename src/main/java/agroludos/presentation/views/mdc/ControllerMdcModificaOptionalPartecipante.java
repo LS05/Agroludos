@@ -70,8 +70,8 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 
 
 	@Override
-	protected void initializeView(String viewName) {
-		this.viewName = viewName;
+	protected void initializeView(String nameView) {
+		this.viewName = nameView;
 
 	}
 
