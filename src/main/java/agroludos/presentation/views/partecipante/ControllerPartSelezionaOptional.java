@@ -24,7 +24,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -170,7 +169,7 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 	public String getViewName() {
 		return this.viewName;
 	}
-	
+
 	private class DeleteTableCell extends TableCell<OptModel, String> {
 
 		private final Button btnElimina;
@@ -395,22 +394,33 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 	}
 
 	@FXML protected void btnConferma(MouseEvent event) {
-
-		this.mainIscr.clearOptionals();
-		for (OptionalTO opt : this.optScelti.values()) {
-			this.mainIscr.addOptional(opt);
-		}
-		this.mainIscr.setCosto(this.totComp);
-		this.close();
+		//se esiste una iscrizione allora è una modifica altrimenti un inserimento
 
 		this.risposta = this.getRisposta();
-		this.richiesta = this.getRichiesta(this.mainIscr, "modificaIscrizioneByPartecipante", this.viewName);
+		this.richiesta = this.getRichiesta(this.mainIscr, "esisteIscrizione", this.viewName);
 		this.eseguiRichiesta(this.richiesta, this.risposta);
+
 	}
 
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
+		String commandName = request.getCommandName();
 
+		if( commandName.equals( this.getCommandName("esisteIscrizione") )){
+			this.mainIscr.clearOptionals();
+			for (OptionalTO opt : this.optScelti.values()) {
+				this.mainIscr.addOptional(opt);
+			}
+			this.mainIscr.setCosto(this.totComp);
+			this.close();
+			Object res = response.getRespData();
+			if(res instanceof IscrizioneTO){
+				this.risposta = this.getRisposta();
+				this.richiesta = this.getRichiesta(this.mainIscr, "modificaIscrizioneByPartecipante", this.viewName);
+				this.eseguiRichiesta(this.richiesta, this.risposta);
+			}else
+				this.setVista("mostraIscrPart", this.mainIscr);
+		}
 	}
 }
