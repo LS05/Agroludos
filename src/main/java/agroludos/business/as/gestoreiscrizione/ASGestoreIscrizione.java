@@ -1,5 +1,6 @@
 package agroludos.business.as.gestoreiscrizione;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
@@ -18,13 +19,16 @@ import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.StatoIscrizioneTO;
+import agroludos.utility.email.AgroludosMail;
 
 class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizione{
 
 	private AgroludosValidator validator;
+	private AgroludosMail agroludosMail;
 
-	ASGestoreIscrizione(AgroludosValidator validator){
+	ASGestoreIscrizione(AgroludosValidator validator, AgroludosMail agroludosMail){
 		this.validator = validator;
+		this.agroludosMail = agroludosMail;
 	}
 
 	private DBDAOFactory getDBDaoFactory() throws DatabaseException{
@@ -80,17 +84,24 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 					iscTO = iscDAO.create(iscTO);
 					
 					//TODO invia email
-					EmailTO mail = toFact.createEmailTO();
-					mail.setOggetto(iscTO.getPartecipante().getUsername() + " si è iscritto "
-							+ "alla competizione " + iscTO.getCompetizione().getNome());
-					mail.setMessage("Dati iscrizione: "
-							+ iscTO.getPartecipante().toString() 
-							+ " costo "
-							+ iscTO.getCosto()
-							+ " optional scelti "
-							+ iscTO.getAllOptionals().toString());
-
+					EmailTO mail = this.toFact.createEmailTO();
+					String partUsername = iscTO.getPartecipante().getUsername();
+					String compNome = iscTO.getCompetizione().getNome();
+					
+					String iscrObj = this.sysConf.getString("mailIscrizioneSubj");
+					String mailObj = MessageFormat.format(iscrObj, partUsername, compNome);
+					mail.setOggetto(mailObj);
+					
+					String iscrMsg = this.sysConf.getString("mailIscrizioneMsg");
+					String mailMsg = MessageFormat.format(iscrMsg,
+							iscTO.getPartecipante().toString(), 
+							iscTO.getCosto(), 
+							iscTO.getAllOptionals().toString());
+					mail.setMessage(mailMsg);
+					
 					mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
+					
+					this.agroludosMail.sendEmail(mail);
 				}
 			}
 		}

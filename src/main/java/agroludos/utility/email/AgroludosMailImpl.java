@@ -20,7 +20,7 @@ class AgroludosMailImpl extends Thread implements AgroludosMail {
 	private EmailTO emailTO;
 
 	AgroludosMailImpl(Conf sysConf){
-		super();
+		super("agroludos-mail");
 		this.sysConf = sysConf;
 	}
 
@@ -46,7 +46,6 @@ class AgroludosMailImpl extends Thread implements AgroludosMail {
 	}
 
 	public void run() {
-		this.setName("agroludos-mail");
 		this.sendEmailThread(this.emailTO);
 	}
 
@@ -62,7 +61,12 @@ class AgroludosMailImpl extends Thread implements AgroludosMail {
 		final String username = this.sysConf.getString("agroludosMail");
 		final String password = this.sysConf.getString("agroludosMailPwd");
 
-		Properties props = this.createMailProperties();
+		Properties props = new Properties();
+		props.setProperty("mail.transport.protocol", "smtp");
+		props.setProperty("mail.host", "smtp.live.com");
+		props.put("mail.smtp.ssl.trust", "smtp.live.com");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.auth", "true");
 
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
