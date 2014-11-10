@@ -82,29 +82,41 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 					iscTO.setStatoIscrizione(listSI.get(1));
 
 					iscTO = iscDAO.create(iscTO);
-					
+
 					//TODO invia email
 					EmailTO mail = this.toFact.createEmailTO();
 					String partUsername = iscTO.getPartecipante().getUsername();
 					String compNome = iscTO.getCompetizione().getNome();
-					
+
 					String iscrObj = this.sysConf.getString("mailIscrizioneSubj");
 					String mailObj = MessageFormat.format(iscrObj, partUsername, compNome);
 					mail.setOggetto(mailObj);
-					
-					String iscrMsg = this.sysConf.getString("mailIscrizioneMsg");
-					String mailMsg = MessageFormat.format(iscrMsg,
-							iscTO.getPartecipante().toString(), 
-							iscTO.getCosto(), 
-							iscTO.getAllOptionals().toString());
+
+					String iscrMsg = "";
+					String mailMsg = "";
+
+					if(iscTO.getAllOptionals().size() > 0){
+						iscrMsg = this.sysConf.getString("mailIscrizioneMsg");
+						mailMsg = MessageFormat.format(iscrMsg,
+								iscTO.getPartecipante().toString(), 
+								iscTO.getCosto().toString(), 
+								iscTO.getAllOptionals().toString());
+					} else {
+						iscrMsg = this.sysConf.getString("mailIscrizioneMsgNoOpt");
+						mailMsg = MessageFormat.format(iscrMsg,
+								iscTO.getPartecipante().toString(), 
+								iscTO.getCosto().toString());
+					}
+
 					mail.setMessage(mailMsg);
-					
+
 					mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
-					
+
 					this.agroludosMail.sendEmail(mail);
 				}
 			}
 		}
+		
 		return iscTO;
 	}
 
@@ -123,7 +135,7 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 				+ iscTO.getAllOptionals().toString()
 				+ " e il costo totale dell'iscrizione ora è: "
 				+ iscTO.getCosto());
-		
+
 		mail.addDestinatario(iscTO.getPartecipante());
 
 		return iscTO;
@@ -152,14 +164,14 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 		IscrizioneDAO iscDAO = getIscrizioneDAO();
 		return iscDAO.update(iscTO);
 	}
-	
+
 	@Override
 	public IscrizioneTO eliminaIscrizioneByMdc(IscrizioneTO iscTO) throws DatabaseException{
 		iscTO = eliminaIscrizione(iscTO);
 
 		return iscTO;
 	}
-	
+
 	@Override
 	public IscrizioneTO eliminaIscrizioneByPartecipante(IscrizioneTO iscTO) throws DatabaseException{
 		iscTO = eliminaIscrizione(iscTO);

@@ -13,16 +13,17 @@
       <children>
         <GridPane prefHeight="43.0" prefWidth="355.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
           <children>
-            <Button id="btnOkErrLogin" fx:id="btnNo" mnemonicParsing="false" onMouseClicked="#btnNo" prefWidth="82.0" text="%key139" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+            <Button id="btnOkErrLogin" fx:id="btnNo" mnemonicParsing="false" onMouseClicked="#btnNo" prefWidth="82.0" text="%key139" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0">
               <GridPane.margin>
                 <Insets />
               </GridPane.margin>
             </Button>
-            <Button id="btnOkErrLogin" fx:id="btnYes" mnemonicParsing="false" onMouseClicked="#btnYes" prefWidth="82.0" text="%key165" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+            <Button id="btnOkErrLogin" fx:id="btnYes" mnemonicParsing="false" onMouseClicked="#btnYes" prefWidth="82.0" text="%key165" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
           </children>
           <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="10.0" prefWidth="-1.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
           </columnConstraints>
           <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -33,8 +34,8 @@
             <Pane id="paneQuestIcon" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
           </children>
           <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="437.0" minWidth="10.0" prefWidth="437.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="396.0" minWidth="10.0" prefWidth="127.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="528.0" minWidth="10.0" prefWidth="528.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="396.0" minWidth="10.0" prefWidth="120.0" />
           </columnConstraints>
           <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
