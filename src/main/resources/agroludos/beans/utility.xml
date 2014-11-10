@@ -13,7 +13,7 @@
 		<constructor-arg ref="passwordEncryptor" />
 	</bean>
 
-	<bean id="agroludosMail" class="agroludos.utility.email.AgroludosMailImpl">
+	<bean id="agroludosMail" class="agroludos.utility.email.AgroludosMailImpl" scope="prototype">
 		<constructor-arg ref="systemConf" />
 	</bean>
 </beans>

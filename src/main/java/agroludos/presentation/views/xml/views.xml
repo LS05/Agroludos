@@ -226,8 +226,8 @@
 		<view tipo="dialog">
 			<name>motivoEliminazione</name>
 			<url>/fxml/mdc/motivoEliminazione.fxml</url>
-			<width>564</width>
-			<height>225</height>
+			<width>563</width>
+			<height>420</height>
 			<title>Agroludos</title>
 		</view>
 	</views>

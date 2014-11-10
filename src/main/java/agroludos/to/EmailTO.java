@@ -6,11 +6,12 @@ public interface EmailTO extends AgroludosTO{
 
 	void addDestinatario(UtenteTO dest);
 
-	void setMessage(String message);
-
 	List<UtenteTO> getDestinatari();
 
 	String getMessage();
+
+	void setMessage(String message);
+
 
 	String getOggetto();
 

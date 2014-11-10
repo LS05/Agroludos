@@ -25,6 +25,7 @@
 		<property name="respFact" ref="respFactory" />
 		<property name="reqConf" ref="systemConf"/>
 		<property name="errConf" ref="systemConf"/>
+		<property name="conf" ref="systemConf"/>
 	</bean>
 	
 	<bean id="viewsParser" class="agroludos.presentation.views.xml.ViewsParser">

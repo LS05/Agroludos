@@ -2,44 +2,39 @@ package agroludos.presentation.views.mdc;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.EmailTO;
-import agroludos.to.IscrizioneTO;
 
 public class ControllerMotivoEliminazione extends AgroludosController{
 
 	private String viewName;
-	@FXML private Button btnInvia;
+
 	@FXML private TextArea txtMotivazioni;
-	private IscrizioneTO iscTO;
+
 	private EmailTO mail;
 	private AgroResponse risposta;
 	private AgroRequest richiesta;
 
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
-		if(mainTO instanceof IscrizioneTO){
-			this.iscTO = (IscrizioneTO) mainTO;
-			//creo l'email per il partecipante
-			mail = toFact.createEmailTO();
-			mail.setOggetto("Iscrizione annullata");
-			mail.addDestinatario(iscTO.getPartecipante());
+		if(mainTO instanceof EmailTO){
+			this.mail = (EmailTO) mainTO;
 		}
 	}
 
 	@Override
-	protected void initializeView(String nameView) {
-		this.viewName = nameView;
+	protected void initializeView(String viewName) {
+		this.viewName = viewName;
 		this.txtMotivazioni.setText("");
-		
+
 		final Stage stage = this.getStage(this.viewName);
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
@@ -48,20 +43,23 @@ public class ControllerMotivoEliminazione extends AgroludosController{
 		});
 	}
 
-	@FXML protected void btnInvia(MouseEvent event) {	
+	@FXML protected void btnInviaClicked(MouseEvent event) {	
 		invia();	
 	}
 
 	private void invia(){
-		mail.setMessage(iscTO.getPartecipante().getUsername() + " abbiamo annullato l'iscrizione "
-				+ "alla competizione " + iscTO.getCompetizione().getNome()
-				+ "per i seguenti motivi: " + this.txtMotivazioni.getText());
+		String motivazione = this.txtMotivazioni.getText();
+		String message = this.mail.getMessage();
+		StringBuilder mail = new StringBuilder();
+		mail.append(message);
+		mail.append(motivazione);
+		this.mail.setMessage(mail.toString());
 		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta(this.mail, "inviaMail", this.viewName);
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 		this.close();
 	}
-	
+
 	@Override
 	protected String getViewName() {
 		return this.viewName;
@@ -69,7 +67,6 @@ public class ControllerMotivoEliminazione extends AgroludosController{
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -59,6 +59,10 @@ public abstract class AgroludosController {
 		controller.setMainStage(stage);
 	}
 	
+	protected String getString(String key){
+		return controller.getString(key);
+	}
+	
 	protected UtenteTO getUtente(){
 		return utente;
 	}

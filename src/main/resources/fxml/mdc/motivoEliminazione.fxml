@@ -8,13 +8,13 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="errDialogPane" maxHeight="-1.0" maxWidth="-Infinity" minHeight="-1.0" minWidth="-Infinity" prefHeight="225.0" prefWidth="564.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="agroludos.presentation.views.mdc.ControllerMotivoEliminazione">
+<AnchorPane id="errDialogPane" maxHeight="-1.0" maxWidth="-Infinity" minHeight="-1.0" minWidth="-Infinity" prefHeight="420.0" prefWidth="563.9999000000025" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="agroludos.presentation.views.mdc.ControllerMotivoEliminazione">
   <children>
     <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
         <GridPane prefHeight="43.0" prefWidth="355.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
           <children>
-            <Button id="btnOkErrLogin" fx:id="btnInvia" mnemonicParsing="false" onMouseClicked="#btnInvia" prefWidth="82.0" text="%key182" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+            <Button id="btnOkErrLogin" fx:id="btnInvia" mnemonicParsing="false" onMouseClicked="#btnInviaClicked" prefWidth="82.0" text="%key182" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
               <GridPane.margin>
                 <Insets right="15.0" />
               </GridPane.margin>
@@ -25,7 +25,7 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           </columnConstraints>
           <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-1.0" minHeight="10.0" prefHeight="-1.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
         <GridPane GridPane.columnIndex="0" GridPane.rowIndex="1">
@@ -40,38 +40,25 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="10.0" prefWidth="-1.0" />
           </columnConstraints>
           <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="-1.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane id="messageTitle" GridPane.columnIndex="0" GridPane.rowIndex="0">
-          <children>
-            <Pane fx:id="errorIconPane" prefHeight="-1.0" prefWidth="-1.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <Pane fx:id="successIconPane" prefHeight="-1.0" prefWidth="-1.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <Label id="" alignment="TOP_LEFT" prefHeight="-1.0" prefWidth="-1.0" text="%key181" textAlignment="LEFT" textFill="BLACK" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
-              <font>
-                <Font name="System Bold" size="16.0" />
-              </font>
-              <GridPane.margin>
-                <Insets left="10.0" />
-              </GridPane.margin>
-            </Label>
-          </children>
-          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="482.0" minWidth="10.0" prefWidth="480.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="84.0" />
-          </columnConstraints>
-          <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          </rowConstraints>
-        </GridPane>
+        <Label id="" alignment="TOP_LEFT" prefHeight="-1.0" prefWidth="-1.0" text="%key181" textAlignment="LEFT" textFill="BLACK" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+          <font>
+            <Font name="System Bold" size="16.0" />
+          </font>
+          <GridPane.margin>
+            <Insets left="10.0" />
+          </GridPane.margin>
+        </Label>
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       </columnConstraints>
       <rowConstraints>
-        <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="84.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="94.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="313.0" minHeight="10.0" prefHeight="309.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
   </children>

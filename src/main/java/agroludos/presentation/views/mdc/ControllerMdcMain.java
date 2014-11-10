@@ -1,6 +1,7 @@
 package agroludos.presentation.views.mdc;
 
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -10,11 +11,11 @@ import agroludos.presentation.views.components.tablemodel.CmpModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.EmailTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.QuestionTO;
 import agroludos.to.SuccessMessageTO;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -240,10 +241,19 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 				closeVista("mostraIscrizione");
 
-				this.setVista("mostraCmp",iscTO.getCompetizione());
+				this.setVista("mostraCmp", iscTO.getCompetizione());
 
 				//mostro la view per catturare la motivazione dell'eliminazione
-				this.setVista("motivoEliminazione",iscTO);
+				EmailTO mail = toFact.createEmailTO();
+				mail.setOggetto(this.getString("mailAnnullaIscrMdcSubj"));
+				String msgString = this.getString("mailAnnullaIscrMdcMsg");
+				String msgMail = MessageFormat.format(msgString, 
+						iscTO.getPartecipante().getUsername(), 
+						iscTO.getCompetizione().getNome());
+				mail.addDestinatario(iscTO.getPartecipante());
+				mail.setMessage(msgMail);
+				
+				this.setVista("motivoEliminazione", mail);
 				
 				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.resources.getString("key123"));

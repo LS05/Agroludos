@@ -6,6 +6,7 @@ import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.req.RequestFactory;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.resp.ResponseFactory;
+import agroludos.system.Conf;
 import agroludos.system.ReqConf;
 import agroludos.system.RulesErrorsConf;
 import agroludos.to.AgroludosTO;
@@ -17,6 +18,7 @@ class Controller {
 	private static ResponseFactory respFact;
 	private static ReqConf reqConf;
 	private static RulesErrorsConf errConf;
+	private static Conf conf;
 
 	AgroResponse getRiposta(){
 		return respFact.createResponse();
@@ -56,8 +58,12 @@ class Controller {
 		nav.closeVista(viewName);
 	}
 	
-	public Stage getStage(String viewName) {
+	Stage getStage(String viewName) {
 		return nav.getStage(viewName);
+	}
+	
+	String getString(String key){
+		return conf.getString(key);
 	}
 
 	public void setNav(Navigator navigator) {
@@ -86,5 +92,9 @@ class Controller {
 
 	public void setErrConf(RulesErrorsConf rulesConfig) {
 		errConf = rulesConfig;
+	}
+
+	public static void setConf(Conf agConf) {
+		conf = agConf;
 	}
 }

@@ -112,5 +112,6 @@
 	
 	<bean id="gestoreEmail" class="agroludos.business.as.gestoremail.ASGestoreEmail"
 		parent="agroludosAS">
+		<constructor-arg ref="agroludosMail"></constructor-arg>
 	</bean>
 </beans>

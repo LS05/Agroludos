@@ -48,13 +48,13 @@ class ViewsCache {
 			double width = 0;
 			Screen screen = Screen.getPrimary();
 			Rectangle2D bounds = screen.getVisualBounds();
-
+			
 			if(window.isDialog()){
 				height = window.getHeight();
 				width =  window.getWidth();
 				//creo la scena		
 				Scene dialogScene = new Scene(root, width, height);
-				Stage stage = new Stage(StageStyle.UTILITY);
+				Stage stage = new Stage();
 				stage.setScene(dialogScene);
 				stage.setTitle(window.getTitle());
 				stage.setResizable(false);

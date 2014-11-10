@@ -14,13 +14,21 @@ import agroludos.business.as.AgroludosAS;
 import agroludos.exceptions.DatabaseException;
 import agroludos.to.EmailTO;
 import agroludos.to.UtenteTO;
+import agroludos.utility.email.AgroludosMail;
 
 class ASGestoreEmail extends AgroludosAS implements LEmail{
 
+	private AgroludosMail agroludosMail;
+	
+	ASGestoreEmail(AgroludosMail agroludosMail){
+		this.agroludosMail = agroludosMail;
+	}
+	
 	@Override
 	public boolean sendEmail(EmailTO emailTO) throws DatabaseException {
 		boolean res = false;
 
+		
 		final String username = "jackeb@hotmail.it";
 		final String password = "270588";
 
@@ -64,9 +72,7 @@ class ASGestoreEmail extends AgroludosAS implements LEmail{
 	}
 	@Override
 	public EmailTO inviaMail(EmailTO mail) throws DatabaseException{
-		
-		//TODO invia mail
-		
+		this.agroludosMail.sendEmail(mail);
 		return mail;
 	}
 
