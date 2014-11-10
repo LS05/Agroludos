@@ -9,7 +9,6 @@ public class EmailImpl implements EmailTO{
 	
 	private List<UtenteTO> listDestinatari;
 	private String messaggio;
-	private UtenteTO mittente;
 
 	private String oggetto;
 	
@@ -36,17 +35,6 @@ public class EmailImpl implements EmailTO{
 	@Override
 	public void addDestinatario(UtenteTO dest) {
 		this.listDestinatari.add(dest);		
-	}
-
-	@Override
-	public void setMittente(UtenteTO mitt) {
-		this.mittente = mitt;
-		
-	}
-	
-	@Override
-	public UtenteTO getMittente() {
-		return this.mittente;
 	}
 
 	@Override

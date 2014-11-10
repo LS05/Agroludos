@@ -1,5 +1,7 @@
 package agroludos.system;
 
+import java.text.MessageFormat;
+
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.FileConfiguration;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -97,5 +99,12 @@ class SystemConfImpl implements SystemConf, HibernateConf, RulesErrorsConf, ReqC
 	@Override
 	public String getLang() {
 		return this.config.getString("lang");
+	}
+	
+	public static void main(String args[]) throws ConfigurationException{
+		SystemConfImpl p = new SystemConfImpl();
+		String mail = p.getString("mailAnnullaIscrMdcMsg");
+		String s = MessageFormat.format(mail, "foo", "a", "bar");
+		System.out.println(s);
 	}
 }

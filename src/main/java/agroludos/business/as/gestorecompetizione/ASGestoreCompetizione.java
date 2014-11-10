@@ -179,7 +179,6 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		//TODO invia mail
 		EmailTO mail = toFact.createEmailTO();
 		mail.setOggetto(cmpto.getNome() + " annullata.");
-		mail.setMittente(cmpto.getManagerDiCompetizione());
 		mail.setMessage("La competizione " + cmpto.getNome() + "  è stata annullata.");
 
 		List<IscrizioneTO> listIsc = iscDao.getIscrizioniAttiveCmp(cmpto);
