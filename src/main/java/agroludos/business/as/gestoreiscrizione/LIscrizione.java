@@ -17,4 +17,5 @@ public interface LIscrizione extends AgroludosService {
 			throws DatabaseException;
 	List<IscrizioneTO> getAllIscrizioniPartecipante(PartecipanteTO parTO)
 			throws DatabaseException;
+	IscrizioneTO esisteIscrizione(IscrizioneTO iscTO) throws DatabaseException;
 }

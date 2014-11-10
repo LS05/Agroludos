@@ -283,6 +283,12 @@
 			<forward success="mostraIscrizione" failure="modificaOptionalPartecipante" />
 		</from>
 	</command>
+		<command name="esisteIscrizione">
+		<classe>agroludos.business.as.gestoreiscrizione.LIscrizione</classe>
+		<from name="selezionaOptionalPart">
+			<forward success="selezionaOptionalPart" failure="selezionaOptionalPart" />
+		</from>
+	</command>
 	<command name="getAllStatoIscrizione">
 		<classe>agroludos.business.as.gestorestatoiscrizione.LStatoIscrizione</classe>
 		<from name="partMostraIscrizione">
