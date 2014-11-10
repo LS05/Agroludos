@@ -59,6 +59,7 @@ public class ControllerMotivoEliminazione extends AgroludosController{
 		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta(this.mail, "inviaMail", this.viewName);
 		this.eseguiRichiesta(this.richiesta, this.risposta);
+		this.close();
 	}
 	
 	@Override

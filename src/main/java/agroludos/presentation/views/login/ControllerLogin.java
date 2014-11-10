@@ -128,6 +128,11 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 				this.lblErroreLogin.setVisible(true);
 				this.lblErroreLogin.setText(errMsg);
 			}
+		}else if(commandName.equals(this.getCommandName("nuovoManagerDiSistema") )){
+			Object res = response.getRespData();
+			if(res instanceof UtenteTO){
+				closeVista("configurazione");
+			}
 		}
 	}
 }
