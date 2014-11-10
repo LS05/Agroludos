@@ -9,6 +9,7 @@ import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.CmpDataAttiveException;
 import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.NoModificaCmp;
 import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
@@ -37,17 +38,19 @@ import agroludos.to.TipoCompetizioneTO;
  * La classe espone i seguenti servizi:</br>
  * <b><i>Lettura</i></b></br>
  * <ul>
- * <li>{@link LChiusura.getCompetizioneByMdc}</li>
- * <li>{@link LChiusura.getCompetizioniByTipo}</li>
- * <li>{@link LChiusura.getCompetizioneAllCompetizione}</li>
- * <li>{@link LChiusura.getCompetizioneById}</li>
- * <li>{@link LChiusura.getCompetizioniAttive}</li>
+ * <li>{@link LCompetizione.getCompetizioneByMdc}</li>
+ * <li>{@link LCompetizione.getCompetizioniByTipo}</li>
+ * <li>{@link LCompetizione.getCompetizioneAllCompetizione}</li>
+ * <li>{@link LCompetizione.getCompetizioneById}</li>
+ * <li>{@link LCompetizione.getCompetizioniAttive}</li> 
+ * <li>{@link LCompetizione.getCompetizioniAperte}</li>
+ * <li>{@link LCompetizione.getCompetizioneAttiveByMdc}</li>
  * </ul>
  * <b><i>Scrittura</i></b></br>
  * <ul>
  * <li>{@link SCompetizione.inserisciCompetizione}</li>
- * <li>{@link LChiusura.modificaCompetizione}</li>
- * <li>{@link LChiusura.annullaCompetizione}</li>
+ * <li>{@link SCompetizione.modificaCompetizione}</li>
+ * <li>{@link SCompetizione.annullaCompetizione}</li>
  * </ul></br>
  * 
  * @author Luca Suriano
@@ -95,9 +98,9 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 
 		this.checkCmpData(cmpto);
 
-		cmpto = daoCmp.create(checkCmp(cmpto));
+		cmpto = daoCmp.create(cmpto);
 
-		return checkCmp(cmpto);
+		return cmpto;
 
 	}
 
@@ -106,16 +109,22 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 			throws DatabaseException, ValidationException {
 
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
+		//se la competizione non è aperta alle iscrizioni
+		//non è possibile effettuare modifiche
+		if(getStatoCmp(cmpto).getId()
+				==getStatoCompetizioneDAO().getStatoCmpAperta().getId()){
 
-		this.validator.validate(cmpto);
-		this.checkCmpData(cmpto);
+			this.validator.validate(cmpto);
 
-		List<IscrizioneTO> listIscAttive = getIscrizioneDAO().getIscrizioniAttiveCmp(cmpto);
-		if(listIscAttive.size() > cmpto.getNmax())
-			eliminaIscrizioniInEsubero(listIscAttive);
-		cmpto = daoCmp.update(checkCmp(cmpto));
+			this.checkCmpData(cmpto);
 
-		return checkCmp(cmpto);
+			List<IscrizioneTO> listIscAttive = getIscrizioneDAO().getIscrizioniAttiveCmp(cmpto);
+			if(listIscAttive.size() > cmpto.getNmax())
+				eliminaIscrizioniInEsubero(listIscAttive);
+			cmpto = daoCmp.update(cmpto);
+		}else
+			throw new NoModificaCmp();
+		return cmpto;
 	}
 
 	private List<IscrizioneTO> eliminaIscrizioniInEsubero(
@@ -174,7 +183,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		cmpto.setStatoCompetizione(daoScmp.getStatoCmpAnnullata());
 		daoCmp.annullaCompetizione(cmpto);
 		IscrizioneDAO iscDao = getIscrizioneDAO();
-		
+
 
 		//TODO invia mail
 		EmailTO mail = toFact.createEmailTO();
@@ -186,9 +195,9 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 			mail.addDestinatario(iscTO.getPartecipante());
 		}
 
-		
+
 		iscDao.terminaIscrizioni(cmpto);
-		
+
 		return cmpto;
 	}
 
@@ -210,7 +219,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	@Override
 	public List<CompetizioneTO> getCompetizioniByTipo(TipoCompetizioneTO tcmto)
 			throws DatabaseException {
-		
+
 		List<CompetizioneTO> res = getCompetizioneDAO().getCompetizioniByTipo(tcmto);
 
 		return checkCmp(res);
@@ -250,6 +259,10 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		return daoCmp.readCompetizioniAttive();
 	}
 
+	//controlla le competizioni cambiando il loro stato confrontando la dato di oggi
+	//con la data della competizione
+	//se termina termina le iscrizioni attive
+	//se viene annullata per il non raggiungimento del numero minimo annulla la comp
 	private List<CompetizioneTO> checkCmp(List<CompetizioneTO> listCmp) throws DatabaseException{
 
 		StatoCompetizioneDAO daoStatoCmp = this.getStatoCompetizioneDAO();
@@ -264,19 +277,33 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 				DateTime dataCmp = new DateTime(cmp.getData());
 				if(dataCmp.isEqualNow() 
 						&& !(cmp.getStatoCompetizione().getId() == 2)){
-					cmp.setStatoCompetizione(daoStatoCmp.getStatoCmpInCorso());
-					cmpDao.update(cmp);
+					//se non si è raggiunti il numero minimo di partecipanti la 
+					//competizione viene annullata
+					List<IscrizioneTO> listIscCmp = getIscrizioneDAO().getIscrizioniAttiveCmp(cmp);
+					if(listIscCmp.size() < cmp.getNmin())
+						annullaCompetizione(cmp);
+					else{
+						cmp.setStatoCompetizione(daoStatoCmp.getStatoCmpChiusa());
+						cmpDao.update(cmp);
+					}
 				}
 				else if(dataCmp.isAfter(today) && dataCmp.isBefore(today.plusDays(2))
 						&& !(cmp.getStatoCompetizione().getId() == 3)){
-					cmp.setStatoCompetizione(daoStatoCmp.getStatoCmpChiusa());
-					cmpDao.update(cmp);
+					//se non si è raggiunti il numero minimo di partecipanti la 
+					//competizione viene annullata
+					List<IscrizioneTO> listIscCmp = getIscrizioneDAO().getIscrizioniAttiveCmp(cmp);
+					if(listIscCmp.size() < cmp.getNmin())
+						annullaCompetizione(cmp);
+					else{
+						cmp.setStatoCompetizione(daoStatoCmp.getStatoCmpChiusa());
+						cmpDao.update(cmp);
+					}
 				}
 				else if (today.isAfter(dataCmp)
 						&& !(cmp.getStatoCompetizione().getId() == 4)){
+
 					cmp.setStatoCompetizione(daoStatoCmp.getStatoCmpTerminata());
-					IscrizioneDAO iscDao = getIscrizioneDAO();
-					iscDao.terminaIscrizioni(cmp);
+					getIscrizioneDAO().terminaIscrizioni(cmp);
 					cmpDao.update(cmp);
 				}
 			}

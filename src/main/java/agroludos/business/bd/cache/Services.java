@@ -12,7 +12,6 @@ import agroludos.business.as.gestoreconfigurazione.SConfigurazione;
 import agroludos.business.as.gestoreiscrizione.LIscrizione;
 import agroludos.business.as.gestoreiscrizione.SIscrizione;
 import agroludos.business.as.gestoremail.LEmail;
-import agroludos.business.as.gestoremail.SEmail;
 import agroludos.business.as.gestoremdc.LManagerDiCompetizione;
 import agroludos.business.as.gestoremdc.SManagerDiCompetizione;
 import agroludos.business.as.gestoremds.LManagerDiSistema;
@@ -68,7 +67,6 @@ class Services {
 	private STipoCompetizione stipocmp;
 	private LTipoUtente ltipoUtente;
 	private LEmail lemail;
-	private SEmail semail;
 	private LChiusura lchiusura;
 
 	private Map<String, AgroludosService> services;
@@ -228,10 +226,6 @@ class Services {
 		this.services.put(LEmail.class.getName(), this.lemail);
 	}
 
-	public void setSemail(SEmail semail) {
-		this.semail = semail;
-		this.services.put(SEmail.class.getName(), this.semail);
-	}
 	public void setLtipoUtente(LTipoUtente ltipoUtente) {
 		this.ltipoUtente = ltipoUtente;
 		this.services.put(LTipoUtente.class.getName(), this.ltipoUtente);

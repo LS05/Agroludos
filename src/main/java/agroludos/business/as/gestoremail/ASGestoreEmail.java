@@ -15,7 +15,7 @@ import agroludos.exceptions.DatabaseException;
 import agroludos.to.EmailTO;
 import agroludos.to.UtenteTO;
 
-class ASGestoreEmail extends AgroludosAS implements LEmail, SEmail{
+class ASGestoreEmail extends AgroludosAS implements LEmail{
 
 	@Override
 	public boolean sendEmail(EmailTO emailTO) throws DatabaseException {
@@ -61,6 +61,13 @@ class ASGestoreEmail extends AgroludosAS implements LEmail, SEmail{
 		}
 		return res;
 
+	}
+	@Override
+	public EmailTO inviaMail(EmailTO mail) throws DatabaseException{
+		
+		//TODO invia mail
+		
+		return mail;
 	}
 
 }

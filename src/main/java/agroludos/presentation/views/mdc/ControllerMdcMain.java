@@ -69,10 +69,10 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 		this.viewName = nameView;
 		
 		final Stage stage = this.getStage(this.viewName);
-		//aggiungo l'evento close vista quando si chiude lo stage
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
 				chiusura();
+				we.consume();
 			}
 		});
 		
@@ -233,13 +233,18 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 		}else if(commandName.equals( this.getCommandName("eliminaIscrizioneByMdc"))){
 			Object res = response.getRespData();
 			if(res instanceof IscrizioneTO){
+				IscrizioneTO iscTO = (IscrizioneTO) res;
+
 				this.listaTabCmp.clear();
-				this.initializeView(((IscrizioneTO) res).getCompetizione().getManagerDiCompetizione());
+				this.initializeView(iscTO.getCompetizione().getManagerDiCompetizione());
 
 				closeVista("mostraIscrizione");
 
-				this.setVista("mostraCmp",((IscrizioneTO) res).getCompetizione());
+				this.setVista("mostraCmp",iscTO.getCompetizione());
 
+				//mostro la view per catturare la motivazione dell'eliminazione
+				this.setVista("motivoEliminazione",iscTO);
+				
 				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.resources.getString("key123"));
 				this.setVista("messageDialog",succMessage);

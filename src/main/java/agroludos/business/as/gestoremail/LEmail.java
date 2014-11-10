@@ -8,4 +8,6 @@ public interface LEmail extends AgroludosService{
 	
 	boolean sendEmail(EmailTO email) throws DatabaseException;
 
+	EmailTO inviaMail(EmailTO mail) throws DatabaseException;
+
 }

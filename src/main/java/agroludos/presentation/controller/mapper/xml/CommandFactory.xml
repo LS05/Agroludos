@@ -99,11 +99,14 @@
 		<from name="mostraIscrizione">
 			<forward success="managerDiCompetizione" failure="mostraIscrizoine" />
 		</from>
-		<from name="partMostraIscrizione">
-			<forward success="partecipante" failure="partMostraIscrizione" />
+	</command>
+	<command name="inviaMail">
+		<classe>agroludos.business.as.gestoremail.LEmail</classe>
+		<from name="motivoEliminazione">
+			<forward success="managerDiCompetizione" failure="motivoEliminazione" />
 		</from>
 	</command>
-		<command name="eliminaIscrizioneByPartecipante">
+	<command name="eliminaIscrizioneByPartecipante">
 		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
 		<from name="partMostraIscrizione">
 			<forward success="partecipante" failure="partMostraIscrizione" />
@@ -274,7 +277,7 @@
 			<forward success="partMostraIscrizione" failure="partMostraIscrizione" />
 		</from>
 	</command>
-		<command name="modificaIscrizioneByMdc">
+	<command name="modificaIscrizioneByMdc">
 		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
 		<from name="modificaOptionalPartecipante">
 			<forward success="mostraIscrizione" failure="modificaOptionalPartecipante" />
@@ -364,7 +367,7 @@
 			<forward success="visualizzaIscrizioni" failure="visualizzaIscrizioni" />
 		</from>
 	</command>
-		<command name="chiusura">
+	<command name="chiusura">
 		<classe>agroludos.business.as.gestorechiusura.LChiusura</classe>
 		<from name="aggiornaSRC">
 			<forward success="aggiornaSRC" failure="aggiornaSRC" />
@@ -377,6 +380,9 @@
 		</from>
 		<from name="partecipante">
 			<forward success="partecipante" failure="partecipante" />
+		</from>
+		<from name="login">
+			<forward success="login" failure="login" />
 		</from>
 	</command>
 </commands>

@@ -70,6 +70,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
 				chiusura();
+				we.consume();
 			}
 		});
 

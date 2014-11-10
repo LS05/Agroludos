@@ -35,7 +35,6 @@
 		<property name="stipocmp" ref="gestoreTipoCompetizione" />
 		<property name="ltipoUtente" ref="gestoreTipoUtente" />
 		<property name="lemail" ref="gestoreEmail" />
-		<property name="semail" ref="gestoreEmail" />
 		<property name="lchiusura" ref="gestoreChiusura" />
 	</bean>
 
