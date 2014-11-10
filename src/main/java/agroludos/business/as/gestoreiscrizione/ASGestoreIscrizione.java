@@ -146,18 +146,9 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 	public IscrizioneTO eliminaIscrizioneByMdc(IscrizioneTO iscTO) throws DatabaseException{
 		iscTO = eliminaIscrizione(iscTO);
 
-		//TODO invia email
-		EmailTO mail = toFact.createEmailTO();
-		mail.setOggetto("Iscrizione annullata");
-		mail.setMessage(iscTO.getPartecipante().getUsername() + " abbiamo annullato l'iscrizione "
-				+ "alla competizione " + iscTO.getCompetizione().getNome()
-				+ "per i seguenti motivi: ");
-
-		mail.addDestinatario(iscTO.getPartecipante());
-
 		return iscTO;
 	}
-
+	
 	@Override
 	public IscrizioneTO eliminaIscrizioneByPartecipante(IscrizioneTO iscTO) throws DatabaseException{
 		iscTO = eliminaIscrizione(iscTO);

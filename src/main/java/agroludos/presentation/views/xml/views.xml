@@ -223,5 +223,12 @@
 			<height>355</height>
 			<title>Agroludos | Aggiorna Certificato SRC</title>
 		</view>
+		<view tipo="dialog">
+			<name>motivoEliminazione</name>
+			<url>/fxml/mdc/motivoEliminazione.fxml</url>
+			<width>564</width>
+			<height>225</height>
+			<title>Agroludos</title>
+		</view>
 	</views>
 </agro-views>

@@ -99,8 +99,11 @@
 		<from name="mostraIscrizione">
 			<forward success="managerDiCompetizione" failure="mostraIscrizoine" />
 		</from>
-		<from name="partMostraIscrizione">
-			<forward success="partecipante" failure="partMostraIscrizione" />
+	</command>
+	<command name="inviaMail">
+		<classe>agroludos.business.as.gestoremail.LEmail</classe>
+		<from name="motivoEliminazione">
+			<forward success="managerDiCompetizione" failure="motivoEliminazione" />
 		</from>
 	</command>
 	<command name="eliminaIscrizioneByPartecipante">
