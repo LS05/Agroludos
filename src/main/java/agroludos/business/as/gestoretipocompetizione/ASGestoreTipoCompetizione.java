@@ -5,6 +5,7 @@ import java.util.List;
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.TipoCmpExistException;
 import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.TipoCompetizioneDAO;
@@ -30,6 +31,11 @@ class ASGestoreTipoCompetizione extends AgroludosAS implements LTipoCompetizione
 		TipoCompetizioneDAO daoTcm = getTipoCompetizioneDAO();
 		
 		this.validator.validate(tcmto);
+		List<TipoCompetizioneTO> listTcmp = daoTcm.getAll();
+		for(TipoCompetizioneTO tcmp: listTcmp){
+			if(tcmp.getNome().compareTo(tcmto.getNome())==0)
+				throw new TipoCmpExistException();
+		}
 		
 		return daoTcm.create(tcmto);
 

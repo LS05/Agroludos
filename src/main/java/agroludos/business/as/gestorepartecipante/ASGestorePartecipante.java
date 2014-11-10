@@ -18,13 +18,15 @@ import agroludos.integration.dao.file.FileDAOFactory;
 import agroludos.integration.dao.file.FileFactory;
 import agroludos.to.CertificatoTO;
 import agroludos.to.PartecipanteTO;
+import agroludos.utility.PasswordEncryption;
 
 class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SPartecipante{
-
+	private PasswordEncryption pwdEnc;
 	private FileFactory fileFactory;
 	private AgroludosValidator validator;
 
-	ASGestorePartecipante(FileFactory fileFactory, AgroludosValidator validator){
+	ASGestorePartecipante(PasswordEncryption pwdEnc, FileFactory fileFactory, AgroludosValidator validator){
+		this.pwdEnc = pwdEnc;
 		this.fileFactory = fileFactory;
 		this.validator = validator;
 	}
@@ -57,12 +59,15 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 			throws DatabaseException, ValidationException, IOException {
 
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
+		if( daoPar.esisteEmail(partTO))
+			throw new UtenteEsistenteException("Email già esistente");
+		if( daoPar.esisteUsername(partTO) )
+			throw new UtenteEsistenteException("Username già esistente");
 
-		if( !daoPar.esisteEmail(partTO) && !daoPar.esisteUsername(partTO) ){ 
-			this.setDatiPartecipante(partTO);
-		} else {
-			throw new UtenteEsistenteException();
-		}
+		this.setDatiPartecipante(partTO);
+
+		String inputPassword = partTO.getPassword();
+		partTO.setPassword(this.pwdEnc.encryptPassword(inputPassword));
 
 		return daoPar.create(partTO);
 

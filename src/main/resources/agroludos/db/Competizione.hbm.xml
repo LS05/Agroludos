@@ -51,7 +51,7 @@
 	<query name="getAllCompetizione">
         <![CDATA[ from agroludos.to.Competizione c ]]></query>
 	<query name="getCompetizioniByTipo">
-        <![CDATA[ from agroludos.to.Competizione c where c.tipoCompetizione = ?]]></query>
+        <![CDATA[ from agroludos.to.Competizione c where c.tipoCompetizione.nome = ?]]></query>
 	<query name="getCompetizioneById">
         <![CDATA[ from agroludos.to.Competizione c where c.id = ?]]></query>
 	<query name="getCompetizioneByMdc">

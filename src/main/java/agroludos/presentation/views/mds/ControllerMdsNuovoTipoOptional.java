@@ -8,11 +8,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
+import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.SuccessMessageTO;
 import agroludos.to.TipoOptionalTO;
@@ -55,12 +55,6 @@ public class ControllerMdsNuovoTipoOptional extends AgroludosController implemen
 		this.risposta = this.getRisposta();
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 
-		if(!this.flagError){
-			SuccessMessageTO msgNuovoOpt = toFact.createSuccMessageTO();
-			msgNuovoOpt.setMessage(this.res.getString("key166"));
-			this.setVista("messageDialog", msgNuovoOpt);
-		}
-
 	}
 
 	@Override
@@ -83,6 +77,11 @@ public class ControllerMdsNuovoTipoOptional extends AgroludosController implemen
 					this.lblNomeError.setVisible(true);
 					this.lblNomeError.setText(errors.getError(nomeKey));
 				} 
+			}else if(res instanceof String){
+				ErrorMessageTO errorMessage = toFact.createErrMessageTO();
+				String msg = (String)res;
+				errorMessage.setMessage(msg);
+				this.setVista("messageDialog", errorMessage);
 			}
 		}
 	}

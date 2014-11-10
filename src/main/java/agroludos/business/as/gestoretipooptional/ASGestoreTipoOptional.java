@@ -5,9 +5,12 @@ import java.util.List;
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.TipoCmpExistException;
+import agroludos.exceptions.TipoOptExistException;
 import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.TipoOptionalDAO;
+import agroludos.to.TipoCompetizioneTO;
 import agroludos.to.TipoOptionalTO;
 
 class ASGestoreTipoOptional extends AgroludosAS implements LTipoOptional, STipoOptional{
@@ -28,6 +31,11 @@ class ASGestoreTipoOptional extends AgroludosAS implements LTipoOptional, STipoO
 
 		TipoOptionalDAO daoTop = getTipoOptionalDAO();
 		this.validator.validate(tipoOptTO);
+		List<TipoOptionalTO> listTopt = daoTop.getAll();
+		for(TipoOptionalTO topt: listTopt){
+			if(topt.getNome().compareTo(tipoOptTO.getNome())==0)
+				throw new TipoOptExistException();
+		}
 		
 		return daoTop.create(tipoOptTO);
 	}

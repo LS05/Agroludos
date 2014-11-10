@@ -176,7 +176,6 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.btnResetRicComp.setVisible(false);
 
 		final String viewNameSupp = this.viewName;
-		final List<TipiAgroludosTO> suppListTipiCompetizione = this.listTipiComp;
 		this.listViewComp.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@SuppressWarnings("unchecked")
@@ -184,9 +183,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			public void handle(MouseEvent event) {
 				ListView<String> source = (ListView<String>)event.getSource();
 				String nomeTipo = source.getSelectionModel().getSelectedItem();
-				Integer idSelected = source.getSelectionModel().getSelectedIndex();
 				if(nomeTipo != null){
-					TipoCompetizioneTO tipoComp = (TipoCompetizioneTO) suppListTipiCompetizione.get(idSelected);
+					TipoCompetizioneTO tipoComp = toFact.createTipoCompetizioneTO();
+					tipoComp.setNome(nomeTipo);
 
 					richiesta = getRichiesta(tipoComp, "getCompetizioniByTipo", viewNameSupp);
 					risposta = getRisposta();
@@ -331,7 +330,6 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.paneListaTipiOpt.getChildren().add(listViewOpt);
 
 		final String viewNameSupp = this.viewName;
-		final List<TipiAgroludosTO> suppListTipiOptional = this.listTipiOpt;
 		this.listViewOpt.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@SuppressWarnings("unchecked")
@@ -339,9 +337,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			public void handle(MouseEvent event) {
 				ListView<String> source = (ListView<String>)event.getSource();
 				String nomeTipo = source.getSelectionModel().getSelectedItem();
-				Integer idSelected = source.getSelectionModel().getSelectedIndex();
 				if(nomeTipo != null){
-					TipoOptionalTO tipoOpt = (TipoOptionalTO) suppListTipiOptional.get(idSelected);
+					TipoOptionalTO tipoOpt = toFact.createTipoOptionalTO();
+					tipoOpt.setNome(nomeTipo);
 					richiesta = getRichiesta(tipoOpt, "getOptionalByTipo", viewNameSupp);
 					risposta = getRisposta();
 					eseguiRichiesta(richiesta, risposta);
@@ -618,8 +616,18 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			Object res = response.getRespData();
 
 			if(res instanceof TipoOptionalTO){
-				TipoOptionalTO tipo = (TipoOptionalTO)res;
-				this.listViewOpt.addItem(tipo);
+				this.closeVista("nuovoTipoOpt");
+
+				SuccessMessageTO msgNuovoOpt = toFact.createSuccMessageTO();
+				msgNuovoOpt.setMessage(this.resources.getString("key166"));
+				this.setVista("messageDialog", msgNuovoOpt);
+
+				this.richiesta = this.getRichiesta("getAllTipoOptional", this.viewName);
+				this.risposta = this.getRisposta();
+				this.eseguiRichiesta(this.richiesta, this.risposta);
+				this.listViewOpt.getItems().clear();
+				for(TipiAgroludosTO topt: this.listTipiOpt)
+					this.listViewOpt.addItem(topt);
 			}
 		} else if( commandName.equals( this.getCommandName("disattivaOptional") )){
 			Object res = response.getRespData();
@@ -662,8 +670,19 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			Object res = response.getRespData();
 
 			if(res instanceof TipoCompetizioneTO){
-				TipoCompetizioneTO tipo = (TipoCompetizioneTO)res;
-				this.listViewComp.addItem(tipo);
+				this.closeVista("nuovoTipoCpt");
+
+				SuccessMessageTO msgNuovoOpt = toFact.createSuccMessageTO();
+				msgNuovoOpt.setMessage(this.resources.getString("key129"));
+				this.setVista("messageDialog", msgNuovoOpt);
+
+				this.richiesta = this.getRichiesta("getAllTipoCompetizione", this.viewName);
+				this.risposta = this.getRisposta();
+				this.eseguiRichiesta(this.richiesta, this.risposta);
+
+				this.listViewComp.getItems().clear();
+				for(TipiAgroludosTO tcmp: this.listTipiComp)
+					this.listViewComp.addItem(tcmp);
 			}
 		} else if( commandName.equals( this.getCommandName("eliminaManagerDiCompetizione") )){
 			Object res = response.getRespData();
@@ -679,8 +698,13 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			Object res = response.getRespData();
 
 			if(res instanceof ManagerDiCompetizioneTO){
+				this.closeVista("nuovoMDC");
 				ManagerDiCompetizioneTO optTO = (ManagerDiCompetizioneTO)res;
 				this.tableManagerCompetizione.addItem(optTO);
+				
+				SuccessMessageTO msgNuovoOpt = toFact.createSuccMessageTO();
+				msgNuovoOpt.setMessage(this.resources.getString("key166"));
+				this.setVista("messageDialog", msgNuovoOpt);
 			}
 		}else if( commandName.equals( this.getCommandName("checkMdcCmpAttive") )){
 			Object res = response.getRespData();

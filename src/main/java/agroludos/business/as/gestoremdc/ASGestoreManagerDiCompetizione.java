@@ -6,6 +6,7 @@ import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.MdcCmpAttiveException;
+import agroludos.exceptions.UtenteEsistenteException;
 import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
@@ -39,6 +40,11 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 
 		this.validator.validate(mdcto);
 
+		if( daoMan.esisteEmail(mdcto))
+			throw new UtenteEsistenteException("Email già esistente");
+		if( daoMan.esisteUsername(mdcto) )
+			throw new UtenteEsistenteException("Username già esistente");
+		
 		String inputPassword = mdcto.getPassword();
 		mdcto.setPassword(this.pwdEnc.encryptPassword(inputPassword));
 

@@ -19,12 +19,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.presentation.views.components.numberspinner.NumberSpinner;
 import agroludos.to.AgroludosTO;
+import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoUtenteTO;
@@ -133,11 +133,6 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 		this.richiesta = this.getRichiesta(mdcTO, "nuovoManagerDiCompetizione", this.viewName);
 		this.risposta = this.getRisposta();
 		this.eseguiRichiesta(this.richiesta, this.risposta);
-		if(!this.flagError){
-			SuccessMessageTO succTO = toFact.createSuccMessageTO();
-			succTO.setMessage(this.resources.getString("key132"));
-			this.setVista("messageDialog", succTO);
-		}
 	}
 
 	@Override
@@ -201,6 +196,11 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 					this.lblEmailError.setText(errors.getError(emailKey));
 				}
 
+			}else if(res instanceof String){
+				ErrorMessageTO errorMessage = toFact.createErrMessageTO();
+				String msg = (String)res;
+				errorMessage.setMessage(msg);
+				this.setVista("messageDialog", errorMessage);
 			}
 		}
 	}
