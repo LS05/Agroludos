@@ -16,11 +16,13 @@ public final class TableCompetizioniFilter extends TableFilter<CmpModel> {
 
 		if (cmpModel.getNome().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
 			return true;
-		} else if (cmpModel.getDescrizione().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-			return true;
 		} else if (cmpModel.getCosto().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
 			return true;
 		} else if (cmpModel.getStato().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+			return true;
+		} else if (cmpModel.getId().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+			return true;
+		}else if (cmpModel.getMdcmail().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
 			return true;
 		}
 

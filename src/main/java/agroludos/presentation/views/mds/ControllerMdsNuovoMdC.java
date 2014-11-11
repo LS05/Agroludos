@@ -30,7 +30,6 @@ import agroludos.to.TipoUtenteTO;
 
 public class ControllerMdsNuovoMdC extends AgroludosController {
 	private String viewName;
-	private boolean flagError;
 
 	private @FXML TextField txtUsername;
 	private @FXML PasswordField txtPassword;
@@ -60,7 +59,6 @@ public class ControllerMdsNuovoMdC extends AgroludosController {
 	@Override
 	protected void initializeView(String nameView) {
 		this.viewName = nameView;
-		this.flagError = false;
 		this.lblUsernameError.setVisible(false);
 		this.lblPasswordError.setVisible(false);
 		this.lblNomeError.setVisible(false);
@@ -101,7 +99,6 @@ public class ControllerMdsNuovoMdC extends AgroludosController {
 
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
-		this.flagError = false;
 	}
 
 	@FXML protected void confermaNuovoManagerDiCompetizione(MouseEvent event){
@@ -142,7 +139,6 @@ public class ControllerMdsNuovoMdC extends AgroludosController {
 			if(res instanceof ErrorTO){
 
 				ErrorTO errors = (ErrorTO)res;
-				this.flagError = true;
 
 				if(errors.hasError(this.getError("nomeKey"))){
 					String nomeKey = this.getError("nomeKey");

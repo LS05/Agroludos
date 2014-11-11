@@ -86,7 +86,8 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 		}else{
 			this.tableIscrizioni = new TableIscrizioni();
 			this.tableCompetizioni = new TableCompetizioni();
-			this.tableCompetizioni.hideColumn(3);
+			this.tableCompetizioni.hideColumn(2);
+			this.tableCompetizioni.hideColumn(4);
 
 			this.richiesta = this.getRichiesta(this.currUser,"getAllIscrizioniAttive", this.viewName);
 			this.risposta = this.getRisposta();

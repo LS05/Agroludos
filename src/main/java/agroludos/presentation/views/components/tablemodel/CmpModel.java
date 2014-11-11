@@ -1,7 +1,6 @@
 package agroludos.presentation.views.components.tablemodel;
 
 import agroludos.to.CompetizioneTO;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class CmpModel {
@@ -14,7 +13,8 @@ public class CmpModel {
 	private SimpleStringProperty stato;
 	private SimpleStringProperty descrizione;
 	private SimpleStringProperty costo;
-	private SimpleIntegerProperty iscritti;
+	private SimpleStringProperty iscritti;
+	private SimpleStringProperty mdcmail;
 	private CompetizioneTO cmpto;
 
 	public CmpModel(CompetizioneTO cmpto){
@@ -27,7 +27,8 @@ public class CmpModel {
 		this.stato = new SimpleStringProperty(cmpto.getStatoCompetizione().getNome());
 		this.descrizione = new SimpleStringProperty(cmpto.getDescrizione());
 		this.costo = new SimpleStringProperty(Double.toString(cmpto.getCosto()));
-		this.iscritti =  new SimpleIntegerProperty();
+		this.iscritti =  new SimpleStringProperty(Integer.toString(cmpto.getNiscritti()));
+		this.mdcmail =  new SimpleStringProperty(cmpto.getManagerDiCompetizione().getEmail());
 		this.cmpto = cmpto;
 	}
 
@@ -103,16 +104,29 @@ public class CmpModel {
 		return costo.get();
 	}
 
-	public Integer getNiscritti() {
+	public String getMdcmail() {
+		return mdcmail.get();
+	}
+
+
+	public void setMdcmail(String mdcMail) {
+		this.mdcmail.set(mdcMail);
+	}
+	
+	public String getNiscritti() {
 		return iscritti.get();
 	}
 
 
-	public void setNiscritti(Integer niscritti) {
+	public void setNiscritti(String niscritti) {
 		this.iscritti.set(niscritti);
 	}
+	
+	public SimpleStringProperty mdcmailProperty(){
+		return this.mdcmail;
+	}
 
-	public SimpleIntegerProperty niscrittiProperty(){
+	public SimpleStringProperty iscrittiProperty(){
 		return this.iscritti;
 	}
 	
@@ -158,4 +172,5 @@ public class CmpModel {
 				+ ", niscritti=" + iscritti + ", nmin=" + nmin + ", nmax="
 				+ nmax + ", tipo=" + tipo + ", stato=" + stato + "]";
 	}
+
 }
