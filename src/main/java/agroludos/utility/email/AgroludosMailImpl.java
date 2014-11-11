@@ -6,7 +6,6 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
-import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -46,28 +45,10 @@ class AgroludosMailImpl implements AgroludosMail {
 		return props;
 	}
 
-	private class MailThread extends Thread{
-		private Message message;
-
-		MailThread(Message message){
-			super("agroludos-mail");
-			this.message = message;
-		}
-
-		@Override
-		public void run(){
-			try {
-				Transport.send(message);
-			} catch (MessagingException e) {
-				throw new RuntimeException(e);
-			}
-		}
-	};
-
 	@Override
 	public void sendEmail(EmailTO emailTO) {
-		final String username = sysConf.getString("agroludosMail");
-		final String password = sysConf.getString("agroludosMailPwd");
+		final String username = this.sysConf.getString("agroludosMail");
+		final String password = this.sysConf.getString("agroludosMailPwd");
 
 		Properties props = createMailProperties();
 
