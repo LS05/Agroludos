@@ -44,6 +44,13 @@
 			<height>574</height>
 			<title>Agroludos | Registrazione</title>
 		</view>
+		<view tipo="dialog">
+			<name>modificaDatiAccesso</name>
+			<url>/fxml/registrazione/modificaDatiAccesso.fxml</url>
+			<width>644</width>
+			<height>389</height>
+			<title>Agroludos | Modifica Dati di Accesso</title>
+		</view>
 		<view tipo="mainView">
 			<name>managerDiSistema</name>
 			<url>/fxml/mds/mdsMain.fxml</url>

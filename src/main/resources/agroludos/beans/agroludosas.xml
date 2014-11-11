@@ -58,6 +58,7 @@
 	<bean id="gestoreUtente" class="agroludos.business.as.gestoreutente.ASGestoreUtente"
 		parent="agroludosAS">
 		<constructor-arg ref="pwdEnc" />
+		<constructor-arg ref="partValidator" />
 	</bean>
 	
 	<bean id="gestoreStatoUtente"

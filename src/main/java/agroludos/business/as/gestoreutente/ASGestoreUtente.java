@@ -5,8 +5,11 @@ import java.io.IOException;
 import org.apache.commons.lang.RandomStringUtils;
 
 import agroludos.business.as.AgroludosAS;
+import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.UserNotFoundException;
+import agroludos.exceptions.UtenteEsistenteException;
+import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.UtenteDAO;
 import agroludos.to.EmailTO;
@@ -15,9 +18,11 @@ import agroludos.utility.PasswordEncryption;
 
 class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 	PasswordEncryption pwdEnc;
+	private AgroludosValidator validator;
 
-	ASGestoreUtente(PasswordEncryption pwdEnc){
+	ASGestoreUtente(PasswordEncryption pwdEnc, AgroludosValidator validator){
 		this.pwdEnc = pwdEnc;
+		this.validator = validator;
 	}
 
 	private UtenteDAO<UtenteTO> getUtenteDAO() throws DatabaseException{
@@ -92,5 +97,21 @@ class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 		mail.addDestinatario(uTO);
 
 		return uTO;
+	}
+
+	@Override
+	public UtenteTO modificaDatiAccesso(UtenteTO uTO) throws DatabaseException, ValidationException {
+		UtenteDAO<UtenteTO> daoUto = this.getUtenteDAO();
+
+		if( daoUto.esisteEmail(uTO))
+			throw new UtenteEsistenteException("Email già esistente");
+
+		this.validator.validate(uTO);
+
+		String inputPassword = uTO.getPassword();
+		uTO.setPassword(this.pwdEnc.encryptPassword(inputPassword));
+
+
+		return daoUto.update(uTO);
 	}
 }

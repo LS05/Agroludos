@@ -18,4 +18,5 @@ public interface LUtente extends AgroludosService {
 
 	UtenteTO passwordDimenticata(UtenteTO uTO) throws DatabaseException,
 			UserNotFoundException, IOException;
+
 }

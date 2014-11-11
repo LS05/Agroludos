@@ -121,6 +121,11 @@
                 <MenuItem mnemonicParsing="false" onAction="#menuEsci" text="%key15" fx:id="menuEsci" />
               </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="%key25">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#menuModificaDatiAccesso" text="%key26" />
+              </items>
+            </Menu>
           </menus>
         </MenuBar>
       </top>

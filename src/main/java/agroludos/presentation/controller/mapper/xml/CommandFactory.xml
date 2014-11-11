@@ -382,4 +382,10 @@
 			<forward success="login" failure="login" />
 		</from>
 	</command>
+		<command name="modificaDatiAccesso">
+		<classe>agroludos.business.as.gestoreutente.SUtente</classe>
+		<from name="modificaDatiAccesso">
+			<forward success="modificaDatiAccesso" failure="modificaDatiAccesso" />
+		</from>
+	</command>
 </commands>
