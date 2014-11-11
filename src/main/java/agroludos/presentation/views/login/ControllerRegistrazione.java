@@ -208,10 +208,8 @@ public class ControllerRegistrazione extends AgroludosController{
 		this.richiesta = this.getRichiesta(this.parTO,"inserisciPartecipante", this.viewName);
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 
-		if( !this.errFlag ){
-			System.out.println("partecipante inserito correttamente!");
+		if( !this.errFlag )
 			this.close();
-		}
 	}
 
 	@FXML protected void btnCarica(MouseEvent event) {

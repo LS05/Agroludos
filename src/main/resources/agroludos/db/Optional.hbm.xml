@@ -27,7 +27,7 @@
 	<query name="getAllOptional">
         <![CDATA[ from agroludos.to.Optional o ]]></query>
 	<query name="getOptionalByTipo">
-        <![CDATA[ from agroludos.to.Optional o where o.tipoOptional = ?]]></query>
+        <![CDATA[ from agroludos.to.Optional o where o.tipoOptional.nome = ?]]></query>
 	<query name="getOptionalAttiviByTipo">
-        <![CDATA[ from agroludos.to.Optional o where o.tipoOptional = ? and stato = 1]]></query>
+        <![CDATA[ from agroludos.to.Optional o where o.tipoOptional.nome = ? and stato = 1]]></query>
 </hibernate-mapping>

@@ -149,7 +149,7 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 			if( this.mainIscr.getAllOptionals().size() > 0 ){
 				this.passoCorrente = this.nPassi - 1;
 				this.btnAvanti.setVisible(false);
-				this.tableOptional.setVisible(false);
+				this.paneTableOptional.setVisible(false);
 				this.btnConferma.setVisible(true);
 				for(OptionalTO opt : this.mainIscr.getAllOptionals()){
 					OptModel o = new OptModel(opt);
@@ -160,6 +160,11 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 				}
 				showConfermaView();
 				this.btnIndietro.setDisable(false);
+			}else{
+				this.btnAvanti.setVisible(true);
+				this.btnAvanti.setDisable(false);
+				this.btnConferma.setVisible(false);
+				this.btnIndietro.setDisable(true);
 			}
 
 		}
@@ -341,10 +346,10 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 
 		if(this.passoCorrente == 0)
 			this.btnIndietro.setDisable(true);
-
-		if(!this.tableOptional.visibleProperty().getValue()){
-			this.tableOptional.setVisible(true);
-		}
+		else
+			this.btnIndietro.setDisable(true);
+		
+		this.paneTableOptional.setVisible(true);
 
 		this.setLabelDialog();
 		this.paneOptionalScelti.setVisible(false);
@@ -361,28 +366,21 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 
 	private void showConfermaView(){
 		this.paneOptionalScelti.setVisible(true);
-		if(this.optScelti.size() == 0){
-			this.tableOptScelti.setVisible(false);
-		} else {
-			this.tableOptScelti.setVisible(true);
-			DecimalFormat df = new DecimalFormat("#.00");
-			this.lblTotaleOpt.setText(df.format(this.totaleOpt));
-			this.lblTotaleComp.setText(df.format(this.totComp));
-		}
+		DecimalFormat df = new DecimalFormat("#.00");
+		this.lblTotaleOpt.setText(df.format(this.totaleOpt));
+		this.lblTotaleComp.setText(df.format(this.totComp));
 	}
 
 	@FXML protected void btnAvanti(MouseEvent event) {
 		this.passoCorrente++;
 		this.setLabelDialog();
-
+		this.btnIndietro.setDisable(false);
 		if(this.passoCorrente == (this.nPassi - 1)){
 			this.btnAvanti.setVisible(false);
-			this.tableOptional.setVisible(false);
 			this.paneTableOptional.setVisible(false);
 			this.btnConferma.setVisible(true);
 			showConfermaView();
 		} else {
-			this.btnIndietro.setDisable(false);
 			this.setTable((TipoOptionalTO)this.listTipiOpt.get(this.passoCorrente));
 			TipoOptionalTO tipoCorr = (TipoOptionalTO)this.listTipiOpt.get(this.passoCorrente);
 			this.setTable(tipoCorr);
@@ -412,7 +410,11 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 			for (OptionalTO opt : this.optScelti.values()) {
 				this.mainIscr.addOptional(opt);
 			}
-			this.mainIscr.setCosto(this.totComp);
+			if(this.mainIscr.getAllOptionals().isEmpty())
+				this.mainIscr.setCosto(this.mainComp.getCosto());
+			else
+				this.mainIscr.setCosto(this.totComp);
+			
 			this.close();
 			Object res = response.getRespData();
 			if(res instanceof IscrizioneTO){

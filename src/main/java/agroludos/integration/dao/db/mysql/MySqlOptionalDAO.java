@@ -21,8 +21,8 @@ class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements Optional
 
 	@Override
 	public List<OptionalTO> getOptionalAttiviByTipo(TipoOptionalTO toptTO) throws DatabaseException {
-		List<TipoOptionalTO> param = new ArrayList<TipoOptionalTO>();
-		param.add(toptTO);
+		List<String> param = new ArrayList<String>();
+		param.add(toptTO.getNome());
 
 		List<OptionalTO> res = super.executeParamQuery("getOptionalAttiviByTipo", param);
 
@@ -32,8 +32,8 @@ class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements Optional
 
 	@Override
 	public List<OptionalTO> getOptionalByTipo(TipoOptionalTO toptTO) throws DatabaseException {
-		List<TipoOptionalTO> param = new ArrayList<TipoOptionalTO>();
-		param.add(toptTO);
+		List<String> param = new ArrayList<String>();
+		param.add(toptTO.getNome());
 
 		List<OptionalTO> res = super.executeParamQuery("getOptionalByTipo", param);
 

@@ -94,5 +94,5 @@
 	<query name="getByUsername">
 		<![CDATA[ from agroludos.to.Utente m where m.statoUtente.id = 1 and m.username = ? ]]></query>
 	<query name="getByEmail">
-		<![CDATA[ from agroludos.to.Utente m where m.email = ? ]]></query>
+		<![CDATA[ from agroludos.to.Utente m where m.statoUtente.id = 1 and m.email = ? ]]></query>
 </hibernate-mapping>

@@ -77,6 +77,7 @@
 	<bean id="gestorePartecipante"
 		class="agroludos.business.as.gestorepartecipante.ASGestorePartecipante"
 		parent="agroludosAS">
+		<constructor-arg ref="pwdEnc" />
 		<constructor-arg ref="fileFactory" />
 		<constructor-arg ref="partValidator" />
 	</bean>
