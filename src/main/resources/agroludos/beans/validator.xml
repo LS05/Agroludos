@@ -16,6 +16,11 @@
 	<import resource="classpath:agroludos/beans/compRules.xml" />
 	<import resource="classpath:agroludos/beans/iscrizioneRules.xml" />
 	
+	<bean id="userValidator" class="agroludos.business.validator.partecipante.utente.UtenteValidator">
+		<constructor-arg ref="userRulesFactory" />
+		<constructor-arg ref="toFactory" />
+	</bean>
+	
 	<bean id="partValidator" class="agroludos.business.validator.partecipante.PartValidator">
 		<constructor-arg ref="pRulesFactory" />
 		<constructor-arg ref="userRulesFactory" />
