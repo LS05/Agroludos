@@ -273,7 +273,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 
 		for(CompetizioneTO cmp: listCmp){
 			if(!(cmp.getStatoCompetizione().getId() == 0)
-					|| !(cmp.getStatoCompetizione().getId() == 4)){
+					&& !(cmp.getStatoCompetizione().getId() == 4)){
 				DateTime dataCmp = new DateTime(cmp.getData());
 				if(dataCmp.isEqualNow() 
 						&& !(cmp.getStatoCompetizione().getId() == 2)){

@@ -17,12 +17,9 @@ abstract class TableFilter<T> {
 	}
 
 	public void setData(AgroTable<T> mainTable){
-		if(mainTable.getItems().size() == 0){
-			this.masterData.clear();
-		} else {
-			for(T m : mainTable.getItems()){
-				this.masterData.add(m);
-			}
+		this.masterData.clear();
+		for(T m : mainTable.getItems()){
+			this.masterData.add(m);
 		}
 	}
 
