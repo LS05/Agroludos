@@ -7,5 +7,7 @@ import agroludos.to.StatoIscrizioneTO;
 public interface StatoIscrizioneDAO extends DAO<StatoIscrizioneTO> {
 
 	StatoIscrizioneTO getStatoAttivo() throws DatabaseException;
+	
+	StatoIscrizioneTO getStatoDisattivo() throws DatabaseException;
 
 }

@@ -245,7 +245,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 				//mostro la view per catturare la motivazione dell'eliminazione
 				EmailTO mail = toFact.createEmailTO();
-				mail.setOggetto(this.getString("mailAnnullaIscrMdcSubj"));
+				mail.setOggetto(this.getString("mailAnnullaIscrSubj"));
 				String msgString = this.getString("mailAnnullaIscrMdcMsg");
 				String msgMail = MessageFormat.format(msgString, 
 						iscTO.getPartecipante().getUsername(), 

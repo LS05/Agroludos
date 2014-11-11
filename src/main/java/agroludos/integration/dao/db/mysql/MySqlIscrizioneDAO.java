@@ -25,10 +25,8 @@ class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements Iscr
 
 	@Override
 	public IscrizioneTO annullaIscrizione(IscrizioneTO iscTO) throws DatabaseException {
-
 		super.update(iscTO);
 		return iscTO;
-
 	}
 
 	//TODO Da rivedere il confronto con null
@@ -60,7 +58,7 @@ class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements Iscr
 	}
 
 	private StatoIscrizioneTO getStatoIscrizioneTerminato() throws DatabaseException {
-		
+
 		StatoIscrizioneTO siscTO = (StatoIscrizioneTO) super.executeQuery("getStatoIscrizioneTerminato");
 
 		return siscTO;

@@ -81,7 +81,7 @@ class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 
 		uTO.setPassword(this.pwdEnc.encryptPassword(psw));
 		daoUtente.update(uTO);
-		
+
 		//TODO PasswordDimenticata
 		EmailTO mail = toFact.createEmailTO();
 		mail.setOggetto("Password dimenticata");
@@ -90,7 +90,7 @@ class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 				+ "Nuova Password: " + psw);
 
 		mail.addDestinatario(uTO);
-		
+
 		return uTO;
 	}
 }

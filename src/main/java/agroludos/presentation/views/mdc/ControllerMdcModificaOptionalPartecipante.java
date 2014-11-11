@@ -60,24 +60,14 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 	private double totale;
 	private ResourceBundle res;
 
-
-
 	@Override
 	public void initialize(URL url, ResourceBundle resources) {
 		this.res = resources;
-
 	}
-
 
 	@Override
 	protected void initializeView(String nameView) {
 		this.viewName = nameView;
-
-	}
-
-	@Override
-	public String getViewName() {
-		return this.viewName;
 	}
 
 	@Override
@@ -144,8 +134,7 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 			this.tableOptionalScelti.hideColumn(1);
 			this.tableOptionalScelti.hideColumn(4);
 
-			this.AggiornaTotale();
-
+			this.aggiornaTotale();
 		}
 	}
 
@@ -178,7 +167,6 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 		this.tableOptionalScelti.getItems().setAll(this.optSceltiData);
 	}
 
-
 	@FXML protected void btnAggiungi(MouseEvent event) {
 		this.btnAggiungi.setDisable(true);
 		Boolean checkTipoOptional = false;
@@ -198,7 +186,7 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 				this.setVista("messageDialog",succMessage);
 			}
 		}
-		this.AggiornaTotale();
+		this.aggiornaTotale();
 	}
 
 	@FXML protected void btnRimuovi(MouseEvent event) {
@@ -210,11 +198,11 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 			this.tableOptionalScelti.getItems().clear();
 			this.tableOptionalScelti.getItems().setAll(this.optSceltiData);
 		}
-		this.AggiornaTotale();
+		this.aggiornaTotale();
 
 	}
 
-	private void AggiornaTotale() {
+	private void aggiornaTotale() {
 		this.totale = (double) 0;
 
 		for(OptModel optMod: this.tableOptionalScelti.getItems()){
@@ -223,8 +211,6 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 		this.lblTotale.setText(String.valueOf(totale));
 
 	}
-
-
 
 	@FXML protected void btnIndietro(MouseEvent event) {
 
@@ -240,6 +226,7 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 
 
 	}
+
 	@FXML protected void btnAvanti(MouseEvent event) {
 
 		this.btnIndietro.setDisable(false);
@@ -254,6 +241,7 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 		}
 
 	}
+
 	@FXML protected void btnConferma(MouseEvent event) {
 
 		this.mainIsc.clearOptionals();
@@ -268,8 +256,10 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 		this.close();
 	}
 
-
-
+	@Override
+	public String getViewName() {
+		return this.viewName;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -286,6 +276,4 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 			}
 		}
 	}
-
 }
-

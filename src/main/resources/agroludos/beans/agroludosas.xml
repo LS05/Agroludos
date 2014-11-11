@@ -47,6 +47,7 @@
 		class="agroludos.business.as.gestorecompetizione.ASGestoreCompetizione"
 		parent="agroludosAS">
 		<constructor-arg ref="compValidator" />
+		<constructor-arg ref="agroludosMail" />
 	</bean>
 	
 	<bean id="gestoreStatoCompetizione"

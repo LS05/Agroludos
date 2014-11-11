@@ -177,6 +177,11 @@ class Competizione implements CompetizioneTO{
 	public void clearOptionals(){
 		this.optionals.clear();
 	}
+	
+	@Override
+	public void setManagerDiCompetizione(ManagerDiCompetizioneTO managerDiCompetizione) {
+		this.managerDiCompetizione = (ManagerDiCompetizione) managerDiCompetizione;
+	}
 
 	@Override
 	public boolean equals(Object competizione){
@@ -204,11 +209,25 @@ class Competizione implements CompetizioneTO{
 
 		return res;
 	}
-
+	
 	@Override
-	public void setManagerDiCompetizione(ManagerDiCompetizioneTO managerDiCompetizione) {
-		this.managerDiCompetizione = (ManagerDiCompetizione) managerDiCompetizione;
-
+	public CompetizioneTO clone(){
+		Competizione c = new Competizione();
+//		c.id = new Integer(id);
+//		c.nome = new String(nome);
+//		private DateTime suppData;
+//		private Date data;
+//		c.nmin = nmin;
+//		c.nmax = nmax;
+//		c.descrizione = new String(descrizione);
+//		c.costo = new Double(costo);
+//		c.idStato = idStato;
+//		c.optionals = this.optionals.clone();
+//		private Set<Optional> optionals;
+//		private TipoCompetizione tipoCompetizione;
+//		private StatoCompetizione statoCompetizione;
+//		private ManagerDiCompetizione managerDiCompetizione;
+		return c;
 	}
 
 	@Override

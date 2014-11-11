@@ -83,7 +83,6 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 
 					iscTO = iscDAO.create(iscTO);
 
-					//TODO invia email
 					EmailTO mail = this.toFact.createEmailTO();
 					String partUsername = iscTO.getPartecipante().getUsername();
 					String compNome = iscTO.getCompetizione().getNome();
@@ -116,45 +115,6 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 				}
 			}
 		}
-		
-		return iscTO;
-	}
-
-
-	@Override
-	public IscrizioneTO modificaIscrizioneByMdc(IscrizioneTO iscTO)
-			throws DatabaseException {
-		iscTO = modificaIscrizione(iscTO);
-
-		//TODO invia email
-		EmailTO mail = toFact.createEmailTO();
-		mail.setOggetto("Modifica iscrizione");
-		mail.setMessage(iscTO.getPartecipante().getUsername() + " abbiamo modificato l'iscrizione"
-				+ " alla competizione " + iscTO.getCompetizione().getNome()
-				+ " cambiando gli optional. I nuovi optional sono i seguenti: "
-				+ iscTO.getAllOptionals().toString()
-				+ " e il costo totale dell'iscrizione ora è: "
-				+ iscTO.getCosto());
-
-		mail.addDestinatario(iscTO.getPartecipante());
-
-		return iscTO;
-	}
-
-	@Override
-	public IscrizioneTO modificaIscrizioneByPartecipante(IscrizioneTO iscTO)
-			throws DatabaseException {
-		iscTO = modificaIscrizione(iscTO);
-
-		//TODO invia email
-		EmailTO mail = toFact.createEmailTO();
-		mail.setOggetto("Modifca optional");
-		mail.setMessage(iscTO.getPartecipante().getUsername() + " ha modificato l'iscrizione "
-				+ "alla competizione " + iscTO.getCompetizione().getNome()
-				+ " scegliendo i seguenti optional: "
-				+ iscTO.getAllOptionals().toString());
-
-		mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
 
 		return iscTO;
 	}
@@ -166,23 +126,80 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 	}
 
 	@Override
-	public IscrizioneTO eliminaIscrizioneByMdc(IscrizioneTO iscTO) throws DatabaseException{
-		iscTO = eliminaIscrizione(iscTO);
+	public IscrizioneTO modificaIscrizioneByMdc(IscrizioneTO iscTO) 
+			throws DatabaseException {
+
+		iscTO = modificaIscrizione(iscTO);
+
+		EmailTO mail = this.toFact.createEmailTO();
+
+		String mailSubj = this.sysConf.getString("mailModIscrMdcSubj");
+		mail.setOggetto(mailSubj);
+
+		String mailMsg = this.sysConf.getString("mailModIscrMdcMsg");
+		String realMsg = MessageFormat.format(mailMsg, 
+				iscTO.getPartecipante().getUsername(), 
+				iscTO.getCompetizione().getNome(), 
+				iscTO.getAllOptionals().toString(), 
+				iscTO.getCosto());
+		mail.setMessage(realMsg);
+		mail.addDestinatario(iscTO.getPartecipante());
+
+		this.agroludosMail.sendEmail(mail);
 
 		return iscTO;
 	}
 
 	@Override
-	public IscrizioneTO eliminaIscrizioneByPartecipante(IscrizioneTO iscTO) throws DatabaseException{
+	public IscrizioneTO modificaIscrizioneByPartecipante(IscrizioneTO iscTO)
+			throws DatabaseException {
+		iscTO = modificaIscrizione(iscTO);
+
+		EmailTO mail = this.toFact.createEmailTO();
+
+		String mailSubj = this.sysConf.getString("mailModIscrPartSubj");
+		mail.setOggetto(mailSubj);
+
+		String mailMsg = this.sysConf.getString("mailModIscrPartMsg");
+		String realMsg = MessageFormat.format(mailMsg, 
+				iscTO.getPartecipante().getUsername(), 
+				iscTO.getCompetizione().getNome(), 
+				iscTO.getAllOptionals().toString());
+		mail.setMessage(realMsg);
+		mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
+		this.agroludosMail.sendEmail(mail);
+
+		return iscTO;
+	}
+
+	@Override
+	public IscrizioneTO eliminaIscrizioneByMdc(IscrizioneTO iscTO) 
+			throws DatabaseException{
+
+		iscTO = eliminaIscrizione(iscTO);
+		return iscTO;
+	}
+
+	@Override
+	public IscrizioneTO eliminaIscrizioneByPartecipante(IscrizioneTO iscTO) 
+			throws DatabaseException{
+
 		iscTO = eliminaIscrizione(iscTO);
 
-		//TODO invia email
-		EmailTO mail = toFact.createEmailTO();
-		mail.setOggetto("Iscrizione annullata");
-		mail.setMessage(iscTO.getPartecipante().getUsername() + " ha annullato l'iscrizione "
-				+ "alla competizione " + iscTO.getCompetizione().getNome());
+		EmailTO mail = this.toFact.createEmailTO();
+
+		String emailSubj = this.sysConf.getString("mailAnnullaIscrSubj");
+		mail.setOggetto(emailSubj);
+
+		String mailMsg = this.sysConf.getString("mailAnnullaIscrPartMsg");
+		String realMsg = MessageFormat.format(mailMsg, 
+				iscTO.getPartecipante().getUsername(), 
+				iscTO.getCompetizione().getNome());
+		mail.setMessage(realMsg);
 
 		mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
+
+		this.agroludosMail.sendEmail(mail);
 
 		return iscTO;
 	}
@@ -208,12 +225,16 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 	}
 
 	@Override
-	public List<IscrizioneTO> getAllIscrizioniAttive(PartecipanteTO parTO) throws DatabaseException {
+	public List<IscrizioneTO> getAllIscrizioniAttive(PartecipanteTO parTO)
+			throws DatabaseException {
+
 		IscrizioneDAO daoMan = getIscrizioneDAO(); 
 		return daoMan.getAllIscrizioniAttive(parTO);
 	}
 
-	private boolean isCompetizioneAperta(CompetizioneTO cmp) throws ChiuseIscrizioniException {
+	private boolean isCompetizioneAperta(CompetizioneTO cmp)
+			throws ChiuseIscrizioniException {
+
 		boolean res = true;
 		if(cmp.getStatoCompetizione().getId()!=1)
 			throw new ChiuseIscrizioniException();
@@ -221,7 +242,9 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 		return res;
 	}
 
-	private boolean iscrizioneEsistente(IscrizioneTO isc) throws DatabaseException, IscrizioneEsistenteException {
+	private boolean iscrizioneEsistente(IscrizioneTO isc) 
+			throws DatabaseException, IscrizioneEsistenteException {
+
 		boolean res = false;
 		List<IscrizioneTO> listIscCmp = getIscrizioneDAO().getIscrizioniAttiveCmp(isc.getCompetizione());
 
@@ -229,10 +252,13 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 			if(tempIsc.getPartecipante().getId()==isc.getPartecipante().getId())
 				throw new IscrizioneEsistenteException();
 		}
+
 		return res;
 	}
 
-	private boolean numeroMaxRaggiunto(CompetizioneTO cmp) throws DatabaseException, NmaxRaggiuntoException {
+	private boolean numeroMaxRaggiunto(CompetizioneTO cmp) 
+			throws DatabaseException, NmaxRaggiuntoException {
+
 		boolean res = false;
 		List<IscrizioneTO> listIscCmp = getIscrizioneDAO().getIscrizioniAttiveCmp(cmp);
 

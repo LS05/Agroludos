@@ -131,4 +131,18 @@ class Iscrizione implements IscrizioneTO{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@Override
+	public Iscrizione clone(){
+        Iscrizione p = new Iscrizione();
+//        p.data = new Date(this.data);
+//    	p.id = this.id;
+//    	p.idcompetizione = new Integer(this.idcompetizione);	
+//    	p.partecipante = this.partecipante.clone();
+//    	private Competizione competizione;
+//    	private Set<Optional> optionals;
+//    	private StatoIscrizione statoIscrizione;
+//    	private Double costo;
+        return p;
+    }
 }

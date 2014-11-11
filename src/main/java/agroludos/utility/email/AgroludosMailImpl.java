@@ -59,9 +59,9 @@ class AgroludosMailImpl implements AgroludosMail {
 		});
 
 		try {
-
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(username));
+
 
 			message.setSubject(emailTO.getOggetto());
 			message.setText(emailTO.getMessage());
@@ -70,11 +70,8 @@ class AgroludosMailImpl implements AgroludosMail {
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(uTO.getEmail()));
 				new MailThread(message).start();
 			}
-
 		} catch (MessagingException e) {
-			throw new RuntimeException(e);
-		}catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 
 		return;

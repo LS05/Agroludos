@@ -1,5 +1,6 @@
 package agroludos.business.as.gestorecompetizione;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.CmpDataAttiveException;
 import agroludos.exceptions.DatabaseException;
-import agroludos.exceptions.NoModificaCmp;
+import agroludos.exceptions.UnModCompetizioneException;
 import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
@@ -22,6 +23,7 @@ import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoCompetizioneTO;
 import agroludos.to.TipoCompetizioneTO;
+import agroludos.utility.email.AgroludosMail;
 
 /**
  * <b>Business Tier</b></br>
@@ -61,11 +63,12 @@ import agroludos.to.TipoCompetizioneTO;
 class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompetizione{
 
 	private AgroludosValidator validator;
+	private AgroludosMail agroludosMail;
 
-	ASGestoreCompetizione(AgroludosValidator validator){
+	ASGestoreCompetizione(AgroludosValidator validator, AgroludosMail agroludosMail){
 		this.validator = validator;
+		this.agroludosMail = agroludosMail;
 	}
-
 
 	private DBDAOFactory getDBDaoFactory() throws DatabaseException{
 		return this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
@@ -86,55 +89,64 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		return dbDAOFact.getIscrizioneDAO();
 	}
 
+	private StatoIscrizioneDAO getStatoIscrizioneDAO() throws DatabaseException {
+		DBDAOFactory dbDAOFact = this.getDBDaoFactory();
+		return dbDAOFact.getStatoIscrizioneDAO();
+	}
+
 	@Override
-	public CompetizioneTO inserisciCompetizione(CompetizioneTO cmpto)
+	public CompetizioneTO inserisciCompetizione(CompetizioneTO cmpTO)
 			throws DatabaseException, ValidationException {
 
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
 		StatoCompetizioneDAO daoStatoCmp = getStatoCompetizioneDAO();
-		cmpto.setStatoCompetizione(daoStatoCmp.getStatoCmpAperta());
+		cmpTO.setStatoCompetizione(daoStatoCmp.getStatoCmpAperta());
 
-		this.validator.validate(cmpto);
+		this.validator.validate(cmpTO);
 
-		this.checkCmpData(cmpto);
+		this.checkCmpData(cmpTO);
 
-		cmpto = daoCmp.create(cmpto);
+		cmpTO = daoCmp.create(cmpTO);
 
-		return cmpto;
-
+		return cmpTO;
 	}
 
 	@Override
-	public CompetizioneTO modificaCompetizione(CompetizioneTO cmpto)
+	public CompetizioneTO modificaCompetizione(CompetizioneTO cmpTO)
 			throws DatabaseException, ValidationException {
 
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
 		//se la competizione non è aperta alle iscrizioni
 		//non è possibile effettuare modifiche
-		if(getStatoCmp(cmpto).getId()
-				==getStatoCompetizioneDAO().getStatoCmpAperta().getId()){
+		//TODO Eliminare il confronto sugli id
+		if(getStatoCmp(cmpTO).getId()==getStatoCompetizioneDAO().getStatoCmpAperta().getId()){
 
-			this.validator.validate(cmpto);
+			this.validator.validate(cmpTO);
 
-			this.checkCmpData(cmpto);
+			this.checkCmpData(cmpTO);
 
-			List<IscrizioneTO> listIscAttive = getIscrizioneDAO().getIscrizioniAttiveCmp(cmpto);
-			if(listIscAttive.size() > cmpto.getNmax())
-				eliminaIscrizioniInEsubero(listIscAttive);
-			cmpto = daoCmp.update(cmpto);
-		}else
-			throw new NoModificaCmp();
-		return cmpto;
+			List<IscrizioneTO> listIscAttive = getIscrizioneDAO().getIscrizioniAttiveCmp(cmpTO);
+
+			cmpTO = daoCmp.update(cmpTO);
+
+			if(listIscAttive.size() > cmpTO.getNmax())
+				eliminaIscrizioniInEsubero(listIscAttive, cmpTO);
+
+		} else {
+			throw new UnModCompetizioneException();
+		}
+
+		return cmpTO;
 	}
 
-	private List<IscrizioneTO> eliminaIscrizioniInEsubero(
-			List<IscrizioneTO> listIsc) throws DatabaseException {
-		CompetizioneTO cmp = listIsc.get(0).getCompetizione();
+	private List<IscrizioneTO> eliminaIscrizioniInEsubero(List<IscrizioneTO> listIsc, CompetizioneTO cmpTO) 
+			throws DatabaseException {
 
-		//TODO testare 
+		//TODO Effettuare una deep copy
+		List<IscrizioneTO> listIscTemp = new ArrayList<IscrizioneTO>(listIsc);
 
 		//ordinare la lista per data
-		int lenght = listIsc.size()-1;
+		int lenght = listIsc.size() - 1;
 		while(lenght > 0){
 			for(int i = 0; i < lenght; i++){
 				if(listIsc.get(i).getData().after(listIsc.get(i+1).getData())){
@@ -147,58 +159,68 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 			}	
 		}
 
-		StatoIscrizioneDAO statoIscDao = this.dbFact.getDAOFactory(this.sysConf.getTipoDB()).getStatoIscrizioneDAO();
+		StatoIscrizioneDAO statoIscDao = this.getStatoIscrizioneDAO();
 		IscrizioneDAO iscDao = getIscrizioneDAO();
 
 		//elimino gli ultimi registrati e li avviso via mail
-		while(listIsc.size() > cmp.getNmax()){
+		while(listIsc.size() > cmpTO.getNmax()){
 			IscrizioneTO iscTO = listIsc.get(listIsc.size()-1);
 
 			listIsc.remove(listIsc.size()-1);
 
-			iscTO.setStatoIscrizione(statoIscDao.getAll().get(0));
+			iscTO.setStatoIscrizione(statoIscDao.getStatoDisattivo());
 			iscDao.annullaIscrizione(iscTO);
 
-			//TODO GestoreCompetizione - Invio mail 
-			EmailTO mail = toFact.createEmailTO();
-			mail.setOggetto("Iscrizione annullata");
-			mail.setMessage(iscTO.getPartecipante().getUsername() + " abbiamo annullato l'iscrizione "
-					+ "alla competizione " + iscTO.getCompetizione().getNome()
-					+ " in quanto il numero massimo di partecipanti si è ridotto"
-					+ " e stiamo annullando le iscrizioni a partire dall'ultimo iscritto"
-					+ " fino al raggiungimento del numero massimo.");
+			EmailTO mail = this.toFact.createEmailTO();
+
+			String mailSubj = this.sysConf.getString("mailAnnullaIscrSubj");
+			mail.setOggetto(mailSubj);
+
+			String mailMsg = this.sysConf.getString("mailAnnullaIscrEsubMsg");
+			String realMsg = MessageFormat.format(mailMsg, 
+					iscTO.getPartecipante().getUsername(), 
+					iscTO.getCompetizione().getNome());
+			mail.setMessage(realMsg);
 
 			mail.addDestinatario(iscTO.getPartecipante());
+
+			this.agroludosMail.sendEmail(mail);
 		}
+
 		return listIsc;
 	}
 
 	@Override
-	public CompetizioneTO annullaCompetizione(CompetizioneTO cmpto)
+	public CompetizioneTO annullaCompetizione(CompetizioneTO cmpTO)
 			throws DatabaseException {
 
-		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-		CompetizioneDAO daoCmp = dbDAOFact.getCompetizioneDAO();
-		StatoCompetizioneDAO daoScmp = dbDAOFact.getStatoCompetizioneDAO();
-		cmpto.setStatoCompetizione(daoScmp.getStatoCmpAnnullata());
-		daoCmp.annullaCompetizione(cmpto);
-		IscrizioneDAO iscDao = getIscrizioneDAO();
+		CompetizioneDAO daoCmp = this.getCompetizioneDAO();
+		StatoCompetizioneDAO daoScmp = this.getStatoCompetizioneDAO();
+		IscrizioneDAO iscDao = this.getIscrizioneDAO();
+
+		cmpTO.setStatoCompetizione(daoScmp.getStatoCmpAnnullata());
+		daoCmp.annullaCompetizione(cmpTO);
 
 
-		//TODO invia mail
 		EmailTO mail = toFact.createEmailTO();
-		mail.setOggetto(cmpto.getNome() + " annullata.");
-		mail.setMessage("La competizione " + cmpto.getNome() + "  è stata annullata.");
 
-		List<IscrizioneTO> listIsc = iscDao.getIscrizioniAttiveCmp(cmpto);
+		String mailSubj = this.sysConf.getString("mailAnnullaCompSubj");
+		mail.setOggetto(mailSubj);
+
+		String mailMsg = this.sysConf.getString("mailAnnullaCompMsg");
+		String realMsg = MessageFormat.format(mailMsg, cmpTO.getNome());
+		mail.setMessage(realMsg);
+
+		List<IscrizioneTO> listIsc = iscDao.getIscrizioniAttiveCmp(cmpTO);
 		for(IscrizioneTO iscTO: listIsc){
 			mail.addDestinatario(iscTO.getPartecipante());
 		}
 
+		this.agroludosMail.sendEmail(mail);
 
-		iscDao.terminaIscrizioni(cmpto);
+		iscDao.terminaIscrizioni(cmpTO);
 
-		return cmpto;
+		return cmpTO;
 	}
 
 	@Override
@@ -232,11 +254,12 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	}
 
 	@Override
-	public CompetizioneTO getCompetizioneById(CompetizioneTO cmpto)
+	public CompetizioneTO getCompetizioneById(CompetizioneTO cmpTO)
 			throws DatabaseException {
+
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
 
-		return checkCmp(daoCmp.readById(cmpto.getId()));
+		return checkCmp(daoCmp.readById(cmpTO.getId()));
 	}
 
 	@Override
@@ -259,7 +282,14 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		return daoCmp.readCompetizioniAttive();
 	}
 
-	//controlla le competizioni cambiando il loro stato confrontando la dato di oggi
+	//TODO ???
+	private CompetizioneTO checkCmp(CompetizioneTO Cmp) throws DatabaseException{
+		List<CompetizioneTO> listCmp = new ArrayList<CompetizioneTO>();
+		listCmp.add(Cmp);
+		return checkCmp(listCmp).get(0);
+	}
+
+	//controlla le competizioni cambiando il loro stato confrontando la data di oggi
 	//con la data della competizione
 	//se termina termina le iscrizioni attive
 	//se viene annullata per il non raggiungimento del numero minimo annulla la comp
@@ -311,13 +341,6 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		return listCmp;
 	}
 
-	private CompetizioneTO checkCmp(CompetizioneTO Cmp) throws DatabaseException{
-
-		List<CompetizioneTO> listCmp = new ArrayList<CompetizioneTO>();
-		listCmp.add(Cmp);
-		return checkCmp(listCmp).get(0);
-	}
-
 	private CompetizioneTO checkCmpData(CompetizioneTO cmp) 
 			throws DatabaseException, CmpDataAttiveException{
 
@@ -333,8 +356,6 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 
 		return cmp;
 	}
-
-
 
 	public StatoCompetizioneTO getStatoCmp(CompetizioneTO cmp)
 			throws DatabaseException {

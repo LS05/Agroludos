@@ -67,15 +67,14 @@ public class ControllerAggiornaCSRC extends AgroludosController implements Initi
 		Stage aggiornaStage = this.getStage(this.viewName);
 
 		aggiornaStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
-			public void handle(WindowEvent we) {
-				//TODO
+			public void handle(WindowEvent event) {
 				QuestionTO question = toFact.createQuestionTO();
 				question.setQuestion(res.getString("key177"));
 				question.setRequest("chiusura");
 				question.setViewName(viewName);
 				setVista("questionDialog", question);
 				getStage(viewName).show();
+				event.consume();
 			}
 		});
 	}
