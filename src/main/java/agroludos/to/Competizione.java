@@ -29,8 +29,6 @@ class Competizione implements CompetizioneTO{
 	private int nmax;
 	private String descrizione;
 	private Double costo;
-	private int idStato;
-
 	private Set<Optional> optionals;
 	private TipoCompetizione tipoCompetizione;
 	private StatoCompetizione statoCompetizione;
@@ -38,16 +36,6 @@ class Competizione implements CompetizioneTO{
 
 	Competizione(){
 		this.optionals = new HashSet<Optional>();
-	}
-
-	@Override
-	public int getIdStato() {
-		return idStato;
-	}
-
-	@Override
-	public void setIdStato(int idStato) {
-		this.idStato = idStato;
 	}
 
 	@Override

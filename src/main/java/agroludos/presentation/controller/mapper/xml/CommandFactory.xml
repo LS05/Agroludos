@@ -244,15 +244,6 @@
 			<forward success="managerDiSistema" failure="managerDiSistema" />
 		</from>
 	</command>
-	<command name="getAllTipoUtente">
-		<classe>agroludos.business.as.gestoretipoutente.LTipoUtente</classe>
-		<from name="nuovoMDC">
-			<forward success="nuovoMDC" failure="nuovoMDC" />
-		</from>
-		<from name="nuovaRegistrazione">
-			<forward success="nuovaRegistrazione" failure="nuovaRegistrazione" />
-		</from>
-	</command>
 	<command name="getCompetizioniAperte">
 		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
 		<from name="partecipante">

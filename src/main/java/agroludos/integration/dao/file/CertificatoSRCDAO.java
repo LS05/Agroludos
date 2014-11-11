@@ -9,6 +9,6 @@ public interface CertificatoSRCDAO {
 	
 	public CertificatoTO getCertificato(PartecipanteTO partTO);
 	
-	public void salvaCertificato(PartecipanteTO partTO) throws IOException;
+	public CertificatoTO salvaCertificato(PartecipanteTO partTO) throws IOException;
 	
 }

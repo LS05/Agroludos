@@ -67,7 +67,7 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 		OptionalDAO daoOpt = getOptionalDAO();
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		StatoOptionalDAO daoStatoOpt = dbDAOFact.getStatoOptionalDAO();
-		StatoOptionalTO stato = daoStatoOpt.getAll().get(0);
+		StatoOptionalTO stato = daoStatoOpt.getStatoDisattivo();
 		optto.setStatoOptional(stato);
 		validate(optto);
 

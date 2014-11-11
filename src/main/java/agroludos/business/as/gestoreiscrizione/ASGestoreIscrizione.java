@@ -77,9 +77,7 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 
 					StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
 
-					List<StatoIscrizioneTO> listSI = statoIscDAO.getAll();
-
-					iscTO.setStatoIscrizione(listSI.get(1));
+					iscTO.setStatoIscrizione(statoIscDAO.getStatoAttivo());
 
 					iscTO = iscDAO.create(iscTO);
 
@@ -210,7 +208,7 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 		IscrizioneDAO iscDAO = getIscrizioneDAO();
 
 		StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
-		StatoIscrizioneTO siTO = statoIscDAO.getAll().get(0);
+		StatoIscrizioneTO siTO = statoIscDAO.getStatoDisattivo();
 
 		iscTO.setStatoIscrizione(siTO);
 

@@ -154,7 +154,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 			this.setVista("questionDialog", question);
 		}else{	
 			this.risposta = this.getRisposta();
-			this.richiesta = this.getRichiesta(cmpto, "modificaCompetizione", this.viewName);
+			this.richiesta = this.getRichiesta(this.cmpto, "modificaCompetizione", this.viewName);
 			this.eseguiRichiesta(this.richiesta, this.risposta);
 		}
 		this.close();

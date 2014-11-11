@@ -65,8 +65,6 @@ public class ControllerRegistrazione extends AgroludosController{
 	private AgroDatePicker dataSrcPicker;
 	private AgroDatePicker dataNascPicker;
 
-	private List<TipoUtenteTO> listTipiU;
-
 	private List<StatoUtenteTO> listStatiU;
 
 	private File fileSrc;
@@ -90,10 +88,6 @@ public class ControllerRegistrazione extends AgroludosController{
 		this.parTO = toFact.createPartecipanteTO();
 
 		this.fileChooser = new FileChooser();
-
-		this.risposta = this.getRisposta();
-		this.richiesta = this.getRichiesta("getAllTipoUtente", this.viewName);
-		this.eseguiRichiesta(this.richiesta, this.risposta);
 
 		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta("getAllStatoUtente", this.viewName);
@@ -230,13 +224,7 @@ public class ControllerRegistrazione extends AgroludosController{
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if(commandName.equals(this.getCommandName("getAllTipoUtente") )){
-			Object res = response.getRespData();
-			if(res instanceof List<?>){
-				this.listTipiU = (List<TipoUtenteTO>)res;
-				this.parTO.setTipoUtente(this.listTipiU.get(2));
-			}
-		} else if(commandName.equals(this.getCommandName("getAllStatoUtente") )){
+		if(commandName.equals(this.getCommandName("getAllStatoUtente") )){
 			Object res = response.getRespData();
 
 			if(res instanceof List<?>){

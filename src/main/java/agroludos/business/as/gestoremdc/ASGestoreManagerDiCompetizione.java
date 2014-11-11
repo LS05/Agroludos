@@ -12,9 +12,11 @@ import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
 import agroludos.integration.dao.db.StatoUtenteDAO;
+import agroludos.integration.dao.db.TipoUtenteDAO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoUtenteTO;
+import agroludos.to.TipoUtenteTO;
 import agroludos.utility.PasswordEncryption;
 
 class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCompetizione, SManagerDiCompetizione{
@@ -31,24 +33,32 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return dbDAOFact.getManagerDiCompetizioneDAO();
 	}
+	
+	private TipoUtenteDAO getTipoUtenteDAO() throws DatabaseException{
+		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		return dbDAOFact.getTipoUtenteDAO();
+	}
 
 	@Override
-	public ManagerDiCompetizioneTO inserisciManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) 
+	public ManagerDiCompetizioneTO inserisciManagerDiCompetizione(ManagerDiCompetizioneTO mdcTO) 
 			throws DatabaseException, ValidationException {
 
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
 
-		this.validator.validate(mdcto);
+		this.validator.validate(mdcTO);
 
-		if( daoMan.esisteEmail(mdcto))
+		if( daoMan.esisteEmail(mdcTO))
 			throw new UtenteEsistenteException("Email già esistente");
-		if( daoMan.esisteUsername(mdcto) )
+		if( daoMan.esisteUsername(mdcTO) )
 			throw new UtenteEsistenteException("Username già esistente");
 		
-		String inputPassword = mdcto.getPassword();
-		mdcto.setPassword(this.pwdEnc.encryptPassword(inputPassword));
-
-		return daoMan.create(mdcto);
+		String inputPassword = mdcTO.getPassword();
+		mdcTO.setPassword(this.pwdEnc.encryptPassword(inputPassword));
+		
+		TipoUtenteTO tipoUtente = this.getTipoUtenteDAO().getTipoUtenteMdc();
+		mdcTO.setTipoUtente(tipoUtente);
+		
+		return daoMan.create(mdcTO);
 	}
 
 	@Override

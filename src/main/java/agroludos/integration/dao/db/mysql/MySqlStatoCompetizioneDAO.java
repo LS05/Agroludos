@@ -1,13 +1,10 @@
 package agroludos.integration.dao.db.mysql;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import agroludos.exceptions.DatabaseException;
 import agroludos.integration.dao.db.StatoCompetizioneDAO;
-import agroludos.to.CompetizioneTO;
 import agroludos.to.StatoCompetizioneTO;
-import agroludos.to.TipoCompetizioneTO;
 
 public class MySqlStatoCompetizioneDAO extends MySqlAgroludosDAO<StatoCompetizioneTO> implements StatoCompetizioneDAO {
 

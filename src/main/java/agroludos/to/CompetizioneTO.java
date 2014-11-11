@@ -13,14 +13,14 @@ import java.util.List;
  * @see <a href="http://en.wikipedia.org/wiki/Data_transfer_object">http://en.wikipedia.org/wiki/Data_transfer_object</a>
  */
 public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
-	
+
 	/**
 	 * Il metodo ritorna il nome della competizione
 	 * 
 	 * @return Il nome della competizione
 	 */
 	public String getNome();
-	
+
 	/**
 	 * Il metodo inserisce il nome della competizione
 	 * 
@@ -28,14 +28,14 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 * 		  {@code String} che rappresenta il nome della competizione
 	 */
 	public void setNome(String nome);
-	
+
 	/**
 	 * Ritorna la data di <strong>inizio</strong> della competizione
 	 * 
 	 * @return
 	 */
 	public Date getData();
-	
+
 	/**
 	 * Il metodo setta la data della competizione
 	 * 
@@ -43,38 +43,38 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 * 		  Data dela competizione
 	 */
 	public void setData(Date data);
-	
+
 	/**
 	 * Ritorna la descrizione della competizione
 	 * 
 	 * @return
 	 */
 	public String getDescrizione();
-	
-	
+
+
 	/**
 	 * Inserisce la descrizione della competizione
 	 * 
 	 * @param descrizione
 	 */
 	public void setDescrizione(String descrizione);
-	
+
 	/**
 	 * Ritorna il costo di iscizione ad una competizione
 	 * 
 	 * @return
 	 */
 	public Double getCosto();
-	
-	
+
+
 	/**
 	 * Inserisce il costo di iscrizione ad una competizione
 	 * 
 	 * @param costo
 	 */
 	public void setCosto(Double costo);
-	
-		/**
+
+	/**
 	 * Ritorna un intero che rappresenta l'id della competizione.
 	 * 
 	 * Tale intero può essere utilizzato nelle query nel db.
@@ -82,7 +82,7 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 * @return {@code Integer} L'id della competizione
 	 */
 	Integer getId();
-	
+
 	/**
 	 * Ritorna un intero che rappresenta il numero minimo di partecipanti
 	 * che è possibile avere in questa competizione
@@ -90,7 +90,7 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 * @return {@code Integer} Il numero minimo di partecipanti iscrivibili
 	 */
 	int getNmin();
-	
+
 	/**
 	 * Setta il numero minimo di partecipanti che è possibile avere in questa 
 	 * competizione.
@@ -99,7 +99,7 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 */
 	//TODO Cambiare in Integer
 	void setNmin(int nmin);
-	
+
 	/**
 	 * Ritorna un intero che rappresenta il numero massimo di partecipanti
 	 * che è possibile avere in questa competizione
@@ -107,7 +107,7 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 * @return {@code Integer} Il numero massimo di partecipanti iscrivibili
 	 */
 	int getNmax();
-	
+
 	/**
 	 * Setta il numero massimo di partecipanti che è possibile avere in questa 
 	 * competizione.
@@ -116,7 +116,7 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 */
 	//TODO Cambiare in Integer
 	void setNmax(int nmax);
-	
+
 
 	/**
 	 * Aggiunge un optional alla competizione. In questo modo il partecipante
@@ -139,17 +139,15 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	List<OptionalTO> getAllOptionals();
 
 	TipoCompetizioneTO getTipoCompetizione();
+
 	StatoCompetizioneTO getStatoCompetizione();
+
 	ManagerDiCompetizioneTO getManagerDiCompetizione();
 
 	void setStatoCompetizione(StatoCompetizioneTO statoCompetizione);
 
-	int getIdStato();
-
-	void setIdStato(int idStato);
-
 	void setTipoCompetizione(TipoCompetizioneTO tipoCompetizione);
 
-	public void setManagerDiCompetizione(ManagerDiCompetizioneTO managerDiCompetizione);
+	void setManagerDiCompetizione(ManagerDiCompetizioneTO managerDiCompetizione);
 
 }
