@@ -26,7 +26,6 @@ import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoUtenteTO;
-import agroludos.to.TipoUtenteTO;
 
 public class ControllerMdsNuovoMdC extends AgroludosController {
 	private String viewName;
