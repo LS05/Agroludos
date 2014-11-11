@@ -92,34 +92,31 @@ class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 		CertificatoTO certTO = this.toFact.createCertificatoTO();
 		CertFile partCertFile = this.toFact.createCertFile();
 
-		try{
-			File userFile = new File(partTO.getSrc());
+		File userFile = new File(partTO.getSrc());
 
-			String userFileName = FilenameUtils.getName(userFile.toString());
+		String userFileName = FilenameUtils.getName(userFile.toString());
 
-			File outDir = new File(certInputPath);
+		File outDir = new File(certInputPath);
 
-			FileUtils.deleteDirectory(outDir);
-			FileUtils.forceMkdir(outDir);
-			FileUtils.copyFileToDirectory(userFile, outDir);
+		FileUtils.deleteDirectory(outDir);
+		FileUtils.forceMkdir(outDir);
+		FileUtils.copyFileToDirectory(userFile, outDir);
 
-			Path tempFilePath = Paths.get(outDir.toString() + "/" + userFileName);
-			File outTempFile = FileUtils.getFile(tempFilePath.toString());
-			String tempFileDir = FilenameUtils.getPath(outTempFile.getPath());
+		Path tempFilePath = Paths.get(outDir.toString() + "/" + userFileName);
+		File outTempFile = FileUtils.getFile(tempFilePath.toString());
+		String tempFileDir = FilenameUtils.getPath(outTempFile.getPath());
 
-			StringBuilder certPath = new StringBuilder(100);
-			certPath.append(tempFileDir);
-			certPath.append(this.sysConf.getString("certFile"));
+		StringBuilder certPath = new StringBuilder(100);
+		certPath.append(tempFileDir);
+		certPath.append(this.sysConf.getString("certFile"));
 
-			String renamePath = certPath.toString();
-			File certFile = new File(renamePath);
-			outTempFile.renameTo(certFile);
+		String renamePath = certPath.toString();
+		File certFile = new File(renamePath);
+		outTempFile.renameTo(certFile);
 
-			partCertFile.setFile(certFile);
-			certTO.setCertificatoFile(partCertFile);
-		} catch(IOException e){
-			e.printStackTrace();
-		}
+		partCertFile.setFile(certFile);
+		certTO.setCertificatoFile(partCertFile);
+
 
 		return certTO;
 	}

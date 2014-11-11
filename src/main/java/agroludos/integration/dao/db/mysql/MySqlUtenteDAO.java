@@ -35,8 +35,6 @@ class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements
 		List<T> list = super.executeParamQuery(queryName, params);
 
 		if(list.size() == 0){
-			
-			//TODO toFact è null
 			res = toFact.createNullUTO();
 		} else {
 			res = (UtenteTO)list.get(0);

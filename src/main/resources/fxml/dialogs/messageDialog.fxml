@@ -53,6 +53,7 @@
           <children>
             <Pane fx:id="errorIconPane" prefHeight="-1.0" prefWidth="-1.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <Pane fx:id="successIconPane" prefHeight="-1.0" prefWidth="-1.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Pane fx:id="infoIconPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="482.0" minWidth="10.0" prefWidth="480.0" />
@@ -71,6 +72,11 @@
           </GridPane.margin>
         </Label>
         <Label id="" fx:id="lblErrTitle" alignment="TOP_LEFT" font="$x2" prefHeight="-1.0" prefWidth="-1.0" text="%key169" textAlignment="LEFT" textFill="#ff3333" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <GridPane.margin>
+            <Insets left="10.0" />
+          </GridPane.margin>
+        </Label>
+        <Label fx:id="lblInfoTitle" font="$x2" text="key183" GridPane.columnIndex="0" GridPane.rowIndex="0">
           <GridPane.margin>
             <Insets left="10.0" />
           </GridPane.margin>

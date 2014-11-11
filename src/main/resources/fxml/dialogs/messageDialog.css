@@ -27,3 +27,10 @@
     -fx-background-size: 40 40;
     -fx-background-position: center center;
 }
+
+#infoIconPane{
+	-fx-background-image: url("../../images/icons/info.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: 40 40;
+    -fx-background-position: center center;
+}

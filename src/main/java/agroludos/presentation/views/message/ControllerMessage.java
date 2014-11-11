@@ -9,6 +9,7 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorMessageTO;	
+import agroludos.to.InfoMessageTO;
 import agroludos.to.MessageTO;
 import agroludos.to.SuccessMessageTO;
 
@@ -19,6 +20,8 @@ public class ControllerMessage extends AgroludosController{
 	@FXML private Label lblMessage;
 	@FXML private Label lblSuccTitle;
 	@FXML private Label lblErrTitle;
+	@FXML private Label lblInfoTitle;
+	@FXML private Pane infoIconPane;
 	@FXML private Pane successIconPane;
 	@FXML private Pane errorIconPane;
 
@@ -29,8 +32,10 @@ public class ControllerMessage extends AgroludosController{
 		this.viewName = nameView;
 		this.successIconPane.setVisible(false);
 		this.errorIconPane.setVisible(false);
+		this.infoIconPane.setVisible(false);
 		this.lblSuccTitle.setVisible(false);
 		this.lblErrTitle.setVisible(false);
+		this.lblInfoTitle.setVisible(false);
 	}
 
 	@Override
@@ -44,6 +49,9 @@ public class ControllerMessage extends AgroludosController{
 			} else if(mainTO instanceof ErrorMessageTO){
 				this.errorIconPane.setVisible(true);
 				this.lblErrTitle.setVisible(true);
+			} else if(mainTO instanceof InfoMessageTO){
+				this.infoIconPane.setVisible(true);
+				this.lblInfoTitle.setVisible(true);
 			}
 		}
 	}

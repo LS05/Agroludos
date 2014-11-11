@@ -59,6 +59,7 @@
 		parent="agroludosAS">
 		<constructor-arg ref="pwdEnc" />
 		<constructor-arg ref="partValidator" />
+		<constructor-arg ref="agroludosMail" />
 	</bean>
 	
 	<bean id="gestoreStatoUtente"
