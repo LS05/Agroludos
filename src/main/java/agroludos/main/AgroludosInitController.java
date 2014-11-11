@@ -5,6 +5,7 @@ import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorMessageTO;
+import agroludos.to.InfoMessageTO;
 
 public class AgroludosInitController extends AgroludosController{
 	private String viewName;
@@ -43,7 +44,7 @@ public class AgroludosInitController extends AgroludosController{
 					this.setVista("configurazione");
 				}
 			}else if(res instanceof String){
-				ErrorMessageTO errorMessage = toFact.createErrMessageTO();
+				InfoMessageTO errorMessage = toFact.createInfoMessageTO();
 				String msg = (String)res;
 				errorMessage.setMessage(msg);
 				this.setVista("configurazione");

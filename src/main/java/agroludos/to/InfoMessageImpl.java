@@ -1,6 +1,6 @@
 package agroludos.to;
 
-class InfoMessageImpl implements SuccessMessageTO{
+class InfoMessageImpl implements InfoMessageTO{
 	private static final long serialVersionUID = 1L;
 	private String message;
 

@@ -9,23 +9,23 @@ public interface TOFactory {
 	UtenteTO createUTO();
 
 	ManagerDiCompetizioneTO createMdCTO();
-	
+
 	CompetizioneTO createCompetizioneTO();
-	
+
 	IscrizioneTO createIscrizioneTO();
-	
+
 	OptionalTO createOptionalTO();
-	
+
 	PartecipanteTO createPartecipanteTO();
-	
+
 	TipoCompetizioneTO createTipoCompetizioneTO();
-	
+
 	TipoOptionalTO createTipoOptionalTO();
 
 	UtenteTO createNullUTO();
-	
+
 	StatoCompetizioneTO createStatoCompetizioneTO();
-	
+
 	ErrorTO createErrorTO();
 
 	SuccessMessageTO createSuccMessageTO();
@@ -33,13 +33,13 @@ public interface TOFactory {
 	StatoUtenteTO createStatoUtenteTO();
 
 	StatoOptionalTO createStatoOptionalTO();
-	
+
 	QuestionTO createQuestionTO();
 
 	TipoUtenteTO createTipoUtenteTO();
 
 	CertFile createCertFile();
-	
+
 	CertificatoTO createCertificatoTO();
 
 	EmailTO createEmailTO();
@@ -47,5 +47,7 @@ public interface TOFactory {
 	ErrorMessageTO createErrMessageTO();
 
 	StatoIscrizioneTO createStatoIscrizioneTO();
+
+	InfoMessageTO createInfoMessageTO();
 
 }
