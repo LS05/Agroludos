@@ -7,7 +7,6 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import agroludos.business.as.AgroludosAS;
-import agroludos.business.as.gestoreiscrizione.LIscrizione;
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.exceptions.CmpDataAttiveException;
 import agroludos.exceptions.DatabaseException;

@@ -23,7 +23,10 @@ class Iscrizione implements IscrizioneTO{
 	
 	@Override
 	public Double getCosto() {
-		return costo;
+		this.costo = getCompetizione().getCosto();
+		for(OptionalTO opt: getAllOptionals())
+			this.costo = this.costo + opt.getCosto();
+		return this.costo;
 	}
 
 	@Override
