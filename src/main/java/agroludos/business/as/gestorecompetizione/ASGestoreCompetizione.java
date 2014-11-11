@@ -129,8 +129,16 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 
 			cmpTO = daoCmp.update(cmpTO);
 
+			EmailTO mail = toFact.createEmailTO();
+			String mailSubj = this.sysConf.getString("mailModCompSubj");
+			mail.setOggetto(mailSubj);
+			String mailMsg = this.sysConf.getString("mailModCompMsg");
+			mail.setMessage(mailMsg);
+			this.agroludosMail.sendEmail(mail);
+
 			if(listIscAttive.size() > cmpTO.getNmax())
 				eliminaIscrizioniInEsubero(listIscAttive, cmpTO);
+
 
 		} else {
 			throw new UnModCompetizioneException();
@@ -298,7 +306,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		IscrizioneDAO iscDao = getIscrizioneDAO();
 		cmp.setNiscritti(iscDao.getIscrizioniAttiveCmp(cmp).size());
 	}
-	
+
 	private List<CompetizioneTO> checkCmp(List<CompetizioneTO> listCmp) throws DatabaseException{
 		for(CompetizioneTO cmp: listCmp)
 			checkCmp(cmp);

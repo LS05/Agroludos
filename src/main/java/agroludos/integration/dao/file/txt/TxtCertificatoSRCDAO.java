@@ -17,7 +17,7 @@ import agroludos.to.CertificatoTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.TOFactory;
 
-public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
+class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 
 	private TOFactory toFact;
 	private Conf sysConf;
@@ -62,7 +62,8 @@ public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 		CertFile certFile = this.toFact.createCertFile();
 		CertificatoTO certTO = this.toFact.createCertificatoTO();
 
-		String certPath = Paths.get(this.getCertPath(partTO)).toString();
+		String certPath = Paths.get(this.getCertPath(partTO)).toString() + "/" + this.sysConf.getString("certFile");
+
 		String certificato = "";
 
 		try{
@@ -86,7 +87,7 @@ public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 
 	//TODO rivedere IOException
 	@Override
-	public void salvaCertificato(PartecipanteTO partTO) throws IOException {
+	public CertificatoTO salvaCertificato(PartecipanteTO partTO) throws IOException {
 		String certInputPath = Paths.get(this.getCertPath(partTO)).toString();
 		CertificatoTO certTO = this.toFact.createCertificatoTO();
 		CertFile partCertFile = this.toFact.createCertFile();
@@ -109,19 +110,17 @@ public class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 			StringBuilder certPath = new StringBuilder(100);
 			certPath.append(tempFileDir);
 			certPath.append(this.sysConf.getString("certFile"));
-			
+
 			String renamePath = certPath.toString();
 			File certFile = new File(renamePath);
 			outTempFile.renameTo(certFile);
 
-			certTO.setCertificatoCont(this.getCertCont(certTO, renamePath));
 			partCertFile.setFile(certFile);
 			certTO.setCertificatoFile(partCertFile);
-			partTO.setCertificato(certTO);
-
-			partTO.setSrc(certPath.toString());
 		} catch(IOException e){
 			e.printStackTrace();
 		}
+
+		return certTO;
 	}
 }

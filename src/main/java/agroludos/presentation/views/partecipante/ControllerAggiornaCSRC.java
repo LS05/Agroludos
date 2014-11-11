@@ -25,7 +25,8 @@ import agroludos.to.SuccessMessageTO;
 
 public class ControllerAggiornaCSRC extends AgroludosController implements Initializable {
 	private String viewName;
-
+	boolean flagError = false;
+	
 	@FXML private Label lblSrc;
 	@FXML private Label lblSrcError;
 	@FXML private Label lblDataSrcError;
@@ -35,8 +36,6 @@ public class ControllerAggiornaCSRC extends AgroludosController implements Initi
 	private File fileSrc;
 	private FileChooser fileChooser;
 	private PartecipanteTO parTO;
-
-	boolean flagError = false;
 
 	private ResourceBundle res;
 

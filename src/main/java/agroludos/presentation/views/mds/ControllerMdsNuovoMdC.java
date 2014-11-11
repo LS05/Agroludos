@@ -16,6 +16,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -25,7 +26,6 @@ import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoUtenteTO;
-import agroludos.to.TipoUtenteTO;
 
 public class ControllerMdsNuovoMdC extends AgroludosController {
 	private String viewName;
@@ -48,12 +48,10 @@ public class ControllerMdsNuovoMdC extends AgroludosController {
 	private @FXML GridPane mainNuovoMdC;
 	private @FXML GridPane paneStipendio;
 
-	private List<TipoUtenteTO> listTipiUtente;
 	private List<StatoUtenteTO> listStatiUtente;
 
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
-
 
 	private NumberSpinner stipendioMdC;
 
@@ -70,10 +68,7 @@ public class ControllerMdsNuovoMdC extends AgroludosController {
 
 		this.stipendioMdC = new NumberSpinner(BigDecimal.ZERO, new BigDecimal("10"), new DecimalFormat("#,##0.00"));
 		this.paneStipendio.getChildren().add(this.stipendioMdC);
-		this.richiesta = this.getRichiesta("getAllTipoUtente", this.viewName);
-		this.risposta = this.getRisposta();
-		this.eseguiRichiesta(this.richiesta, this.risposta);
-
+		
 		this.richiesta = this.getRichiesta("getAllStatoUtente", this.viewName);
 		this.risposta = this.getRisposta();
 		this.eseguiRichiesta(this.richiesta, this.risposta);
@@ -112,7 +107,6 @@ public class ControllerMdsNuovoMdC extends AgroludosController {
 		mdcTO.setUsername(this.txtUsername.getText());
 		mdcTO.setPassword(this.txtPassword.getText());
 		mdcTO.setEmail(this.txtEmail.getText());
-		mdcTO.setTipoUtente(this.listTipiUtente.get(1));
 		mdcTO.setStipendio(this.stipendioMdC.getNumber().doubleValue());
 		int selectedStato = this.cmbStato.getSelectionModel().getSelectedIndex();
 		mdcTO.setStatoUtente(this.listStatiUtente.get(selectedStato));
@@ -132,14 +126,7 @@ public class ControllerMdsNuovoMdC extends AgroludosController {
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals( this.getCommandName("getAllTipoUtente") )){
-			Object res = response.getRespData();
-
-			if(res instanceof List<?>){
-				List<TipoUtenteTO> listTipo = (List<TipoUtenteTO>)res;
-				this.listTipiUtente = listTipo;
-			}
-		} else if( commandName.equals( this.getCommandName("getAllStatoUtente") )){
+		if( commandName.equals( this.getCommandName("getAllStatoUtente") )){
 			Object res = response.getRespData();
 
 			if(res instanceof List<?>){

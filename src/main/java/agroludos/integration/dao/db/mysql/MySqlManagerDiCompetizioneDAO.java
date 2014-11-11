@@ -14,7 +14,7 @@ class MySqlManagerDiCompetizioneDAO extends MySqlUtenteDAO<ManagerDiCompetizione
 	
 	@Override
 	public List< ManagerDiCompetizioneTO > getAll() throws DatabaseException{
-		List< ManagerDiCompetizioneTO > res = super.getAll();
+		List<ManagerDiCompetizioneTO> res = super.getAll();
 
 		return res;
 	}

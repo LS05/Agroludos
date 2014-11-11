@@ -15,4 +15,8 @@
 	</class>
 	<query name="getAllStatoOptional">
         <![CDATA[ from agroludos.to.StatoOptional o ]]></query>
+	<query name="getStatoOptionalDisattivo">
+        <![CDATA[ from agroludos.to.StatoOptional o where id = 0 ]]></query>
+	<query name="getStatoOptionalAttivo">
+        <![CDATA[ from agroludos.to.StatoOptional o where id = 1 ]]></query>
 </hibernate-mapping>

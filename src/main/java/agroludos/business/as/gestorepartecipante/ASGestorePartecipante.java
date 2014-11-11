@@ -13,6 +13,7 @@ import agroludos.exceptions.UserNotFoundException;
 import agroludos.exceptions.ValidationException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.PartecipanteDAO;
+import agroludos.integration.dao.db.TipoUtenteDAO;
 import agroludos.integration.dao.file.CertificatoSRCDAO;
 import agroludos.integration.dao.file.FileDAOFactory;
 import agroludos.integration.dao.file.FileFactory;
@@ -36,6 +37,11 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 		return dbDAOFact.getPartecipanteDAO();
 	}
 
+	private TipoUtenteDAO getTipoUtenteDAO() throws DatabaseException {
+		DBDAOFactory daoTipoUtente = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		return daoTipoUtente.getTipoUtenteDAO();
+	}
+
 	private CertificatoSRCDAO getCertificatoSRCDAO() {
 		FileDAOFactory daoFile = this.fileFactory.getDAOFactory(this.sysConf.getTipoCert());
 		return daoFile.getCertificatoSRCDAO();
@@ -49,6 +55,7 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 		CertificatoSRCDAO daoCert = this.getCertificatoSRCDAO();
 
 		daoCert.salvaCertificato(partTO);
+
 		partTO.setCertificato(daoCert.getCertificato(partTO));
 
 		return;
@@ -59,15 +66,20 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 			throws DatabaseException, ValidationException, IOException {
 
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
+
 		if( daoPar.esisteEmail(partTO))
 			throw new UtenteEsistenteException("Email già esistente");
 		if( daoPar.esisteUsername(partTO) )
 			throw new UtenteEsistenteException("Username già esistente");
 
+		TipoUtenteDAO daoTipoUtente = this.getTipoUtenteDAO();
+
 		this.setDatiPartecipante(partTO);
 
 		String inputPassword = partTO.getPassword();
 		partTO.setPassword(this.pwdEnc.encryptPassword(inputPassword));
+
+		partTO.setTipoUtente(daoTipoUtente.getTipoUtentePart());
 
 		return daoPar.create(partTO);
 
