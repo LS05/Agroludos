@@ -160,6 +160,10 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 		this.close();
 		this.setVista("login");
 	}
+	
+	@FXML protected void menuModificaDatiAccesso(ActionEvent event){
+		this.setVista("modificaDatiAccesso",this.currUser);
+	}
 
 	@FXML protected void menuEsci(ActionEvent event){
 		chiusura();

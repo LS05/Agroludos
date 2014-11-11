@@ -101,5 +101,13 @@ class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements
 
 		return res;
 	}
+
+	@Override
+	public UtenteTO getGenericUtenteByID(Integer id) throws DatabaseException {
+		List<Integer> param = new ArrayList<Integer>();
+		param.add(id);
+		List<UtenteTO> list = (List<UtenteTO>) super.executeParamQuery("getGenericUtenteByID", param);
+		return list.get(0);
+	}
 	
 }

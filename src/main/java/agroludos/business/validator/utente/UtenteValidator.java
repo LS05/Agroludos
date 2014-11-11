@@ -1,4 +1,4 @@
-package agroludos.business.validator.partecipante.utente;
+package agroludos.business.validator.utente;
 
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.business.validator.rules.AgroludosRule;
@@ -6,15 +6,12 @@ import agroludos.business.validator.rules.utente.UserRulesFactory;
 import agroludos.exceptions.ValidationException;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
-import agroludos.to.PartecipanteTO;
 import agroludos.to.TOFactory;
+import agroludos.to.UtenteTO;
 
 class UtenteValidator implements AgroludosValidator{
 	private UserRulesFactory userRulesFact;
 	private TOFactory toFact;
-	private AgroludosRule nomeRule;
-	private AgroludosRule cognomeRule;
-	private AgroludosRule usernameRule;
 	private AgroludosRule passwordRule;
 	private AgroludosRule emailRule;
 
@@ -22,24 +19,18 @@ class UtenteValidator implements AgroludosValidator{
 		this.userRulesFact = userRulesFactory;
 		this.toFact = toFactory;
 
-		this.nomeRule = this.userRulesFact.getNomeRule();
 		this.emailRule = this.userRulesFact.getEmailRule();
 		this.passwordRule = this.userRulesFact.getPasswordRule();
-		this.cognomeRule = this.userRulesFact.getCognomeRule();
-		this.usernameRule = this.userRulesFact.getUsernameRule();
 		
-		this.nomeRule.setSuccessor(this.cognomeRule);
-		this.cognomeRule.setSuccessor(this.usernameRule);
-		this.usernameRule.setSuccessor(this.passwordRule);
-		this.passwordRule.setSuccessor(this.emailRule);
+		this.emailRule.setSuccessor(this.passwordRule);
 	}
 
 	@Override
 	public void validate(AgroludosTO to) throws ValidationException {
-		if(to instanceof PartecipanteTO){
+		if(to instanceof UtenteTO){
 			ErrorTO errorTO = this.toFact.createErrorTO();
-			PartecipanteTO partecipante = (PartecipanteTO)to;
-			this.nomeRule.validate(partecipante, errorTO);
+			UtenteTO utente = (UtenteTO)to;
+			this.emailRule.validate(utente, errorTO);
 			if(errorTO.hasErrors())
 				throw new ValidationException(errorTO);
 		}

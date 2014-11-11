@@ -274,7 +274,7 @@
 			<forward success="mostraIscrizione" failure="modificaOptionalPartecipante" />
 		</from>
 	</command>
-		<command name="esisteIscrizione">
+	<command name="esisteIscrizione">
 		<classe>agroludos.business.as.gestoreiscrizione.LIscrizione</classe>
 		<from name="selezionaOptionalPart">
 			<forward success="selezionaOptionalPart" failure="selezionaOptionalPart" />
@@ -382,7 +382,7 @@
 			<forward success="login" failure="login" />
 		</from>
 	</command>
-		<command name="modificaDatiAccesso">
+	<command name="modificaDatiAccesso">
 		<classe>agroludos.business.as.gestoreutente.SUtente</classe>
 		<from name="modificaDatiAccesso">
 			<forward success="modificaDatiAccesso" failure="modificaDatiAccesso" />

@@ -111,15 +111,19 @@ class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 	public UtenteTO modificaDatiAccesso(UtenteTO uTO) throws DatabaseException, ValidationException {
 		UtenteDAO<UtenteTO> daoUto = this.getUtenteDAO();
 
-		if( daoUto.esisteEmail(uTO))
-			throw new UtenteEsistenteException("Email già esistente");
-
 		this.validator.validate(uTO);
 
-		String inputPassword = uTO.getPassword();
-		uTO.setPassword(this.pwdEnc.encryptPassword(inputPassword));
-
-
+		UtenteTO originUto = daoUto.getGenericUtenteByID(uTO.getId());
+		//se l'utente vuole modificare l'email controllo che non esista già una
+		if(originUto.getEmail().compareTo(uTO.getEmail()) != 0)
+			if( daoUto.esisteEmail(uTO))
+				throw new UtenteEsistenteException("Hai inserito la stessa Email");
+		//se l'utente vuole modificare la password allora effettuo l'encript di quella inserita
+		if(originUto.getPassword().compareTo(uTO.getPassword()) != 0){
+			String inputPassword = uTO.getPassword();
+			uTO.setPassword(this.pwdEnc.encryptPassword(inputPassword));
+		}
+		
 		return daoUto.update(uTO);
 	}
 }

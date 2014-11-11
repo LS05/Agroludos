@@ -39,7 +39,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 	@FXML private Button btnPaneComptizioni;
 	@FXML private Button btnNuovaCompetizione;
 	@FXML private MenuItem menuLogout;
-
+	
 	//tabella competizioni gestite
 	@FXML private TableView<CmpModel> tableCompetizione;
 	@FXML private TableColumn<CmpModel, String> cmpIdCol;
@@ -186,7 +186,10 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 		this.setVista("login");
 	}
 
-
+	@FXML protected void menuModificaDatiAccesso(ActionEvent event){
+		this.setVista("modificaDatiAccesso",this.getUtente());
+	}
+	
 	@FXML protected void menuEsci(ActionEvent event){
 		chiusura();
 	}

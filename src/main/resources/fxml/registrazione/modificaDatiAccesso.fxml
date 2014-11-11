@@ -30,7 +30,7 @@
                               <children>
                                 <GridPane GridPane.columnIndex="0" GridPane.rowIndex="0">
                                   <children>
-                                    <PasswordField fx:id="txtPassword" prefWidth="-1.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                    <PasswordField fx:id="txtPassword" prefWidth="-1.0" promptText="%key75" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                       <GridPane.margin>
                                         <Insets right="30.0" fx:id="x5" />
                                       </GridPane.margin>
@@ -88,6 +88,7 @@
                                 <Insets right="30.0" fx:id="x5" />
                               </GridPane.margin>
                             </Label>
+                            <Label text="%key184" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                           </children>
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -104,7 +105,7 @@
                                 <Insets right="30.0" fx:id="x5" />
                               </GridPane.margin>
                             </Label>
-                            <TextField fx:id="txtEmail" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <TextField fx:id="txtEmail" promptText="%key4" GridPane.columnIndex="0" GridPane.rowIndex="0">
                               <GridPane.margin>
                                 <Insets right="30.0" fx:id="x5" />
                               </GridPane.margin>
@@ -153,7 +154,7 @@
             </GridPane>
             <GridPane>
               <children>
-                <Label text="%key25">
+                <Label text="%key26">
                   <font>
                     <Font name="System Bold" size="24.0" />
                   </font>
@@ -169,7 +170,7 @@
                 <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <Button id="btnRegistrati" mnemonicParsing="false" onMouseClicked="#modificaDatiAccesso" prefHeight="41.0" prefWidth="222.0" text="key25" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <Button id="btnRegistrati" fx:id="btnModifica" mnemonicParsing="false" onMouseClicked="#modificaDatiAccesso" prefHeight="41.0" prefWidth="222.0" text="%key26" GridPane.halignment="CENTER" GridPane.rowIndex="2">
               <GridPane.margin>
                 <Insets bottom="20.0" />
               </GridPane.margin>

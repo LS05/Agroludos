@@ -36,7 +36,7 @@ public class ControllerModificaDatiAccesso extends AgroludosController implement
 
 	private AgroResponse risposta;
 	private AgroRequest richiesta;
-	
+
 	private UtenteTO uTO;
 
 	private ResourceBundle resources;
@@ -45,15 +45,16 @@ public class ControllerModificaDatiAccesso extends AgroludosController implement
 	@Override
 	public void initialize(URL arg0, ResourceBundle res) {
 		this.resources = res;
-		
+
 	}
-	
+
 	@Override
 	protected void initializeView(String nameView) {
 		this.viewName = nameView;
 
 		this.hideErrors();
-
+		this.txtEmail.setText("");
+		this.txtPassword.setText("");
 		this.checkBoxReveal.selectedProperty().addListener(new ChangeListener<Boolean>() {
 			public void changed(ObservableValue<? extends Boolean> ov, Boolean oldVal, Boolean newVal) {
 				if(newVal){
@@ -72,7 +73,7 @@ public class ControllerModificaDatiAccesso extends AgroludosController implement
 
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
-
+		this.uTO = (UtenteTO) mainTO;
 	}
 
 	private void hideErrors(){
@@ -90,13 +91,16 @@ public class ControllerModificaDatiAccesso extends AgroludosController implement
 
 	@FXML protected void modificaDatiAccesso(MouseEvent event) {
 		this.hideErrors();
-		this.uTO.setPassword(this.txtPassword.getText());
-		this.uTO.setEmail(this.txtEmail.getText());
-		
-		this.risposta = this.getRisposta();
-		this.richiesta = this.getRichiesta(this.uTO,"modificaDatiAccesso", this.viewName);
-		this.eseguiRichiesta(this.richiesta, this.risposta);
+		if(!this.txtPassword.getText().isEmpty())
+			this.uTO.setPassword(this.txtPassword.getText());
+		if(!this.txtEmail.getText().isEmpty())
+			this.uTO.setEmail(this.txtEmail.getText());
 
+		if(!this.txtPassword.getText().isEmpty() || !this.txtEmail.getText().isEmpty()){
+			this.risposta = this.getRisposta();
+			this.richiesta = this.getRichiesta(this.uTO,"modificaDatiAccesso", this.viewName);
+			this.eseguiRichiesta(this.richiesta, this.risposta);
+		}
 	}
 
 	@Override
@@ -128,7 +132,7 @@ public class ControllerModificaDatiAccesso extends AgroludosController implement
 				String msg = (String)res;
 				errorMessage.setMessage(msg);
 				this.setVista("messageDialog", errorMessage);
-				
+
 			}else if( res instanceof UtenteTO ){
 				this.close();
 				SuccessMessageTO succMessage = toFact.createSuccMessageTO();

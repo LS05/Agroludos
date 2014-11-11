@@ -516,6 +516,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.setVista("login");
 	}
 
+	@FXML protected void menuModificaDatiAccesso(ActionEvent event){
+		this.setVista("modificaDatiAccesso",this.getUtente());
+	}
 
 	@FXML protected void menuEsci(ActionEvent event){
 		chiusura();
