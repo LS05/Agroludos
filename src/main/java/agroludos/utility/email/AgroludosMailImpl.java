@@ -14,13 +14,11 @@ import agroludos.system.Conf;
 import agroludos.to.EmailTO;
 import agroludos.to.UtenteTO;
 
-class AgroludosMailImpl extends Thread implements AgroludosMail {
+class AgroludosMailImpl implements AgroludosMail {
 
 	private Conf sysConf;
-	private EmailTO emailTO;
 
 	AgroludosMailImpl(Conf sysConf){
-		super("agroludos-mail");
 		this.sysConf = sysConf;
 	}
 
@@ -41,29 +39,37 @@ class AgroludosMailImpl extends Thread implements AgroludosMail {
 
 		String auth = this.sysConf.getString("mail.smtp.auth");
 		props.put("mail.smtp.auth", auth);
-		
+
 		String port = this.sysConf.getString("mail.smtp.port");
 		props.put("mail.smtp.port", port);
 
 		return props;
 	}
 
-	public void run() {
-		this.sendEmailThread(this.emailTO);
-	}
+	private class MailThread extends Thread{
+		private Message message;
+
+		MailThread(Message message){
+			super("agroludos-mail");
+			this.message = message;
+		}
+
+		@Override
+		public void run(){
+			try {
+				Transport.send(message);
+			} catch (MessagingException e) {
+				throw new RuntimeException(e);
+			}
+		}
+	};
 
 	@Override
 	public void sendEmail(EmailTO emailTO) {
-		this.emailTO = emailTO;
-		start();
-	}
+		final String username = sysConf.getString("agroludosMail");
+		final String password = sysConf.getString("agroludosMailPwd");
 
-	private void sendEmailThread(EmailTO emailTO) {
-
-		final String username = this.sysConf.getString("agroludosMail");
-		final String password = this.sysConf.getString("agroludosMailPwd");
-
-		Properties props = this.createMailProperties();
+		Properties props = createMailProperties();
 
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -79,10 +85,9 @@ class AgroludosMailImpl extends Thread implements AgroludosMail {
 			message.setSubject(emailTO.getOggetto());
 			message.setText(emailTO.getMessage());
 
-			// To get the array of addresses
 			for(UtenteTO uTO: emailTO.getDestinatari()){
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(uTO.getEmail()));
-				Transport.send(message);
+				new MailThread(message).start();
 			}
 
 		} catch (MessagingException e) {
@@ -93,9 +98,4 @@ class AgroludosMailImpl extends Thread implements AgroludosMail {
 
 		return;
 	}
-
-	public String toString() {
-		return getName();
-	}
-
 }
