@@ -1,17 +1,14 @@
 package agroludos.presentation.views.mds;
 
 import java.math.BigDecimal;
-import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -28,12 +25,10 @@ import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoUtenteTO;
-import agroludos.to.SuccessMessageTO;
 import agroludos.to.TipoUtenteTO;
 
-public class ControllerMdsNuovoMdC extends AgroludosController implements Initializable{
+public class ControllerMdsNuovoMdC extends AgroludosController {
 	private String viewName;
-	private boolean flagError;
 
 	private @FXML TextField txtUsername;
 	private @FXML PasswordField txtPassword;
@@ -59,19 +54,12 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
 
-	private ResourceBundle resources;
 
 	private NumberSpinner stipendioMdC;
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		this.resources = resources;
-	}
-
-	@Override
 	protected void initializeView(String nameView) {
 		this.viewName = nameView;
-		this.flagError = false;
 		this.lblUsernameError.setVisible(false);
 		this.lblPasswordError.setVisible(false);
 		this.lblNomeError.setVisible(false);
@@ -115,7 +103,6 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
-		this.flagError = false;
 	}
 
 	@FXML protected void confermaNuovoManagerDiCompetizione(MouseEvent event){
@@ -164,7 +151,6 @@ public class ControllerMdsNuovoMdC extends AgroludosController implements Initia
 			if(res instanceof ErrorTO){
 
 				ErrorTO errors = (ErrorTO)res;
-				this.flagError = true;
 
 				if(errors.hasError(this.getError("nomeKey"))){
 					String nomeKey = this.getError("nomeKey");

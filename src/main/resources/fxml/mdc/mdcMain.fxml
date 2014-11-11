@@ -28,7 +28,7 @@
                       </columnResizePolicy>
                       <columns>
                         <TableColumn maxWidth="100.0" minWidth="60.0" prefWidth="60.0" text="%key20" fx:id="cmpIdCol" />
-                        <TableColumn maxWidth="5000.0" minWidth="150.0" prefWidth="150.0" text="%key21" fx:id="cmpNomeCol" />
+                        <TableColumn maxWidth="150.0" minWidth="100.0" prefWidth="150.0" text="%key21" fx:id="cmpNomeCol" />
                         <TableColumn maxWidth="120.0" minWidth="70.0" prefWidth="70.0" text="%key22" fx:id="cmpDataCol" />
                         <TableColumn maxWidth="100.0" minWidth="60.0" prefWidth="60.0" text="%key90" fx:id="cmpNIscrittiCol" />
                         <TableColumn maxWidth="100.0" minWidth="60.0" prefWidth="60.0" text="%key91" fx:id="cmpNminCol" />

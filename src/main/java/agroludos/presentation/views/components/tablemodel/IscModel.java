@@ -18,6 +18,7 @@ public class IscModel {
 	private SimpleStringProperty competizione;
 	private SimpleStringProperty tipo;
 	private SimpleStringProperty manager;
+	private SimpleStringProperty datacmp;
 	private IscrizioneTO iscto;
 
 	public IscModel(IscrizioneTO iscto){
@@ -26,6 +27,7 @@ public class IscModel {
 		this.cognome = new SimpleStringProperty(iscto.getPartecipante().getCognome());
 		this.email =  new SimpleStringProperty(iscto.getPartecipante().getEmail());
 		this.data =  new SimpleStringProperty(iscto.getData().toString());
+		this.datacmp =  new SimpleStringProperty(iscto.getCompetizione().getData().toString());
 		this.stato =  new SimpleStringProperty(iscto.getStatoIscrizione().getNome());
 		this.costoIsc =  new SimpleStringProperty(String.valueOf(iscto.getCosto()));
 		
@@ -122,6 +124,14 @@ public class IscModel {
 		this.data.set(data.toString());
 	}
 
+	public String getDatacmp() {
+		return datacmp.get();
+	}
+
+	public void setDatacmp(Date data) {
+		this.datacmp.set(data.toString());
+	}
+	
 	public String getStato() {
 		return stato.get();
 	}
@@ -152,6 +162,10 @@ public class IscModel {
 	
 	public SimpleStringProperty dataProperty(){
 		return this.data;
+	}
+	
+	public SimpleStringProperty datacmpProperty(){
+		return this.datacmp;
 	}
 	
 	public SimpleStringProperty managerProperty(){

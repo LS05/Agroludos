@@ -150,6 +150,10 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 
 	void setTipoCompetizione(TipoCompetizioneTO tipoCompetizione);
 
-	public void setManagerDiCompetizione(ManagerDiCompetizioneTO managerDiCompetizione);
+	void setManagerDiCompetizione(ManagerDiCompetizioneTO managerDiCompetizione);
+	
+	int getNiscritti();
+	
+	void setNiscritti(int nIscritti);
 
 }

@@ -115,7 +115,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 			this.risposta = this.getRisposta();
 			this.eseguiRichiesta(this.richiesta, this.risposta);
 			
-			cmpModel.setNiscritti(this.listIsc.size());
+			cmpModel.setNiscritti(String.valueOf(this.listIsc.size()));
 			cmpModel.setNmax(String.valueOf(cmpTO.getNmax()));
 			cmpModel.setNmin(String.valueOf(cmpTO.getNmin()));
 			cmpModel.setNome(cmpTO.getNome());
@@ -176,13 +176,6 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 		for(CompetizioneTO cmp : this.listCmp){
 			modelCmp = new CmpModel(cmp);
 			res.add(modelCmp);
-			
-			//richiesta per ottenere le iscrizioni attive di questa competizione
-			this.richiesta = this.getRichiesta(cmp, "getAllIscrizioniAttiveByCmp", this.viewName);
-			this.risposta = this.getRisposta();
-			this.eseguiRichiesta(this.richiesta, this.risposta);
-			
-			modelCmp.setNiscritti(this.listIsc.size());
 		}
 
 		return res;

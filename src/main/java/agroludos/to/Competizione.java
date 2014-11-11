@@ -36,6 +36,8 @@ class Competizione implements CompetizioneTO{
 	private StatoCompetizione statoCompetizione;
 	private ManagerDiCompetizione managerDiCompetizione;
 
+	private int niscritti;
+
 	Competizione(){
 		this.optionals = new HashSet<Optional>();
 	}
@@ -231,6 +233,16 @@ class Competizione implements CompetizioneTO{
 	}
 
 	@Override
+	public int getNiscritti() {
+		return this.niscritti;
+	}
+
+	@Override
+	public void setNiscritti(int nIscritti) {
+		this.niscritti = nIscritti;
+	}
+	
+	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("[id=").append(id).append(", nome=").append(nome)
@@ -244,4 +256,5 @@ class Competizione implements CompetizioneTO{
 		.append(managerDiCompetizione).append("]");
 		return builder.toString();
 	}
+
 }
