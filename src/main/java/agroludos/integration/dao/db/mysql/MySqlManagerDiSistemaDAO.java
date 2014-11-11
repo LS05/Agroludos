@@ -13,12 +13,6 @@ class MySqlManagerDiSistemaDAO extends MySqlUtenteDAO<ManagerDiSistemaTO> implem
 	}
 
 	@Override
-	public ManagerDiSistemaTO getByTelefono(String telefono) throws DatabaseException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean checkMds() throws DatabaseException {
 		boolean res;
 		List<ManagerDiSistemaTO> list = super.executeQuery("checkMds");

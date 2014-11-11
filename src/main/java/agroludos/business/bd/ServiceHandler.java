@@ -13,7 +13,7 @@ import agroludos.presentation.controller.mapper.CommandMap;
 import agroludos.presentation.reqh.AgroRequestContext;
 import agroludos.presentation.resph.AgroResponseContext;
 
-public class ServiceHandler {
+class ServiceHandler {
 	private CommandMap cmdMap;
 	private AgroludosService service;
 	private AgroResponseContext response;
@@ -42,7 +42,7 @@ public class ServiceHandler {
 			} catch (IllegalArgumentException e){
 				throw new ServiceHandlerException(e.getMessage(), e.getCause());
 			}  catch (MethodNotFoundException e) {
-				throw new ServiceNotFoundException("Servizio " + request.getCommandName() + " non presente!", e);
+				throw new ServiceNotFoundException(request.getCommandName(), e);
 			} catch (InvocationTargetException e) {
 				//TODO Aggiungere "Gestore" per le eccezioni?
 				//TODO Controllare se l'eccezione è di sistema o

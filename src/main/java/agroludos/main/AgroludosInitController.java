@@ -60,7 +60,6 @@ public class AgroludosInitController extends AgroludosController{
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		// TODO Auto-generated method stub
 
 	}
 

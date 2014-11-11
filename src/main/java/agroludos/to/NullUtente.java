@@ -10,61 +10,61 @@ class NullUtente implements UtenteTO{
 	private String email;
 	private StatoUtente stato;
 	private TipoUtente tipo;
-	
+
 	NullUtente(){
 		this.id = -1;
 	}
-	
+
 	@Override
 	public Integer getId() {
 		return this.id;
 	}
-	
+
 	@Override
 	public String getNome() {
 		return this.nome;
 	}
-	
+
 	@Override
 	public void setNome(String nome) {
 		this.nome = "";
 	}
-	
+
 	@Override
 	public String getCognome() {
 		return this.cognome;
 	}
-	
+
 	@Override
 	public void setCognome(String cognome) {
 		this.cognome = "";
 	}
-	
+
 	@Override
 	public String getUsername() {
 		return this.username;
 	}
-	
+
 	@Override
 	public void setUsername(String username) {
 		this.username = "";
 	}
-	
+
 	@Override
 	public String getPassword() {
 		return this.password;
 	}
-	
+
 	@Override
 	public void setPassword(String password) {
 		this.password = "";
 	}
-	
+
 	@Override
 	public String getEmail() {
 		return this.email;
 	}
-	
+
 	@Override
 	public void setEmail(String email) {
 		this.email = "";
@@ -74,7 +74,7 @@ class NullUtente implements UtenteTO{
 	public TipoUtenteTO getTipoUtente() {
 		return this.tipo;
 	}
-	
+
 	@Override
 	public void setTipoUtente(TipoUtenteTO tipoUtente) {
 		this.tipo = new TipoUtente();
@@ -89,11 +89,9 @@ class NullUtente implements UtenteTO{
 	public void setStatoUtente(StatoUtenteTO stato) {
 		this.stato = new StatoUtente();
 	}
-	
-	//TODO Due null utenti sono sempre uguali
+
 	@Override
 	public int compareTo(UtenteTO o) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 }

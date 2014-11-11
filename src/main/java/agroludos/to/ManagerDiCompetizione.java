@@ -14,12 +14,6 @@ class ManagerDiCompetizione extends Utente implements ManagerDiCompetizioneTO {
 	public void setStipendio(Double stipendio) {
 		this.stipendio = stipendio;
 	}
-	
-	@Override
-	public int compareTo(UtenteTO o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public String toString() {

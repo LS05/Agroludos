@@ -12,10 +12,10 @@ import agroludos.to.AgroludosTO;
 
 public class ControllerError  extends AgroludosController{
 	private String viewName;
-	
+
 	@FXML private Label lblErrore;
 	@FXML private Button btnOk;
-	
+
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		if(request.getCommandName().equals("checkMds")){
@@ -27,15 +27,15 @@ public class ControllerError  extends AgroludosController{
 		this.setVista("configurazione");
 		this.close();
 	}
-	
+
 	@Override
 	public void initializeView(String nameView) {
 		this.viewName = nameView;
 	}
-	
+
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		// TODO Auto-generated method stub	
+
 	}
 
 	@Override

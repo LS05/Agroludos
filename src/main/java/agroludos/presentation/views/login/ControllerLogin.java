@@ -48,7 +48,7 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		// TODO Auto-generated method stub
+
 	}
 
 	@Override

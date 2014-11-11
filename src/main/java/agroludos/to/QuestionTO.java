@@ -1,6 +1,6 @@
 package agroludos.to;
 
-public interface QuestionTO extends AgroludosTO, Comparable<OptionalTO>{
+public interface QuestionTO extends AgroludosTO {
 
 	public abstract String getViewName();
 

@@ -68,7 +68,7 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
-		// TODO Auto-generated method stub
+
 	}
 
 	@Override

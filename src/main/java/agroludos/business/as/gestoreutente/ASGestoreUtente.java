@@ -1,6 +1,7 @@
 package agroludos.business.as.gestoreutente;
 
 import java.io.IOException;
+import java.text.MessageFormat;
 
 import org.apache.commons.lang.RandomStringUtils;
 
@@ -12,12 +13,15 @@ import agroludos.integration.dao.db.UtenteDAO;
 import agroludos.to.EmailTO;
 import agroludos.to.UtenteTO;
 import agroludos.utility.PasswordEncryption;
+import agroludos.utility.email.AgroludosMail;
 
 class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
-	PasswordEncryption pwdEnc;
+	private PasswordEncryption pwdEnc;
+	private AgroludosMail agroludosMail;
 
-	ASGestoreUtente(PasswordEncryption pwdEnc){
+	ASGestoreUtente(PasswordEncryption pwdEnc, AgroludosMail agroludosMail){
 		this.pwdEnc = pwdEnc;
+		this.agroludosMail = agroludosMail;
 	}
 
 	private UtenteDAO<UtenteTO> getUtenteDAO() throws DatabaseException{
@@ -82,14 +86,18 @@ class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 		uTO.setPassword(this.pwdEnc.encryptPassword(psw));
 		daoUtente.update(uTO);
 
-		//TODO PasswordDimenticata
 		EmailTO mail = toFact.createEmailTO();
-		mail.setOggetto("Password dimenticata");
-		mail.setMessage("I dati di accesso sono : \n"
-				+ "Username: " + uTO.getUsername() + "\n"
-				+ "Nuova Password: " + psw);
+
+		String mailSubj = this.sysConf.getString("mailPwdDimSubj");
+		String mailMsg = this.sysConf.getString("mailPwdDimMsg");
+
+		mail.setOggetto(mailSubj);
+		String realMsg = MessageFormat.format(mailMsg, uTO.getUsername(), psw);
+		mail.setMessage(realMsg);
 
 		mail.addDestinatario(uTO);
+
+		this.agroludosMail.sendEmail(mail);
 
 		return uTO;
 	}

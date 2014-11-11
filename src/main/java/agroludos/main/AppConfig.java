@@ -44,7 +44,6 @@ class AppConfig extends AgroludosController implements App{
 
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
-		// TODO Auto-generated method stub
 
 	}
 }
