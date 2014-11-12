@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
+import agroludos.presentation.views.components.table.filter.TableCompetizioniFilter;
 import agroludos.presentation.views.components.tablemodel.CmpModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.AgroludosTO;
@@ -26,6 +27,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -38,6 +40,8 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 
 	@FXML private Button btnPaneComptizioni;
 	@FXML private Button btnNuovaCompetizione;
+	@FXML private Button btnAnnullaRicercaComp;
+	@FXML private Button btnCercaCompetizioni;
 	@FXML private MenuItem menuLogout;
 	@FXML private TableView<CmpModel> tableCompetizione;
 	@FXML private TableColumn<CmpModel, String> cmpIdCol;
@@ -48,6 +52,8 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 	@FXML private TableColumn<CmpModel, String> cmpNmaxCol;
 	@FXML private TableColumn<CmpModel, String> cmpTipoCol;
 	@FXML private TableColumn<CmpModel, String> cmpStatoCol;
+	@FXML private TextField txtFilterCmp;
+	private TableCompetizioniFilter filterCmp;
 	
 	private ObservableList<CmpModel> listaTabCmp;
 	private List<CompetizioneTO> listCmp;
@@ -75,6 +81,8 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 				we.consume();
 			}
 		});
+		
+		this.filterCmp = new TableCompetizioniFilter();
 		
 		this.mdcTO = toFact.createMdCTO();
 		this.mdcTO = (ManagerDiCompetizioneTO) this.getUtente();
@@ -135,6 +143,16 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 	@FXML protected void btnNuovaCompetizione(MouseEvent event) {
 		this.setVista("mostraNuovaCmp");
 	}
+	
+	@FXML protected void cercaCompetizioniClicked(MouseEvent event){
+		this.filterCmp.updateFilteredData(this.tableCompetizione, this.txtFilterCmp);
+		this.btnAnnullaRicercaComp.setVisible(true);
+	}
+	
+	@FXML protected void annullaRicercaClicked(MouseEvent event){
+		this.filterCmp.resetResearch(this.tableCompetizione, this.txtFilterCmp);
+		this.btnAnnullaRicercaComp.setVisible(false);
+	}
 
 	private <S,T> TableColumn<S, T> initColumn(TableColumn<S, T> col, String colName){
 		col.setCellValueFactory(new PropertyValueFactory<S, T>(colName));
@@ -152,6 +170,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 		this.initColumn(this.cmpStatoCol, "stato");
 
 		this.tableCompetizione.getItems().setAll(this.listaTabCmp);
+		this.filterCmp.setData(this.tableCompetizione);
 
 		this.tableCompetizione.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 

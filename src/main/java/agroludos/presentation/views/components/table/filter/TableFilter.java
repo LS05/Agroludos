@@ -1,9 +1,8 @@
 package agroludos.presentation.views.components.table.filter;
 
-import agroludos.presentation.views.components.table.AgroTable;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 abstract class TableFilter<T> {
@@ -16,7 +15,7 @@ abstract class TableFilter<T> {
 		this.masterData = FXCollections.observableArrayList();
 	}
 
-	public void setData(AgroTable<T> mainTable){
+	public void setData(TableView<T> mainTable){
 		this.masterData.clear();
 		for(T m : mainTable.getItems()){
 			this.masterData.add(m);
@@ -27,7 +26,7 @@ abstract class TableFilter<T> {
 	 * Updates the this.filteredData to contain all data from the masterData that
 	 * matches the current filter.
 	 */
-	public void updateFilteredData(AgroTable<T> mainTable, TextField cmpFilterField) {
+	public void updateFilteredData(TableView<T> mainTable, TextField cmpFilterField) {
 		this.filteredData.clear();
 
 		for (T p : this.masterData) {
@@ -40,7 +39,7 @@ abstract class TableFilter<T> {
 		mainTable.getItems().setAll(this.filteredData);
 	}
 
-	public void resetResearch(AgroTable<T> mainTable, TextField filterField){
+	public void resetResearch(TableView<T> mainTable, TextField filterField){
 		if(mainTable != null && filterField != null){
 			filterField.setText("");
 			mainTable.getItems().setAll(this.masterData);
