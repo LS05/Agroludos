@@ -160,11 +160,13 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 	public boolean isCertificatoValido(PartecipanteTO parTO){
 		DateTime dataSrc = new DateTime(parTO.getDataSRC());
 		DateTime today = new DateTime().withTimeAtStartOfDay();
+		boolean res = false;
 		if( dataSrc.isBefore(today) ){
-			return false;
+			res = false;
 		} else{
-			return true;
+			res = true;
 		}
+		return res;
 	}
 
 }

@@ -4,7 +4,6 @@ import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
-import agroludos.to.ErrorMessageTO;
 import agroludos.to.InfoMessageTO;
 
 public class AgroludosInitController extends AgroludosController{
