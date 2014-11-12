@@ -3,6 +3,7 @@ package agroludos.main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -19,9 +20,6 @@ public class ControllerQuestion extends AgroludosController{
 
 	private QuestionTO questTO;
 
-	private AgroResponse risposta;
-	private AgroRequest richiesta;
-
 	@Override
 	protected void initializeView(AgroludosTO mainTO) {
 		if(mainTO instanceof QuestionTO){
@@ -37,14 +35,15 @@ public class ControllerQuestion extends AgroludosController{
 
 	@FXML protected void btnYes(){
 		this.close();
-		this.risposta = this.getRisposta();
-		
+		AgroRequest richiesta = null;
+		AgroResponse risposta = this.getRisposta();
+
 		if(this.questTO.getDataTO() != null)
-			this.richiesta = this.getRichiesta(this.questTO.getDataTO(), this.questTO.getRequest(), this.questTO.getViewName());
+			richiesta = this.getRichiesta(this.questTO.getDataTO(), this.questTO.getRequest(), this.questTO.getViewName());
 		else
-			this.richiesta = this.getRichiesta(this.questTO.getRequest(), this.questTO.getViewName());
-		
-		this.eseguiRichiesta(this.richiesta, this.risposta);
+			richiesta = this.getRichiesta(this.questTO.getRequest(), this.questTO.getViewName());
+
+		this.eseguiRichiesta(richiesta, risposta);
 	}  
 
 	@FXML protected void btnNo(){

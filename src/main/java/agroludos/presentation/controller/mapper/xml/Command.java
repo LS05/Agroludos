@@ -10,6 +10,7 @@ package agroludos.presentation.controller.mapper.xml;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -60,92 +61,92 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "classe",
-    "from"
+		"classe",
+		"from"
 })
 public class Command {
 
-    @XmlElement(required = true)
-    protected String classe;
-    protected List<From> from;
-    @XmlAttribute(name = "name")
-    protected String name;
+	@XmlElement(required = true)
+	protected String classe;
+	protected List<From> from;
+	@XmlAttribute(name = "name")
+	protected String name;
 
-    /**
-     * Gets the value of the classe property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getClasse() {
-        return classe;
-    }
+	/**
+	 * Gets the value of the classe property.
+	 * 
+	 * @return
+	 *     possible object is
+	 *     {@link String }
+	 *     
+	 */
+	public String getClasse() {
+		return classe;
+	}
 
-    /**
-     * Sets the value of the classe property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setClasse(String value) {
-        this.classe = value;
-    }
+	/**
+	 * Sets the value of the classe property.
+	 * 
+	 * @param value
+	 *     allowed object is
+	 *     {@link String }
+	 *     
+	 */
+	public void setClasse(String value) {
+		this.classe = value;
+	}
 
-    /**
-     * Gets the value of the from property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the from property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getFrom().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link From }
-     * 
-     * 
-     */
-    public List<From> getFrom() {
-        if (from == null) {
-            from = new ArrayList<From>();
-        }
-        return this.from;
-    }
+	/**
+	 * Gets the value of the from property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list,
+	 * not a snapshot. Therefore any modification you make to the
+	 * returned list will be present inside the JAXB object.
+	 * This is why there is not a <CODE>set</CODE> method for the from property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * <pre>
+	 *    getFrom().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list
+	 * {@link From }
+	 * 
+	 * 
+	 */
+	public List<From> getFrom() {
+		if (from == null) {
+			from = new ArrayList<From>();
+		}
+		return this.from;
+	}
 
-    /**
-     * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getName() {
-        return name;
-    }
+	/**
+	 * Gets the value of the name property.
+	 * 
+	 * @return
+	 *     possible object is
+	 *     {@link String }
+	 *     
+	 */
+	public String getName() {
+		return name;
+	}
 
-    /**
-     * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setName(String value) {
-        this.name = value;
-    }
+	/**
+	 * Sets the value of the name property.
+	 * 
+	 * @param value
+	 *     allowed object is
+	 *     {@link String }
+	 *     
+	 */
+	public void setName(String value) {
+		this.name = value;
+	}
 
 }

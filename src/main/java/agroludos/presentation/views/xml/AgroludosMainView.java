@@ -1,6 +1,7 @@
 package agroludos.presentation.views.xml;
 
 import agroludos.system.SystemConf;
+
 import javafx.fxml.FXMLLoader;
 
 public class AgroludosMainView extends AgroludosWindow{

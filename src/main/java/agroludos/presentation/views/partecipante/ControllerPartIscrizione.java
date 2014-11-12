@@ -93,8 +93,9 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 		this.mainIscr.setData(new Date());
 		this.mainIscr.setCompetizione(this.mainComp);
 		Double totale = (double) 0;
-		for(OptionalTO optTO: this.mainIscr.getAllOptionals())
+		for(OptionalTO optTO: this.mainIscr.getAllOptionals()){
 			totale = totale + optTO.getCosto();
+		}
 		totale = totale + this.mainComp.getCosto();
 		this.mainIscr.setCosto(totale);
 

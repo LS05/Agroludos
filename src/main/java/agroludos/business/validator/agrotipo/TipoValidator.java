@@ -10,15 +10,13 @@ import agroludos.to.TOFactory;
 import agroludos.to.TipiAgroludosTO;
 
 class TipoValidator implements AgroludosValidator{
-	private TipoRulesFactory rulesFact;
+
 	private TOFactory toFact;
 	private AgroludosRule nomeRule;
 
 	TipoValidator(TipoRulesFactory rulesFactory, TOFactory toFactory){
-		this.rulesFact = rulesFactory;
 		this.toFact = toFactory;
-
-		this.nomeRule = this.rulesFact.getNomeRule();
+		this.nomeRule = rulesFactory.getNomeRule();
 	}
 
 	@Override

@@ -169,7 +169,7 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 
 		return iscTO;
 	}
-	
+
 	private IscrizioneTO eliminaIscrizione(IscrizioneTO iscTO)
 			throws DatabaseException {
 
@@ -233,8 +233,10 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 			throws ChiuseIscrizioniException {
 
 		boolean res = true;
-		if(cmp.getStatoCompetizione().getId()!=1)
+
+		if(cmp.getStatoCompetizione().getId()!=1){
 			throw new ChiuseIscrizioniException();
+		}
 
 		return res;
 	}
@@ -246,8 +248,9 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 		List<IscrizioneTO> listIscCmp = getIscrizioneDAO().getIscrizioniAttiveCmp(isc.getCompetizione());
 
 		for(IscrizioneTO tempIsc: listIscCmp){
-			if(tempIsc.getPartecipante().getId()==isc.getPartecipante().getId())
+			if(tempIsc.getPartecipante().getId()==isc.getPartecipante().getId()){
 				throw new IscrizioneEsistenteException();
+			}
 		}
 
 		return res;
@@ -259,8 +262,9 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 		boolean res = false;
 		List<IscrizioneTO> listIscCmp = getIscrizioneDAO().getIscrizioniAttiveCmp(cmp);
 
-		if(listIscCmp.size()==cmp.getNmax())
+		if(listIscCmp.size()==cmp.getNmax()){
 			throw new NmaxRaggiuntoException();
+		}
 
 		return res;
 	}

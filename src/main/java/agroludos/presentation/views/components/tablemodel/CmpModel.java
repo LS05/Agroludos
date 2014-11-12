@@ -1,6 +1,7 @@
 package agroludos.presentation.views.components.tablemodel;
 
 import agroludos.to.CompetizioneTO;
+
 import javafx.beans.property.SimpleStringProperty;
 
 public class CmpModel {

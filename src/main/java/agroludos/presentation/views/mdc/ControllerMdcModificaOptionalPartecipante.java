@@ -173,8 +173,8 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 		Boolean checkTipoOptional = false;
 		OptModel optModSelected = this.tableOptional.getSelectedItem();
 		if(optModSelected != null){
-			for(OptModel OptMod: this.optSceltiData){
-				if(optModSelected.getNomeTipo().equals(OptMod.getNomeTipo()))
+			for(OptModel optMod: this.optSceltiData){
+				if(optModSelected.getNomeTipo().equals(optMod.getNomeTipo()))
 					checkTipoOptional = true;
 			}
 			if(!checkTipoOptional){

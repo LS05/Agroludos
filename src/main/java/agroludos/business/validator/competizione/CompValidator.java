@@ -10,26 +10,21 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.TOFactory;
 
 class CompValidator implements AgroludosValidator{
-	private CompRulesFactory compRulesFact;
+
 	private TOFactory toFact;
 	private AgroludosRule nomeRule;
-	private AgroludosRule nPartRule;
-	private AgroludosRule costoRule;
-	private AgroludosRule dataRule;
-
 
 	CompValidator(CompRulesFactory rulesFactory, TOFactory toFactory){
-		this.compRulesFact = rulesFactory;
 		this.toFact = toFactory;
 
-		this.nomeRule = this.compRulesFact.getNomeRule();
-		this.nPartRule = this.compRulesFact.getNumPartRule();
-		this.costoRule = this.compRulesFact.getCostoRule();
-		this.dataRule = this.compRulesFact.getDataRule();
+		this.nomeRule = rulesFactory.getNomeRule();
+		AgroludosRule nPartRule = rulesFactory.getNumPartRule();
+		AgroludosRule costoRule = rulesFactory.getCostoRule();
+		AgroludosRule dataRule = rulesFactory.getDataRule();
 
-		this.nomeRule.setSuccessor(this.nPartRule);
-		this.nPartRule.setSuccessor(this.costoRule);
-		this.costoRule.setSuccessor(this.dataRule);
+		this.nomeRule.setSuccessor(nPartRule);
+		nPartRule.setSuccessor(costoRule);
+		costoRule.setSuccessor(dataRule);
 	}
 
 	@Override

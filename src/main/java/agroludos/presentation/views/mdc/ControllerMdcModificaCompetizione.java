@@ -119,22 +119,22 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 
 	}
 
-	@FXML private void btnSelezioneOpt(){
+	@FXML protected void btnSelezioneOpt(){
 		this.setVista("selezionaOptional", this.cmpto);
 	}
 
-	@FXML private void btnAnnulla(MouseEvent event){
+	@FXML protected void btnAnnulla(MouseEvent event){
 		this.close();
 	}
 
-	@FXML private void btnConferma(MouseEvent event){
+	@FXML protected void btnConferma(MouseEvent event){
 
-		lblNomeCmpError.setVisible(false);
-		lblTipoCmpError.setVisible(false);
-		lblDataCmpError.setVisible(false);
-		lblNminCmpError.setVisible(false);
-		lblNmaxCmpError.setVisible(false);
-		lblCostoCmpError.setVisible(false);
+		this.lblNomeCmpError.setVisible(false);
+		this.lblTipoCmpError.setVisible(false);
+		this.lblDataCmpError.setVisible(false);
+		this.lblNminCmpError.setVisible(false);
+		this.lblNmaxCmpError.setVisible(false);
+		this.lblCostoCmpError.setVisible(false);
 
 		this.cmpto.setCosto(this.costoComp.getNumber().doubleValue());
 		this.cmpto.setData(this.dataCompPicker.getSelectedDate());

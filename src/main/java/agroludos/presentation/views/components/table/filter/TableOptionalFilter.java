@@ -1,6 +1,7 @@
 package agroludos.presentation.views.components.table.filter;
 
 import javafx.scene.control.TextField;
+
 import agroludos.presentation.views.components.tablemodel.OptModel;
 
 public class TableOptionalFilter extends TableFilter<OptModel>{

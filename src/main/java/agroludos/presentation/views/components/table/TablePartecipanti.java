@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import agroludos.presentation.views.components.tablemodel.PartModel;
 import agroludos.to.PartecipanteTO;
 

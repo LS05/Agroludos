@@ -21,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.components.table.TableCompetizioni;
@@ -627,8 +628,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				this.risposta = this.getRisposta();
 				this.eseguiRichiesta(this.richiesta, this.risposta);
 				this.listViewOpt.getItems().clear();
-				for(TipiAgroludosTO topt: this.listTipiOpt)
+				for(TipiAgroludosTO topt: this.listTipiOpt){
 					this.listViewOpt.addItem(topt);
+				}
 			}
 		} else if( commandName.equals( this.getCommandName("disattivaOptional") )){
 			Object res = response.getRespData();
@@ -682,8 +684,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				this.eseguiRichiesta(this.richiesta, this.risposta);
 
 				this.listViewComp.getItems().clear();
-				for(TipiAgroludosTO tcmp: this.listTipiComp)
+				for(TipiAgroludosTO tcmp: this.listTipiComp){
 					this.listViewComp.addItem(tcmp);
+				}
 			}
 		} else if( commandName.equals( this.getCommandName("eliminaManagerDiCompetizione") )){
 			Object res = response.getRespData();
@@ -702,7 +705,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 				this.closeVista("nuovoMDC");
 				ManagerDiCompetizioneTO optTO = (ManagerDiCompetizioneTO)res;
 				this.tableManagerCompetizione.addItem(optTO);
-				
+
 				SuccessMessageTO msgNuovoOpt = toFact.createSuccMessageTO();
 				msgNuovoOpt.setMessage(this.resources.getString("key166"));
 				this.setVista("messageDialog", msgNuovoOpt);

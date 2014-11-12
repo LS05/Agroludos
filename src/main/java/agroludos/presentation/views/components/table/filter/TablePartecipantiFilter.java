@@ -1,6 +1,7 @@
 package agroludos.presentation.views.components.table.filter;
 
 import javafx.scene.control.TextField;
+
 import agroludos.presentation.views.components.tablemodel.PartModel;
 
 public final class TablePartecipantiFilter extends TableFilter<PartModel>{
@@ -25,7 +26,7 @@ public final class TablePartecipantiFilter extends TableFilter<PartModel>{
 				res = true;
 			}
 		}
-		
+
 		return res;
 	}
 }

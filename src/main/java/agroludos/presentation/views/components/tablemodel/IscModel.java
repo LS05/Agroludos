@@ -30,11 +30,11 @@ public class IscModel {
 		this.datacmp =  new SimpleStringProperty(iscto.getCompetizione().getData().toString());
 		this.stato =  new SimpleStringProperty(iscto.getStatoIscrizione().getNome());
 		this.costoIsc =  new SimpleStringProperty(String.valueOf(iscto.getCosto()));
-		
+
 		CompetizioneTO competizione = iscto.getCompetizione();
 		this.tipo = new SimpleStringProperty(competizione.getTipoCompetizione().getNome());
 		this.competizione = new SimpleStringProperty(iscto.getCompetizione().getNome());
-		
+
 		ManagerDiCompetizioneTO man = iscto.getCompetizione().getManagerDiCompetizione();
 		StringBuilder sb = new StringBuilder(100);
 		sb.append(man.getNome());
@@ -43,7 +43,7 @@ public class IscModel {
 		this.manager = new SimpleStringProperty(sb.toString());
 		this.iscto = iscto;
 	}
-	
+
 	public String getCostoIsc() {
 		return costoIsc.get();
 	}
@@ -115,7 +115,7 @@ public class IscModel {
 	public void setEmail(String email) {
 		this.email.set(email);
 	}
-	
+
 	public String getData() {
 		return data.get();
 	}
@@ -131,7 +131,7 @@ public class IscModel {
 	public void setDatacmp(Date data) {
 		this.datacmp.set(data.toString());
 	}
-	
+
 	public String getStato() {
 		return stato.get();
 	}
@@ -155,23 +155,23 @@ public class IscModel {
 	public SimpleStringProperty emailProperty(){
 		return this.email;
 	}
-	
+
 	public SimpleStringProperty statoProperty(){
 		return this.stato;
 	}
-	
+
 	public SimpleStringProperty dataProperty(){
 		return this.data;
 	}
-	
+
 	public SimpleStringProperty datacmpProperty(){
 		return this.datacmp;
 	}
-	
+
 	public SimpleStringProperty managerProperty(){
 		return this.manager;
 	}
-	
+
 	public SimpleStringProperty tipoProperty(){
 		return this.tipo;
 	}

@@ -179,7 +179,7 @@ public class PartModel {
 	public PartecipanteTO getPart() {
 		return part;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "[id=" + id + ", nome=" + nome + ", cognome=" + cognome

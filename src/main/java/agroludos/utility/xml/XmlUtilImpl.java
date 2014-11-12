@@ -19,18 +19,15 @@ import org.xml.sax.SAXException;
 
 class XmlUtilImpl implements XmlUtil{
 
-	private DocumentBuilderFactory docFactory;
-	private DocumentBuilder docBuilder;
-	
 	@Override
 	public Document getDocument(String path){
 		Document doc = null;
-
-		this.docFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder docBuilder = null;
 
 		try {
-			this.docBuilder = docFactory.newDocumentBuilder();
-			doc = this.docBuilder.parse(path);
+			docBuilder = docFactory.newDocumentBuilder();
+			doc = docBuilder.parse(path);
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {

@@ -12,6 +12,7 @@ import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
 import agroludos.presentation.views.utility.PositionHandler;
 import agroludos.presentation.views.xml.AgroludosWindow;
 
@@ -48,7 +49,7 @@ class ViewsCache {
 			double width = 0;
 			Screen screen = Screen.getPrimary();
 			Rectangle2D bounds = screen.getVisualBounds();
-			
+
 			if(window.isDialog()){
 				height = window.getHeight();
 				width =  window.getWidth();

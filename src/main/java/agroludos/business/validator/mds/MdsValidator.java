@@ -11,33 +11,25 @@ import agroludos.to.ManagerDiSistemaTO;
 import agroludos.to.TOFactory;
 
 class MdsValidator implements AgroludosValidator{
-	private MdsRulesFactory mdsRulesFact;
-	private UserRulesFactory userRulesFact;
+
 	private TOFactory toFact;
 	private AgroludosRule nomeRule;
-	private AgroludosRule cognomeRule;
-	private AgroludosRule usernameRule;
-	private AgroludosRule passwordRule;
-	private AgroludosRule emailRule;
-	private AgroludosRule numeroStipendioRule;
 
 	MdsValidator(UserRulesFactory userRulesFactory, MdsRulesFactory mdsRulesFactory, TOFactory toFactory) {
-		this.mdsRulesFact = mdsRulesFactory;
-		this.userRulesFact = userRulesFactory;
 		this.toFact = toFactory;
 
-		this.nomeRule = this.userRulesFact.getNomeRule();
-		this.emailRule = this.userRulesFact.getEmailRule();
-		this.cognomeRule = this.userRulesFact.getCognomeRule();
-		this.usernameRule = this.userRulesFact.getUsernameRule();
-		this.passwordRule = this.userRulesFact.getPasswordRule();
-		this.numeroStipendioRule = this.mdsRulesFact.getNumeroTelefonoRule();
+		this.nomeRule = userRulesFactory.getNomeRule();
+		AgroludosRule emailRule = userRulesFactory.getEmailRule();
+		AgroludosRule cognomeRule = userRulesFactory.getCognomeRule();
+		AgroludosRule usernameRule = userRulesFactory.getUsernameRule();
+		AgroludosRule passwordRule = userRulesFactory.getPasswordRule();
+		AgroludosRule numeroStipendioRule = mdsRulesFactory.getNumeroTelefonoRule();
 
-		this.nomeRule.setSuccessor(this.cognomeRule);
-		this.cognomeRule.setSuccessor(this.emailRule);
-		this.emailRule.setSuccessor(this.usernameRule);
-		this.usernameRule.setSuccessor(this.passwordRule);
-		this.passwordRule.setSuccessor(this.numeroStipendioRule);
+		this.nomeRule.setSuccessor(cognomeRule);
+		cognomeRule.setSuccessor(emailRule);
+		emailRule.setSuccessor(usernameRule);
+		usernameRule.setSuccessor(passwordRule);
+		passwordRule.setSuccessor(numeroStipendioRule);
 	}
 
 	@Override

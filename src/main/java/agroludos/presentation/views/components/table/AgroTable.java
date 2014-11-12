@@ -7,8 +7,9 @@ public abstract class AgroTable<T> extends TableView<T>{
 
 	public void hideColumn(Integer index){
 		TableColumn<T, ?> col = this.getTableColumnByIndex(index);
-		if(col != null)
+		if(col != null){
 			col.setVisible(false);
+		}
 	}
 
 	private TableColumn<T, ?> getTableColumnByIndex(Integer index) {

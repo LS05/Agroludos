@@ -10,19 +10,16 @@ import agroludos.to.TOFactory;
 import agroludos.to.UtenteTO;
 
 class UtenteValidator implements AgroludosValidator{
-	private UserRulesFactory userRulesFact;
 	private TOFactory toFact;
-	private AgroludosRule passwordRule;
 	private AgroludosRule emailRule;
 
 	UtenteValidator(UserRulesFactory userRulesFactory, TOFactory toFactory){
-		this.userRulesFact = userRulesFactory;
 		this.toFact = toFactory;
 
-		this.emailRule = this.userRulesFact.getEmailRule();
-		this.passwordRule = this.userRulesFact.getPasswordRule();
-		
-		this.emailRule.setSuccessor(this.passwordRule);
+		this.emailRule = userRulesFactory.getEmailRule();
+		AgroludosRule passwordRule = userRulesFactory.getPasswordRule();
+
+		this.emailRule.setSuccessor(passwordRule);
 	}
 
 	@Override

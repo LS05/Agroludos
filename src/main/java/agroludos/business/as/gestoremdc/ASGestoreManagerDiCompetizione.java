@@ -33,7 +33,7 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return dbDAOFact.getManagerDiCompetizioneDAO();
 	}
-	
+
 	private TipoUtenteDAO getTipoUtenteDAO() throws DatabaseException{
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return dbDAOFact.getTipoUtenteDAO();
@@ -47,17 +47,20 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 
 		this.validator.validate(mdcTO);
 
-		if( daoMan.esisteEmail(mdcTO))
+		if( daoMan.esisteEmail(mdcTO)){
 			throw new UtenteEsistenteException("Email già esistente");
-		if( daoMan.esisteUsername(mdcTO) )
+		}
+
+		if( daoMan.esisteUsername(mdcTO) ){
 			throw new UtenteEsistenteException("Username già esistente");
-		
+		}
+
 		String inputPassword = mdcTO.getPassword();
 		mdcTO.setPassword(this.pwdEnc.encryptPassword(inputPassword));
-		
+
 		TipoUtenteTO tipoUtente = this.getTipoUtenteDAO().getTipoUtenteMdc();
 		mdcTO.setTipoUtente(tipoUtente);
-		
+
 		return daoMan.create(mdcTO);
 	}
 

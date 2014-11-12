@@ -95,7 +95,7 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 		return this.viewName;
 	}
 
-	@FXML private void btnVisualizzaCertificato(){
+	@FXML protected void btnVisualizzaCertificato(){
 		this.setVista("visualizzaSRC",this.mainIscr.getPartecipante());
 	}
 

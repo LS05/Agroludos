@@ -1,6 +1,7 @@
 package agroludos.presentation.views.components.table.filter;
 
 import agroludos.presentation.views.components.tablemodel.CmpModel;
+
 import javafx.scene.control.TextField;
 
 public final class TableCompetizioniFilter extends TableFilter<CmpModel> {

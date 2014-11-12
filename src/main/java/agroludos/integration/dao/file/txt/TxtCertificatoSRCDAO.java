@@ -40,7 +40,6 @@ class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 		StringBuilder certCont = new StringBuilder(300);
 
 		br = new BufferedReader(new FileReader(certPath));
-		certCont = new StringBuilder(300);
 		String line = br.readLine();
 
 		while (line != null) {

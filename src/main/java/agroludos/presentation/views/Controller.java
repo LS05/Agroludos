@@ -1,6 +1,7 @@
 package agroludos.presentation.views;
 
 import javafx.stage.Stage;
+
 import agroludos.presentation.fc.FrontController;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.req.RequestFactory;
@@ -37,7 +38,7 @@ class Controller {
 	void eseguiRichiesta(AgroRequest request, AgroResponse response) {
 		frontController.eseguiRichiesta(request, response);
 	}
-	
+
 	String getCommandName(String commandName){
 		return reqConf.getRequest(commandName);
 	}
@@ -57,11 +58,11 @@ class Controller {
 	void closeVista(String viewName){
 		nav.closeVista(viewName);
 	}
-	
+
 	Stage getStage(String viewName) {
 		return nav.getStage(viewName);
 	}
-	
+
 	String getString(String key){
 		return conf.getString(key);
 	}

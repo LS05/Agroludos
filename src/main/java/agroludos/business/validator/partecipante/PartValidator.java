@@ -12,51 +12,38 @@ import agroludos.to.TOFactory;
 
 class PartValidator implements AgroludosValidator{
 	private UserRulesFactory userRulesFact;
-	private PRulesFactory partRulesFact;
 	private TOFactory toFact;
 	private AgroludosRule nomeRule;
-	private AgroludosRule cognomeRule;
-	private AgroludosRule usernameRule;
-	private AgroludosRule passwordRule;
-	private AgroludosRule indirizzoRule;
-	private AgroludosRule dataSrcRule;
-	private AgroludosRule emailRule;
-	private AgroludosRule cfRule;
-	private AgroludosRule srcRule;
-	private AgroludosRule tesRule;
-	private AgroludosRule sessoRule;
-	private AgroludosRule dataNascRule;
 
 	PartValidator(UserRulesFactory userRulesFactory, PRulesFactory partRulesFactory, TOFactory toFactory){
 		this.userRulesFact = userRulesFactory;
-		this.partRulesFact = partRulesFactory;
 		this.toFact = toFactory;
-
 		this.nomeRule = this.userRulesFact.getNomeRule();
-		this.emailRule = this.userRulesFact.getEmailRule();
-		this.passwordRule = this.userRulesFact.getPasswordRule();
-		this.cognomeRule = this.userRulesFact.getCognomeRule();
-		this.usernameRule = this.userRulesFact.getUsernameRule();
-		this.cfRule = this.partRulesFact.getCfRule();
-		this.srcRule = this.partRulesFact.getSrcRule();
-		this.indirizzoRule = this.partRulesFact.getIndirizzoRule();
-		this.dataSrcRule = this.partRulesFact.getDataSrcRule();
-		this.tesRule = this.partRulesFact.getTesRule();
 
-		this.sessoRule = this.partRulesFact.getSessoRule();
-		this.dataNascRule = this.partRulesFact.getDataNascRule();
+		AgroludosRule cognomeRule = this.userRulesFact.getCognomeRule();
+		AgroludosRule usernameRule = this.userRulesFact.getUsernameRule();
+		AgroludosRule passwordRule = this.userRulesFact.getPasswordRule();
+		AgroludosRule emailRule = this.userRulesFact.getEmailRule();
+		AgroludosRule indirizzoRule = partRulesFactory.getIndirizzoRule();
+		AgroludosRule dataSrcRule = partRulesFactory.getDataSrcRule();
+		AgroludosRule cfRule = partRulesFactory.getCfRule();
+		AgroludosRule srcRule = partRulesFactory.getSrcRule();
+		AgroludosRule tesRule = partRulesFactory.getTesRule();
+		AgroludosRule sessoRule = partRulesFactory.getSessoRule();
+		AgroludosRule dataNascRule = partRulesFactory.getDataNascRule();
 
-		this.nomeRule.setSuccessor(this.cognomeRule);
-		this.cognomeRule.setSuccessor(this.cfRule);
-		this.cfRule.setSuccessor(this.srcRule);
-		this.srcRule.setSuccessor(this.tesRule);
-		this.tesRule.setSuccessor(this.dataSrcRule);
-		this.dataSrcRule.setSuccessor(this.indirizzoRule);
-		this.indirizzoRule.setSuccessor(this.usernameRule);
-		this.usernameRule.setSuccessor(this.passwordRule);
-		this.passwordRule.setSuccessor(this.emailRule);
-		this.emailRule.setSuccessor(this.sessoRule);
-		this.sessoRule.setSuccessor(this.dataNascRule);
+
+		this.nomeRule.setSuccessor(cognomeRule);
+		cognomeRule.setSuccessor(cfRule);
+		cfRule.setSuccessor(srcRule);
+		srcRule.setSuccessor(tesRule);
+		tesRule.setSuccessor(dataSrcRule);
+		dataSrcRule.setSuccessor(indirizzoRule);
+		indirizzoRule.setSuccessor(usernameRule);
+		usernameRule.setSuccessor(passwordRule);
+		passwordRule.setSuccessor(emailRule);
+		emailRule.setSuccessor(sessoRule);
+		sessoRule.setSuccessor(dataNascRule);
 	}
 
 	@Override

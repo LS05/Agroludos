@@ -300,17 +300,20 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	}
 
 	private void setNiscritti(List<CompetizioneTO> listCmp) throws DatabaseException {
-		for(CompetizioneTO cmp: listCmp)
+		for(CompetizioneTO cmp: listCmp){
 			setNiscritti(cmp);
+		}
 	}
+
 	private void setNiscritti(CompetizioneTO cmp) throws DatabaseException {
 		IscrizioneDAO iscDao = getIscrizioneDAO();
 		cmp.setNiscritti(iscDao.getIscrizioniAttiveCmp(cmp).size());
 	}
 
 	private List<CompetizioneTO> checkCmp(List<CompetizioneTO> listCmp) throws DatabaseException{
-		for(CompetizioneTO cmp: listCmp)
+		for(CompetizioneTO cmp: listCmp){
 			checkCmp(cmp);
+		}
 		return listCmp;
 	}
 

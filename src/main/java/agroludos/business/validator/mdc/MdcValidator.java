@@ -11,33 +11,25 @@ import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.TOFactory;
 
 class MdcValidator implements AgroludosValidator{
-	private MdcRulesFactory mdcRulesFact;
-	private UserRulesFactory userRulesFact;
+
 	private TOFactory toFact;
 	private AgroludosRule nomeRule;
-	private AgroludosRule cognomeRule;
-	private AgroludosRule usernameRule;
-	private AgroludosRule passwordRule;
-	private AgroludosRule emailRule;
-	private AgroludosRule stipendioRule;
-
+	
 	MdcValidator(UserRulesFactory userRulesFactory, MdcRulesFactory mdcRulesFactory, TOFactory toFactory) {
-		this.mdcRulesFact = mdcRulesFactory;
-		this.userRulesFact = userRulesFactory;
 		this.toFact = toFactory;
 
-		this.nomeRule = this.userRulesFact.getNomeRule();
-		this.emailRule = this.userRulesFact.getEmailRule();
-		this.cognomeRule = this.userRulesFact.getCognomeRule();
-		this.usernameRule = this.userRulesFact.getUsernameRule();
-		this.passwordRule = this.userRulesFact.getPasswordRule();
-		this.stipendioRule = this.mdcRulesFact.getStipendioRule();
+		this.nomeRule = userRulesFactory.getNomeRule();
+		AgroludosRule emailRule = userRulesFactory.getEmailRule();
+		AgroludosRule cognomeRule = userRulesFactory.getCognomeRule();
+		AgroludosRule usernameRule = userRulesFactory.getUsernameRule();
+		AgroludosRule passwordRule = userRulesFactory.getPasswordRule();
+		AgroludosRule stipendioRule = mdcRulesFactory.getStipendioRule();
 
-		this.nomeRule.setSuccessor(this.cognomeRule);
-		this.cognomeRule.setSuccessor(this.emailRule);
-		this.emailRule.setSuccessor(this.usernameRule);
-		this.usernameRule.setSuccessor(this.passwordRule);
-		this.passwordRule.setSuccessor(this.stipendioRule);
+		this.nomeRule.setSuccessor(cognomeRule);
+		cognomeRule.setSuccessor(emailRule);
+		emailRule.setSuccessor(usernameRule);
+		usernameRule.setSuccessor(passwordRule);
+		passwordRule.setSuccessor(stipendioRule);
 	}
 
 	@Override

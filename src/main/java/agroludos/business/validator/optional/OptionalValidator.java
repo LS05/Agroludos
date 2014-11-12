@@ -10,22 +10,19 @@ import agroludos.to.TOFactory;
 import agroludos.to.OptionalTO;
 
 class OptionalValidator implements AgroludosValidator{
-	private OptRulesFactory rulesFact;
+
 	private TOFactory toFact;
 	private AgroludosRule nomeRule;
-	private AgroludosRule costoRule;
-	private AgroludosRule statoRule;
 
 	OptionalValidator(OptRulesFactory rulesFactory, TOFactory toFactory){
-		this.rulesFact = rulesFactory;
 		this.toFact = toFactory;
 
-		this.nomeRule = this.rulesFact.getNomeRule();
-		this.costoRule = this.rulesFact.getCostoRule();
-		this.statoRule = this.rulesFact.getStatoRule();
+		this.nomeRule = rulesFactory.getNomeRule();
+		AgroludosRule costoRule = rulesFactory.getCostoRule();
+		AgroludosRule statoRule = rulesFactory.getStatoRule();
 
-		this.nomeRule.setSuccessor(this.costoRule);
-		this.costoRule.setSuccessor(this.statoRule);
+		this.nomeRule.setSuccessor(costoRule);
+		costoRule.setSuccessor(statoRule);
 	}
 
 	@Override

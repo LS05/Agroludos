@@ -58,7 +58,6 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 
 		partTO.setCertificato(daoCert.getCertificato(partTO));
 
-		return;
 	}
 
 	@Override
@@ -67,10 +66,13 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
 
-		if( daoPar.esisteEmail(partTO))
+		if( daoPar.esisteEmail(partTO)){
 			throw new UtenteEsistenteException("Email già esistente");
-		if( daoPar.esisteUsername(partTO) )
+		}
+
+		if( daoPar.esisteUsername(partTO) ){
 			throw new UtenteEsistenteException("Username già esistente");
+		}
 
 		TipoUtenteDAO daoTipoUtente = this.getTipoUtenteDAO();
 

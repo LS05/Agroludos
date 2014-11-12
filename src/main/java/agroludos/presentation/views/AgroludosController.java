@@ -1,6 +1,7 @@
 package agroludos.presentation.views;
 
 import javafx.stage.Stage;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.to.AgroludosTO;
@@ -50,7 +51,7 @@ public abstract class AgroludosController {
 	protected void closeVista(String viewName){
 		controller.closeVista(viewName);
 	}
-	
+
 	protected Stage getStage(String viewName){
 		return controller.getStage(viewName);
 	}
@@ -58,11 +59,11 @@ public abstract class AgroludosController {
 	protected void setMainStage(Stage stage){
 		controller.setMainStage(stage);
 	}
-	
+
 	protected String getString(String key){
 		return controller.getString(key);
 	}
-	
+
 	protected UtenteTO getUtente(){
 		return utente;
 	}
@@ -90,7 +91,7 @@ public abstract class AgroludosController {
 	public void setController(Controller ctrl) {
 		controller = ctrl;
 	}
-	
+
 	protected abstract void initializeView(AgroludosTO mainTO);
 
 	protected abstract void initializeView(String viewName);

@@ -117,15 +117,15 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 	}
 
 
-	@FXML private void btnAnnulla(MouseEvent event){
+	@FXML protected void btnAnnulla(MouseEvent event){
 		this.close();
 	}
 
-	@FXML private void btnSelezionaOptional(MouseEvent event){
+	@FXML protected void btnSelezionaOptional(MouseEvent event){
 		this.setVista("selezionaOptional", this.cmpto);
 	}
 
-	@FXML private void btnInserisciCmp(MouseEvent event){
+	@FXML protected void btnInserisciCmp(MouseEvent event){
 
 		this.lblCostoCmpError.setVisible(false);
 		this.lblDataCmpError.setVisible(false);

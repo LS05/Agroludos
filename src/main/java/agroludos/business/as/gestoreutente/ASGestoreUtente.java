@@ -43,8 +43,9 @@ class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 
 		UtenteTO res = daoUtente.getUtente(uTO);
 
-		if(res.getId() == -1)
+		if(res.getId() == -1){
 			throw new UserNotFoundException();
+		}
 
 		return res;
 	}
@@ -66,12 +67,13 @@ class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 
 		UtenteDAO<UtenteTO> daoUtente = this.getUtenteDAO();
 
-		if(daoUtente.esisteUsername(uTO))
+		if(daoUtente.esisteUsername(uTO)){
 			uTO = daoUtente.getByUsername(uTO.getUsername());
-		else if(daoUtente.esisteEmail(uTO))
+		}else if(daoUtente.esisteEmail(uTO)){
 			uTO = daoUtente.getByEmail(uTO.getEmail());
-		else
+		}else{
 			throw new UserNotFoundException("Utente inesistente!");
+		}
 
 		return uTO;
 	}
@@ -123,7 +125,7 @@ class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 			String inputPassword = uTO.getPassword();
 			uTO.setPassword(this.pwdEnc.encryptPassword(inputPassword));
 		}
-		
+
 		return daoUto.update(uTO);
 	}
 }

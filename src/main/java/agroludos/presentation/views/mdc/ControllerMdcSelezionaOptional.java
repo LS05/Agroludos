@@ -190,14 +190,15 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 			this.btnAvanti.setVisible(false);
 			this.btnConferma.setVisible(true);
 		}
-
 	}
+
 	@FXML protected void btnConferma(MouseEvent event) {
 
 		//aggiunge tutti gli optional scelti
 		this.cmpto.clearOptionals();
-		for (OptionalTO opt: this.listOptScelti)
+		for (OptionalTO opt: this.listOptScelti){
 			this.cmpto.addOptional(opt);
+		}
 		this.close();
 	}
 
