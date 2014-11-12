@@ -1,8 +1,8 @@
 package agroludos.business.as.gestoretipooptional;
 
 import agroludos.business.as.AgroludosService;
-import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.business.ValidationException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.to.TipoOptionalTO;
 
 

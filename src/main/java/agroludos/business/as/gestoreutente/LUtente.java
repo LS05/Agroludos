@@ -3,8 +3,8 @@ package agroludos.business.as.gestoreutente;
 import java.io.IOException;
 
 import agroludos.business.as.AgroludosService;
-import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.business.UserNotFoundException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.to.UtenteTO;
 
 public interface LUtente extends AgroludosService {	

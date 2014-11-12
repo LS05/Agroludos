@@ -7,10 +7,10 @@ import org.joda.time.DateMidnight;
 
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
-import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.business.UserNotFoundException;
 import agroludos.exceptions.business.UtenteEsistenteException;
 import agroludos.exceptions.business.ValidationException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.integration.dao.db.TipoUtenteDAO;

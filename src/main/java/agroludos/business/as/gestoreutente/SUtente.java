@@ -1,9 +1,9 @@
 package agroludos.business.as.gestoreutente;
 
 import agroludos.business.as.AgroludosService;
-import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.business.UtenteEsistenteException;
 import agroludos.exceptions.business.ValidationException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.to.UtenteTO;
 public interface SUtente extends AgroludosService {
 	

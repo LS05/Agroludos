@@ -3,7 +3,7 @@ package agroludos.business.as.gestorestatocompetizione;
 import java.util.List;
 
 import agroludos.business.as.AgroludosService;
-import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.to.StatoCompetizioneTO;
 
 public interface LStatoCompetizione extends AgroludosService{

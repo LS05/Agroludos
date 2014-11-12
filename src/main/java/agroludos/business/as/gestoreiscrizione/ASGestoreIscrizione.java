@@ -5,11 +5,11 @@ import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
-import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.business.ChiuseIscrizioniException;
 import agroludos.exceptions.business.IscrizioneEsistenteException;
 import agroludos.exceptions.business.NmaxRaggiuntoException;
 import agroludos.exceptions.business.ValidationException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.IscrizioneDAO;

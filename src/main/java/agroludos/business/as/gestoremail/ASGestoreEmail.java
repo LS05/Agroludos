@@ -1,7 +1,7 @@
 package agroludos.business.as.gestoremail;
 
 import agroludos.business.as.AgroludosAS;
-import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.to.EmailTO;
 import agroludos.utility.email.AgroludosMail;
 

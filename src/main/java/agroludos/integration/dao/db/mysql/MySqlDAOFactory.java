@@ -1,6 +1,6 @@
 package agroludos.integration.dao.db.mysql;
 
-import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.IscrizioneDAO;

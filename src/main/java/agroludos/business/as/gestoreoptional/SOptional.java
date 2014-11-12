@@ -1,8 +1,8 @@
 package agroludos.business.as.gestoreoptional;
 
 import agroludos.business.as.AgroludosService;
-import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.business.ValidationException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.to.OptionalTO;
 
 public interface SOptional extends AgroludosService{

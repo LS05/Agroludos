@@ -1,7 +1,7 @@
 package agroludos.presentation.controller.mapper;
 
 import agroludos.business.bd.BusinessDelegate;
-import agroludos.exceptions.ApplicationException;
+import agroludos.exceptions.system.ApplicationException;
 import agroludos.presentation.reqh.AgroRequestContext;
 import agroludos.presentation.resph.AgroResponseContext;
 

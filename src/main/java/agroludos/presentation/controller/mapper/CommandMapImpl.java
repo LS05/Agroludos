@@ -2,7 +2,7 @@ package agroludos.presentation.controller.mapper;
 
 import java.lang.reflect.Method;
 
-import agroludos.exceptions.MethodNotFoundException;
+import agroludos.exceptions.system.MethodNotFoundException;
 
 class CommandMapImpl implements CommandMap {
 

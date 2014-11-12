@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 import agroludos.business.as.AgroludosService;
-import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.business.UserNotFoundException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.to.CertificatoTO;
 import agroludos.to.PartecipanteTO;
 

@@ -1,4 +1,4 @@
-package agroludos.exceptions;
+package agroludos.exceptions.system;
 
 @SuppressWarnings("serial")
 public class FactoryInstantiationException extends Exception{

@@ -2,7 +2,7 @@ package agroludos.integration.dao.db;
 
 import java.util.List;
 
-import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;

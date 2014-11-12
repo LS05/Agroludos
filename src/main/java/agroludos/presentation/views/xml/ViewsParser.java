@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.xml.bind.JAXBException;
 
-import agroludos.exceptions.ViewNotFoundException;
+import agroludos.exceptions.system.ViewNotFoundException;
 import agroludos.system.SystemConf;
 import agroludos.utility.xml.AgroParser;
 

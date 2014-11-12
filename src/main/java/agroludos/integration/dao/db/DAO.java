@@ -3,7 +3,7 @@ package agroludos.integration.dao.db;
 import java.io.Serializable;
 import java.util.List;
 
-import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.system.DatabaseException;
 
 public interface DAO<T extends Serializable> {
 

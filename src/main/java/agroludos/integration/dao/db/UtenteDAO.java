@@ -1,6 +1,6 @@
 package agroludos.integration.dao.db;
 
-import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.to.UtenteTO;
 
 public interface UtenteDAO<T extends UtenteTO> extends DAO<T>{

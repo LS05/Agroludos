@@ -1,7 +1,7 @@
 package agroludos.integration.dao.db.mysql;
 
 
-import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.integration.dao.db.StatoIscrizioneDAO;
 import agroludos.to.StatoIscrizioneTO;
 

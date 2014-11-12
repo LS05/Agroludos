@@ -3,7 +3,7 @@ package agroludos.business.as.gestorestatoutente;
 import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
-import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.StatoUtenteDAO;
 import agroludos.to.StatoUtenteTO;

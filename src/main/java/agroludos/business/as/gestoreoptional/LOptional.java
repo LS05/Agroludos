@@ -3,8 +3,8 @@ package agroludos.business.as.gestoreoptional;
 import java.util.List;
 
 import agroludos.business.as.AgroludosService;
-import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.business.OptionalCmpAttiveException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.to.OptionalTO;
 import agroludos.to.StatoOptionalTO;
 import agroludos.to.TipoOptionalTO;

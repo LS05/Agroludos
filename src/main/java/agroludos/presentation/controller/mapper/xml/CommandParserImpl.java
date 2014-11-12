@@ -2,7 +2,7 @@ package agroludos.presentation.controller.mapper.xml;
 
 import javax.xml.bind.JAXBException;
 
-import agroludos.exceptions.CommandFactoryException;
+import agroludos.exceptions.system.CommandFactoryException;
 import agroludos.utility.xml.AgroParser;
 
 class CommandParserImpl extends AgroParser implements CommandParser {

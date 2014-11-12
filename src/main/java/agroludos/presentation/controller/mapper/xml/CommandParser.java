@@ -1,6 +1,6 @@
 package agroludos.presentation.controller.mapper.xml;
 
-import agroludos.exceptions.CommandFactoryException;
+import agroludos.exceptions.system.CommandFactoryException;
 
 public interface CommandParser {
 

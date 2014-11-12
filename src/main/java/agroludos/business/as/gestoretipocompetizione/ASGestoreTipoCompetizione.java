@@ -4,9 +4,9 @@ import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
-import agroludos.exceptions.DatabaseException;
 import agroludos.exceptions.business.TipoCmpExistException;
 import agroludos.exceptions.business.ValidationException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.to.TipoCompetizioneTO;

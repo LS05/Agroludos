@@ -1,6 +1,6 @@
 package agroludos.presentation.views.xml;
 
-import agroludos.exceptions.ViewNotFoundException;
+import agroludos.exceptions.system.ViewNotFoundException;
 
 public interface AgroViewsParser {
 	AgroludosWindow getView(String name) throws ViewNotFoundException;

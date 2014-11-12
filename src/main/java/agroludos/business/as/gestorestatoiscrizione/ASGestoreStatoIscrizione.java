@@ -3,7 +3,7 @@ package agroludos.business.as.gestorestatoiscrizione;
 import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
-import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.StatoIscrizioneDAO;
 import agroludos.to.StatoIscrizioneTO;

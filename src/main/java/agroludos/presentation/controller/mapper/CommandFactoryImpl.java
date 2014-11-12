@@ -1,6 +1,6 @@
 package agroludos.presentation.controller.mapper;
 
-import agroludos.exceptions.CommandFactoryException;
+import agroludos.exceptions.system.CommandFactoryException;
 import agroludos.presentation.controller.mapper.xml.CommandParser;
 
 class CommandFactoryImpl implements CommandFactory{

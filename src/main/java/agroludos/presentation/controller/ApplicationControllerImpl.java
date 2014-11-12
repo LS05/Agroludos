@@ -2,11 +2,11 @@ package agroludos.presentation.controller;
 
 import java.io.IOException;
 
-import agroludos.exceptions.ApplicationException;
-import agroludos.exceptions.CommandFactoryException;
-import agroludos.exceptions.EnrichableException;
-import agroludos.exceptions.RequestInitializationException;
-import agroludos.exceptions.ViewNotFoundException;
+import agroludos.exceptions.system.ApplicationException;
+import agroludos.exceptions.system.CommandFactoryException;
+import agroludos.exceptions.system.EnrichableException;
+import agroludos.exceptions.system.RequestInitializationException;
+import agroludos.exceptions.system.ViewNotFoundException;
 import agroludos.presentation.controller.mapper.Command;
 import agroludos.presentation.controller.mapper.CommandFactory;
 import agroludos.presentation.controller.mapper.CommandProcessor;

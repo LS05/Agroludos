@@ -3,7 +3,7 @@ package agroludos.integration.dao.db.mysql;
 import java.util.ArrayList;
 import java.util.List;
 
-import agroludos.exceptions.DatabaseException;
+import agroludos.exceptions.system.DatabaseException;
 import agroludos.integration.dao.db.OptionalDAO;
 import agroludos.to.OptionalTO;
 import agroludos.to.TipoOptionalTO;

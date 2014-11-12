@@ -1,6 +1,6 @@
 package agroludos.presentation.views;
 
-import agroludos.exceptions.ViewNotFoundException;
+import agroludos.exceptions.system.ViewNotFoundException;
 import agroludos.presentation.views.xml.AgroViewsParser;
 import agroludos.presentation.views.xml.AgroludosWindow;
 
