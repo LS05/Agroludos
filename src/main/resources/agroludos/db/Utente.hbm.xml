@@ -82,9 +82,7 @@
 	<query name="getUtente">
         <![CDATA[ from agroludos.to.Utente u where u.statoUtente.id = 1 and u.username = ? and u.password = ?]]></query>
 	<query name="getByID">
-        <![CDATA[ from agroludos.to.Utente u where u.statoUtente.id = 1 and u.id = ? and u.tipoUtente = ? ]]></query>
-	<query name="getGenericUtenteByID">
-        <![CDATA[ from agroludos.to.Utente u where u.statoUtente.id = 1 and u.id = ? ]]></query>
+        <![CDATA[ from agroludos.to.Utente u where u.statoUtente.id = 1 and u.id = ?]]></query>
 	<query name="getPartecipante">
         <![CDATA[ from agroludos.to.Partecipante p where p.statoUtente.id = 1 and p.id = ? ]]></query>
 	<query name="getPartecipanteByCF">

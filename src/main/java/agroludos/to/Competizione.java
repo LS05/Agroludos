@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.joda.time.DateTime;
+import org.joda.time.DateMidnight;
 
 /**
  * Implementazione dell'interfaccia CompetizioneTO. L'implementazione sull'assunzione
@@ -23,7 +23,7 @@ class Competizione implements CompetizioneTO{
 
 	private Integer id;
 	private String nome;
-	private DateTime suppData;
+	private DateMidnight suppData;
 	private Date data;
 	private int nmin;
 	private int nmax;
@@ -86,7 +86,7 @@ class Competizione implements CompetizioneTO{
 
 	@Override
 	public void setData(Date data) {
-		this.suppData = new DateTime(data).withTimeAtStartOfDay();
+		this.suppData = new DateMidnight(data);
 		this.data = data;
 	}
 
@@ -194,7 +194,7 @@ class Competizione implements CompetizioneTO{
 		if(this.id == cpt.getId()){
 			res = 0;
 		} else {
-			this.suppData.compareTo(new DateTime(cpt.getData()));
+			this.suppData.compareTo(new DateMidnight(cpt.getData()));
 		}
 
 		return res;
@@ -205,7 +205,7 @@ class Competizione implements CompetizioneTO{
 		Competizione c = new Competizione();
 //		c.id = new Integer(id);
 //		c.nome = new String(nome);
-//		private DateTime suppData;
+//		private DateMidnight suppData;
 //		private Date data;
 //		c.nmin = nmin;
 //		c.nmax = nmax;

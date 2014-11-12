@@ -3,7 +3,7 @@ package agroludos.business.as.gestorepartecipante;
 import java.io.IOException;
 import java.util.List;
 
-import org.joda.time.DateTime;
+import org.joda.time.DateMidnight;
 
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
@@ -158,8 +158,8 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 
 	@Override
 	public boolean isCertificatoValido(PartecipanteTO parTO){
-		DateTime dataSrc = new DateTime(parTO.getDataSRC());
-		DateTime today = new DateTime().withTimeAtStartOfDay();
+		DateMidnight dataSrc = new DateMidnight(parTO.getDataSRC());
+		DateMidnight today = new DateMidnight();
 		if( dataSrc.isBefore(today) ){
 			return false;
 		} else{

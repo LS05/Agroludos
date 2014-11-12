@@ -4,7 +4,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTime;
+import org.joda.time.DateMidnight;
 
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
@@ -100,11 +100,10 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
 		StatoCompetizioneDAO daoStatoCmp = getStatoCompetizioneDAO();
-		cmpTO.setStatoCompetizione(daoStatoCmp.getStatoCmpAperta());
 
 		this.validator.validate(cmpTO);
-
-		this.checkCmpData(cmpTO);
+		
+		cmpTO.setStatoCompetizione(daoStatoCmp.getStatoCmpAperta());
 
 		cmpTO = daoCmp.create(cmpTO);
 
@@ -321,14 +320,12 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 
 		StatoCompetizioneDAO daoStatoCmp = this.getStatoCompetizioneDAO();
 
-		DateTime today = new DateTime();
-		today = DateTime.now();
+		DateMidnight today = new DateMidnight();
+		DateMidnight dataCmp = new DateMidnight(cmp.getData());
 		CompetizioneDAO cmpDao = getCompetizioneDAO();
-
 		if(!(cmp.getStatoCompetizione().getId() == 0)
 				&& !(cmp.getStatoCompetizione().getId() == 4)){
-			DateTime dataCmp = new DateTime(cmp.getData());
-			if(dataCmp.isEqualNow() 
+			if(dataCmp.isEqual(today) 
 					&& !(cmp.getStatoCompetizione().getId() == 2)){
 				//se non si è raggiunti il numero minimo di partecipanti la 
 				//competizione viene annullata
@@ -336,7 +333,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 				if(listIscCmp.size() < cmp.getNmin())
 					annullaCompetizione(cmp);
 				else{
-					cmp.setStatoCompetizione(daoStatoCmp.getStatoCmpChiusa());
+					cmp.setStatoCompetizione(daoStatoCmp.getStatoCmpInCorso());
 					cmpDao.update(cmp);
 				}
 			}
