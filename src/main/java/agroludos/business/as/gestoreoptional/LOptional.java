@@ -4,7 +4,7 @@ import java.util.List;
 
 import agroludos.business.as.AgroludosService;
 import agroludos.exceptions.DatabaseException;
-import agroludos.exceptions.OptionalCmpAttiveException;
+import agroludos.exceptions.business.OptionalCmpAttiveException;
 import agroludos.to.OptionalTO;
 import agroludos.to.StatoOptionalTO;
 import agroludos.to.TipoOptionalTO;

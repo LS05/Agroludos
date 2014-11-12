@@ -98,8 +98,8 @@ public class ControllerPartCompetizione extends AgroludosController{
 			this.paneTableOptional.setVisible(true);
 			this.tableOptional.setAll(this.cmpto.getAllOptionals());
 
-			this.tableOptional.hideColumn("Stato");
-			this.tableOptional.hideColumn("Descrizione");
+			this.tableOptional.hideColumn(4);
+			this.tableOptional.hideColumn(1);
 		}
 	}
 

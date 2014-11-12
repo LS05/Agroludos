@@ -1,7 +1,7 @@
 package agroludos.business.bd.cache;
 
 import agroludos.business.as.AgroludosService;
-import agroludos.exceptions.BusinessComponentNotFoundException;
+import agroludos.exceptions.business.BusinessComponentNotFoundException;
 
 class ServiceCacheImpl implements ServiceCache {
 	private Services services;

@@ -74,10 +74,4 @@ public class TableCompetizioni extends AgroTable<CmpModel>{
 		getItems().setAll(res);
 
 	}
-
-	@Override
-	public void updateTable(String text) {
-		// TODO Auto-generated method stub
-		
-	}
 }

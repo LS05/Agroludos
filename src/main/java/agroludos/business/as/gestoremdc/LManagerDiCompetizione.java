@@ -4,7 +4,7 @@ import java.util.List;
 
 import agroludos.business.as.AgroludosService;
 import agroludos.exceptions.DatabaseException;
-import agroludos.exceptions.MdcCmpAttiveException;
+import agroludos.exceptions.business.MdcCmpAttiveException;
 import agroludos.to.ManagerDiCompetizioneTO;
 
 public interface LManagerDiCompetizione extends AgroludosService {

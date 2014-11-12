@@ -60,9 +60,4 @@ public class TableMdC extends AgroTable<MdcModel>{
 		MdcModel mdcMod = new MdcModel(mdc);
 		this.getItems().add(mdcMod);
 	}
-
-	@Override
-	public void updateTable(String text) {
-		// TODO Auto-generated method stub
-	}
 }

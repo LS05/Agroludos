@@ -23,7 +23,7 @@ public class TableIscrizioni extends AgroTable<IscModel>{
 		this.iscColTipo = new TableColumn<IscModel, String>("Tipo");
 		this.iscColMan = new TableColumn<IscModel, String>("Manager");
 		this.iscColStato = new TableColumn<IscModel, String>("Stato");
-		
+
 
 		this.iscColNomeCompetizione.setCellValueFactory(new PropertyValueFactory<IscModel, String>("competizione"));
 		this.iscColDataCmp.setCellValueFactory(new PropertyValueFactory<IscModel, String>("datacmp"));
@@ -36,7 +36,7 @@ public class TableIscrizioni extends AgroTable<IscModel>{
 		this.getColumns().add(this.iscColTipo);
 		this.getColumns().add(this.iscColMan);
 		this.getColumns().add(this.iscColStato);
-		
+
 		this.setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY);
 	}
 
@@ -62,11 +62,5 @@ public class TableIscrizioni extends AgroTable<IscModel>{
 
 		getItems().setAll(res);
 
-	}
-
-	@Override
-	public void updateTable(String text) {
-
-		// TODO Auto-generated method stub	
 	}
 }

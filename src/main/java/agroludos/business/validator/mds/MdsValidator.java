@@ -4,8 +4,7 @@ import agroludos.business.validator.AgroludosValidator;
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.business.validator.rules.mds.MdsRulesFactory;
 import agroludos.business.validator.rules.utente.UserRulesFactory;
-import agroludos.exceptions.ValidationException;
-
+import agroludos.exceptions.business.ValidationException;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiSistemaTO;

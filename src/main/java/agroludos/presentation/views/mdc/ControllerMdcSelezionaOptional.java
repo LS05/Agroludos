@@ -110,8 +110,8 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 
 					});
 
-			this.tableOptional.hideColumn("Stato");
-			this.tableOptional.hideColumn("Tipo");
+			this.tableOptional.hideColumn(4);
+			this.tableOptional.hideColumn(3);
 
 		}
 	}

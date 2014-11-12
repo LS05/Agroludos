@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import agroludos.business.as.AgroludosService;
 import agroludos.exceptions.DatabaseException;
-import agroludos.exceptions.UserNotFoundException;
+import agroludos.exceptions.business.UserNotFoundException;
 import agroludos.to.UtenteTO;
 
 public interface LUtente extends AgroludosService {	

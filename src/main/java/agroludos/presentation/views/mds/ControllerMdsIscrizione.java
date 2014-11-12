@@ -61,8 +61,8 @@ public class ControllerMdsIscrizione extends AgroludosController {
 			this.paneTableOptionalScelti.setVisible(true);
 			this.tableOptional.setAll(this.iscto.getAllOptionals());
 
-			this.tableOptional.hideColumn("Stato");
-			this.tableOptional.hideColumn("Descrizione");
+			this.tableOptional.hideColumn(4);
+			this.tableOptional.hideColumn(1);
 		}
 	}
 

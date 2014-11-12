@@ -35,7 +35,7 @@ import agroludos.business.as.gestoretipooptional.STipoOptional;
 import agroludos.business.as.gestoretipoutente.LTipoUtente;
 import agroludos.business.as.gestoreutente.LUtente;
 import agroludos.business.as.gestoreutente.SUtente;
-import agroludos.exceptions.BusinessComponentNotFoundException;
+import agroludos.exceptions.business.BusinessComponentNotFoundException;
 
 class Services {
 	private final int SBSIZE = 100;

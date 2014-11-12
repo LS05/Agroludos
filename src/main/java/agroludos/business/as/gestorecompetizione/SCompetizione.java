@@ -2,7 +2,7 @@ package agroludos.business.as.gestorecompetizione;
 
 import agroludos.business.as.AgroludosService;
 import agroludos.exceptions.DatabaseException;
-import agroludos.exceptions.ValidationException;
+import agroludos.exceptions.business.ValidationException;
 import agroludos.to.CompetizioneTO;
 
 public interface SCompetizione extends AgroludosService {

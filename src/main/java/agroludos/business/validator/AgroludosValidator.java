@@ -1,6 +1,6 @@
 package agroludos.business.validator;
 
-import agroludos.exceptions.ValidationException;
+import agroludos.exceptions.business.ValidationException;
 import agroludos.to.AgroludosTO;
 
 public interface AgroludosValidator {

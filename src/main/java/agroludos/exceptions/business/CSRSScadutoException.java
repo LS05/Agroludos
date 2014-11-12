@@ -1,4 +1,5 @@
-package agroludos.exceptions;
+package agroludos.exceptions.business;
+
 
 @SuppressWarnings("serial")
 public class CSRSScadutoException extends ValidationException {

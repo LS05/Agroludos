@@ -39,8 +39,6 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 	@FXML private Button btnPaneComptizioni;
 	@FXML private Button btnNuovaCompetizione;
 	@FXML private MenuItem menuLogout;
-	
-	//tabella competizioni gestite
 	@FXML private TableView<CmpModel> tableCompetizione;
 	@FXML private TableColumn<CmpModel, String> cmpIdCol;
 	@FXML private TableColumn<CmpModel, String> cmpNomeCol;
@@ -50,6 +48,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 	@FXML private TableColumn<CmpModel, String> cmpNmaxCol;
 	@FXML private TableColumn<CmpModel, String> cmpTipoCol;
 	@FXML private TableColumn<CmpModel, String> cmpStatoCol;
+	
 	private ObservableList<CmpModel> listaTabCmp;
 	private List<CompetizioneTO> listCmp;
 

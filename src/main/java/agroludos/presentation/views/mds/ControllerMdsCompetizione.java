@@ -93,7 +93,7 @@ public class ControllerMdsCompetizione extends AgroludosController{
 			this.paneTableOptional.setVisible(true);
 			this.tableOptional.setAll(this.cmpto.getAllOptionals());
 
-			this.tableOptional.hideColumn("Descrizione");
+			this.tableOptional.hideColumn(2);
 		}
 
 	}

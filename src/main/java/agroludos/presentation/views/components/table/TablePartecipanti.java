@@ -30,7 +30,7 @@ public class TablePartecipanti extends AgroTable<PartModel>{
 		this.getColumns().add(this.partColCognome);
 		this.getColumns().add(this.partColEmail);
 		this.getColumns().add(this.partColUsername);
-		
+
 		this.setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY);
 
 		ObservableList<PartModel> res = FXCollections.observableArrayList();
@@ -52,11 +52,5 @@ public class TablePartecipanti extends AgroTable<PartModel>{
 	@Override
 	public PartModel getSelectedItem() {
 		return this.getSelectionModel().getSelectedItem();
-	}
-
-	@Override
-	public void updateTable(String text) {
-		// TODO Auto-generated method stub
-		
 	}
 }

@@ -45,6 +45,13 @@ class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements Iscr
 
 		return res;
 	}
+	
+	private StatoIscrizioneTO getStatoIscrizioneTerminato() throws DatabaseException {
+
+		StatoIscrizioneTO siscTO = (StatoIscrizioneTO) super.executeQuery("getStatoIscrizioneTerminato");
+
+		return siscTO;
+	}
 
 	@Override
 	public void terminaIscrizioni(CompetizioneTO cmp) throws DatabaseException {
@@ -55,20 +62,6 @@ class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements Iscr
 			this.update(isc);
 		}
 
-	}
-
-	private StatoIscrizioneTO getStatoIscrizioneTerminato() throws DatabaseException {
-
-		StatoIscrizioneTO siscTO = (StatoIscrizioneTO) super.executeQuery("getStatoIscrizioneTerminato");
-
-		return siscTO;
-	}
-
-	private StatoIscrizioneTO getStatoIscrizioneDisattivato() throws DatabaseException {
-
-		StatoIscrizioneTO siscTO = (StatoIscrizioneTO) super.executeQuery("getStatoIscrizioneDisattivato");
-
-		return siscTO;
 	}
 
 	@Override

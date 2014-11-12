@@ -7,7 +7,7 @@ import agroludos.business.as.AgroludosService;
 import agroludos.exceptions.MethodNotFoundException;
 import agroludos.exceptions.ServiceHandlerException;
 import agroludos.exceptions.ServiceNotFoundException;
-import agroludos.exceptions.ValidationException;
+import agroludos.exceptions.business.ValidationException;
 import agroludos.presentation.controller.mapper.Command;
 import agroludos.presentation.controller.mapper.CommandMap;
 import agroludos.presentation.reqh.AgroRequestContext;

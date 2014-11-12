@@ -3,7 +3,7 @@ package agroludos.business.validator.competizione;
 import agroludos.business.validator.AgroludosValidator;
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.business.validator.rules.competizione.CompRulesFactory;
-import agroludos.exceptions.ValidationException;
+import agroludos.exceptions.business.ValidationException;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.CompetizioneTO;

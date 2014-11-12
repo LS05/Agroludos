@@ -1,4 +1,4 @@
-package agroludos.exceptions;
+package agroludos.exceptions.business;
 
 import agroludos.to.ErrorTO;
 

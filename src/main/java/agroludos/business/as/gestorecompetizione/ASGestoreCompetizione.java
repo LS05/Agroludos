@@ -8,10 +8,10 @@ import org.joda.time.DateTime;
 
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
-import agroludos.exceptions.CmpDataAttiveException;
 import agroludos.exceptions.DatabaseException;
-import agroludos.exceptions.UnModCompetizioneException;
-import agroludos.exceptions.ValidationException;
+import agroludos.exceptions.business.CmpDataAttiveException;
+import agroludos.exceptions.business.UnModCompetizioneException;
+import agroludos.exceptions.business.ValidationException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.IscrizioneDAO;
@@ -317,6 +317,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	//con la data della competizione
 	//se termina termina le iscrizioni attive
 	//se viene annullata per il non raggiungimento del numero minimo annulla la comp
+	//TODO DA TESTARE
 	private CompetizioneTO checkCmp(CompetizioneTO cmp) throws DatabaseException{
 
 		StatoCompetizioneDAO daoStatoCmp = this.getStatoCompetizioneDAO();

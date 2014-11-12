@@ -7,11 +7,11 @@ import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
 import agroludos.to.ManagerDiCompetizioneTO;
 
 class MySqlManagerDiCompetizioneDAO extends MySqlUtenteDAO<ManagerDiCompetizioneTO> implements ManagerDiCompetizioneDAO{
-	
+
 	MySqlManagerDiCompetizioneDAO(){
 		this.setClasse(toFact.createMdCTO());
 	}
-	
+
 	@Override
 	public List< ManagerDiCompetizioneTO > getAll() throws DatabaseException{
 		List<ManagerDiCompetizioneTO> res = super.getAll();
@@ -19,9 +19,4 @@ class MySqlManagerDiCompetizioneDAO extends MySqlUtenteDAO<ManagerDiCompetizione
 		return res;
 	}
 
-	@Override
-	public ManagerDiCompetizioneTO getByStipendio(Double stipendio) throws DatabaseException {
-		//TODO
-		return null;
-	}
 }

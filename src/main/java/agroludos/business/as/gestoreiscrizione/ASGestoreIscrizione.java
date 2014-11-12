@@ -5,11 +5,11 @@ import java.util.List;
 
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
-import agroludos.exceptions.ChiuseIscrizioniException;
 import agroludos.exceptions.DatabaseException;
-import agroludos.exceptions.IscrizioneEsistenteException;
-import agroludos.exceptions.NmaxRaggiuntoException;
-import agroludos.exceptions.ValidationException;
+import agroludos.exceptions.business.ChiuseIscrizioniException;
+import agroludos.exceptions.business.IscrizioneEsistenteException;
+import agroludos.exceptions.business.NmaxRaggiuntoException;
+import agroludos.exceptions.business.ValidationException;
 import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.IscrizioneDAO;
@@ -169,6 +169,19 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 
 		return iscTO;
 	}
+	
+	private IscrizioneTO eliminaIscrizione(IscrizioneTO iscTO)
+			throws DatabaseException {
+
+		IscrizioneDAO iscDAO = getIscrizioneDAO();
+
+		StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
+		StatoIscrizioneTO siTO = statoIscDAO.getStatoDisattivo();
+
+		iscTO.setStatoIscrizione(siTO);
+
+		return iscDAO.annullaIscrizione(iscTO);
+	}
 
 	@Override
 	public IscrizioneTO eliminaIscrizioneByMdc(IscrizioneTO iscTO) 
@@ -201,20 +214,6 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 
 		return iscTO;
 	}
-
-	private IscrizioneTO eliminaIscrizione(IscrizioneTO iscTO)
-			throws DatabaseException {
-
-		IscrizioneDAO iscDAO = getIscrizioneDAO();
-
-		StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
-		StatoIscrizioneTO siTO = statoIscDAO.getStatoDisattivo();
-
-		iscTO.setStatoIscrizione(siTO);
-
-		return iscDAO.annullaIscrizione(iscTO);
-	}
-
 
 	@Override
 	public List<IscrizioneTO> getAllIscrizione() throws DatabaseException {
