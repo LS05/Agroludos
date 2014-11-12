@@ -122,16 +122,6 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 	}
 
 	@Override
-	public PartecipanteTO getPartecipanteById(PartecipanteTO parTO)
-			throws DatabaseException, UserNotFoundException, IOException {
-
-		PartecipanteDAO daoPar = this.getPartecipanteDAO();
-		PartecipanteTO user = daoPar.getByID(parTO.getId());
-
-		return getSupp(user);
-	}
-
-	@Override
 	public List<PartecipanteTO> getAllPartecipante() 
 			throws DatabaseException {
 
