@@ -8,7 +8,6 @@ import agroludos.integration.dao.db.IscrizioneDAO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;
-import agroludos.to.StatoIscrizioneTO;
 
 class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements IscrizioneDAO{
 
@@ -46,30 +45,6 @@ class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements Iscr
 		return res;
 	}
 
-	@Override
-	public void terminaIscrizioni(CompetizioneTO cmp) throws DatabaseException {
-		List<IscrizioneTO> res = getIscrizioniAttiveCmp(cmp);
-
-		for(IscrizioneTO isc: res){
-			isc.setStatoIscrizione(getStatoIscrizioneTerminato());
-			this.update(isc);
-		}
-
-	}
-
-	private StatoIscrizioneTO getStatoIscrizioneTerminato() throws DatabaseException {
-
-		StatoIscrizioneTO siscTO = (StatoIscrizioneTO) super.executeQuery("getStatoIscrizioneTerminato");
-
-		return siscTO;
-	}
-
-	private StatoIscrizioneTO getStatoIscrizioneDisattivato() throws DatabaseException {
-
-		StatoIscrizioneTO siscTO = (StatoIscrizioneTO) super.executeQuery("getStatoIscrizioneDisattivato");
-
-		return siscTO;
-	}
 
 	@Override
 	public List<IscrizioneTO> getIscrizioniAttiveCmp(CompetizioneTO cmp) throws DatabaseException {

@@ -20,5 +20,10 @@ public class MySqlStatoIscrizioneDAO extends MySqlAgroludosDAO<StatoIscrizioneTO
 	public StatoIscrizioneTO getStatoDisattivo() throws DatabaseException {
 		return this.findOne(0);
 	}
+	
+	@Override
+	public StatoIscrizioneTO getStatoIscrizioneTerminato() throws DatabaseException {
+		return this.findOne(2);
+	}
 
 }
