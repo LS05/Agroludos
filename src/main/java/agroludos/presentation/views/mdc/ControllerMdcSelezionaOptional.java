@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -204,7 +205,7 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
-		
+
 		if( commandName.equals( this.getCommandName("getAllTipoOptional") )){
 			Object res = response.getRespData();
 			if(res instanceof List<?>){
