@@ -8,22 +8,24 @@ public final class TablePartecipantiFilter extends TableFilter<PartModel>{
 	@Override
 	protected boolean matchesFilter(PartModel partModel, TextField cmpFilterField) {
 		String filterString = cmpFilterField.getText();
+		boolean res = false;
+
 		if (filterString == null || filterString.isEmpty()) {
-			return true;
+			res = true;
+		} else{
+			String lowerCaseFilterString = filterString.toLowerCase();
+
+			if (partModel.getNome().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+				res = true;
+			} else if (partModel.getCognome().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+				res = true;
+			} else if (partModel.getEmail().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+				res = true;
+			} else if (partModel.getUsername().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+				res = true;
+			}
 		}
-
-		String lowerCaseFilterString = filterString.toLowerCase();
-
-		if (partModel.getNome().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-			return true;
-		} else if (partModel.getCognome().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-			return true;
-		} else if (partModel.getEmail().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-			return true;
-		} else if (partModel.getUsername().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-			return true;
-		}
-
-		return false;
+		
+		return res;
 	}
 }

@@ -15,7 +15,7 @@ public abstract class AgroludosWindow {
 	private Stage stage;
 	private SystemConf config;
 
-	AgroludosWindow(View view, SystemConf conf){
+	protected AgroludosWindow(View view, SystemConf conf){
 		this.config = conf;
 		this.initLoader(view.getUrl());	
 	}

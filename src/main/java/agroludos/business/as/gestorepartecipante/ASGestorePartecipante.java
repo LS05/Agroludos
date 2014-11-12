@@ -122,16 +122,6 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 	}
 
 	@Override
-	public PartecipanteTO getPartecipanteById(PartecipanteTO parTO)
-			throws DatabaseException, UserNotFoundException, IOException {
-
-		PartecipanteDAO daoPar = this.getPartecipanteDAO();
-		PartecipanteTO user = daoPar.getByID(parTO.getId());
-
-		return getSupp(user);
-	}
-
-	@Override
 	public List<PartecipanteTO> getAllPartecipante() 
 			throws DatabaseException {
 
@@ -160,11 +150,13 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 	public boolean isCertificatoValido(PartecipanteTO parTO){
 		DateMidnight dataSrc = new DateMidnight(parTO.getDataSRC());
 		DateMidnight today = new DateMidnight();
+		boolean res = false;
 		if( dataSrc.isBefore(today) ){
-			return false;
+			res = false;
 		} else{
-			return true;
+			res = true;
 		}
+		return res;
 	}
 
 }

@@ -8,23 +8,25 @@ public class TableOptionalFilter extends TableFilter<OptModel>{
 	@Override
 	protected boolean matchesFilter(OptModel tableModel, TextField cmpFilterField) {
 		String filterString = cmpFilterField.getText();
+		boolean res = false;
+
 		if (filterString == null || filterString.isEmpty()) {
-			return true;
+			res = true;
+		} else {
+			String lowerCaseFilterString = filterString.toLowerCase();
+
+			if (tableModel.getNome().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+				res = true;
+			} else if (tableModel.getDescrizione().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+				res = true;
+			} else if (tableModel.getCosto().toString().indexOf(lowerCaseFilterString) != -1) {
+				res = true;
+			} else if (tableModel.getNomeStato().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+				res = true;
+			}
 		}
 
-		String lowerCaseFilterString = filterString.toLowerCase();
-
-		if (tableModel.getNome().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-			return true;
-		} else if (tableModel.getDescrizione().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-			return true;
-		} else if (tableModel.getCosto().toString().indexOf(lowerCaseFilterString) != -1) {
-			return true;
-		} else if (tableModel.getNomeStato().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-			return true;
-		}
-
-		return false;
+		return res;
 	}
 
 }

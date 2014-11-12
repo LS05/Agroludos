@@ -115,7 +115,8 @@ class Competizione implements CompetizioneTO{
 		return id;
 	}
 
-	void setId(Integer id) {
+	@SuppressWarnings("unused")
+	private void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -167,7 +168,7 @@ class Competizione implements CompetizioneTO{
 	public void clearOptionals(){
 		this.optionals.clear();
 	}
-	
+
 	@Override
 	public void setManagerDiCompetizione(ManagerDiCompetizioneTO managerDiCompetizione) {
 		this.managerDiCompetizione = (ManagerDiCompetizione) managerDiCompetizione;
@@ -199,24 +200,24 @@ class Competizione implements CompetizioneTO{
 
 		return res;
 	}
-	
+
 	@Override
 	public CompetizioneTO clone(){
 		Competizione c = new Competizione();
-//		c.id = new Integer(id);
-//		c.nome = new String(nome);
-//		private DateMidnight suppData;
-//		private Date data;
-//		c.nmin = nmin;
-//		c.nmax = nmax;
-//		c.descrizione = new String(descrizione);
-//		c.costo = new Double(costo);
-//		c.idStato = idStato;
-//		c.optionals = this.optionals.clone();
-//		private Set<Optional> optionals;
-//		private TipoCompetizione tipoCompetizione;
-//		private StatoCompetizione statoCompetizione;
-//		private ManagerDiCompetizione managerDiCompetizione;
+		//		c.id = new Integer(id);
+		//		c.nome = new String(nome);
+		//		private DateTime suppData;
+		//		private Date data;
+		//		c.nmin = nmin;
+		//		c.nmax = nmax;
+		//		c.descrizione = new String(descrizione);
+		//		c.costo = new Double(costo);
+		//		c.idStato = idStato;
+		//		c.optionals = this.optionals.clone();
+		//		private Set<Optional> optionals;
+		//		private TipoCompetizione tipoCompetizione;
+		//		private StatoCompetizione statoCompetizione;
+		//		private ManagerDiCompetizione managerDiCompetizione;
 		return c;
 	}
 
@@ -229,19 +230,19 @@ class Competizione implements CompetizioneTO{
 	public void setNiscritti(int nIscritti) {
 		this.niscritti = nIscritti;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("[id=").append(id).append(", nome=").append(nome)
-		.append(", data=").append(data).append(", nmin=").append(nmin)
-		.append(", nmax=").append(nmax).append(", descrizione=")
-		.append(descrizione).append(", costo=").append(costo)
-		.append(", optionals=").append(optionals).append(", iscritti=")
-		.append(", tipoCompetizione=").append(tipoCompetizione)
-		.append(", statoCompetizione=").append(statoCompetizione)
-		.append(", managerDiCompetizione=")
-		.append(managerDiCompetizione).append("]");
+			.append(", data=").append(data).append(", nmin=").append(nmin)
+			.append(", nmax=").append(nmax).append(", descrizione=")
+			.append(descrizione).append(", costo=").append(costo)
+			.append(", optionals=").append(optionals).append(", iscritti=")
+			.append(", tipoCompetizione=").append(tipoCompetizione)
+			.append(", statoCompetizione=").append(statoCompetizione)
+			.append(", managerDiCompetizione=")
+			.append(managerDiCompetizione).append("]");
 		return builder.toString();
 	}
 

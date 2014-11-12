@@ -1,12 +1,9 @@
 package agroludos.to;
 
 public interface StatoUtenteTO extends AgroludosTO, Comparable<StatoUtenteTO>{
-	
-	public String getNome();
 
-	public void setNome(String nome);
+	public String getNome();
 
 	Integer getId();
 
-	void setId(Integer id);
 }

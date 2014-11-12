@@ -35,7 +35,7 @@ public class ControllerQuestion extends AgroludosController{
 		this.viewName = nameView;
 	}
 
-	@FXML private void btnYes(){
+	@FXML protected void btnYes(){
 		this.close();
 		this.risposta = this.getRisposta();
 		
@@ -47,7 +47,7 @@ public class ControllerQuestion extends AgroludosController{
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 	}  
 
-	@FXML private void btnNo(){
+	@FXML protected void btnNo(){
 		this.close();
 	}
 

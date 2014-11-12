@@ -11,7 +11,7 @@ abstract class TableFilter<T> {
 	private ObservableList<T> masterData;
 	private ObservableList<T> filteredData;
 
-	TableFilter(){
+	protected TableFilter(){
 		this.filteredData = FXCollections.observableArrayList();
 		this.masterData = FXCollections.observableArrayList();
 	}

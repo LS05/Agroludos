@@ -3,23 +3,19 @@ package agroludos.to;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class EmailImpl implements EmailTO{
+class EmailImpl implements EmailTO{
 	private static final long serialVersionUID = -8701532820569848721L;
-	
 	private List<UtenteTO> listDestinatari;
 	private String messaggio;
-
 	private String oggetto;
-	
+
 	EmailImpl(){
 		this.listDestinatari = new ArrayList<UtenteTO>();
 	}
 
 	@Override
 	public void setMessage(String message) {
-		this.messaggio = message;
-		
+		this.messaggio = message;	
 	}
 
 	@Override
@@ -45,6 +41,5 @@ public class EmailImpl implements EmailTO{
 	@Override
 	public void setOggetto(String ogg) {
 		this.oggetto = ogg;
-		
 	}
 }

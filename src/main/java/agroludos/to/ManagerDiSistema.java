@@ -24,14 +24,17 @@ class ManagerDiSistema extends Utente implements ManagerDiSistemaTO {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "ManagerDiSistema [indirizzo=" + indirizzo + ", id=" + id
-				+ ", nome=" + nome + ", cognome=" + cognome + ", username="
-				+ username + ", password=" + password + ", email=" + email
-				+ "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("[id=").append(id).append(", nome=").append(nome)
+				.append(", cognome=").append(cognome).append(", email=")
+				.append(email).append(", password=").append(password)
+				.append(", username=").append(username).append(", indirizzo=")
+				.append(indirizzo).append(", telefono=").append(telefono)
+				.append("]");
+		return builder.toString();
 	}
 
-	
 }

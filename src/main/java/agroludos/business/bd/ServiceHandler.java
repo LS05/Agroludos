@@ -18,6 +18,11 @@ class ServiceHandler {
 	private AgroludosService service;
 	private AgroResponseContext response;
 
+	ServiceHandler(AgroResponseContext response, CommandMap commandMap){
+		this.response = response;
+		this.cmdMap = commandMap;
+	}
+
 	void setService(AgroludosService service){
 		this.service = service;
 	}
@@ -26,9 +31,8 @@ class ServiceHandler {
 
 		if(this.service != null){
 			Object res = null;
-			this.cmdMap = new CommandMap(this.service.getClass());
 			try {
-				Method service = this.cmdMap.getMethod(request.getCommandName());
+				Method service = this.cmdMap.getMethod(this.service.getClass(), request.getCommandName());
 				service.setAccessible(true);
 				if(request.isParam()){	
 					res = service.invoke(this.service, request.getData());
@@ -64,7 +68,7 @@ class ServiceHandler {
 					} else {
 						this.response.setData(exception.getMessage());
 					}
-					
+
 				} else{
 					this.response.setData(e.getTargetException().getMessage());
 				}

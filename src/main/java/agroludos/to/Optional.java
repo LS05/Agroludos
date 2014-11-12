@@ -34,7 +34,8 @@ class Optional implements OptionalTO{
 		return id;
 	}
 
-	void setId(Integer id) {
+	@SuppressWarnings("unused")
+	private void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -101,11 +102,11 @@ class Optional implements OptionalTO{
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("[nome=").append(nome).append(", descrizione=")
-		.append(descrizione).append(", costo=").append(costo)
-		.append(", id=").append(id).append(", tipoOptional=")
-		.append(tipoOptional).append(", statoOptional=")
-		.append(statoOptional).append("]");
+		builder.append("[id=").append(id).append(", nome=").append(nome)
+				.append(", descrizione=").append(descrizione)
+				.append(", costo=").append(costo).append(", tipoOptional=")
+				.append(tipoOptional).append(", statoOptional=")
+				.append(statoOptional).append("]");
 		return builder.toString();
 	}
 

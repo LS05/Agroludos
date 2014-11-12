@@ -22,8 +22,18 @@ class Iscrizione implements IscrizioneTO{
 	}
 	
 	@Override
+	public Integer getId() {
+		return id;
+	}
+	
+	@SuppressWarnings("unused")
+	private void setId(Integer id) {
+		this.id = id;
+	}
+	
+	@Override
 	public Double getCosto() {
-		this.costo = getCompetizione().getCosto();
+		this.costo = this.competizione.getCosto();
 		for(OptionalTO opt: getAllOptionals())
 			this.costo = this.costo + opt.getCosto();
 		return this.costo;
@@ -53,21 +63,12 @@ class Iscrizione implements IscrizioneTO{
 		this.data = data;
 	}
 	
-	@Override
-	public Integer getId() {
-		return id;
-	}
-	
-	void setId(Integer id) {
-		this.id = id;
-	}
-	
-
 	public Integer getIdcompetizione() {
 		return idcompetizione;
 	}
 	
-	public void setIdcompetizione(Integer idcompetizione) {
+	@SuppressWarnings("unused")
+	private void setIdcompetizione(Integer idcompetizione) {
 		this.idcompetizione = idcompetizione;
 	}
 	

@@ -8,22 +8,23 @@ public class TableMdcFilter extends TableFilter<MdcModel>{
 	@Override
 	protected boolean matchesFilter(MdcModel mdcModel, TextField mdcFilterField) {
 		String filterString = mdcFilterField.getText();
+		boolean res = false;
 
 		if (filterString == null || filterString.isEmpty()) {
-			return true;
+			res = true;
+		} else {
+			String lowerCaseFilterString = filterString.toLowerCase();
+
+			if (mdcModel.getNome().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+				res = true;
+			} else if (mdcModel.getCognome().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+				res = true;
+			} else if (mdcModel.getEmail().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+				res = true;
+			}
 		}
 
-		String lowerCaseFilterString = filterString.toLowerCase();
-
-		if (mdcModel.getNome().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-			return true;
-		} else if (mdcModel.getCognome().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-			return true;
-		} else if (mdcModel.getEmail().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-			return true;
-		}
-
-		return false;
+		return res;
 	}
 
 }

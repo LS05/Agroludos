@@ -15,8 +15,6 @@ public interface LPartecipante extends AgroludosService {
 
 	List<PartecipanteTO> getAllPartecipante() throws DatabaseException, IOException;
 
-	PartecipanteTO getPartecipanteById(PartecipanteTO parto) throws DatabaseException, UserNotFoundException, IOException;
-
 	CertificatoTO getCertificatoSRC(PartecipanteTO parto)throws DatabaseException, IOException;
 
 	boolean isCertificatoValido(PartecipanteTO parTO);
