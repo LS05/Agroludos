@@ -4,7 +4,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTime;
+import org.joda.time.DateMidnight;
 
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
@@ -100,11 +100,10 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
 		StatoCompetizioneDAO daoStatoCmp = getStatoCompetizioneDAO();
-		cmpTO.setStatoCompetizione(daoStatoCmp.getStatoCmpAperta());
 
 		this.validator.validate(cmpTO);
 
-		this.checkCmpData(cmpTO);
+		cmpTO.setStatoCompetizione(daoStatoCmp.getStatoCmpAperta());
 
 		cmpTO = daoCmp.create(cmpTO);
 
@@ -205,6 +204,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		CompetizioneDAO daoCmp = this.getCompetizioneDAO();
 		StatoCompetizioneDAO daoScmp = this.getStatoCompetizioneDAO();
 		IscrizioneDAO iscDao = this.getIscrizioneDAO();
+		StatoIscrizioneDAO sIscDao = getStatoIscrizioneDAO();
 
 		cmpTO.setStatoCompetizione(daoScmp.getStatoCmpAnnullata());
 		daoCmp.annullaCompetizione(cmpTO);
@@ -222,11 +222,12 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		List<IscrizioneTO> listIsc = iscDao.getIscrizioniAttiveCmp(cmpTO);
 		for(IscrizioneTO iscTO: listIsc){
 			mail.addDestinatario(iscTO.getPartecipante());
+			//annulla le iscrizioni
+			iscTO.setStatoIscrizione(sIscDao.getStatoDisattivo());
+			iscDao.annullaIscrizione(iscTO);
 		}
 
 		this.agroludosMail.sendEmail(mail);
-
-		iscDao.terminaIscrizioni(cmpTO);
 
 		return cmpTO;
 	}
@@ -322,26 +323,17 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 
 		StatoCompetizioneDAO daoStatoCmp = this.getStatoCompetizioneDAO();
 
-		DateTime today = new DateTime();
-		today = DateTime.now();
+		DateMidnight today = new DateMidnight();
+		DateMidnight dataCmp = new DateMidnight(cmp.getData());
 		CompetizioneDAO cmpDao = getCompetizioneDAO();
-
 		if(!(cmp.getStatoCompetizione().getId() == 0)
 				&& !(cmp.getStatoCompetizione().getId() == 4)){
-			DateTime dataCmp = new DateTime(cmp.getData());
-			if(dataCmp.isEqualNow() 
+			if(dataCmp.isEqual(today) 
 					&& !(cmp.getStatoCompetizione().getId() == 2)){
-				//se non si è raggiunti il numero minimo di partecipanti la 
-				//competizione viene annullata
-				List<IscrizioneTO> listIscCmp = getIscrizioneDAO().getIscrizioniAttiveCmp(cmp);
-				if(listIscCmp.size() < cmp.getNmin())
-					annullaCompetizione(cmp);
-				else{
-					cmp.setStatoCompetizione(daoStatoCmp.getStatoCmpChiusa());
-					cmpDao.update(cmp);
-				}
+				cmp.setStatoCompetizione(daoStatoCmp.getStatoCmpInCorso());
+				cmpDao.update(cmp);
 			}
-			else if(dataCmp.isAfter(today) && dataCmp.isBefore(today.plusDays(2))
+			else if(dataCmp.isAfter(today) && dataCmp.isBefore(today.plusDays(3))
 					&& !(cmp.getStatoCompetizione().getId() == 3)){
 				//se non si è raggiunti il numero minimo di partecipanti la 
 				//competizione viene annullata
@@ -357,11 +349,23 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 					&& !(cmp.getStatoCompetizione().getId() == 4)){
 
 				cmp.setStatoCompetizione(daoStatoCmp.getStatoCmpTerminata());
-				getIscrizioneDAO().terminaIscrizioni(cmp);
+				terminaIscrizioni(cmp);
 				cmpDao.update(cmp);
 			}
 		}
 		return cmp;
+	}
+
+	private void terminaIscrizioni(CompetizioneTO cmp) throws DatabaseException {
+		IscrizioneDAO iscDao = getIscrizioneDAO();
+		List<IscrizioneTO> listIsc = iscDao.getIscrizioniAttiveCmp(cmp);
+		StatoIscrizioneDAO sIscDao = getStatoIscrizioneDAO();
+		for(IscrizioneTO iscTO: listIsc){
+			//termina le iscrizioni
+			iscTO.setStatoIscrizione(sIscDao.getStatoIscrizioneTerminato());
+			iscDao.update(iscTO);
+		}
+
 	}
 
 	private CompetizioneTO checkCmpData(CompetizioneTO cmp) 

@@ -1,6 +1,6 @@
 package agroludos.business.validator.rules.competizione;
 
-import org.joda.time.DateTime;
+import org.joda.time.DateMidnight;
 
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.to.AgroludosTO;
@@ -14,8 +14,8 @@ public class CompDataRule extends AgroludosRule {
 		if(mainTO instanceof CompetizioneTO){
 			CompetizioneTO competizione = (CompetizioneTO)mainTO;
 
-			DateTime dataCmp = new DateTime(competizione.getData());
-			DateTime today = new DateTime().withTimeAtStartOfDay();
+			DateMidnight dataCmp = new DateMidnight(competizione.getData());
+			DateMidnight today = new DateMidnight();
 
 			String key = this.getRule("dataCmpKey");
 

@@ -94,7 +94,6 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 			this.eseguiRichiesta(this.richiesta, this.risposta);
 
 			this.paneIscrizioni.add(this.tableIscrizioni, 0, 1);
-			this.tableIscrizioni.hideColumn(4);
 			this.richiesta = this.getRichiesta("getCompetizioniAperte", this.viewName);
 			this.risposta = this.getRisposta();
 			this.eseguiRichiesta(this.richiesta, this.risposta);

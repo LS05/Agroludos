@@ -113,7 +113,7 @@ class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 
 		this.validator.validate(uTO);
 
-		UtenteTO originUto = daoUto.getGenericUtenteByID(uTO.getId());
+		UtenteTO originUto = daoUto.getByID(uTO.getId());
 		//se l'utente vuole modificare l'email controllo che non esista già una
 		if(originUto.getEmail().compareTo(uTO.getEmail()) != 0)
 			if( daoUto.esisteEmail(uTO))

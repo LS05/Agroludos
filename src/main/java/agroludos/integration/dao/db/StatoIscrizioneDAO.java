@@ -10,4 +10,6 @@ public interface StatoIscrizioneDAO extends DAO<StatoIscrizioneTO> {
 	
 	StatoIscrizioneTO getStatoDisattivo() throws DatabaseException;
 
+	StatoIscrizioneTO getStatoIscrizioneTerminato() throws DatabaseException;
+
 }

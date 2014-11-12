@@ -15,10 +15,10 @@ public interface IscrizioneDAO extends DAO<IscrizioneTO>{
 
 	List<IscrizioneTO> getAllIscrizioniAttive(PartecipanteTO parTO) throws DatabaseException;
 
-	void terminaIscrizioni(CompetizioneTO cmp) throws DatabaseException;
-
 	List<IscrizioneTO> getIscrizioniAttiveCmp(CompetizioneTO cmp) throws DatabaseException;
 
 	List<IscrizioneTO> getAllIscrizioniPartecipante(PartecipanteTO parTO) throws DatabaseException;
+
+	void terminaIscrizioni(CompetizioneTO cmp) throws DatabaseException;
 
 }
