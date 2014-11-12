@@ -4,9 +4,6 @@ public interface StatoCompetizioneTO extends AgroludosTO, Comparable<StatoCompet
 
 	public String getNome();
 
-	public void setNome(String nome);
-
 	Integer getId();
 
-	public void setId(Integer id);
 }

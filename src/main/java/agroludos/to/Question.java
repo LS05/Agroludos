@@ -1,6 +1,6 @@
 package agroludos.to;
 
-public class Question implements QuestionTO{
+class Question implements QuestionTO{
 
 	private static final long serialVersionUID = 1L;
 

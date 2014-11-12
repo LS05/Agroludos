@@ -19,16 +19,16 @@ import agroludos.utility.email.AgroludosMail;
 class ASGestoreEmail extends AgroludosAS implements LEmail{
 
 	private AgroludosMail agroludosMail;
-	
+
 	ASGestoreEmail(AgroludosMail agroludosMail){
 		this.agroludosMail = agroludosMail;
 	}
-	
+
 	@Override
 	public boolean sendEmail(EmailTO emailTO) throws DatabaseException {
 		boolean res = false;
 
-		
+
 		final String username = "jackeb@hotmail.it";
 		final String password = "270588";
 
@@ -55,10 +55,10 @@ class ASGestoreEmail extends AgroludosAS implements LEmail{
 			message.setSubject(emailTO.getOggetto());
 			message.setText(emailTO.getMessage());
 			// To get the array of addresses
-			for(UtenteTO uTO: emailTO.getDestinatari()){;
-			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse(uTO.getEmail()));
-			Transport.send(message);
+			for(UtenteTO uTO: emailTO.getDestinatari()){
+				message.setRecipients(Message.RecipientType.TO,
+						InternetAddress.parse(uTO.getEmail()));
+				Transport.send(message);
 			}
 			res = true;
 			System.out.println("Done");
@@ -70,6 +70,7 @@ class ASGestoreEmail extends AgroludosAS implements LEmail{
 		return res;
 
 	}
+	
 	@Override
 	public EmailTO inviaMail(EmailTO mail) throws DatabaseException{
 		this.agroludosMail.sendEmail(mail);

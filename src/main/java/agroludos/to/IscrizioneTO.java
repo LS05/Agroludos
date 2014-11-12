@@ -14,7 +14,7 @@ public interface IscrizioneTO extends AgroludosTO, Comparable<IscrizioneTO>{
 
 	List<OptionalTO> getAllOptionals();
 
-	StatoIscrizione getStatoIscrizione();
+	StatoIscrizioneTO getStatoIscrizione();
 
 	PartecipanteTO getPartecipante();
 

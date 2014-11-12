@@ -9,10 +9,19 @@ class Utente implements UtenteTO{
 	protected String username;
 	protected String password;
 	protected String email;
-
 	private TipoUtente tipoUtente;
 	private StatoUtente statoUtente;
 
+	@Override
+	public Integer getId() {
+		return id;
+	}
+
+	@SuppressWarnings("unused")
+	private void setId(Integer id) {
+		this.id = id;
+	}
+	
 	@Override
 	public TipoUtente getTipoUtente() {
 		return tipoUtente;
@@ -35,15 +44,6 @@ class Utente implements UtenteTO{
 
 	public void setStatoUtente(StatoUtente statoUtente) {
 		this.statoUtente = statoUtente;
-	}
-
-	@Override
-	public Integer getId() {
-		return id;
-	}
-
-	void setId(Integer id) {
-		this.id = id;
 	}
 
 	@Override

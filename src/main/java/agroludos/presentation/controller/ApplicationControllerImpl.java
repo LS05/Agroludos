@@ -25,7 +25,7 @@ class ApplicationControllerImpl implements ApplicationController{
 	private String getCommandName(AgroRequestContext request) throws RequestInitializationException{
 		String res = request.getCommandName();
 		
-		if(res == "" || res == null){
+		if(res.isEmpty() || res == null){
 			throw new RequestInitializationException();
 		}
 		
@@ -35,7 +35,7 @@ class ApplicationControllerImpl implements ApplicationController{
 	private String getviewName(AgroRequestContext request) throws RequestInitializationException{
 		String res = request.getviewName();
 		
-		if(res == "" || res == null){
+		if(res.isEmpty() || res == null){
 			throw new RequestInitializationException();
 		}
 		

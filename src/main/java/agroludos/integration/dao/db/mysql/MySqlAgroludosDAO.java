@@ -40,6 +40,7 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 
 			tx.commit();
 		}catch (HibernateException e){
+			tx.rollback();
 			throw new DatabaseException(e.getMessage(), e);
 		}finally{
 			session.close();
@@ -62,6 +63,7 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 
 			tx.commit();
 		} catch (HibernateException e){
+			tx.rollback();
 			throw new DatabaseException(e.getMessage(), e);
 		}finally{
 			session.close();

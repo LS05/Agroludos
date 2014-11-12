@@ -1,12 +1,21 @@
 package agroludos.to;
 
-
 class TipoCompetizione implements TipoCompetizioneTO{
 	private static final long serialVersionUID = -5721300020452970477L;
 	private String descrizione;
 	private String nome;
 	private Integer id;
 
+	@Override
+	public Integer getId() {
+		return id;
+	}
+
+	@SuppressWarnings("unused")
+	private void setId(Integer id) {
+		this.id = id;
+	}
+	
 	@Override
 	public String getDescrizione() {
 		return descrizione;
@@ -25,15 +34,6 @@ class TipoCompetizione implements TipoCompetizioneTO{
 	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	@Override
-	public Integer getId() {
-		return id;
-	}
-
-	void setId(Integer id) {
-		this.id = id;
 	}
 
 	@Override

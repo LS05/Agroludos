@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class ErrorImpl implements ErrorTO{
+class ErrorImpl implements ErrorTO{
 	private static final long serialVersionUID = -2933017900423676320L;
 	private int errorCounts;
 	private Map<String, String> mapErrors;
