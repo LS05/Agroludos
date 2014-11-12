@@ -17,6 +17,7 @@ import agroludos.to.IscrizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.QuestionTO;
 import agroludos.to.SuccessMessageTO;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,7 +38,6 @@ import javafx.stage.WindowEvent;
 public class ControllerMdcMain extends ControllerUtenti implements Initializable{
 
 	@FXML private GridPane paneCompetizioni;
-
 	@FXML private Button btnPaneComptizioni;
 	@FXML private Button btnNuovaCompetizione;
 	@FXML private Button btnAnnullaRicercaComp;

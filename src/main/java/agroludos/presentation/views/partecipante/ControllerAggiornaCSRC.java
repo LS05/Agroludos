@@ -13,6 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -26,7 +27,7 @@ import agroludos.to.SuccessMessageTO;
 public class ControllerAggiornaCSRC extends AgroludosController implements Initializable {
 	private String viewName;
 	private boolean flagError = false;
-	
+
 	@FXML private Label lblSrc;
 	@FXML private Label lblSrcError;
 	@FXML private Label lblDataSrcError;
