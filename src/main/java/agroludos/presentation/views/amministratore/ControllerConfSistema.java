@@ -7,15 +7,17 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiSistemaTO;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class ControllerConfSistema extends AgroludosController {
 	private String viewName;
@@ -44,6 +46,17 @@ public class ControllerConfSistema extends AgroludosController {
 	@Override
 	public void initializeView(String nameView) {
 		this.viewName = nameView;
+		
+		final Stage stage = this.getStage(this.viewName);
+		//aggiungo per chiudere il programma
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent we) {
+				risposta = getRisposta();
+				richiesta = getRichiesta("chiusura", viewName);
+				eseguiRichiesta(richiesta, risposta);
+			}
+		});
+		
 		this.mdsto = toFact.createMdSTO();
 		this.hideErrors();
 		this.checkBoxReveal.selectedProperty().addListener(new ChangeListener<Boolean>() {

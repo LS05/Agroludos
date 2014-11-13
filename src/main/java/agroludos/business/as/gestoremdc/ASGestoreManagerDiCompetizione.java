@@ -78,7 +78,7 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 			throws DatabaseException {
 
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO(); 
-		return daoMan.getAll();
+		return daoMan.getAllManagerDiCompetizione();
 
 	}
 

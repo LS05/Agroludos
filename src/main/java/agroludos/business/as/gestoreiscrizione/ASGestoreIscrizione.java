@@ -3,8 +3,11 @@ package agroludos.business.as.gestoreiscrizione;
 import java.text.MessageFormat;
 import java.util.List;
 
+import org.joda.time.DateMidnight;
+
 import agroludos.business.as.AgroludosAS;
 import agroludos.business.validator.AgroludosValidator;
+import agroludos.exceptions.business.CSRCScadutoException;
 import agroludos.exceptions.business.ChiuseIscrizioniException;
 import agroludos.exceptions.business.IscrizioneEsistenteException;
 import agroludos.exceptions.business.NmaxRaggiuntoException;
@@ -85,48 +88,64 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 		if(isCompetizioneAperta(cmp)){
 			if(!iscrizioneEsistente(iscTO)){
 				if(!numeroMaxRaggiunto(cmp)){
-					this.validator.validate(iscTO);
+					if(isCertificatoValido(iscTO.getPartecipante(),iscTO.getCompetizione())){
+						this.validator.validate(iscTO);
 
-					StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
+						StatoIscrizioneDAO statoIscDAO = getStatoIscrizioneDAO();
 
-					iscTO.setStatoIscrizione(statoIscDAO.getStatoAttivo());
+						iscTO.setStatoIscrizione(statoIscDAO.getStatoAttivo());
 
-					iscTO = iscDAO.create(iscTO);
+						iscTO = iscDAO.create(iscTO);
 
-					EmailTO mail = this.toFact.createEmailTO();
-					String partUsername = iscTO.getPartecipante().getUsername();
-					String compNome = iscTO.getCompetizione().getNome();
+						EmailTO mail = this.toFact.createEmailTO();
+						String partUsername = iscTO.getPartecipante().getUsername();
+						String compNome = iscTO.getCompetizione().getNome();
 
-					String iscrObj = this.sysConf.getString("mailIscrizioneSubj");
-					String mailObj = MessageFormat.format(iscrObj, partUsername, compNome);
-					mail.setOggetto(mailObj);
+						String iscrObj = this.sysConf.getString("mailIscrizioneSubj");
+						String mailObj = MessageFormat.format(iscrObj, partUsername, compNome);
+						mail.setOggetto(mailObj);
 
-					String iscrMsg = "";
-					String mailMsg = "";
+						String iscrMsg = "";
+						String mailMsg = "";
 
-					if(iscTO.getAllOptionals().size() > 0){
-						iscrMsg = this.sysConf.getString("mailIscrizioneMsg");
-						mailMsg = MessageFormat.format(iscrMsg,
-								iscTO.getPartecipante().toString(), 
-								iscTO.getCosto().toString(), 
-								iscTO.getAllOptionals().toString());
-					} else {
-						iscrMsg = this.sysConf.getString("mailIscrizioneMsgNoOpt");
-						mailMsg = MessageFormat.format(iscrMsg,
-								iscTO.getPartecipante().toString(), 
-								iscTO.getCosto().toString());
+						if(iscTO.getAllOptionals().size() > 0){
+							iscrMsg = this.sysConf.getString("mailIscrizioneMsg");
+							mailMsg = MessageFormat.format(iscrMsg,
+									iscTO.getPartecipante().toString(), 
+									iscTO.getCosto().toString(), 
+									iscTO.getAllOptionals().toString());
+						} else {
+							iscrMsg = this.sysConf.getString("mailIscrizioneMsgNoOpt");
+							mailMsg = MessageFormat.format(iscrMsg,
+									iscTO.getPartecipante().toString(), 
+									iscTO.getCosto().toString());
+						}
+
+						mail.setMessage(mailMsg);
+
+						mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
+
+						this.agroludosMail.sendEmail(mail);
+					}else{
+						throw new CSRCScadutoException("Il certifica scadrà prima dell'inizio della competizione!\nAggiorna.");
 					}
-
-					mail.setMessage(mailMsg);
-
-					mail.addDestinatario(iscTO.getCompetizione().getManagerDiCompetizione());
-
-					this.agroludosMail.sendEmail(mail);
 				}
 			}
 		}
 
 		return iscTO;
+	}
+
+	private boolean isCertificatoValido(PartecipanteTO parTO, CompetizioneTO cmp){
+		DateMidnight dataSrc = new DateMidnight(parTO.getDataSRC());
+		DateMidnight dataCmp = new DateMidnight(cmp.getData());
+		boolean res = false;
+		if( dataCmp.isBefore(dataSrc.plusYears(1))){
+			res = true;
+		} else{
+			res = false;
+		}
+		return res;
 	}
 
 	private IscrizioneTO modificaIscrizione(IscrizioneTO iscTO)

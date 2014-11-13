@@ -37,5 +37,10 @@ class MySqlPartecipanteDAO extends MySqlUtenteDAO<PartecipanteTO> implements Par
 		return res;
 	}
 
+	@Override
+	public List<PartecipanteTO> getAllPartecipante() throws DatabaseException {
+		return super.executeQuery("getAllPartecipante");
+	}
+
 
 }

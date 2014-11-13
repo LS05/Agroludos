@@ -35,10 +35,6 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 	@FXML private Label lblNomeError;
 	@FXML private Label lblCognomeError;
 	@FXML private Label lblEmailError;
-	@FXML private Label lblStatoError;
-	@FXML private ComboBox<String> cmbStato;
-
-	private List<StatoUtenteTO> listStatiUtente;
 
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
@@ -60,7 +56,6 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 		this.lblNomeError.setVisible(false);
 		this.lblCognomeError.setVisible(false);
 		this.lblEmailError.setVisible(false);
-		this.lblStatoError.setVisible(false);
 	}
 
 	@Override
@@ -73,16 +68,6 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 			this.txtNome.setText(this.mdcTO.getNome());
 			this.txtEmail.setText(this.mdcTO.getEmail());
 
-			this.richiesta = this.getRichiesta("getAllStatoUtente", this.viewName);
-			this.risposta = this.getRisposta();
-			this.eseguiRichiesta(this.richiesta, this.risposta);
-
-			ObservableList<String> listStati = FXCollections.observableArrayList();
-			for(StatoUtenteTO stato : this.listStatiUtente){
-				listStati.add(stato.getNome());
-			}
-			this.cmbStato.setItems(listStati);
-			this.cmbStato.setValue(this.mdcTO.getStatoUtente().getNome());
 		}
 	}
 
@@ -90,7 +75,6 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 		this.lblCognomeError.setVisible(false);
 		this.lblEmailError.setVisible(false);
 		this.lblNomeError.setVisible(false);
-		this.lblStatoError.setVisible(false);
 		this.lblUsernameError.setVisible(false);
 		this.flagError=false;
 
@@ -98,10 +82,6 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 		this.mdcTO.setCognome(this.txtCognome.getText());
 		this.mdcTO.setUsername(this.txtUsername.getText());
 		this.mdcTO.setEmail(this.txtEmail.getText());
-
-		Integer statoSel = this.cmbStato.getSelectionModel().getSelectedIndex();
-		StatoUtenteTO stato = this.listStatiUtente.get(statoSel);
-		this.mdcTO.setStatoUtente(stato);
 
 		this.richiesta = this.getRichiesta(this.mdcTO, "modificaManagerDiCompetizione", this.viewName);
 		this.risposta = this.getRisposta();
@@ -119,20 +99,11 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 		return this.viewName;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
 		String commandName = request.getCommandName();
 
-		if( commandName.equals( this.getCommandName("getAllStatoUtente") )){
-			Object res = response.getRespData();
-
-			if(res instanceof List<?>){
-				List<StatoUtenteTO> listStati = (List<StatoUtenteTO>)res;
-				this.listStatiUtente = listStati;
-			}
-
-		} else if( commandName.equals( this.getCommandName("modificaManagerDiCompetizione") )){
+		if( commandName.equals( this.getCommandName("modificaManagerDiCompetizione") )){
 			Object res = response.getRespData();
 			this.flagError = true;
 			if(res instanceof ErrorTO){

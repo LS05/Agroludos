@@ -67,10 +67,8 @@ class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 
 		UtenteDAO<UtenteTO> daoUtente = this.getUtenteDAO();
 
-		if(daoUtente.esisteUsername(uTO)){
+		if(daoUtente.esisteUsername(uTO) && daoUtente.esisteEmail(uTO)){
 			uTO = daoUtente.getByUsername(uTO.getUsername());
-		}else if(daoUtente.esisteEmail(uTO)){
-			uTO = daoUtente.getByEmail(uTO.getEmail());
 		}else{
 			throw new UserNotFoundException("Utente inesistente!");
 		}
@@ -85,8 +83,11 @@ class ASGestoreUtente extends AgroludosAS implements LUtente, SUtente{
 
 		UtenteDAO<UtenteTO> daoUtente = this.getUtenteDAO();
 
-		//se non esiste viene sollevata un'eccezione UserNotFoundException
-		uTO = checkUtente(uTO);
+		if(daoUtente.esisteEmail(uTO)){
+			uTO = daoUtente.getByEmail(uTO.getEmail());
+		}else{
+			throw new UserNotFoundException("Email non presente nel sistema!");
+		}
 
 		String psw = RandomStringUtils.randomAlphanumeric(8);
 

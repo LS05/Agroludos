@@ -129,7 +129,7 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
 		CertificatoSRCDAO certDao = this.getCertificatoSRCDAO();
-		List<PartecipanteTO> res = daoPar.getAll();
+		List<PartecipanteTO> res = daoPar.getAllPartecipante();
 
 		for(PartecipanteTO part : res){
 			part.setCertificato(certDao.getCertificato(part));
@@ -153,10 +153,10 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 		DateMidnight dataSrc = new DateMidnight(parTO.getDataSRC());
 		DateMidnight today = new DateMidnight();
 		boolean res = false;
-		if( dataSrc.isBefore(today) ){
-			res = false;
-		} else{
+		if( today.isBefore(dataSrc.plusYears(1))){
 			res = true;
+		} else{
+			res = false;
 		}
 		return res;
 	}
