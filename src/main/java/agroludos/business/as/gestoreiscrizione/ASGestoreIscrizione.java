@@ -50,6 +50,18 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 		return dbDAOFact.getCompetizioneDAO();
 	}
 
+	private boolean isCompetizioneAperta(CompetizioneTO cmp)
+			throws ChiuseIscrizioniException {
+
+		boolean res = true;
+
+		if(cmp.getStatoCompetizione().getId()!=1){
+			throw new ChiuseIscrizioniException();
+		}
+
+		return res;
+	}
+
 	@Override
 	public IscrizioneTO inserisciIscrizione(IscrizioneTO iscTO)
 			throws DatabaseException, ValidationException {
@@ -227,18 +239,6 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 
 		IscrizioneDAO daoMan = getIscrizioneDAO(); 
 		return daoMan.getAllIscrizioniAttive(parTO);
-	}
-
-	private boolean isCompetizioneAperta(CompetizioneTO cmp)
-			throws ChiuseIscrizioniException {
-
-		boolean res = true;
-
-		if(cmp.getStatoCompetizione().getId()!=1){
-			throw new ChiuseIscrizioniException();
-		}
-
-		return res;
 	}
 
 	private boolean iscrizioneEsistente(IscrizioneTO isc) 
