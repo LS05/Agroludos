@@ -89,7 +89,7 @@
         <![CDATA[ from agroludos.to.Partecipante p where p.statoUtente.id = 1 and p.cf = ? ]]></query>
 	<query name="getAllManagerDiCompetizione">
 		<![CDATA[ from agroludos.to.ManagerDiCompetizione m where m.statoUtente.id = 1]]></query>
-	<query name="getAllPartecipanti">
+	<query name="getAllPartecipante">
 		<![CDATA[ from agroludos.to.Partecipante m where m.statoUtente.id = 1 ]]></query>
 	<query name="getByUsername">
 		<![CDATA[ from agroludos.to.Utente m where m.statoUtente.id = 1 and m.username = ? ]]></query>

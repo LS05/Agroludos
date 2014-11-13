@@ -695,8 +695,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			Object res = response.getRespData();
 
 			if(res instanceof ManagerDiCompetizioneTO){
-				ManagerDiCompetizioneTO mdc = (ManagerDiCompetizioneTO)res;
-				this.lblMdcStato.setText(mdc.getStatoUtente().getNome());
+				this.tableManagerCompetizione.getItems().remove(selectedMdC);
 				SuccessMessageTO succTO = toFact.createSuccMessageTO();
 				succTO.setMessage(this.resources.getString("key130"));
 				this.setVista("messageDialog", succTO);

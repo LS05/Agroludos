@@ -11,7 +11,6 @@ import agroludos.integration.dao.db.CompetizioneDAO;
 import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.OptionalDAO;
 import agroludos.integration.dao.db.StatoOptionalDAO;
-import agroludos.integration.dao.db.TipoOptionalDAO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.StatoOptionalTO;
@@ -28,11 +27,6 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 	private OptionalDAO getOptionalDAO() throws DatabaseException {
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return dbDAOFact.getOptionalDAO();
-	}
-
-	private TipoOptionalDAO getTipoOptionalDAO() throws DatabaseException{
-		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-		return dbDAOFact.getTipoOptionalDAO();
 	}
 
 	private void validate(OptionalTO optTO) throws ValidationException{
@@ -108,18 +102,5 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 	public List<OptionalTO> getAllOptional() throws DatabaseException {
 		OptionalDAO daoOpt = getOptionalDAO();
 		return daoOpt.getAll();
-	}
-
-	@Override
-	public List<TipoOptionalTO> getAllTipoOptional() throws DatabaseException {
-		TipoOptionalDAO daoOpt = this.getTipoOptionalDAO();
-		return daoOpt.getAll();
-	}
-
-	@Override
-	public List<StatoOptionalTO> getAllStatoOptional() throws DatabaseException {
-		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
-		StatoOptionalDAO statoOpt = dbDAOFact.getStatoOptionalDAO();
-		return statoOpt.getAll();
 	}
 }

@@ -129,7 +129,7 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 
 		PartecipanteDAO daoPar = this.getPartecipanteDAO();
 		CertificatoSRCDAO certDao = this.getCertificatoSRCDAO();
-		List<PartecipanteTO> res = daoPar.getAll();
+		List<PartecipanteTO> res = daoPar.getAllPartecipante();
 
 		for(PartecipanteTO part : res){
 			part.setCertificato(certDao.getCertificato(part));

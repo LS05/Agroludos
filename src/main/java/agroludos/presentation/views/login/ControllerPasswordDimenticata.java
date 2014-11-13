@@ -26,7 +26,6 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 
 	@FXML private Button btnRichiedi;
 	@FXML private Pane agroLogoPane;
-	@FXML private TextField txtUsername;
 	@FXML private TextField txtEmail;
 
 	@FXML private Label lblErroreLogin;
@@ -41,9 +40,6 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 	@Override
 	public void initializeView(String nameView) {
 		this.viewName = nameView;
-
-		this.txtUsername.clear();
-		this.txtUsername.setPromptText(this.res.getString("key74"));
 		this.txtEmail.clear();
 		this.txtEmail.setPromptText(this.res.getString("key4"));
 		this.agroLogoPane.setFocusTraversable(true);
@@ -71,8 +67,7 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 		}
 	}
 
-	@FXML protected void btnRichiedi(MouseEvent event) {	
-		this.uTO.setUsername(this.txtUsername.getText());
+	@FXML protected void btnRichiedi(MouseEvent event) {
 		this.uTO.setEmail(this.txtEmail.getText());
 		eseguiRipristino();
 	}

@@ -57,7 +57,11 @@ class ASGestoreManagerDiSistema extends AgroludosAS implements LManagerDiSistema
 			mdsTO.setTipoUtente(tipoUtenteDao.getTipoUtenteMds());
 			mdsTO.setStatoUtente(statoUtenteDao.getStatoAttivo());
 		} else{
-			throw new UtenteEsistenteException();
+			if(mdsDao.esisteEmail(mdsTO)){
+				throw new UtenteEsistenteException("Email già esistente!");
+			}else{
+				throw new UtenteEsistenteException("Username già esistente");
+			}
 		}
 
 		return this.getManagerDiSistemaDAO().create(mdsTO);
