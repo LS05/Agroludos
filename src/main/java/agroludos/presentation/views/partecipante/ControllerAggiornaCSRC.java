@@ -69,10 +69,6 @@ public class ControllerAggiornaCSRC extends AgroludosController implements Initi
 		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta(this.parTO, "modificaPartecipante", this.viewName);
 		this.eseguiRichiesta(this.richiesta, this.risposta);
-		if( !this.flagError ){
-			this.close();
-			this.setVista("partecipante");
-		}
 	}
 
 	@FXML protected void btnCaricaClicked(MouseEvent event){
@@ -121,6 +117,7 @@ public class ControllerAggiornaCSRC extends AgroludosController implements Initi
 				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.res.getString("key179"));
 				this.setVista("messageDialog", succMessage);
+				this.close();
 			}
 		}
 	}

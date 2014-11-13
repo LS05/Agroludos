@@ -77,63 +77,56 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 		this.currUser = (PartecipanteTO)this.getUtente();
 		this.isCertValido = true;
 
-		this.richiesta = this.getRichiesta(this.currUser, "isCertificatoValido", this.viewName);
+		this.tableIscrizioni = new TableIscrizioni();
+		this.tableCompetizioni = new TableCompetizioni();
+		this.tableCompetizioni.hideColumn(2);
+		this.tableCompetizioni.hideColumn(4);
+
+		this.richiesta = this.getRichiesta(this.currUser,"getAllIscrizioniAttive", this.viewName);
 		this.risposta = this.getRisposta();
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 
-		if( !this.isCertValido ){
-			this.setVista("aggiornaSRC", this.currUser);
-		}else{
-			this.tableIscrizioni = new TableIscrizioni();
-			this.tableCompetizioni = new TableCompetizioni();
-			this.tableCompetizioni.hideColumn(2);
-			this.tableCompetizioni.hideColumn(4);
+		this.paneIscrizioni.add(this.tableIscrizioni, 0, 1);
+		this.richiesta = this.getRichiesta("getCompetizioniAperte", this.viewName);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
+		this.tableCompetizioni.setAll(this.listComp);
+		this.paneCompetizioni.add(this.tableCompetizioni, 0, 1);
 
-			this.richiesta = this.getRichiesta(this.currUser,"getAllIscrizioniAttive", this.viewName);
-			this.risposta = this.getRisposta();
-			this.eseguiRichiesta(this.richiesta, this.risposta);
+		this.paneCompetizioni.setVisible(true);
+		this.paneIscrizioni.setVisible(false);
 
-			this.paneIscrizioni.add(this.tableIscrizioni, 0, 1);
-			this.richiesta = this.getRichiesta("getCompetizioniAperte", this.viewName);
-			this.risposta = this.getRisposta();
-			this.eseguiRichiesta(this.richiesta, this.risposta);
-			this.tableCompetizioni.setAll(this.listComp);
-			this.paneCompetizioni.add(this.tableCompetizioni, 0, 1);
+		this.tableIscrizioni.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
-			this.paneCompetizioni.setVisible(true);
-			this.paneIscrizioni.setVisible(false);
-
-			this.tableIscrizioni.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
-				@SuppressWarnings("unchecked")
-				@Override
-				public void handle(MouseEvent event) {
-					if (event.getClickCount() > 1) {
-						TableView<IscModel> table = (TableView<IscModel>) event.getSource();
-						iscModelRow = table.getSelectionModel().getSelectedItem();
-						if(iscModelRow != null){
-							setVista("partMostraIscrizione", iscModelRow.getIscrizioneTO());
-						}
+			@SuppressWarnings("unchecked")
+			@Override
+			public void handle(MouseEvent event) {
+				if (event.getClickCount() > 1) {
+					TableView<IscModel> table = (TableView<IscModel>) event.getSource();
+					iscModelRow = table.getSelectionModel().getSelectedItem();
+					if(iscModelRow != null){
+						setVista("partMostraIscrizione", iscModelRow.getIscrizioneTO());
 					}
 				}
-			});
+			}
+		});
 
-			this.tableCompetizioni.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+		this.tableCompetizioni.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
-				@SuppressWarnings("unchecked")
-				@Override
-				public void handle(MouseEvent event) {
-					if (event.getClickCount() > 1) {
-						TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
-						cmpModelRow = table.getSelectionModel().getSelectedItem();
-						if(cmpModelRow != null){
-							setVista("partMostraCompetizione", cmpModelRow.getCompetizioneTO());
-						}
+			@SuppressWarnings("unchecked")
+			@Override
+			public void handle(MouseEvent event) {
+				if (event.getClickCount() > 1) {
+					TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
+					cmpModelRow = table.getSelectionModel().getSelectedItem();
+					if(cmpModelRow != null){
+						setVista("partMostraCompetizione", cmpModelRow.getCompetizioneTO());
 					}
 				}
-			});
-		}
+			}
+		});
 	}
+
 
 	@Override
 	protected String getViewName() {
@@ -147,6 +140,10 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 		this.tableCompetizioni.setAll(this.listComp);
 		this.paneCompetizioni.setVisible(true);
 		this.paneIscrizioni.setVisible(false);
+		//controllo la validità del certificato
+		this.richiesta = this.getRichiesta(this.currUser, "isCertificatoValido", this.viewName);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
 	@FXML protected void btnGestIscrizioni(MouseEvent event) {
@@ -161,7 +158,7 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 		this.close();
 		this.setVista("login");
 	}
-	
+
 	@FXML protected void btnAggiornaCSRC(ActionEvent event){
 		this.setVista("aggiornaSRC",this.currUser);
 	}
@@ -191,6 +188,9 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 
 			if(res instanceof Boolean){
 				this.isCertValido = (Boolean)res;
+				if(!this.isCertValido){
+					this.setVista("aggiornaSRC", this.currUser);
+				}
 			}
 
 		}else if( commandName.equals( this.getCommandName("getCompetizioniAperte") )){
