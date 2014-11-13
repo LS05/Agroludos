@@ -27,9 +27,12 @@ class UtenteValidator implements AgroludosValidator{
 		if(to instanceof UtenteTO){
 			ErrorTO errorTO = this.toFact.createErrorTO();
 			UtenteTO utente = (UtenteTO)to;
+
 			this.emailRule.validate(utente, errorTO);
-			if(errorTO.hasErrors())
+
+			if(errorTO.hasErrors()){
 				throw new ValidationException(errorTO);
+			}
 		}
 	}
 }

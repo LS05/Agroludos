@@ -34,8 +34,9 @@ class CommandParserImpl extends AgroParser implements CommandParser {
 		From res = null;
 		
 		for(From f : command.getFrom()){
-			if(f.getName().equals(viewName))
+			if(f.getName().equals(viewName)){
 				res = f;
+			}
 		}
 
 		if(res == null){

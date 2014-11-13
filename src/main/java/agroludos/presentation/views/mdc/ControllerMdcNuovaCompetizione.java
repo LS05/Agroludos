@@ -180,8 +180,9 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 		String commandName = request.getCommandName();
 		if(commandName.equals( this.getCommandName("getAllTipoCompetizione") )){
 			Object res = response.getRespData();
-			if(res instanceof List<?>)
+			if(res instanceof List<?>){
 				this.listTipiCmp = (List<TipoCompetizioneTO>)res;
+			}
 		}else if(commandName.equals( this.getCommandName("inserisciCompetizione") )){
 			Object res = response.getRespData();
 			if(res instanceof ErrorTO){

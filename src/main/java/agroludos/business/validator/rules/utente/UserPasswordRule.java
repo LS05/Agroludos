@@ -19,8 +19,9 @@ class UserPasswordRule extends AgroludosRule {
 				errorTO.addError(key, this.getRule("passwordLenError"));
 			}
 
-			if( this.successor != null)
+			if(this.successor != null){
 				this.successor.validate(mainTO, errorTO);
+			}
 		}
 	}
 

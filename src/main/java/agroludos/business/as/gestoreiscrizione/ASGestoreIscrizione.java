@@ -57,7 +57,7 @@ class ASGestoreIscrizione extends AgroludosAS implements LIscrizione, SIscrizion
 		IscrizioneDAO iscDAO = getIscrizioneDAO();
 		CompetizioneDAO cmpDAO = getCompetizioneDAO();
 
-		CompetizioneTO cmp = cmpDAO.readById(iscTO.getCompetizione().getId());	
+		CompetizioneTO cmp = cmpDAO.readById(iscTO.getCompetizione().getId());
 
 		//pseudocodice
 		//getCompetizioneById() dal dao

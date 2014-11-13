@@ -1,51 +1,48 @@
 package agroludos.business.validator.rules.partecipante;
 
 import agroludos.business.validator.rules.AgroludosRule;
-import agroludos.business.validator.rules.partecipante.PartCFRule;
-import agroludos.business.validator.rules.partecipante.PartSrcRule;
-import agroludos.business.validator.rules.partecipante.PartTesRule;
 
 class PartRulesFactoryImpl implements PRulesFactory {
-	private final static PartCFRule cfRule = new PartCFRule();
-	private final static PartSrcRule srcRule = new PartSrcRule();
-	private final static PartTesRule tesRule = new PartTesRule();
-	private final static PartDataSrcRule dataSrcRule = new PartDataSrcRule();
-	private final static PartIndirizzoRule indirizzoRule = new PartIndirizzoRule();
-	private final static PartSessoRule sessoRule = new PartSessoRule();
-	private final static PartDataNascRule dataNascRule = new PartDataNascRule();
+	private final static PartCFRule CF_RULE = new PartCFRule();
+	private final static PartSrcRule SRC_RULE = new PartSrcRule();
+	private final static PartTesRule TES_RULE = new PartTesRule();
+	private final static PartDataSrcRule DATASRC_RULE = new PartDataSrcRule();
+	private final static PartIndirizzoRule INDIRIZZO_RULE = new PartIndirizzoRule();
+	private final static PartSessoRule SESSO_RULE = new PartSessoRule();
+	private final static PartDataNascRule DATANASC_RULE = new PartDataNascRule();
 
 	@Override
 	public AgroludosRule getCfRule(){
-		return cfRule;	
+		return CF_RULE;	
 	}
 
 	@Override
 	public AgroludosRule getSrcRule(){
-		return srcRule;
+		return SRC_RULE;
 	}
 
 	@Override
 	public AgroludosRule getTesRule(){
-		return tesRule;
+		return TES_RULE;
 	}
 
 	@Override
 	public AgroludosRule getDataSrcRule(){
-		return dataSrcRule;
+		return DATASRC_RULE;
 	}
 
 	@Override
 	public AgroludosRule getIndirizzoRule(){
-		return indirizzoRule;
+		return INDIRIZZO_RULE;
 	}
 
 	@Override
 	public AgroludosRule getSessoRule(){
-		return sessoRule;
+		return SESSO_RULE;
 	}
 
 	@Override
 	public AgroludosRule getDataNascRule(){
-		return dataNascRule;
+		return DATANASC_RULE;
 	}
 }

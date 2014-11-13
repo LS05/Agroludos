@@ -11,7 +11,7 @@ class TxtDAOFactoryImpl implements TxtDAOFactory, FileDAOFactory{
 	private TOFactory toFact;
 	private Conf sysConf;
 
-	public TxtDAOFactoryImpl(TOFactory toFact, Conf sysConf){
+	TxtDAOFactoryImpl(TOFactory toFact, Conf sysConf){
 		this.toFact = toFact;
 		this.sysConf = sysConf;
 	}

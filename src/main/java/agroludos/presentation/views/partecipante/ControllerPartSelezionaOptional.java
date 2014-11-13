@@ -180,7 +180,7 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 
 		private final Button btnElimina;
 
-		public DeleteTableCell() {
+		DeleteTableCell() {
 			this.btnElimina = new Button("X");
 			this.btnElimina.setStyle("-fx-base: red;");
 			this.btnElimina.setAlignment(Pos.CENTER);
@@ -248,16 +248,18 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 		int index = -1;
 		ObservableList<OptModel> mainList = this.tableOptScelti.getItems();
 		OptModel opt = this.getOptMod(optMod);
-		if(opt != null)
+		if(opt != null){
 			index = mainList.indexOf(opt);
+		}
 		return index;
 	}
 
 	private boolean isEqualMod(OptModel optMod){
 		boolean res = false;
 		OptModel testMod = this.getOptMod(optMod);
-		if(testMod != null)
+		if(testMod != null){
 			res = optMod.getOptTO().equals(testMod);
+		}
 		return res;
 	}
 
@@ -345,11 +347,12 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 	@FXML protected void btnIndietro(MouseEvent event) { 
 		this.passoCorrente--;
 
-		if(this.passoCorrente == 0)
+		if(this.passoCorrente == 0){
 			this.btnIndietro.setDisable(true);
-		else
+		}else{
 			this.btnIndietro.setDisable(true);
-		
+		}
+
 		this.paneTableOptional.setVisible(true);
 
 		this.setLabelDialog();
@@ -408,22 +411,26 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 
 		if( commandName.equals( this.getCommandName("esisteIscrizione") )){
 			this.mainIscr.clearOptionals();
+
 			for (OptionalTO opt : this.optScelti.values()) {
 				this.mainIscr.addOptional(opt);
 			}
-			if(this.mainIscr.getAllOptionals().isEmpty())
+
+			if(this.mainIscr.getAllOptionals().isEmpty()){
 				this.mainIscr.setCosto(this.mainComp.getCosto());
-			else
+			}else{
 				this.mainIscr.setCosto(this.totComp);
-			
+			}
+
 			this.close();
 			Object res = response.getRespData();
 			if(res instanceof IscrizioneTO){
 				this.risposta = this.getRisposta();
 				this.richiesta = this.getRichiesta(this.mainIscr, "modificaIscrizioneByPartecipante", this.viewName);
 				this.eseguiRichiesta(this.richiesta, this.risposta);
-			}else
+			}else{
 				this.setVista("mostraIscrPart", this.mainIscr);
+			}
 		}
 	}
 }

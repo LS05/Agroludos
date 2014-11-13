@@ -20,12 +20,13 @@ class MdsNumeroTelefonoRule extends AgroludosRule {
 
 			if( !this.stringValidator.isNumeric(telefono) ){
 				errorTO.addError(key, this.getRule("telefonoAlphaError"));
-			} else if( telefono.length() < telLen){
+			} else if( telefono.length() < telLen ){
 				errorTO.addError(key, this.getRule("telefonoLenError"));
 			}
 
-			if( this.successor != null)
+			if(this.successor != null){
 				this.successor.validate(mainTO, errorTO);
+			}
 		}
 	}
 

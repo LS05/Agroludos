@@ -17,8 +17,9 @@ class OptionalCostoRule extends AgroludosRule {
 				errorTO.addError(this.getRule("costoKey"), this.getRule("costoError"));
 			}
 
-			if(this.successor != null)
+			if(this.successor != null){
 				this.successor.validate(optional, errorTO);
+			}
 		}
 	}
 

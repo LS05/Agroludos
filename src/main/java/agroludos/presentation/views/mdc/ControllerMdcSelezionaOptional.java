@@ -95,8 +95,9 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 						@Override
 						public void changed(ObservableValue<? extends String> str,
 								String oldStr, String newStr) {
-							if(listViewOptional.getSelectionModel().getSelectedItem() != null)
+							if(listViewOptional.getSelectionModel().getSelectedItem() != null){
 								btnRimuovi.setDisable(false);
+							}
 						}
 
 					});
@@ -169,8 +170,10 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 		this.passoCorrente--;
 		this.btnAvanti.setVisible(true);
 		this.btnConferma.setVisible(false);
-		if(this.passoCorrente == 0)
+
+		if(this.passoCorrente == 0){
 			this.btnIndietro.setDisable(true);
+		}
 
 		this.setLabelDialog();
 

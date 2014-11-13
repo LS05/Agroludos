@@ -24,9 +24,12 @@ class TipoValidator implements AgroludosValidator{
 		if(to instanceof TipiAgroludosTO){
 			ErrorTO errorTO = this.toFact.createErrorTO();
 			TipiAgroludosTO tipo = (TipiAgroludosTO)to;
+
 			this.nomeRule.validate(tipo, errorTO);
-			if(errorTO.hasErrors())
+
+			if(errorTO.hasErrors()){
 				throw new ValidationException(errorTO);
+			}
 		}
 	}
 }

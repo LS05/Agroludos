@@ -10,6 +10,7 @@ import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.to.AgroludosTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -73,12 +74,12 @@ public class ControllerMdsProfiloPartecipante extends AgroludosController{
 			this.tableIscrizioni = new TableIscrizioni();
 			this.paneIscrizione.getChildren().add(this.tableIscrizioni);
 			this.paneIscrizione.setVisible(true);
-			
+
 			//richiesta per ottenere tutte le iscrizioni da un partecipante
 			this.richiesta = this.getRichiesta(this.parTO,"getAllIscrizioniPartecipante", this.viewName);
 			this.risposta = this.getRisposta();
 			this.eseguiRichiesta(this.richiesta, this.risposta);
-			
+
 			this.tableIscrizioni.setAll(this.listIscPart);
 
 			this.tableIscrizioni.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -89,8 +90,9 @@ public class ControllerMdsProfiloPartecipante extends AgroludosController{
 					if (event.getClickCount() > 1) {
 						TableView<IscModel> table = (TableView<IscModel>) event.getSource();
 						iscModelRow = table.getSelectionModel().getSelectedItem();
-						if(iscModelRow != null)
+						if(iscModelRow != null){
 							setVista("mostraIscrizioneMds", iscModelRow.getIscrizioneTO());
+						}
 					}
 				}
 			});

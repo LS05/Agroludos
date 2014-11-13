@@ -77,10 +77,11 @@ public class ControllerPartVisualizzaIscrizione extends AgroludosController impl
 			this.tableOptional.hideColumn(4);
 			this.tableOptional.hideColumn(1);
 
-			if(this.mainIscr.getCompetizione().getAllOptionals().isEmpty())
+			if(this.mainIscr.getCompetizione().getAllOptionals().isEmpty()){
 				this.btnModificaOptionalIscrizione.setDisable(true);
-			else
+			}else{
 				this.btnModificaOptionalIscrizione.setDisable(false);
+			}
 
 		}
 	}

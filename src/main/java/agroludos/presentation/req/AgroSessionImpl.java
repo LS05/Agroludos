@@ -8,16 +8,16 @@ import agroludos.to.UtenteTO;
 public class AgroSessionImpl implements AgroSession{
 
 	private Map<String, UtenteTO> utenti;
-	
+
 	public AgroSessionImpl() {
 		this.utenti = new HashMap<String, UtenteTO>();
 	}
-	
+
 	@Override
 	public void setAttribute(UtenteTO uto) {
-		if(this.utenti.isEmpty())
+		if(this.utenti.isEmpty()){
 			this.utenti.put("session", uto);
-		else{
+		}else{
 			this.utenti.clear();
 			this.utenti.put("session", uto);
 		}

@@ -85,7 +85,9 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 
 			tx.commit();
 		} catch (HibernateException e){
-			if (tx != null) tx.rollback();
+			if (tx != null){
+				tx.rollback();
+			}
 			throw new DatabaseException(e.getMessage(), e);
 		}finally{
 			session.close();
@@ -107,7 +109,9 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 
 			tx.commit();
 		} catch (HibernateException e){
-			if (tx != null) tx.rollback();
+			if (tx != null){
+				tx.rollback();
+			}
 			throw new DatabaseException(e.getMessage(), e);
 		}finally{
 			session.close();
@@ -138,7 +142,9 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 
 			tx.commit();
 		} catch (Exception e){
-			if (tx != null) tx.rollback();
+			if (tx != null) {
+				tx.rollback();
+			}
 			throw new DatabaseException(e.getMessage(), e);
 		}finally{
 			session.close();
@@ -169,7 +175,9 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 
 			tx.commit();
 		} catch (Exception e){
-			if (tx != null) tx.rollback();
+			if (tx != null){
+				tx.rollback();
+			}
 			throw new DatabaseException(e.getMessage(), e);
 		}finally{
 			session.close();
@@ -194,7 +202,9 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 
 			tx.commit();
 		} catch (Exception e){
-			if (tx != null) tx.rollback();
+			if (tx != null){
+				tx.rollback();
+			}
 			throw new DatabaseException(e.getMessage(), e);
 		}finally{
 			session.close();
@@ -218,7 +228,9 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 
 			tx.commit();
 		} catch (Exception e){
-			if (tx != null) tx.rollback();
+			if (tx != null){
+				tx.rollback();
+			}
 			throw new DatabaseException(e.getMessage(), e);
 		}finally{
 			session.close();

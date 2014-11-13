@@ -16,11 +16,11 @@ import javafx.stage.Stage;
 
 class AppConfig extends AgroludosController implements App{
 
-	private final String viewName = "mainController";
+	private final String VIEW_NAME = "mainController";
 
 	@Override
 	public void initialize(Stage stage){
-		AgroRequest richiesta = this.getRichiesta("checkConfigurazione", this.viewName);
+		AgroRequest richiesta = this.getRichiesta("checkConfigurazione", this.VIEW_NAME);
 		AgroResponse risposta = this.getRisposta();
 
 		this.setMainStage(stage);
@@ -40,7 +40,7 @@ class AppConfig extends AgroludosController implements App{
 
 	@Override
 	protected String getViewName() {
-		return this.viewName;
+		return this.VIEW_NAME;
 	}
 
 	@Override

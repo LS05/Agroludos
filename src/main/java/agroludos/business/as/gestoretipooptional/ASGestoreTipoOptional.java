@@ -13,11 +13,11 @@ import agroludos.to.TipoOptionalTO;
 
 class ASGestoreTipoOptional extends AgroludosAS implements LTipoOptional, STipoOptional{
 	private AgroludosValidator validator;
-	
+
 	ASGestoreTipoOptional(AgroludosValidator validator){
 		this.validator = validator;
 	}
-	
+
 	private TipoOptionalDAO getTipoOptionalDAO() throws DatabaseException {
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return dbDAOFact.getTipoOptionalDAO();
@@ -30,11 +30,13 @@ class ASGestoreTipoOptional extends AgroludosAS implements LTipoOptional, STipoO
 		TipoOptionalDAO daoTop = getTipoOptionalDAO();
 		this.validator.validate(tipoOptTO);
 		List<TipoOptionalTO> listTopt = daoTop.getAll();
+
 		for(TipoOptionalTO topt: listTopt){
-			if(topt.getNome().compareTo(tipoOptTO.getNome())==0)
+			if(topt.getNome().compareTo(tipoOptTO.getNome())==0){
 				throw new TipoOptExistException();
+			}
 		}
-		
+
 		return daoTop.create(tipoOptTO);
 	}
 

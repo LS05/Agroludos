@@ -15,11 +15,13 @@ class UserCognomeRule extends AgroludosRule {
 			Integer cognLength = Integer.valueOf(this.getRule("cognomeLength"));
 
 			String key = this.getRule("cognKey");
-			if( cognome.length() < cognLength )
+			if(cognome.length() < cognLength){
 				errorTO.addError(key, this.getRule("cognLenghtError"));
+			}
 
-			if( this.successor != null )
+			if(this.successor != null){
 				this.successor.validate(mainTO, errorTO);
+			}
 		}
 	}
 

@@ -34,6 +34,7 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 
 	@FXML private CompetizioneTO cmpto;
 	@FXML private TextField txtNome;
+	//TODO Da cambiare con lo spinner
 	@FXML private ComboBox<Integer> cmbNmin;
 	@FXML private ComboBox<Integer> cmbNmax;
 	@FXML private TextField txtTipoCmp;

@@ -18,8 +18,9 @@ class OptionalNomeRule extends AgroludosRule {
 				errorTO.addError(this.getRule("nomeKey"), this.getRule("nomeLenghtError"));
 			}
 
-			if(this.successor != null)
+			if(this.successor != null){
 				this.successor.validate(tipo, errorTO);
+			}
 		}
 	}
 

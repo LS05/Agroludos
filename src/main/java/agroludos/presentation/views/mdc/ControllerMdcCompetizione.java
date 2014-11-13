@@ -172,10 +172,11 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 				TableView<IscModel> table = (TableView<IscModel>) event.getSource();
 				iscModelRow = table.getSelectionModel().getSelectedItem();
 				if(iscModelRow != null){
-					if (event.getClickCount() > 1) 
+					if(event.getClickCount() > 1){
 						setVista("mostraIscrizione", iscModelRow.getIscrizioneTO());
-					else
+					}else{
 						btnAnnullaIsc.setDisable(false);
+					}
 				}
 			}
 

@@ -52,7 +52,7 @@ public class ControllerMdsNuovoOptional extends AgroludosController implements I
 	public void initialize(URL location, ResourceBundle resources) {
 		this.res = resources;
 	}
-	
+
 	@Override
 	protected void initializeView(String nameView) {
 		this.viewName = nameView;
@@ -93,8 +93,9 @@ public class ControllerMdsNuovoOptional extends AgroludosController implements I
 
 		TipoOptionalTO tipoOpt = null;
 		for(TipoOptionalTO tipo : this.listTipiOpt){
-			if(tipo.getNome().equalsIgnoreCase(this.tipoOpt.getNome()))
+			if(tipo.getNome().equalsIgnoreCase(this.tipoOpt.getNome())){
 				tipoOpt = tipo;
+			}
 		}
 		optional.setTipoOptional(tipoOpt);
 

@@ -18,12 +18,12 @@ import agroludos.presentation.views.xml.AgroludosWindow;
 
 class ViewsCache {
 
-	//hash map per le view
 	private Map<String, AgroludosWindow> views;
 	private Stage mainStage;
 
 	ViewsCache(){
 		this.views = new HashMap<String, AgroludosWindow>();
+		this.mainStage = null;
 	}
 
 	boolean checkView(String viewName) {
@@ -55,12 +55,12 @@ class ViewsCache {
 				width =  window.getWidth();
 				//creo la scena		
 				Scene dialogScene = new Scene(root, width, height);
-				Stage stage = new Stage();
-				stage.setScene(dialogScene);
-				stage.setTitle(window.getTitle());
-				stage.setResizable(false);
-				stage.initModality(Modality.APPLICATION_MODAL);
-				window.setStage(stage);
+				Stage dialogStage = new Stage();
+				dialogStage.setScene(dialogScene);
+				dialogStage.setTitle(window.getTitle());
+				dialogStage.setResizable(false);
+				dialogStage.initModality(Modality.APPLICATION_MODAL);
+				window.setStage(dialogStage);
 				PositionHandler.centerComp(window.getStage(), window.getStage().getScene());
 
 			}else if(window.isMainView()){
@@ -68,11 +68,11 @@ class ViewsCache {
 				width =  bounds.getWidth();		
 				//creo la scena	e la aggiungo al mainStage
 				Scene mainViewScene = new Scene(root, width, height);
-				Stage stage = new Stage(StageStyle.DECORATED);
-				stage.setScene(mainViewScene);
-				stage.setTitle(window.getTitle());
+				Stage mainViewStage = new Stage(StageStyle.DECORATED);
+				mainViewStage.setScene(mainViewScene);
+				mainViewStage.setTitle(window.getTitle());
 				//setto il mainStage
-				window.setStage(stage);
+				window.setStage(mainViewStage);
 			}
 		}
 		this.views.put(window.getName(), window);

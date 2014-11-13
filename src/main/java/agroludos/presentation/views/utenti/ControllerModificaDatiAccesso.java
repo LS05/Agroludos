@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -91,10 +92,14 @@ public class ControllerModificaDatiAccesso extends AgroludosController implement
 
 	@FXML protected void modificaDatiAccesso(MouseEvent event) {
 		this.hideErrors();
-		if(!this.txtPassword.getText().isEmpty())
+
+		if(!this.txtPassword.getText().isEmpty()){
 			this.uTO.setPassword(this.txtPassword.getText());
-		if(!this.txtEmail.getText().isEmpty())
+		}
+
+		if(!this.txtEmail.getText().isEmpty()){
 			this.uTO.setEmail(this.txtEmail.getText());
+		}
 
 		if(!this.txtPassword.getText().isEmpty() || !this.txtEmail.getText().isEmpty()){
 			this.risposta = this.getRisposta();

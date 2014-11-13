@@ -111,8 +111,9 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 					if (event.getClickCount() > 1) {
 						TableView<IscModel> table = (TableView<IscModel>) event.getSource();
 						iscModelRow = table.getSelectionModel().getSelectedItem();
-						if(iscModelRow != null)
+						if(iscModelRow != null){
 							setVista("partMostraIscrizione", iscModelRow.getIscrizioneTO());
+						}
 					}
 				}
 			});
@@ -125,8 +126,9 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 					if (event.getClickCount() > 1) {
 						TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
 						cmpModelRow = table.getSelectionModel().getSelectedItem();
-						if(cmpModelRow != null)
+						if(cmpModelRow != null){
 							setVista("partMostraCompetizione", cmpModelRow.getCompetizioneTO());
+						}
 					}
 				}
 			});

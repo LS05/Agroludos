@@ -82,11 +82,12 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 
 			this.tableOptional.hideColumn(4);
 			this.tableOptional.hideColumn(1);
-			
-			if(this.iscto.getCompetizione().getAllOptionals().isEmpty())
+
+			if(this.iscto.getCompetizione().getAllOptionals().isEmpty()){
 				this.btnModificaOptionalIscrizione.setDisable(true);
-			else
+			}else{
 				this.btnModificaOptionalIscrizione.setDisable(false);
+			}
 		}
 	}
 
@@ -136,7 +137,7 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 				succMessage.setMessage(this.res.getString("key99"));
 
 				this.setVista("messageDialog",succMessage);
-				
+
 			}
 		}
 	}

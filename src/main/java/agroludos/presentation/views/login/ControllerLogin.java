@@ -75,8 +75,9 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 	}
 
 	@FXML protected void txtKeyPressed(KeyEvent evt) {
-		if (evt.getCode() == KeyCode.ENTER)
+		if (evt.getCode() == KeyCode.ENTER){
 			eseguiLogin();
+		}
 	}
 
 	@FXML protected void btnLogin(MouseEvent event) {	

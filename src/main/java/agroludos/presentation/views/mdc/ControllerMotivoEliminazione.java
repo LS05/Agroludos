@@ -50,7 +50,7 @@ public class ControllerMotivoEliminazione extends AgroludosController{
 	private void invia(){
 		String motivazione = this.txtMotivazioni.getText();
 		String message = this.mail.getMessage();
-		StringBuilder mail = new StringBuilder();
+		StringBuilder mail = new StringBuilder(300);
 		mail.append(message);
 		mail.append(motivazione);
 		this.mail.setMessage(mail.toString());

@@ -21,21 +21,21 @@ import agroludos.to.SuccessMessageTO;
 import agroludos.to.UtenteTO;
 
 public class ControllerPasswordDimenticata extends AgroludosController implements Initializable{
-	
+
 	private String viewName;
-	
+
 	@FXML private Button btnRichiedi;
 	@FXML private Pane agroLogoPane;
 	@FXML private TextField txtUsername;
 	@FXML private TextField txtEmail;
 
 	@FXML private Label lblErroreLogin;
-	
+
 	private ResourceBundle res;
 
 	private AgroRequest richiesta;
 	private AgroResponse risposta;
-	
+
 	private UtenteTO uTO;
 
 	@Override
@@ -50,24 +50,25 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 		this.uTO = toFact.createUTO();
 
 	}
-	
+
 	@Override
 	public void initializeView(AgroludosTO mainTO) {
 	}
-	
+
 	@Override
 	protected String getViewName() {
 		return this.viewName;
 	}
-	
+
 	@Override
 	public void initialize(URL url, ResourceBundle resources) {
 		this.res = resources;		
 	}
-	
+
 	@FXML protected void txtKeyPressed(javafx.scene.input.KeyEvent evt) {
-		if (evt.getCode() == KeyCode.ENTER)
+		if (evt.getCode() == KeyCode.ENTER){
 			eseguiRipristino();
+		}
 	}
 
 	@FXML protected void btnRichiedi(MouseEvent event) {	
@@ -75,7 +76,7 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 		this.uTO.setEmail(this.txtEmail.getText());
 		eseguiRipristino();
 	}
-	
+
 	private void eseguiRipristino() {	
 		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta(this.uTO, "passwordDimenticata", this.viewName);

@@ -37,9 +37,12 @@ class MdsValidator implements AgroludosValidator{
 		if(to instanceof ManagerDiSistemaTO){
 			ErrorTO errorTO = this.toFact.createErrorTO();
 			ManagerDiSistemaTO mds = (ManagerDiSistemaTO)to;
+
 			this.nomeRule.validate(mds, errorTO);
-			if(errorTO.hasErrors())
+
+			if(errorTO.hasErrors()){
 				throw new ValidationException(errorTO);
+			}
 		}
 	}
 }

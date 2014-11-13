@@ -10,7 +10,7 @@ class DBFactoryImpl implements DBFactory{
 	private SystemConf sysConf;
 	
 	//TODO da rivedere
-	public DBFactoryImpl(DBDAOFactory fact, SystemConf sysConf){
+	DBFactoryImpl(DBDAOFactory fact, SystemConf sysConf){
 		this.fact = fact;
 		this.sysConf = sysConf;
 	}

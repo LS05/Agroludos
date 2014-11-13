@@ -54,7 +54,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 	@FXML private TableColumn<CmpModel, String> cmpStatoCol;
 	@FXML private TextField txtFilterCmp;
 	private TableCompetizioniFilter filterCmp;
-	
+
 	private ObservableList<CmpModel> listaTabCmp;
 	private List<CompetizioneTO> listCmp;
 
@@ -73,7 +73,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 	@Override
 	public void initializeView(String nameView) {
 		this.viewName = nameView;
-		
+
 		final Stage stage = this.getStage(this.viewName);
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
@@ -81,16 +81,16 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 				we.consume();
 			}
 		});
-		
+
 		this.filterCmp = new TableCompetizioniFilter();
-		
+
 		this.mdcTO = toFact.createMdCTO();
 		this.mdcTO = (ManagerDiCompetizioneTO) this.getUtente();
-		
+
 		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta(this.mdcTO, "getCompetizioneAttiveByMdc", this.viewName);
 		this.eseguiRichiesta(this.richiesta, this.risposta);
-		
+
 		this.listaTabCmp = this.getListTabellaCmp();
 		this.initCmpTable();
 	}
@@ -106,7 +106,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 			this.risposta = this.getRisposta();
 			this.richiesta = this.getRichiesta(this.mdcTO, "getCompetizioneAttiveByMdc", this.viewName);
 			this.eseguiRichiesta(this.richiesta, this.risposta);
-			
+
 			this.listaTabCmp = this.getListTabellaCmp();
 			this.initCmpTable();
 		}else if(mainTO instanceof CompetizioneTO){
@@ -116,12 +116,12 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 			cmpModel.setCompetizioneTO(cmpTO);
 			cmpModel.setData(cmpTO.getData().toString());
 			cmpModel.setId(cmpTO.getId().toString());
-			
+
 			//richiesta per ottenere le iscrizioni attive di questa competizione
 			this.richiesta = this.getRichiesta(cmpTO, "getAllIscrizioniAttiveByCmp", this.viewName);
 			this.risposta = this.getRisposta();
 			this.eseguiRichiesta(this.richiesta, this.risposta);
-			
+
 			cmpModel.setNiscritti(String.valueOf(this.listIsc.size()));
 			cmpModel.setNmax(String.valueOf(cmpTO.getNmax()));
 			cmpModel.setNmin(String.valueOf(cmpTO.getNmin()));
@@ -143,12 +143,12 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 	@FXML protected void btnNuovaCompetizione(MouseEvent event) {
 		this.setVista("mostraNuovaCmp");
 	}
-	
+
 	@FXML protected void cercaCompetizioniClicked(MouseEvent event){
 		this.filterCmp.updateFilteredData(this.tableCompetizione, this.txtFilterCmp);
 		this.btnAnnullaRicercaComp.setVisible(true);
 	}
-	
+
 	@FXML protected void annullaRicercaClicked(MouseEvent event){
 		this.filterCmp.resetResearch(this.tableCompetizione, this.txtFilterCmp);
 		this.btnAnnullaRicercaComp.setVisible(false);
@@ -180,8 +180,9 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 					@SuppressWarnings("unchecked")
 					TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
 					cmpModelRow = table.getSelectionModel().getSelectedItem();
-					if(cmpModelRow != null)
+					if(cmpModelRow != null){
 						setVista("mostraCmp", cmpModelRow.getCompetizioneTO());
+					}
 				}
 			}
 		});
@@ -207,7 +208,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 	@FXML protected void menuModificaDatiAccesso(ActionEvent event){
 		this.setVista("modificaDatiAccesso",this.getUtente());
 	}
-	
+
 	@FXML protected void menuEsci(ActionEvent event){
 		chiusura();
 	}
@@ -219,7 +220,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 		question.setViewName(viewName);
 		setVista("questionDialog", question);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void forward(AgroRequest request, AgroResponse response) {
@@ -232,7 +233,7 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 				this.initializeView(cmp.getManagerDiCompetizione());
 
 				this.getStage("mostraCmp").close();
-			
+
 				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.resources.getString("key119"));
 
@@ -266,9 +267,9 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 						iscTO.getCompetizione().getNome());
 				mail.addDestinatario(iscTO.getPartecipante());
 				mail.setMessage(msgMail);
-				
+
 				this.setVista("motivoEliminazione", mail);
-				
+
 				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.resources.getString("key123"));
 				this.setVista("messageDialog",succMessage);
@@ -279,13 +280,13 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 			if(res instanceof CompetizioneTO){
 				this.listaTabCmp.clear();
 				this.initializeView(((CompetizioneTO) res).getManagerDiCompetizione());	
-				
+
 				this.closeVista("mostraNuovaCmp");
 				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
 				succMessage.setMessage(this.resources.getString("key124"));
 				this.setVista("messageDialog",succMessage);
-				
-				
+
+
 			}
 		}else if(commandName.equals(this.getCommandName("modificaCompetizione"))){
 			Object res = response.getRespData();

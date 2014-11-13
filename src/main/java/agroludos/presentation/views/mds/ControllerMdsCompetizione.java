@@ -13,6 +13,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -142,8 +143,9 @@ public class ControllerMdsCompetizione extends AgroludosController{
 				TableView<IscModel> table = (TableView<IscModel>) event.getSource();
 				iscModelRow = table.getSelectionModel().getSelectedItem();
 				if(iscModelRow != null){
-					if (event.getClickCount() > 1) 
+					if(event.getClickCount() > 1){ 
 						setVista("mostraIscrizioneMds", iscModelRow.getIscrizioneTO());
+					}
 				}
 			}
 

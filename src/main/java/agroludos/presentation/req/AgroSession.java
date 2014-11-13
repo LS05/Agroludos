@@ -5,5 +5,7 @@ import agroludos.to.UtenteTO;
 public interface AgroSession {
 
 	void setAttribute(UtenteTO uto);
+
 	UtenteTO getAttribute();
+
 }

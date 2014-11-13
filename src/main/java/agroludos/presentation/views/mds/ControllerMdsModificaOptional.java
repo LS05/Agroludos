@@ -13,6 +13,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import agroludos.presentation.views.components.numberspinner.NumberSpinner;
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
@@ -95,8 +96,9 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 		this.eseguiRichiesta(request, response);
 
 		Object res = response.getRespData();
-		if(res instanceof OptionalTO)
+		if(res instanceof OptionalTO){
 			this.close();
+		}
 	}
 
 	@Override

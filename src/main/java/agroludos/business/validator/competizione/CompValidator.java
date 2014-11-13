@@ -32,9 +32,12 @@ class CompValidator implements AgroludosValidator{
 		if(to instanceof CompetizioneTO){
 			ErrorTO errorTO = this.toFact.createErrorTO();
 			CompetizioneTO competizione = (CompetizioneTO)to;
+
 			this.nomeRule.validate(competizione, errorTO);
-			if(errorTO.hasErrors())
+
+			if(errorTO.hasErrors()){
 				throw new ValidationException(errorTO);
+			}
 		}
 	}
 }

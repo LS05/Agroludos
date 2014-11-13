@@ -30,9 +30,12 @@ class OptionalValidator implements AgroludosValidator{
 		if(to instanceof OptionalTO){
 			ErrorTO errorTO = this.toFact.createErrorTO();
 			OptionalTO tipo = (OptionalTO)to;
+
 			this.nomeRule.validate(tipo, errorTO);
-			if(errorTO.hasErrors())
+
+			if(errorTO.hasErrors()){
 				throw new ValidationException(errorTO);
+			}
 		}
 	}
 }

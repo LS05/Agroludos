@@ -28,9 +28,12 @@ class IscrValidator implements AgroludosValidator{
 		if(to instanceof IscrizioneTO){
 			ErrorTO errorTO = this.toFact.createErrorTO();
 			IscrizioneTO iscrizione = (IscrizioneTO)to;
+
 			this.dataRule.validate(iscrizione, errorTO);
-			if(errorTO.hasErrors())
+
+			if(errorTO.hasErrors()){
 				throw new ValidationException(errorTO);
+			}
 		}
 	}
 }

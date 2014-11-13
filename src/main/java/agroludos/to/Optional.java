@@ -101,7 +101,7 @@ class Optional implements OptionalTO{
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder(300);
 		builder.append("[id=").append(id).append(", nome=").append(nome)
 				.append(", descrizione=").append(descrizione)
 				.append(", costo=").append(costo).append(", tipoOptional=")

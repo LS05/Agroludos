@@ -17,7 +17,11 @@ class PropertiesFileImpl implements AgroPropFile{
 
 	@Override
 	public Properties getPropertyFile(String pathName) throws IOException{
-		Path propFile = Paths.get("/properties/" + pathName);
+		StringBuilder pathBuilder = new StringBuilder(300);
+		pathBuilder.append("/properties/");
+		pathBuilder.append(pathName);
+
+		Path propFile = Paths.get(pathBuilder.toString());
 		String path = propFile.toString();
 		InputStream inputStream = this.getClass().getResourceAsStream(path);
 

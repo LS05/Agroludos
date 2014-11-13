@@ -166,8 +166,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 					@SuppressWarnings("unchecked")
 					TableView<CmpModel> table = (TableView<CmpModel>) event.getSource();
 					cmpModelRow = table.getSelectionModel().getSelectedItem();
-					if(cmpModelRow != null)
+					if(cmpModelRow != null){
 						setVista("mostraCmpMds", cmpModelRow.getCompetizioneTO());
+					}
 				}
 			}
 
@@ -407,9 +408,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 						selectedPart = tablePartecipanti.getSelectedIndex();
 						setDxPartColumn(selectedPart);
-						if( selectedPart != -1 )
+						if( selectedPart != -1 ){
 							setDxPartColumn(selectedPart);
-
+						}
 					}
 
 				});
@@ -443,8 +444,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			this.richiesta = this.getRichiesta(optTO, "checkOptCmpAttive", this.viewName);
 			this.risposta = this.getRisposta();
 			this.eseguiRichiesta(this.richiesta, this.risposta);
-			if(!this.checkOpt)
+			if(!this.checkOpt){
 				this.setVista("modificaOpt", optTO);
+			}
 		}
 	}
 	@FXML protected void nuovoMdCClicked(MouseEvent event){
@@ -459,8 +461,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			this.risposta = this.getRisposta();
 			this.eseguiRichiesta(this.richiesta, this.risposta);
 
-			if(!this.checkMdc)
+			if(!this.checkMdc){
 				this.setVista("modificaMDC", mdcto);
+			}
 		}
 	}
 

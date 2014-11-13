@@ -29,8 +29,9 @@ public class CompDataRule extends AgroludosRule {
 				errorTO.addError(key, this.getRule("data2Error"));
 			}
 
-			if(this.successor != null)
+			if(this.successor != null){
 				this.successor.validate(competizione, errorTO);
+			}
 		}
 	}
 

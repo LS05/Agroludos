@@ -14,7 +14,7 @@ class MdcValidator implements AgroludosValidator{
 
 	private TOFactory toFact;
 	private AgroludosRule nomeRule;
-	
+
 	MdcValidator(UserRulesFactory userRulesFactory, MdcRulesFactory mdcRulesFactory, TOFactory toFactory) {
 		this.toFact = toFactory;
 
@@ -37,9 +37,12 @@ class MdcValidator implements AgroludosValidator{
 		if(to instanceof ManagerDiCompetizioneTO){
 			ErrorTO errorTO = this.toFact.createErrorTO();
 			ManagerDiCompetizioneTO mdc = (ManagerDiCompetizioneTO)to;
+
 			this.nomeRule.validate(mdc, errorTO);
-			if(errorTO.hasErrors())
+
+			if(errorTO.hasErrors()){
 				throw new ValidationException(errorTO);
+			}
 		}
 	}
 }

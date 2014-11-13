@@ -2,10 +2,10 @@ package agroludos.presentation.controller;
 
 class ACFactoryImpl implements ACFactory{
 
-	private final static ApplicationControllerImpl applicationController = new ApplicationControllerImpl();
+	private final static ApplicationControllerImpl APPLICATION_CONTROLLER = new ApplicationControllerImpl();
 
 	@Override
 	public ApplicationController getAC(){
-		return applicationController;
+		return APPLICATION_CONTROLLER;
 	}
 }

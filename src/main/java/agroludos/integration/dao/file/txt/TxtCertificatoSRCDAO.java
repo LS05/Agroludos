@@ -34,7 +34,7 @@ class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 		return certPath.toString();
 	}
 
-	private String getCertCont(CertificatoTO certTO, String certPath) throws IOException{
+	private String getCertCont(String certPath) throws IOException{
 		String certificato = "";
 		BufferedReader br = null;
 		StringBuilder certCont = new StringBuilder(300);
@@ -50,8 +50,9 @@ class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 
 		certificato = certCont.toString();
 
-		if( br != null )
+		if(br != null){
 			br.close();
+		}
 
 		return certificato;
 	}
@@ -61,13 +62,18 @@ class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 		CertFile certFile = this.toFact.createCertFile();
 		CertificatoTO certTO = this.toFact.createCertificatoTO();
 
-		String certPath = Paths.get(this.getCertPath(partTO)).toString() + "/" + this.sysConf.getString("certFile");
+		StringBuilder pathBuilder = new StringBuilder(300);
+		pathBuilder.append(this.getCertPath(partTO)).toString();
+		pathBuilder.append("/");
+		pathBuilder.append(this.sysConf.getString("certFile"));
+
+		String certPath = Paths.get(pathBuilder.toString()).toString();
 
 		String certificato = "";
 
 		try{
 			try{
-				certificato = this.getCertCont(certTO, certPath);
+				certificato = this.getCertCont(certPath);
 				certFile.setFile(new File(certPath));
 				certTO.setCertificatoFile(certFile);
 				certTO.setCertificatoCont(certificato);
@@ -101,15 +107,20 @@ class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 		FileUtils.forceMkdir(outDir);
 		FileUtils.copyFileToDirectory(userFile, outDir);
 
-		Path tempFilePath = Paths.get(outDir.toString() + "/" + userFileName);
+		StringBuilder pathBuilder = new StringBuilder(300);
+		pathBuilder.append(outDir.toString());
+		pathBuilder.append("/");
+		pathBuilder.append(userFileName);
+
+		Path tempFilePath = Paths.get(pathBuilder.toString());
 		File outTempFile = FileUtils.getFile(tempFilePath.toString());
 		String tempFileDir = FilenameUtils.getPath(outTempFile.getPath());
 
-		StringBuilder certPath = new StringBuilder(100);
-		certPath.append(tempFileDir);
-		certPath.append(this.sysConf.getString("certFile"));
+		pathBuilder = new StringBuilder(100);
+		pathBuilder.append(tempFileDir);
+		pathBuilder.append(this.sysConf.getString("certFile"));
 
-		String renamePath = certPath.toString();
+		String renamePath = pathBuilder.toString();
 		File certFile = new File(renamePath);
 		outTempFile.renameTo(certFile);
 

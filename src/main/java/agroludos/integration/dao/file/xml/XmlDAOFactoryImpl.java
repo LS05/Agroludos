@@ -10,7 +10,7 @@ class XmlDAOFactoryImpl implements XmlDAOFactory, FileDAOFactory{
 	
 	private static XmlConfigurazioneDAO xmlConf;
 	
-	public XmlDAOFactoryImpl(HibernateConf sysConf, XmlUtil utXml){
+	XmlDAOFactoryImpl(HibernateConf sysConf, XmlUtil utXml){
 		xmlConf = new XmlConfigurazioneDAO(sysConf, utXml);
 	}
 	

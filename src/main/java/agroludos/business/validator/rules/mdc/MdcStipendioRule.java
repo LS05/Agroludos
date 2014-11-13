@@ -6,7 +6,7 @@ import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 
 class MdcStipendioRule extends AgroludosRule {
-	
+
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof ManagerDiCompetizioneTO){
@@ -18,8 +18,9 @@ class MdcStipendioRule extends AgroludosRule {
 				errorTO.addError(key, this.getRule("stipendioError"));
 			}
 
-			if( this.successor != null)
+			if(this.successor != null){
 				this.successor.validate(mainTO, errorTO);
+			}
 		}
 	}
 

@@ -109,8 +109,9 @@ public class ControllerConfSistema extends AgroludosController {
 			Object res = response.getRespData();
 			if(res instanceof Boolean){
 				boolean nuovoMds = (Boolean)res;
-				if(nuovoMds)
+				if(nuovoMds){
 					this.setVista("login");
+				}
 			} else if(res instanceof ErrorTO){
 
 				ErrorTO errors = (ErrorTO)res;

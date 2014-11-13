@@ -135,9 +135,9 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 			mail.setMessage(mailMsg);
 			this.agroludosMail.sendEmail(mail);
 
-			if(listIscAttive.size() > cmpTO.getNmax())
+			if(listIscAttive.size() > cmpTO.getNmax()){
 				eliminaIscrizioniInEsubero(listIscAttive, cmpTO);
-
+			}
 
 		} else {
 			throw new UnModCompetizioneException();
@@ -341,9 +341,9 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 				//se non si è raggiunti il numero minimo di partecipanti la 
 				//competizione viene annullata
 				List<IscrizioneTO> listIscCmp = getIscrizioneDAO().getIscrizioniAttiveCmp(cmp);
-				if(listIscCmp.size() < cmp.getNmin())
+				if(listIscCmp.size() < cmp.getNmin()){
 					annullaCompetizione(cmp);
-				else{
+				}else{
 					cmp.setStatoCompetizione(daoStatoCmp.getStatoCmpChiusa());
 					cmpDao.update(cmp);
 				}
@@ -379,9 +379,11 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		//controllo se esiste una competizione attiva nella data inserita
 		List<CompetizioneTO> cmpList = daoCmp.readCompetizioniAttive();
 		for(CompetizioneTO compet : cmpList){
-			if(compet.getId()!=cmp.getId())
-				if(compet.getData().compareTo(cmp.getData()) == 0)
+			if(compet.getId()!=cmp.getId()){
+				if(compet.getData().compareTo(cmp.getData()) == 0){
 					throw new CmpDataAttiveException();
+				}
+			}
 		}
 
 		return cmp;

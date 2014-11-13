@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.views.AgroludosController;
@@ -42,12 +43,12 @@ public class ControllerMdsVisualizzaIscrizioni extends AgroludosController {
 	protected void initializeView(AgroludosTO mainTO) {
 		if(mainTO instanceof PartecipanteTO){
 			this.part = (PartecipanteTO)mainTO;
-			StringBuilder sb = new StringBuilder();
+			StringBuilder sb = new StringBuilder(200);
 			sb.append(part.getNome());
 			sb.append(" ");
 			sb.append(part.getCognome());
 			this.lblNomeCognome.setText(sb.toString());
-			
+
 			//richiesta per ottenere tutte le iscrizioni da un partecipante
 			this.richiesta = this.getRichiesta(this.part,"getAllIscrizioniPartecipante", this.viewName);
 			this.risposta = this.getRisposta();
@@ -75,8 +76,9 @@ public class ControllerMdsVisualizzaIscrizioni extends AgroludosController {
 					TableView<IscModel> table = (TableView<IscModel>) event.getSource();
 					iscModelRow = table.getSelectionModel().getSelectedItem();
 					if(iscModelRow != null){
-						if (event.getClickCount() > 1) 
+						if(event.getClickCount() > 1){ 
 							setVista("mostraIscrizioneMds", iscModelRow.getIscrizioneTO());
+						}
 					}
 				}
 

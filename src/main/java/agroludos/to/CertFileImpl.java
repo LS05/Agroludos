@@ -16,8 +16,9 @@ class CertFileImpl implements CertFile{
 	@Override
 	public String getName() {
 		String path = "";
-		if( this.certificato != null)
+		if( this.certificato != null){
 			path = FilenameUtils.getBaseName(this.certificato.getAbsolutePath());
+		}
 		return path;
 	}
 }

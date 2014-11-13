@@ -25,8 +25,9 @@ class UserEmailRule extends AgroludosRule {
 				errorTO.addError(key , this.getRule("emailError"));
 			}
 
-			if(this.successor != null)
+			if(this.successor != null){
 				this.successor.validate(user, errorTO);
+			}
 		}
 	}
 

@@ -13,11 +13,13 @@ class OptionalStatoRule extends AgroludosRule {
 			OptionalTO tipo = (OptionalTO)mainTO;
 			String nome = tipo.getNome();
 
-			if(nome.length() < 0)
+			if(nome.length() < 0){
 				errorTO.addError(this.getRule("nomeKey"), this.getRule("nomeLenghtError"));
+			}
 
-			if(this.successor != null)
+			if(this.successor != null){
 				this.successor.validate(tipo, errorTO);
+			}
 		}
 	}
 

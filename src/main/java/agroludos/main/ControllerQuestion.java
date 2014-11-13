@@ -38,10 +38,11 @@ public class ControllerQuestion extends AgroludosController{
 		AgroRequest richiesta = null;
 		AgroResponse risposta = this.getRisposta();
 
-		if(this.questTO.getDataTO() != null)
+		if(this.questTO.getDataTO() != null){
 			richiesta = this.getRichiesta(this.questTO.getDataTO(), this.questTO.getRequest(), this.questTO.getViewName());
-		else
+		}else{
 			richiesta = this.getRichiesta(this.questTO.getRequest(), this.questTO.getViewName());
+		}
 
 		this.eseguiRichiesta(richiesta, risposta);
 	}  

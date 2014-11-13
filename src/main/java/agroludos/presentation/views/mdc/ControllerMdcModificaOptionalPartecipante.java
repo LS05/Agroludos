@@ -174,8 +174,9 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 		OptModel optModSelected = this.tableOptional.getSelectedItem();
 		if(optModSelected != null){
 			for(OptModel optMod: this.optSceltiData){
-				if(optModSelected.getNomeTipo().equals(optMod.getNomeTipo()))
+				if(optModSelected.getNomeTipo().equals(optMod.getNomeTipo())){
 					checkTipoOptional = true;
+				}
 			}
 			if(!checkTipoOptional){
 				this.optSceltiData.add(optModSelected);
@@ -214,18 +215,17 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 	}
 
 	@FXML protected void btnIndietro(MouseEvent event) {
-
 		this.passoCorrente--;
 		this.btnAvanti.setVisible(true);
 		this.btnConferma.setVisible(false);
-		if(this.passoCorrente == 0)
+
+		if(this.passoCorrente == 0){
 			this.btnIndietro.setDisable(true);
+		}
 
 		this.setLabelDialog();
 
 		this.setTableOptional((TipoOptionalTO) this.listTipiOpt.get(this.passoCorrente));
-
-
 	}
 
 	@FXML protected void btnAvanti(MouseEvent event) {

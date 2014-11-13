@@ -26,8 +26,10 @@ public class Navigator {
 	}
 
 	public AgroludosController getRequestDispatcher(String viewName) throws ViewNotFoundException, IOException{
-		if(!this.viewsCache.checkView(viewName))
+		if(!this.viewsCache.checkView(viewName)){
 			this.setVista(viewName);
+		}
+
 		AgroludosController controller = null;
 
 		try {

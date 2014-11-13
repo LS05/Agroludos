@@ -51,9 +51,12 @@ class PartValidator implements AgroludosValidator{
 		if(to instanceof PartecipanteTO){
 			ErrorTO errorTO = this.toFact.createErrorTO();
 			PartecipanteTO partecipante = (PartecipanteTO)to;
+
 			this.nomeRule.validate(partecipante, errorTO);
-			if(errorTO.hasErrors())
+
+			if(errorTO.hasErrors()){
 				throw new ValidationException(errorTO);
+			}
 		}
 	}
 }

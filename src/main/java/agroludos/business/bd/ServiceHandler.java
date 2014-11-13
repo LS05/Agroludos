@@ -21,6 +21,7 @@ class ServiceHandler {
 	ServiceHandler(AgroResponseContext response, CommandMap commandMap){
 		this.response = response;
 		this.cmdMap = commandMap;
+		this.service = null;
 	}
 
 	void setService(AgroludosService service){

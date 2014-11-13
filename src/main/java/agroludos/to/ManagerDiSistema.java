@@ -27,7 +27,7 @@ class ManagerDiSistema extends Utente implements ManagerDiSistemaTO {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder(300);
 		builder.append("[id=").append(id).append(", nome=").append(nome)
 				.append(", cognome=").append(cognome).append(", email=")
 				.append(email).append(", password=").append(password)

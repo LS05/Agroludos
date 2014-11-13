@@ -12,13 +12,13 @@ import agroludos.integration.dao.db.TipoCompetizioneDAO;
 import agroludos.to.TipoCompetizioneTO;
 
 class ASGestoreTipoCompetizione extends AgroludosAS implements LTipoCompetizione, STipoCompetizione{
-	
+
 	private AgroludosValidator validator;
-	
+
 	ASGestoreTipoCompetizione(AgroludosValidator validator){
 		this.validator = validator;
 	}
-	
+
 	private TipoCompetizioneDAO getTipoCompetizioneDAO() throws DatabaseException {
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return dbDAOFact.getTipoCompetizioneDAO();
@@ -29,14 +29,16 @@ class ASGestoreTipoCompetizione extends AgroludosAS implements LTipoCompetizione
 			throws DatabaseException, ValidationException {
 
 		TipoCompetizioneDAO daoTcm = getTipoCompetizioneDAO();
-		
+
 		this.validator.validate(tcmto);
 		List<TipoCompetizioneTO> listTcmp = daoTcm.getAll();
+
 		for(TipoCompetizioneTO tcmp: listTcmp){
-			if(tcmp.getNome().compareTo(tcmto.getNome())==0)
+			if(tcmp.getNome().compareTo(tcmto.getNome())==0){
 				throw new TipoCmpExistException();
+			}
 		}
-		
+
 		return daoTcm.create(tcmto);
 
 	}

@@ -24,8 +24,9 @@ class ErrorImpl implements ErrorTO{
 	public String getError(String id) {
 		String res = "";
 
-		if(this.mapErrors.containsKey(id))
+		if(this.mapErrors.containsKey(id)){
 			res = this.mapErrors.get(id);
+		}
 
 		return res;
 	}
@@ -34,7 +35,7 @@ class ErrorImpl implements ErrorTO{
 	public boolean hasErrors() {
 		return (this.errorCounts > 0) ? true : false;
 	}
-	
+
 	@Override
 	public boolean hasError(String id) {
 		return this.mapErrors.containsKey(id);
