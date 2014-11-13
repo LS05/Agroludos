@@ -120,6 +120,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="%key25">
               <items>
+                <MenuItem mnemonicParsing="false" onAction="#btnAggiornaCSRC" text="%key158" />
                 <MenuItem mnemonicParsing="false" onAction="#menuModificaDatiAccesso" text="%key26" />
               </items>
             </Menu>

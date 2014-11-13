@@ -4,15 +4,12 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import agroludos.presentation.req.AgroRequest;
 import agroludos.presentation.resp.AgroResponse;
@@ -21,7 +18,6 @@ import agroludos.presentation.views.components.datepicker.AgroDatePicker;
 import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
-import agroludos.to.QuestionTO;
 import agroludos.to.SuccessMessageTO;
 
 public class ControllerAggiornaCSRC extends AgroludosController implements Initializable {
@@ -64,19 +60,6 @@ public class ControllerAggiornaCSRC extends AgroludosController implements Initi
 		this.viewName = nameView;
 		this.dataSrcPicker = new AgroDatePicker();
 		this.paneDataSrc.getChildren().add(this.dataSrcPicker.getDatePicker());
-		Stage aggiornaStage = this.getStage(this.viewName);
-
-		aggiornaStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			public void handle(WindowEvent event) {
-				QuestionTO question = toFact.createQuestionTO();
-				question.setQuestion(res.getString("key177"));
-				question.setRequest("chiusura");
-				question.setViewName(viewName);
-				setVista("questionDialog", question);
-				getStage(viewName).show();
-				event.consume();
-			}
-		});
 	}
 
 	@FXML protected void btnAggiornaClicked(MouseEvent event){

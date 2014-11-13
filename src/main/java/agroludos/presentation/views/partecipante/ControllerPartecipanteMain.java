@@ -162,6 +162,9 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 		this.setVista("login");
 	}
 	
+	@FXML protected void btnAggiornaCSRC(ActionEvent event){
+		this.setVista("aggiornaSRC",this.currUser);
+	}
 	@FXML protected void menuModificaDatiAccesso(ActionEvent event){
 		this.setVista("modificaDatiAccesso",this.currUser);
 	}

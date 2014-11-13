@@ -475,9 +475,12 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			this.risposta = this.getRisposta();
 			this.eseguiRichiesta(this.richiesta, this.risposta);
 			if(!this.checkMdc){
-				this.richiesta = this.getRichiesta(mdcto, "eliminaManagerDiCompetizione", this.viewName);
-				this.risposta = this.getRisposta();
-				this.eseguiRichiesta(this.richiesta, this.risposta);
+				QuestionTO question = toFact.createQuestionTO();
+				question.setQuestion(resources.getString("key186"));
+				question.setDataTO(mdcto);
+				question.setRequest("eliminaManagerDiCompetizione");
+				question.setViewName(this.viewName);
+				setVista("questionDialog", question);
 			}
 		}
 	}
