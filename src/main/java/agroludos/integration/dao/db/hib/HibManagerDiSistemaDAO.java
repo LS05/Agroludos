@@ -1,4 +1,4 @@
-package agroludos.integration.dao.db.mysql;
+package agroludos.integration.dao.db.hib;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import agroludos.exceptions.system.DatabaseException;
 import agroludos.integration.dao.db.ManagerDiSistemaDAO;
 import agroludos.to.ManagerDiSistemaTO;
 
-class MySqlManagerDiSistemaDAO extends MySqlUtenteDAO<ManagerDiSistemaTO> implements ManagerDiSistemaDAO{
+class HibManagerDiSistemaDAO extends HibUtenteDAO<ManagerDiSistemaTO> implements ManagerDiSistemaDAO{
 
-	MySqlManagerDiSistemaDAO(){
+	HibManagerDiSistemaDAO(){
 		this.setClasse(toFact.createMdSTO());
 	}
 

@@ -1,4 +1,4 @@
-package agroludos.integration.dao.db.mysql;
+package agroludos.integration.dao.db.hib;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -7,7 +7,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import agroludos.exceptions.system.DatabaseException;
 
-class MySqlDAOUtil{
+class HibDAOUtil{
 
 	private static SessionFactory sessionFactory;
 

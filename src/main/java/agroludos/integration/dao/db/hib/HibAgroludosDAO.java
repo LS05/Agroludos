@@ -1,4 +1,4 @@
-package agroludos.integration.dao.db.mysql;
+package agroludos.integration.dao.db.hib;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import agroludos.integration.dao.db.DAO;
 import agroludos.to.AgroludosTO;
 import agroludos.to.TOFactory;
 
-abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
+abstract class HibAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 
 	protected static TOFactory toFact;
 
@@ -23,7 +23,7 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 	}
 
 	private Session getSession(){
-		return MySqlDAOUtil.getSessionFactory().openSession();
+		return HibDAOUtil.getSessionFactory().openSession();
 	}
 
 	@SuppressWarnings("unchecked")

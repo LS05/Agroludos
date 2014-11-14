@@ -1,4 +1,4 @@
-package agroludos.integration.dao.db.mysql;
+package agroludos.integration.dao.db.hib;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,9 @@ import agroludos.exceptions.system.DatabaseException;
 import agroludos.integration.dao.db.PartecipanteDAO;
 import agroludos.to.PartecipanteTO;
 
-class MySqlPartecipanteDAO extends MySqlUtenteDAO<PartecipanteTO> implements PartecipanteDAO {
+class HibPartecipanteDAO extends HibUtenteDAO<PartecipanteTO> implements PartecipanteDAO {
 
-	MySqlPartecipanteDAO() {
+	HibPartecipanteDAO() {
 		this.setClasse(toFact.createPartecipanteTO());
 	}
 

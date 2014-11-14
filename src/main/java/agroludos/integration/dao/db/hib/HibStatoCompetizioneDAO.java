@@ -1,4 +1,4 @@
-package agroludos.integration.dao.db.mysql;
+package agroludos.integration.dao.db.hib;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import agroludos.exceptions.system.DatabaseException;
 import agroludos.integration.dao.db.StatoCompetizioneDAO;
 import agroludos.to.StatoCompetizioneTO;
 
-public class MySqlStatoCompetizioneDAO extends MySqlAgroludosDAO<StatoCompetizioneTO> implements StatoCompetizioneDAO {
+public class HibStatoCompetizioneDAO extends HibAgroludosDAO<StatoCompetizioneTO> implements StatoCompetizioneDAO {
 
-	public MySqlStatoCompetizioneDAO() {
+	public HibStatoCompetizioneDAO() {
 		this.setClasse(toFact.createStatoCompetizioneTO());
 	}
 

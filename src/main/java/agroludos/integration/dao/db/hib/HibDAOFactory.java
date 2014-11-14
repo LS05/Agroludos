@@ -1,4 +1,4 @@
-package agroludos.integration.dao.db.mysql;
+package agroludos.integration.dao.db.hib;
 
 import agroludos.exceptions.system.DatabaseException;
 import agroludos.integration.dao.db.CompetizioneDAO;
@@ -18,80 +18,80 @@ import agroludos.integration.dao.db.TipoUtenteDAO;
 import agroludos.integration.dao.db.UtenteDAO;
 import agroludos.to.UtenteTO;
 
-public class MySqlDAOFactory implements DBDAOFactory {
+public class HibDAOFactory implements DBDAOFactory {
 
 	
-	MySqlDAOFactory() throws DatabaseException{
-		MySqlDAOUtil.buildSessionFactory();
+	HibDAOFactory() throws DatabaseException{
+		HibDAOUtil.buildSessionFactory();
 	}
 	
 	@Override
 	public ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO() {
-		return new MySqlManagerDiCompetizioneDAO();
+		return new HibManagerDiCompetizioneDAO();
 	}
 
 	@Override
 	public ManagerDiSistemaDAO getManagerDiSistemaDAO() {
-		return new MySqlManagerDiSistemaDAO();
+		return new HibManagerDiSistemaDAO();
 	}
 
 	@Override
 	public CompetizioneDAO getCompetizioneDAO() {
-		return new MySqlCompetizioneDAO();
+		return new HibCompetizioneDAO();
 	}
 
 	@Override
 	public PartecipanteDAO getPartecipanteDAO() {
-		return new MySqlPartecipanteDAO();
+		return new HibPartecipanteDAO();
 	}
 
 	@Override
 	public TipoCompetizioneDAO getTipoCompetizioneDAO() {
-		return new MySqlTipoCompetizioneDAO();
+		return new HibTipoCompetizioneDAO();
 	}
 
 	@Override
 	public TipoOptionalDAO getTipoOptionalDAO() {
-		return new MySqlTipoOptionalDAO();
+		return new HibTipoOptionalDAO();
 	}
 
 	@Override
 	public OptionalDAO getOptionalDAO() {
-		return new MySqlOptionalDAO();
+		return new HibOptionalDAO();
 	}
 
 	@Override
 	public UtenteDAO<UtenteTO> getUtenteDAO() {
-		return new MySqlUtenteDAO<UtenteTO>();
+		return new HibUtenteDAO<UtenteTO>();
 	}
 
 	@Override
 	public IscrizioneDAO getIscrizioneDAO() {
-		return new MySqlIscrizioneDAO();
+		return new HibIscrizioneDAO();
 	}
 
 	@Override
 	public StatoCompetizioneDAO getStatoCompetizioneDAO() {
-		return new MySqlStatoCompetizioneDAO();
+		return new HibStatoCompetizioneDAO();
 	}
 
 	@Override
 	public StatoIscrizioneDAO getStatoIscrizioneDAO() {
-		return new MySqlStatoIscrizioneDAO();
+		return new HibStatoIscrizioneDAO();
 	}
 
 	@Override
 	public StatoOptionalDAO getStatoOptionalDAO() {
-		return new MySqlStatoOptionalDAO();
+		return new HibStatoOptionalDAO();
 	}
 
 	@Override
 	public StatoUtenteDAO getStatoUtenteDAO() {
-		return new MySqlStatoUtenteDAO();
+		return new HibStatoUtenteDAO();
 	}
 
 	@Override
 	public TipoUtenteDAO getTipoUtenteDAO() {
-		return new MySqlTipoUtenteDAO();
+		return new HibTipoUtenteDAO();
 	}
 }

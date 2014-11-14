@@ -1,4 +1,4 @@
-package agroludos.integration.dao.db.mysql;
+package agroludos.integration.dao.db.hib;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +9,9 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.TipoCompetizioneTO;
 
-class MySqlCompetizioneDAO extends MySqlAgroludosDAO<CompetizioneTO> implements CompetizioneDAO {
+class HibCompetizioneDAO extends HibAgroludosDAO<CompetizioneTO> implements CompetizioneDAO {
 
-	MySqlCompetizioneDAO() {
+	HibCompetizioneDAO() {
 		this.setClasse(toFact.createCompetizioneTO());
 	}
 

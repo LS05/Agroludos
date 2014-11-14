@@ -1,4 +1,4 @@
-package agroludos.integration.dao.db.mysql;
+package agroludos.integration.dao.db.hib;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,9 @@ import agroludos.integration.dao.db.OptionalDAO;
 import agroludos.to.OptionalTO;
 import agroludos.to.TipoOptionalTO;
 
-class MySqlOptionalDAO extends MySqlAgroludosDAO<OptionalTO> implements OptionalDAO {
+class HibOptionalDAO extends HibAgroludosDAO<OptionalTO> implements OptionalDAO {
 
-	MySqlOptionalDAO(){
+	HibOptionalDAO(){
 		this.setClasse(toFact.createOptionalTO());
 	}
 
