@@ -1,7 +1,6 @@
 package agroludos.presentation.views.mds;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import agroludos.presentation.req.AgroRequest;
@@ -11,14 +10,10 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiCompetizioneTO;
-import agroludos.to.StatoUtenteTO;
 import agroludos.to.SuccessMessageTO;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;

@@ -22,7 +22,6 @@ import agroludos.to.SuccessMessageTO;
 
 public class ControllerAggiornaCSRC extends AgroludosController implements Initializable {
 	private String viewName;
-	private boolean flagError = false;
 
 	@FXML private Label lblSrc;
 	@FXML private Label lblSrcError;
@@ -105,7 +104,6 @@ public class ControllerAggiornaCSRC extends AgroludosController implements Initi
 		if( commandName.equals(this.getCommandName("modificaPartecipante") )){
 			if(res instanceof ErrorTO){
 				ErrorTO errors = (ErrorTO)res;
-				this.flagError = true;
 				if(errors.hasError(this.getError("srcKey"))){
 					this.showErrors(errors, this.lblSrcError, "srcKey");
 				}

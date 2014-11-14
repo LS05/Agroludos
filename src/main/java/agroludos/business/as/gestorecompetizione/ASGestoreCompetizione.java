@@ -1,7 +1,6 @@
 package agroludos.business.as.gestorecompetizione;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateMidnight;
@@ -117,7 +116,6 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		CompetizioneDAO daoCmp = getCompetizioneDAO();
 		//se la competizione non è aperta alle iscrizioni
 		//non è possibile effettuare modifiche
-		//TODO Eliminare il confronto sugli id
 		if(getStatoCmp(cmpTO).getId()==getStatoCompetizioneDAO().getStatoCmpAperta().getId()){
 
 			this.validator.validate(cmpTO);
@@ -149,8 +147,6 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	private List<IscrizioneTO> eliminaIscrizioniInEsubero(List<IscrizioneTO> listIsc, CompetizioneTO cmpTO) 
 			throws DatabaseException {
 
-		//TODO Effettuare una deep copy
-		List<IscrizioneTO> listIscTemp = new ArrayList<IscrizioneTO>(listIsc);
 
 		//ordinare la lista per data
 		int lenght = listIsc.size() - 1;
@@ -321,7 +317,6 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	//con la data della competizione
 	//se termina termina le iscrizioni attive
 	//se viene annullata per il non raggiungimento del numero minimo annulla la comp
-	//TODO DA TESTARE
 	private CompetizioneTO checkCmp(CompetizioneTO cmp) throws DatabaseException{
 
 		StatoCompetizioneDAO daoStatoCmp = this.getStatoCompetizioneDAO();
