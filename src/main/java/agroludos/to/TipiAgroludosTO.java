@@ -1,9 +1,7 @@
 package agroludos.to;
 
 /**
- * L'interfaccia rappresenta tutti i tipi in agroludos. <br>
- * Sono quindi forniti tutti i metodi per gestirne l'uso (ovvero sia la lettura 
- * che la scrittura di informazioni riguardanti una competizione).
+ * L'interfaccia rappresenta un'interfaccia comune per TipoCompetizioneTO e TipoOptionalTO.<br/>
  * 
  * @author Luca Suriano
  * @author Francesco Zagaria
