@@ -64,30 +64,73 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 	private AgroludosValidator validator;
 	private AgroludosMail agroludosMail;
 
+	/**
+	 * Il costrute inizializza gli attributi validator e agroludosMail
+	 * 
+	 * @param validator
+	 * @param agroludosMail
+	 * @see agroludos.business.validator.AgroludosValidator
+	 * @see agroludos.utility.email.AgroludosMail
+	 */
 	ASGestoreCompetizione(AgroludosValidator validator, AgroludosMail agroludosMail){
 		this.validator = validator;
 		this.agroludosMail = agroludosMail;
 	}
 
+	/**
+	 * Il metodo restuisce un'istanza di DBDAOFactory
+	 * 
+	 * @return DBDAOFactory
+	 * @throws DatabaseException
+	 * @see agroludos.integration.dao.db.DBDAOFactory
+	 */
 	private DBDAOFactory getDBDaoFactory() throws DatabaseException{
 		return this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 	}
 
+	/**
+	 * Il metodo restituisce un'istanza di CompetizioneDAO
+	 * 
+	 * @return CompetizioneDAO
+	 * @throws DatabaseException
+	 * @see agroludos.integration.dao.db.CompetizioneDAO
+	 */
 	private CompetizioneDAO getCompetizioneDAO() throws DatabaseException {
 		DBDAOFactory dbDAOFact = this.getDBDaoFactory();
 		return dbDAOFact.getCompetizioneDAO();
 	}
 
+	/**
+	 * Il metodo restituisce un'istanza di StatoCompetizioneDAO
+	 * 
+	 * @return StatoCompetizioneDAO
+	 * @throws DatabaseException
+	 * @see agroludos.integration.dao.db.StatoCompetizioneDAO
+	 */
 	private StatoCompetizioneDAO getStatoCompetizioneDAO() throws DatabaseException{
 		DBDAOFactory dbDAOFact = this.getDBDaoFactory();
 		return dbDAOFact.getStatoCompetizioneDAO();
 	}
 
+	/**
+	 * Il metodo restituisce un'istanza di IscrizioneDAO
+	 * 
+	 * @return IscrizioneDAO
+	 * @throws DatabaseException
+	 * @see agroludos.integration.dao.db.IscrizioneDAO
+	 */
 	private IscrizioneDAO getIscrizioneDAO() throws DatabaseException {
 		DBDAOFactory dbDAOFact = this.getDBDaoFactory();
 		return dbDAOFact.getIscrizioneDAO();
 	}
 
+	/**
+	 * Il metodo restituisce un'istanza di StatoIscrizioneDAO
+	 * 
+	 * @return StatoIscrizioneDAO
+	 * @throws DatabaseException
+	 * @see agroludos.integration.dao.db.StatoIscrizioneDAO
+	 */
 	private StatoIscrizioneDAO getStatoIscrizioneDAO() throws DatabaseException {
 		DBDAOFactory dbDAOFact = this.getDBDaoFactory();
 		return dbDAOFact.getStatoIscrizioneDAO();
@@ -126,6 +169,10 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 
 			cmpTO = daoCmp.update(cmpTO);
 
+			if(listIscAttive.size() > cmpTO.getNmax()){
+				eliminaIscrizioniInEsubero(listIscAttive, cmpTO);
+			}
+			
 			EmailTO mail = toFact.createEmailTO();
 			String mailSubj = this.sysConf.getString("mailModCompSubj");
 			mail.setOggetto(mailSubj);
@@ -133,9 +180,7 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 			mail.setMessage(mailMsg);
 			this.agroludosMail.sendEmail(mail);
 
-			if(listIscAttive.size() > cmpTO.getNmax()){
-				eliminaIscrizioniInEsubero(listIscAttive, cmpTO);
-			}
+			
 
 		} else {
 			throw new UnModCompetizioneException();
@@ -144,6 +189,20 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		return cmpTO;
 	}
 
+	/**
+	 * Il metodo elimia le iscrizioni in esubero di una competizione modificata.
+	 * Elimina le iscrizioni partendo dalla più recente fino al raggiungimento del numero 
+	 * massimo di partecipanti che prevede la competizione.
+	 * Infine invia una email a tutti i partecipanti eliminati dalla competizione
+	 * 
+	 * @param listIsc
+	 * @param cmpTO
+	 * @return List di IscrizioneTO
+	 * @throws DatabaseException
+	 * @see agroludos.integration.dao.db.StatoIscrizioneDAO
+	 * @see agroludos.integration.dao.db.IscrizioneDAO
+	 * @see agroludos.to.EmailTO
+	 */
 	private List<IscrizioneTO> eliminaIscrizioniInEsubero(List<IscrizioneTO> listIsc, CompetizioneTO cmpTO) 
 			throws DatabaseException {
 
@@ -295,28 +354,63 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		return listCmpAttive;
 	}
 
+	/**
+	 * Il metodo setta il numero di Iscrizioni in ogni Competizione della lista in input
+	 * 
+	 * @param listCmp
+	 * @throws DatabaseException
+	 * @see agroludos.to.IscrizioneTO
+	 * @see agroludos.to.CompetizioneTO
+	 */
 	private void setNiscritti(List<CompetizioneTO> listCmp) throws DatabaseException {
 		for(CompetizioneTO cmp: listCmp){
 			setNiscritti(cmp);
 		}
 	}
 
+	/**
+	 * Il metodo setta il numero di Iscrizioni nella Competizione in input utilizzando
+	 * il DAO IscrizioneDAO per interrogare la sorgente dati
+	 * 
+	 * @param cmp
+	 * @throws DatabaseException
+	 * @see agroludos.to.IscrizioneTO
+	 * @see agroludos.integration.dao.db.IscrizioneDAO
+	 */
 	private void setNiscritti(CompetizioneTO cmp) throws DatabaseException {
 		IscrizioneDAO iscDao = getIscrizioneDAO();
 		cmp.setNiscritti(iscDao.getIscrizioniAttiveCmp(cmp).size());
 	}
 
+	/**
+	 * Il metodo invoca per ogni Competizione nella lista in input il metodo {@link #checkCmp(CompetizioneTO)}
+	 * 
+	 * @param listCmp
+	 * @return List di CompetizioneTO
+	 * @throws DatabaseException
+	 * @see ASGestoreCompetizione.checkCmp(CompetizioneTO)
+	 */
 	private List<CompetizioneTO> checkCmp(List<CompetizioneTO> listCmp) throws DatabaseException{
 		for(CompetizioneTO cmp: listCmp){
 			checkCmp(cmp);
 		}
 		return listCmp;
 	}
-
-	//controlla le competizioni cambiando il loro stato confrontando la data di oggi
-	//con la data della competizione
-	//se termina termina le iscrizioni attive
-	//se viene annullata per il non raggiungimento del numero minimo annulla la comp
+	/**
+	 * Il metodo controlla le Competizioni in input cambiando il loro Stato confrontando la data di oggi
+	 * con la data della competizione.
+	 * Se la competizione termina invoca il metodo {@link #terminaIscrizioni(CompetizioneTO)}
+	 * Se la competizione viene annullata per il non raggiungimento del numero minimo di iscritti 
+	 * allora annulla la competizione invocando il metodo {@link #annullaCompetizione(CompetizioneTO)}
+	 *
+	 * @param cmp
+	 * @return CompetizioneTO
+	 * @throws DatabaseException
+	 * @see agroludos.integration.dao.db.StatoCompetizioneDAO
+	 * @see agroludos.integration.dao.db.CompetizioneDAO
+	 * @see agroludos.to.IscrizioneTO
+	 * @see agroludos.integration.dao.db.IscrizioneDAO
+	 */
 	private CompetizioneTO checkCmp(CompetizioneTO cmp) throws DatabaseException{
 
 		StatoCompetizioneDAO daoStatoCmp = this.getStatoCompetizioneDAO();
@@ -354,6 +448,17 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		return cmp;
 	}
 
+	/**
+	 * Il metodo cambia lo Stato delle iscrizioni appartententi alla Competizione
+	 * in input. Utilizza i DAO IscrizioneDAO e StatoIscrizioneDAO per effettuare modifiche nella
+	 * sorgente dati
+	 * 
+	 * @param cmp
+	 * @throws DatabaseException
+	 * @see agroludos.to.IscrizioneTO
+	 * @see agroludos.integration.dao.db.IscrizioneDAO
+	 * @see agroludos.integration.dao.db.StatoIscrizioneDAO 
+	 */
 	private void terminaIscrizioni(CompetizioneTO cmp) throws DatabaseException {
 		IscrizioneDAO iscDao = getIscrizioneDAO();
 		List<IscrizioneTO> listIsc = iscDao.getIscrizioniAttiveCmp(cmp);
@@ -366,6 +471,16 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 
 	}
 
+	/**
+	 * Il metodo controlla non esiste, nella data della Competizione in input, una Competizione già attiva
+	 * nella sorgente dati
+	 * 
+	 * @param cmp
+	 * @return CompetizioneTO
+	 * @throws DatabaseException
+	 * @throws CmpDataAttiveException
+	 * @see agroludos.integration.dao.db.CompetizioneDAO
+	 */
 	private CompetizioneTO checkCmpData(CompetizioneTO cmp) 
 			throws DatabaseException, CmpDataAttiveException{
 
@@ -384,6 +499,13 @@ class ASGestoreCompetizione extends AgroludosAS implements LCompetizione, SCompe
 		return cmp;
 	}
 
+	/**
+	 * Il metodo restituisce lo Stato associato alla Competizione in input
+	 * 
+	 * @param cmp
+	 * @return
+	 * @throws DatabaseException
+	 */
 	public StatoCompetizioneTO getStatoCmp(CompetizioneTO cmp)
 			throws DatabaseException {
 		return getCompetizioneById(cmp).getStatoCompetizione();

@@ -21,13 +21,9 @@ import agroludos.business.as.gestoreoptional.SOptional;
 import agroludos.business.as.gestorepartecipante.LPartecipante;
 import agroludos.business.as.gestorepartecipante.SPartecipante;
 import agroludos.business.as.gestorestatocompetizione.LStatoCompetizione;
-import agroludos.business.as.gestorestatocompetizione.SStatoCompetizione;
 import agroludos.business.as.gestorestatoiscrizione.LStatoIscrizione;
-import agroludos.business.as.gestorestatoiscrizione.SStatoIscrizione;
 import agroludos.business.as.gestorestatooptional.LStatoOptional;
-import agroludos.business.as.gestorestatooptional.SStatoOptional;
 import agroludos.business.as.gestorestatoutente.LStatoUtente;
-import agroludos.business.as.gestorestatoutente.SStatoUtente;
 import agroludos.business.as.gestoretipocompetizione.LTipoCompetizione;
 import agroludos.business.as.gestoretipocompetizione.STipoCompetizione;
 import agroludos.business.as.gestoretipooptional.LTipoOptional;
@@ -52,15 +48,11 @@ class Services {
 	private LPartecipante lpartecipante;
 	private SPartecipante spartecipante;
 	private LStatoCompetizione lstatocmp;
-	private SStatoCompetizione sstatocmp;
 	private LIscrizione lisc;
 	private SIscrizione sisc;
 	private LStatoIscrizione lstatoisc;
-	private SStatoIscrizione sstatoisc;
 	private LStatoOptional lstatoopt;
-	private SStatoOptional sstatoopt;
 	private LStatoUtente lstatoutente;
-	private SStatoUtente sstatoutente;
 	private LTipoOptional ltipoopt;
 	private STipoOptional stipoopt;
 	private LTipoCompetizione ltipocmp;
@@ -176,31 +168,16 @@ class Services {
 		this.services.put(LStatoUtente.class.getName(), this.lstatoutente);
 	}
 
-	public void setSstatoutente(SStatoUtente sstatoutente) {
-		this.sstatoutente = sstatoutente;
-		this.services.put(SStatoUtente.class.getName(), this.sstatoutente);
-	}
-
 	public void setLstatoisc(LStatoIscrizione lstatoisc) {
 		this.lstatoisc = lstatoisc;
 		this.services.put(LStatoIscrizione.class.getName(), this.lstatoisc);
 	}
 
-	public void setSstatoisc(SStatoIscrizione sstatoisc) {
-		this.sstatoisc = sstatoisc;
-		this.services.put(SStatoIscrizione.class.getName(), this.sstatoisc);
-	}
-	
 	public void setLstatoopt(LStatoOptional lstatoopt) {
 		this.lstatoopt = lstatoopt;
 		this.services.put(LStatoOptional.class.getName(), this.lstatoopt);
 	}
 
-	public void setSstatoopt(SStatoOptional sstatoopt) {
-		this.sstatoopt = sstatoopt;
-		this.services.put(SStatoOptional.class.getName(), this.sstatoopt);
-	}
-	
 	public void setLisc(LIscrizione lisc) {
 		this.lisc = lisc;
 		this.services.put(LIscrizione.class.getName(), this.lisc);
@@ -216,11 +193,6 @@ class Services {
 		this.services.put(LStatoCompetizione.class.getName(), this.lstatocmp);
 	}
 
-	public void setSstatocmp(SStatoCompetizione sstatocmp) {
-		this.sstatocmp = sstatocmp;
-		this.services.put(SStatoCompetizione.class.getName(), this.sstatocmp);
-	}
-		
 	public void setLemail(LEmail lemail) {
 		this.lemail = lemail;
 		this.services.put(LEmail.class.getName(), this.lemail);

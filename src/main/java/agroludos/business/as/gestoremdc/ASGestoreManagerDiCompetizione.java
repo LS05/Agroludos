@@ -19,26 +19,69 @@ import agroludos.to.StatoUtenteTO;
 import agroludos.to.TipoUtenteTO;
 import agroludos.utility.PasswordEncryption;
 
+/**
+ * <b>Business Tier</b></br>
+ * La classe modella e implementa un <b>Application Service</b> e rappresenta il componente:
+ * <b>Gestore Manager Di Competizione.</b><br /> 
+ * L'obiettivo della classe &egrave; quello di centralizzare ed incapsulare il funzionamento
+ * dei servizi andando a ridurre l'accoppiamento con le altre componenti del sistema.
+ * Il gestore utilizza una serie di {@link AgroludosTO} (Transfer Object o Data Transfer Object
+ * la cui tipologia dipende dal servizio) e sfrutta il {@link ManagerDiCompetizioneDAO}
+ * (Data Access Object) per occuparsi della persistenza di tali oggetti.</br>
+ * Il Gestore Manager Di Competizione espone la logica di business riguardante i Manager Di Competizione 
+ * tramite due interfacce. L'interfaccia {@link LManagerDiCompetizione} fornisce i servizi 
+ * di lettura, mentre l'interfaccia {@link SManagerDiCompetizione} offre i servizi di scrittura.</br>
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCompetizione, SManagerDiCompetizione{
 
 	private PasswordEncryption pwdEnc;
 	private AgroludosValidator validator;
 
+	/**
+	 * Il costrute inizializza gli attributi validator e pwdEnc
+	 * 
+	 * @param pwdEnc
+	 * @param validator
+	 * @see agroludos.business.validator.AgroludosValidator
+	 * @see agroludos.utility.PasswordEncryption
+	 */	
 	ASGestoreManagerDiCompetizione(PasswordEncryption pwdEnc, AgroludosValidator validator){
 		this.pwdEnc = pwdEnc;
 		this.validator = validator;
 	}
 
+	/**
+	 * Il metodo restituisce un'istanza di {@link ManagerDiCompetizioneDAO}
+	 * 
+	 * @return {@link ManagerDiCompetizioneDAO}
+	 * @throws DatabaseException
+	 * @see {@link agroludos.integration.dao.db.ManagerDiCompetizioneDAO}
+	 */
 	private ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO() throws DatabaseException{
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return dbDAOFact.getManagerDiCompetizioneDAO();
 	}
 
+	/**
+	 * Il metodo restituisce un'istanza di {@link TipoUtenteDAO}
+	 * 
+	 * @return {@link TipoUtenteDAO}
+	 * @throws DatabaseException
+	 */
 	private TipoUtenteDAO getTipoUtenteDAO() throws DatabaseException{
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return dbDAOFact.getTipoUtenteDAO();
 	}
 
+	/**
+	 * Il metodo inserisce un Manager di Competizione nella sorgente dati attraverso il DAO {@link ManagerDiCompetizioneDAO}
+	 * Prima di inserire il Manager effettua la validazione dei campi, controlla se esiste già l'email o
+	 * l'username inseriti sollevando {@link UtenteEsistenteException}
+	 */
 	@Override
 	public ManagerDiCompetizioneTO inserisciManagerDiCompetizione(ManagerDiCompetizioneTO mdcTO) 
 			throws DatabaseException, ValidationException {
@@ -64,6 +107,9 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 		return daoMan.create(mdcTO);
 	}
 
+	/**
+	 * Il metodo restituisce un Manager di Competizione tramite l'username
+	 */
 	@Override
 	public ManagerDiCompetizioneTO getManagerDiCompetizione(ManagerDiCompetizioneTO mdcto) 
 			throws DatabaseException {
@@ -73,6 +119,10 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 
 	}
 
+	/**
+	 * Il metodo restituisce una lista con tutti i Manager di Competizioni presenti nella sorgente dati,
+	 * utilizza il DAO {@link ManagerDiCompetizioneDAO}
+	 */
 	@Override
 	public List<ManagerDiCompetizioneTO> getAllManagerDiCompetizione() 
 			throws DatabaseException {
@@ -82,6 +132,10 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 
 	}
 
+	/**
+	 * Il metodo, dopo aver validato i campi, modifica il manager di competizione tramite il DAO
+	 * {@link ManagerDiCompetizioneDAO}
+	 */
 	@Override
 	public ManagerDiCompetizioneTO modificaManagerDiCompetizione(ManagerDiCompetizioneTO mdcto)
 			throws DatabaseException, ValidationException {
@@ -94,6 +148,11 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 		return res;
 	}
 
+	/**
+	 * Il metodo, dopo aver controllato che il Manager in input non gestica competizioni attive tramite
+	 * {@link #checkMdcCmpAttive(ManagerDiCompetizioneTO)}, elimina il Manager di Competizione in 
+	 * input tramite il DAO {@link ManagerDiCompetizioneDAO}
+	 */
 	@Override
 	public ManagerDiCompetizioneTO eliminaManagerDiCompetizione(ManagerDiCompetizioneTO mdcto)
 			throws DatabaseException, ValidationException {
@@ -101,8 +160,8 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 		ManagerDiCompetizioneDAO daoMan = getManagerDiCompetizioneDAO();
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 
-		this.validator.validate(mdcto);
-
+		checkMdcCmpAttive(mdcto);
+		
 		StatoUtenteDAO suDAO = dbDAOFact.getStatoUtenteDAO();
 		List<StatoUtenteTO> stati = suDAO.getAll();
 
@@ -111,6 +170,10 @@ class ASGestoreManagerDiCompetizione extends AgroludosAS implements LManagerDiCo
 		return daoMan.update(mdcto);
 	}
 
+	/**
+	 * Il metodo controlla che il Manager di Competizione in input non gestica competizioni attive cioè 
+	 * competizioni che abbiano lo stato "aperta alle iscrizioni", "chiusa alle iscrizioni" o "in corso"
+	 */
 	@Override
 	public ManagerDiCompetizioneTO checkMdcCmpAttive(ManagerDiCompetizioneTO mdcTO) 
 			throws DatabaseException, MdcCmpAttiveException{

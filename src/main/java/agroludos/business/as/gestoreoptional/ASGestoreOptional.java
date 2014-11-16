@@ -16,23 +16,58 @@ import agroludos.to.OptionalTO;
 import agroludos.to.StatoOptionalTO;
 import agroludos.to.TipoOptionalTO;
 
+/**
+ * <b>Business Tier</b></br>
+ * La classe modella e implementa un <b>Application Service</b> e rappresenta il componente:
+ * <b>Gestore degli Optional.</b><br /> 
+ * L'obiettivo della classe &egrave; quello di centralizzare ed incapsulare il funzionamento
+ * dei servizi andando a ridurre l'accoppiamento con le altre componenti del sistema.
+ * Il gestore utilizza una serie di {@link AgroludosTO} (Transfer Object o Data Transfer Object
+ * la cui tipologia dipende dal servizio) e sfrutta il {@link OptionalDAO} 
+ * (Data Access Object) per occuparsi della persistenza di tali oggetti.</br>
+ * Il Gestore degli Optional espone la logica di business riguardante gli Optional 
+ * tramite due interfacce. L'interfaccia {@link LOptional} fornisce i servizi 
+ * di lettura, mentre l'interfaccia {@link SOptional} offre i servizi di scrittura.</br>
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 
 	private AgroludosValidator validator;
 
+	/**
+	 * Il costruttore inizializza la variabile validator
+	 * @param validator
+	 */
 	ASGestoreOptional(AgroludosValidator validator){
 		this.validator = validator;
 	}
 
+	/**
+	 * Il metodo restituisce un'istanza di {@link OptionalDAO}
+	 * @return {@link OptionalDAO}
+	 * @throws DatabaseException
+	 */
 	private OptionalDAO getOptionalDAO() throws DatabaseException {
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return dbDAOFact.getOptionalDAO();
 	}
 
+	/**
+	 * Il metodo effettua la validazione dell'optional in input
+	 * @param optTO
+	 * @throws ValidationException
+	 */
 	private void validate(OptionalTO optTO) throws ValidationException{
 		this.validator.validate(optTO);
 	}
 
+	/**
+	 * Il metodo dopo aver validato l'optiona in input lo inserisce nella sorgente dati tramite
+	 * il DAO {@link OptionalDAO}
+	 */
 	@Override
 	public OptionalTO inserisciOptional(OptionalTO optto) 
 			throws DatabaseException, ValidationException {
@@ -43,6 +78,10 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 
 	}
 
+	/**
+	 * Il metodo dopo aver validato l'optiona in input inserisce le modifiche nella sorgente dati tramite
+	 * il DAO {@link OptionalDAO}
+	 */
 	@Override
 	public OptionalTO modificaOptional(OptionalTO optto)
 			throws DatabaseException, ValidationException {
@@ -54,6 +93,10 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 
 	}
 
+	/**
+	 * Il metodo disattiva l'optional in input cambiando il suo stato in "disattivo" 
+	 * tramite i DAO {@link OptionalDAO} e {@link StatoOptionalDAO}
+	 */
 	@Override
 	public OptionalTO disattivaOptional(OptionalTO optto) 
 			throws DatabaseException, ValidationException {
@@ -68,6 +111,10 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 		return daoOpt.disattivaOptional(optto);
 	}
 
+	/**
+	 * Il metodo controlla che se un optional fa parte di competizioni attive, se si solleva l'eccezione
+	 * {@link OptionalCmpAttiveException} altrimenti restituisce l'optional in input
+	 */
 	@Override
 	public OptionalTO checkOptCmpAttive(OptionalTO optto) throws DatabaseException, OptionalCmpAttiveException{
 		CompetizioneDAO daoCmp = this.dbFact.getDAOFactory(this.sysConf.getTipoDB()).getCompetizioneDAO();
@@ -81,6 +128,10 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 		return optto;
 	}
 
+	/**
+	 * Il metodo restituisce una lista di optional attivi in base al tipo degli optional preso in input.
+	 * Utilizza il DAO {@link OptionalDAO}
+	 */
 	@Override
 	public List<OptionalTO> getOptionalAttiviByTipo(TipoOptionalTO toptTO) throws DatabaseException{
 
@@ -89,6 +140,10 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 		return res;
 	}
 
+	/**
+	 * Il metodo restituisce tutti gli optional (sia attivi che disattivi) di uno specificato tipo preso 
+	 * in input
+	 */
 	@Override
 	public List<OptionalTO> getOptionalByTipo(TipoOptionalTO toptTO)
 			throws DatabaseException {
@@ -98,6 +153,10 @@ class ASGestoreOptional extends AgroludosAS implements LOptional, SOptional{
 		return res;
 	}
 
+	/**
+	 * Il metodo restituisce una lisa con tutti gli optional trovati nella sorgente dati tramite il
+	 * DAO {@link OptionalDAO}
+	 */
 	@Override
 	public List<OptionalTO> getAllOptional() throws DatabaseException {
 		OptionalDAO daoOpt = getOptionalDAO();
