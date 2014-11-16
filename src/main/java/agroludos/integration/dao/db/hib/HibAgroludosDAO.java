@@ -158,41 +158,6 @@ abstract class HibAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <V> V executeValParamQuery(String queryName, List<?> parameters) throws DatabaseException {
-		Transaction tx = null;
-		List<V> res = null;
-		Session session = null;
-
-		try {
-			session = this.getSession();
-			tx = session.beginTransaction();
-
-			Query query = session.getNamedQuery(queryName);
-			int index = 0;
-
-			for(Object param : parameters){
-				query.setParameter(index, param);
-				index++;
-			}
-
-			res = query.list();
-
-			tx.commit();
-		} catch (Exception e){
-			if (tx != null){
-				tx.rollback();
-			}
-			throw new DatabaseException(e.getMessage(), e);
-		}finally{
-			session.close();
-		}
-
-		return res.get(0);
-	}
-
-
-	@SuppressWarnings("unchecked")
-	@Override
 	public List<T> executeQuery(String queryName) throws DatabaseException {
 		Transaction tx = null;
 		List<T> res = null;
@@ -216,33 +181,6 @@ abstract class HibAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 		}
 
 		return res;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <V> V executeValQuery(String queryName) throws DatabaseException {
-		Transaction tx = null;
-		List<V> res = null;
-		Session session = null;
-
-		try {
-			session = this.getSession();
-			tx = session.beginTransaction();
-
-			Query query = session.getNamedQuery(queryName);
-			res = query.list();
-
-			tx.commit();
-		} catch (Exception e){
-			if (tx != null){
-				tx.rollback();
-			}
-			throw new DatabaseException(e.getMessage(), e);
-		}finally{
-			session.close();
-		}
-
-		return res.get(0);
 	}
 
 	public void setToFact(TOFactory toFactory) {
