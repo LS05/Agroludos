@@ -1,5 +1,13 @@
 package agroludos.to;
 
+/**
+ * Implementazione dell'interfaccia {@link TipoCompetizioneTO}. Alcuni metodi non sono resi pubblici nell'interfaccia, in quanto chiamati
+ * da Hibernate per settare o leggere i campi in base a quelli presenti nella tabella TipoCompetizione.
+ * .
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class TipoCompetizione implements TipoCompetizioneTO{
 	private static final long serialVersionUID = -5721300020452970477L;
 	private String descrizione;
@@ -11,6 +19,10 @@ class TipoCompetizione implements TipoCompetizioneTO{
 		return id;
 	}
 
+	/**
+	 * Utilizzato da hibernate per settare l'id tramite mapping
+	 * @param id
+	 */
 	@SuppressWarnings("unused")
 	private void setId(Integer id) {
 		this.id = id;

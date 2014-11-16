@@ -4,11 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Implementazione dell'interfaccia {@link ErrorTO}. 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class ErrorImpl implements ErrorTO{
 	private static final long serialVersionUID = -2933017900423676320L;
 	private int errorCounts;
 	private Map<String, String> mapErrors;
 
+	/**
+	 * Il costruttore inizializza il set degli errori e errorCounts
+	 */
 	public ErrorImpl(){
 		this.mapErrors = new HashMap<String, String>();
 		this.errorCounts = 0;

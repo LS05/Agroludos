@@ -1,5 +1,13 @@
 package agroludos.to;
 
+/**
+ * Implementazione dell'interfaccia {@link TipoOptionalTO}. Alcuni metodi non sono resi pubblici nell'interfaccia, in quanto chiamati
+ * da Hibernate per settare o leggere i campi in base a quelli presenti nella tabella TipoOptional.
+ * .
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class TipoOptional implements TipoOptionalTO{
 	private static final long serialVersionUID = -9220739058941615067L;
 	private String nome;
@@ -20,6 +28,10 @@ class TipoOptional implements TipoOptionalTO{
 		return id;
 	}
 
+	/**
+	 * Utilizzato da hibernate per settare l'id tramite mapping
+	 * @param id
+	 */
 	@SuppressWarnings("unused")
 	private void setId(Integer id) {
 		this.id = id;

@@ -5,8 +5,17 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 
+/**
+ * gestisce gli errori sulla data di nascita di un partecipante
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class PartDataNascRule extends AgroludosRule {
 
+	/**
+	 * controlla che non sia null
+	 */
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof PartecipanteTO){

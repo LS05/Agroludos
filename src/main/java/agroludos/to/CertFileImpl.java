@@ -3,7 +3,12 @@ package agroludos.to;
 import java.io.File;
 
 import org.apache.commons.io.FilenameUtils;
-
+/**
+ * Implementazione dell'interfaccia {@link CertFile}. 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class CertFileImpl implements CertFile{
 
 	private File certificato;

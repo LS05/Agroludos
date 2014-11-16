@@ -8,11 +8,22 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.TOFactory;
 import agroludos.to.UtenteTO;
-
+/**
+ * Implementazione di {@link AgroludosValidator}
+ * Gestisce gli errori sugli utenti
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class UtenteValidator implements AgroludosValidator{
 	private TOFactory toFact;
 	private AgroludosRule emailRule;
 
+	/**
+	 * Inizializza i fields
+	 * @param userRulesFactory
+	 * @param toFactory
+	 */
 	UtenteValidator(UserRulesFactory userRulesFactory, TOFactory toFactory){
 		this.toFact = toFactory;
 
@@ -22,6 +33,9 @@ class UtenteValidator implements AgroludosValidator{
 		this.emailRule.setSuccessor(passwordRule);
 	}
 
+	/**
+	 * controlla la validità dell'utente
+	 */
 	@Override
 	public void validate(AgroludosTO to) throws ValidationException {
 		if(to instanceof UtenteTO){

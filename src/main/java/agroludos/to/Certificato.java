@@ -1,5 +1,11 @@
 package agroludos.to;
-
+/**
+ * Implementazione dell'interfaccia {@link CertificatoTO}.
+ * .
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class Certificato implements CertificatoTO{
 	private static final long serialVersionUID = -5477389191603846187L;
 	private String certCont;

@@ -6,14 +6,27 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.UtenteTO;
 
+/**
+ * gestisce gli errori sulla email degli utenti
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class UserEmailRule extends AgroludosRule {
 	private StringValidator strValidator;
 
+	/**
+	 * inizializza il fied strValidator e chiama il costruttore della superclasse
+	 * @param strValidator
+	 */
 	UserEmailRule(StringValidator strValidator) {
 		super();
 		this.strValidator = strValidator;
 	}
 
+	/**
+	 * controlla se l'email è valida
+	 */
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof UtenteTO){

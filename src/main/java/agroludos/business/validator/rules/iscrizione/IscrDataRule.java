@@ -7,8 +7,17 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.IscrizioneTO;
 
+/**
+ * Gestisce gli errori sulla data dell'iscrizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class IscrDataRule extends AgroludosRule {
 
+	/**
+	 * controlla che la data non sia null
+	 */
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof IscrizioneTO){

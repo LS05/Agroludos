@@ -8,7 +8,6 @@ import agroludos.business.as.gestorechiusura.LChiusura;
 import agroludos.business.as.gestorecompetizione.LCompetizione;
 import agroludos.business.as.gestorecompetizione.SCompetizione;
 import agroludos.business.as.gestoreconfigurazione.LConfigurazione;
-import agroludos.business.as.gestoreconfigurazione.SConfigurazione;
 import agroludos.business.as.gestoreiscrizione.LIscrizione;
 import agroludos.business.as.gestoreiscrizione.SIscrizione;
 import agroludos.business.as.gestoremail.LEmail;
@@ -36,7 +35,6 @@ import agroludos.exceptions.business.BusinessComponentNotFoundException;
 class Services {
 	private final int SBSIZE = 100;
 	private LConfigurazione lconfigurazione;
-	private SConfigurazione sconfigurazione;
 	private LUtente lutente;
 	private SUtente sutente;
 	private LManagerDiSistema lmds;
@@ -96,11 +94,6 @@ class Services {
 	public void setLconfigurazione(LConfigurazione conf) {
 		this.lconfigurazione = conf;
 		this.services.put(LConfigurazione.class.getName(), this.lconfigurazione);
-	}
-
-	public void setSconfigurazione(SConfigurazione conf) {
-		this.sconfigurazione = conf;
-		this.services.put(SConfigurazione.class.getName(), this.sconfigurazione);
 	}
 
 	public void setLutente(LUtente lutente) {

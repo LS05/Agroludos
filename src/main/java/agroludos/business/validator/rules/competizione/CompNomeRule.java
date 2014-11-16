@@ -5,8 +5,17 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.CompetizioneTO;
 
+/**
+ * Gestisce gli errori sul nome della competizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class CompNomeRule extends AgroludosRule {
 
+	/**
+	 * controlla che la lunghezza del nome sia maggiore della lunghezza segnata nel file di proprietà
+	 */
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof CompetizioneTO){

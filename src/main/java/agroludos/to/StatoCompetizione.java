@@ -1,5 +1,13 @@
 package agroludos.to;
 
+/**
+ * Implementazione dell'interfaccia {@link StatoCompetizioneTO}. Alcuni metodi non sono resi pubblici nell'interfaccia, in quanto chiamati
+ * da Hibernate per settare o leggere i campi in base a quelli presenti nella tabella.
+ * .
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class StatoCompetizione implements StatoCompetizioneTO{
 	private static final long serialVersionUID = 1L;
 	private String nome;
@@ -10,6 +18,10 @@ class StatoCompetizione implements StatoCompetizioneTO{
 		return id;
 	}
 
+	/**
+	 * Utilizzato da hibernate, setta l'id dello stato della competizione
+	 * @param id
+	 */
 	@SuppressWarnings("unused")
 	private void setId(Integer id) {
 		this.id = id;
@@ -19,7 +31,11 @@ class StatoCompetizione implements StatoCompetizioneTO{
 	public String getNome() {
 		return nome;
 	}
-
+	
+	/**
+	 * Utilizzato da hibernate per settare il nome dello stato tramite mapping
+	 * @param nome
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

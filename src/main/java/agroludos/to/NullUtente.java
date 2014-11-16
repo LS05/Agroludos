@@ -1,5 +1,14 @@
 package agroludos.to;
 
+/**
+ * Implementazione dell'interfaccia {@link UtenteTO}. 
+ * Questa implementazione rappresenta un utente nullo con id = -1 e campi ti testo vuoti.
+ * Può essere restituito quando un operazione su un utente non va a buon fine.
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class NullUtente implements UtenteTO{
 	private static final long serialVersionUID = 1L;
 	private Integer id;
@@ -11,6 +20,9 @@ class NullUtente implements UtenteTO{
 	private StatoUtente stato;
 	private TipoUtente tipo;
 
+	/**
+	 * Il costruttore setta l'id a -1
+	 */
 	NullUtente(){
 		this.id = -1;
 	}

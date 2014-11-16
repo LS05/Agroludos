@@ -6,9 +6,18 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 
+/**
+ * Gestisce gli errori sul file src
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class PartSrcRule extends AgroludosRule {
 	private FileValidator fileValidator;
 
+	/**
+	 * controlla il formato del file
+	 */
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof PartecipanteTO){

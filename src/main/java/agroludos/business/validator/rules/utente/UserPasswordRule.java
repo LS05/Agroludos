@@ -5,8 +5,17 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.UtenteTO;
 
+/**
+ * gestisce gli errori sulla password 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class UserPasswordRule extends AgroludosRule {
 
+	/**
+	 * controlla la lunghezza
+	 */
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof UtenteTO){
