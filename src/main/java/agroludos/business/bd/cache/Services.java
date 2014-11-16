@@ -33,15 +33,17 @@ import agroludos.business.as.gestoreutente.SUtente;
 import agroludos.exceptions.business.BusinessComponentNotFoundException;
 
 /**
- * Rappresenta la cache contenente tutte le componenti di business che fornisco i servizi di sistema.
- * Le istanze vengono prima settate richiamando il metodo appropriato. L'istanza viene nascosta 
- * dall'interfaccia parametro di ciascun setter presente nella classe.
- * In questo si favorisce la riusabilità del codice permettendo di fornire ai setter altre istanze
- * di classi che sono state oggetto di motifica o refactoring.<br />
- * In ciascun setter viene poi utilizzato l'HashMap che conterrà come chiave il nome della classe
+ * Rappresenta la cache contenente tutte le componenti di business che fornisco i servizi di sistema.<br />
+ * Le istanze delle componenti vengono prima settate richiamando il metodo appropriato. L'istanza viene nascosta 
+ * dall'interfaccia parametro di ciascun setter.
+ * In questo modo si favorisce la riusabilità del codice permettendo di fornire ai setter altre istanze
+ * di classi che potrebbero essere state oggetto di modifica o refactoring.<br />
+ * In ciascun setter viene poi utilizzato l'HashMap salvando come chiave il nome della classe
  * che implementa l'interfaccia (parametro del setter), e come valore l'istanza vera e propria.
  * Questa strategia è stata utilizzata perché nel file XML che specifica l'API di business del sistema,
  * è presente il nome del servizio con associato il nome della classe su cui eseguire tale servizio.
+ * Perciò a partire dal nome del servizio viene ottenuto il nome della classe che lo deve eseguire, e grazie al nome
+ * della classe è possibile ottenere un'istanza della componente di business presente nella cache.
  * 
  * @author Luca Suriano
  * @author Francesco Zagaria
@@ -211,14 +213,24 @@ class Services {
 		this.services.put(LTipoUtente.class.getName(), this.ltipoUtente);
 	}
 
-	public AgroludosService getService(String serviceName) throws BusinessComponentNotFoundException{
-		AgroludosService service = this.services.get(serviceName);
+	/**
+	 * Ritorna un'istanza di una classe che implementa l'interfaccia AgroludosService che rappresenta
+	 * una componente del livello di business contenente il servizio da eseguire.
+	 * La componente è ottenuta in base al parametro che rappresenta il nome della classe su cui eseguire il
+	 * servizio richiesto.
+	 * 
+	 * @param nome Nome della classe
+	 * @return Istanza di una classe che implementa l'interfaccia AgrolduosService.
+	 * @throws BusinessComponentNotFoundException Sollevata se una componente di business non è trovata.
+	 */
+	public AgroludosService getService(String nome) throws BusinessComponentNotFoundException{
+		AgroludosService service = this.services.get(nome);
 		int sbSize = 100;
 
 		if(service == null){
 			StringBuilder sb = new StringBuilder(sbSize);
 			sb.append("Gestore del servizio non trovato! Percorso errato oppure classe ASGestore non istanziata: ");
-			sb.append(serviceName);
+			sb.append(nome);
 			throw new BusinessComponentNotFoundException(sb.toString());
 		}
 

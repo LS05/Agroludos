@@ -55,12 +55,12 @@ class BusinessDelegateImpl implements BusinessDelegate{
 	 * Il metodo si occupa  di eseguire il servizio richiesto.
 	 * Prima è eseguito il meccanismo di lookup utilizzando il ServiceLocator. Al metodo viene fornito il nome
 	 * della classe contenente il servizio tramite getClassName() di Command, restituendo così un riferimento
-	 * ad una classe che implementa l'interfaccia AgroludosService.
-	 * AgroludosService rappresenta una componente del livello di business che fornisce il servizio di business.
+	 * ad una classe che implementa l'interfaccia AgroludosService. Tale classe rappresenta una componente del 
+	 * livello di business che fornisce il servizio da eseguire.
 	 * L'AgroludosService viene poi passato al ServiceHandler che grazie al metodo handleService si occuperà di
 	 * eseguire il servizio richiesto.
 	 * 
-	 * @param command Contiene le informazioni come il nome della classe che deve eseguire il servizio di business
+	 * @param command Contiene le informazioni come il nome della classe che deve eseguire il servizio di business.
 	 * @param request Contiene i dati della richiesta ovvero: nome del servizio da eseguire o eventuali parametri.
 	 * @throws ApplicationException Sollevata nei seguenti casi
 	 * <ul>

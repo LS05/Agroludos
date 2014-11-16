@@ -27,7 +27,7 @@ import agroludos.presentation.resph.AgroResponseContext;
  * @see agroludos.presentation.resph.AgroResponseContext
  */
 class ServiceHandler {
-	
+
 	/**
 	 * Classe di supporto che permette di ottenere un'istanza di classe Method che rappresenta
 	 * il servizio da eseguire.
@@ -36,12 +36,12 @@ class ServiceHandler {
 	 */
 	//TODO Cambiare package
 	private CommandMap cmdMap;
-	
+
 	/**
 	 * Rappresenta una componente del livello di business che fornisce il servizio di business
 	 */
 	private AgroludosService service;
-	
+
 	/**
 	 * Classe che modella la risposta, ovvero il risultato dell'esecuzione del servizio
 	 */
@@ -71,24 +71,30 @@ class ServiceHandler {
 
 	/**
 	 * Metodo che esegue il servizio richiesto. Il nome del servizio è ottenuto tramite il metodo getCommandName().
-	 * Dato il nome del metodo e la componente di business che eseguirà il metodo, viene poi utilizzato il metodo
-	 * getMethod della classe CommandMap che permette di ottenere un'oggetto instanza di classe 
-	 * {@link java.lang.reflect.Method}.
-	 * Ottenuta l'istanza di Method viene utilizzato il metodo invoke per la sua esecuzione.
+	 * Dato il nome del servizio e la componente di business che lo eseguirà (rappresentata dall'attributo service),
+	 * viene poi utilizzato il metodo getMethod della classe CommandMap che permette di ottenere un'oggetto instanza 
+	 * di classe {@link java.lang.reflect.Method}. Tale oggetto rappresenta il metodo da eseguire sulla classe
+	 * rappresentata dall'attributo service. 
+	 * Ottenuta l'istanza di Method viene utilizzato il suo metodo invoke per la sua esecuzione.
 	 * L'esecuzione del metodo avviene in due modi in base al fatto che la richiesta ha dei parametri o meno.
-	 * Se il metodo isParam() ritorna true allora il metodo invoke è chiamato passando i parametri. I parametri 
-	 * della richiesta sono ottenuti tramite il metodo getData(), altrimenti se isParam() ritorna false il metodo
-	 * invoke è chiamato specificando solo l'istanza della componente di business che eseguirà il metodo.
+	 * Se il metodo isParam() ritorna true, allora il metodo invoke è chiamato passando i parametri. I parametri 
+	 * della richiesta sono ottenuti tramite il metodo getData().
+	 * Altrimenti se isParam() ritorna false il metodo invoke è chiamato specificando solo l'istanza della componente 
+	 * di business che eseguirà il metodo.
 	 * Eseguito il metodo il risultato è salvato tramite setData() della classe AgroResponseContext. Se non è stata
 	 * sollevata alcuna eccezione, viene impostata la view su cui effettuare il dispatching utilizzando il metodo
-	 * setLogicalViewName() a cui viene fornito il nome della view per il caso di successo con il metodo getSuccView
+	 * setLogicalViewName(), a cui viene fornito il nome della view per il caso di successo con il metodo getSuccView
 	 * della classe Command.
 	 * 
-	 * @param command Contiene le informazioni come il nome della classe che deve eseguire il servizio di business
+	 * TODO Eccezioni non documentate
+	 * 
+	 * @param command Contiene le informazioni come il nome della classe che deve eseguire il servizio di business,
+	 * nome per la view nel caso di successo e nome della view nel caso di fallimento
 	 * @param request Contiene i dati della richiesta ovvero: nome del servizio da eseguire o eventuali parametri.
-	 * @return Il risultat
+	 * @return Il risultato dell'esecuzione del metodo
 	 * @throws ServiceHandlerException
 	 * @throws ServiceNotFoundException
+	 * 
 	 * @see agroludos.presentation.reqh.AgroRequestContext#getCommandName()
 	 * @see agroludos.presentation.controller.mapper.CommandMap#getMethod(Class, String)
 	 * @see java.lang.reflect.Method#invoke(Object, Object...)
@@ -144,11 +150,8 @@ class ServiceHandler {
 				} else{
 					this.response.setData(e.getTargetException().getMessage());
 				}
-
 			}
 		}
-
 		return this.response;
 	}
- 
 }

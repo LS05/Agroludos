@@ -4,7 +4,7 @@ import agroludos.business.as.AgroludosService;
 import agroludos.exceptions.business.BusinessComponentNotFoundException;
 
 /**
- * La classe implementa l'interfaccia ServiceCache è fornisce un'istanza di una componente di
+ * La classe implementa l'interfaccia ServiceCache e fornisce un'istanza di una componente di
  * business attraverso il metodo getService() sfruttando la classe di supporto Services che
  * rappresenta la vera e propria cache.
  * 
