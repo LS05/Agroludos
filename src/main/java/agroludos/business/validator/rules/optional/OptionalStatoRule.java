@@ -5,8 +5,17 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.OptionalTO;
 
+/**
+ * Gestisce gli errori sull nome dello stato di un optional
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class OptionalStatoRule extends AgroludosRule {
 
+	/**
+	 * controlla che il la lunghezza del nome superi la lunghezza segnata nel file di proprietà
+	 */
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof OptionalTO){

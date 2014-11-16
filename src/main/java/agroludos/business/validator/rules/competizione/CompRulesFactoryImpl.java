@@ -1,7 +1,12 @@
 package agroludos.business.validator.rules.competizione;
 
 import agroludos.business.validator.rules.AgroludosRule;
-
+/**
+ * implementa {@link CompRulesFactory}
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class CompRulesFactoryImpl implements CompRulesFactory {
 	private final static CompNomeRule NOME_RULE = new CompNomeRule();
 	private final static CompNumPartRule NUMPART_RULE = new CompNumPartRule();

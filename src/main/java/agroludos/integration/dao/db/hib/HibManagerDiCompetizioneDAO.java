@@ -1,4 +1,4 @@
-package agroludos.integration.dao.db.mysql;
+package agroludos.integration.dao.db.hib;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import agroludos.exceptions.system.DatabaseException;
 import agroludos.integration.dao.db.ManagerDiCompetizioneDAO;
 import agroludos.to.ManagerDiCompetizioneTO;
 
-class MySqlManagerDiCompetizioneDAO extends MySqlUtenteDAO<ManagerDiCompetizioneTO> implements ManagerDiCompetizioneDAO{
+class HibManagerDiCompetizioneDAO extends HibUtenteDAO<ManagerDiCompetizioneTO> implements ManagerDiCompetizioneDAO{
 
-	MySqlManagerDiCompetizioneDAO(){
+	HibManagerDiCompetizioneDAO(){
 		this.setClasse(toFact.createMdCTO());
 	}
 

@@ -5,8 +5,20 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.CompetizioneTO;
 
+/**
+ * Gestisce gli errori sul numero di partecipanti di una competizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class CompNumPartRule extends AgroludosRule {
 
+	/**
+	 * controlla se il numero minimo di iscritti e il numero massimo di iscriti 
+	 * ad una competizione sia maggiore di 0 e se il numero numero minimo è inferiore al numero massimo
+	 * @see CompetizioneTO
+	 * 
+	 */
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof CompetizioneTO){

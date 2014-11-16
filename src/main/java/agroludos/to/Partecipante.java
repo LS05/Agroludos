@@ -2,6 +2,14 @@ package agroludos.to;
 
 import java.util.Date;
 
+/**
+ * Implementazione dell'interfaccia {@link PartecipanteTO}. Alcuni metodi sono chiamati
+ * da Hibernate per settare o leggere i campi in base a quelli presenti nella tabella.
+ * .
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class Partecipante extends Utente implements PartecipanteTO {
 	private static final long serialVersionUID = -4787024687328022378L;
 	private String cf;
@@ -63,6 +71,7 @@ class Partecipante extends Utente implements PartecipanteTO {
 		this.certificato = certificato;
 	}
 	
+	@Override
 	public String getSrc() {
 		return src;
 	}

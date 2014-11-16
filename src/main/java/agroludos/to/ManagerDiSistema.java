@@ -1,5 +1,13 @@
 package agroludos.to;
 
+/**
+ * Implementazione dell'interfaccia {@link ManagerDiSistemaTO}. Alcuni metodi non sono resi pubblici nell'interfaccia, in quanto chiamati
+ * da Hibernate per settare o leggere i campi in base a quelli presenti nella tabella.
+ * .
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class ManagerDiSistema extends Utente implements ManagerDiSistemaTO {
 	private static final long serialVersionUID = -7505581083991050221L;
 	private String indirizzo;

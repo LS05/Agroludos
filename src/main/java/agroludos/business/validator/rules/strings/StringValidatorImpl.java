@@ -4,6 +4,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.apache.commons.validator.routines.EmailValidator;
 
+/**
+ * Implementazione dell'interfaccia {@link StringValidator}
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class StringValidatorImpl implements StringValidator{
 
 	@Override

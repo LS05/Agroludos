@@ -2,6 +2,12 @@ package agroludos.business.validator.rules.partecipante;
 
 import agroludos.business.validator.rules.AgroludosRule;
 
+/**
+ * implementa {@link PRulesFactory}
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class PartRulesFactoryImpl implements PRulesFactory {
 	private final static PartCFRule CF_RULE = new PartCFRule();
 	private final static PartSrcRule SRC_RULE = new PartSrcRule();

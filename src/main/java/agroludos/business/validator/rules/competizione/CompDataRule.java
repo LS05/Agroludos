@@ -7,8 +7,18 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.ErrorTO;
 
+/**
+ * Gestisce gli errori sulla data di una competizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class CompDataRule extends AgroludosRule {
 
+	/**
+	 * Controlla che la data sia posteriore a 2 giorni da oggi, che non sia antecedente ad oggi <br>
+	 * e che non sia null
+	 */
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof CompetizioneTO){

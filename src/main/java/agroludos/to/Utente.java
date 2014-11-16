@@ -1,5 +1,13 @@
 package agroludos.to;
 
+/**
+ * Implementazione dell'interfaccia {@link UtenteTO}. Alcuni metodi non sono resi pubblici nell'interfaccia, in quanto chiamati
+ * da Hibernate per settare o leggere i campi in base a quelli presenti nella tabella.
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class Utente implements UtenteTO{
 
 	private static final long serialVersionUID = -5750807819852265909L;
@@ -17,6 +25,10 @@ class Utente implements UtenteTO{
 		return id;
 	}
 
+	/**
+	 * Utilizzato da hibernate per settare l'id tramite mapping
+	 * @param id
+	 */
 	@SuppressWarnings("unused")
 	private void setId(Integer id) {
 		this.id = id;
@@ -42,6 +54,10 @@ class Utente implements UtenteTO{
 		this.statoUtente = (StatoUtente)stato;
 	}
 
+	/**
+	 * Utilizzato da hibernate per settare lo statoutente tramite mapping
+	 * @param statoUtente
+	 */
 	public void setStatoUtente(StatoUtente statoUtente) {
 		this.statoUtente = statoUtente;
 	}
@@ -96,11 +112,6 @@ class Utente implements UtenteTO{
 		this.email = email;
 	}
 
-	@Override
-	public int compareTo(UtenteTO o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public String toString() {
@@ -108,5 +119,11 @@ class Utente implements UtenteTO{
 				+ ", username=" + username + ", password=" + password
 				+ ", email=" + email + ", tipoUtente=" + tipoUtente
 				+ ", statoUtente=" + statoUtente + "]";
+	}
+
+	@Override
+	public int compareTo(UtenteTO arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

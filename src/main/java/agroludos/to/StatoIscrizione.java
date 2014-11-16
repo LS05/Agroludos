@@ -1,5 +1,13 @@
 package agroludos.to;
 
+/**
+ * Implementazione dell'interfaccia {@link StatoIscrizioneTO}. Alcuni metodi non sono resi pubblici nell'interfaccia, in quanto chiamati
+ * da Hibernate per settare o leggere i campi in base a quelli presenti nella tabella.
+ * .
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class StatoIscrizione implements StatoIscrizioneTO{
 
 	private static final long serialVersionUID = 1L;
@@ -11,6 +19,10 @@ class StatoIscrizione implements StatoIscrizioneTO{
 		return id;
 	}
 
+	/**
+	 * Utilizzato da hibernate per settare l'id dello stato tramite il mapping
+	 * @param id
+	 */
 	@SuppressWarnings("unused")
 	private void setId(Integer id) {
 		this.id = id;
@@ -21,6 +33,10 @@ class StatoIscrizione implements StatoIscrizioneTO{
 		return nome;
 	}
 
+	/**
+	 * Utilizzato da hibernate per settare il nome dello stato tramite mapping
+	 * @param nome
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

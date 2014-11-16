@@ -5,12 +5,21 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.UtenteTO;
 
+/**
+ * Gestisce gli errori sull'username degli utenti
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class UserUsernameRule extends AgroludosRule {
 
 	UserUsernameRule() {
 		super();
 	}
 
+	/**
+	 * controlla la lunghezza 
+	 */
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof UtenteTO){

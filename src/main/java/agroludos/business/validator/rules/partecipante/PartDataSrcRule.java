@@ -9,9 +9,18 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 
+/**
+ * gestisce gli errori sulla data del certificato src
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class PartDataSrcRule extends AgroludosRule {
 	private DateValidator dateValidator;
 
+	/**
+	 * controlla che non sia nul e che sia antecendente ad oggi
+	 */
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof PartecipanteTO){

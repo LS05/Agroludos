@@ -1,5 +1,12 @@
 package agroludos.to;
 
+/**
+ * Implementazione dell'interfaccia {@link QuestionTO}. 
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class Question implements QuestionTO{
 
 	private static final long serialVersionUID = 1L;

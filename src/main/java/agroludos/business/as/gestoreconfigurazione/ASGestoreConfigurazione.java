@@ -2,11 +2,8 @@ package agroludos.business.as.gestoreconfigurazione;
 
 import agroludos.business.as.AgroludosAS;
 import agroludos.exceptions.system.DatabaseException;
-import agroludos.integration.dao.file.FConfigurazioneDAO;
-import agroludos.integration.dao.file.FileDAOFactory;
 import agroludos.integration.dao.file.FileFactory;
 import agroludos.system.SystemConf;
-import agroludos.to.DatabaseTO;
 
 /**
  * <b>Business Tier</b></br>
@@ -17,29 +14,12 @@ import agroludos.to.DatabaseTO;
  * @author Francesco Zagaria
  *
  */
-class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione, SConfigurazione{
-
-	private FileDAOFactory fileDaoFact;
-
-	private FConfigurazioneDAO fileConf;
+class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione{
 
 	private SystemConf sysConf;
 
 	ASGestoreConfigurazione(SystemConf sysConf, FileFactory filefact){
 		this.sysConf = sysConf;
-		this.fileDaoFact = filefact.getDAOFactory(this.sysConf.getTipoConf());
-		this.fileConf = this.fileDaoFact.getConfigurazioneDAO();
-	}
-
-	@Override
-	public boolean inserisciConfigurazione(DatabaseTO dbto) throws DatabaseException {
-		boolean res = false;
-
-		if(this.fileConf.creaConfigurazione(dbto)){
-			res = true;
-		}
-
-		return res;
 	}
 
 	@Override

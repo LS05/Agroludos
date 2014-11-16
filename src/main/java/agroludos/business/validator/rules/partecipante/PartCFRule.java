@@ -6,9 +6,18 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 
+/**
+ * gestisce gli errori sul CF di un partecipante
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class PartCFRule extends AgroludosRule {
 	private StringValidator strValidator;
 
+	/**
+	 * controlla che sia alphanumerico e che sia di 16 cifre
+	 */
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof PartecipanteTO){

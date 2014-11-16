@@ -5,8 +5,17 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.IscrizioneTO;
 
+/**
+ * Gestisce gli errori sul costo dell'iscrizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class IscrCostoRule extends AgroludosRule {
 
+	/**
+	 * controlla che il costo non sia inferiore a 0
+	 */
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof IscrizioneTO){

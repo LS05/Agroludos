@@ -6,9 +6,18 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiSistemaTO;
 
+/**
+ * Gestisce gli errori sul numero di telefono del manager di sistem
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class MdsNumeroTelefonoRule extends AgroludosRule {
 	private StringValidator stringValidator;
 
+	/**
+	 * controlla che il numero sia numerico e che sia maggiore della lunghezza segnata nel file di proprietà
+	 */
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof ManagerDiSistemaTO){

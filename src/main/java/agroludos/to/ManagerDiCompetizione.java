@@ -1,6 +1,11 @@
 package agroludos.to;
 
-
+/**
+ * Implementazione dell'interfaccia {@link ManagerDiCompetizioneTO}.
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class ManagerDiCompetizione extends Utente implements ManagerDiCompetizioneTO {
 	private static final long serialVersionUID = 8563751281065371435L;
 	private Double stipendio;

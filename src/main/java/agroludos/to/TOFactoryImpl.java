@@ -1,11 +1,14 @@
 package agroludos.to;
 
+/**
+ * Implementazione dell'interfaccia {@link TOFactory}
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class TOFactoryImpl implements TOFactory {
 
-	@Override
-	public DatabaseTO createDatabaseTO(){
-		return new Database();
-	}
 
 	@Override
 	public SuccessMessageTO createSuccMessageTO(){

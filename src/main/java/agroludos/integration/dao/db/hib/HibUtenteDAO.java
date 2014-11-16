@@ -1,4 +1,4 @@
-package agroludos.integration.dao.db.mysql;
+package agroludos.integration.dao.db.hib;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import agroludos.exceptions.system.DatabaseException;
 import agroludos.integration.dao.db.UtenteDAO;
 import agroludos.to.UtenteTO;
 
-class MySqlUtenteDAO<T extends UtenteTO> extends MySqlAgroludosDAO<T> implements UtenteDAO<T>{
+class HibUtenteDAO<T extends UtenteTO> extends HibAgroludosDAO<T> implements UtenteDAO<T>{
 
 	@SuppressWarnings("unchecked")
 	@Override

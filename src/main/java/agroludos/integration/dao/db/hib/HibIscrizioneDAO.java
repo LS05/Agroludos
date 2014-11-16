@@ -1,4 +1,4 @@
-package agroludos.integration.dao.db.mysql;
+package agroludos.integration.dao.db.hib;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,9 @@ import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.StatoIscrizioneTO;
 
-class MySqlIscrizioneDAO extends MySqlAgroludosDAO<IscrizioneTO> implements IscrizioneDAO{
+class HibIscrizioneDAO extends HibAgroludosDAO<IscrizioneTO> implements IscrizioneDAO{
 
-	MySqlIscrizioneDAO() {
+	HibIscrizioneDAO() {
 		this.setClasse(toFact.createIscrizioneTO());
 	}
 

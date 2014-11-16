@@ -21,32 +21,77 @@ import agroludos.to.CertificatoTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.utility.PasswordEncryption;
 
+/**
+ * <b>Business Tier</b></br>
+ * La classe modella e implementa un <b>Application Service</b> e rappresenta il componente:
+ * <b>Gestore dei Partecipanti.</b><br /> 
+ * L'obiettivo della classe &egrave; quello di centralizzare ed incapsulare il funzionamento
+ * dei servizi andando a ridurre l'accoppiamento con le altre componenti del sistema.
+ * Il gestore utilizza una serie di {@link AgroludosTO} (Transfer Object o Data Transfer Object
+ * la cui tipologia dipende dal servizio) e sfrutta il {@link PartecipanteDAO} 
+ * (Data Access Object) per occuparsi della persistenza di tali oggetti.</br>
+ * Il Gestore dei Partecipanti espone la logica di business riguardante i Partecipanti 
+ * tramite due interfacce. L'interfaccia {@link LPartecipante} fornisce i servizi 
+ * di lettura, mentre l'interfaccia {@link SPartecipante} offre i servizi di scrittura.</br>
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SPartecipante{
 	private PasswordEncryption pwdEnc;
 	private FileFactory fileFactory;
 	private AgroludosValidator validator;
 
+	/**
+	 * Il costruttore inizializza le variabili pwdEnc, fileFactory e validator
+	 * @param pwdEnc
+	 * @param fileFactory
+	 * @param validator
+	 */
 	ASGestorePartecipante(PasswordEncryption pwdEnc, FileFactory fileFactory, AgroludosValidator validator){
 		this.pwdEnc = pwdEnc;
 		this.fileFactory = fileFactory;
 		this.validator = validator;
 	}
 
+	/**
+	 * 
+	 * @return istanza di {@link PartecipanteDAO}
+	 * @throws DatabaseException
+	 */
 	private PartecipanteDAO getPartecipanteDAO() throws DatabaseException {
 		DBDAOFactory dbDAOFact = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return dbDAOFact.getPartecipanteDAO();
 	}
 
+	/**
+	 * 
+	 * @return istanza di {@link TipoUtenteDAO}
+	 * @throws DatabaseException
+	 */
 	private TipoUtenteDAO getTipoUtenteDAO() throws DatabaseException {
 		DBDAOFactory daoTipoUtente = this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
 		return daoTipoUtente.getTipoUtenteDAO();
 	}
 
+	/**
+	 * 
+	 * @return istanza di {@link CertificatoSRCDAO}
+	 */
 	private CertificatoSRCDAO getCertificatoSRCDAO() {
 		FileDAOFactory daoFile = this.fileFactory.getDAOFactory(this.sysConf.getTipoCert());
 		return daoFile.getCertificatoSRCDAO();
 	}
 
+	/**
+	 * Il metodo effettua la validazione del partecipante in input, salva il certificato in memoria
+	 * e imposta il suo percorso nel {@link PartecipanteTO} associato al partecipante
+	 * @param partTO
+	 * @throws DatabaseException
+	 * @throws ValidationException
+	 * @throws IOException
+	 */
 	private void setDatiPartecipante(PartecipanteTO partTO)
 			throws DatabaseException, ValidationException, IOException{
 
@@ -60,6 +105,11 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 
 	}
 
+	/**
+	 * Il metodo inserisce un partecipanti nella sorgente dati tramite il DAO {@link PartecipanteDAO}.
+	 * Prima di effettuare l'inserimento controlla che non esistano già username e email, altrimenti 
+	 * solleva l'eccezione {@link UtenteEsistenteException}, e effettua la validazione tramite {@link #setDatiPartecipante(PartecipanteTO)}
+	 */
 	@Override
 	public PartecipanteTO inserisciPartecipante(PartecipanteTO partTO)
 			throws DatabaseException, ValidationException, IOException {
@@ -87,6 +137,10 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 
 	}
 
+	/**
+	 * Il metodo dopo aver validato il partecipante in input tramite {@link #setDatiPartecipante(PartecipanteTO)}
+	 * effettua la modifica tramite il DAO {@link PartecipanteDAO}
+	 */
 	@Override
 	public PartecipanteTO modificaPartecipante(PartecipanteTO partTO)
 			throws DatabaseException, ValidationException, IOException {
@@ -100,6 +154,13 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 		return part;
 	}
 
+	/**
+	 * TODO
+	 * @param partTO
+	 * @return
+	 * @throws UserNotFoundException
+	 * @throws IOException
+	 */
 	private PartecipanteTO getSupp(PartecipanteTO partTO) 
 			throws UserNotFoundException, IOException{
 		CertificatoSRCDAO certFile = this.getCertificatoSRCDAO();
@@ -113,6 +174,9 @@ class ASGestorePartecipante extends AgroludosAS implements LPartecipante, SParte
 		return partTO;
 	}
 
+	/**
+	 * Il metodo restituisce un Partecipante utilizzando l'username in input
+	 */
 	@Override
 	public PartecipanteTO getPartecipante(PartecipanteTO parTO)
 			throws DatabaseException, IOException, UserNotFoundException {

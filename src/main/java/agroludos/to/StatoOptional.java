@@ -1,5 +1,13 @@
 package agroludos.to;
 
+/**
+ * Implementazione dell'interfaccia {@link StatoOptionalTO}. Alcuni metodi non sono resi pubblici nell'interfaccia, in quanto chiamati
+ * da Hibernate per settare o leggere i campi in base a quelli presenti nella tabella StatoOptional.
+ * .
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class StatoOptional implements StatoOptionalTO{
 
 	private static final long serialVersionUID = 1L;
@@ -11,6 +19,10 @@ class StatoOptional implements StatoOptionalTO{
 		return id;
 	}
 
+	/**
+	 * Utilizzato da hibernate per settare l'id tramite mapping
+	 * @param nome
+	 */
 	@SuppressWarnings("unused")
 	private void setId(Integer id) {
 		this.id = id;
@@ -21,6 +33,10 @@ class StatoOptional implements StatoOptionalTO{
 		return nome;
 	}
 	
+	/**
+	 * Utilizzato da hibernate per settare il nome dello stato tramite mapping
+	 * @param nome
+	 */
 	@SuppressWarnings("unused")
 	private void setNome(String nome){
 		this.nome = nome;

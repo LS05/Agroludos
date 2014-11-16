@@ -5,8 +5,18 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.CompetizioneTO;
 
+/**
+ * Gestisce gli errori sul costo di una competizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ * @see CompetizioneTO
+ *
+ */
 class CompCostoRule extends AgroludosRule {
 
+	/**
+	 * controlla che il costo della copetizione sia maggiore di 0
+	 */
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof CompetizioneTO){

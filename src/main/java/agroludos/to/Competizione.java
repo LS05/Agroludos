@@ -9,11 +9,8 @@ import java.util.Set;
 import org.joda.time.DateMidnight;
 
 /**
- * Implementazione dell'interfaccia CompetizioneTO. L'implementazione sull'assunzione
- * per quale alcuni metodi non sono resi pubblici nell'interfaccia, in quanto chiamati
+ * Implementazione dell'interfaccia CompetizioneTO. Alcuni metodi non sono resi pubblici nell'interfaccia, in quanto chiamati
  * da Hibernate per settare o leggere i campi in base a quelli presenti nella tabella
- * competizione.
- * In particolare i campi seguono 
  * @author Luca Suriano
  * @author Francesco Zagaria
  *
@@ -115,6 +112,10 @@ class Competizione implements CompetizioneTO{
 		return id;
 	}
 
+	/**
+	 * Inserisce l'id di una competizione
+	 * @param id
+	 */
 	@SuppressWarnings("unused")
 	private void setId(Integer id) {
 		this.id = id;
@@ -145,10 +146,18 @@ class Competizione implements CompetizioneTO{
 		this.nmax = nmax;
 	}
 
+	/**
+	 * Hibernate gestisce il set degli {@link Optional} associati alla competizione mediante mapping
+	 * @return gli {@link Optional} accosiati ad una competizione
+	 */
 	public Set<Optional> getOptionals() {
 		return optionals;
 	}
 
+	/**
+	 *  Hibernate gestisce il set degli {@link Optional} associati alla competizione mediante mapping
+	 * @param optionals
+	 */
 	public void setOptionals(Set<Optional> optionals) {
 		this.optionals = optionals;
 	}
@@ -199,26 +208,6 @@ class Competizione implements CompetizioneTO{
 		}
 
 		return res;
-	}
-
-	@Override
-	public CompetizioneTO clone(){
-		Competizione c = new Competizione();
-		//		c.id = new Integer(id);
-		//		c.nome = new String(nome);
-		//		private DateTime suppData;
-		//		private Date data;
-		//		c.nmin = nmin;
-		//		c.nmax = nmax;
-		//		c.descrizione = new String(descrizione);
-		//		c.costo = new Double(costo);
-		//		c.idStato = idStato;
-		//		c.optionals = this.optionals.clone();
-		//		private Set<Optional> optionals;
-		//		private TipoCompetizione tipoCompetizione;
-		//		private StatoCompetizione statoCompetizione;
-		//		private ManagerDiCompetizione managerDiCompetizione;
-		return c;
 	}
 
 	@Override

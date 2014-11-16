@@ -1,5 +1,13 @@
 package agroludos.to;
 
+/**
+ * Implementazione dell'interfaccia {@link OptionalTO}. Alcuni metodi non sono resi pubblici nell'interfaccia, in quanto chiamati
+ * da Hibernate per settare o leggere i campi in base a quelli presenti nella tabella.
+ * .
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class Optional implements OptionalTO{
 	private static final long serialVersionUID = 4962907532320055278L;
 	private String nome;
@@ -34,6 +42,10 @@ class Optional implements OptionalTO{
 		return id;
 	}
 
+	/**
+	 * Utilizzato da hibernate per settare l'id tramite mapping
+	 * @param id
+	 */
 	@SuppressWarnings("unused")
 	private void setId(Integer id) {
 		this.id = id;

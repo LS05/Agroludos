@@ -1,4 +1,4 @@
-package agroludos.integration.dao.db.mysql;
+package agroludos.integration.dao.db.hib;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import agroludos.integration.dao.db.DAO;
 import agroludos.to.AgroludosTO;
 import agroludos.to.TOFactory;
 
-abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
+abstract class HibAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 
 	protected static TOFactory toFact;
 
@@ -23,9 +23,10 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 	}
 
 	private Session getSession(){
-		return MySqlDAOUtil.getSessionFactory().openSession();
+		return HibDAOUtil.getSessionFactory().openSession();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List< T > getAll() throws DatabaseException {
 		List<T> res = null;
@@ -49,6 +50,7 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 		return res; 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T findOne(Integer id) throws DatabaseException {
 		T entity = null;
@@ -120,6 +122,7 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 		return entity;		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <P> List<T> executeParamQuery(String queryName, List<P> parameters) throws DatabaseException {
 		Transaction tx = null;
@@ -153,6 +156,7 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 		return res;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <V> V executeValParamQuery(String queryName, List<?> parameters) throws DatabaseException {
 		Transaction tx = null;
@@ -187,6 +191,7 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> executeQuery(String queryName) throws DatabaseException {
 		Transaction tx = null;
@@ -213,6 +218,7 @@ abstract class MySqlAgroludosDAO<T extends AgroludosTO> implements DAO<T> {
 		return res;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <V> V executeValQuery(String queryName) throws DatabaseException {
 		Transaction tx = null;

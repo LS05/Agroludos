@@ -5,8 +5,17 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.UtenteTO;
 
+/**
+ * GEstisce gli errori sul cognome di un untente
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class UserCognomeRule extends AgroludosRule {
 
+	/**
+	 * controlla la lunghezza
+	 */
 	@Override
 	public void validate(AgroludosTO mainTO, ErrorTO errorTO) {
 		if(mainTO instanceof UtenteTO){

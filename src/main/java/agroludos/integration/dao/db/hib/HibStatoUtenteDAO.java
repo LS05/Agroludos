@@ -1,12 +1,12 @@
-package agroludos.integration.dao.db.mysql;
+package agroludos.integration.dao.db.hib;
 
 import agroludos.exceptions.system.DatabaseException;
 import agroludos.integration.dao.db.StatoUtenteDAO;
 import agroludos.to.StatoUtenteTO;
 
-public class MySqlStatoUtenteDAO extends MySqlAgroludosDAO<StatoUtenteTO> implements StatoUtenteDAO {
+public class HibStatoUtenteDAO extends HibAgroludosDAO<StatoUtenteTO> implements StatoUtenteDAO {
 
-	public MySqlStatoUtenteDAO() {
+	public HibStatoUtenteDAO() {
 		this.setClasse(toFact.createStatoUtenteTO());
 	}
 

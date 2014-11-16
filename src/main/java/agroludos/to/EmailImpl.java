@@ -3,6 +3,12 @@ package agroludos.to;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementazione dell'interfaccia {@link EmailTO}.
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class EmailImpl implements EmailTO{
 	private static final long serialVersionUID = -8701532820569848721L;
 	private List<UtenteTO> listDestinatari;

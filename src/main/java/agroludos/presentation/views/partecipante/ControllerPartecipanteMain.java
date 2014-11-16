@@ -12,11 +12,11 @@ import agroludos.presentation.views.components.tablemodel.CmpModel;
 import agroludos.presentation.views.components.tablemodel.IscModel;
 import agroludos.presentation.views.utenti.ControllerUtenti;
 import agroludos.to.CompetizioneTO;
+import agroludos.to.ErrorMessageTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.QuestionTO;
 import agroludos.to.SuccessMessageTO;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -236,6 +236,10 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 				succ.setMessage(this.res.getString("key157"));
 				this.setVista("messageDialog", succ);
 
+			}if(res instanceof String){
+				ErrorMessageTO msg = toFact.createErrMessageTO();
+				msg.setMessage((String) res);
+				this.setVista("messageDialog", msg);
 			}
 
 		}

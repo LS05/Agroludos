@@ -1,13 +1,13 @@
-package agroludos.integration.dao.db.mysql;
+package agroludos.integration.dao.db.hib;
 
 
 import agroludos.exceptions.system.DatabaseException;
 import agroludos.integration.dao.db.StatoIscrizioneDAO;
 import agroludos.to.StatoIscrizioneTO;
 
-public class MySqlStatoIscrizioneDAO extends MySqlAgroludosDAO<StatoIscrizioneTO> implements StatoIscrizioneDAO{
+public class HibStatoIscrizioneDAO extends HibAgroludosDAO<StatoIscrizioneTO> implements StatoIscrizioneDAO{
 
-	public MySqlStatoIscrizioneDAO() {
+	public HibStatoIscrizioneDAO() {
 		this.setClasse(toFact.createStatoIscrizioneTO());
 	}
 

@@ -97,7 +97,6 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 * 
 	 * @return
 	 */
-	//TODO Cambiare in Integer
 	void setNmin(int nmin);
 
 	/**
@@ -114,7 +113,6 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 * 
 	 * @return
 	 */
-	//TODO Cambiare in Integer
 	void setNmax(int nmax);
 
 
@@ -138,20 +136,58 @@ public interface CompetizioneTO extends AgroludosTO, Comparable<CompetizioneTO>{
 	 */
 	List<OptionalTO> getAllOptionals();
 
+	/**
+	 * 
+	 * @return il tipo di competizione
+	 * @see TipoCompetizioneTO
+	 */
 	TipoCompetizioneTO getTipoCompetizione();
 
+	/**
+	 * 
+	 * @return lo stato della competizione
+	 * @see StatoCompetizioneTO
+	 */
 	StatoCompetizioneTO getStatoCompetizione();
 
+	/**
+	 * 
+	 * @return il Manager della competizione
+	 * @see ManagerDiCompetizioneTO
+	 */
 	ManagerDiCompetizioneTO getManagerDiCompetizione();
 
+	/**
+	 * Inserisce lo stato della competizione
+	 * @param statoCompetizione
+	 * @see StatoCompetizioneTO
+	 */
 	void setStatoCompetizione(StatoCompetizioneTO statoCompetizione);
 
+	/**
+	 * Inserisce il tipo di competizione
+	 * @param tipoCompetizione
+	 * @see TipoCompetizioneTO
+	 */
 	void setTipoCompetizione(TipoCompetizioneTO tipoCompetizione);
 
+	/**
+	 * Inserisce il manager di competizione
+	 * @param managerDiCompetizione
+	 * @see ManagerDiCompetizioneTO
+	 */
 	void setManagerDiCompetizione(ManagerDiCompetizioneTO managerDiCompetizione);
 
+	/**
+	 * 
+	 * @return restituisce il numero di iscritti alla competizione
+	 */
 	int getNiscritti();
 
+	/**
+	 * Inserisce in numero di iscritti alla competizione
+	 * @param nIscritti
+	 */
 	void setNiscritti(int nIscritti);
 
 }

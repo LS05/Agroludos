@@ -3,6 +3,12 @@ package agroludos.business.validator.rules.utente;
 import agroludos.business.validator.rules.AgroludosRule;
 import agroludos.business.validator.rules.strings.StringValidator;
 
+/**
+ * Implementa {@link UserRulesFactory}
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class UserRulesFactoryImpl implements UserRulesFactory {
 
 	private StringValidator strValidator;
