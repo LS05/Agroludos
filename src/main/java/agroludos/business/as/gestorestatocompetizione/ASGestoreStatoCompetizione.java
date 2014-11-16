@@ -8,7 +8,7 @@ import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.StatoCompetizioneDAO;
 import agroludos.to.StatoCompetizioneTO;
 
-public class ASGestoreStatoCompetizione extends AgroludosAS implements LStatoCompetizione, SStatoCompetizione{
+public class ASGestoreStatoCompetizione extends AgroludosAS implements LStatoCompetizione {
 
 	@Override
 	public List<StatoCompetizioneTO> getAllStatoCompetizione()

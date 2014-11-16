@@ -8,8 +8,7 @@ import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.StatoUtenteDAO;
 import agroludos.to.StatoUtenteTO;
 
-public class ASGestoreStatoUtente extends AgroludosAS implements LStatoUtente,
-		SStatoUtente {
+public class ASGestoreStatoUtente extends AgroludosAS implements LStatoUtente {
 
 	@Override
 	public List<StatoUtenteTO> getAllStatoUtente() throws DatabaseException {

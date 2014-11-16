@@ -24,11 +24,9 @@
 		<property name="lstatocmp" ref="gestoreStatoCompetizione" />
 		<property name="sstatocmp" ref="gestoreStatoCompetizione" />
 		<property name="lstatoopt" ref="gestoreStatoOptional" />
-		<property name="sstatoopt" ref="gestoreStatoOptional" />
 		<property name="lstatoutente" ref="gestoreStatoUtente" />
 		<property name="sstatoutente" ref="gestoreStatoUtente" />
 		<property name="lstatoisc" ref="gestoreStatoIscrizione" />
-		<property name="sstatoisc" ref="gestoreStatoIscrizione" />
 		<property name="ltipoopt" ref="gestoreTipoOptional" />
 		<property name="stipoopt" ref="gestoreTipoOptional" />
 		<property name="ltipocmp" ref="gestoreTipoCompetizione" />

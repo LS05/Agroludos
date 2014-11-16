@@ -8,7 +8,7 @@ import agroludos.integration.dao.db.DBDAOFactory;
 import agroludos.integration.dao.db.StatoOptionalDAO;
 import agroludos.to.StatoOptionalTO;
 
-public class ASGestoreStatoOptional extends AgroludosAS implements LStatoOptional,SStatoOptional{
+public class ASGestoreStatoOptional extends AgroludosAS implements LStatoOptional {
 
 	@Override
 	public List<StatoOptionalTO> getAllStatoOptional() throws DatabaseException {
