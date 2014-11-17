@@ -70,6 +70,11 @@ class HibUtenteDAO<T extends UtenteTO> extends HibAgroludosDAO<T> implements Ute
 		return getUtenteBy("getByID", param);
 	}
 	
+	/**
+	 * 
+	 * @param user
+	 * @return vero se si tratta di un utente nullo, falso altrimenti
+	 */
 	private boolean isNullUtente(UtenteTO user){
 		return user.getId() == -1;
 	}
