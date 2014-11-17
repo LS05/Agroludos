@@ -29,7 +29,6 @@ class HibIscrizioneDAO extends HibAgroludosDAO<IscrizioneTO> implements Iscrizio
 		return iscTO;
 	}
 
-	//TODO Da rivedere il confronto con null
 	@Override
 	public boolean esisteIscrizione(IscrizioneTO iscTO) throws DatabaseException {
 		IscrizioneTO iscrizione = this.findOne(iscTO.getId());
@@ -46,6 +45,11 @@ class HibIscrizioneDAO extends HibAgroludosDAO<IscrizioneTO> implements Iscrizio
 		return res;
 	}
 	
+	/**
+	 * Restituisce lo stato terminato di un iscrizione
+	 * @return
+	 * @throws DatabaseException
+	 */
 	private StatoIscrizioneTO getStatoIscrizioneTerminato() throws DatabaseException {
 
 		StatoIscrizioneTO siscTO = (StatoIscrizioneTO) super.executeQuery("getStatoIscrizioneTerminato");
