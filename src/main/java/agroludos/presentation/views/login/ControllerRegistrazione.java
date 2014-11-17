@@ -26,6 +26,12 @@ import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.StatoUtenteTO;
 
+/**
+ * Gestisce la view di regisrazione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerRegistrazione extends AgroludosController{
 
 	private String viewName;
@@ -146,6 +152,9 @@ public class ControllerRegistrazione extends AgroludosController{
 
 	}
 
+	/**
+	 * nasconde le label di errori mostrati in caso di fallimento di validazione
+	 */
 	private void hideErrors(){
 		this.lblNomeError.setVisible(false);
 		this.lblCognomeError.setVisible(false);
@@ -161,6 +170,12 @@ public class ControllerRegistrazione extends AgroludosController{
 		this.lblSessoError.setVisible(false);
 	}
 
+	/**
+	 * mostra le label di errori che non hanno passato la validazione
+	 * @param errors
+	 * @param lblError
+	 * @param errorKey
+	 */
 	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
 		if(errors.hasError(this.getError(errorKey))){
 			String nomeKey = this.getError(errorKey);
@@ -169,6 +184,10 @@ public class ControllerRegistrazione extends AgroludosController{
 		} 
 	}
 
+	/**
+	 * popola il partecipante to e effettua la richiesta per la registrazione
+	 * @param event
+	 */
 	@FXML protected void btnRegistrati(MouseEvent event) {
 		this.hideErrors();
 		this.parTO.setNome(this.txtNome.getText());
@@ -206,6 +225,10 @@ public class ControllerRegistrazione extends AgroludosController{
 		}
 	}
 
+	/**
+	 * carica il file del certificato
+	 * @param event
+	 */
 	@FXML protected void btnCarica(MouseEvent event) {
 		File file = this.fileChooser.showOpenDialog(this.getStage(this.viewName));
 		if (file != null) {

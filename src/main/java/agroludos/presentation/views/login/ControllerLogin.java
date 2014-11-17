@@ -25,6 +25,12 @@ import agroludos.to.PartecipanteTO;
 import agroludos.to.SuccessMessageTO;
 import agroludos.to.UtenteTO;
 
+/**
+ * La classe gestisce la view di Login
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerLogin extends AgroludosController implements Initializable{
 
 	private String viewName;
@@ -84,6 +90,9 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 		eseguiLogin();
 	}
 
+	/**
+	 * popola il to Utente e esegue la richiesta di autenticazione
+	 */
 	private void eseguiLogin() {
 		this.lblErroreLogin.setVisible(false);
 
@@ -100,10 +109,18 @@ public class ControllerLogin extends AgroludosController implements Initializabl
 		}
 	}
 
+	/**
+	 * mostra la view passwordDimenticata
+	 * @param event
+	 */
 	@FXML protected void btnPswDimenticata(MouseEvent event) {
 		this.setVista("passwordDimenticata");
 	}
 
+	/**
+	 * mostra la view per la registrazione
+	 * @param event
+	 */
 	@FXML protected void btnRegistrati(MouseEvent event) {
 		this.setVista("nuovaRegistrazione");
 	}

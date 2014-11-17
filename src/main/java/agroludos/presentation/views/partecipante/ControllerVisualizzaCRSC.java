@@ -11,6 +11,12 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.CertificatoTO;
 import agroludos.to.PartecipanteTO;
 
+/**
+ * Gestisce la view per la visualizzazione del certificato SRC
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerVisualizzaCRSC extends AgroludosController {
 	private String viewName;
 

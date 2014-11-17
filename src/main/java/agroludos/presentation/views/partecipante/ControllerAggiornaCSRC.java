@@ -20,6 +20,12 @@ import agroludos.to.ErrorTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.SuccessMessageTO;
 
+/**
+ * gestisce la view per l'aggiornamento del certificato SRC
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerAggiornaCSRC extends AgroludosController implements Initializable {
 	private String viewName;
 
@@ -61,6 +67,11 @@ public class ControllerAggiornaCSRC extends AgroludosController implements Initi
 		this.paneDataSrc.getChildren().add(this.dataSrcPicker.getDatePicker());
 	}
 
+	/**
+	 * effettua la richiesta della modifica del partecipante dopo aver inserito la
+	 * nuova data di rilascio e il percorso al fle
+	 * @param event
+	 */
 	@FXML protected void btnAggiornaClicked(MouseEvent event){
 		this.hideErrors();
 		this.parTO.setDataSRC(this.dataSrcPicker.getSelectedDate());
@@ -70,6 +81,10 @@ public class ControllerAggiornaCSRC extends AgroludosController implements Initi
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
+	/**
+	 * carica il file aggiornato
+	 * @param event
+	 */
 	@FXML protected void btnCaricaClicked(MouseEvent event){
 		File file = this.fileChooser.showOpenDialog(this.getStage(this.viewName));
 		if (file != null) {
@@ -78,11 +93,20 @@ public class ControllerAggiornaCSRC extends AgroludosController implements Initi
 		}
 	}
 
+	/**
+	 * nasconde gli errori di valizazione
+	 */
 	private void hideErrors(){
 		this.lblDataSrcError.setVisible(false);
 		this.lblSrcError.setVisible(false);
 	}
 
+	/**
+	 * mostra gli errori di valizazione
+	 * @param errors
+	 * @param lblError
+	 * @param errorKey
+	 */
 	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
 		if(errors.hasError(this.getError(errorKey))){
 			String nomeKey = this.getError(errorKey);

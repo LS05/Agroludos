@@ -17,6 +17,7 @@ import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.QuestionTO;
 import agroludos.to.SuccessMessageTO;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -28,6 +29,12 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+/**
+ * Gestisce la view principale di un partecipante
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerPartecipanteMain extends ControllerUtenti implements Initializable{
 	private String viewName;
 
@@ -133,6 +140,10 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 		return this.viewName;
 	}
 
+	/**
+	 * mostra il pane per la visualizzazione delle competizione aperte
+	 * @param event
+	 */
 	@FXML protected void btnGestComp(MouseEvent event) {
 		this.richiesta = this.getRichiesta("getCompetizioniAperte", this.viewName);
 		this.risposta = this.getRisposta();
@@ -146,6 +157,10 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
+	/**
+	 * mostra il pane per la gestione delle iscrizione del partecipante loggato
+	 * @param event
+	 */
 	@FXML protected void btnGestIscrizioni(MouseEvent event) {
 		this.richiesta = this.getRichiesta(this.currUser,"getAllIscrizioniAttive", this.viewName);
 		this.risposta = this.getRisposta();
@@ -154,22 +169,42 @@ public class ControllerPartecipanteMain extends ControllerUtenti implements Init
 		this.paneIscrizioni.setVisible(true);
 	}
 
+	/**
+	 * effetua il logout e mostra la view di login
+	 * @param event
+	 */
 	@FXML protected void menuLogout(ActionEvent event){
 		this.close();
 		this.setVista("login");
 	}
 
+	/**
+	 * mostra la view per l'aggiornamento del certificato SRC
+	 * @param event
+	 */
 	@FXML protected void btnAggiornaCSRC(ActionEvent event){
 		this.setVista("aggiornaSRC",this.currUser);
 	}
+	
+	/**
+	 * mostra la view per la modifica dei dati di accesso
+	 * @param event
+	 */
 	@FXML protected void menuModificaDatiAccesso(ActionEvent event){
 		this.setVista("modificaDatiAccesso",this.currUser);
 	}
 
+	/**
+	 * effettua la richiesta di chiusura
+	 * @param event
+	 */
 	@FXML protected void menuEsci(ActionEvent event){
 		chiusura();
 	}
 
+	/**
+	 * inserisce in un question to la richiesta di chiusura e mostra la view della question
+	 */
 	private void chiusura(){
 		QuestionTO question = toFact.createQuestionTO();
 		question.setQuestion(res.getString("key180"));

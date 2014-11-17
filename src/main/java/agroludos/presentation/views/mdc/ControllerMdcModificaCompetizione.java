@@ -29,6 +29,12 @@ import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.QuestionTO;
 
+/**
+ * Gestisce la view modifica di una competizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdcModificaCompetizione extends AgroludosController implements Initializable{
 	private String viewName;
 
@@ -120,14 +126,25 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 
 	}
 
+	/**
+	 * mostra la view per selezionare gli optional da associare alla competizione
+	 */
 	@FXML protected void btnSelezioneOpt(){
 		this.setVista("selezionaOptional", this.cmpto);
 	}
 
+	/**
+	 * chiude la modifica
+	 * @param event
+	 */
 	@FXML protected void btnAnnulla(MouseEvent event){
 		this.close();
 	}
 
+	/**
+	 * aggiorna il to della competizione e effettua la richiesta per la modifica della competizione
+	 * @param event
+	 */
 	@FXML protected void btnConferma(MouseEvent event){
 
 		this.lblNomeCmpError.setVisible(false);
@@ -161,6 +178,12 @@ public class ControllerMdcModificaCompetizione extends AgroludosController imple
 		this.close();
 	}
 
+	/**
+	 * mostra gli errori di validaziojne
+	 * @param errors
+	 * @param lblError
+	 * @param errorKey
+	 */
 	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
 		if(errors.hasError(this.getError(errorKey))){
 			String nomeKey = this.getError(errorKey);

@@ -23,6 +23,12 @@ import agroludos.to.ErrorTO;
 import agroludos.to.SuccessMessageTO;
 import agroludos.to.UtenteTO;
 
+/**
+ * Gestisce la view per la modifica dei dati di accesso da parte di un qualsiasi utente
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerModificaDatiAccesso extends AgroludosController implements Initializable{
 
 	private String viewName;
@@ -77,11 +83,20 @@ public class ControllerModificaDatiAccesso extends AgroludosController implement
 		this.uTO = (UtenteTO) mainTO;
 	}
 
+	/**
+	 * nasconde gli errori di validazione
+	 */
 	private void hideErrors(){
 		this.lblPasswordError.setVisible(false);
 		this.lblEmailError.setVisible(false);
 	}
 
+	/**
+	 * mostra gli errori di validazione
+	 * @param errors
+	 * @param lblError
+	 * @param errorKey
+	 */
 	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
 		if(errors.hasError(this.getError(errorKey))){
 			String nomeKey = this.getError(errorKey);
@@ -90,6 +105,10 @@ public class ControllerModificaDatiAccesso extends AgroludosController implement
 		} 
 	}
 
+	/**
+	 * esegue la richiesta per la modifica dei dati di accesso
+	 * @param event
+	 */
 	@FXML protected void modificaDatiAccesso(MouseEvent event) {
 		this.hideErrors();
 

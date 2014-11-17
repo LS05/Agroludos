@@ -20,6 +20,12 @@ import agroludos.to.MessageTO;
 import agroludos.to.SuccessMessageTO;
 import agroludos.to.UtenteTO;
 
+/**
+ * Gestisce la view per richiedere il ripristino della pasword
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerPasswordDimenticata extends AgroludosController implements Initializable{
 
 	private String viewName;
@@ -67,11 +73,18 @@ public class ControllerPasswordDimenticata extends AgroludosController implement
 		}
 	}
 
+	/**
+	 * salva l'email in un utente TO e esegue il ripristino della passoword
+	 * @param event
+	 */
 	@FXML protected void btnRichiedi(MouseEvent event) {
 		this.uTO.setEmail(this.txtEmail.getText());
 		eseguiRipristino();
 	}
 
+	/**
+	 * esegue la richiesta di password dimenticata
+	 */
 	private void eseguiRipristino() {	
 		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta(this.uTO, "passwordDimenticata", this.viewName);

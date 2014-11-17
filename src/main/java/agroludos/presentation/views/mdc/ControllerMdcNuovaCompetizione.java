@@ -32,6 +32,9 @@ import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.QuestionTO;
 import agroludos.to.TipoCompetizioneTO;
 
+/**
+ * Gestisce la view per l'inserimento di una nuova competizione
+ */
 public class ControllerMdcNuovaCompetizione extends AgroludosController implements Initializable{
 
 	private String viewName;
@@ -117,14 +120,27 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 	}
 
 
+	/**
+	 * chiude la view
+	 * @param event
+	 */
 	@FXML protected void btnAnnulla(MouseEvent event){
 		this.close();
 	}
 
+	/**
+	 * mostra la view di selezione degli optional
+	 * @param event
+	 */
 	@FXML protected void btnSelezionaOptional(MouseEvent event){
 		this.setVista("selezionaOptional", this.cmpto);
 	}
 
+	/**
+	 * popola la competizione e effettua la richiesta per l'inserimento della stessa
+	 * nella sorgente dati
+	 * @param event
+	 */
 	@FXML protected void btnInserisciCmp(MouseEvent event){
 
 		this.lblCostoCmpError.setVisible(false);
@@ -166,6 +182,12 @@ public class ControllerMdcNuovaCompetizione extends AgroludosController implemen
 		}
 	}
 
+	/**
+	 * mostra gli errori di validazione
+	 * @param errors
+	 * @param lblError
+	 * @param errorKey
+	 */
 	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
 		if(errors.hasError(this.getError(errorKey))){
 			String nomeKey = this.getError(errorKey);

@@ -24,6 +24,12 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.ErrorMessageTO;
 import agroludos.to.IscrizioneTO;
 
+/**
+ * Gestisce la view di una competizione vista da un partecipante
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerPartCompetizione extends AgroludosController{
 
 	private String viewName;
@@ -134,6 +140,10 @@ public class ControllerPartCompetizione extends AgroludosController{
 		this.tblIscritti.getItems().setAll(this.listaTabIsc);
 	}
 
+	/**
+	 * mostra la view per l'iscrizione alla competizione
+	 * @param event
+	 */
 	@FXML protected void btnIscrivitiClicked(MouseEvent event){
 		this.mainIscr.setCompetizione(this.cmpto);
 		this.setVista("mostraIscrPart", this.mainIscr);

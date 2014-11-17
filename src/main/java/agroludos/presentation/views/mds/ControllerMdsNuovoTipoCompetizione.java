@@ -14,6 +14,12 @@ import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.TipoCompetizioneTO;
 
+/**
+ * Gestisce la view per l'inserimento di un nuovo tipo di competizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdsNuovoTipoCompetizione extends AgroludosController{
 	private String viewName;
 
@@ -36,6 +42,11 @@ public class ControllerMdsNuovoTipoCompetizione extends AgroludosController{
 	protected void initializeView(AgroludosTO mainTO) {
 	}
 
+	/**
+	 * inserisce i dati in un {@link TipoCompetizioneTO} e effettua la richiesta
+	 * per l'inserimento del nuovo tipo di competizione
+	 * @param event
+	 */
 	@FXML protected void confermaNuovoTipoCompetizione(MouseEvent event) {
 		TipoCompetizioneTO tipoCpt = toFact.createTipoCompetizioneTO();
 		tipoCpt.setNome(this.txtNomeTipo.getText());

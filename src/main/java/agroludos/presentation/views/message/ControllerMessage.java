@@ -14,6 +14,12 @@ import agroludos.to.InfoMessageTO;
 import agroludos.to.MessageTO;
 import agroludos.to.SuccessMessageTO;
 
+/**
+ * Gestisce la view per mostrare a video un messaggio
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMessage extends AgroludosController{
 
 	private String viewName;
@@ -57,6 +63,10 @@ public class ControllerMessage extends AgroludosController{
 		}
 	}
 
+	/**
+	 * chiude la view 
+	 * @param event
+	 */
 	@FXML protected void btnOkClicked(MouseEvent event) {	
 		this.close();
 	}

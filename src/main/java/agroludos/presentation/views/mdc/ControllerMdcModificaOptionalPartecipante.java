@@ -29,6 +29,12 @@ import agroludos.to.SuccessMessageTO;
 import agroludos.to.TipiAgroludosTO;
 import agroludos.to.TipoOptionalTO;
 
+/**
+ * Gestisce la view per la modifica degli optional scelti da un partecipante
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdcModificaOptionalPartecipante extends AgroludosController implements Initializable{
 
 	private String viewName;
@@ -139,12 +145,19 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 		}
 	}
 
+	/**
+	 * imposta la label che tiene traccia del numero di passaggio dell'operazione
+	 */
 	private void setLabelDialog(){
 		//label passi e label tipo optioal
 		this.lblTipoOptional.setText(this.listTipiOpt.get(this.passoCorrente).getNome());
 		this.lblPassi.setText("Passo " + (this.passoCorrente+1) + " di " + this.nPassi);
 	}
 
+	/**
+	 * imposta gli optional in base al tipo in input nella tabella
+	 * @param tipoOpt
+	 */
 	private void setTableOptional(TipoOptionalTO tipoOpt){
 		List<OptionalTO> tblList = new ArrayList<OptionalTO>();
 
@@ -157,6 +170,9 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 		this.tableOptional.setAll(tblList);
 	}
 
+	/**
+	 * inserisce nella tabella gli optional scelti dall'iscritto
+	 */
 	private void setTableOptionalScelti(){
 		if(!this.mainIsc.getAllOptionals().isEmpty()){
 			for(OptionalTO opt: this.mainIsc.getAllOptionals()){
@@ -168,6 +184,10 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 		this.tableOptionalScelti.getItems().setAll(this.optSceltiData);
 	}
 
+	/**
+	 * aggiunge alla tabella degli optional scelti un optional
+	 * @param event
+	 */
 	@FXML protected void btnAggiungi(MouseEvent event) {
 		this.btnAggiungi.setDisable(true);
 		Boolean checkTipoOptional = false;
@@ -191,6 +211,10 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 		this.aggiornaTotale();
 	}
 
+	/**
+	 * rimuove dalla lista degli optional scelti un optional
+	 * @param event
+	 */
 	@FXML protected void btnRimuovi(MouseEvent event) {
 		this.btnRimuovi.setDisable(true);
 
@@ -204,6 +228,9 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 
 	}
 
+	/**
+	 * aggiorna il totale del costo dell'iscrizione
+	 */
 	private void aggiornaTotale() {
 		this.totale = (double) 0;
 
@@ -214,6 +241,10 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 
 	}
 
+	/**
+	 * torna al passo precedente
+	 * @param event
+	 */
 	@FXML protected void btnIndietro(MouseEvent event) {
 		this.passoCorrente--;
 		this.btnAvanti.setVisible(true);
@@ -228,6 +259,10 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 		this.setTableOptional((TipoOptionalTO) this.listTipiOpt.get(this.passoCorrente));
 	}
 
+	/**
+	 * va al passo successivo
+	 * @param event
+	 */
 	@FXML protected void btnAvanti(MouseEvent event) {
 
 		this.btnIndietro.setDisable(false);
@@ -243,6 +278,11 @@ public class ControllerMdcModificaOptionalPartecipante extends AgroludosControll
 
 	}
 
+	/**
+	 * conferma la modifica, popola il to dell'iscrizione con le modifiche e effettua la richiesta
+	 * di modifica iscrizione
+	 * @param event
+	 */
 	@FXML protected void btnConferma(MouseEvent event) {
 
 		this.mainIsc.clearOptionals();

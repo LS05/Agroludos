@@ -27,6 +27,12 @@ import agroludos.to.ErrorTO;
 import agroludos.to.ManagerDiCompetizioneTO;
 import agroludos.to.StatoUtenteTO;
 
+/**
+ * gestisce la view per l'inserimento di un nuovo manager di competizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdsNuovoMdC extends AgroludosController {
 	private String viewName;
 
@@ -100,6 +106,11 @@ public class ControllerMdsNuovoMdC extends AgroludosController {
 	protected void initializeView(AgroludosTO mainTO) {
 	}
 
+	/**
+	 * crea e popola un nuovo {@link ManagerDiCompetizioneTO} e esegue la richiesta
+	 * per l'inserimento di un nuovo manager di competizione
+	 * @param event
+	 */
 	@FXML protected void confermaNuovoManagerDiCompetizione(MouseEvent event){
 		ManagerDiCompetizioneTO mdcTO = toFact.createMdCTO();
 		mdcTO.setNome(this.txtNome.getText());

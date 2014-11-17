@@ -19,6 +19,12 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
+/**
+ * Gestisce la view di una iscrizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdcIscrizione extends AgroludosController implements Initializable{
 	private String viewName;
 
@@ -101,10 +107,18 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 		return this.viewName;
 	}
 
+	/**
+	 * mostra la view che mostra il certificato SRC
+	 * @param event
+	 */
 	@FXML protected void btnVisualizzaCertificato(MouseEvent event){
 		this.setVista("visualizzaSRC",this.iscto.getPartecipante());
 	}
 
+	/**
+	 * Inserisce la richiesta di annulla iscrizione in un {@link QuestionTO} e mostra la view question
+	 * @param event
+	 */
 	@FXML protected void btnAnnullaIscrizione(MouseEvent event){
 		QuestionTO question = toFact.createQuestionTO();
 		question.setQuestion(this.res.getString("key159"));
@@ -117,6 +131,10 @@ public class ControllerMdcIscrizione extends AgroludosController implements Init
 
 	}
 
+	/**
+	 * Mostra la view per la modifica degli optional scelti da un iscritto
+	 * @param event
+	 */
 	@FXML protected void btnModificaOptionalIscrizione(MouseEvent event) {
 		this.setVista("modificaOptionalPartecipante", this.iscto);
 	}

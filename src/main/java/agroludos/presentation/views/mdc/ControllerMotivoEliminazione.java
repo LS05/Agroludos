@@ -13,6 +13,13 @@ import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.EmailTO;
 
+/**
+ * gestisce la view per l'inserimento di una motivazione per l'eliminazione di una iscrizione
+ * da una competizione da parte di un manager di competizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMotivoEliminazione extends AgroludosController{
 
 	private String viewName;
@@ -47,6 +54,9 @@ public class ControllerMotivoEliminazione extends AgroludosController{
 		invia();	
 	}
 
+	/**
+	 * popola l'email TO e effettua la richiesta di invio mail tramite il gestore mail
+	 */
 	private void invia(){
 		String motivazione = this.txtMotivazioni.getText();
 		String message = this.mail.getMessage();

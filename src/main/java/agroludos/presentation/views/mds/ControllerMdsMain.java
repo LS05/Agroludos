@@ -48,6 +48,12 @@ import agroludos.to.TipiAgroludosTO;
 import agroludos.to.TipoCompetizioneTO;
 import agroludos.to.TipoOptionalTO;
 
+/**
+ * Gestisce la view principale di un manager di sistema
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdsMain extends ControllerUtenti implements Initializable{
 	//pane centrali
 	@FXML private GridPane paneGestioneCompetizioni;
@@ -237,41 +243,73 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		}
 	}
 
+	/**
+	 * effettua la ricerca sulle competizioni
+	 * @param event
+	 */
 	@FXML protected void btnCercaCompetizioniClicked(MouseEvent event) {
 		this.filterCmp.updateFilteredData(this.tableCompetizioni, this.txtFilterComp);
 		this.btnResetRicComp.setVisible(true);
 	}
 
+	/**
+	 * annulla la ricerca sulle competizioni
+	 * @param event
+	 */
 	@FXML protected void annullaRicercaCompClicked(MouseEvent event) {
 		this.filterCmp.resetResearch(this.tableCompetizioni, this.txtFilterComp);
 		this.btnResetRicComp.setVisible(false);
 	}
 
+	/**
+	 * annulla la ricerca sui partecipanti
+	 * @param event
+	 */
 	@FXML protected void annullaRicercaPartClicked(MouseEvent event){
 		this.filterPart.resetResearch(this.tablePartecipanti, this.txtFilterPart);
 		this.btnResetRicPart.setVisible(false);
 	}
 
+	/**
+	 * effettua la ricerca sui partecipanti
+	 * @param event
+	 */
 	@FXML protected void btnCercaPartClicked(MouseEvent event){
 		this.filterPart.updateFilteredData(this.tablePartecipanti, this.txtFilterPart);
 		this.btnResetRicPart.setVisible(true);
 	}
 
+	/**
+	 * effettua la ricerca sui manager di comeptizione
+	 * @param event
+	 */
 	@FXML protected void cercaMdcClicked(MouseEvent event){
 		this.filterMdc.updateFilteredData(this.tableManagerCompetizione, this.txtFilterMdc);
 		this.btnResetCercaMdc.setVisible(true);
 	}
 
+	/**
+	 * annulla la ricerca sui manager di competizione
+	 * @param event
+	 */
 	@FXML protected void annullaRicercaMdcClicked(MouseEvent event){
 		this.filterMdc.resetResearch(this.tableManagerCompetizione, this.txtFilterMdc);
 		this.btnResetCercaMdc.setVisible(false);
 	}
 
+	/**
+	 * effettua la ricerca sugli optional
+	 * @param event
+	 */
 	@FXML protected void btnCercaOptClicked(MouseEvent event){
 		this.filterOpt.updateFilteredData(this.tableOptional, this.txtFilterOpt);
 		this.btnResetRicOpt.setVisible(true);
 	}
 
+	/**
+	 * annulla la ricerca sugli optional
+	 * @param event
+	 */
 	@FXML protected void annullaRicercaOptClicked(MouseEvent event){
 		this.filterOpt.resetResearch(this.tableOptional, this.txtFilterOpt);
 		this.btnResetRicOpt.setVisible(false);
@@ -302,6 +340,9 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		}
 	}
 
+	/**
+	 * resetta i campi di ricerca
+	 */
 	private void resetRicerche(){
 		this.filterCmp.resetResearch(this.tableCompetizioni, this.txtFilterComp);
 		this.btnResetRicComp.setVisible(false);
@@ -309,6 +350,10 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.btnResetRicPart.setVisible(false);
 	}
 
+	/**
+	 * mostra il pane per la gestione delle competizioni
+	 * @param event
+	 */
 	@FXML protected void btnGestComp(MouseEvent event) {
 		this.paneGestioneCompetizioni.setVisible(true);
 		this.paneGestioneOptional.setVisible(false);
@@ -317,6 +362,10 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.resetRicerche();
 	}
 
+	/**
+	 * mostra il pane per la gestione degli optional
+	 * @param event
+	 */
 	@FXML protected void btnGestOptional(MouseEvent event) {
 
 		this.resetRicerche();
@@ -358,6 +407,10 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.paneGestionePartecipanti.setVisible(false);
 	}
 
+	/**
+	 * mostra il pane per la gestione dei manager di competizione
+	 * @param event
+	 */
 	@FXML protected void btnGestManComp(MouseEvent event) {
 		this.resetRicerche();
 		this.richiesta = this.getRichiesta("getAllManagerDiCompetizione", this.viewName);
@@ -389,6 +442,10 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.paneGestionePartecipanti.setVisible(false);
 	}
 
+	/**
+	 * mostra il pane per la gestione dei partecipanti
+	 * @param event
+	 */
 	@FXML protected void btnGestPart(MouseEvent event) {
 		this.resetRicerche();
 		this.richiesta = this.getRichiesta("getAllPartecipante", this.viewName);
@@ -421,6 +478,11 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		this.paneGestionePartecipanti.setVisible(true);
 	}
 
+	/**
+	 * disattiva un optional effettuando una prima richiesta per verificare che non sia
+	 * attivo in qualche competizione una seconda richiesta per disattivare l'optional
+	 * @param event
+	 */
 	@FXML protected void btnDisattivaOptionalClicked(MouseEvent event){
 		OptModel optModel = this.tableOptional.getSelectionModel().getSelectedItem();
 		if(optModel != null){
@@ -437,6 +499,11 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 	}
 
+	/**
+	 * modifica un optional effettuando una richiesta per verificare che non sia
+	 * attivo in qualche competizione per poi mostrare la view per la modifica dell'optional
+	 * @param event
+	 */
 	@FXML protected void modificaOptionalClicked(MouseEvent event){
 		OptModel optModel = this.tableOptional.getSelectionModel().getSelectedItem();
 		if(optModel != null){
@@ -449,10 +516,20 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			}
 		}
 	}
+	
+	/**
+	 * mostra la view per l'inserimento di un nuovo manager di competizione
+	 * @param event
+	 */
 	@FXML protected void nuovoMdCClicked(MouseEvent event){
 		this.setVista("nuovoMDC");
 	}
 
+	/**
+	 * modifica un manager di competizione effettuando una richiesta per verificare che non sia
+	 * attivo in qualche competizione per poi mostrare la view per la modifica del manager di competizione
+	 * @param event
+	 */
 	@FXML protected void modificaMdCClicked(MouseEvent event){
 		MdcModel mdcMod = this.tableManagerCompetizione.getSelectedItem();
 		if(mdcMod != null){
@@ -467,6 +544,12 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		}
 	}
 
+	/**
+	 * controlla attraverso una richiesta, che il manager di competizione selezionato non sia
+	 * attivo in nessuna competizione attiva, dopodichè crea un question to dove isnerisce la richesta
+	 * di eliminazione di un manager ci competizione
+	 * @param event
+	 */
 	@FXML protected void eliminaMdCClicked(MouseEvent event){
 		MdcModel mdcMod = this.tableManagerCompetizione.getSelectedItem();
 		if(mdcMod != null){
@@ -485,14 +568,26 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		}
 	}
 
+	/**
+	 * mostra la view per l'inserimento di un nuovo tipo di competizione
+	 * @param event
+	 */
 	@FXML protected void nuovoTipoCompetizioneClicked(MouseEvent event) {
 		this.setVista("nuovoTipoCpt");
 	}
 
+	/**
+	 * mostra la view per l'inserimento di un nuovo tipo optional
+	 * @param event
+	 */
 	@FXML protected void nuovoTipoOptionalClicked(MouseEvent event) {
 		this.setVista("nuovoTipoOpt");
 	}
 
+	/**
+	 * mostra la view per l'inserimento di un nuovo optional
+	 * @param event
+	 */
 	@FXML protected void nuovoOptClicked(MouseEvent event){
 		TipoOptionalTO tipoOpt = toFact.createTipoOptionalTO();
 		String nome = this.listViewOpt.getSelectionModel().getSelectedItem();
@@ -502,6 +597,10 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		}
 	}
 
+	/**
+	 * mosta la view per visualizzare il certificato SRC di un partecipante selezionato
+	 * @param event
+	 */
 	@FXML protected void visualizzaCertificatoSrc(MouseEvent event){
 		PartModel partModel = this.tablePartecipanti.getSelectionModel().getSelectedItem();
 		if(partModel != null){
@@ -510,6 +609,10 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		}
 	}
 
+	/**
+	 * mostra la view che visualizza le iscrizioni di un partecipante selezionato
+	 * @param event
+	 */
 	@FXML protected void visualizzaIscrizioniClicked(MouseEvent event){
 		PartModel partModel = this.tablePartecipanti.getSelectionModel().getSelectedItem();
 		if(partModel != null){
@@ -518,19 +621,34 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 		}
 	}
 
+	/**
+	 * effettua il logout e mostra il login
+	 * @param event
+	 */
 	@FXML protected void menuLogout(ActionEvent event){
 		this.close();
 		this.setVista("login");
 	}
 
+	/**
+	 * mostra la view per la modifica dei dati di accesso
+	 * @param event
+	 */
 	@FXML protected void menuModificaDatiAccesso(ActionEvent event){
 		this.setVista("modificaDatiAccesso",this.getUtente());
 	}
 
+	/**
+	 * invoca {@link #chiusura()}
+	 * @param event
+	 */
 	@FXML protected void menuEsci(ActionEvent event){
 		chiusura();
 	}
 
+	/**
+	 * inserisce in un question to la richiesta di chiusura e mostra la view della question
+	 */
 	private void chiusura(){
 		QuestionTO question = toFact.createQuestionTO();
 		question.setQuestion(resources.getString("key180"));

@@ -23,6 +23,12 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 
+/**
+ * Gestisce la view che mostra il profilo di una competizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdsCompetizione extends AgroludosController{
 
 	private String viewName;

@@ -18,6 +18,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * Gestisce la view per la modifica di un manager di competizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdsModificaMDC extends AgroludosController implements Initializable{
 	private String viewName;
 	private boolean flagError;
@@ -66,6 +72,11 @@ public class ControllerMdsModificaMDC extends AgroludosController implements Ini
 		}
 	}
 
+	/**
+	 * effettua le modifiche al to {@link ManagerDiCompetizioneTO} e esegue la richiesta
+	 * per modificare il manager di competizione
+	 * @param event
+	 */
 	@FXML public void confermaModificaManagerDiCompetizion(MouseEvent event){
 		this.lblCognomeError.setVisible(false);
 		this.lblEmailError.setVisible(false);
