@@ -13,6 +13,12 @@ import agroludos.to.ErrorMessageTO;
 import agroludos.to.ErrorTO;
 import agroludos.to.TipoOptionalTO;
 
+/**
+ * Gestisce la view per l'inserimento di un nuovo tipo optional
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdsNuovoTipoOptional extends AgroludosController{
 	private String viewName;
 
@@ -33,6 +39,11 @@ public class ControllerMdsNuovoTipoOptional extends AgroludosController{
 		this.lblNomeError.setVisible(false);
 	}
 
+	/**
+	 * inserisce i dati in un {@link TipoOptionalTO} e effettua la richiesta per 
+	 * l'inserimento del nuovo tipooptional
+	 * @param event
+	 */
 	@FXML protected void confermaNuovoTipoOptional(MouseEvent event) {
 		TipoOptionalTO tipoOtp = toFact.createTipoOptionalTO();
 		tipoOtp.setNome(this.txtNomeTipo.getText());

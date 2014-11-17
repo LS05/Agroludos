@@ -20,6 +20,12 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.PartecipanteTO;
 
+/**
+ * Gestisce la view che mostra le iscrizioni di un partecipante
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdsVisualizzaIscrizioni extends AgroludosController {
 	private String viewName;
 

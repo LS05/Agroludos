@@ -27,6 +27,12 @@ import agroludos.to.StatoOptionalTO;
 import agroludos.to.SuccessMessageTO;
 import agroludos.to.TipoOptionalTO;
 
+/**
+ * Gestisce la view per l'inserimento di un nuovo optional
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdsNuovoOptional extends AgroludosController implements Initializable{
 	private String viewName;
 
@@ -84,6 +90,10 @@ public class ControllerMdsNuovoOptional extends AgroludosController implements I
 		this.cmbStatoOptional.setValue(listStati.get(0));
 	}
 
+	/**
+	 * popola un {@link OptionalTO} e effettua la richiesta per l'inserimento del nuovo optional
+	 * @param event
+	 */
 	@FXML protected void confermaNuovoOptional(MouseEvent event){
 		OptionalTO optional = toFact.createOptionalTO();
 		double costo = this.costoOptional.getNumber().doubleValue();

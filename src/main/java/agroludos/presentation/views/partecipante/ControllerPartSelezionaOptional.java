@@ -36,6 +36,12 @@ import agroludos.to.IscrizioneTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.TipoOptionalTO;
 
+/**
+ * Gestisce la view per la selezione degli optional per l'iscrizoine ad una competizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerPartSelezionaOptional extends AgroludosController implements Initializable{
 
 	private String viewName;
@@ -176,6 +182,12 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 		return this.viewName;
 	}
 
+	/**
+	 * elimina la riga della tabella degli optional scelti
+	 * @author Luca Suriano
+	 * @author Francesco Zagaria
+	 *
+	 */
 	private class DeleteTableCell extends TableCell<OptModel, String> {
 
 		private final Button btnElimina;
@@ -263,6 +275,11 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 		return res;
 	}
 
+	/**
+	 * aggiunge un otpional agli optional scelti (1 per ogni tipo optional)
+	 * @param optMod
+	 * @return
+	 */
 	private boolean addOptScelto(OptModel optMod){
 		boolean res = false;
 
@@ -287,6 +304,9 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 		return res;
 	}
 
+	/**
+	 * inizializza i dati
+	 */
 	private void initData(){
 		this.listTipiOpt = new ArrayList<TipoOptionalTO>();
 
@@ -315,6 +335,9 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 		}
 	}
 
+	/**
+	 * imposta il numero di passo dell'operazione
+	 */
 	private void setLabelDialog(){
 		if(this.passoCorrente != (this.nPassi - 1)){
 			this.lblTipoOptional.setText(this.listTipiOpt.get(this.passoCorrente).getNome());
@@ -332,6 +355,10 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 		this.lblPassi.setText(sb.toString());
 	}
 
+	/**
+	 * inserisce gli optional nella tabella in base al tipo
+	 * @param tipoOpt
+	 */
 	private void setTable(TipoOptionalTO tipoOpt){
 		List<OptionalTO> tblList = new ArrayList<OptionalTO>();
 
@@ -344,6 +371,10 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 		this.tableOptional.setAll(tblList);
 	}
 
+	/**
+	 * torna indietro
+	 * @param event
+	 */
 	@FXML protected void btnIndietro(MouseEvent event) { 
 		this.passoCorrente--;
 
@@ -368,6 +399,9 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 		}
 	}
 
+	/**
+	 * mostra il pane per la conferma dell'operazione
+	 */
 	private void showConfermaView(){
 		this.paneOptionalScelti.setVisible(true);
 		DecimalFormat df = new DecimalFormat("#.00");
@@ -375,6 +409,10 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 		this.lblTotaleComp.setText(df.format(this.totComp));
 	}
 
+	/**
+	 * va avanti al passaggio successivo
+	 * @param event
+	 */
 	@FXML protected void btnAvanti(MouseEvent event) {
 		this.passoCorrente++;
 		this.setLabelDialog();
@@ -395,6 +433,11 @@ public class ControllerPartSelezionaOptional extends AgroludosController impleme
 		}
 	}
 
+	/**
+	 * effettua la richiesta per controllare se esiste l'iscrizione e quindi si tratta di modifica
+	 * oppure di un inserimento
+	 * @param event
+	 */
 	@FXML protected void btnConferma(MouseEvent event) {
 		//se esiste una iscrizione allora è una modifica altrimenti un inserimento
 

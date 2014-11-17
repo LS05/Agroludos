@@ -18,7 +18,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
+/**
+ * gestisce la view per l'inserimento della configurazione, ovvero dell'inserimento
+ * del manager di sistema
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerConfSistema extends AgroludosController {
 	private String viewName;
 
@@ -79,6 +85,11 @@ public class ControllerConfSistema extends AgroludosController {
 
 	}
 
+	/**
+	 * popola il manager di sistema to e effettua la richiesta per l'inserimento
+	 * del manager di sistema
+	 * @param event
+	 */
 	@FXML protected void btnConfermaConfClicked(MouseEvent event){
 		this.hideErrors();
 		this.mdsto.setNome(this.txtNomeMds.getText());
@@ -92,6 +103,9 @@ public class ControllerConfSistema extends AgroludosController {
 		this.eseguiRichiesta(this.richiesta, this.risposta);
 	}
 
+	/**
+	 * nasconde gli errori mostrati con la validazione
+	 */
 	private void hideErrors(){
 		this.lblNomeError.setVisible(false);
 		this.lblCognomeError.setVisible(false);
@@ -101,6 +115,12 @@ public class ControllerConfSistema extends AgroludosController {
 		this.lblTelefonoError.setVisible(false);
 	}
 
+	/**
+	 * mostra gli errori di validazione
+	 * @param errors
+	 * @param lblError
+	 * @param errorKey
+	 */
 	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
 		if(errors.hasError(this.getError(errorKey))){
 			String nomeKey = this.getError(errorKey);

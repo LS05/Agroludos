@@ -13,6 +13,12 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
+/**
+ * Gestisce la view per la visualizzazione di una iscrizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdsIscrizione extends AgroludosController {
 	private String viewName;
 
@@ -66,6 +72,10 @@ public class ControllerMdsIscrizione extends AgroludosController {
 		}
 	}
 
+	/**
+	 * mostra la view per la visualizzazione del certicato SRC
+	 * @param event
+	 */
 	@FXML protected void btnVisualizzaCertificato(MouseEvent event){
 		this.setVista("visualizzaSRC",this.iscto.getPartecipante());
 	}

@@ -19,6 +19,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
+/**
+ * Gestisce la visualizzazione del profilo di un partecipante
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdsProfiloPartecipante extends AgroludosController{
 	private String viewName;
 
@@ -99,6 +105,10 @@ public class ControllerMdsProfiloPartecipante extends AgroludosController{
 		}
 	}
 
+	/**
+	 * mostra la view che visualizza il certificato SRC
+	 * @param event
+	 */
 	@FXML protected void btnVisualizzaCertificato(MouseEvent event){
 		this.setVista("visualizzaSRC",this.parTO);
 	}

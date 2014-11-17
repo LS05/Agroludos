@@ -25,6 +25,12 @@ import agroludos.to.OptionalTO;
 import agroludos.to.TipiAgroludosTO;
 import agroludos.to.TipoOptionalTO;
 
+/**
+ * Gestisce la selezione degli optional per una competizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdcSelezionaOptional extends AgroludosController{
 
 	private String viewName;
@@ -129,12 +135,19 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 		return this.viewName;
 	}
 
+	/**
+	 * imposta la label dei passi
+	 */
 	private void setLabelDialog(){
 		//label passi e label tipo optioal
 		this.lblTipoOptional.setText(this.listTipiOpt.get(this.passoCorrente).getNome());
 		this.lblPassi.setText("Passo " + (this.passoCorrente+1) + " di " + this.nPassi);
 	}
 
+	/**
+	 * imposta gli optional di un tipo mediate richiesta nella tabella
+	 * @param tipoOpt
+	 */
 	private void setTable(TipoOptionalTO tipoOpt){
 		this.risposta = this.getRisposta();
 		this.richiesta = this.getRichiesta(tipoOpt,"getOptionalAttiviByTipo", this.viewName);
@@ -142,6 +155,10 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 		this.tableOptional.setAll(listOptAttivi);
 	}
 
+	/**
+	 * aggiunge un optional (se non presente )nella listview degli optional scelti
+	 * @param event
+	 */
 	@FXML protected void btnAggiungi(MouseEvent event) {
 		this.btnAggiungi.setDisable(true);
 		OptionalTO opt = toFact.createOptionalTO();
@@ -156,6 +173,10 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 		}
 	}
 
+	/**
+	 * Rimuove un optional dalla lista degli optional scelti
+	 * @param event
+	 */
 	@FXML protected void btnRimuovi(MouseEvent event) {
 		this.btnRimuovi.setDisable(true);
 		String nomeOpt = this.listViewOptional.getSelectionModel().getSelectedItem();
@@ -165,6 +186,10 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 
 	}
 
+	/**
+	 * torna indietro di un passo al tipo optional precedente
+	 * @param event
+	 */
 	@FXML protected void btnIndietro(MouseEvent event) {
 
 		this.passoCorrente--;
@@ -181,6 +206,11 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 
 
 	}
+	
+	/**
+	 * Va avanti alla prossima lista di optional del nuovo tipo
+	 * @param event
+	 */
 	@FXML protected void btnAvanti(MouseEvent event) {
 
 		this.btnIndietro.setDisable(false);
@@ -195,6 +225,10 @@ public class ControllerMdcSelezionaOptional extends AgroludosController{
 		}
 	}
 
+	/**
+	 * conferma la scelta degli optional, aggiorna il to e effettua la richiesta di modifica
+	 * @param event
+	 */
 	@FXML protected void btnConferma(MouseEvent event) {
 
 		//aggiunge tutti gli optional scelti

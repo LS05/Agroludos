@@ -6,6 +6,12 @@ import agroludos.presentation.views.AgroludosController;
 import agroludos.to.AgroludosTO;
 import agroludos.to.UtenteTO;
 
+/**
+ * Gestisce la view di controllo per degli utenti
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerUtenti extends AgroludosController {
 	protected String viewName;
 

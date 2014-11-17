@@ -35,6 +35,12 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+/**
+ * Gestisce la main view di un manager di competizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdcMain extends ControllerUtenti implements Initializable{
 
 	@FXML private GridPane paneCompetizioni;
@@ -136,19 +142,35 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 		this.resources = res;		
 	}
 
+	/**
+	 * mostra il pane per la gestione delle competizione
+	 * @param event
+	 */
 	@FXML protected void btnPaneComptizioni(MouseEvent event) {
 		this.paneCompetizioni.setVisible(true);
 	}
 
+	/**
+	 * mostra la view per l'inserimento di una nuova competizione
+	 * @param event
+	 */
 	@FXML protected void btnNuovaCompetizione(MouseEvent event) {
 		this.setVista("mostraNuovaCmp");
 	}
 
+	/**
+	 * effettua una ricerca tra le competizione utilizzando un filtro
+	 * @param event
+	 */
 	@FXML protected void cercaCompetizioniClicked(MouseEvent event){
 		this.filterCmp.updateFilteredData(this.tableCompetizione, this.txtFilterCmp);
 		this.btnAnnullaRicercaComp.setVisible(true);
 	}
 
+	/**
+	 * annulla la ricerca
+	 * @param event
+	 */
 	@FXML protected void annullaRicercaClicked(MouseEvent event){
 		this.filterCmp.resetResearch(this.tableCompetizione, this.txtFilterCmp);
 		this.btnAnnullaRicercaComp.setVisible(false);
@@ -159,6 +181,9 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 		return col;
 	}
 
+	/**
+	 * inizializza la tabella delle competizioni
+	 */
 	private void initCmpTable(){
 		this.initColumn(this.cmpIdCol, "id");
 		this.initColumn(this.cmpNomeCol, "nome");
@@ -200,19 +225,34 @@ public class ControllerMdcMain extends ControllerUtenti implements Initializable
 		return res;
 	}
 
+	/**
+	 * effettua il logout e mostra la view di login
+	 * @param event
+	 */
 	@FXML protected void menuLogout(ActionEvent event){
 		this.close();
 		this.setVista("login");
 	}
 
+	/**
+	 * mostra la view per la modifica dei dati di accesso
+	 * @param event
+	 */
 	@FXML protected void menuModificaDatiAccesso(ActionEvent event){
 		this.setVista("modificaDatiAccesso",this.getUtente());
 	}
 
+	/**
+	 * chiama la richiesta di chiusura
+	 * @param event
+	 */
 	@FXML protected void menuEsci(ActionEvent event){
 		chiusura();
 	}
 
+	/**
+	 * inserisce in un question to la richiesta di chiusura e mostra la view della question
+	 */
 	private void chiusura(){
 		QuestionTO question = toFact.createQuestionTO();
 		question.setQuestion(resources.getString("key180"));

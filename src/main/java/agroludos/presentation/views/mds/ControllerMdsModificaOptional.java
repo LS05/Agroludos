@@ -24,6 +24,12 @@ import agroludos.to.ErrorTO;
 import agroludos.to.OptionalTO;
 import agroludos.to.StatoOptionalTO;
 
+/**
+ * Gestisce la view per la modifica di un optional
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdsModificaOptional extends AgroludosController{
 	private String viewName;
 	private @FXML Label lblNomeTipoOpt;
@@ -83,6 +89,10 @@ public class ControllerMdsModificaOptional extends AgroludosController{
 		}
 	}
 
+	/**
+	 * effettua le modifiche al TO e esegue la richiesta per la modifica del optional
+	 * @param event
+	 */
 	@FXML protected void confermaModificaOptional(MouseEvent event){
 		this.optional.setNome(this.txtNomeOptional.getText());
 		this.optional.setDescrizione(this.txtAreaDescrizione.getText());

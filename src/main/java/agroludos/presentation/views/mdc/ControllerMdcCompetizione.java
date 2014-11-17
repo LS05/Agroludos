@@ -28,6 +28,12 @@ import agroludos.to.CompetizioneTO;
 import agroludos.to.IscrizioneTO;
 import agroludos.to.QuestionTO;
 
+/**
+ * Gestisce la view di una competizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerMdcCompetizione extends AgroludosController implements Initializable{
 
 	private String viewName;
@@ -140,6 +146,10 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 	}
 
 
+	/**
+	 * restituisce una {@link ObservableList} di {@link IscModel}
+	 * @return
+	 */
 	private ObservableList<IscModel> getListTabellaIsc(){
 		ObservableList<IscModel> res = FXCollections.observableArrayList();
 		IscModel modelIsc = null;
@@ -157,6 +167,9 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 		return col;
 	}
 
+	/**
+	 * inizializza la tabella delle iscrizoioni
+	 */
 	private void initIscTable(){
 		this.initColumn(this.iscNomeCol, "nome");
 		this.initColumn(this.iscCognomeCol, "cognome");
@@ -183,6 +196,10 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 		});
 	}
 
+	/**
+	 * Inserisce la richiesta di annulla iscrizione in un {@link QuestionTO} e mostra la view question
+	 * @param event
+	 */
 	@FXML protected void btnAnnullaIsc(MouseEvent event) {
 
 		IscrizioneTO iscto = this.tblIscritti.getSelectionModel().getSelectedItem().getIscrizioneTO();
@@ -197,6 +214,10 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 
 	}
 
+	/**
+	 * Inserisce la richiesta di annullamento della competizione in un {@link QuestionTO} e mostra la view question
+	 * @param event
+	 */
 	@FXML protected void btnAnnullaCmp(MouseEvent event) {
 
 		QuestionTO question = toFact.createQuestionTO();
@@ -210,6 +231,10 @@ public class ControllerMdcCompetizione extends AgroludosController implements In
 
 	}
 
+	/**
+	 * mostra la view per la modifica di una competizione
+	 * @param event
+	 */
 	@FXML protected void btnModificaCmp(MouseEvent event) {
 		this.setVista("mostraModificaCmp", this.cmpto);
 	}

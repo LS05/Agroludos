@@ -20,6 +20,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * Gestisce la view per l'iscrizione ad una competizione
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public class ControllerPartIscrizione extends AgroludosController implements Initializable{
 	private String viewName;
 
@@ -82,14 +88,27 @@ public class ControllerPartIscrizione extends AgroludosController implements Ini
 		this.viewName = nameView;
 	}
 
+	/**
+	 * chiude la view
+	 * @param event
+	 */
 	@FXML protected void btnAnnullaClicked(MouseEvent event){
 		this.close();
 	}
 
+	/**
+	 * mostra la view per la selezione degli optional per l'iscrizione
+	 * @param event
+	 */
 	@FXML protected void btnSelezOptClicked(MouseEvent event){
 		this.setVista("selezionaOptionalPart", this.mainIscr);
 	}
 
+	/**
+	 * inserisce i dati nell'iscrizioneTO e effettua la richiesta per l'inserimento
+	 * di una nova iscrizione
+	 * @param event
+	 */
 	@FXML protected void btnIscrivitiClicked(MouseEvent event){
 		this.mainIscr.setData(new Date());
 		this.mainIscr.setCompetizione(this.mainComp);

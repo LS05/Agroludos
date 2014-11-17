@@ -8,6 +8,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 
+/**
+ * gestisce la listview dei tipi nella view principale del manager di sistema
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class ListaViewTipi extends ListView<String>{
 
 	private ObservableList<String> names = FXCollections.observableArrayList();
