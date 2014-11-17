@@ -11,22 +11,16 @@ import agroludos.to.TipoCompetizioneTO;
 
 class HibCompetizioneDAO extends HibAgroludosDAO<CompetizioneTO> implements CompetizioneDAO {
 
+	/**
+	 * Il costruttore inizializza l'entità competizione da utilizzare in tutte le operazioni
+	 * di questo DAO, utilizzando il metodo setClasse()
+	 * 
+	 * @see agroludos.integration.dao.db.hib.HibAgroludosDAO#setClasse()
+	 */
 	HibCompetizioneDAO() {
 		this.setClasse(toFact.createCompetizioneTO());
 	}
-
-	@Override
-	public List<CompetizioneTO> readByTipo(TipoCompetizioneTO tipo) throws DatabaseException{
-
-		List<TipoCompetizioneTO> param = new ArrayList<TipoCompetizioneTO>();
-		param.add(tipo);
-
-		List<CompetizioneTO> res = super.executeParamQuery("getCompetizioneByTipo", param);
-
-		return res;
-	}
-
-
+	
 	@Override
 	public CompetizioneTO readById(Integer id) throws DatabaseException{
 

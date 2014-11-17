@@ -18,9 +18,8 @@ import agroludos.integration.dao.db.TipoUtenteDAO;
 import agroludos.integration.dao.db.UtenteDAO;
 import agroludos.to.UtenteTO;
 
-public class HibDAOFactory implements DBDAOFactory {
+class HibDAOFactory implements DBDAOFactory {
 
-	
 	HibDAOFactory() throws DatabaseException{
 		HibDAOUtil.buildSessionFactory();
 	}
