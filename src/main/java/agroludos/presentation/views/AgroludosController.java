@@ -99,15 +99,26 @@ public abstract class AgroludosController {
 		controller = ctrl;
 	}
 
+	/**
+	 * Metodo che inizializza la view e imposta i campi utilizzando il TO in input
+	 * @param mainTO
+	 */
 	protected abstract void initializeView(AgroludosTO mainTO);
 
+	/**
+	 * Metodo che inizializza la view
+	 * @param viewName
+	 */
 	protected abstract void initializeView(String viewName);
 
+	/**
+	 * Restituisce il nome della view
+	 * @return
+	 */
 	protected abstract String getViewName();
 
 	/**
-	 * Per i dialog il forward è utile solo in caso di errore. Perchè il dato
-	 * viene gestito sempre dalla mainView.
+	 * Il forward gestisce tutte le risposte delle richieste effettuate
 	 *  
 	 * @param request
 	 * @param response
