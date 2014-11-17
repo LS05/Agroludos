@@ -17,16 +17,34 @@ import agroludos.to.CertificatoTO;
 import agroludos.to.PartecipanteTO;
 import agroludos.to.TOFactory;
 
+/** 
+ * Data Access Object per tutte le operazioni CRUD per quanto riguarda il file del certificato in formato txt.
+ * Sono presenti i metodi di lettura del file.
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 
 	private TOFactory toFact;
 	private Conf sysConf;
 
+	/**
+	 * inizializza le variabile toFact e sysConf
+	 * @param toFact
+	 * @param sysConf
+	 */
 	TxtCertificatoSRCDAO(TOFactory toFact, Conf sysConf){
 		this.toFact = toFact;
 		this.sysConf = sysConf;
 	}
 
+	/**
+	 * Restituisce il percorso del file del partecipante in input
+	 * @param partTO
+	 * @return
+	 */
 	private String getCertPath(PartecipanteTO partTO){
 		StringBuilder certPath = new StringBuilder(100);
 		certPath.append(this.sysConf.getString("certPath"));
@@ -34,6 +52,12 @@ class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 		return certPath.toString();
 	}
 
+	/**
+	 * Restituisce il contenuto del file di testo
+	 * @param certPath
+	 * @return
+	 * @throws IOException
+	 */
 	private String getCertCont(String certPath) throws IOException{
 		String certificato = "";
 		BufferedReader br = null;
@@ -90,7 +114,6 @@ class TxtCertificatoSRCDAO implements CertificatoSRCDAO{
 		return certTO;
 	}
 
-	//TODO rivedere IOException
 	@Override
 	public CertificatoTO salvaCertificato(PartecipanteTO partTO) throws IOException {
 		String certInputPath = Paths.get(this.getCertPath(partTO)).toString();
