@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import agroludos.exceptions.system.ApplicationException;
 import agroludos.exceptions.system.CommandFactoryException;
-import agroludos.exceptions.system.EnrichableException;
 import agroludos.exceptions.system.RequestInitializationException;
 import agroludos.exceptions.system.ViewNotFoundException;
 import agroludos.presentation.controller.mapper.Command;
@@ -135,47 +134,55 @@ class ApplicationControllerImpl implements ApplicationController{
 			commandName = this.getCommandName(request);
 			viewName = this.getviewName(request);
 		} catch(RequestInitializationException e){
-			throw new EnrichableException("gestisciRichiesta", "E3", "Errore in ApplicationControllerImpl.gestisciRichiesta()", e);
+			e.printStackTrace();
 		}
 
 		try {
 			command = this.commandFactory.getCommand(commandName, viewName);
 			response = this.commandProcessor.invoke(command, request);
 		} catch (CommandFactoryException e) {
-
-			// TODO Eccezione di programmazione
-			// Il servizio richiesto (commandName) non è presente nel file CommandFactory.xml
-			throw new EnrichableException("gestisciRichiesta", "E1", "Errore in ApplicationControllerImpl.gestisciRichiesta()", e);
+			e.printStackTrace();
 		} catch (ApplicationException e) {
-
-			// TODO Da controllare se è un'eccezione di programmazione
-			// In caso in cui ho una BusinessComponentNotFoundException, ServiceNotFoundException, IllegalAccess o IllegalArgument
-			// quindi da qui il programma deve chiudersi; 
-			throw new EnrichableException("gestisciRichiesta", "E2", "Errore in ApplicationControllerImpl.gestisciRichiesta()", e);
+			e.printStackTrace();
 		}
 
 		return response;
 	}
 
+	/**
+	 * Il metodo si occupa di effettuare il dispatching. In particolare la richiesta e la risposta sono utilizzate dal
+	 * metodo forward() della classe AgroludosController ottenuta mediante il {@link Navigator}. In particolare il 
+	 * risultato dell'esecuzione del servizio richiesto, ovvero la classe AgroResponseContext, contiene il nome della
+	 * view su cui effettuare il dispatching. Tale view implementa l'interfaccia AgroludosController, ed è su questa
+	 * che viene richiamato il metodo forward()
+	 * 
+	 * @see agroludos.presentation.views.AgroludosController#forward(AgroRequest, AgroResponse)
+	 */
 	@Override
-	public void gestisciRisposta(AgroRequestContext requestContext,
-			AgroResponseContext responseContext) {
+	public void gestisciRisposta(AgroRequestContext requestContext, AgroResponseContext responseContext) {
 		dispatch(requestContext.getRequest(), responseContext.getResponse(), responseContext.getLogicalViewName());
 	}
 
-	private void dispatch(AgroRequest request, AgroResponse response, String page) {
+	/**
+	 * Il metodo ottiene anzitutto l'istanza di una classe che implementa {@link AgroludosController}
+	 * utilizzando il metodo getRequestDispatcher() che utilizza il parametro viewName.
+	 * Una volta ottenuta l'istanza il dispatching della richiesta è effettuato chiamando il metodo
+	 * forward.
+	 * 
+	 * @param request Richiesta effettuata per l'esecuzione di un servizio
+	 * @param response Risposta ottenuta dopo l'esecuzione
+	 * @param viewName Nome della view su cui effettuare il dispatching
+	 * @see agroludos.presentation.views.Navigator#getRequestDispatcher(String)
+	 */
+	private void dispatch(AgroRequest request, AgroResponse response, String viewName) {
 		AgroludosController dispatcher = null;
 
 		try {
-			dispatcher = this.nav.getRequestDispatcher(page);
+			dispatcher = this.nav.getRequestDispatcher(viewName);
 			dispatcher.forward(request, response);
 		} catch (ViewNotFoundException e){
-
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch(IOException e) {
-
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
