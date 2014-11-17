@@ -16,24 +16,49 @@ import javafx.stage.StageStyle;
 import agroludos.presentation.views.utility.PositionHandler;
 import agroludos.presentation.views.xml.AgroludosWindow;
 
+/**
+ * Rappresenta una cache contenente tutte le view
+ * disponibili. Le view sono ottenute attraverso il metodo {@link #getView(String)}
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class ViewsCache {
 
 	private Map<String, AgroludosWindow> views;
 	private Stage mainStage;
 
+	/**
+	 * inizializza l'hashmap
+	 */
 	ViewsCache(){
 		this.views = new HashMap<String, AgroludosWindow>();
 		this.mainStage = null;
 	}
 
+	/**
+	 * Restituisce vero se esiste la view all'interno dell'hashmap
+	 * @param viewName
+	 * @return
+	 */
 	boolean checkView(String viewName) {
 		return this.views.containsKey(viewName);
 	}
 
+	/**
+	 * Restituisce la view tramite il suo nome
+	 * @param viewName
+	 * @return
+	 */
 	AgroludosWindow getView(String viewName) {
 		return this.views.get(viewName);
 	}
 
+	/**
+	 * aggiunge una view alla {@link ViewsCache}
+	 * @param window
+	 * @throws IOException
+	 */
 	void addView(AgroludosWindow window) throws IOException {
 		//carico l'fxml e setto scena e stage
 		FXMLLoader loader = window.getLoader();
@@ -79,10 +104,17 @@ class ViewsCache {
 
 	}
 
+	/**
+	 * setta il mainstage
+	 * @param mainStage
+	 */
 	public void addMainStage(Stage mainStage) {
 		this.mainStage = mainStage;
 	}
 
+	/**
+	 * chiude il mainstage
+	 */
 	public void closeMainStage() {
 		this.mainStage.close();
 	}

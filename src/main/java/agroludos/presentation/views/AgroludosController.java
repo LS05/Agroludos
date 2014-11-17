@@ -8,6 +8,13 @@ import agroludos.to.AgroludosTO;
 import agroludos.to.TOFactory;
 import agroludos.to.UtenteTO;
 
+/**
+ * Classe astratta che rappresenta un generico controller in modo tale che tutti i controller possano
+ * implementare i metodi di initialize, getViewName e Forward()
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public abstract class AgroludosController {
 
 	private static Controller controller;

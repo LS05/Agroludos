@@ -12,6 +12,13 @@ import agroludos.system.ReqConf;
 import agroludos.system.RulesErrorsConf;
 import agroludos.to.AgroludosTO;
 
+/**
+ * Classe di supporto per tutte le view, contiene le dipendenze dei controller delle view evitando 
+ * di disperderle.
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class Controller {	
 	private static Navigator nav;
 	private static FrontController frontController;
