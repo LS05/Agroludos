@@ -1,7 +1,7 @@
 package agroludos.system;
 
 /**
- * Gestisce il file di configurazione di sistema
+ * Gestisce il file di proprietà di sistema
  * @author Luca Suriano
  * @author Francesco Zagaria
  *

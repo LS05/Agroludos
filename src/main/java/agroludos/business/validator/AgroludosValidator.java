@@ -10,5 +10,14 @@ import agroludos.to.AgroludosTO;
  *
  */
 public interface AgroludosValidator {
+	/**
+	 * Il metodo effettua la validazione del Transfer Object specificato come 
+	 * parametro. Se ci sono degli errori di validazione viene sollevata una
+	 * ValidationException
+	 * 
+	 * @param to Transfer Object da validare
+	 * @throws ValidationException Sollevata se ci sono degli errori di validazione
+	 * 
+	 */
 	public void validate(AgroludosTO to) throws ValidationException;
 }

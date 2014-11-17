@@ -3,9 +3,9 @@ package agroludos.utility;
 import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 
 /**
- * Utilizzo per login
+ * Utilizza la libreria Jasypt per effettuare il criptaggio delle password
  * 
- * if (passwordEncryptor.checkPassword(inputPassword, encryptedPassword)) {
+ * @see <a href="http://www.jasypt.org/api/jasypt/1.9.0/index.html">http://www.jasypt.org/api/jasypt/1.9.0/index.html</a>
  * 
  * @author Luca Suriano
  * @author Francesco Zagaria
@@ -13,8 +13,16 @@ import org.jasypt.util.password.ConfigurablePasswordEncryptor;
  */
 class PasswordEncryptionImpl implements PasswordEncryption {
 	
+	/**
+	 * @see <a href="http://www.jasypt.org/api/jasypt/1.9.0/org/jasypt/util/password/ConfigurablePasswordEncryptor.html">http://www.jasypt.org/api/jasypt/1.9.0/org/jasypt/util/password/ConfigurablePasswordEncryptor.html</a>
+	 */
 	private ConfigurablePasswordEncryptor passwordEncryptor;
 	
+	/**
+	 * Il costruttore inizializza {@link passwordEncryptor} settando l'algoritmo
+	 * SHA-256 per il criptaggio
+	 * @param passEnc
+	 */
 	PasswordEncryptionImpl(ConfigurablePasswordEncryptor passEnc){
 		this.passwordEncryptor = passEnc;
 		this.passwordEncryptor.setAlgorithm("SHA-256");

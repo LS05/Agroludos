@@ -76,7 +76,7 @@
             <Insets left="10.0" />
           </GridPane.margin>
         </Label>
-        <Label fx:id="lblInfoTitle" font="$x2" text="key183" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <Label fx:id="lblInfoTitle" font="$x2" text="%key183" GridPane.columnIndex="0" GridPane.rowIndex="0">
           <GridPane.margin>
             <Insets left="10.0" />
           </GridPane.margin>

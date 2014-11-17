@@ -1,5 +1,12 @@
 package agroludos.system;
 
+/**
+ * Permette la lettura di proprietà specifiche del file di proprietà di Hibernate.
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 public interface HibernateConf extends Conf{
 
 	public String getConfPath();

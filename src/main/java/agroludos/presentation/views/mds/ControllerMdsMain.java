@@ -215,31 +215,35 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 
 	private void setDxMdCColumn(Integer selected){
 		if( selected != -1){
-			MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
-			selModel = tableManagerCompetizione.getItems().get(selected);
-			this.lblMdcNome.setText(selModel.getNome());
-			this.lblMdcCognome.setText(selModel.getCognome());
-			this.lblMdcEmail.setText(selModel.getEmail());
-			this.lblMdcUsername.setText(selModel.getUsername());
-			this.lblMdcStato.setText(selModel.getStato());
+			if(!tableCompetizioni.getItems().isEmpty()){
+				MdcModel selModel = tableManagerCompetizione.getItems().get(selected);
+				selModel = tableManagerCompetizione.getItems().get(selected);
+				this.lblMdcNome.setText(selModel.getNome());
+				this.lblMdcCognome.setText(selModel.getCognome());
+				this.lblMdcEmail.setText(selModel.getEmail());
+				this.lblMdcUsername.setText(selModel.getUsername());
+				this.lblMdcStato.setText(selModel.getStato());
+			}
 		}
 	}
 
 	private void setDxPartColumn(int selected) {
 		if( selected != -1 ){
-			PartModel selModel = this.tablePartecipanti.getItems().get(selected);
-			selModel = this.tablePartecipanti.getItems().get(selected);
-			this.lblParNome.setText(selModel.getNome());
-			this.lblParCognome.setText(selModel.getCognome());
-			this.lblParEmail.setText(selModel.getEmail());
-			this.lblParUsername.setText(selModel.getUsername());
-			this.lblParStato.setText(selModel.getStato());
-			this.lblParDataSRC.setText(selModel.getDataSRC());
-			this.lblParCodFisc.setText(selModel.getCf());
-			this.lblParIndirizzo.setText(selModel.getIndirizzo());
-			this.lblParSesso.setText(selModel.getSesso());
-			this.lblParAnnoNasc.setText(selModel.getDataNasc());
-			this.lblParNumTessSan.setText(selModel.getNumTessera());
+			if(!tablePartecipanti.getItems().isEmpty()){
+				PartModel selModel = this.tablePartecipanti.getItems().get(selected);
+				selModel = this.tablePartecipanti.getItems().get(selected);
+				this.lblParNome.setText(selModel.getNome());
+				this.lblParCognome.setText(selModel.getCognome());
+				this.lblParEmail.setText(selModel.getEmail());
+				this.lblParUsername.setText(selModel.getUsername());
+				this.lblParStato.setText(selModel.getStato());
+				this.lblParDataSRC.setText(selModel.getDataSRC());
+				this.lblParCodFisc.setText(selModel.getCf());
+				this.lblParIndirizzo.setText(selModel.getIndirizzo());
+				this.lblParSesso.setText(selModel.getSesso());
+				this.lblParAnnoNasc.setText(selModel.getDataNasc());
+				this.lblParNumTessSan.setText(selModel.getNumTessera());
+			}
 		}
 	}
 
@@ -516,7 +520,7 @@ public class ControllerMdsMain extends ControllerUtenti implements Initializable
 			}
 		}
 	}
-	
+
 	/**
 	 * mostra la view per l'inserimento di un nuovo manager di competizione
 	 * @param event
