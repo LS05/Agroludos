@@ -5,19 +5,17 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
 	<bean id="mySqlDaoFactory" 
-		  class="agroludos.integration.dao.db.mysql.MySqlDAOFactory">
+		  class="agroludos.integration.dao.db.hib.HibDAOFactory">
 	</bean>
 	
 	<bean id="mysqlAgroludosDAO" 
-		  class="agroludos.integration.dao.db.mysql.MySqlAgroludosDAO"
+		  class="agroludos.integration.dao.db.hib.HibAgroludosDAO"
 		  abstract="true">
 		  <property name="toFact" ref="toFactory" />
 	</bean>
-		  
-	<bean id="mySqlUtenteDAO" class="agroludos.integration.dao.db.mysql.MySqlUtenteDAO"
-		parent="mysqlAgroludosDAO"
-		factory-bean="mySqlDaoFactory"
-		factory-method="getUtenteDAO">
+	
+	<bean id="mySqlUtenteDAO" class="agroludos.integration.dao.db.hib.HibUtenteDAO"
+		parent="mysqlAgroludosDAO">
 	</bean>
-
+  
 </beans>

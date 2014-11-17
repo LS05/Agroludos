@@ -6,7 +6,6 @@
     
     <import resource="classpath:agroludos/beans/system.xml" />
     <import resource="classpath:agroludos/beans/dao/mySQLDao.xml" />
-    <import resource="classpath:agroludos/beans/dao/xmlDao.xml" />
     
     <bean id="txtDaoFactory" class="agroludos.integration.dao.file.txt.TxtDAOFactoryImpl">
 		<constructor-arg ref="toFactory" />
@@ -15,7 +14,6 @@
     
 	<bean id="fileFactory" class="agroludos.integration.dao.file.FileFactoryImpl">
 		<constructor-arg ref="txtDaoFactory" />
-		<constructor-arg ref="xmlDaoFactory" />
 	</bean>
 	
 	<bean id="dbFactory" class="agroludos.integration.dao.db.DBFactoryImpl">

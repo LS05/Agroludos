@@ -6,7 +6,6 @@
 
 	<bean id="services" class="agroludos.business.bd.cache.Services">
 		<property name="lconfigurazione" ref="gestoreConfigurazione" />
-		<property name="sconfigurazione" ref="gestoreConfigurazione" />
 		<property name="lutente" ref="gestoreUtente" />
 		<property name="sutente" ref="gestoreUtente" />
 		<property name="lmds" ref="gestoreManagerSistema" />
@@ -22,10 +21,8 @@
 		<property name="lpartecipante" ref="gestorePartecipante" />
 		<property name="spartecipante" ref="gestorePartecipante" />
 		<property name="lstatocmp" ref="gestoreStatoCompetizione" />
-		<property name="sstatocmp" ref="gestoreStatoCompetizione" />
 		<property name="lstatoopt" ref="gestoreStatoOptional" />
 		<property name="lstatoutente" ref="gestoreStatoUtente" />
-		<property name="sstatoutente" ref="gestoreStatoUtente" />
 		<property name="lstatoisc" ref="gestoreStatoIscrizione" />
 		<property name="ltipoopt" ref="gestoreTipoOptional" />
 		<property name="stipoopt" ref="gestoreTipoOptional" />

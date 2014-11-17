@@ -1,7 +1,7 @@
 package agroludos.presentation.views;
 
-import java.io.IOException;
 
+import java.io.IOException;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -18,7 +18,7 @@ import agroludos.to.AgroludosTO;
  * @author Francesco Zagaria
  *
  */
-public class Navigator {
+class Navigator implements NavigatorI {
 
 	private ViewsLoader viewsLoader;
 

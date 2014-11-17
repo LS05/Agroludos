@@ -7,15 +7,12 @@
 	<import resource="classpath:agroludos/beans/utility.xml" />
 	<import resource="classpath:agroludos/beans/commands.xml" />
 	<import resource="classpath:agroludos/beans/navigator.xml" />
-	
-	<bean id="acFactory"
-		class="agroludos.presentation.controller.ACFactoryImpl"></bean>
 
-	<bean id="agroludosAC" class="agroludos.presentation.controller.ApplicationControllerImpl"
-		factory-bean="acFactory" factory-method="getAC">
-		<property name="commandFactory" ref="cmdFactory" />
-		<property name="commandProcessor" ref="cmdProcess" />
-		<property name="nav" ref="navigator" />
+	<bean id="agroludosAC" 
+		  class="agroludos.presentation.controller.ApplicationControllerImpl">
+		<constructor-arg ref="cmdFactory" />
+		<constructor-arg name="commandProcessor" ref="cmdProcess" />
+		<constructor-arg name="nav" ref="navigator" />
 	</bean>
 
 </beans>

@@ -14,7 +14,7 @@ import agroludos.presentation.reqh.AgroRequestContext;
 import agroludos.presentation.resp.AgroResponse;
 import agroludos.presentation.resph.AgroResponseContext;
 import agroludos.presentation.views.AgroludosController;
-import agroludos.presentation.views.Navigator;
+import agroludos.presentation.views.NavigatorI;
 
 /**
  * <strong>Presentation Tier</strong><br />
@@ -64,7 +64,13 @@ class ApplicationControllerImpl implements ApplicationController{
 	 * Il dispatching avviene tramite il metodo 
 	 * {@link agroludos.presentation.controller.ApplicationControllerImpl#dispatch(AgroRequest, AgroResponse, String)} 
 	 */
-	private Navigator nav;
+	private NavigatorI nav;
+	
+	ApplicationControllerImpl(CommandProcessor commandProcessor, CommandFactory commandFactory, NavigatorI nav){
+		this.commandProcessor = commandProcessor;
+		this.commandFactory = commandFactory;
+		this.nav = nav;
+	}
 
 	/**
 	 * Il metodo si occupa di ritornare il nome del servizio richiesto. Il nome è ottenuto tramite il metodo
@@ -185,17 +191,5 @@ class ApplicationControllerImpl implements ApplicationController{
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void setCommandProcessor(CommandProcessor commandProcessor) {
-		this.commandProcessor = commandProcessor;
-	}
-
-	public void setCommandFactory(CommandFactory commandFactory) {
-		this.commandFactory = commandFactory;
-	}
-
-	public void setNav(Navigator nav) {
-		this.nav = nav;
 	}
 }
