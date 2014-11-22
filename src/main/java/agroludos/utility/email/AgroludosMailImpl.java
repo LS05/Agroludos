@@ -13,14 +13,38 @@ import agroludos.system.Conf;
 import agroludos.to.EmailTO;
 import agroludos.to.UtenteTO;
 
+/**
+ * La classe si occupa di inviare una mail. L'operazione di invio delle mail è
+ * eseguita su un Thread rappresentato dalla classe {@link MailThread}.
+ * Vengono utilizzati i valori di configurazione delle mail presenti nel file di
+ * proprietà corrispondente grazie all'uso dell'interfaccia {@link Conf}
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
 class AgroludosMailImpl implements AgroludosMail {
-
+	/**
+	 * Interfaccia per ottenere i valori di configuazione per le email come: username,
+	 * password, server SMTP, porta ecc.
+	 */
 	private Conf sysConf;
 
+	/**
+	 * Inizializza sysConf
+	 * 
+	 * @param sysConf Interfaccia per accedere alle proprietà di sistema
+	 */
 	AgroludosMailImpl(Conf sysConf){
 		this.sysConf = sysConf;
 	}
 
+	/**
+	 * Il metodo si occupa di effettuare la configurazione per l'invio delle
+	 * mail utilizzando {@link sysConf}
+	 * 
+	 * @return Proprietà per l'invio delle email
+	 */
 	private Properties createMailProperties(){
 		Properties props = new Properties();
 
@@ -45,6 +69,11 @@ class AgroludosMailImpl implements AgroludosMail {
 		return props;
 	}
 
+	/**
+	 * Il metodo invia una mail con i dati presenti nel Transfer Object, utilizzando
+	 * la classe di supporto {@link MailThread} e le proprietà ottenute dal metodo
+	 * {@link agroludos.utility.email.AgroludosMailImpl#createMailProperties()}
+	 */
 	@Override
 	public void sendEmail(EmailTO emailTO) {
 		final String username = this.sysConf.getString("agroludosMail");

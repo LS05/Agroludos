@@ -1,7 +1,9 @@
 package agroludos.system;
 
 /**
- * Gestisce il file di proprietà di sistema
+ * Permette di accedere al file di proprietà di sistema per ottenere informazioni
+ * quali: tipo di database usato, tipo file del certificato e lingua del sistema.
+ * 
  * @author Luca Suriano
  * @author Francesco Zagaria
  *

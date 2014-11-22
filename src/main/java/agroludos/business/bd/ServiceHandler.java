@@ -126,19 +126,11 @@ class ServiceHandler {
 			}  catch (MethodNotFoundException e) {
 				throw new ServiceNotFoundException(request.getCommandName(), e);
 			} catch (InvocationTargetException e) {
-				//TODO Aggiungere "Gestore" per le eccezioni?
-				//TODO Controllare se l'eccezione è di sistema o
-				//di applicazione
-				//Controllare se è un'eccezione di controllo-dati 
-				//(o di un altro tipo particolare) 
-				//allora passo il TO, altrimenti il messaggio.
-				//Passare il messaggio o l'eccezione?
 				this.response.setLogicalViewName(command.getFailView());
 
 				Throwable cause = e.getCause();
 				if(cause == null) {
-					throw new IllegalStateException( 
-							"Got InvocationTargetException, but the cause is null.", e);
+					throw new IllegalStateException(e);
 				} else if(cause instanceof ValidationException) {
 					ValidationException exception = (ValidationException) cause;
 					if( exception.getErrors() != null ) {
