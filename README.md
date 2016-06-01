@@ -17,4 +17,4 @@ L'applicazione inoltre è stata sviluppata utilizzando:
 - Spring  
 - Hibernate  
 - JavaFX 2  
-Il codice è stato analizzato con Kiuwan per monitorare aspetti quali: efficienza, manutenibilità, portabilità, sicurezza e affidabilità.
+Il codice è stato analizzato con [Kiuwan](https://www.kiuwan.com/) per monitorare aspetti quali: efficienza, manutenibilità, portabilità, sicurezza e affidabilità.
