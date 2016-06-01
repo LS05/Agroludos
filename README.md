@@ -9,12 +9,12 @@ The application is also developed using the following frameworks:
 - JavaFX 2  
 The code was constantly analyzed with the Kiuwan platform for monitoring: efficiency, maintainability, portability, security and reliability.
 
-Applicazione in Java realizzata per il corso di Ingegneria del Software. Si basa su concetti chiave dell'ambito dell'ingegneria del software ovvero:
-- Design Patterns
-- Principi S.O.L.I.D.
-- Modularità, Astrazione, Generalità, Anticipazione al Cambiamento
-L'applicazione inoltre è stata sviluppata utilizzando:
-- Spring
-- Hibernate
-- JavaFX 2
+Applicazione in Java realizzata per il corso di Ingegneria del Software. Si basa su concetti chiave dell'ambito dell'ingegneria del software ovvero:  
+- Design Patterns  
+- Principi S.O.L.I.D.  
+- Modularità, Astrazione, Generalità, Anticipazione al Cambiamento  
+L'applicazione inoltre è stata sviluppata utilizzando:  
+- Spring  
+- Hibernate  
+- JavaFX 2  
 Il codice è stato analizzato con Kiuwan per monitorare aspetti quali: efficienza, manutenibilità, portabilità, sicurezza e affidabilità.
