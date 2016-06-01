@@ -7,7 +7,7 @@ The application is also developed using the following frameworks:
 - Spring  
 - Hibernate  
 - JavaFX 2  
-The code was constantly analyzed with the Kiuwan platform for monitoring: efficiency, maintainability, portability, security and reliability.
+The code was constantly analyzed with the [Kiuwan](https://www.kiuwan.com/) platform for monitoring: efficiency, maintainability, portability, security and reliability.
 
 Applicazione in Java realizzata per il corso di Ingegneria del Software. Si basa su concetti chiave dell'ambito dell'ingegneria del software ovvero:  
 - Design Patterns  
