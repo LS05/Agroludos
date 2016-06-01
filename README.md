@@ -1,5 +1,6 @@
 # README #
-Java application for the Software Engineering course. It's based on key concepts of software engineering like:
+Java application for the Software Engineering course.  
+It's based on key concepts of software engineering like:
 - Design Patterns  
 - S.O.L.I.D. Principles  
 The application is also developed using the following frameworks:
