@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<command name="checkConfigurazione">
+		<classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe>
+		<from name="mainController">
+			<forward success="initView" failure="initView" />
+		</from>
+	</command>
+	<command name="testConnessioneDB">
+		<classe>agroludos.business.as.gestoreconfigurazione.LConfigurazione</classe>
+		<from name="initView">
+			<forward success="initView" failure="initView" />
+		</from>
+	</command>
+	<command name="checkMds">
+		<classe>agroludos.business.as.gestoremds.LManagerDiSistema</classe>
+		<from name="initView">
+			<forward success="initView" failure="initView" />
+		</from>
+	</command>
+	<command name="getUtenteByUsername">
+		<classe>agroludos.business.as.gestoreutente.LUtente</classe>
+		<from name="passwordDimenticata">
+			<forward success="login" failure="passwordDimenticata" />
+		</from>
+	</command>
+	<command name="autenticazioneUtente">
+		<classe>agroludos.business.as.gestoreutente.LUtente</classe>
+		<from name="login">
+			<forward success="session" failure="login" />
+		</from>
+	</command>
+	<command name="inserisciConfigurazione">
+		<classe>agroludos.business.as.gestoreconfigurazione.SConfigurazione</classe>
+		<from name="configurazione">
+			<forward success="configurazione" failure="configurazione" />
+		</from>
+	</command>
+	<command name="nuovoManagerDiSistema">
+		<classe>agroludos.business.as.gestoremds.SManagerDiSistema</classe>
+		<from name="configurazione">
+			<forward success="login" failure="configurazione" />
+		</from>
+	</command>
+	<command name="inserisciManagerDiCompetizione">
+		<classe>agroludos.business.as.gestoremdc.SManagerDiCompetizione</classe>
+		<from name="nuovoMDC">
+			<forward success="managerDiSistema" failure="nuovoMDC" />
+		</from>
+	</command>
+	<command name="inserisciPartecipante">
+		<classe>agroludos.business.as.gestorepartecipante.SPartecipante</classe>
+		<from name="nuovaRegistrazione">
+			<forward success="login" failure="nuovaRegistrazione" />
+		</from>
+	</command>
+	<command name="inserisciCompetizione">
+		<classe>agroludos.business.as.gestorecompetizione.SCompetizione</classe>
+		<from name="mostraNuovaCmp">
+			<forward success="managerDiCompetizione" failure="mostraNuovaCmp" />
+		</from>
+	</command>
+	<command name="getAllManagerDiCompetizione">
+		<classe>agroludos.business.as.gestoremdc.LManagerDiCompetizione</classe>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+	</command>
+	<command name="getCompetizioneByMdc">
+		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
+		<from name="managerDiCompetizione">
+			<forward success="managerDiCompetizione" failure="managerDiCompetizione" />
+		</from>
+	</command>
+	<command name="getCompetizioneAttiveByMdc">
+		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
+		<from name="managerDiCompetizione">
+			<forward success="managerDiCompetizione" failure="managerDiCompetizione" />
+		</from>
+	</command>
+	<command name="modificaCompetizione">
+		<classe>agroludos.business.as.gestorecompetizione.SCompetizione</classe>
+		<from name="mostraModificaCmp">
+			<forward success="managerDiCompetizione" failure="mostraModificaCmp" />
+		</from>
+	</command>
+	<command name="annullaCompetizione">
+		<classe>agroludos.business.as.gestorecompetizione.SCompetizione</classe>
+		<from name="mostraCmp">
+			<forward success="managerDiCompetizione" failure="mostraCmp" />
+		</from>
+	</command>
+	<command name="eliminaIscrizioneByMdc">
+		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
+		<from name="mostraCmp">
+			<forward success="managerDiCompetizione" failure="mostraCmp" />
+		</from>
+		<from name="mostraIscrizione">
+			<forward success="managerDiCompetizione" failure="mostraIscrizoine" />
+		</from>
+	</command>
+	<command name="inviaMail">
+		<classe>agroludos.business.as.gestoremail.LEmail</classe>
+		<from name="motivoEliminazione">
+			<forward success="managerDiCompetizione" failure="motivoEliminazione" />
+		</from>
+	</command>
+	<command name="eliminaIscrizioneByPartecipante">
+		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
+		<from name="partMostraIscrizione">
+			<forward success="partecipante" failure="partMostraIscrizione" />
+		</from>
+	</command>
+	<command name="modificaManagerDiCompetizione">
+		<classe>agroludos.business.as.gestoremdc.SManagerDiCompetizione</classe>
+		<from name="modificaMDC">
+			<forward success="managerDiSistema" failure="modificaMDC" />
+		</from>
+	</command>
+	<command name="getAllOptional">
+		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+	</command>
+	<command name="getAllPartecipante">
+		<classe>agroludos.business.as.gestorepartecipante.LPartecipante</classe>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+	</command>
+	<command name="getAllCompetizione">
+		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+	</command>
+	<command name="disattivaOptional">
+		<classe>agroludos.business.as.gestoreoptional.SOptional</classe>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+	</command>
+	<command name="getAllTipoOptional">
+		<classe>agroludos.business.as.gestoretipooptional.LTipoOptional</classe>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+		<from name="nuovoOpt">
+			<forward success="nuovoOpt" failure="nuovoOpt" />
+		</from>
+		<from name="selezionaOptional">
+			<forward success="selezionaOptional" failure="selezionaOptional" />
+		</from>
+		<from name="selezionaOptionalPart">
+			<forward success="selezionaOptionalPart" failure="selezionaOptionalPart" />
+		</from>
+		<from name="modificaOptionalPartecipante">
+			<forward success="modificaOptionalPartecipante" failure="modificaOptionalPartecipante" />
+		</from>
+	</command>
+	<command name="getOptionalByTipo">
+		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+	</command>
+	<command name="getAllTipoCompetizione">
+		<classe>agroludos.business.as.gestoretipocompetizione.LTipoCompetizione</classe>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+		<from name="mostraNuovaCmp">
+			<forward success="mostraNuovaCmp" failure="mostraNuovaCmp" />
+		</from>
+	</command>
+	<command name="getAllStatoCompetizione">
+		<classe>agroludos.business.as.gestorestatocompetizione.LStatoCompetizione</classe>
+		<from name="mostraNuovaCmp">
+			<forward success="mostraNuovaCmp" failure="mostraNuovaCmp" />
+		</from>
+	</command>
+	<command name="getCompetizioniByTipo">
+		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+	</command>
+	<command name="getAllStatoUtente">
+		<classe>agroludos.business.as.gestorestatoutente.LStatoUtente</classe>
+		<from name="modificaMDC">
+			<forward success="modificaMDC" failure="modificaMDC" />
+		</from>
+		<from name="nuovoMDC">
+			<forward success="nuovoMDC" failure="modificaMDC" />
+		</from>
+		<from name="nuovaRegistrazione">
+			<forward success="nuovaRegistrazione" failure="nuovaRegistrazione" />
+		</from>
+	</command>
+	<command name="inserisciTipoOptional">
+		<classe>agroludos.business.as.gestoretipooptional.STipoOptional</classe>
+		<from name="nuovoTipoOpt">
+			<forward success="managerDiSistema" failure="nuovoTipoOpt" />
+		</from>
+	</command>
+	<command name="getCertificatoSRC">
+		<classe>agroludos.business.as.gestorepartecipante.LPartecipante</classe>
+		<from name="visualizzaSRC">
+			<forward success="visualizzaSRC" failure="visualizzaSRC" />
+		</from>
+	</command>
+	<command name="inserisciOptional">
+		<classe>agroludos.business.as.gestoreoptional.SOptional</classe>
+		<from name="nuovoOpt">
+			<forward success="managerDiSistema" failure="nuovoOpt" />
+		</from>
+	</command>
+	<command name="getAllStatoOptional">
+		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
+		<from name="nuovoOpt">
+			<forward success="nuovoOpt" failure="nuovoOpt" />
+		</from>
+		<from name="modificaOpt">
+			<forward success="modificaOpt" failure="modificaOpt" />
+		</from>
+	</command>
+	<command name="modificaOptional">
+		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
+		<from name="modificaOpt">
+			<forward success="managerDiSistema" failure="modificaOpt" />
+		</from>
+	</command>
+	<command name="inserisciTipoCompetizione">
+		<classe>agroludos.business.as.gestoretipocompetizione.STipoCompetizione</classe>
+		<from name="nuovoTipoCpt">
+			<forward success="managerDiSistema" failure="nuovoTipoCpt" />
+		</from>
+	</command>
+	<command name="eliminaManagerDiCompetizione">
+		<classe>agroludos.business.as.gestoremdc.SManagerDiCompetizione</classe>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+	</command>
+	<command name="getCompetizioniAperte">
+		<classe>agroludos.business.as.gestorecompetizione.LCompetizione</classe>
+		<from name="partecipante">
+			<forward success="partecipante" failure="partecipante" />
+		</from>
+	</command>
+	<command name="getAllIscrizioniAttive">
+		<classe>agroludos.business.as.gestoreiscrizione.LIscrizione</classe>
+		<from name="partecipante">
+			<forward success="partecipante" failure="partecipante" />
+		</from>
+	</command>
+	<command name="inserisciIscrizione">
+		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
+		<from name="mostraIscrPart">
+			<forward success="partecipante" failure="partMostraCompetizione" />
+		</from>
+	</command>
+	<command name="modificaIscrizioneByPartecipante">
+		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
+		<from name="selezionaOptionalPart">
+			<forward success="partMostraIscrizione" failure="partMostraIscrizione" />
+		</from>
+	</command>
+	<command name="modificaIscrizioneByMdc">
+		<classe>agroludos.business.as.gestoreiscrizione.SIscrizione</classe>
+		<from name="modificaOptionalPartecipante">
+			<forward success="mostraIscrizione" failure="modificaOptionalPartecipante" />
+		</from>
+	</command>
+	<command name="esisteIscrizione">
+		<classe>agroludos.business.as.gestoreiscrizione.LIscrizione</classe>
+		<from name="selezionaOptionalPart">
+			<forward success="selezionaOptionalPart" failure="selezionaOptionalPart" />
+		</from>
+	</command>
+	<command name="getAllStatoIscrizione">
+		<classe>agroludos.business.as.gestorestatoiscrizione.LStatoIscrizione</classe>
+		<from name="partMostraIscrizione">
+			<forward success="partMostraIscrizione" failure="partMostraIscrizione" />
+		</from>
+		<from name="mostraIscrPart">
+			<forward success="mostraIscrPart" failure="mostraIscrPart" />
+		</from>
+	</command>
+	<command name="sendEmail">
+		<classe>agroludos.business.as.gestoremail.LEmail</classe>
+		<from name="managerDiCompetizione">
+			<forward success="managerDiCompetizione" failure="mostraCmp" />
+		</from>
+		<from name="partMostraCompetizione">
+			<forward success="partecipante" failure="partMostraCompetizione" />
+		</from>
+		<from name="partecipante">
+			<forward success="partecipante" failure="partecipante" />
+		</from>
+		<from name="mostraIscrizione">
+			<forward success="mostraIscrizione" failure="modificaOptionalPartecipante" />
+		</from>
+		<from name="partMostraIscrizione">
+			<forward success="partMostraIscrizione" failure="partMostraIscrizione" />
+		</from>
+	</command>
+	<command name="passwordDimenticata">
+		<classe>agroludos.business.as.gestoreutente.LUtente</classe>
+		<from name="passwordDimenticata">
+			<forward success="passwordDimenticata" failure="passwordDimenticata" />
+		</from>
+	</command>
+	<command name="checkMdcCmpAttive">
+		<classe>agroludos.business.as.gestoremdc.LManagerDiCompetizione</classe>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+	</command>
+	<command name="checkOptCmpAttive">
+		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+	</command>
+	<command name="isCertificatoValido">
+		<classe>agroludos.business.as.gestorepartecipante.LPartecipante</classe>
+		<from name="partecipante">
+			<forward success="partecipante" failure="partecipante" />
+		</from>
+	</command>
+	<command name="modificaPartecipante">
+		<classe>agroludos.business.as.gestorepartecipante.SPartecipante</classe>
+		<from name="aggiornaSRC">
+			<forward success="aggiornaSRC" failure="aggiornaSRC" />
+		</from>
+	</command>
+	<command name="getOptionalAttiviByTipo">
+		<classe>agroludos.business.as.gestoreoptional.LOptional</classe>
+		<from name="selezionaOptional">
+			<forward success="selezionaOptional" failure="selezionaOptional" />
+		</from>
+	</command>
+	<command name="getAllIscrizioniAttiveByCmp">
+		<classe>agroludos.business.as.gestoreiscrizione.LIscrizione</classe>
+		<from name="partMostraCompetizione">
+			<forward success="partMostraCompetizione" failure="partMostraCompetizione" />
+		</from>
+		<from name="mostraCmpMds">
+			<forward success="mostraCmpMds" failure="mostraCmpMds" />
+		</from>
+		<from name="mostraCmp">
+			<forward success="mostraCmp" failure="mostraCmp" />
+		</from>
+		<from name="managerDiCompetizione">
+			<forward success="managerDiCompetizione" failure="managerDiCompetizione" />
+		</from>
+	</command>
+	<command name="getAllIscrizioniPartecipante">
+		<classe>agroludos.business.as.gestoreiscrizione.LIscrizione</classe>
+		<from name="visualizzaIscrizioni">
+			<forward success="visualizzaIscrizioni" failure="visualizzaIscrizioni" />
+		</from>
+	</command>
+	<command name="chiusura">
+		<classe>agroludos.business.as.gestorechiusura.LChiusura</classe>
+		<from name="aggiornaSRC">
+			<forward success="aggiornaSRC" failure="aggiornaSRC" />
+		</from>
+		<from name="managerDiSistema">
+			<forward success="managerDiSistema" failure="managerDiSistema" />
+		</from>
+		<from name="managerDiCompetizione">
+			<forward success="managerDiCompetizione" failure="managerDiCompetizione" />
+		</from>
+		<from name="partecipante">
+			<forward success="partecipante" failure="partecipante" />
+		</from>
+		<from name="login">
+			<forward success="login" failure="login" />
+		</from>
+		<from name="configurazione">
+			<forward success="configurazione" failure="configurazione" />
+		</from>
+	</command>
+	<command name="modificaDatiAccesso">
+		<classe>agroludos.business.as.gestoreutente.SUtente</classe>
+		<from name="modificaDatiAccesso">
+			<forward success="modificaDatiAccesso" failure="modificaDatiAccesso" />
+		</from>
+	</command>
+</commands>

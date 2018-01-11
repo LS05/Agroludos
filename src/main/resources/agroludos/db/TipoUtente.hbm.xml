@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="agroludos.to.TipoUtente" table="tbl_ruoli"
+		catalog="agroludos">
+		<id name="id" type="java.lang.Integer">
+			<column name="idruolo" />
+			<generator class="increment" />
+		</id>
+		<property name="nome" type="string">
+			<column name="nome" not-null="true" />
+		</property>
+	</class>
+	<query name="getAllTipoUtente">
+        <![CDATA[ from agroludos.to.TipoUtente o ]]></query>
+	<query name="getTipoUtenteMds">
+		<![CDATA[ from agroludos.to.TipoUtente m where m.id = 0 ]]></query>
+	<query name="getTipoUtenteMdc">
+		<![CDATA[ from agroludos.to.TipoUtente m where m.id = 1 ]]></query>
+	<query name="getTipoUtentePart">
+		<![CDATA[ from agroludos.to.TipoUtente m where m.id = 2 ]]></query>
+</hibernate-mapping>

@@ -1,5 +1,7 @@
 package agroludos.integration.dao.db;
 
-public interface TipoCompetizioneDAO {
+import agroludos.to.TipoCompetizioneTO;
+
+public interface TipoCompetizioneDAO extends DAO<TipoCompetizioneTO>{
 
 }

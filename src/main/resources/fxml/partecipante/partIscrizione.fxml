@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="837.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="agroludos.presentation.views.partecipante.ControllerPartIscrizione">
+  <children>
+    <BorderPane prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <bottom>
+        <Pane prefHeight="10.0" prefWidth="900.0" BorderPane.alignment="CENTER" />
+      </bottom>
+      <center>
+        <GridPane BorderPane.alignment="CENTER">
+          <children>
+            <Label fx:id="lblNomeCompetizione" text="Questo è il nome della competizione" wrapText="true">
+              <font>
+                <Font size="20.0" />
+              </font>
+              <GridPane.margin>
+                <Insets left="10.0" />
+              </GridPane.margin>
+            </Label>
+            <GridPane GridPane.rowIndex="2">
+              <children>
+                <GridPane>
+                  <children>
+                    <GridPane prefHeight="230.0" prefWidth="510.0">
+                      <children>
+                        <Label id="lblData" text="%key22">
+                          <font>
+                            <Font name="System Bold" size="13.0" fx:id="x1" />
+                          </font>
+                          <GridPane.margin>
+                            <Insets left="10.0" />
+                          </GridPane.margin>
+                        </Label>
+                        <Label id="lblNMax" font="$x1" text="%key29" GridPane.rowIndex="1">
+                          <GridPane.margin>
+                            <Insets left="10.0" />
+                          </GridPane.margin>
+                        </Label>
+                        <Label id="lblNMin" font="$x1" text="%key30" GridPane.rowIndex="2">
+                          <GridPane.margin>
+                            <Insets left="10.0" />
+                          </GridPane.margin>
+                        </Label>
+                        <Label text="%key31" GridPane.rowIndex="3">
+                          <font>
+                            <Font name="System Bold" size="18.0" fx:id="x2" />
+                          </font>
+                          <GridPane.margin>
+                            <Insets left="10.0" />
+                          </GridPane.margin>
+                        </Label>
+                        <Label fx:id="lblCosto" font="$x2" text="€ 50" textFill="#292929" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                        <Label fx:id="lblData" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                        <Label fx:id="lblNMax" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                        <Label fx:id="lblNMin" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                      </children>
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="10.0" prefWidth="181.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                      </columnConstraints>
+                      <rowConstraints>
+                        <RowConstraints maxHeight="39.0" minHeight="39.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="39.0" minHeight="39.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="39.0" minHeight="39.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                        <RowConstraints vgrow="SOMETIMES" />
+                      </rowConstraints>
+                    </GridPane>
+                    <GridPane prefHeight="62.0" prefWidth="827.0" GridPane.rowIndex="1">
+                      <children>
+                        <Label font="$x2" prefHeight="41.0" prefWidth="829.0" text="%key32">
+                          <GridPane.margin>
+                            <Insets left="10.0" right="10.0" />
+                          </GridPane.margin>
+                        </Label>
+                        <Button fx:id="btnSelezionaOptional" mnemonicParsing="false" onMouseClicked="#btnSelezOptClicked" text="%key67" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                          <GridPane.margin>
+                            <Insets />
+                          </GridPane.margin>
+                        </Button>
+                        <Label text="%key141" GridPane.rowIndex="1">
+                          <font>
+                            <Font name="System Bold" size="24.0" fx:id="x4" />
+                          </font>
+                          <GridPane.margin>
+                            <Insets left="10.0" />
+                          </GridPane.margin>
+                        </Label>
+                        <Label fx:id="lblCostoTot" font="$x4" text="€ 0" textFill="#18ad18" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                          <GridPane.margin>
+                            <Insets right="10.0" />
+                          </GridPane.margin>
+                        </Label>
+                      </children>
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="551.0" minWidth="10.0" prefWidth="551.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="427.0" minWidth="10.0" prefWidth="276.0" />
+                      </columnConstraints>
+                      <rowConstraints>
+                        <RowConstraints maxHeight="63.0" minHeight="0.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="129.0" valignment="CENTER" vgrow="SOMETIMES" />
+                      </rowConstraints>
+                    </GridPane>
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints maxHeight="210.0" minHeight="10.0" prefHeight="164.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="179.0" minHeight="10.0" prefHeight="169.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane GridPane.columnIndex="0" GridPane.rowIndex="1">
+                  <children>
+                    <Button id="btnIscriviti" mnemonicParsing="false" onMouseClicked="#btnIscrivitiClicked" prefHeight="26.0" prefWidth="166.0" text="%key68" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+                    <Button mnemonicParsing="false" onMouseClicked="#btnAnnullaClicked" prefHeight="26.0" text="%key40" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+                      <GridPane.margin>
+                        <Insets />
+                      </GridPane.margin>
+                    </Button>
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="383.0" minWidth="10.0" prefWidth="372.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.0" minWidth="10.0" prefWidth="276.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="179.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="468.0" minHeight="10.0" prefHeight="235.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="52.0" minHeight="33.0" prefHeight="52.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane GridPane.rowIndex="1">
+              <children>
+                <Label fx:id="lblTipoCompetizione" font="$x1" text="Questo è il tipo della competizione" textFill="#8a8a8a">
+                  <GridPane.margin>
+                    <Insets left="10.0" />
+                  </GridPane.margin>
+                </Label>
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="710.0" minWidth="10.0" prefWidth="710.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="362.0" minWidth="10.0" prefWidth="117.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="51.0" minHeight="51.0" prefHeight="51.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="610.0" minHeight="10.0" prefHeight="532.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </center>
+      <right>
+        <Pane prefHeight="561.0" prefWidth="10.0" BorderPane.alignment="CENTER" />
+      </right>
+      <top>
+        <MenuBar BorderPane.alignment="CENTER">
+          <menus>
+            <Menu mnemonicParsing="false" text="Agroludos">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Esci da Agroludos" />
+              </items>
+            </Menu>
+          </menus>
+        </MenuBar>
+      </top>
+    </BorderPane>
+  </children>
+</AnchorPane>

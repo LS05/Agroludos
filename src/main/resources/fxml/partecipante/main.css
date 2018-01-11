@@ -1,0 +1,62 @@
+#paneMainMenu{
+	-fx-background-color: #465660;	
+}
+
+.mainMenuButton{
+    -fx-background-color: #465660;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 3px 6px 4px 6px;
+    -fx-border-insets: 0, 0 1 0 1;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+	-fx-text-alignment: left;
+}
+
+.mainMenuButton:hover{
+	-fx-background-color: #4F616D;
+}
+
+.mainPane{
+	-fx-background-color: #465660;	
+}
+
+/* .lbltitolo{ */
+/*     -fx-border-color: #f4f4f4 #f4f4f4 #A2A4A8 #f4f4f4; */
+/* } */
+
+.mainBtn{
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-border-insets: 0, 0 0 0 0;
+}
+
+.btnConferma{
+    -fx-background-color:#18B22A;
+}
+
+.btnConferma:hover{
+    -fx-background-color:#27BF4B;
+}
+
+.btnIndietro{
+    -fx-font-weight: normal;
+    -fx-text-fill: #282828;
+    -fx-background-color:#f4f4f4;
+}
+
+.btnIndietro:hover{
+    -fx-underline: true;
+}
+
+.btnAvanti{
+    -fx-background-color:#46C3F3;
+}
+
+.btnAvanti:hover{
+    -fx-background-color:#70cff3;
+}
+
+.lblError{
+	-fx-text-fill: #f00;
+}

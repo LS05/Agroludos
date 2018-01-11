@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="agroludos.to.Utente" table="tbl_utenti" catalog="agroludos">
+		<id name="id" type="java.lang.Integer">
+			<column name="idutente" />
+			<generator class="increment" />
+		</id>
+		<property name="nome" type="string">
+			<column name="nome" not-null="true" />
+		</property>
+		<property name="cognome" type="string">
+			<column name="cognome" not-null="true" />
+		</property>
+		<property name="username" type="string">
+			<column name="username" not-null="true" />
+		</property>
+		<property name="password" type="string">
+			<column name="password" not-null="true" />
+		</property>
+		<property name="email" type="string">
+			<column name="email" not-null="true" />
+		</property>
+		<many-to-one name="tipoUtente" class="agroludos.to.TipoUtente"
+			cascade="persist,merge,refresh" lazy="false">
+			<column name="idruolo" not-null="true" />
+		</many-to-one>
+		<many-to-one name="statoUtente" class="agroludos.to.StatoUtente"
+			 cascade="persist,merge,refresh" lazy="false">
+			<column name="stato" not-null="true" />
+		</many-to-one>
+		<joined-subclass name="agroludos.to.ManagerDiSistema"
+			table="tbl_mds" extends="agroludos.to.Utente">
+			<key column="idmds" />
+			<property name="indirizzo" type="string">
+				<column name="indirizzo" />
+			</property>
+			<property name="telefono" type="string">
+				<column name="telefono" />
+			</property>
+		</joined-subclass>
+		<joined-subclass name="agroludos.to.ManagerDiCompetizione"
+			table="tbl_mdc" extends="agroludos.to.Utente">
+			<key column="idmdc" />
+			<property name="stipendio" type="double">
+				<column name="stipendio" />
+			</property>
+		</joined-subclass>
+		<joined-subclass name="agroludos.to.Partecipante"
+			table="tbl_partecipante" extends="agroludos.to.Utente">
+			<key column="idpartecipante" />
+			<property name="cf" type="string">
+				<column name="cf" not-null="true" />
+			</property>
+			<property name="dataNasc" type="date">
+				<column name="datanasc" not-null="true" />
+			</property>
+			<property name="sesso" type="string">
+				<column name="sesso" not-null="true" />
+			</property>
+			<property name="numTS" type="string">
+				<column name="n_tessan" not-null="true" />
+			</property>
+			<property name="indirizzo" type="string">
+				<column name="indirizzo" not-null="true" />
+			</property>
+			<property name="src" type="string">
+				<column name="src" not-null="true" />
+			</property>
+			<property name="dataSRC" type="date">
+				<column name="data_src" not-null="true" />
+			</property>
+		</joined-subclass>
+
+
+	</class>
+	<query name="checkMds">
+		<![CDATA[ from agroludos.to.Utente m where m.statoUtente.id = 1 and m.tipoUtente.id = 0 ]]></query>
+	<query name="getUtente">
+        <![CDATA[ from agroludos.to.Utente u where u.statoUtente.id = 1 and u.username = ? and u.password = ?]]></query>
+	<query name="getByID">
+        <![CDATA[ from agroludos.to.Utente u where u.statoUtente.id = 1 and u.id = ?]]></query>
+	<query name="getPartecipante">
+        <![CDATA[ from agroludos.to.Partecipante p where p.statoUtente.id = 1 and p.id = ? ]]></query>
+	<query name="getPartecipanteByCF">
+        <![CDATA[ from agroludos.to.Partecipante p where p.statoUtente.id = 1 and p.cf = ? ]]></query>
+	<query name="getAllManagerDiCompetizione">
+		<![CDATA[ from agroludos.to.ManagerDiCompetizione m where m.statoUtente.id = 1]]></query>
+	<query name="getAllPartecipante">
+		<![CDATA[ from agroludos.to.Partecipante m where m.statoUtente.id = 1 ]]></query>
+	<query name="getByUsername">
+		<![CDATA[ from agroludos.to.Utente m where m.statoUtente.id = 1 and m.username = ? ]]></query>
+	<query name="getByEmail">
+		<![CDATA[ from agroludos.to.Utente m where m.statoUtente.id = 1 and m.email = ? ]]></query>
+</hibernate-mapping>

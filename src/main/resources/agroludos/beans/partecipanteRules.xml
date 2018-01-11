@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="pRulesFactory"
+		class="agroludos.business.validator.rules.partecipante.PartRulesFactoryImpl" />
+		
+	<bean id="partCfRule"
+		  class="agroludos.business.validator.rules.partecipante.PartCFRule"
+		  parent="agroRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getCfRule">
+		  <property name="strValidator" ref="stringValidator" />
+	</bean>
+	
+	<bean id="partDataSrcRule"
+		  class="agroludos.business.validator.rules.partecipante.PartDataSrcRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getDataSrcRule">
+		  <property name="dateValidator" ref="dateValidator" />
+	</bean>
+		  
+	<bean id="partIndirizzoRule"
+		  class="agroludos.business.validator.rules.partecipante.PartIndirizzoRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getIndirizzoRule">
+	</bean>
+	
+	<bean id="partSrcRule"
+		  class="agroludos.business.validator.rules.partecipante.PartSrcRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getSrcRule">
+		  <property name="fileValidator" ref="fileValidator" />
+	</bean>
+	
+	<bean id="partTesRule"
+		  class="agroludos.business.validator.rules.partecipante.PartTesRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getTesRule"></bean>
+		  
+	<bean id="partSessoRule"
+		  class="agroludos.business.validator.rules.partecipante.PartSessoRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getSessoRule"></bean>
+		  
+	<bean id="partDataNascRule"
+		  class="agroludos.business.validator.rules.partecipante.PartDataNascRule"
+		  factory-bean="pRulesFactory"
+		  factory-method="getDataNascRule"></bean>
+</beans>

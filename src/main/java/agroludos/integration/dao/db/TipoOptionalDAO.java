@@ -1,5 +1,7 @@
 package agroludos.integration.dao.db;
 
-public interface TipoOptionalDAO {
+import agroludos.to.TipoOptionalTO;
 
+public interface TipoOptionalDAO extends DAO<TipoOptionalTO>{
+	
 }

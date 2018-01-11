@@ -1,0 +1,95 @@
+#paneMainMenu{
+	-fx-background-color: #465660;	
+}
+
+.mainMenuButton{
+    -fx-background-color: #465660;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 3px 6px 4px 6px;
+    -fx-border-insets: 0, 0 1 0 1;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+	-fx-text-alignment: left;
+}
+
+.mainMenuButton:active{
+	 -fx-background-color: #ffffff;
+	 -fx-text-fill: #465660;
+}
+
+.mainMenuButton:hover{
+	-fx-background-color: #4F616D;
+}
+
+.mainPane{
+	-fx-background-color: #465660;	
+}
+
+.mainBtn{
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-border-insets: 0, 0 0 0 0;
+}
+
+.btnConferma{
+    -fx-background-color:#18B22A;
+}
+
+.btnConferma:hover{
+    -fx-background-color:#27BF4B;
+}
+
+.btnIndietro{
+    -fx-font-weight: normal;
+    -fx-text-fill: #282828;
+    -fx-background-color:#f4f4f4;
+}
+
+.btnIndietro:hover{
+    -fx-underline: true;
+}
+
+.btnAvanti{
+    -fx-background-color:#46C3F3;
+}
+
+.btnAvanti:hover{
+    -fx-background-color:#70cff3;
+}
+
+.attivoCell{
+	-fx-background-color:#94dc70;
+}
+
+.disattivoCell{
+	-fx-background-color:#ea5a53;
+}
+
+.optionalRow:selected{
+   -fx-background-color: steelblue; 
+}
+
+.optionalRow:selected .disattivoCell{
+   -fx-background-color: red;
+}
+
+.optionalRow:selected .text{
+       -fx-fill: white ;
+}
+
+.lblError{
+	-fx-text-fill: red;
+	-fx-font-weight: bold;
+}
+
+.btnAnnullaCerca{
+	-fx-background-color: #ffffff;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0, 0 1 0 1;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 0 0;
+    -fx-cursor: hand;
+    -fx-text-fill: #9a9999;
+}

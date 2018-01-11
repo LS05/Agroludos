@@ -1,177 +1,184 @@
 package agroludos.presentation.views.amministratore;
 
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
-
-import agroludos.presentation.fc.FC;
-import agroludos.presentation.req.FrameRequest;
-import agroludos.utility.SecurePassword;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import agroludos.presentation.req.AgroRequest;
+import agroludos.presentation.resp.AgroResponse;
+import agroludos.presentation.views.AgroludosController;
+import agroludos.to.AgroludosTO;
+import agroludos.to.ErrorMessageTO;
+import agroludos.to.ErrorTO;
+import agroludos.to.ManagerDiSistemaTO;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+/**
+ * gestisce la view per l'inserimento della configurazione, ovvero dell'inserimento
+ * del manager di sistema
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
+public class ControllerConfSistema extends AgroludosController {
+	private String viewName;
 
-import java.security.NoSuchAlgorithmException;
-
-public class ControllerConfSistema implements Initializable{
-	@FXML private Button btnAvantiConf;
-	@FXML private Button btnIndietroConf;
-	@FXML private Button btnConfermaConfigurazione;
-	@FXML private GridPane databasePane;
-	@FXML private GridPane managerSistemaPane;
-
-	//texfield DataBase
-	@FXML private ComboBox<String> cmbTipoDB;
-	@FXML private TextField txtServerDB;
-	@FXML private TextField txtPortaDB;
-	@FXML private TextField txtNomeDB;
-	@FXML private TextField txtUsernameDB;
-	@FXML private PasswordField txtPasswordDB;
-
-	//texfield Manager Di Sistema
+	@FXML private Label lblNomeError;
+	@FXML private Label lblCognomeError;
+	@FXML private Label lblUsernameError;
+	@FXML private Label lblPasswordError;
+	@FXML private Label lblEmailError;
+	@FXML private Label lblTelefonoError;
 	@FXML private TextField txtNomeMds;
 	@FXML private TextField txtCognomeMds;
-	@FXML private TextField txtUsernameMds;
-	@FXML private PasswordField txtPasswordMds;
+	@FXML private TextField txtUsernameMds;	
 	@FXML private TextField txtEmailMds;
 	@FXML private TextField txtTelefonoMds;
+	@FXML private PasswordField txtPasswordMds;
+	@FXML private TextField txtRevealPassword;
+	@FXML private CheckBox checkBoxReveal;
 
-	//hashmap dei contenuti delle text
-	private Map<String, String> parametriDB = new HashMap<>();
-	private Map<String, String> parametriMds = new HashMap<>();
+	private ManagerDiSistemaTO mdsto;
 
+	private AgroRequest richiesta;
 
-	private FC frontController = FC.getInstance();
+	private AgroResponse risposta;
 
-	private FrameRequest richiesta;
-	private ObservableList<String> listaTipiDB;
-
-
-
-
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.listaTipiDB = FXCollections.observableArrayList();
-		//aggiungo i tipi di db alla combobox
-		this.listaTipiDB.add("mysql");
-		this.listaTipiDB.add("oracle");
-		this.listaTipiDB.add("postgress");
-		this.cmbTipoDB.setItems(this.listaTipiDB);
-		this.cmbTipoDB.setValue("mysql");
-
-		this.databasePane.setVisible(true);
-		this.managerSistemaPane.setVisible(false);
-	}
-
-	@FXML protected void btnAvantiClicked(MouseEvent event) {
-		//controllo la validità delle textfield	
-
-		if((this.cmbTipoDB.getValue().length() != 0)  &&
-				(this.txtServerDB.getText().length() != 0)  && 
-				(this.txtPortaDB.getText().length() != 0)  && 
-				(this.txtNomeDB.getText().length() != 0)  &&
-				(this.txtUsernameDB.getText().length() != 0)  &&
-				(this.txtPasswordDB.getText().length() != 0)  
-				) {
-
-			//copio il contenuto delle textfield nell'hashmap parametri
-			parametriDB.put("tipo", this.cmbTipoDB.getValue());
-			parametriDB.put("server", txtServerDB.getText());
-			parametriDB.put("porta", txtPortaDB.getText());
-			parametriDB.put("nome", txtNomeDB.getText());
-			parametriDB.put("username", txtUsernameDB.getText());
-			parametriDB.put("password", this.txtPasswordDB.getText());
-
-			this.richiesta = new FrameRequest(parametriDB,"confermaConfigurazione");
-			boolean res = (boolean) this.frontController.eseguiRichiesta(richiesta);
-
-			//se la connessione al db è andata a buon fine procedi
-			if(res){
-				this.databasePane.setVisible(false);
-				this.managerSistemaPane.setVisible(true);
+	@Override
+	public void initializeView(String nameView) {
+		this.viewName = nameView;
+		
+		final Stage stage = this.getStage(this.viewName);
+		//aggiungo per chiudere il programma
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent we) {
+				risposta = getRisposta();
+				richiesta = getRichiesta("chiusura", viewName);
+				eseguiRichiesta(richiesta, risposta);
 			}
-			else
-				System.out.println("Connessione al DB fallita");
-		}
-		else {
-			System.out.println("Campi vuoti o errati");
-		}
-
-	}
-
-	@FXML protected void btnIndietroClicked(MouseEvent event) {
-		this.databasePane.setVisible(true);
-		this.managerSistemaPane.setVisible(false);
-
-	}
-
-	@FXML protected void btnConfermaConfigurazione(MouseEvent event) {
-		//controllo la validità delle textfield
-		if((this.txtNomeMds.getText().length() != 0)  && 
-				(this.txtCognomeMds.getText().length() != 0)  &&
-				(this.txtUsernameMds.getText().length() != 0)  &&
-				(this.txtPasswordMds.getText().length() != 0)  &&
-				(this.txtEmailMds.getText().length() != 0)  &&
-				(this.txtTelefonoMds.getText().length() != 0)  
-				) {
-			//richiesta per creare il Manager di Sistema
-			//sicurezza password
-			String securePassword = null;
-			try {
-				securePassword = SecurePassword.stringToMD5(this.txtPasswordMds.getText());
-			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		});
+		
+		this.mdsto = toFact.createMdSTO();
+		this.hideErrors();
+		this.checkBoxReveal.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			public void changed(ObservableValue<? extends Boolean> ov, Boolean oldVal, Boolean newVal) {
+				if(newVal){
+					txtPasswordMds.setVisible(false);
+					txtRevealPassword.setVisible(true);
+					txtRevealPassword.setText(txtPasswordMds.getText());
+				} else {
+					txtPasswordMds.setVisible(true);
+					txtPasswordMds.setText(txtRevealPassword.getText());
+					txtRevealPassword.setVisible(false);
+				}
 			}
-			//copio il contenuto delle textfield nell'hashmap parametri
-			parametriMds.put("txtNomeMds", txtNomeMds.getText());
-			parametriMds.put("txtCognomeMds", txtCognomeMds.getText());
-			parametriMds.put("txtUsernameMds", txtUsernameMds.getText());
-			parametriMds.put("txtPasswordMds", securePassword);
-			parametriMds.put("txtEmailMds", txtEmailMds.getText());
-			parametriMds.put("txtTelefonoMds", txtTelefonoMds.getText());
+		});
+	}
 
-			this.richiesta = new FrameRequest(parametriMds,"nuovoMDS");
-			boolean res = (boolean) this.frontController.eseguiRichiesta(richiesta);
-			//se non ci sono errori mostra la finestra di login
-			if(res){
-				System.out.println("Manager di Sistema inserito correttamente");
-				
-//				Class c = ControllerViews.class;
-//				
-//				try {
-//					Method m = c.getMethod(itm.getId());
-//					m.invoke(c);
-//				} catch (NoSuchMethodException | SecurityException e) {
-//					e.printStackTrace();
-//				} catch (IllegalAccessException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IllegalArgumentException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (InvocationTargetException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-				
-			}
-			else
-				System.out.println("Inserimento fallito");
-		}
-		else {
-			System.out.println("Campi vuoti o errati");
-		}
+	@Override
+	public void initializeView(AgroludosTO mainTO) {
 
 	}
 
+	/**
+	 * popola il manager di sistema to e effettua la richiesta per l'inserimento
+	 * del manager di sistema
+	 * @param event
+	 */
+	@FXML protected void btnConfermaConfClicked(MouseEvent event){
+		this.hideErrors();
+		this.mdsto.setNome(this.txtNomeMds.getText());
+		this.mdsto.setCognome(this.txtCognomeMds.getText());
+		this.mdsto.setUsername(this.txtUsernameMds.getText());
+		this.mdsto.setPassword(this.txtPasswordMds.getText());
+		this.mdsto.setEmail(this.txtEmailMds.getText());
+		this.mdsto.setTelefono(this.txtTelefonoMds.getText());
+		this.richiesta = this.getRichiesta(this.mdsto, "nuovoManagerDiSistema", this.viewName);
+		this.risposta = this.getRisposta();
+		this.eseguiRichiesta(this.richiesta, this.risposta);
+	}
 
+	/**
+	 * nasconde gli errori mostrati con la validazione
+	 */
+	private void hideErrors(){
+		this.lblNomeError.setVisible(false);
+		this.lblCognomeError.setVisible(false);
+		this.lblUsernameError.setVisible(false);
+		this.lblPasswordError.setVisible(false);
+		this.lblEmailError.setVisible(false);
+		this.lblTelefonoError.setVisible(false);
+	}
 
+	/**
+	 * mostra gli errori di validazione
+	 * @param errors
+	 * @param lblError
+	 * @param errorKey
+	 */
+	private void showErrors(ErrorTO errors, Label lblError, String errorKey){
+		if(errors.hasError(this.getError(errorKey))){
+			String nomeKey = this.getError(errorKey);
+			lblError.setVisible(true);
+			lblError.setText(errors.getError(nomeKey));
+		}
+	}
+
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
+
+	@Override
+	public void forward(AgroRequest request, AgroResponse response) {
+		String commandName = request.getCommandName();
+
+		if( commandName.equals(this.getCommandName("nuovoManagerDiSistema") )){
+			Object res = response.getRespData();
+			if(res instanceof Boolean){
+				boolean nuovoMds = (Boolean)res;
+				if(nuovoMds){
+					this.setVista("login");
+				}
+			} else if(res instanceof ErrorTO){
+
+				ErrorTO errors = (ErrorTO)res;
+
+				if(errors.hasError(this.getError("nomeKey"))){
+					this.showErrors(errors, this.lblNomeError, "nomeKey");
+				} 
+
+				if(errors.hasError(this.getError("cognKey"))){
+					this.showErrors(errors, this.lblCognomeError, "cognKey");
+				}
+
+				if(errors.hasError(this.getError("usernameKey"))){
+					this.showErrors(errors, this.lblUsernameError, "usernameKey");
+				}
+
+				if(errors.hasError(this.getError("passwordKey"))){
+					this.showErrors(errors, this.lblPasswordError, "passwordKey");
+				}
+
+				if(errors.hasError(this.getError("emailKey"))){
+					this.showErrors(errors, this.lblEmailError, "emailKey");
+				}
+
+				if(errors.hasError(this.getError("telefonoKey"))){
+					this.showErrors(errors, this.lblTelefonoError, "telefonoKey");
+				}
+
+			} else if(res instanceof String){
+				String msg = (String)res;
+				ErrorMessageTO errorMessage = toFact.createErrMessageTO();
+				errorMessage.setMessage(msg);
+				this.setVista("messageDialog", errorMessage);
+			}
+		}
+	}
 }

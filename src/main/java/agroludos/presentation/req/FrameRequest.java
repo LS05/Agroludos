@@ -1,54 +1,42 @@
 package agroludos.presentation.req;
 
-import java.util.ArrayList;
-import java.util.Map;
+import agroludos.to.AgroludosTO;
 
-/**
- * Modificare il Nome di questa classe
- * @author lucasuriano
- *
- */
+class FrameRequest implements DataRequest{
+	private AgroludosTO data;
+	private String commandName;
+	private String viewName;
+	private AgroSession session;
 
-public class FrameRequest extends AgroRequest{
-	private Map<String, String> reqData;
-	
-	public FrameRequest(Map<String, String> data, String commandName) {
-		super(commandName);
-		this.reqData = data;
-		this.flagParam = true;
-	}
-	
-	public FrameRequest(String commandName) {
-		super(commandName);
-		this.flagParam = false;
+	FrameRequest(AgroludosTO data, String commandName, String viewName, AgroSession session) {
+		this.data = data;
+		this.commandName = commandName;
+		this.viewName = viewName;
+		this.session = session;
 	}
 
 	@Override
-	public Object getData(Object key) throws DataFieldException{
-		Object data = null;
-		
-		if(this.reqData.containsKey(key))
-			data = this.reqData.get(key);
-		else
-			throw new DataFieldException("Data Field: " + key.toString() + " Inesistente!");
-		
-		return data;
-	}
-	
-	public ArrayList getAllData(){
-		ArrayList<String> res = new ArrayList<String>();
-		for(String str : this.reqData.values())
-			res.add(str);
-		return res;
+	public AgroludosTO getData() {
+		return this.data;
 	}
 
 	@Override
-	public boolean isParameter() {
-		return this.flagParam;
+	public String getCommandName() {
+		return this.commandName;
 	}
 
 	@Override
-	public Object getData() {
-		return this.reqData;
+	public boolean isParam() {
+		return true;
+	}
+
+	@Override
+	public AgroSession getSession() {
+		return this.session;
+	}
+
+	@Override
+	public String getviewName() {
+		return this.viewName;
 	}
 }

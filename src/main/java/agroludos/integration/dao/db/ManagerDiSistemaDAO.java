@@ -1,7 +1,23 @@
 package agroludos.integration.dao.db;
 
-import agroludos.to.UtenteTO;
+import agroludos.exceptions.system.DatabaseException;
+import agroludos.to.ManagerDiSistemaTO;
 
-public interface ManagerDiSistemaDAO {
-	boolean crea(UtenteTO uto);
+/** 
+ * Data Access Object per tutte le operazioni CRUD per quanto riguarda il manager di sistema.
+ * Sono presenti i metodi di lettura.
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
+public interface ManagerDiSistemaDAO extends UtenteDAO<ManagerDiSistemaTO>{
+	
+	/**
+	 * 
+	 * @return vero se esiste nella sorgente dati il manager di sistema, falso altrimenti
+	 * @throws DatabaseException
+	 */
+	public boolean checkMds() throws DatabaseException;
+	
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+           
+	<import resource="classpath:agroludos/beans/userRules.xml" />
+	
+	<bean id="mdsRulesFactory"
+		class="agroludos.business.validator.rules.mds.MdsRulesFactoryImpl">
+	</bean>
+		
+	<bean id="mdsTelRule"
+		class="agroludos.business.validator.rules.mds.MdsNumeroTelefonoRule"
+		factory-bean="mdsRulesFactory" 
+		factory-method="getNumeroTelefonoRule">
+		<property name="stringValidator" ref="stringValidator" />
+	</bean>		
+</beans>

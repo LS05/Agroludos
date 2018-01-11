@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="agroludos.to.Iscrizione" table="tbl_iscrizione"
+		catalog="agroludos">
+		<id name="id" type="java.lang.Integer">
+			<column name="idiscrizione" />
+			<generator class="increment" />
+		</id>
+		<property name="data" type="date">
+			<column name="data" not-null="true" />
+		</property>
+		<property name="costo" type="double">
+			<column name="costo" not-null="true" default="0" />
+		</property>
+		<many-to-one name="statoIscrizione" class="agroludos.to.StatoIscrizione"
+			cascade="persist,merge,refresh" lazy="false">
+			<column name="stato" not-null="true" />
+		</many-to-one>
+		<many-to-one name="competizione" class="agroludos.to.Competizione"
+			cascade="persist,merge,refresh" lazy="false">
+			<column name="idcompetizione" not-null="true" />
+		</many-to-one>
+		<many-to-one name="partecipante" class="agroludos.to.Partecipante"
+			cascade="persist,merge,refresh" lazy="false">
+			<column name="idpartecipante" not-null="true" />
+		</many-to-one>
+		<set name="optionals" cascade="persist,merge,refresh" table="tbl_opt_iscr"
+			lazy="false">
+			<key column="idiscrizione" />
+			<many-to-many column="idoptional" class="agroludos.to.Optional" />
+		</set>
+	</class>
+	<query name="getAllIscrizioni">
+        <![CDATA[ from agroludos.to.Iscrizione i where i.statoIscrizione = 1 ]]></query>
+	<query name="getAllIscrizioniAttive">
+        <![CDATA[ from agroludos.to.Iscrizione i where i.partecipante = ? and stato = 1 ]]></query>
+	<query name="getIscrizioniAttiveCmp">
+        <![CDATA[ from agroludos.to.Iscrizione i where i.competizione = ? and stato = 1 ]]></query>
+	<query name="getAllIscrizioniPartecipante">
+        <![CDATA[ from agroludos.to.Iscrizione i where i.partecipante = ? ]]></query>
+</hibernate-mapping>

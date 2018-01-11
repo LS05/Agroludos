@@ -1,0 +1,5 @@
+.lblError{
+    -fx-font-weight: bold;
+    -fx-text-fill: #f00;
+    -fx-padding: 0 0 5px 0;
+}

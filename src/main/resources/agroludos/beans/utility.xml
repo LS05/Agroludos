@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<import resource="classpath:agroludos/beans/system.xml" />
+	
+	<bean id="passwordEncryptor" class="org.jasypt.util.password.ConfigurablePasswordEncryptor"/>
+	
+	<bean id="pwdEnc" class="agroludos.utility.PasswordEncryptionImpl">
+		<constructor-arg ref="passwordEncryptor" />
+	</bean>
+
+	<bean id="agroludosMail" class="agroludos.utility.email.AgroludosMailImpl" scope="prototype">
+		<constructor-arg ref="systemConf" />
+	</bean>
+</beans>

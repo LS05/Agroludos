@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="agroludos.to.Optional" table="tbl_optional" catalog="agroludos">
+		<id name="id" type="java.lang.Integer">
+			<column name="idcompetizione" />
+			<generator class="increment" />
+		</id>
+		<property name="nome" type="string">
+			<column name="nome" not-null="true" />
+		</property>
+		<property name="descrizione" type="string">
+			<column name="descrizione" not-null="true" />
+		</property>
+		<property name="costo" type="double">
+			<column name="costo" not-null="true" />
+		</property>
+		<property name="stato" type="integer">
+			<column name="stato" not-null="true" default="1" />
+		</property>
+		<property name="tipo" type="integer">
+			<column name="tipoopt" not-null="true" default="1" />
+		</property>
+	</class>
+</hibernate-mapping>

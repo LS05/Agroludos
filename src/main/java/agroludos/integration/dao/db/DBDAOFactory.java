@@ -1,75 +1,78 @@
 package agroludos.integration.dao.db;
 
-import agroludos.integration.dao.file.ConfigurazioneDAODB;
+import agroludos.to.UtenteTO;
 
-public abstract class DBDAOFactory{
-	private static DBDAOFactory dao;
-
-	// --- Metodo di factory ---
-
-	/**
-	 * In base al parametro di input il metoro ritorna una delle possibili
-	 * implementazioni di questo factory, basate sulla specifica
-	 * dell'interfaccia DAOFactory
-	 */
-	public static DBDAOFactory getDAOFactory() {
-		return dao;
-	}
-
-	// --- Factory specification: concrete factories implementing this spec must
-	// provide this methods! ---
+public interface DBDAOFactory {
 
 	/**
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
 	 * ManagerDiCompetizione
 	 */
-	public abstract ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO();
+	public ManagerDiCompetizioneDAO getManagerDiCompetizioneDAO();
 
 	/**
 	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
 	 * ManagerDiSistema
 	 */
-	public abstract ManagerDiSistemaDAO getManagerDiSistemaDAO();
+	public ManagerDiSistemaDAO getManagerDiSistemaDAO();
 
 	/**
-	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
-	 * Competizione
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Competizione
 	 */
-	public abstract CompetizioneDAO getCompetizioneDAO();
+	public CompetizioneDAO getCompetizioneDAO();
 
 	/**
-	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
-	 * Partecipante
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Tipo Competizione
 	 */
-	public abstract TipoCompetizioneDAO getTipoCompetizioneDAO();
+	public TipoCompetizioneDAO getTipoCompetizioneDAO();
 
 	/**
-	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
-	 * Partecipante
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Partecipante
 	 */
-	public abstract PartecipanteDAO getPartecipanteDAO();
+	public PartecipanteDAO getPartecipanteDAO();
 
 	/**
-	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
-	 * Partecipante
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Tipo Optional
 	 */
-	public abstract TipoOptionalDAO getTipoOptionalDAO();
+	public TipoOptionalDAO getTipoOptionalDAO();
 
 	/**
-	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
-	 * Partecipante
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Optional
 	 */
-	public abstract OptionalDAO getOptionalDAO();
+	public OptionalDAO getOptionalDAO();
 
 	/**
-	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
-	 * Partecipante
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Utente
 	 */
-	public abstract UtenteDAO getUtenteDAO();
+	public UtenteDAO<UtenteTO> getUtenteDAO();
 
 	/**
-	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Manager di
-	 * Partecipante
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Iscrizione
 	 */
-	public abstract ConfigurazioneDAODB getConfigurazioneDAO();	
+	public IscrizioneDAO getIscrizioneDAO();
+
+	/**
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo StatoCompetizione
+	 */
+	public StatoCompetizioneDAO getStatoCompetizioneDAO();
+
+	/**
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Stato Iscrizione
+	 */
+	public StatoIscrizioneDAO getStatoIscrizioneDAO();
+
+	/**
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Stato Optional
+	 */
+	public StatoOptionalDAO getStatoOptionalDAO();
+
+	/**
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Stato Utente
+	 */
+	public StatoUtenteDAO getStatoUtenteDAO();
+
+	/**
+	 * Metodo per ottenere il DATA ACCESS OBJECT per il tipo Tipo Utente
+	 */
+	public TipoUtenteDAO getTipoUtenteDAO();
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<richieste xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ReqFactorySchema.xsd">
+	<richiesta tipo="checkConfigurazione">
+		<classe>agroludos.presentation.reqh.EmptyRequestContextImpl</classe>
+	</richiesta>
+	<richiesta tipo="inserisciConfigurazione">
+		<classe>agroludos.presentation.reqh.DataRequestContextImpl</classe>
+	</richiesta>
+	<richiesta tipo="nuovoManagerDiSistema">
+		<classe>agroludos.presentation.reqh.DataRequestContextImpl</classe>
+	</richiesta>
+	<richiesta tipo="autenticazioneUtente">
+		<classe>agroludos.presentation.reqh.DataRequestContextImpl</classe>
+	</richiesta>
+</richieste>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="agro-views">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="views">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="view" maxOccurs="unbounded"
+								minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element type="xs:string" name="name" />
+										<xs:element type="xs:string" name="url" />
+										<xs:element type="xs:int" name="width" />
+										<xs:element type="xs:int" name="height" />
+										<xs:element type="xs:string" name="title"
+											minOccurs="0" />
+									</xs:sequence>
+									<xs:attribute type="xs:string" name="tipo" use="required" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+					<xs:unique name="nomeViewUniqueKey">
+						<xs:selector xpath="view" />
+						<xs:field xpath="name" />
+					</xs:unique>
+					<xs:unique name="urlViewUniqueKey">
+						<xs:selector xpath="view" />
+						<xs:field xpath="url" />
+					</xs:unique>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="agroludos.presentation.views.partecipante.ControllerPartecipanteMain">
+  <children>
+    <BorderPane prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <bottom>
+        <ToolBar prefWidth="200.0" BorderPane.alignment="CENTER">
+          <items>
+            <Button contentDisplay="CENTER" mnemonicParsing="false" text="Button" />
+          </items>
+        </ToolBar>
+      </bottom>
+      <center>
+        <AnchorPane BorderPane.alignment="CENTER">
+          <children>
+            <GridPane fx:id="paneCompetizioni" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                <GridPane GridPane.columnIndex="0" GridPane.rowIndex="0">
+                  <children>
+                    <TextField promptText="%key17" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                      <GridPane.margin>
+                        <Insets />
+                      </GridPane.margin>
+                    </TextField>
+                    <Button id="btnCercaCompetizioni" minWidth="150.0" mnemonicParsing="false" text="%key18" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="10.0" prefWidth="-1.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+              </columnConstraints>
+              <padding>
+                <Insets left="10.0" right="10.0" />
+              </padding>
+              <rowConstraints>
+                <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneIscrizioni" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                <GridPane GridPane.columnIndex="0" GridPane.rowIndex="0">
+                  <children>
+                    <Button id="btnCercaIscrizioni" minWidth="150.0" mnemonicParsing="false" text="Cerca Iscrizione" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+                    <TextField promptText="Nome Competizione" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                      <GridPane.margin>
+                        <Insets />
+                      </GridPane.margin>
+                    </TextField>
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="10.0" prefWidth="-1.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+              </columnConstraints>
+              <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" />
+              </padding>
+              <rowConstraints>
+                <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+          </children>
+        </AnchorPane>
+      </center>
+      <left>
+        <GridPane id="paneMainMenu" hgap="10.0" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+          <children>
+            <Button id="" fx:id="btnGestComp" alignment="CENTER_LEFT" mnemonicParsing="false" onMouseClicked="#btnGestComp" prefHeight="65.0" prefWidth="294.0" styleClass="mainMenuButton" text="%key16" textFill="WHITE" GridPane.valignment="TOP">
+              <GridPane.margin>
+                <Insets />
+              </GridPane.margin>
+            </Button>
+            <Button id="btnIscrizioni" fx:id="btnGestIscrizioni" alignment="CENTER_LEFT" mnemonicParsing="false" onMouseClicked="#btnGestIscrizioni" prefHeight="65.0" prefWidth="200.0" styleClass="mainMenuButton" text="%key136" textFill="WHITE" GridPane.rowIndex="1" />
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="406.0" minHeight="10.0" prefHeight="252.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </left>
+      <top>
+        <MenuBar BorderPane.alignment="CENTER">
+          <menus>
+            <Menu mnemonicParsing="false" text="Agroludos">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#menuLogout" text="%key168" fx:id="menuLogout" />
+                <MenuItem mnemonicParsing="false" onAction="#menuEsci" text="%key15" fx:id="menuEsci" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="%key25">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#btnAggiornaCSRC" text="%key158" />
+                <MenuItem mnemonicParsing="false" onAction="#menuModificaDatiAccesso" text="%key26" />
+              </items>
+            </Menu>
+          </menus>
+        </MenuBar>
+      </top>
+    </BorderPane>
+  </children>
+  <stylesheets>
+    <URL value="@main.css" />
+  </stylesheets>
+</AnchorPane>

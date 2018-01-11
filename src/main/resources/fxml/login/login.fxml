@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="agroludos.presentation.views.login.ControllerLogin">
+  <children>
+    <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <TextField fx:id="txtUsername" onKeyPressed="#txtKeyPressed" prefHeight="33.0" prefWidth="407.0" promptText="%key74" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+          <children>
+            <PasswordField fx:id="txtPassword" onKeyPressed="#txtKeyPressed" prefHeight="33.0" prefWidth="407.0" promptText="%key75" />
+            <Button id="btnPwdDimenticata" fx:id="btnPswDimenticata" mnemonicParsing="false" onMouseClicked="#btnPswDimenticata" text="%key84" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+        <!-- <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                <image>
+                    <Image url="@../logo.png"/>
+                </image>
+            </ImageView> -->
+        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+          <children>
+            <Button fx:id="btnLogin" mnemonicParsing="false" onMouseClicked="#btnLogin" prefHeight="30.0" prefWidth="150.0" styleClass="btnLogin" text="%key86" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+            <Button fx:id="btnRegistrati" mnemonicParsing="false" onMouseClicked="#btnRegistrati" prefHeight="30.0" prefWidth="150.0" styleClass="btnLogin, btnRegistrati" text="%key85" GridPane.halignment="LEFT" />
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="0">
+          <children>
+            <Pane id="agrologo" fx:id="agroLogoPane" maxHeight="70.0" prefHeight="11.0" prefWidth="407.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label id="lblerrore" fx:id="lblErroreLogin" alignment="CENTER" contentDisplay="LEFT" prefHeight="67.0" prefWidth="407.0" text="Errore Login" textFill="#ff3333" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1">
+              <font>
+                <Font name="System Bold" size="16.0" />
+              </font>
+            </Label>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="141.0" minHeight="10.0" prefHeight="141.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="407.0" minWidth="10.0" prefWidth="407.0" />
+        <ColumnConstraints hgrow="SOMETIMES" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="200.0" minHeight="120.0" prefHeight="187.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="146.0" minHeight="44.0" prefHeight="79.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="124.0" minHeight="78.0" prefHeight="98.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="90.0" minHeight="62.0" prefHeight="67.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="261.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </children>
+  <stylesheets>
+    <URL value="@login.css" />
+  </stylesheets>
+</AnchorPane>

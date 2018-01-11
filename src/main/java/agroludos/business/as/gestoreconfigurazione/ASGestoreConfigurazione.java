@@ -1,59 +1,46 @@
 package agroludos.business.as.gestoreconfigurazione;
 
-import agroludos.integration.dao.db.DBDAOFactory;
-import agroludos.integration.dao.file.ConfigurazioneDAODB;
-import agroludos.integration.dao.file.FConfigurazioneDAO;
-import agroludos.integration.dao.file.FileDAOFactory;
+import agroludos.business.as.AgroludosAS;
+import agroludos.exceptions.system.DatabaseException;
+import agroludos.integration.dao.file.FileFactory;
 import agroludos.system.SystemConf;
-import agroludos.to.ConfigurazioneTO;
-import agroludos.to.DatabaseTO;
-import agroludos.to.TOFactory;
 
-class ASGestoreConfigurazione implements LConfigurazione, SConfigurazione{
-	private FileDAOFactory fileDaoFact;
-	private FConfigurazioneDAO fileConf;
-	private static SystemConf sysConf = SystemConf.getInstance();
-	
-	ASGestoreConfigurazione(){
-		this.fileDaoFact = FileDAOFactory.getDAOFactory(sysConf.getTipoConf());
-		this.fileConf = fileDaoFact.getConfigurazioneDAO();
+/**
+ * <b>Business Tier</b></br>
+ * La classe modella e implementa un <b>Application Service</b> e rappresenta il componente:
+ * <b>Gestore di Competizione.</b><br /> 
+ * 
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
+class ASGestoreConfigurazione extends AgroludosAS implements LConfigurazione{
+
+	private SystemConf sysConf;
+
+	ASGestoreConfigurazione(SystemConf sysConf, FileFactory filefact){
+		this.sysConf = sysConf;
 	}
 
 	@Override
-	public boolean testDBConnection() {
-		return false;
-	}
-
-	@Override
-	public boolean inserisciConfigurazione(DatabaseTO dbto) {
+	public boolean checkConfigurazione() {
 		boolean res = false;
-		DBDAOFactory daoFact = null;
-		ConfigurazioneDAODB dbConf = null; 
-		
-		// TODO Aggiungere controlli sui dati dei parametri
-		
-		if(this.fileConf.creaConfigurazione(dbto)){
-			SystemConf sysConf = SystemConf.getInstance();
-			sysConf.setTipoDB(dbto.getTipo());
-			daoFact = DBDAOFactory.getDAOFactory();
-			dbConf = daoFact.getConfigurazioneDAO();
-			ConfigurazioneTO conf = TOFactory.getConfigurazioneTO(); 
-			conf.setPathConf(this.fileConf.getConfPath());
-			conf.setNomeDB(dbto.getNome());
-			conf.setUserDB(dbto.getUsername());
-			conf.setPwdDB(dbto.getPassword());
-			conf.setPortaDB(dbto.getPorta());
-			conf.setServerDB(dbto.getServer());
-			conf.setTipoDB(dbto.getTipo());
-			dbConf.addConfigurazioneDB(conf);
+		String tipoDB = this.sysConf.getTipoDB();
+
+		if(tipoDB.length() != 0){
+			res = true;
 		}
-		
+
 		return res;
 	}
 
 	@Override
-	public boolean testConfigurazione() {
-		return false;
-	}
+	public boolean testConnessioneDB() throws DatabaseException {
+		boolean res = false;
 
+		this.dbFact.getDAOFactory(this.sysConf.getTipoDB());
+		res = true;
+
+		return res;
+	}
 }

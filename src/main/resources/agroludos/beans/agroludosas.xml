@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<import resource="classpath:agroludos/beans/system.xml" />
+	<import resource="classpath:agroludos/beans/transferobject.xml" />
+	<import resource="classpath:agroludos/beans/utility.xml" />
+	<import resource="classpath:agroludos/beans/validator.xml" />
+	<import resource="classpath:agroludos/beans/dao/dao.xml" />
+
+
+	<bean id="agroludosAS" class="agroludos.business.as.AgroludosAS"
+		abstract="true">
+		<property name="dbFact" ref="dbFactory" />
+		<property name="sysConf" ref="systemConf" />
+		<property name="errConf" ref="systemConf" />
+		<property name="toFact" ref="toFactory" />
+	</bean>
+	
+	<bean id="gestoreChiusura" class="agroludos.business.as.gestorechiusura.ASGestoreChiusura"
+		parent="agroludosAS">
+	</bean>
+	
+	<bean id="gestoreConfigurazione"
+		class="agroludos.business.as.gestoreconfigurazione.ASGestoreConfigurazione"
+		parent="agroludosAS">
+		<constructor-arg ref="systemConf" />
+		<constructor-arg ref="fileFactory" />
+	</bean>
+	
+	<bean id="gestoreManagerSistema"
+		class="agroludos.business.as.gestoremds.ASGestoreManagerDiSistema"
+		parent="agroludosAS">
+		<constructor-arg ref="mdsValidator" />
+		<constructor-arg ref="pwdEnc" />
+	</bean>
+	
+	<bean id="gestoreManagerCompetizione"
+		class="agroludos.business.as.gestoremdc.ASGestoreManagerDiCompetizione"
+		parent="agroludosAS">
+		<constructor-arg ref="pwdEnc" />
+		<constructor-arg ref="mdcValidator" />
+	</bean>
+	
+	<bean id="gestoreCompetizione"
+		class="agroludos.business.as.gestorecompetizione.ASGestoreCompetizione"
+		parent="agroludosAS">
+		<constructor-arg ref="compValidator" />
+		<constructor-arg ref="agroludosMail" />
+	</bean>
+	
+	<bean id="gestoreStatoCompetizione"
+		class="agroludos.business.as.gestorestatocompetizione.ASGestoreStatoCompetizione"
+		parent="agroludosAS">
+	</bean>
+	
+	<bean id="gestoreUtente" class="agroludos.business.as.gestoreutente.ASGestoreUtente"
+		parent="agroludosAS">
+		<constructor-arg ref="pwdEnc" />
+		<constructor-arg ref="userValidator" />
+		<constructor-arg ref="agroludosMail" />
+	</bean>
+	
+	<bean id="gestoreStatoUtente"
+		class="agroludos.business.as.gestorestatoutente.ASGestoreStatoUtente"
+		parent="agroludosAS">
+	</bean>
+	
+	<bean id="gestoreOptional" class="agroludos.business.as.gestoreoptional.ASGestoreOptional"
+		parent="agroludosAS">
+		<constructor-arg ref="optValidator" />
+	</bean>
+	
+	<bean id="gestoreStatoOptional"
+		class="agroludos.business.as.gestorestatooptional.ASGestoreStatoOptional"
+		parent="agroludosAS">
+	</bean>
+	
+	<bean id="gestorePartecipante"
+		class="agroludos.business.as.gestorepartecipante.ASGestorePartecipante"
+		parent="agroludosAS">
+		<constructor-arg ref="pwdEnc" />
+		<constructor-arg ref="fileFactory" />
+		<constructor-arg ref="partValidator" />
+	</bean>
+	
+	<bean id="gestoreIscrizione"
+		class="agroludos.business.as.gestoreiscrizione.ASGestoreIscrizione"
+		parent="agroludosAS">
+		<constructor-arg ref="iscValidator" />
+		<constructor-arg ref="agroludosMail" />
+	</bean>
+	
+	<bean id="gestoreStatoIscrizione"
+		class="agroludos.business.as.gestorestatoiscrizione.ASGestoreStatoIscrizione"
+		parent="agroludosAS">
+	</bean>
+	
+	<bean id="gestoreTipoCompetizione"
+		class="agroludos.business.as.gestoretipocompetizione.ASGestoreTipoCompetizione"
+		parent="agroludosAS">
+		<constructor-arg ref="tipoValidator" />
+	</bean>
+	
+	<bean id="gestoreTipoOptional"
+		class="agroludos.business.as.gestoretipooptional.ASGestoreTipoOptional"
+		parent="agroludosAS">
+		<constructor-arg ref="tipoValidator" />
+	</bean>
+	
+	<bean id="gestoreTipoUtente"
+		class="agroludos.business.as.gestoretipoutente.ASGestoreTipoUtente"
+		parent="agroludosAS">
+	</bean>
+	
+	<bean id="gestoreEmail" class="agroludos.business.as.gestoremail.ASGestoreEmail"
+		parent="agroludosAS">
+		<constructor-arg ref="agroludosMail"></constructor-arg>
+	</bean>
+</beans>

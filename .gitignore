@@ -1,0 +1,9 @@
+.DS_Store
+.project
+/target/
+/.settings/
+api
+/doc/*
+/lib/*
+.txt
+/utenti/*

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="agroludos.presentation.views.mdc.ControllerMdcMain">
+  <children>
+    <BorderPane prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <bottom>
+        <ToolBar prefWidth="200.0" BorderPane.alignment="CENTER">
+          <items>
+            <Button contentDisplay="CENTER" mnemonicParsing="false" text="Button" />
+          </items>
+        </ToolBar>
+      </bottom>
+      <center>
+        <AnchorPane BorderPane.alignment="CENTER">
+          <children>
+            <GridPane fx:id="paneCompetizioni" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                <GridPane id="paneTipoCompetizione" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                  <children>
+                    <GridPane>
+                      <children>
+                        <Button fx:id="btnNuovaCompetizione" mnemonicParsing="false" onMouseClicked="#btnNuovaCompetizione" prefHeight="26.0" prefWidth="200.0" styleClass="btnNuovaComp" text="%key19" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                        <GridPane>
+                          <children>
+                            <Button fx:id="btnCercaCompetizioni" mnemonicParsing="false" onMouseClicked="#cercaCompetizioniClicked" prefHeight="26.0" prefWidth="150.0" text="%key18" GridPane.columnIndex="1" GridPane.valignment="CENTER">
+                              <GridPane.margin>
+                                <Insets left="10.0" right="10.0" />
+                              </GridPane.margin>
+                            </Button>
+                            <TextField id="txtRicercaComp" fx:id="txtFilterCmp" prefHeight="26.0" prefWidth="319.0" promptText="%key17" />
+                            <AnchorPane fx:id="paneAnnullaRicerca" maxWidth="50.0" prefHeight="200.0" prefWidth="50.0" visible="true" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+                              <children>
+                                <Button fx:id="btnAnnullaRicercaComp" alignment="CENTER" contentDisplay="CENTER" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#annullaRicercaClicked" prefHeight="22.0" prefWidth="30.0" styleClass="btnAnnullaCerca" text="x" visible="false" AnchorPane.rightAnchor="2.0">
+                                  <font>
+                                    <Font name="System Bold" size="13.0" />
+                                  </font>
+                                </Button>
+                              </children>
+                            </AnchorPane>
+                          </children>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="10.0" prefWidth="-1.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
+                            <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                      </children>
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="10.0" prefWidth="-1.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
+                      </columnConstraints>
+                      <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      </rowConstraints>
+                    </GridPane>
+                    <TableView id="tableTest" fx:id="tableCompetizione" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                      <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                      </columnResizePolicy>
+                      <columns>
+                        <TableColumn prefWidth="75.0" text="%key20" fx:id="cmpIdCol" />
+                        <TableColumn prefWidth="75.0" text="%key21" fx:id="cmpNomeCol" />
+                        <TableColumn prefWidth="75.0" text="%key22" fx:id="cmpDataCol" />
+                        <TableColumn prefWidth="75.0" text="%key90" fx:id="cmpNIscrittiCol" />
+                        <TableColumn prefWidth="75.0" text="%key91" fx:id="cmpNminCol" />
+                        <TableColumn prefWidth="75.0" text="%key92" fx:id="cmpNmaxCol" />
+                        <TableColumn prefWidth="75.0" text="%key23" fx:id="cmpTipoCol" />
+                        <TableColumn prefWidth="75.0" text="%key24" fx:id="cmpStatoCol" />
+                      </columns>
+                    </TableView>
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="571.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                  <GridPane.margin>
+                    <Insets bottom="10.0" top="10.0" />
+                  </GridPane.margin>
+                </GridPane>
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+          </children>
+          <padding>
+            <Insets left="10.0" right="10.0" />
+          </padding>
+        </AnchorPane>
+      </center>
+      <left>
+        <GridPane id="paneMainMenu" hgap="10.0" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+          <children>
+            <Button fx:id="btnPaneComptizioni" alignment="CENTER_LEFT" mnemonicParsing="false" onMouseClicked="#btnPaneComptizioni" prefHeight="65.0" prefWidth="200.0" styleClass="mainMenuButton" text="%key16" textFill="WHITE" GridPane.valignment="TOP">
+              <GridPane.margin>
+                <Insets left="10.0" />
+              </GridPane.margin>
+            </Button>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="406.0" minHeight="10.0" prefHeight="252.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </left>
+      <top>
+        <MenuBar BorderPane.alignment="CENTER">
+          <menus>
+            <Menu mnemonicParsing="false" text="Agroludos">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#menuLogout" text="%key168" fx:id="menuLogout" />
+                <MenuItem mnemonicParsing="false" onAction="#menuEsci" text="%key15" fx:id="menuEsci" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="%key25">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#menuModificaDatiAccesso" text="%key26" />
+              </items>
+            </Menu>
+          </menus>
+        </MenuBar>
+      </top>
+    </BorderPane>
+  </children>
+  <stylesheets>
+    <URL value="@main.css" />
+  </stylesheets>
+</AnchorPane>

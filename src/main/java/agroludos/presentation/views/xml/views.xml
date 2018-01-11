@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agro-views xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="views.xsd">
+	<views>
+		<view tipo="controlView">
+			<name>initView</name>
+			<url>/fxml/config/init.fxml</url>
+			<width>1</width>
+			<height>1</height>
+			<title></title>
+		</view>
+		<view tipo="dialog">
+			<name>login</name>
+			<url>/fxml/login/login.fxml</url>
+			<width>600</width>
+			<height>462</height>
+			<title>Agroludos | Login</title>
+		</view>
+		<view tipo="dialog">
+			<name>passwordDimenticata</name>
+			<url>/fxml/login/passwordDimenticata.fxml</url>
+			<width>600</width>
+			<height>462</height>
+			<title>Agroludos | Recupero Password</title>
+		</view>
+		<view tipo="controlView">
+			<name>session</name>
+			<url>/fxml/config/session.fxml</url>
+			<width>600</width>
+			<height>400</height>
+			<title></title>
+		</view>
+		<view tipo="dialog">
+			<name>configurazione</name>
+			<url>/fxml/config/conf_sistema.fxml</url>
+			<width>933</width>
+			<height>543</height>
+			<title>Agroludos | Configurazione</title>
+		</view>
+		<view tipo="dialog">
+			<name>nuovaRegistrazione</name>
+			<url>/fxml/registrazione/registrazione.fxml</url>
+			<width>959</width>
+			<height>574</height>
+			<title>Agroludos | Registrazione</title>
+		</view>
+		<view tipo="dialog">
+			<name>modificaDatiAccesso</name>
+			<url>/fxml/registrazione/modificaDatiAccesso.fxml</url>
+			<width>644</width>
+			<height>389</height>
+			<title>Agroludos | Modifica Dati di Accesso</title>
+		</view>
+		<view tipo="mainView">
+			<name>managerDiSistema</name>
+			<url>/fxml/mds/mdsMain.fxml</url>
+			<width>1440</width>
+			<height>900</height>
+			<title>Agroludos | Manager Di Sistema</title>
+		</view>
+		<view tipo="mainView">
+			<name>partecipante</name>
+			<url>/fxml/partecipante/partecipanteMain.fxml</url>
+			<width>1240</width>
+			<height>800</height>
+			<title>Agroludos | Partecipante</title>
+		</view>
+		<view tipo="mainView">
+			<name>managerDiCompetizione</name>
+			<url>/fxml/mdc/mdcMain.fxml</url>
+			<width>882</width>
+			<height>697</height>
+			<title>Agroludos | Manager Di Competizione</title>
+		</view>
+		<view tipo="dialog">
+			<name>modificaMDC</name>
+			<url>/fxml/mds/mdsModificaMdc.fxml</url>
+			<width>600</width>
+			<height>400</height>
+		</view>
+		<view tipo="dialog">
+			<name>mostraModificaCmp</name>
+			<url>/fxml/mdc/mdcModificaCmp.fxml</url>
+			<width>800</width>
+			<height>459</height>
+		</view>
+		<view tipo="dialog">
+			<name>mostraNuovaCmp</name>
+			<url>/fxml/mdc/mdcNuovaCompetizione.fxml</url>
+			<width>800</width>
+			<height>459</height>
+		</view>
+		<view tipo="dialog">
+			<name>mostraIscrizione</name>
+			<url>/fxml/mdc/mdcIscrizione.fxml</url>
+			<width>800</width>
+			<height>600</height>
+		</view>
+		<view tipo="dialog">
+			<name>mostraProfiloPartecipante</name>
+			<url>/fxml/mds/mdsProfiloPartecipante.fxml</url>
+			<width>800</width>
+			<height>600</height>
+		</view>
+		<view tipo="dialog">
+			<name>mostraIscrizioneMds</name>
+			<url>/fxml/mds/mdsIscrizione.fxml</url>
+			<width>800</width>
+			<height>600</height>
+		</view>
+		<view tipo="dialog">
+			<name>mostraCmp</name>
+			<url>/fxml/mdc/mdcCompetizione.fxml</url>
+			<width>1092</width>
+			<height>644</height>
+		</view>
+		<view tipo="dialog">
+			<name>mostraCmpMds</name>
+			<url>/fxml/mds/mdsCompetizione.fxml</url>
+			<width>1092</width>
+			<height>644</height>
+		</view>
+		<view tipo="dialog">
+			<name>messageDialog</name>
+			<url>/fxml/dialogs/messageDialog.fxml</url>
+			<width>564</width>
+			<height>225</height>
+			<title>Agroludos</title>
+		</view>
+		<view tipo="dialog">
+			<name>questionDialog</name>
+			<url>/fxml/dialogs/questionDialog.fxml</url>
+			<width>650</width>
+			<height>280</height>
+			<title>Agroludos | Question</title>
+		</view>
+		<view tipo="dialog">
+			<name>visualizzaSRC</name>
+			<url>/fxml/partecipante/visualizzaCSRC.fxml</url>
+			<width>1000</width>
+			<height>600</height>
+			<title>Agroludos | Certificato di Sana e Robusta Costituzione</title>
+		</view>
+		<view tipo="dialog">
+			<name>nuovoTipoOpt</name>
+			<url>/fxml/mds/nuovoTipoOpt.fxml</url>
+			<width>492</width>
+			<height>263</height>
+			<title>Agroludos | Nuovo Tipo Optional</title>
+		</view>
+		<view tipo="dialog">
+			<name>nuovoOpt</name>
+			<url>/fxml/mds/nuovoOpt.fxml</url>
+			<width>582</width>
+			<height>438</height>
+			<title>Agroludos | Nuovo Optional</title>
+		</view>
+		<view tipo="dialog">
+			<name>modificaOpt</name>
+			<url>/fxml/mds/modificaOpt.fxml</url>
+			<width>582</width>
+			<height>438</height>
+			<title>Agroludos | Modifica Optional</title>
+		</view>
+		<view tipo="dialog">
+			<name>nuovoMDC</name>
+			<url>/fxml/mds/mdsNuovoMdc.fxml</url>
+			<width>600</width>
+			<height>493</height>
+			<title>Agroludos | Nuovo Manager di Competizione</title>
+		</view>
+		<view tipo="dialog">
+			<name>nuovoTipoCpt</name>
+			<url>/fxml/mds/nuovoTipoCpt.fxml</url>
+			<width>492</width>
+			<height>374</height>
+			<title>Agroludos | Nuovo Tipo Competizione</title>
+		</view>
+		<view tipo="dialog">
+			<name>selezionaOptional</name>
+			<url>/fxml/mdc/mdcSelezionaOptional.fxml</url>
+			<width>1080</width>
+			<height>576</height>
+			<title>Agroludos | Optionals</title>
+		</view>
+		<view tipo="dialog">
+			<name>visualizzaIscrizioni</name>
+			<url>/fxml/mds/visualizzaIscrizioni.fxml</url>
+			<width>1000</width>
+			<height>600</height>
+			<title>Agroludos | Iscrizioni</title>
+		</view>
+		<view tipo="dialog">
+			<name>mostraIscrPart</name>
+			<url>/fxml/partecipante/partIscrizione.fxml</url>
+			<width>837</width>
+			<height>525</height>
+			<title>Agroludos | Iscrizione</title>
+		</view>
+		<view tipo="dialog">
+			<name>selezionaOptionalPart</name>
+			<url>/fxml/partecipante/partSelezionaOptional.fxml</url>
+			<width>1080</width>
+			<height>576</height>
+			<title>Agroludos | Optionals</title>
+		</view>
+		<view tipo="dialog">
+			<name>modificaOptionalPartecipante</name>
+			<url>/fxml/mdc/mdcOptionalPartecipante.fxml</url>
+			<width>1080</width>
+			<height>576</height>
+			<title>Agroludos | Optionals</title>
+		</view>
+		<view tipo="dialog">
+			<name>partMostraCompetizione</name>
+			<url>/fxml/partecipante/partCompetizione.fxml</url>
+			<width>1092</width>
+			<height>644</height>
+		</view>
+		<view tipo="dialog">
+			<name>partMostraIscrizione</name>
+			<url>/fxml/partecipante/partVisualizzaIscrizione.fxml</url>
+			<width>800</width>
+			<height>600</height>
+		</view>
+		<view tipo="dialog">
+			<name>aggiornaSRC</name>
+			<url>/fxml/partecipante/aggiornaCSRC.fxml</url>
+			<width>552</width>
+			<height>355</height>
+			<title>Agroludos | Aggiorna Certificato SRC</title>
+		</view>
+		<view tipo="dialog">
+			<name>motivoEliminazione</name>
+			<url>/fxml/mdc/motivoEliminazione.fxml</url>
+			<width>563</width>
+			<height>420</height>
+			<title>Agroludos</title>
+		</view>
+	</views>
+</agro-views>

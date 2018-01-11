@@ -1,6 +1,9 @@
 package agroludos.business.as.gestoreconfigurazione;
 
-public interface LConfigurazione {
-	public boolean testDBConnection();
-	public boolean testConfigurazione();
+import agroludos.business.as.AgroludosService;
+import agroludos.exceptions.system.DatabaseException;
+
+public interface LConfigurazione extends AgroludosService{
+	public boolean checkConfigurazione();
+	public boolean testConnessioneDB() throws DatabaseException;
 }

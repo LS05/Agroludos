@@ -1,95 +1,153 @@
 package agroludos.presentation.views.login;
 
 import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import agroludos.presentation.fc.FC;
-import agroludos.presentation.req.FrameRequest;
-import agroludos.utility.SecurePassword;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
-public class ControllerLogin {
+import agroludos.presentation.req.AgroRequest;
+import agroludos.presentation.resp.AgroResponse;
+import agroludos.presentation.views.AgroludosController;
+import agroludos.to.AgroludosTO;
+import agroludos.to.PartecipanteTO;
+import agroludos.to.SuccessMessageTO;
+import agroludos.to.UtenteTO;
+
+/**
+ * La classe gestisce la view di Login
+ * @author Luca Suriano
+ * @author Francesco Zagaria
+ *
+ */
+public class ControllerLogin extends AgroludosController implements Initializable{
+
+	private String viewName;
 
 	@FXML private Button btnLogin;
 	@FXML private Button btnPswDimenticata;
 	@FXML private Button btnRegistrati;
-	
-	//texfield 
+	@FXML private Pane agroLogoPane;
 	@FXML private TextField txtUsername;
 	@FXML private PasswordField txtPassword;
+	@FXML private Label lblErroreLogin;
 
-	//hashmap dei contenuti delle text
-	private Map<String, String> paramLogin = new HashMap<>();
+	private ResourceBundle res;
 
+	private AgroRequest richiesta;
+	private AgroResponse risposta;
 
-	private FC frontController = FC.getInstance();
+	@Override
+	public void initialize(URL url, ResourceBundle resources) {
+		this.res = resources;		
+	}
 
-	private FrameRequest richiesta;
-
-
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	@Override
+	public void initializeView(AgroludosTO mainTO) {
 
 	}
 
-	@FXML protected void btnLogin(MouseEvent event) {
-		//controllo la validità delle textfield	
+	@Override
+	public void initializeView(String nameView) {
+		this.viewName = nameView;
+		this.lblErroreLogin.setVisible(false);
 
-		if((this.txtUsername.getText().length() != 0)  &&
-				(this.txtPassword.getText().length() != 0)  
-				) {
-
-			//sicurezza password
-			String securePassword = null;
-			try {
-				securePassword = SecurePassword.stringToMD5(this.txtPassword.getText());
-			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		final Stage stage = this.getStage(this.viewName);
+		//aggiungo per chiudere il programma
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent we) {
+				risposta = getRisposta();
+				richiesta = getRichiesta("chiusura", viewName);
+				eseguiRichiesta(richiesta, risposta);
 			}
-			//copio il contenuto delle textfield nell'hashmap parametri
-			paramLogin.put("username", txtUsername.getText());
-			paramLogin.put("password", securePassword);
+		});
 
-			this.richiesta = new FrameRequest(paramLogin,"cofermaLogin");
-			boolean res = (boolean) this.frontController.eseguiRichiesta(richiesta);
-
-			//se il login è andato a buon fine
-			if(res){
-				//entra nel pannello dell'untente che ha effettuato il login
-			}
-			else
-				System.out.println("Utente non registrato");
-		}
-		else {
-			System.out.println("Campi vuoti");
-		}
-
+		this.agroLogoPane.setFocusTraversable(true);
 	}
 
+	@FXML protected void txtKeyPressed(KeyEvent evt) {
+		if (evt.getCode() == KeyCode.ENTER){
+			eseguiLogin();
+		}
+	}
+
+	@FXML protected void btnLogin(MouseEvent event) {	
+		eseguiLogin();
+	}
+
+	/**
+	 * popola il to Utente e esegue la richiesta di autenticazione
+	 */
+	private void eseguiLogin() {
+		this.lblErroreLogin.setVisible(false);
+
+		UtenteTO uto = toFact.createUTO();
+		uto.setUsername(this.txtUsername.getText());
+		uto.setPassword(this.txtPassword.getText());
+		this.risposta = this.getRisposta();
+		this.richiesta = this.getRichiesta(uto, "autenticazioneUtente", this.viewName);
+		this.eseguiRichiesta(this.richiesta, this.risposta);
+
+		Object res = this.risposta.getRespData();
+		if(res instanceof UtenteTO){
+			this.close();
+		}
+	}
+
+	/**
+	 * mostra la view passwordDimenticata
+	 * @param event
+	 */
 	@FXML protected void btnPswDimenticata(MouseEvent event) {
-		// TO DO
-		System.out.println("Password Dimenticata");
+		this.setVista("passwordDimenticata");
 	}
 
+	/**
+	 * mostra la view per la registrazione
+	 * @param event
+	 */
 	@FXML protected void btnRegistrati(MouseEvent event) {
-		//TO DO
-		System.out.println("Registrazione");
+		this.setVista("nuovaRegistrazione");
 	}
 
-	
+	@Override
+	protected String getViewName() {
+		return this.viewName;
+	}
 
-
-	
+	@Override
+	public void forward(AgroRequest request, AgroResponse response) {
+		String commandName = request.getCommandName();
+		if(commandName.equals(this.getCommandName("inserisciPartecipante") )){
+			Object res = response.getRespData();
+			if(res instanceof PartecipanteTO){
+				SuccessMessageTO succMessage = toFact.createSuccMessageTO();
+				succMessage.setMessage(this.res.getString("key152"));
+				this.setVista("messageDialog", succMessage);
+			}
+		}else if(commandName.equals(this.getCommandName("autenticazioneUtente") )){
+			Object res = response.getRespData();
+			if(res instanceof String){
+				String errMsg = (String)res;
+				this.lblErroreLogin.setVisible(true);
+				this.lblErroreLogin.setText(errMsg);
+			}
+		}else if(commandName.equals(this.getCommandName("nuovoManagerDiSistema") )){
+			Object res = response.getRespData();
+			if(res instanceof UtenteTO){
+				closeVista("configurazione");
+			}
+		}
+	}
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<import resource="classpath:agroludos/beans/transferobject.xml" />
+	<import resource="classpath:agroludos/beans/rules.xml" />
+	<import resource="classpath:agroludos/beans/partecipanteRules.xml" />
+	<import resource="classpath:agroludos/beans/userRules.xml" />
+	<import resource="classpath:agroludos/beans/optRules.xml" />
+	<import resource="classpath:agroludos/beans/mdcRules.xml" />
+	<import resource="classpath:agroludos/beans/mdsRules.xml" />
+	<import resource="classpath:agroludos/beans/tipiRules.xml" />
+	<import resource="classpath:agroludos/beans/compRules.xml" />
+	<import resource="classpath:agroludos/beans/compRules.xml" />
+	<import resource="classpath:agroludos/beans/iscrizioneRules.xml" />
+	
+	<bean id="userValidator" class="agroludos.business.validator.utente.UtenteValidator">
+		<constructor-arg ref="userRulesFactory" />
+		<constructor-arg ref="toFactory" />
+	</bean>
+	
+	<bean id="partValidator" class="agroludos.business.validator.partecipante.PartValidator">
+		<constructor-arg ref="pRulesFactory" />
+		<constructor-arg ref="userRulesFactory" />
+		<constructor-arg ref="toFactory" />
+	</bean>
+	
+	<bean id="mdcValidator" class="agroludos.business.validator.mdc.MdcValidator">
+		<constructor-arg ref="userRulesFactory" />
+		<constructor-arg ref="mdcRulesFactory" />
+		<constructor-arg ref="toFactory" />
+	</bean>
+	
+	<bean id="mdsValidator" class="agroludos.business.validator.mds.MdsValidator">
+		<constructor-arg ref="userRulesFactory" />
+		<constructor-arg ref="mdsRulesFactory" />
+		<constructor-arg ref="toFactory" />
+	</bean>
+	
+	<bean id="tipoValidator" class="agroludos.business.validator.agrotipo.TipoValidator">
+		<constructor-arg ref="tipoRulesFactory" />
+		<constructor-arg ref="toFactory" />
+	</bean>
+	
+	<bean id="optValidator" class="agroludos.business.validator.optional.OptionalValidator">
+		<constructor-arg ref="optRulesFactory" />
+		<constructor-arg ref="toFactory" />
+	</bean>
+	
+	<bean id="compValidator" class="agroludos.business.validator.competizione.CompValidator">
+		<constructor-arg ref="compRulesFactory" />
+		<constructor-arg ref="toFactory" />
+	</bean>
+	
+	<bean id="iscValidator" class="agroludos.business.validator.iscrizione.IscrValidator">
+		<constructor-arg ref="iscrRulesFactory" />
+		<constructor-arg ref="toFactory" />
+	</bean>
+	
+</beans>
