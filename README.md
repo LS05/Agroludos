@@ -4,6 +4,7 @@ Java application for the Software Engineering class.
 It's based on key concepts of software engineering like:  
 - Design Patterns  
 - S.O.L.I.D. Principles  
+
 The application is also developed using the following frameworks:  
 - Spring  
 - Hibernate  
@@ -14,6 +15,7 @@ Applicazione in Java realizzata per il corso di Ingegneria del Software. Si basa
 - Design Patterns  
 - Principi S.O.L.I.D.  
 - Modularità, Astrazione, Generalità, Anticipazione al Cambiamento  
+
 L'applicazione inoltre è stata sviluppata utilizzando:  
 - Spring  
 - Hibernate  
