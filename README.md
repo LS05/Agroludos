@@ -1,5 +1,6 @@
 # README #
 Java application for the Software Engineering class.
+
 It's based on key concepts of software engineering like:  
 - Design Patterns  
 - S.O.L.I.D. Principles  
